@@ -68,9 +68,6 @@
 
             <!-- Center: Brand/Title -->
             <div onclick="navigateTo('section-home')" class="flex items-center justify-center gap-3 cursor-pointer group">
-                <!-- <div class="bg-brand-accent p-2 rounded-xl shadow-lg shadow-brand-accent/20 group-hover:scale-105 transition-transform">
-                    <svg class="w-6 h-6 text-slate-900" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" /></svg>
-                </div> -->
                 <div class="hidden lg:block">
                     <h1 class="text-xl font-extrabold tracking-tighter text-slate-900 dark:text-white group-hover:text-brand-accent transition-colors">Master the Cloud</h1>
                 </div>
@@ -100,23 +97,24 @@
         </div>
         
         <nav class="flex flex-col gap-1 p-4 overflow-y-auto custom-scrollbar flex-grow">
-            <button data-target="section-home" onclick="navigateTo('section-home')" class="nav-btn text-left px-5 py-4 mb-2 rounded-xl text-lg font-black transition-all text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800">Dashboard</button>
-            <span class="px-4 text-[10px] font-black text-slate-400 uppercase tracking-widest mt-2 mb-1">Foundations</span>
-            <button data-target="section-caf" onclick="navigateTo('section-caf')" class="nav-btn text-left px-4 py-2 rounded-xl text-sm font-bold transition-all text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800">CAF Framework</button>
-            <button data-target="section-waf" onclick="navigateTo('section-waf')" class="nav-btn text-left px-4 py-2 rounded-xl text-sm font-bold transition-all text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800">WAF Pillars</button>
-            <button data-target="section-shared" onclick="navigateTo('section-shared')" class="nav-btn text-left px-4 py-2 rounded-xl text-sm font-bold transition-all text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800">Shared Responsibility</button>
+            <button data-target="section-home" onclick="navigateTo('section-home')" class="nav-btn text-left px-4 py-2 rounded-xl text-base font-bold transition-all text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800">Dashboard</button>
             
-            <span class="px-4 text-[10px] font-black text-slate-400 uppercase tracking-widest mt-6 mb-1">Technical Domains</span>
-            <button data-target="section-compute" onclick="navigateTo('section-compute')" class="nav-btn text-left px-4 py-2 rounded-xl text-sm font-bold transition-all text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800">Compute</button>
-            <button data-target="section-storage" onclick="navigateTo('section-storage')" class="nav-btn text-left px-4 py-2 rounded-xl text-sm font-bold transition-all text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800">Storage</button>
-            <button data-target="section-database" onclick="navigateTo('section-database')" class="nav-btn text-left px-4 py-2 rounded-xl text-sm font-bold transition-all text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800">Database</button>
-            <button data-target="section-network" onclick="navigateTo('section-network')" class="nav-btn text-left px-4 py-2 rounded-xl text-sm font-bold transition-all text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800">Network</button>
-            <button data-target="section-security" onclick="navigateTo('section-security')" class="nav-btn text-left px-4 py-2 rounded-xl text-sm font-bold transition-all text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800">Security & Compliance</button>
-            <button data-target="section-mgmt" onclick="navigateTo('section-mgmt')" class="nav-btn text-left px-4 py-2 rounded-xl text-sm font-bold transition-all text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800">Management & Governance</button>
+            <span class="px-4 text-xs font-black text-slate-400 uppercase tracking-widest mt-4 mb-1">Foundations</span>
+            <button data-target="section-caf" onclick="navigateTo('section-caf')" class="nav-btn text-left px-4 py-2 rounded-xl text-base font-bold transition-all text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800">CAF Framework</button>
+            <button data-target="section-waf" onclick="navigateTo('section-waf')" class="nav-btn text-left px-4 py-2 rounded-xl text-base font-bold transition-all text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800">WAF Pillars</button>
+            <button data-target="section-shared" onclick="navigateTo('section-shared')" class="nav-btn text-left px-4 py-2 rounded-xl text-base font-bold transition-all text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800">Shared Responsibility</button>
             
-            <span class="px-4 text-[10px] font-black text-slate-400 uppercase tracking-widest mt-6 mb-1">Business & Strategy</span>
-            <button data-target="section-6rs" onclick="navigateTo('section-6rs')" class="nav-btn text-left px-4 py-2 rounded-xl text-sm font-bold transition-all text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800">Migration (6 Rs)</button>
-            <button data-target="section-billing" onclick="navigateTo('section-billing')" class="nav-btn text-left px-4 py-2 rounded-xl text-sm font-bold transition-all text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800">Billing & Pricing</button>
+            <span class="px-4 text-xs font-black text-slate-400 uppercase tracking-widest mt-6 mb-1">Technical Domains</span>
+            <button data-target="section-compute" onclick="navigateTo('section-compute')" class="nav-btn text-left px-4 py-2 rounded-xl text-base font-bold transition-all text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800">Compute</button>
+            <button data-target="section-storage" onclick="navigateTo('section-storage')" class="nav-btn text-left px-4 py-2 rounded-xl text-base font-bold transition-all text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800">Storage</button>
+            <button data-target="section-database" onclick="navigateTo('section-database')" class="nav-btn text-left px-4 py-2 rounded-xl text-base font-bold transition-all text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800">Database</button>
+            <button data-target="section-network" onclick="navigateTo('section-network')" class="nav-btn text-left px-4 py-2 rounded-xl text-base font-bold transition-all text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800">Network</button>
+            <button data-target="section-security" onclick="navigateTo('section-security')" class="nav-btn text-left px-4 py-2 rounded-xl text-base font-bold transition-all text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800">Security & Compliance</button>
+            <button data-target="section-mgmt" onclick="navigateTo('section-mgmt')" class="nav-btn text-left px-4 py-2 rounded-xl text-base font-bold transition-all text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800">Management & Governance</button>
+            
+            <span class="px-4 text-xs font-black text-slate-400 uppercase tracking-widest mt-6 mb-1">Business & Strategy</span>
+            <button data-target="section-6rs" onclick="navigateTo('section-6rs')" class="nav-btn text-left px-4 py-2 rounded-xl text-base font-bold transition-all text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800">Migration (6 Rs)</button>
+            <button data-target="section-billing" onclick="navigateTo('section-billing')" class="nav-btn text-left px-4 py-2 rounded-xl text-base font-bold transition-all text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800">Billing & Pricing</button>
         </nav>
     </aside>
 
@@ -344,104 +342,904 @@
     </div>
 
     <script>
-        // DATA OBJECTS (Extended with Security & Mgmt)
+        // DATA OBJECTS (Enriched with maximum detail for CLF-C02)
         const securityData = [
-            { id: 'sec1', icon: '👤', title: 'AWS IAM', desc: 'Identity and Access Management.', summary: '• Least Privilege\n• Users, Groups, Roles\n• MFA Enforcement', dive: `### AWS Identity and Access Management (IAM)\nIAM allows you to manage access to AWS services and resources securely.\n\n#### Key Components\n- **Users:** Permanent identities for people or applications.\n- **Groups:** Collections of users with shared permissions.\n- **Roles:** Temporary identities assumed by services or users (no permanent passwords, highly secure).\n- **Policies:** JSON documents defining "Who" can do "What" on "Which" resource.\n\n#### 💡 CLF-C02 Exam Tip\nIAM is a **Global** service. Always follow the "Principle of Least Privilege". The Root user should only be used for the initial setup, never for daily tasks.` },
-            { id: 'sec2', icon: '🛡️', title: 'AWS Shield', desc: 'Managed DDoS protection.', summary: '• Shield Standard (Free)\n• Shield Advanced (Paid)\n• Layer 3/4 protection', dive: `### AWS Shield\nA managed Distributed Denial of Service (DDoS) protection service.\n\n#### Tiers\n- **Shield Standard:** Automatically protects all AWS customers at no extra cost from common infrastructure (Layer 3 and 4) attacks.\n- **Shield Advanced:** Provides additional protection against large/complex attacks, 24x7 access to the AWS DDoS Response Team (DRT), and cost protection against billing spikes during an attack.\n\n#### 💡 CLF-C02 Exam Tip\n"DDoS Protection" = Shield. Shield Standard is on by default for everyone. Shield Advanced provides financial protection.` },
-            { id: 'sec3', icon: '🧱', title: 'AWS WAF', desc: 'Web Application Firewall.', summary: '• Layer 7 protection\n• SQL Injection blocks\n• IP Rate limiting', dive: `### AWS WAF\nProtects web applications from common web exploits that could affect availability, compromise security, or consume excessive resources.\n\n#### Key Features\n- Operates at **Layer 7** (Application layer - HTTP/HTTPS).\n- Filters traffic based on IP addresses, HTTP headers, and custom URI strings.\n- Protects against SQL injection (SQLi) and Cross-Site Scripting (XSS).\n\n#### 💡 CLF-C02 Exam Tip\nWAF works seamlessly with CloudFront, Application Load Balancer (ALB), and API Gateway. If the question mentions "blocking specific IP addresses" or "SQL injection", choose WAF.` },
-            { id: 'sec4', icon: '🔍', title: 'GuardDuty', desc: 'Intelligent threat detection.', summary: '• ML-powered monitoring\n• Analyzes logs automatically\n• Finds malicious activity', dive: `### Amazon GuardDuty\nA continuous security monitoring service that uses Machine Learning, anomaly detection, and integrated threat intelligence to detect unauthorized behavior.\n\n#### Analyzed Logs (No agents required)\n- VPC Flow Logs\n- CloudTrail Event Logs\n- DNS Logs\n\n#### 💡 CLF-C02 Exam Tip\nGuardDuty is your "Security Guard". It looks for signs of compromise, such as EC2 instances mining cryptocurrency or communicating with known malicious IPs.` },
-            { id: 'sec5', icon: '🗝️', title: 'AWS KMS', desc: 'Key Management Service.', summary: '• Managed Encryption Keys\n• FIPS 140-2 compliance\n• Integrated with S3/EBS', dive: `### AWS Key Management Service (KMS)\nA managed service that makes it easy for you to create and control the cryptographic keys used to encrypt your data.\n\n#### Key Features\n- Uses Hardware Security Modules (HSMs) to protect keys.\n- Natively integrated with almost every AWS service (S3, EBS, RDS, etc.).\n- Supports both symmetric and asymmetric keys.\n\n#### 💡 CLF-C02 Exam Tip\nKMS is for "Encryption Key Management". AWS CloudTrail logs all usage of your KMS keys for auditing.` },
-            { id: 'sec6', icon: '📄', title: 'AWS Artifact', desc: 'Compliance reports & agreements.', summary: '• Security/Compliance reports\n• BAA agreements\n• ISO/PCI/SOC certs', dive: `### AWS Artifact\nYour go-to, central resource for compliance-related information that matters to you.\n\n#### Key Features\n- Provides on-demand access to AWS's security and compliance reports (e.g., SOC, PCI, ISO).\n- Allows you to review, accept, and manage agreements with AWS (like Business Associate Addendums - BAA for HIPAA compliance).\n\n#### 💡 CLF-C02 Exam Tip\nIf you need to prove to an auditor that AWS meets a certain compliance standard (PCI-DSS, ISO), you download the report from AWS Artifact.` },
-            { id: 'sec7', icon: '🕵️', title: 'Amazon Macie', desc: 'Discover and protect PII.', summary: '• Data security & privacy\n• Uses Machine Learning\n• Scans Amazon S3', dive: `### Amazon Macie\nA fully managed data security and data privacy service that uses machine learning and pattern matching to discover and protect your sensitive data in AWS.\n\n#### Key Features\n- Automatically detects Personal Identifiable Information (PII) like names, addresses, and credit card numbers.\n- Continuously evaluates all your S3 buckets and alerts you to unencrypted or publicly accessible buckets.\n\n#### 💡 CLF-C02 Exam Tip\nKeywords: "Discover PII", "Protect sensitive data in S3", "Machine learning for data privacy" = Amazon Macie.` },
-            { id: 'sec8', icon: '🔐', title: 'Amazon Cognito', desc: 'Identity for Web & Mobile apps.', summary: '• User sign-up/sign-in\n• Social Identity Providers\n• Guest user access', dive: `### Amazon Cognito\nProvides authentication, authorization, and user management for your web and mobile apps.\n\n#### Key Features\n- **User Pools:** Directories that provide sign-up and sign-in options for your app users.\n- **Identity Pools:** Enable you to grant your users access to other AWS services.\n- Supports login via social identity providers (Google, Facebook, Amazon, Apple) and SAML.\n\n#### 💡 CLF-C02 Exam Tip\n"Customer Identity", "Sign-up/Sign-in for mobile app", "Authenticate via Facebook/Google" = Amazon Cognito.` }
+            { id: 'sec1', icon: '👤', title: 'AWS IAM', desc: 'Identity and Access Management.', summary: '• Least Privilege\n• Users, Groups, Roles\n• MFA Enforcement', dive: `### AWS Identity and Access Management (IAM)
+IAM allows you to securely control access to AWS services and resources. It is a **Global** service, meaning it applies across all AWS Regions simultaneously.
+
+#### Core Components
+- **Users:** End-users (people) or service accounts (applications). Can have long-term credentials like passwords or access keys.
+- **Groups:** A collection of IAM users. **Best Practice:** Assign permissions to groups, not individual users, to simplify management.
+- **Roles:** Identities that you can assume temporarily. They do *not* have long-term credentials. Highly secure. Frequently used by EC2 instances to securely access S3, or for federated users.
+- **Policies:** JSON documents attached to identities that define permissions. Follows the "Effect, Action, Resource" format (e.g., Allow S3:GetObject on bucket).
+
+#### Key Concepts & Best Practices
+- **Principle of Least Privilege:** Grant only the specific permissions required to perform a task. Never grant full admin access unless absolutely necessary.
+- **MFA (Multi-Factor Authentication):** Always enable for the Root User and all IAM users to prevent unauthorized access even if a password is compromised.
+- **IAM Identity Center:** (Formerly AWS SSO). The recommended service for managing access to multiple AWS accounts within AWS Organizations.
+- **Root User:** Has unrestricted access to all resources. **Only use** for initial setup, modifying support plans, or closing the account.` },
+            { id: 'sec2', icon: '🛡️', title: 'AWS Shield', desc: 'Managed DDoS protection.', summary: '• Shield Standard (Free)\n• Shield Advanced (Paid)\n• Layer 3/4 protection', dive: `### AWS Shield
+A managed Distributed Denial of Service (DDoS) protection service that safeguards applications running on AWS.
+
+#### Service Tiers
+- **Shield Standard:** Automatically protects *all* AWS customers at no extra cost. It defends against the most common, frequently occurring network and transport layer (Layer 3 and 4) DDoS attacks (e.g., SYN/UDP floods).
+- **Shield Advanced:** A paid tier ($3,000/month) that provides tailored detection and mitigation against large and complex DDoS attacks.
+
+#### Key Features of Shield Advanced
+- **24x7 Access to DRT:** Direct access to the AWS DDoS Response Team to help mitigate complex attacks.
+- **Cost Protection:** Reimburses you for scaling costs incurred during an attack (e.g., if an attack causes your Auto Scaling group to spin up 50 extra instances, AWS refunds that compute cost).
+- Integrates seamlessly with Route 53, CloudFront, and Elastic Load Balancing.
+
+#### 💡 CLF-C02 Exam Tip
+If the exam asks about "DDoS Protection", the answer is Shield. If it asks about "financial protection against spikes in compute costs due to an attack", the answer is Shield Advanced.` },
+            { id: 'sec3', icon: '🧱', title: 'AWS WAF', desc: 'Web Application Firewall.', summary: '• Layer 7 protection\n• SQL Injection blocks\n• IP Rate limiting', dive: `### AWS WAF
+A Web Application Firewall that helps protect your web applications or APIs against common web exploits and bots that may affect availability, compromise security, or consume excessive resources.
+
+#### Key Features & Use Cases
+- **Layer 7 Protection:** Operates at the Application Layer (HTTP/HTTPS traffic).
+- **Custom Rules:** You can create rules that filter traffic based on IP addresses, HTTP headers, body content, or custom URI strings.
+- **Common Exploit Protection:** Natively blocks SQL injection (SQLi) and Cross-Site Scripting (XSS) attacks.
+- **Rate Limiting:** Protects against brute-force login attempts or HTTP floods by limiting requests from a single IP over a time window.
+- **Bot Control:** Gives you visibility and control over common and pervasive bot traffic.
+
+#### Supported Services
+You can deploy AWS WAF on:
+- Amazon CloudFront (Global)
+- Application Load Balancer (ALB)
+- Amazon API Gateway
+- AWS AppSync
+
+#### 💡 CLF-C02 Exam Tip
+If the scenario involves "blocking a specific IP address", "preventing SQL injection", or "Layer 7 attacks", the answer is AWS WAF.` },
+            { id: 'sec4', icon: '🔍', title: 'GuardDuty', desc: 'Intelligent threat detection.', summary: '• ML-powered monitoring\n• Analyzes logs automatically\n• Finds malicious activity', dive: `### Amazon GuardDuty
+A continuous security monitoring service that uses Machine Learning, anomaly detection, and integrated threat intelligence to identify unauthorized or malicious behavior in your AWS environment.
+
+#### How It Works (Data Sources)
+GuardDuty is entirely agentless. It works automatically by analyzing tens of billions of events across multiple AWS data sources:
+- **VPC Flow Logs:** Analyzes network traffic patterns.
+- **CloudTrail Event Logs:** Looks for unusual API calls (e.g., disabling CloudTrail or launching resources in unusual regions).
+- **DNS Logs:** Detects communication with known malicious domains.
+- **EBS Volume Data:** Scans for malware on attached storage.
+
+#### What It Detects
+- Compromised EC2 instances communicating with command-and-control servers or mining cryptocurrency.
+- Credentials being exfiltrated and used from an unusual IP address.
+- Unusual S3 bucket discovery or data exfiltration.
+
+#### 💡 CLF-C02 Exam Tip
+GuardDuty is your "Security Guard". If a question mentions "intelligent threat detection", "machine learning for security", or "detecting crypto-mining", the answer is GuardDuty.` },
+            { id: 'sec5', icon: '🗝️', title: 'AWS KMS', desc: 'Key Management Service.', summary: '• Managed Encryption Keys\n• FIPS 140-2 compliance\n• Integrated with S3/EBS', dive: `### AWS Key Management Service (KMS)
+A managed service that makes it easy for you to create and control the cryptographic keys used to encrypt your data.
+
+#### Key Features
+- **Centralized Control:** A single place to generate and manage your encryption keys.
+- **Hardware Protection:** Uses FIPS 140-2 validated Hardware Security Modules (HSMs) to protect the confidentiality and integrity of your keys.
+- **Native Integration:** Integrated with almost every AWS service (S3, EBS, RDS, DynamoDB) to seamlessly encrypt data at rest.
+- **Symmetric & Asymmetric:** Supports both symmetric (one key) and asymmetric (public/private key pairs) encryption.
+
+#### Customer Managed vs AWS Managed
+- **AWS Managed Keys:** Free, automatically rotated every 1 year. You don't have to manage them, but you have less granular control.
+- **Customer Managed Keys (CMK):** You pay per key, have full control over policies, and can choose to rotate them manually or automatically.
+
+#### 💡 CLF-C02 Exam Tip
+KMS is for "Encryption Key Management". AWS CloudTrail logs all usage of your KMS keys for auditing (you can see exactly who decrypted what and when).` },
+            { id: 'sec6', icon: '📄', title: 'AWS Artifact', desc: 'Compliance reports & agreements.', summary: '• Security/Compliance reports\n• BAA agreements\n• ISO/PCI/SOC certs', dive: `### AWS Artifact
+Your go-to, central resource for compliance-related information that matters to your organization.
+
+#### Key Features
+- **Compliance Reports:** Provides on-demand access to AWS's security and compliance reports from third-party auditors. This includes reports for **SOC**, **PCI-DSS**, **FedRAMP**, and **ISO** certifications.
+- **Agreements:** Allows you to review, accept, and manage legal agreements with AWS.
+- **BAA for HIPAA:** The most famous use case. If you handle healthcare data in the US, you use Artifact to sign a Business Associate Addendum (BAA) with AWS before putting PHI in the cloud.
+
+#### 💡 CLF-C02 Exam Tip
+If a company's internal auditor demands "proof that AWS data centers meet PCI compliance", or the company needs to sign a "Non-Disclosure Agreement (NDA)" or "BAA", the service to use is AWS Artifact.` },
+            { id: 'sec7', icon: '🕵️', title: 'Amazon Macie', desc: 'Discover and protect PII.', summary: '• Data security & privacy\n• Uses Machine Learning\n• Scans Amazon S3', dive: `### Amazon Macie
+A fully managed data security and data privacy service that uses machine learning and pattern matching to discover and protect your sensitive data in AWS.
+
+#### Key Features
+- **PII Discovery:** Automatically detects Personal Identifiable Information (PII) such as names, addresses, Social Security numbers, and credit card numbers.
+- **S3 Evaluation:** Continuously evaluates all your Amazon S3 buckets. It provides a dashboard showing which buckets are unencrypted, publicly accessible, or shared with AWS accounts outside your organization.
+- **Alerting:** Integrates with EventBridge to trigger automated remediation if sensitive data is found exposed.
+
+#### 💡 CLF-C02 Exam Tip
+Keywords: "Discover PII", "Protect sensitive data in S3", "Compliance with privacy regulations like GDPR or HIPAA by finding lost data". The answer is Amazon Macie.` },
+            { id: 'sec8', icon: '🔐', title: 'Amazon Cognito', desc: 'Identity for Web & Mobile apps.', summary: '• User sign-up/sign-in\n• Social Identity Providers\n• Guest user access', dive: `### Amazon Cognito
+Provides authentication, authorization, and user management for your web and mobile applications. It scales to millions of users seamlessly.
+
+#### Key Components
+- **User Pools:** User directories that provide sign-up and sign-in options for your app users. It handles password resets, MFA, and profile management.
+- **Identity Pools:** Enable you to grant your users temporary, limited-privilege AWS credentials so they can directly access AWS resources (like putting a file in an S3 bucket or reading from DynamoDB).
+
+#### Social Identity Providers
+Cognito acts as a federated identity broker. Users can log in using their existing credentials from Amazon, Apple, Facebook, Google, or corporate SAML/OIDC identities.
+
+#### 💡 CLF-C02 Exam Tip
+If the exam mentions "Customer Identity", "Adding sign-up/sign-in to a mobile app", or "Allowing users to authenticate via Facebook/Google", the service is Amazon Cognito.` }
         ];
 
         const mgmtData = [
-            { id: 'mg1', icon: '👁️', title: 'CloudWatch', desc: 'Monitoring and observability.', summary: '• Performance metrics\n• Dashboarding\n• Alarms & Events', dive: `### Amazon CloudWatch\nCloudWatch monitors your AWS resources and the applications you run on AWS in real-time.\n\n#### Key Concepts\n- **Metrics:** Data about performance (CPU utilization, Network In/Out).\n- **Alarms:** Trigger actions when a threshold is met (e.g., alert SNS or scale out EC2 when CPU > 80%).\n- **Logs:** Centralize and analyze logs from EC2 instances, Lambda, and other services.\n- **EventBridge (formerly CloudWatch Events):** Trigger actions based on state changes in AWS.\n\n#### 💡 CLF-C02 Exam Tip\nCloudWatch = **Performance**. If you want to see "How much CPU am I using?" or "Trigger an Auto Scaling event", look here.` },
-            { id: 'mg2', icon: '📜', title: 'CloudTrail', desc: 'Audit API calls and user activity.', summary: '• Governance & Compliance\n• API History\n• Who did what?', dive: `### AWS CloudTrail\nCloudTrail enables governance, compliance, operational auditing, and risk auditing of your AWS account.\n\n#### Key Features\n- Records every API call made in your account (via the AWS Management Console, SDKs, or CLI).\n- Provides a history of events for security analysis, resource change tracking, and troubleshooting.\n\n#### 💡 CLF-C02 Exam Tip\nCloudTrail = **Audit**. If a question asks "Who deleted that S3 bucket?", "What time was this EC2 instance launched?", or mentions "API auditing", the answer is CloudTrail.` },
-            { id: 'mg3', icon: '✅', title: 'Trusted Advisor', desc: 'Optimize your entire AWS environment.', summary: '• Cost optimization\n• Security checks\n• Performance & Limits', dive: `### AWS Trusted Advisor\nAn online tool that provides real-time guidance to help you provision your resources following AWS best practices.\n\n#### Five Pillars of Checks\n1. **Cost Optimization:** (e.g., idle EC2 instances)\n2. **Performance:** (e.g., overutilized EBS volumes)\n3. **Security:** (e.g., S3 buckets with public permissions)\n4. **Fault Tolerance:** (e.g., RDS instances not Multi-AZ)\n5. **Service Limits:** (e.g., nearing your max limit of VPCs)\n\n#### 💡 CLF-C02 Exam Tip\nTrusted Advisor gives you "Recommendations". All users get 7 core security/limit checks; Business and Enterprise support plans unlock the full suite of checks.` },
-            { id: 'mg4', icon: '⚙️', title: 'AWS Config', desc: 'Resource configuration history.', summary: '• Track changes over time\n• Evaluate compliance\n• Configuration drift', dive: `### AWS Config\nA service that enables you to assess, audit, and evaluate the configurations of your AWS resources.\n\n#### Key Features\n- Continuously monitors and records your AWS resource configurations.\n- Allows you to automate the evaluation of recorded configurations against desired configurations (Rules).\n- Can alert you if an S3 bucket configuration changes from private to public.\n\n#### 💡 CLF-C02 Exam Tip\n"Track configuration changes", "evaluate compliance against rules", "inventory of AWS resources" = AWS Config.` },
-            { id: 'mg5', icon: '🔧', title: 'Systems Manager', desc: 'Operational insight & patch management.', summary: '• Run Command (No SSH needed)\n• Patch Manager\n• Parameter Store', dive: `### AWS Systems Manager (SSM)\nA secure, end-to-end management solution for hybrid cloud environments.\n\n#### Key Features\n- **Run Command:** Safely execute scripts on EC2 instances without needing to SSH into them.\n- **Patch Manager:** Automate the process of patching managed instances with security-related updates.\n- **Parameter Store:** Secure, hierarchical storage for configuration data management and secrets management.\n\n#### 💡 CLF-C02 Exam Tip\nKeywords: "Manage fleet of EC2 instances", "Automate OS patching", "Run commands remotely securely" = AWS Systems Manager.` },
-            { id: 'mg6', icon: '🏗️', title: 'CloudFormation', desc: 'Infrastructure as Code (IaC).', summary: '• Automate deployments\n• JSON or YAML templates\n• Repeatable infrastructure', dive: `### AWS CloudFormation\nGives you an easy way to model a collection of related AWS and third-party resources, provision them quickly and consistently, and manage them throughout their lifecycles.\n\n#### Key Features\n- You write a template (in JSON or YAML) describing your desired infrastructure.\n- CloudFormation provisions and configures those resources for you (Stacks).\n- Extremely useful for disaster recovery or replicating environments across regions.\n\n#### 💡 CLF-C02 Exam Tip\n"Infrastructure as Code (IaC)", "Deploy templates", "Automate provisioning of resources" = CloudFormation.` },
-            { id: 'mg7', icon: '🏢', title: 'Control Tower', desc: 'Automated multi-account setup.', summary: '• Best practices landing zone\n• Automated guardrails\n• Uses AWS Organizations', dive: `### AWS Control Tower\nProvides the easiest way to set up and govern a secure, multi-account AWS environment based on best practices.\n\n#### Key Features\n- Automates the setup of a "Landing Zone".\n- Establishes preventative and detective "Guardrails" (using SCPs and AWS Config rules).\n- Centralizes identity and access using AWS IAM Identity Center.\n\n#### 💡 CLF-C02 Exam Tip\nIf a company is "new to AWS" and wants to set up a "multi-account environment with best practices and guardrails automatically", choose Control Tower.` },
-            { id: 'mg8', icon: '🏥', title: 'Health Dashboard', desc: 'AWS Service Health status.', summary: '• Global service status\n• Account-specific alerts\n• Maintenance schedules', dive: `### AWS Health Dashboard\nThe single place to learn about the availability and operations of AWS services.\n\n#### Two Views\n1. **Service Health:** A general overview of the status of all AWS services globally (like the old AWS Service Health Dashboard).\n2. **Your Account Health:** Personalized alerts regarding events that specifically impact your AWS resources (e.g., hardware degradation on a host running your EC2 instance).\n\n#### 💡 CLF-C02 Exam Tip\n"Alerts about upcoming maintenance affecting your specific EC2 instances" = AWS Health Dashboard.` }
+            { id: 'mg1', icon: '👁️', title: 'CloudWatch', desc: 'Monitoring and observability.', summary: '• Performance metrics\n• Dashboarding\n• Alarms & Events', dive: `### Amazon CloudWatch
+CloudWatch monitors your AWS resources and the applications you run on AWS in real-time. It is the core observability tool in the AWS ecosystem.
+
+#### Key Concepts
+- **Metrics:** Numerical data about performance (e.g., CPU utilization, Network In/Out, Disk Reads). Default metrics are collected every 5 minutes (Basic) or 1 minute (Detailed Monitoring).
+- **Alarms:** Trigger automated actions when a metric threshold is breached (e.g., "Alert SNS or scale out an EC2 Auto Scaling group when CPU > 80% for 5 minutes").
+- **Logs:** Centralize, search, and analyze logs from EC2 instances, Lambda functions, CloudTrail, and other services.
+- **EventBridge (formerly CloudWatch Events):** A serverless event bus that connects application data from your apps, SaaS, and AWS services. Used to trigger Lambda functions on a cron schedule.
+
+#### 💡 CLF-C02 Exam Tip
+CloudWatch = **Performance & Real-Time Monitoring**. If a question asks "How do I monitor CPU usage?", "How do I trigger an Auto Scaling event?", or "Where do I store my application logs?", choose CloudWatch.` },
+            { id: 'mg2', icon: '📜', title: 'CloudTrail', desc: 'Audit API calls and user activity.', summary: '• Governance & Compliance\n• API History\n• Who did what?', dive: `### AWS CloudTrail
+CloudTrail enables governance, compliance, operational auditing, and risk auditing of your AWS account.
+
+#### Key Features
+- **API Tracking:** Records *every single* API call made in your account (whether via the AWS Management Console, SDKs, or CLI).
+- **Event History:** Tells you **Who** made the call, **What** the call was, **When** it happened, and from **Where** (IP address).
+- **Management vs Data Events:** By default, logs management events (e.g., creating a bucket). You can optionally log data events (e.g., individual file uploads to S3) for an extra cost.
+- **Multi-Region:** You can configure a single CloudTrail to capture events across all AWS regions and centralize them in one secure S3 bucket.
+
+#### 💡 CLF-C02 Exam Tip
+CloudTrail = **Audit & Compliance**. If a question asks "Who deleted that S3 bucket?", "What time was this EC2 instance launched?", or mentions "API auditing for compliance", the answer is CloudTrail.` },
+            { id: 'mg3', icon: '✅', title: 'Trusted Advisor', desc: 'Optimize your entire AWS environment.', summary: '• Cost optimization\n• Security checks\n• Performance & Limits', dive: `### AWS Trusted Advisor
+An online tool that acts as your customized cloud expert. It analyzes your AWS environment and provides real-time guidance to help you provision your resources following AWS best practices.
+
+#### The Five Pillars of Checks
+1. **Cost Optimization:** Finds unused or idle resources (e.g., unattached EBS volumes, idle EC2 instances) to save you money.
+2. **Performance:** Checks for high-utilization resources that might be bottlenecking your app.
+3. **Security:** Flags critical security flaws (e.g., S3 buckets with public permissions, IAM users without MFA, Security Groups with open port 22/SSH).
+4. **Fault Tolerance:** Checks if your architecture is resilient (e.g., RDS instances that are not Multi-AZ, EBS volumes without recent snapshots).
+5. **Service Limits:** Warns you if you are approaching your account's maximum limit for a resource (e.g., nearing your max limit of VPCs or EC2 instances).
+
+#### 💡 CLF-C02 Exam Tip
+Trusted Advisor provides "Recommendations". All users (Basic/Developer support) get access to 7 core security/limit checks. **Business and Enterprise** support plans unlock the full suite of all checks.` },
+            { id: 'mg4', icon: '⚙️', title: 'AWS Config', desc: 'Resource configuration history.', summary: '• Track changes over time\n• Evaluate compliance\n• Configuration drift', dive: `### AWS Config
+A service that enables you to assess, audit, and evaluate the configurations of your AWS resources over time.
+
+#### Key Features
+- **Configuration History:** Continuously monitors and records your AWS resource configurations. You can see exactly what an EC2 instance looked like 3 days ago versus today.
+- **Compliance Rules:** Automate the evaluation of recorded configurations against desired guidelines (e.g., rule: "All EBS volumes must be encrypted").
+- **Drift Detection:** Alerts you immediately via SNS if a resource configuration changes and falls out of compliance (e.g., someone changes an S3 bucket from private to public).
+- **Conformance Packs:** Collections of AWS Config rules mapped to specific regulatory standards (like HIPAA or PCI-DSS).
+
+#### 💡 CLF-C02 Exam Tip
+"Track configuration changes over time", "evaluate compliance against internal rules", "resource inventory timeline", "configuration drift" = AWS Config.` },
+            { id: 'mg5', icon: '🔧', title: 'Systems Manager', desc: 'Operational insight & patch management.', summary: '• Run Command (No SSH)\n• Patch Manager\n• Parameter Store', dive: `### AWS Systems Manager (SSM)
+A secure, end-to-end management solution for hybrid cloud environments. It provides visibility and control over your AWS resources and on-premises servers.
+
+#### Key Capabilities
+- **Run Command:** Safely execute scripts and commands across fleets of EC2 instances simultaneously *without* needing to open SSH/RDP ports or manage bastion hosts.
+- **Session Manager:** Provides secure, auditable, interactive browser-based shell access to your EC2 instances.
+- **Patch Manager:** Automate the process of patching managed instances with security-related updates on a predefined schedule.
+- **Parameter Store:** Secure, hierarchical storage for configuration data and secrets management (e.g., database connection strings).
+
+#### 💡 CLF-C02 Exam Tip
+Keywords: "Manage a fleet of EC2 instances simultaneously", "Automate OS patching across hundreds of servers", "Run commands remotely without SSH access" = AWS Systems Manager.` },
+            { id: 'mg6', icon: '🏗️', title: 'CloudFormation', desc: 'Infrastructure as Code (IaC).', summary: '• Automate deployments\n• JSON or YAML templates\n• Repeatable infrastructure', dive: `### AWS CloudFormation
+The core Infrastructure as Code (IaC) service in AWS. It gives you an easy way to model a collection of related AWS resources, provision them quickly and consistently, and manage them throughout their lifecycles.
+
+#### Key Features
+- **Templates:** You write a declarative template in JSON or YAML describing your desired infrastructure (e.g., "I want 1 VPC, 2 Subnets, and 1 EC2 instance").
+- **Stacks:** CloudFormation reads the template and provisions all the resources in exactly the right order (this collection of resources is called a Stack).
+- **Repeatability:** You can reuse the same template to deploy identical environments in different AWS Regions or accounts (perfect for Disaster Recovery).
+- **Drift Detection:** Can detect if someone manually changes a resource that was provisioned by CloudFormation.
+
+#### 💡 CLF-C02 Exam Tip
+"Infrastructure as Code (IaC)", "Deploy JSON/YAML templates", "Automate provisioning of resources repeatedly", "version control your infrastructure" = CloudFormation.` },
+            { id: 'mg7', icon: '🏢', title: 'Control Tower', desc: 'Automated multi-account setup.', summary: '• Best practices landing zone\n• Automated guardrails\n• Uses AWS Organizations', dive: `### AWS Control Tower
+Provides the easiest way to set up and govern a secure, multi-account AWS environment based on AWS best practices.
+
+#### Key Features
+- **Landing Zone:** Automates the creation of a well-architected multi-account environment (using AWS Organizations).
+- **Guardrails:** Establishes mandatory and recommended rules (preventative and detective). For example, it automatically prevents anyone from disabling CloudTrail across the organization.
+- **Account Factory:** A standardized template to quickly provision new, compliant AWS accounts for different teams or projects.
+- **Centralized Identity:** Integrates with IAM Identity Center to manage user access across all accounts.
+
+#### 💡 CLF-C02 Exam Tip
+If a company is "new to AWS", "wants to set up a multi-account environment quickly", or "wants a baseline environment with best practices and guardrails automatically applied", choose Control Tower.` },
+            { id: 'mg8', icon: '🏥', title: 'Health Dashboard', desc: 'AWS Service Health status.', summary: '• Global service status\n• Account-specific alerts\n• Maintenance schedules', dive: `### AWS Health Dashboard
+The single, authoritative place to learn about the availability and operations of AWS services.
+
+#### Two Distinct Views
+1. **Service Health:** A general, public-facing overview of the status of all AWS services globally. If S3 goes down in us-east-1, you check this page.
+2. **Your Account Health:** Personalized, authenticated alerts regarding events that *specifically* impact your AWS resources. 
+
+#### Common Alerts
+- An underlying hardware host running your specific EC2 instance is degrading and requires maintenance.
+- An upcoming AWS API deprecation that affects your application code.
+- IAM access keys in your account that have been compromised and posted on GitHub.
+
+#### 💡 CLF-C02 Exam Tip
+"Alerts about upcoming scheduled maintenance affecting your specific EC2 instances", "personalized view of service disruptions" = AWS Health Dashboard.` }
         ];
 
         const cafData = [
-            { id: 'c1', icon: '💼', title: 'Business', desc: 'Alignment, data monetization, and ROI.', summary: '• Strategic ROI\n• Budget & Finance\n• Business Outcomes', dive: `### Business Perspective\nThe Business Perspective helps ensure that your cloud investments accelerate your digital transformation ambitions and business outcomes.\n\n#### Key Focus Areas\n- **Cloud Value Realization:** Measuring the value delivered by your cloud investments against business cases.\n- **Business Case Development:** Creating financial justifications including TCO (Total Cost of Ownership) and ROI models.\n- **IT Finance:** Transitioning from CapEx (Capital Expenditure) to OpEx (Operational Expenditure) models.\n- **Strategy Management:** Aligning IT strategy with organizational goals.\n\n#### 💡 CLF-C02 Exam Tip\nIf a scenario mentions "stakeholders", "ROI", "CapEx to OpEx", or "business outcomes", the answer is almost always the Business Perspective.` },
-            { id: 'c2', icon: '👥', title: 'People', desc: 'Skills development and organizational change.', summary: '• Training/Certifications\n• Skills Gap Analysis\n• Culture Change', dive: `### People Perspective\nThe People Perspective serves as a bridge between technology and business, focusing on workforce evolution and organizational culture.\n\n#### Key Focus Areas\n- **Culture Evolution:** Fostering a mindset of continuous learning, agility, and innovation.\n- **Transformational Leadership:** Empowering leaders to sponsor and drive cloud adoption.\n- **Cloud Fluency:** Creating comprehensive training programs and certification paths to close skills gaps.\n- **Organizational Alignment:** Establishing a Cloud Center of Excellence (CCoE) to champion the transformation.\n\n#### 💡 CLF-C02 Exam Tip\nAny question regarding "training", "skills", "staffing", "organizational change management (OCM)", or "CCoE" maps directly to the People Perspective.` },
-            { id: 'c3', icon: '⚖️', title: 'Governance', desc: 'Risk mitigation and portfolio management.', summary: '• Compliance guardrails\n• Risk management\n• Program tracking', dive: `### Governance Perspective\nThe Governance Perspective orchestrates cloud initiatives while maximizing organizational benefits and minimizing transformation-related risks.\n\n#### Key Focus Areas\n- **Program & Project Management:** Structuring and tracking complex cloud initiatives.\n- **Risk Management:** Identifying, measuring, and mitigating technical and business risks.\n- **Cloud Governance:** Establishing automated guardrails, policies, and compliance controls.\n- **Benefits Management:** Ensuring projects deliver their promised value.\n\n#### 💡 CLF-C02 Exam Tip\nLook for keywords like "compliance", "policies", "risk mitigation", "guardrails", or "portfolio management". AWS Organizations and AWS Control Tower are key governance services.` },
-            { id: 'c4', icon: '🏗️', title: 'Platform', desc: 'Infrastructure and modern app architecture.', summary: '• Cloud Landing Zones\n• IaC (CloudFormation)\n• App Modernization', dive: `### Platform Perspective\nThe Platform Perspective provides the architectural blueprints and physical foundation for your cloud environment.\n\n#### Key Focus Areas\n- **Platform Architecture:** Designing multi-account architectures, networking, and security perimeters (Landing Zones).\n- **Data Architecture:** Designing scalable data lakes and databases.\n- **Modern Application Development:** Utilizing containers, serverless architectures, and microservices.\n- **Infrastructure as Code (IaC):** Automating infrastructure provisioning.\n\n#### 💡 CLF-C02 Exam Tip\nKeywords include "architecture", "Landing Zone", "Infrastructure as Code", "network topologies", and "compute scaling".` },
-            { id: 'c5', icon: '🛡️', title: 'Security', desc: 'Data protection and identity control.', summary: '• IAM Best Practices\n• Encryption (KMS)\n• Incident Response', dive: `### Security Perspective\nThe Security Perspective helps you achieve the confidentiality, integrity, and availability of your data and cloud workloads.\n\n#### Key Focus Areas\n- **Identity and Access Management (IAM):** Enforcing the principle of least privilege.\n- **Infrastructure Protection:** Implementing network firewalls and DDoS protection.\n- **Data Protection:** Encrypting data at rest and in transit.\n- **Incident Response:** Automating the detection and remediation of security events.\n\n#### 💡 CLF-C02 Exam Tip\nQuestions featuring "encryption", "IAM", "least privilege", "Zero Trust", or "compliance auditing" belong to the Security Perspective.` },
-            { id: 'c6', icon: '⚙️', title: 'Operations', desc: 'Health monitoring and incident cycles.', summary: '• Observability (CloudWatch)\n• Patch Management\n• Inventory tracking', dive: `### Operations Perspective\nThe Operations Perspective ensures that your cloud services are delivered at a level that meets the needs of your business.\n\n#### Key Focus Areas\n- **Observability:** Implementing robust logging, monitoring, and tracing.\n- **Event & Incident Management:** Automating responses to system alerts and failures.\n- **Change & Release Management:** Ensuring smooth, automated deployment pipelines (CI/CD).\n- **Performance & Capacity Management:** Ensuring resources meet SLA demands without waste.\n\n#### 💡 CLF-C02 Exam Tip\nFocus on "health monitoring", "SLAs", "runbooks", "patching", and "daily IT management". Amazon CloudWatch and AWS Systems Manager are foundational here.` }
+            { id: 'c1', icon: '💼', title: 'Business', desc: 'Alignment, data monetization, and ROI.', summary: '• Strategic ROI\n• Budget & Finance\n• Business Outcomes', dive: `### Business Perspective
+The Business Perspective helps ensure that your cloud investments accelerate your digital transformation ambitions and business outcomes. It focuses on the "Why".
+
+#### Key Focus Areas
+- **Cloud Value Realization:** Measuring the value delivered by your cloud investments against the original business cases.
+- **Business Case Development:** Creating financial justifications including TCO (Total Cost of Ownership) and comprehensive ROI (Return on Investment) models.
+- **IT Finance:** Managing the transition from heavy upfront CapEx (Capital Expenditure) hardware purchases to flexible OpEx (Operational Expenditure) cloud consumption models.
+- **Strategy Management:** Ensuring IT strategy flawlessly aligns with overarching organizational goals.
+- **Data Monetization:** Leveraging cloud data to create new revenue streams.
+
+#### 💡 CLF-C02 Exam Tip
+If an exam scenario mentions "stakeholders", "ROI", "CapEx to OpEx transition", "business outcomes", or "business risk", the answer is almost always the Business Perspective.` },
+            { id: 'c2', icon: '👥', title: 'People', desc: 'Skills development and organizational change.', summary: '• Training/Certifications\n• Skills Gap Analysis\n• Culture Change', dive: `### People Perspective
+The People Perspective serves as a crucial bridge between technology and business, focusing purely on workforce evolution, structure, and organizational culture.
+
+#### Key Focus Areas
+- **Culture Evolution:** Fostering a mindset of continuous learning, agility, and innovation across the workforce.
+- **Transformational Leadership:** Empowering leaders to sponsor, champion, and drive cloud adoption.
+- **Cloud Fluency & Training:** Creating comprehensive training programs and certification paths to close technical skills gaps.
+- **Organizational Alignment:** Establishing new organizational structures, such as a **Cloud Center of Excellence (CCoE)**, to spearhead the transformation.
+- **Incentive Management:** Restructuring rewards and goals to align with cloud adoption success.
+
+#### 💡 CLF-C02 Exam Tip
+Any question regarding "training programs", "certifications", "staffing", "closing skills gaps", "organizational change management (OCM)", or forming a "CCoE" maps directly to the People Perspective.` },
+            { id: 'c3', icon: '⚖️', title: 'Governance', desc: 'Risk mitigation and portfolio management.', summary: '• Compliance guardrails\n• Risk management\n• Program tracking', dive: `### Governance Perspective
+The Governance Perspective orchestrates cloud initiatives while maximizing organizational benefits and minimizing transformation-related risks. It provides the "guardrails" for agility.
+
+#### Key Focus Areas
+- **Program & Project Management:** Structuring, executing, and tracking complex cloud initiatives.
+- **Risk Management:** Identifying, measuring, and mitigating technical, business, and operational risks.
+- **Cloud Governance:** Establishing automated guardrails, policies, and compliance controls (using tools like AWS Organizations, Config, and Control Tower).
+- **Benefits Management:** Establishing metrics to ensure projects deliver their promised value.
+- **License Management:** Ensuring software licenses deployed in the cloud comply with vendor agreements.
+
+#### 💡 CLF-C02 Exam Tip
+Look for keywords like "compliance requirements", "corporate policies", "risk mitigation", "automated guardrails", "IT governance", or "portfolio management".` },
+            { id: 'c4', icon: '🏗️', title: 'Platform', desc: 'Infrastructure and modern app architecture.', summary: '• Cloud Landing Zones\n• IaC (CloudFormation)\n• App Modernization', dive: `### Platform Perspective
+The Platform Perspective provides the technical architectural blueprints and the physical foundation for your cloud environment.
+
+#### Key Focus Areas
+- **Platform Architecture:** Designing multi-account architectures, networking topologies, and security perimeters (creating a solid "Landing Zone").
+- **Data Architecture:** Designing highly scalable data lakes, analytics pipelines, and purpose-built databases.
+- **Modern Application Development:** Transitioning from monoliths to utilizing containers, serverless architectures, and microservices.
+- **Infrastructure Provisioning:** Adopting Infrastructure as Code (IaC) to automate and standardizing resource provisioning.
+
+#### 💡 CLF-C02 Exam Tip
+Keywords include "architecture patterns", "Landing Zone foundation", "Infrastructure as Code", "network topologies", "compute scaling", and "application modernization".` },
+            { id: 'c5', icon: '🛡️', title: 'Security', desc: 'Data protection and identity control.', summary: '• IAM Best Practices\n• Encryption (KMS)\n• Incident Response', dive: `### Security Perspective
+The Security Perspective helps you achieve the confidentiality, integrity, and availability of your data and cloud workloads.
+
+#### Key Focus Areas
+- **Identity and Access Management (IAM):** Enforcing the principle of least privilege, MFA, and centralized identity.
+- **Infrastructure Protection:** Implementing network firewalls, Security Groups, NACLs, and DDoS protection (Shield).
+- **Data Protection:** Classifying data and enforcing strong encryption at rest (KMS) and in transit (TLS).
+- **Detective Controls:** Utilizing services like GuardDuty and Security Hub to identify anomalies.
+- **Incident Response:** Automating the detection, containment, and remediation of security events.
+
+#### 💡 CLF-C02 Exam Tip
+Questions featuring "encryption", "IAM", "least privilege", "Zero Trust architectures", "incident response plans", or "compliance auditing" belong to the Security Perspective.` },
+            { id: 'c6', icon: '⚙️', title: 'Operations', desc: 'Health monitoring and incident cycles.', summary: '• Observability (CloudWatch)\n• Patch Management\n• Inventory tracking', dive: `### Operations Perspective
+The Operations Perspective ensures that your cloud services are delivered at a level that meets or exceeds the needs of your business. It is all about "keeping the lights on" efficiently.
+
+#### Key Focus Areas
+- **Observability:** Implementing robust logging, metrics, monitoring, and distributed tracing.
+- **Event & Incident Management:** Automating responses to system alerts, failures, and degradation to minimize downtime.
+- **Change & Release Management:** Ensuring smooth, automated deployment pipelines (CI/CD) to release code without breaking systems.
+- **Resource Inventory Management:** Tracking what resources exist and who owns them.
+- **Performance & Capacity Management:** Ensuring resources meet SLA demands without unnecessary waste.
+
+#### 💡 CLF-C02 Exam Tip
+Focus on "health monitoring", "SLAs", "runbooks/playbooks", "patching schedules", "incident management", and "daily IT management". Amazon CloudWatch and AWS Systems Manager are foundational here.` }
         ];
 
         const wafData = [
-            { id: 'w1', icon: '🛠️', title: 'Operational Excellence', desc: 'Improve and automate workflows.', summary: '• Operations as Code\n• Frequent changes\n• Learn from failure', dive: `### Operational Excellence Pillar\nThe ability to support development and run workloads effectively, gain insight into their operation, and continuously improve processes.\n\n#### Core Design Principles\n1. **Perform operations as code:** Define your entire workload as code (CloudFormation).\n2. **Make frequent, small, reversible changes:** Ease rollbacks.\n3. **Refine operations procedures frequently:** Evolve your procedures as your workloads evolve.\n4. **Anticipate failure:** Perform "game days" to test your architecture.\n5. **Learn from all operational failures:** Drive improvement through lessons learned.` },
-            { id: 'w2', icon: '🔒', title: 'Security', desc: 'Protect assets and enable traceability.', summary: '• Strong IAM\n• Data encryption\n• Audit logs', dive: `### Security Pillar\nProtecting information, systems, and assets while delivering business value through risk assessments and mitigation strategies.\n\n#### Core Design Principles\n1. **Implement a strong identity foundation:** Rely on least privilege (IAM).\n2. **Enable traceability:** Monitor and audit changes (CloudTrail).\n3. **Apply security at all layers:** Defense in Depth (WAF, Security Groups).\n4. **Automate security best practices:** Create software-based security mechanisms.\n5. **Protect data in transit and at rest:** Classify and encrypt (KMS).\n6. **Keep people away from data:** Reduce direct manual access.` },
-            { id: 'w3', icon: '📈', title: 'Reliability', desc: 'Self-healing systems that recover.', summary: '• Auto recovery\n• Horizontal scaling\n• Stop guessing capacity', dive: `### Reliability Pillar\nThe ability of a workload to perform its intended function correctly and consistently.\n\n#### Core Design Principles\n1. **Automatically recover from failure:** Monitor KPIs and trigger automation.\n2. **Test recovery procedures:** Use Chaos Engineering.\n3. **Scale horizontally:** Replace one large resource with multiple small resources to reduce impact of a single failure (Auto Scaling).\n4. **Stop guessing capacity:** Monitor demand and automate capacity.\n5. **Manage change in automation:** Make changes via IaC.` },
-            { id: 'w4', icon: '⚡', title: 'Performance Efficiency', desc: 'Evolve with tech and use serverless.', summary: '• Go global in minutes\n• Use serverless\n• Experiment often', dive: `### Performance Efficiency Pillar\nThe efficient use of computing resources to meet requirements, and maintaining efficiency as demand changes.\n\n#### Core Design Principles\n1. **Democratize advanced technologies:** Push complex tech (like ML) to the cloud vendor.\n2. **Go global in minutes:** Deploy in multiple Regions (CloudFront/Route53).\n3. **Use serverless architectures:** Remove the need to run/maintain servers (Lambda).\n4. **Experiment more often:** Quickly test and tear down.\n5. **Mechanical sympathy:** Use the approach that aligns best with your goals.` },
-            { id: 'w5', icon: '💰', title: 'Cost Optimization', desc: 'Maximize value and eliminate waste.', summary: '• Pay-as-you-go\n• Cloud Financial Mgmt\n• Consumption models', dive: `### Cost Optimization Pillar\nAvoiding unnecessary costs, ensuring you achieve the highest possible return on your cloud investments.\n\n#### Core Design Principles\n1. **Implement Cloud Financial Management:** Build a cost-aware culture.\n2. **Adopt a consumption model:** Pay only for the computing resources you consume.\n3. **Measure overall efficiency:** Business output vs. cost.\n4. **Stop spending money on undifferentiated heavy lifting:** Let AWS handle data center operations.\n5. **Analyze and attribute expenditure:** Use tags to attribute costs (Cost Explorer).` },
-            { id: 'w6', icon: '🌍', title: 'Sustainability', desc: 'Minimize environmental footprint.', summary: '• Maximize utilization\n• Efficient hardware\n• Carbon footprint metrics', dive: `### Sustainability Pillar\nFocuses on environmental impacts, especially energy consumption and efficiency.\n\n#### Core Design Principles\n1. **Understand your impact:** Measure environmental impact.\n2. **Establish sustainability goals:** Reduce carbon footprint.\n3. **Maximize utilization:** Right-size workloads to avoid idle resources.\n4. **Anticipate and adopt new hardware:** Upgrade to energy-efficient hardware (e.g., AWS Graviton processors).\n5. **Use managed services:** Shared services reduce overall infrastructure.\n6. **Reduce downstream impact:** Lower the energy required by your customers.` }
+            { id: 'w1', icon: '🛠️', title: 'Operational Excellence', desc: 'Improve and automate workflows.', summary: '• Operations as Code\n• Frequent changes\n• Learn from failure', dive: `### Operational Excellence Pillar
+The ability to support development and run workloads effectively, gain continuous insight into their operation, and continuously improve processes and procedures to deliver business value.
+
+#### Core Design Principles
+1. **Perform operations as code:** Define your entire workload (applications and infrastructure) as code (e.g., CloudFormation) and update it using CI/CD pipelines.
+2. **Make frequent, small, reversible changes:** Design workloads to allow components to be updated regularly to ease rollback in case of failure.
+3. **Refine operations procedures frequently:** Evolve your procedures, runbooks, and playbooks as your workloads evolve.
+4. **Anticipate failure:** Perform "game days" to simulate failure events and test your architecture's response.
+5. **Learn from all operational failures:** Drive improvement through blameless post-incident analysis across all teams.
+
+#### 💡 CLF-C02 Exam Tip
+Keywords: "Runbooks", "Playbooks", "Game Days", "Infrastructure as Code", "Continuous Improvement".` },
+            { id: 'w2', icon: '🔒', title: 'Security', desc: 'Protect assets and enable traceability.', summary: '• Strong IAM\n• Data encryption\n• Audit logs', dive: `### Security Pillar
+The ability to protect data, systems, and assets to take advantage of cloud technologies to improve your security.
+
+#### Core Design Principles
+1. **Implement a strong identity foundation:** Rely on centralized privilege management and the principle of least privilege (IAM).
+2. **Enable traceability:** Monitor, alert, and audit actions and changes to your environment in real-time (CloudTrail, GuardDuty).
+3. **Apply security at all layers:** Apply a Defense in Depth approach with multiple security controls at Edge, VPC, Subnet, OS, and App levels.
+4. **Automate security best practices:** Create secure, automated software-based security mechanisms that respond to threats automatically.
+5. **Protect data in transit and at rest:** Classify your data into sensitivity levels and use encryption (KMS, Macie).
+6. **Keep people away from data:** Use mechanisms to reduce or eliminate the need for direct access or manual processing of data.
+
+#### 💡 CLF-C02 Exam Tip
+Keywords: "Defense in depth", "Least privilege", "Traceability", "Encryption".` },
+            { id: 'w3', icon: '📈', title: 'Reliability', desc: 'Self-healing systems that recover.', summary: '• Auto recovery\n• Horizontal scaling\n• Stop guessing capacity', dive: `### Reliability Pillar
+The ability of a workload to perform its intended function correctly and consistently when it’s expected to. This includes the ability to operate and test the workload through its total lifecycle.
+
+#### Core Design Principles
+1. **Automatically recover from failure:** Monitor KPIs and trigger automation when thresholds are breached (e.g., Auto Scaling replacing a dead EC2 instance).
+2. **Test recovery procedures:** Use Chaos Engineering to test how your system fails and recovers in production.
+3. **Scale horizontally:** Replace one large resource with multiple small resources to reduce the impact of a single point of failure.
+4. **Stop guessing capacity:** Monitor demand and automate the addition or removal of resources to maintain optimal performance.
+5. **Manage change in automation:** Make changes to your infrastructure using automation to ensure predictability.
+
+#### 💡 CLF-C02 Exam Tip
+Keywords: "Self-healing", "Recover from failure", "Horizontal scaling", "Multi-AZ deployment", "RTO/RPO (Recovery Time/Point Objective)".` },
+            { id: 'w4', icon: '⚡', title: 'Performance Efficiency', desc: 'Evolve with tech and use serverless.', summary: '• Go global in minutes\n• Use serverless\n• Experiment often', dive: `### Performance Efficiency Pillar
+The ability to use computing resources efficiently to meet system requirements, and to maintain that efficiency as demand changes and technologies evolve.
+
+#### Core Design Principles
+1. **Democratize advanced technologies:** Push difficult IT tasks (like Machine Learning, media transcoding, or complex databases) to the cloud vendor rather than learning to host them yourself.
+2. **Go global in minutes:** Deploy workloads in multiple AWS Regions to provide lower latency and a better experience for your end-users (using CloudFront or Global Accelerator).
+3. **Use serverless architectures:** Remove the operational burden of managing physical servers or virtual machines (Lambda, Fargate).
+4. **Experiment more often:** Quickly spin up resources, perform comparative tests, and tear down instances without upfront hardware costs.
+5. **Mechanical sympathy:** Use the technology approach that aligns best with what you are trying to achieve (e.g., picking the exact right database for the job).
+
+#### 💡 CLF-C02 Exam Tip
+Keywords: "Serverless", "Global reach", "Democratize technology", "Select right resource type".` },
+            { id: 'w5', icon: '💰', title: 'Cost Optimization', desc: 'Maximize value and eliminate waste.', summary: '• Pay-as-you-go\n• Cloud Financial Mgmt\n• Consumption models', dive: `### Cost Optimization Pillar
+The ability to run systems to deliver business value at the lowest price point, ensuring you achieve the highest possible return on your cloud investments.
+
+#### Core Design Principles
+1. **Implement Cloud Financial Management:** Build a cost-aware culture through knowledge building and cost programs (FinOps).
+2. **Adopt a consumption model:** Pay only for the computing resources you consume, and increase or decrease usage depending on business requirements.
+3. **Measure overall efficiency:** Measure the business output of the workload against the costs associated with delivering it.
+4. **Stop spending money on undifferentiated heavy lifting:** Let AWS handle the data center operations, racking, stacking, and powering servers.
+5. **Analyze and attribute expenditure:** Use robust resource tagging to identify system usage and accurately attribute costs to specific business owners or projects (Cost Explorer).
+
+#### 💡 CLF-C02 Exam Tip
+Keywords: "FinOps", "Rightsizing", "Tagging for cost allocation", "Eliminate waste", "Reserved Instances".` },
+            { id: 'w6', icon: '🌍', title: 'Sustainability', desc: 'Minimize environmental footprint.', summary: '• Maximize utilization\n• Efficient hardware\n• Carbon footprint metrics', dive: `### Sustainability Pillar
+Focuses on environmental impacts, especially energy consumption and efficiency, across all components of a workload by maximizing the benefits from the provisioned resources.
+
+#### Core Design Principles
+1. **Understand your impact:** Measure the environmental impact of your cloud workloads using the AWS Customer Carbon Footprint Tool.
+2. **Establish sustainability goals:** Set long-term goals for reducing the carbon footprint per transaction of your application.
+3. **Maximize utilization:** Right-size workloads and utilize auto-scaling to avoid idle resources that consume energy pointlessly.
+4. **Anticipate and adopt new hardware:** Continuously upgrade to newer, more energy-efficient instance types (e.g., moving from x86 to AWS Graviton ARM-based processors).
+5. **Use managed services:** Shared managed services (like S3 or Serverless) maximize resource efficiency across thousands of customers, reducing the overall infrastructure footprint.
+6. **Reduce the downstream impact:** Reduce the energy required by your customers' devices to consume your services (e.g., optimizing client-side code).
+
+#### 💡 CLF-C02 Exam Tip
+Keywords: "Carbon footprint", "Energy efficiency", "Graviton processors", "Maximize resource utilization".` }
         ];
 
         const computeData = [
-            { id: 'cm1', icon: '💻', title: 'Amazon EC2', desc: 'Virtual servers in the cloud.', summary: '• IaaS\n• Full OS control\n• Resizable capacity', dive: `### Amazon Elastic Compute Cloud (EC2)\nProvides resizable, virtual machines (instances) in the cloud.\n\n#### Key Features\n- Complete control over the operating system (OS).\n- Choose CPU, Memory, Storage, and Networking capacity.\n- **Pricing Models:** On-Demand, Reserved Instances, Savings Plans, Spot Instances, Dedicated Hosts.\n\n#### 💡 CLF-C02 Exam Tip\nEC2 is IaaS. You are responsible for OS patching. Spot instances are for fault-tolerant workloads. Reserved instances/Savings Plans are for 1-3 year predictable workloads.` },
-            { id: 'cm2', icon: '⚡', title: 'AWS Lambda', desc: 'Run code without thinking about servers.', summary: '• Serverless\n• Event-driven\n• Pay per ms', dive: `### AWS Lambda\nA serverless compute service that lets you run code without provisioning or managing servers.\n\n#### Key Features\n- Runs code in response to triggers (e.g., changes in S3, DynamoDB, or HTTP requests via API Gateway).\n- Automatically scales from zero to thousands of concurrent requests.\n- Maximum execution time is 15 minutes.\n- You pay only for the compute time you consume (per millisecond).\n\n#### 💡 CLF-C02 Exam Tip\nKeywords: "Serverless", "run code without servers", "event-driven", "under 15 minutes execution".` },
-            { id: 'cm3', icon: '🐳', title: 'ECS & EKS', desc: 'Container management services.', summary: '• Docker orchestration\n• ECS (AWS native)\n• EKS (Kubernetes)', dive: `### Elastic Container Service (ECS) & Elastic Kubernetes Service (EKS)\nHighly scalable, high-performance container orchestration services.\n\n#### Key Differences\n- **Amazon ECS:** AWS's native container orchestration tool. Simple to integrate with other AWS services.\n- **Amazon EKS:** Managed Kubernetes service. Use this if you are already using Kubernetes on-premises or want open-source tooling.\n\n#### 💡 CLF-C02 Exam Tip\nIf you see "Docker" or "Containers", look for ECS or EKS. If they want open-source, choose EKS.` },
-            { id: 'cm4', icon: '🚀', title: 'AWS Fargate', desc: 'Serverless compute for containers.', summary: '• Serverless containers\n• No EC2 to manage\n• Works with ECS/EKS', dive: `### AWS Fargate\nA serverless compute engine for containers that works with both Amazon ECS and Amazon EKS.\n\n#### Key Features\n- Removes the need to provision and manage EC2 instances for your containers.\n- You don't have to pick server types or scale cluster capacity.\n- Fargate allocates the right amount of compute, eliminating over-provisioning.\n\n#### 💡 CLF-C02 Exam Tip\n"Serverless containers" = Fargate. You manage the container image, AWS manages the underlying server capacity.` },
-            { id: 'cm5', icon: '🌱', title: 'Elastic Beanstalk', desc: 'PaaS for deploying web apps.', summary: '• PaaS\n• Easy app deployment\n• AWS handles scaling', dive: `### AWS Elastic Beanstalk\nAn easy-to-use Platform as a Service (PaaS) for deploying and scaling web applications.\n\n#### Key Features\n- Simply upload your code (Java, .NET, Node.js, PHP, Python, Go, Docker).\n- Elastic Beanstalk automatically handles the deployment, capacity provisioning, load balancing, and auto-scaling.\n- You retain full control over the underlying AWS resources.\n\n#### 💡 CLF-C02 Exam Tip\nKeywords: "PaaS", "upload code and AWS handles the rest", "developer focus on code, not infrastructure".` },
-            { id: 'cm6', icon: '📦', title: 'AWS Batch', desc: 'Fully managed batch processing.', summary: '• Run batch jobs\n• Dynamically provisions\n• Spot Instance integration', dive: `### AWS Batch\nEnables you to run hundreds of thousands of batch computing jobs efficiently.\n\n#### Key Features\n- Dynamically provisions the optimal quantity and type of compute resources based on the volume and specific requirements of the batch jobs submitted.\n- Plans, schedules, and executes batch workloads.\n\n#### 💡 CLF-C02 Exam Tip\n"Batch processing at scale", "dynamically provisions EC2/Spot instances for scheduled jobs" = AWS Batch.` },
-            { id: 'cm7', icon: '🏢', title: 'AWS Outposts', desc: 'Hybrid cloud compute solution.', summary: '• AWS hardware on-prem\n• Hybrid cloud\n• Ultra-low latency', dive: `### AWS Outposts\nA fully managed service that offers the same AWS infrastructure, AWS services, APIs, and tools to virtually any datacenter, co-location space, or on-premises facility.\n\n#### Key Features\n- AWS physically delivers and installs racks of servers in your data center.\n- Ideal for workloads requiring low latency access to on-premises systems, local data processing, or data residency.\n\n#### 💡 CLF-C02 Exam Tip\n"AWS hardware in your own data center", "Hybrid cloud", "Ultra-low latency to local factory equipment" = AWS Outposts.` }
+            { id: 'cm1', icon: '💻', title: 'Amazon EC2', desc: 'Virtual servers in the cloud.', summary: '• IaaS\n• Full OS control\n• Resizable capacity', dive: `### Amazon Elastic Compute Cloud (EC2)
+EC2 provides secure, resizable compute capacity (virtual machines) in the cloud. It is a core **Infrastructure as a Service (IaaS)** offering.
+
+#### Key Features
+- **Total Control:** You have root/admin level control over the operating system (Windows, Linux, macOS).
+- **Responsibility:** Because it is IaaS, you are fully responsible for OS patching, security configuration, and application updates.
+- **Instance Families:** - **General Purpose:** Balanced compute, memory, and networking.
+  - **Compute Optimized:** For high-performance web servers, machine learning, and gaming.
+  - **Memory Optimized:** For fast performance of large in-memory databases (e.g., Redis, SAP HANA).
+  - **Storage Optimized:** For massive NoSQL databases or data warehousing.
+- **EBS Integration:** Backed by persistent block storage volumes (EBS).
+
+#### 💡 CLF-C02 Exam Tip
+If a scenario requires "full control over the operating system", "installing custom software", or "bringing your own software licenses", EC2 is the correct answer.` },
+            { id: 'cm2', icon: '⚡', title: 'AWS Lambda', desc: 'Run code without thinking about servers.', summary: '• Serverless\n• Event-driven\n• Pay per ms', dive: `### AWS Lambda
+A highly popular **Serverless** compute service that lets you run code without provisioning or managing servers.
+
+#### Key Features
+- **Event-Driven:** Lambda executes your code only when triggered by events (e.g., an image uploaded to S3, a new record in DynamoDB, an HTTP request via API Gateway, or a cron schedule via EventBridge).
+- **Auto-Scaling:** Automatically scales out from zero to thousands of concurrent executions in seconds to handle massive traffic spikes.
+- **Pricing:** You pay only for the compute time you consume, calculated per millisecond. If your code is not running, you pay $0.
+- **Limitations:** The maximum execution time for a single Lambda function is **15 minutes**. It is not designed for long-running, continuous tasks.
+
+#### 💡 CLF-C02 Exam Tip
+Keywords: "Serverless", "run code without servers", "event-driven architecture", "pay per millisecond", "sub-15 minute execution limit".` },
+            { id: 'cm3', icon: '🐳', title: 'ECS & EKS', desc: 'Container management services.', summary: '• Docker orchestration\n• ECS (AWS native)\n• EKS (Kubernetes)', dive: `### Elastic Container Service (ECS) & Elastic Kubernetes Service (EKS)
+Highly scalable, high-performance container orchestration services that allow you to easily run and scale containerized applications on AWS.
+
+#### Container Basics
+Containers (like Docker) bundle application code and its dependencies into a single object, ensuring it runs consistently in any environment. 
+
+#### The Two Flavors
+- **Amazon ECS:** AWS's native, highly integrated container orchestration tool. It is simpler to set up and integrates deeply with IAM, ALB, and CloudWatch.
+- **Amazon EKS:** A managed **Kubernetes** service. Kubernetes is a powerful, open-source system. Use EKS if your company already uses Kubernetes on-premises, you want to avoid vendor lock-in, or you require open-source tooling integrations.
+
+#### 💡 CLF-C02 Exam Tip
+If the exam mentions "Docker", "Containers", or "Microservices", you need a container service. If they specifically mention "Kubernetes" or "Open-Source orchestration", choose EKS. Otherwise, ECS is the standard.` },
+            { id: 'cm4', icon: '🚀', title: 'AWS Fargate', desc: 'Serverless compute for containers.', summary: '• Serverless containers\n• No EC2 to manage\n• Works with ECS/EKS', dive: `### AWS Fargate
+A serverless compute engine specifically designed for containers. It works as the underlying compute layer for both Amazon ECS and Amazon EKS.
+
+#### The Problem Fargate Solves
+Traditionally, to run containers (ECS/EKS), you had to provision and manage a cluster of EC2 instances to host them. You had to patch the EC2 OS, scale the cluster size, and worry about instance utilization.
+
+#### Key Features
+- **Serverless Containers:** Fargate removes the need to provision, configure, or manage any EC2 instances for your containers.
+- **Right-Sizing:** You specify the exact CPU and memory required for your container, and Fargate allocates exactly that amount of compute, eliminating over-provisioning and wasted money.
+- **Security:** Each container runs in its own isolated compute environment by design.
+
+#### 💡 CLF-C02 Exam Tip
+"Serverless containers" = Fargate. If the question asks how to run Docker containers "without managing the underlying EC2 servers", the answer is Fargate.` },
+            { id: 'cm5', icon: '🌱', title: 'Elastic Beanstalk', desc: 'PaaS for deploying web apps.', summary: '• PaaS\n• Easy app deployment\n• AWS handles scaling', dive: `### AWS Elastic Beanstalk
+An easy-to-use **Platform as a Service (PaaS)** for deploying and scaling web applications and services.
+
+#### Key Features
+- **Developer Focus:** You simply upload your application code (supports Java, .NET, Node.js, PHP, Python, Ruby, Go, and Docker).
+- **Automated Provisioning:** Elastic Beanstalk automatically handles the entire deployment process, including capacity provisioning, load balancing, auto-scaling, and application health monitoring.
+- **Underlying Control:** Unlike purely managed services, you retain full root access and control over the underlying AWS resources (EC2 instances, databases) powering your application if you need to tweak them.
+
+#### 💡 CLF-C02 Exam Tip
+Keywords: "PaaS", "upload code and AWS handles the rest", "developer wants to focus on writing code, not managing infrastructure".` },
+            { id: 'cm6', icon: '📦', title: 'AWS Batch', desc: 'Fully managed batch processing.', summary: '• Run batch jobs\n• Dynamically provisions\n• Spot Instance integration', dive: `### AWS Batch
+Enables developers, scientists, and engineers to easily and efficiently run hundreds of thousands of batch computing jobs on AWS.
+
+#### Key Features
+- **Dynamic Provisioning:** AWS Batch dynamically provisions the optimal quantity and type of compute resources (e.g., CPU or memory-optimized instances) based on the specific requirements of the batch jobs submitted.
+- **Spot Integration:** It integrates seamlessly with EC2 Spot Instances to run batch workloads at up to a 90% discount.
+- **No Management Software:** You don't need to install or manage batch computing software or server clusters. AWS Batch plans, schedules, and executes your workloads automatically.
+
+#### 💡 CLF-C02 Exam Tip
+"Batch processing at scale", "asynchronous jobs", "dynamically provisions EC2/Spot instances for scheduled high-performance computing (HPC) jobs" = AWS Batch.` },
+            { id: 'cm7', icon: '🏢', title: 'AWS Outposts', desc: 'Hybrid cloud compute solution.', summary: '• AWS hardware on-prem\n• Hybrid cloud\n• Ultra-low latency', dive: `### AWS Outposts
+A fully managed service that brings native AWS services, infrastructure, and operating models to virtually any data center, co-location space, or on-premises facility.
+
+#### Key Features
+- **Physical Hardware:** AWS literally ships and installs physical racks of AWS servers into your own corporate data center.
+- **True Hybrid:** You use the exact same AWS Management Console, APIs, and tools to manage the resources on Outposts as you do in the public AWS cloud.
+- **Use Cases:** - **Ultra-low latency:** Applications that need to communicate with local, legacy factory equipment with single-digit millisecond latency.
+  - **Data Residency:** Strict government regulations requiring data to remain physically within a specific country or building.
+
+#### 💡 CLF-C02 Exam Tip
+"AWS hardware physically located in your own data center", "True Hybrid cloud", "Ultra-low latency to local on-prem equipment", "Local data processing" = AWS Outposts.` }
         ];
 
         const storageData = [
-            { id: 's1', icon: '🪣', title: 'Amazon S3', desc: 'Scalable object storage.', summary: '• Object storage\n• Infinite scaling\n• Multiple tiers', dive: `### Amazon Simple Storage Service (S3)\nAn object storage service offering industry-leading scalability, data availability, security, and performance.\n\n#### Storage Classes\n- **Standard:** Frequently accessed data.\n- **Intelligent-Tiering:** Auto-moves data to the most cost-effective tier.\n- **Standard-IA:** Infrequently accessed, rapid access needed.\n- **One Zone-IA:** Lower cost, stored in a single AZ (less resilient).\n- **Glacier Classes:** For archiving.\n\n#### 💡 CLF-C02 Exam Tip\nUse S3 for backups, static website hosting, media files, and data lakes. It is "Object Storage", NOT for running databases or OS.` },
-            { id: 's2', icon: '🧱', title: 'Amazon EBS', desc: 'Block storage for EC2.', summary: '• Block storage\n• Attached to one EC2\n• Boot volumes', dive: `### Amazon Elastic Block Store (EBS)\nProvides block level storage volumes for use with EC2 instances.\n\n#### Key Features\n- Behaves like a physical hard drive attached to a computer.\n- Crucial for running operating systems and databases that require low-latency performance.\n- Automatically replicated within its specific Availability Zone (AZ).\n- Can be backed up to S3 using "Snapshots".\n\n#### 💡 CLF-C02 Exam Tip\n"Block storage" = EBS. EBS volumes are locked to a specific Availability Zone (AZ) and typically attach to only one instance.` },
-            { id: 's3', icon: '📁', title: 'Amazon EFS', desc: 'Elastic File System for Linux.', summary: '• File storage\n• Multi-AZ attachment\n• Linux (NFS)', dive: `### Amazon Elastic File System (EFS)\nA simple, serverless, set-and-forget elastic file system.\n\n#### Key Features\n- Can be attached to *multiple* EC2 instances simultaneously (unlike standard EBS).\n- Uses the NFS protocol (Compatible with Linux).\n- Automatically scales up and down as you add/remove files.\n- Spans multiple Availability Zones for high availability.\n\n#### 💡 CLF-C02 Exam Tip\n"Shared file system", "Linux", "attached to hundreds of instances concurrently" = EFS.` },
-            { id: 's4', icon: '🧊', title: 'S3 Glacier', desc: 'Low-cost archival storage.', summary: '• Data archiving\n• Long-term retention\n• Lowest cost', dive: `### Amazon S3 Glacier\nSecure, durable, and extremely low-cost Amazon S3 storage classes for data archiving.\n\n#### Key Classes\n- **Glacier Instant Retrieval:** Millisecond access for rarely accessed data.\n- **Glacier Flexible Retrieval:** Access in 1-5 minutes or 5-12 hours.\n- **Glacier Deep Archive:** Lowest cost storage in AWS. Retrieval in 12-48 hours.\n\n#### 💡 CLF-C02 Exam Tip\nKeywords: "Archive", "regulatory retention for years", "lowest cost", "data not needed immediately".` },
-            { id: 's5', icon: '🌉', title: 'Storage Gateway', desc: 'Hybrid cloud storage solution.', summary: '• Connect on-prem to AWS\n• File, Tape, Volume\n• Cache locally', dive: `### AWS Storage Gateway\nA hybrid cloud storage service that gives you on-premises access to virtually unlimited cloud storage.\n\n#### Key Features\n- Connects your on-premises software appliance with cloud-based storage.\n- Caches frequently accessed data on-premises while storing the full data set in S3/Glacier.\n- Types: File Gateway, Volume Gateway, Tape Gateway.\n\n#### 💡 CLF-C02 Exam Tip\nKeywords: "Hybrid storage", "keep hot data on-prem but back up to cloud", "replace physical tape libraries".` },
-            { id: 's6', icon: '❄️', title: 'AWS Snow Family', desc: 'Physical devices for offline transfer.', summary: '• Petabyte-scale migration\n• Offline transfer\n• Edge computing', dive: `### AWS Snow Family\nPhysical devices to migrate massive amounts of data offline, or to run compute at the edge in disconnected environments.\n\n#### The Devices\n- **Snowcone:** Small, rugged, 8TB. For edge computing.\n- **Snowball Edge:** Up to 80TB. For large scale data migration and edge compute.\n- **Snowmobile:** Exabyte-scale migration. A 45-foot shipping container.\n\n#### 💡 CLF-C02 Exam Tip\n"Terabytes/Petabytes of data", "slow internet connection", "offline transfer to AWS" = Snow Family.` },
-            { id: 's7', icon: '🛡️', title: 'AWS Backup', desc: 'Centralized backup management.', summary: '• Cross-service backups\n• Compliance policies\n• Automated retention', dive: `### AWS Backup\nA fully managed backup service that makes it easy to centralize and automate the backup of data across AWS services.\n\n#### Key Features\n- Configure backup policies and monitor backup activity for AWS resources in one place.\n- Supports EBS volumes, RDS databases, DynamoDB tables, EFS file systems, and Storage Gateway volumes.\n\n#### 💡 CLF-C02 Exam Tip\n"Centralized backup management", "enforce backup compliance across all AWS services" = AWS Backup.` }
+            { id: 's1', icon: '🪣', title: 'Amazon S3', desc: 'Scalable object storage.', summary: '• Object storage\n• Infinite scaling\n• Multiple tiers', dive: `### Amazon Simple Storage Service (S3)
+An object storage service offering industry-leading scalability, data availability, security, and performance. Data is stored as "objects" inside "buckets".
+
+#### Key Features
+- **Durability:** Designed for 11 9s of durability (99.999999999%).
+- **Features:** Supports Object Versioning, Object Lock (WORM model for compliance), and Cross-Region Replication.
+- **Use Cases:** Backup/Restore, Data Lakes, Big Data analytics, and hosting static websites.
+
+#### Storage Classes (Crucial for Exam)
+- **S3 Standard:** Frequent access, default tier.
+- **S3 Intelligent-Tiering:** Automatically moves data between frequent/infrequent access tiers based on usage to optimize cost.
+- **S3 Standard-IA (Infrequent Access):** Cheaper storage, but charges a retrieval fee. For data accessed less than once a month.
+- **S3 One Zone-IA:** Lowest cost IA, stored in only one Availability Zone (data is lost if the AZ is destroyed).
+- **S3 Glacier:** Used strictly for archiving.
+
+#### 💡 CLF-C02 Exam Tip
+S3 is "Object Storage". It is flat. You cannot run an operating system or a relational database on S3. If you need to host HTML/CSS/JS files for a website cheaply, use S3 Static Website Hosting.` },
+            { id: 's2', icon: '🧱', title: 'Amazon EBS', desc: 'Block storage for EC2.', summary: '• Block storage\n• Attached to one EC2\n• Boot volumes', dive: `### Amazon Elastic Block Store (EBS)
+Provides high-performance block-level storage volumes for use with Amazon EC2 instances.
+
+#### Key Features
+- **Physical Hard Drive:** It behaves exactly like an unformatted, raw physical hard drive attached to a computer. You format it with a file system (ext4, NTFS).
+- **AZ Bound:** EBS volumes are locked to a specific Availability Zone (AZ). To move them to another AZ, you must take a snapshot.
+- **Boot Volumes:** Required to run operating systems on EC2 instances.
+- **Snapshots:** You can take point-in-time backups of EBS volumes. These snapshots are automatically stored in S3 for high durability.
+
+#### Volume Types
+- **SSD:** General Purpose (gp2/gp3) for boot volumes, Provisioned IOPS (io1/io2) for high-performance databases.
+- **HDD:** Throughput Optimized (st1) for big data, Cold HDD (sc1) for cheap archive storage.
+
+#### 💡 CLF-C02 Exam Tip
+"Block storage" = EBS. Required for running OS and databases. Remember: A standard EBS volume can only be attached to **one** EC2 instance at a time.` },
+            { id: 's3', icon: '📁', title: 'Amazon EFS', desc: 'Elastic File System for Linux.', summary: '• File storage\n• Multi-AZ attachment\n• Linux (NFS)', dive: `### Amazon Elastic File System (EFS)
+A simple, serverless, set-and-forget elastic file system designed specifically to be shared.
+
+#### Key Features
+- **Concurrent Access:** Unlike EBS, an EFS file system can be attached to *hundreds or thousands* of EC2 instances simultaneously across multiple Availability Zones.
+- **Linux Only:** Uses the NFS (Network File System) protocol. It is natively compatible with Linux, but not Windows. (For Windows shared file systems, use Amazon FSx for Windows File Server).
+- **Elastic:** It automatically scales up as you add files and scales down as you delete them. You pay only for the storage you use, no provisioning required.
+- **Highly Available:** Data is stored redundantly across multiple AZs.
+
+#### 💡 CLF-C02 Exam Tip
+Keywords: "Shared file system", "Linux workloads", "attached to hundreds of instances concurrently", "scale automatically without provisioning".` },
+            { id: 's4', icon: '🧊', title: 'S3 Glacier', desc: 'Low-cost archival storage.', summary: '• Data archiving\n• Long-term retention\n• Lowest cost', dive: `### Amazon S3 Glacier
+Secure, durable, and extremely low-cost Amazon S3 storage classes designed specifically for data archiving and long-term backup.
+
+#### Key Features
+- **Vault Lock:** Enforces "Write Once Read Many" (WORM) policies. Once locked, the policy cannot be changed, ensuring strict regulatory compliance (nobody, not even the root user, can delete the data).
+
+#### Archival Storage Classes
+- **Glacier Instant Retrieval:** For long-lived data that is rarely accessed but requires millisecond retrieval when needed (e.g., medical images).
+- **Glacier Flexible Retrieval:** Standard archive. Retrieval options range from 1 to 5 minutes, or 5 to 12 hours. Bulk retrievals are free.
+- **Glacier Deep Archive:** The absolute lowest-cost storage option in AWS. Designed for data retained for 7-10 years to meet regulatory compliance. Retrieval takes 12 to 48 hours.
+
+#### 💡 CLF-C02 Exam Tip
+Keywords: "Archive", "regulatory retention for years", "lowest cost storage in AWS", "data that is not needed immediately".` },
+            { id: 's5', icon: '🌉', title: 'Storage Gateway', desc: 'Hybrid cloud storage solution.', summary: '• Connect on-prem to AWS\n• File, Tape, Volume\n• Cache locally', dive: `### AWS Storage Gateway
+A hybrid cloud storage service that gives your on-premises applications access to virtually unlimited cloud storage.
+
+#### How It Works
+You deploy a software appliance (VM) in your on-premises data center. This appliance connects to AWS and acts as a bridge, storing data in S3, EBS, or Glacier, while optionally caching frequently accessed data locally for low latency.
+
+#### Three Types
+1. **File Gateway:** Provides an SMB/NFS interface for on-prem servers to store files directly as objects in S3.
+2. **Volume Gateway:** Provides block storage (iSCSI) to on-prem servers, while asynchronously backing up the volume data to AWS as EBS snapshots.
+3. **Tape Gateway:** A virtual tape library (VTL) that replaces physical tape backup systems. Backups are stored in Glacier.
+
+#### 💡 CLF-C02 Exam Tip
+Keywords: "Hybrid storage", "keep hot data on-prem but back up cold data to the cloud", "replace physical tape libraries", "SMB/NFS to S3".` },
+            { id: 's6', icon: '❄️', title: 'AWS Snow Family', desc: 'Physical devices for offline transfer.', summary: '• Petabyte-scale migration\n• Offline transfer\n• Edge computing', dive: `### AWS Snow Family
+A collection of physical devices designed to migrate massive amounts of data into and out of AWS safely offline, or to run compute operations at the edge in disconnected environments.
+
+#### Why Use It?
+Transferring 100 Terabytes of data over a standard corporate internet connection could take months. AWS ships you a rugged device, you load the data locally at high speed, ship it back, and AWS uploads it to S3.
+
+#### The Devices
+- **Snowcone:** Small, ultra-rugged device (8TB-14TB). Fits in a backpack. Used for edge computing in extreme environments (e.g., ships, drones).
+- **Snowball Edge:** Suitcase-sized device (up to 80TB). Used for large scale data migration and significant local edge compute (can run EC2/Lambda locally).
+- **Snowmobile:** Exabyte-scale migration. An actual 45-foot shipping container pulled by a semi-truck. Used for migrating entire data centers.
+
+#### 💡 CLF-C02 Exam Tip
+"Terabytes/Petabytes of data", "slow internet connection", "offline data transfer to AWS", "edge computing in disconnected environments" = Snow Family.` },
+            { id: 's7', icon: '🛡️', title: 'AWS Backup', desc: 'Centralized backup management.', summary: '• Cross-service backups\n• Compliance policies\n• Automated retention', dive: `### AWS Backup
+A fully managed, policy-based service that makes it easy to centralize and automate the backup of data across multiple AWS services in the cloud as well as on-premises.
+
+#### Key Features
+- **Centralized Management:** Instead of managing backups individually within EC2, RDS, and DynamoDB consoles, you do it all from one dashboard.
+- **Backup Plans:** Create policies that define backup frequency (e.g., daily at 2 AM) and retention limits (e.g., keep for 30 days, then transition to cold storage).
+- **Cross-Service Support:** Supports backing up EBS volumes, RDS databases, DynamoDB tables, EFS file systems, Storage Gateway volumes, and more.
+- **Cross-Region/Cross-Account:** Easily copy backups to different AWS Regions or different AWS accounts for disaster recovery.
+
+#### 💡 CLF-C02 Exam Tip
+"Centralized backup management dashboard", "enforce corporate backup compliance across all AWS services globally" = AWS Backup.` }
         ];
 
         const databaseData = [
-            { id: 'd1', icon: '🗄️', title: 'Amazon RDS', desc: 'Managed Relational DB.', summary: '• SQL / Relational\n• Multi-AZ for HA\n• Automated backups', dive: `### Amazon Relational Database Service (RDS)\nMakes it easy to set up, operate, and scale a relational database in the cloud.\n\n#### Key Features\n- Supports 6 engines: MySQL, PostgreSQL, MariaDB, Oracle, SQL Server, and Amazon Aurora.\n- AWS manages backups, software patching, and recovery.\n- Use **Multi-AZ** for high availability and disaster recovery.\n- Use **Read Replicas** for performance scaling.\n\n#### 💡 CLF-C02 Exam Tip\n"Relational", "SQL", "complex transactions/joins" = RDS. Multi-AZ is for availability, Read Replicas are for performance.` },
-            { id: 'd2', icon: '⚡', title: 'Amazon DynamoDB', desc: 'Fast, flexible NoSQL database.', summary: '• NoSQL / Key-Value\n• Single-digit ms latency\n• Serverless', dive: `### Amazon DynamoDB\nA key-value and document database (NoSQL) that delivers single-digit millisecond performance at any scale.\n\n#### Key Features\n- Fully managed, serverless database.\n- No schemas to define, handles unpredictable workloads easily.\n- Built-in security, continuous backups, and in-memory caching (DAX).\n\n#### 💡 CLF-C02 Exam Tip\nKeywords: "NoSQL", "Key-Value", "millisecond latency", "serverless database", "flexible schema".` },
-            { id: 'd3', icon: '✨', title: 'Amazon Aurora', desc: 'High-performance AWS native DB.', summary: '• MySQL/PostgreSQL compat\n• 5x faster than MySQL\n• Enterprise-grade', dive: `### Amazon Aurora\nA MySQL and PostgreSQL-compatible relational database built for the cloud.\n\n#### Key Features\n- Combines the performance of traditional enterprise databases with the simplicity and cost-effectiveness of open-source databases.\n- Up to 5x faster than standard MySQL and 3x faster than standard PostgreSQL.\n- Storage automatically grows up to 128 TiB.\n\n#### 💡 CLF-C02 Exam Tip\n"Enterprise-class relational database", "AWS native", "MySQL/PostgreSQL compatible with high performance" = Aurora.` },
-            { id: 'd4', icon: '📊', title: 'Amazon Redshift', desc: 'Petabyte-scale data warehouse.', summary: '• Data Warehouse\n• Analytics & BI\n• Columnar storage', dive: `### Amazon Redshift\nA fully managed, petabyte-scale data warehouse service in the cloud.\n\n#### Key Features\n- Designed for complex analytical queries against massive datasets.\n- Uses columnar storage and parallel processing for high performance.\n- Integrates tightly with BI (Business Intelligence) tools like QuickSight.\n\n#### 💡 CLF-C02 Exam Tip\nKeywords: "Data warehouse", "analytics", "Business Intelligence (BI)", "querying massive historical data".` },
-            { id: 'd5', icon: '🚀', title: 'Amazon ElastiCache', desc: 'In-memory caching service.', summary: '• In-memory data store\n• Sub-millisecond latency\n• Redis & Memcached', dive: `### Amazon ElastiCache\nA fully managed in-memory data store and cache service by AWS.\n\n#### Key Features\n- Improves the performance of web applications by retrieving information from fast, managed, in-memory caches, instead of relying entirely on slower disk-based databases.\n- Supports two open-source engines: **Redis** and **Memcached**.\n\n#### 💡 CLF-C02 Exam Tip\n"In-memory", "caching", "sub-millisecond latency", "reduce load on primary database" = ElastiCache.` },
-            { id: 'd6', icon: '🔄', title: 'AWS DMS', desc: 'Database Migration Service.', summary: '• Migrate databases securely\n• Source DB remains active\n• Heterogeneous migrations', dive: `### AWS Database Migration Service (DMS)\nHelps you migrate databases to AWS quickly and securely.\n\n#### Key Features\n- The source database remains fully operational during the migration, minimizing downtime.\n- **Homogeneous:** e.g., Oracle to Oracle.\n- **Heterogeneous:** e.g., Oracle to Amazon Aurora (uses AWS Schema Conversion Tool - SCT to convert the schema).\n\n#### 💡 CLF-C02 Exam Tip\n"Migrate database with minimal downtime", "Oracle to Aurora" = DMS.` },
-            { id: 'd7', icon: '📄', title: 'Amazon DocumentDB', desc: 'MongoDB-compatible document DB.', summary: '• Document database\n• MongoDB compatible\n• Fully managed', dive: `### Amazon DocumentDB (with MongoDB compatibility)\nA fast, scalable, highly available, and fully managed document database service that supports MongoDB workloads.\n\n#### Key Features\n- Designed from the ground up to give you the performance, scalability, and availability you need when operating mission-critical MongoDB workloads at scale.\n- JSON data model.\n\n#### 💡 CLF-C02 Exam Tip\n"JSON document database", "MongoDB compatible" = DocumentDB.` }
+            { id: 'd1', icon: '🗄️', title: 'Amazon RDS', desc: 'Managed Relational DB.', summary: '• SQL / Relational\n• Multi-AZ for HA\n• Automated backups', dive: `### Amazon Relational Database Service (RDS)
+A managed service that makes it easy to set up, operate, and scale a traditional relational database in the cloud.
+
+#### Supported Engines
+Supports 6 engines: **MySQL, PostgreSQL, MariaDB, Oracle, Microsoft SQL Server, and Amazon Aurora.**
+
+#### Managed Benefits
+AWS completely handles routine database tasks such as provisioning, operating system patching, database software patching, automated backups, and failure recovery. 
+
+#### Two Critical Concepts
+1. **Multi-AZ Deployments:** Used for **High Availability (HA)** and Disaster Recovery. AWS creates a synchronous standby replica in a different Availability Zone. If the primary fails, AWS automatically fails over to the standby.
+2. **Read Replicas:** Used for **Performance Scaling**. Creates read-only copies of your database to offload heavy read traffic (e.g., complex analytics queries) from your primary database.
+
+#### 💡 CLF-C02 Exam Tip
+"Relational", "SQL", "complex transactions/joins" = RDS. Remember: Multi-AZ is for *availability*, Read Replicas are for *performance/scalability*. You cannot SSH into the underlying EC2 instance of an RDS database.` },
+            { id: 'd2', icon: '⚡', title: 'Amazon DynamoDB', desc: 'Fast, flexible NoSQL database.', summary: '• NoSQL / Key-Value\n• Single-digit ms latency\n• Serverless', dive: `### Amazon DynamoDB
+A fully managed, serverless, key-value and document database (NoSQL) that delivers single-digit millisecond performance at any scale.
+
+#### Key Features
+- **Serverless:** There are no servers to provision, patch, or manage. You simply create tables.
+- **Scalability:** It can automatically scale to handle millions of requests per second and trillions of requests per day.
+- **Schema-less:** Each item in a table can have different attributes. It perfectly handles unstructured or unpredictable data (like gaming profiles or IoT sensor data).
+- **DAX (DynamoDB Accelerator):** An in-memory cache specifically for DynamoDB that reduces response times from milliseconds to microseconds.
+- **Global Tables:** Automatically replicates your table across multiple AWS Regions for global, active-active applications.
+
+#### 💡 CLF-C02 Exam Tip
+Keywords: "NoSQL", "Key-Value", "Document database", "single-digit millisecond latency", "serverless database", "flexible schema".` },
+            { id: 'd3', icon: '✨', title: 'Amazon Aurora', desc: 'High-performance AWS native DB.', summary: '• MySQL/PostgreSQL compat\n• 5x faster than MySQL\n• Enterprise-grade', dive: `### Amazon Aurora
+A proprietary relational database engine built entirely for the cloud by AWS. It is fully compatible with MySQL and PostgreSQL.
+
+#### Why Aurora over standard RDS?
+- **Performance:** It combines the performance and availability of commercial enterprise databases (like Oracle) with the simplicity and cost-effectiveness of open-source databases. Up to **5x faster** than standard MySQL and **3x faster** than standard PostgreSQL.
+- **Resilient Storage:** The storage layer is fault-tolerant and self-healing. Data is automatically replicated **6 times across 3 Availability Zones**.
+- **Auto-Scaling Storage:** Storage automatically grows in 10GB increments up to 128 TiB as your database grows.
+- **Aurora Serverless:** An on-demand, auto-scaling configuration for Aurora where the database automatically starts up, shuts down, and scales capacity based on your application's needs.
+
+#### 💡 CLF-C02 Exam Tip
+"Enterprise-class relational database", "AWS native", "MySQL/PostgreSQL compatible with highest performance", "Storage replicates 6 times across 3 AZs" = Aurora.` },
+            { id: 'd4', icon: '📊', title: 'Amazon Redshift', desc: 'Petabyte-scale data warehouse.', summary: '• Data Warehouse\n• Analytics & BI\n• Columnar storage', dive: `### Amazon Redshift
+A fully managed, petabyte-scale data warehouse service in the cloud.
+
+#### Data Warehousing vs Transactional DBs
+Standard databases (RDS) are designed for Online Transaction Processing (OLTP) – doing millions of small read/writes fast. Redshift is designed for **Online Analytical Processing (OLAP)** – running incredibly complex queries against massive datasets spanning years of history.
+
+#### Key Features
+- **Performance:** Achieves massive performance by using **Columnar Storage** (storing data by column instead of row) and **Massively Parallel Processing (MPP)** (distributing queries across multiple compute nodes).
+- **Integration:** Integrates tightly with Business Intelligence (BI) tools like Amazon QuickSight, Tableau, or PowerBI to generate executive dashboards and reports.
+
+#### 💡 CLF-C02 Exam Tip
+Keywords: "Data warehouse", "analytics", "Business Intelligence (BI)", "querying massive historical data", "OLAP", "columnar storage".` },
+            { id: 'd5', icon: '🚀', title: 'Amazon ElastiCache', desc: 'In-memory caching service.', summary: '• In-memory data store\n• Sub-millisecond latency\n• Redis & Memcached', dive: `### Amazon ElastiCache
+A fully managed in-memory data store and cache service by AWS.
+
+#### Purpose
+Databases stored on disk (like RDS) can become bottlenecks under heavy read loads. ElastiCache sits in front of your database and stores frequently requested data directly in RAM (memory). 
+
+#### Key Features
+- **Extreme Speed:** Because data is retrieved from RAM instead of disk, latency drops to **microseconds** (sub-millisecond).
+- **Offload Primary DB:** Dramatically reduces the load on your primary RDS database, preventing it from crashing during traffic spikes (like a Black Friday sale).
+- **Engines:** Supports two popular open-source engines: **Redis** (supports complex data types, pub/sub, replication) and **Memcached** (simple key-value caching).
+
+#### 💡 CLF-C02 Exam Tip
+"In-memory store", "caching", "sub-millisecond latency", "reduce read load on primary database", "Redis/Memcached" = ElastiCache.` },
+            { id: 'd6', icon: '🔄', title: 'AWS DMS', desc: 'Database Migration Service.', summary: '• Migrate databases securely\n• Source DB remains active\n• Heterogeneous migrations', dive: `### AWS Database Migration Service (DMS)
+A service that helps you migrate databases to AWS quickly and securely.
+
+#### Key Features
+- **Zero Downtime:** The source database remains fully operational during the migration process, minimizing downtime for your applications.
+- **Continuous Replication:** Can continuously replicate data with high availability and consolidate databases into a petabyte-scale data warehouse.
+
+#### Migration Types
+- **Homogeneous:** Migrating from one engine to the exact same engine (e.g., On-premise Oracle to Amazon RDS for Oracle).
+- **Heterogeneous:** Migrating from one engine to a completely different engine (e.g., On-premise Oracle to Amazon Aurora). This requires the **AWS Schema Conversion Tool (SCT)** to translate the database schema and views first.
+
+#### 💡 CLF-C02 Exam Tip
+"Migrate database with minimal downtime", "Continuous data replication to cloud", "AWS Schema Conversion Tool (SCT)" = DMS.` },
+            { id: 'd7', icon: '📄', title: 'Amazon DocumentDB', desc: 'MongoDB-compatible document DB.', summary: '• Document database\n• MongoDB compatible\n• Fully managed', dive: `### Amazon DocumentDB (with MongoDB compatibility)
+A fast, scalable, highly available, and fully managed document database service that supports MongoDB workloads.
+
+#### Key Features
+- **MongoDB Compatible:** Implements the Apache 2.0 open-source MongoDB API. You can use your existing MongoDB drivers and tools with DocumentDB.
+- **Document Data Model:** Stores data in a JSON-like format. This makes it highly flexible for storing semi-structured data where the schema evolves rapidly.
+- **Architecture:** Like Aurora, it uses a purpose-built distributed, fault-tolerant, self-healing storage volume that automatically scales up to 64 TB.
+
+#### 💡 CLF-C02 Exam Tip
+If a question specifically asks for a "JSON document database" or mentions migrating a "MongoDB workload", the answer is Amazon DocumentDB.` }
         ];
 
         const networkData = [
-            { id: 'n1', icon: '🌐', title: 'Amazon VPC', desc: 'Private network in the cloud.', summary: '• Virtual Private Cloud\n• Subnets & IGW\n• Security Groups & NACLs', dive: `### Amazon Virtual Private Cloud (VPC)\nLets you provision a logically isolated section of the AWS Cloud where you launch resources in a virtual network that you define.\n\n#### Key Components\n- **Subnets:** Segments of a VPC's IP range. Public (has route to internet) or Private.\n- **Internet Gateway (IGW):** Allows communication with the internet.\n- **Security Groups:** Stateful firewalls at the *instance* level.\n- **NACLs:** Stateless firewalls at the *subnet* level.\n\n#### 💡 CLF-C02 Exam Tip\nVPC is the foundational network service. Know the difference between Security Groups (instance-level) and NACLs (subnet-level).` },
-            { id: 'n2', icon: '🗺️', title: 'Amazon Route 53', desc: 'Scalable DNS and domain registration.', summary: '• DNS routing\n• Domain registration\n• Health checks', dive: `### Amazon Route 53\nA highly available and scalable cloud Domain Name System (DNS) web service.\n\n#### Key Features\n- Routes end users to applications by translating names like www.example.com into IP addresses.\n- Performs automated health checks on your application endpoints.\n- Supports complex routing policies: Simple, Weighted, Latency, Failover, Geolocation.\n\n#### 💡 CLF-C02 Exam Tip\nRoute 53 is AWS's DNS service. If a question mentions "DNS", "routing users based on latency/location", or "domain registration", it's Route 53.` },
-            { id: 'n3', icon: '⚡', title: 'Amazon CloudFront', desc: 'Global Content Delivery Network (CDN).', summary: '• CDN\n• Edge Locations\n• Low latency delivery', dive: `### Amazon CloudFront\nA fast content delivery network (CDN) service that securely delivers data, videos, applications, and APIs to customers globally with low latency.\n\n#### Key Features\n- Caches content at **Edge Locations** around the world.\n- Integrates directly with S3, EC2, and ELB.\n- Provides built-in DDoS protection via AWS Shield.\n\n#### 💡 CLF-C02 Exam Tip\n"Low latency for global users", "CDN", "Edge Locations", "Caching static content" = CloudFront.` },
-            { id: 'n4', icon: '⚖️', title: 'Elastic Load Balancing', desc: 'Distribute incoming traffic automatically.', summary: '• Distributes traffic\n• ALB, NLB, GLB\n• High availability', dive: `### Elastic Load Balancing (ELB)\nAutomatically distributes incoming application traffic across multiple targets, such as EC2 instances, containers, and IP addresses.\n\n#### Types of Load Balancers\n- **Application Load Balancer (ALB):** HTTP/HTTPS traffic. Layer 7. Good for web apps.\n- **Network Load Balancer (NLB):** TCP/UDP traffic. Layer 4. Ultra-high performance, low latency.\n- **Gateway Load Balancer (GLB):** For deploying third-party virtual appliances.\n\n#### 💡 CLF-C02 Exam Tip\nELB ensures high availability by distributing traffic across multiple Availability Zones. It works hand-in-hand with Auto Scaling.` },
-            { id: 'n5', icon: '🔌', title: 'AWS Direct Connect', desc: 'Dedicated physical network connection.', summary: '• Private physical connection\n• Bypasses the internet\n• Consistent performance', dive: `### AWS Direct Connect\nA cloud service solution that makes it easy to establish a dedicated network connection from your premises to AWS.\n\n#### Key Features\n- Bypasses the public internet entirely.\n- Provides a private, dedicated, high-bandwidth (1Gbps - 100Gbps) physical fiber connection.\n- Ideal for massive data transfers or strict compliance requirements.\n\n#### 💡 CLF-C02 Exam Tip\n"Dedicated physical connection", "bypass public internet", "consistent network performance" = Direct Connect. (Note: Takes weeks to set up physically, unlike a VPN).` },
-            { id: 'n6', icon: '🚪', title: 'API Gateway', desc: 'Create, maintain, and secure APIs.', summary: '• API Management\n• Front-door for Lambda\n• Throttling & Security', dive: `### Amazon API Gateway\nA fully managed service that makes it easy for developers to create, publish, maintain, monitor, and secure APIs at any scale.\n\n#### Key Features\n- Acts as the "front door" for applications to access data, business logic, or functionality from your backend services.\n- Most commonly used to trigger **AWS Lambda** functions in a serverless architecture.\n- Handles traffic management, CORS, authorization, and API versioning.\n\n#### 💡 CLF-C02 Exam Tip\n"Create REST/WebSocket APIs", "Trigger Lambda from HTTP request" = API Gateway.` },
-            { id: 'n7', icon: '🚀', title: 'Global Accelerator', desc: 'Improve global application performance.', summary: '• Uses AWS Global Network\n• Static IP addresses\n• TCP/UDP acceleration', dive: `### AWS Global Accelerator\nA networking service that improves the performance of your users' traffic by up to 60% using Amazon's global network infrastructure.\n\n#### Key Features\n- Provides two static IP addresses that act as a fixed entry point to your application endpoints in a single or multiple AWS Regions.\n- Traffic routes through the AWS backbone rather than the public internet, reducing packet loss and latency.\n\n#### 💡 CLF-C02 Exam Tip\n"Improve performance for UDP/TCP traffic globally", "Static IPs for global routing", "Uses AWS global backbone" = Global Accelerator.` },
-            { id: 'n8', icon: '🕸️', title: 'Transit Gateway', desc: 'Hub and spoke network routing.', summary: '• Connect VPCs easily\n• Hub and spoke topology\n• Simplify network mgmt', dive: `### AWS Transit Gateway\nA service that enables customers to connect their Amazon Virtual Private Clouds (VPCs) and their on-premises networks to a single gateway.\n\n#### Key Features\n- Acts as a cloud router, simplifying network architecture.\n- Replaces the need for complex point-to-point VPC peering connections.\n- Uses a "Hub and Spoke" topology.\n\n#### 💡 CLF-C02 Exam Tip\n"Hub and spoke network topology", "simplify connecting hundreds of VPCs" = Transit Gateway.` }
+            { id: 'n1', icon: '🌐', title: 'Amazon VPC', desc: 'Private network in the cloud.', summary: '• Virtual Private Cloud\n• Subnets & IGW\n• Security Groups & NACLs', dive: `### Amazon Virtual Private Cloud (VPC)
+VPC lets you provision a logically isolated section of the AWS Cloud where you launch your AWS resources in a virtual network that you define.
+
+#### Core Components
+- **Subnets:** Segments of a VPC's IP address range. 
+  - **Public Subnet:** Has a direct route to the Internet Gateway.
+  - **Private Subnet:** Has no direct route to the internet. Highly secure.
+- **Internet Gateway (IGW):** A component attached to your VPC that enables communication between resources in your VPC and the internet.
+- **NAT Gateway:** Placed in a public subnet, allows instances in a private subnet to connect to the internet (to download patches) while preventing the internet from initiating connections to those instances.
+- **VPC Peering:** Connects two VPCs together privately using AWS's network.
+
+#### Security Layers
+- **Security Groups:** Stateful firewalls operating at the **Instance** level. (Allow rules only).
+- **NACLs (Network Access Control Lists):** Stateless firewalls operating at the **Subnet** level. (Support Allow and Deny rules).
+
+#### 💡 CLF-C02 Exam Tip
+VPC is the foundational network service. You MUST know the difference between Security Groups (instance-level, stateful) and NACLs (subnet-level, stateless).` },
+            { id: 'n2', icon: '🗺️', title: 'Amazon Route 53', desc: 'Scalable DNS and domain registration.', summary: '• DNS routing\n• Domain registration\n• Health checks', dive: `### Amazon Route 53
+A highly available and scalable cloud Domain Name System (DNS) web service. It translates human-readable names (www.example.com) into IP addresses.
+
+#### Key Capabilities
+- **Domain Registration:** You can buy and manage domains directly through AWS.
+- **Health Checks:** Continuously monitors your application endpoints. If a server goes down, Route 53 can automatically route traffic away from it.
+
+#### Routing Policies
+- **Simple:** Standard DNS resolution.
+- **Weighted:** Send a percentage of traffic to one resource, and a percentage to another (useful for A/B testing).
+- **Latency:** Routes users to the AWS Region that provides the lowest network latency.
+- **Failover:** Routes traffic to a standby resource if the primary resource fails health checks.
+- **Geolocation:** Routes users based on their physical geographic location.
+
+#### 💡 CLF-C02 Exam Tip
+Route 53 is the only AWS service that is 100% globally highly available. If a question mentions "DNS", "routing users based on latency/location", or "domain registration", it's Route 53.` },
+            { id: 'n3', icon: '⚡', title: 'Amazon CloudFront', desc: 'Global Content Delivery Network (CDN).', summary: '• CDN\n• Edge Locations\n• Low latency delivery', dive: `### Amazon CloudFront
+A fast Content Delivery Network (CDN) service that securely delivers data, videos, applications, and APIs to customers globally with extremely low latency.
+
+#### How It Works
+- **Edge Locations:** CloudFront utilizes a global network of hundreds of Edge Locations (points of presence). 
+- **Caching:** When a user requests a file (like an image or video), CloudFront fetches it from your origin (e.g., an S3 bucket or EC2 instance) and caches a copy at the Edge Location closest to the user. Subsequent requests from other users in that area are served instantly from the cache.
+
+#### Security Features
+- Provides built-in DDoS protection via **AWS Shield**.
+- Integrates with **AWS WAF** to block malicious traffic at the edge, before it even reaches your servers.
+- **OAC (Origin Access Control):** Allows you to lock down an S3 bucket so it can *only* be accessed via CloudFront.
+
+#### 💡 CLF-C02 Exam Tip
+"Low latency for global users", "CDN", "Edge Locations", "Caching static media content" = CloudFront.` },
+            { id: 'n4', icon: '⚖️', title: 'Elastic Load Balancing', desc: 'Distribute incoming traffic automatically.', summary: '• Distributes traffic\n• ALB, NLB, GLB\n• High availability', dive: `### Elastic Load Balancing (ELB)
+Automatically distributes incoming application traffic across multiple targets, such as EC2 instances, containers, and IP addresses, across multiple Availability Zones.
+
+#### Why Use It?
+ELB ensures **High Availability** and fault tolerance. If one EC2 instance crashes, the ELB stops sending traffic to it and routes all traffic to the healthy instances. It works hand-in-hand with Auto Scaling.
+
+#### Types of Load Balancers
+- **Application Load Balancer (ALB):** Operates at Layer 7. Best for HTTP/HTTPS traffic. Can route traffic based on URL path or hostname (great for microservices).
+- **Network Load Balancer (NLB):** Operates at Layer 4 (TCP/UDP). Used for ultra-high performance, capable of handling millions of requests per second with ultra-low latency.
+- **Gateway Load Balancer (GLB):** Used to deploy, scale, and manage third-party virtual network appliances (like third-party firewalls or intrusion detection systems).
+
+#### 💡 CLF-C02 Exam Tip
+If the exam asks how to "distribute traffic evenly", "achieve high availability across AZs", or "route HTTP traffic based on URL", use an ELB.` },
+            { id: 'n5', icon: '🔌', title: 'AWS Direct Connect', desc: 'Dedicated physical network connection.', summary: '• Private physical connection\n• Bypasses the internet\n• Consistent performance', dive: `### AWS Direct Connect
+A cloud service solution that makes it easy to establish a dedicated, physical network connection from your on-premises data center to AWS.
+
+#### Key Features
+- **Private Connection:** Bypasses the public internet entirely, utilizing a private fiber-optic connection.
+- **Bandwidth:** Provides high-bandwidth connections (typically 1 Gbps, 10 Gbps, or 100 Gbps).
+- **Consistency:** Because it bypasses the internet, network performance and latency are highly consistent and predictable.
+
+#### Use Cases
+- Massive data transfers where internet speeds are insufficient.
+- Real-time data feeds.
+- Strict regulatory compliance requiring data to never touch the public internet.
+
+#### 💡 CLF-C02 Exam Tip
+Direct Connect involves physical hardware provisioning and takes weeks to set up. Unlike a Site-to-Site VPN (which uses the internet and can be set up in minutes), Direct Connect is a "dedicated physical connection" that provides "consistent network performance".` },
+            { id: 'n6', icon: '🚪', title: 'API Gateway', desc: 'Create, maintain, and secure APIs.', summary: '• API Management\n• Front-door for Lambda\n• Throttling & Security', dive: `### Amazon API Gateway
+A fully managed service that makes it easy for developers to create, publish, maintain, monitor, and secure APIs at any scale.
+
+#### Key Features
+- **The Front Door:** Acts as the entry point for applications to access data, business logic, or functionality from your backend services.
+- **Serverless Integration:** It is the most common way to trigger **AWS Lambda** functions via HTTP requests in a modern serverless architecture.
+- **Management:** Handles traffic management, CORS support, authorization and access control (via Cognito or IAM), throttling (preventing users from spamming your API), and API versioning.
+- Supports RESTful APIs and WebSocket APIs (for real-time, two-way communication).
+
+#### 💡 CLF-C02 Exam Tip
+"Create REST/WebSocket APIs", "Trigger Lambda from HTTP request", "Throttle API requests", "Manage API versions" = API Gateway.` },
+            { id: 'n7', icon: '🚀', title: 'Global Accelerator', desc: 'Improve global application performance.', summary: '• Uses AWS Global Network\n• Static IP addresses\n• TCP/UDP acceleration', dive: `### AWS Global Accelerator
+A networking service that improves the availability and performance of your users' traffic by up to 60% using Amazon's vast global network infrastructure.
+
+#### How It Works
+- By default, user traffic travels over the congested public internet, hopping between multiple ISPs, which causes latency and packet loss.
+- Global Accelerator provides you with **two static Anycast IP addresses**. 
+- When a user connects to these IPs, their traffic enters the AWS network at the Edge Location closest to them, and then routes over AWS's private, highly optimized global backbone straight to your application.
+
+#### CloudFront vs Global Accelerator
+- **CloudFront:** Caches content at the edge (Layer 7 HTTP).
+- **Global Accelerator:** Does *not* cache. It accelerates TCP/UDP traffic (Layer 4) over the AWS backbone. Excellent for gaming, IoT, or VoIP.
+
+#### 💡 CLF-C02 Exam Tip
+"Improve performance for UDP/TCP traffic globally", "Provide static IPs for global routing", "Uses AWS global backbone to bypass internet congestion" = Global Accelerator.` },
+            { id: 'n8', icon: '🕸️', title: 'Transit Gateway', desc: 'Hub and spoke network routing.', summary: '• Connect VPCs easily\n• Hub and spoke topology\n• Simplify network mgmt', dive: `### AWS Transit Gateway
+A network transit hub that enables customers to connect their Amazon Virtual Private Clouds (VPCs) and their on-premises networks to a single, central gateway.
+
+#### The Problem It Solves
+If you have 100 VPCs and want them all to talk to each other, using standard VPC Peering would require establishing 4,950 complex point-to-point connections. 
+
+#### The Solution
+Transit Gateway acts as a central cloud router. You connect all 100 VPCs and your on-premises VPN/Direct Connect to the Transit Gateway. It uses a **"Hub and Spoke"** topology to route traffic between all of them seamlessly.
+
+#### 💡 CLF-C02 Exam Tip
+If a question mentions "Hub and spoke network topology", "simplify connecting hundreds of VPCs", or "centralized network routing", the answer is AWS Transit Gateway.` }
         ];
 
         const billingData = [
-            { id: 'b1', icon: '💵', title: 'EC2 Pricing Models', desc: 'On-Demand, Reserved, Spot, and Dedicated.', summary: '• On-Demand (Flexible)\n• Reserved/Savings Plans\n• Spot (Interruptible)', dive: `### EC2 Pricing Models\nUnderstanding how to pay for compute is a major part of the CLF-C02 exam.\n\n#### Models\n- **On-Demand:** Pay by the second. No long-term commitments. Best for unpredictable, short-term workloads.\n- **Reserved Instances (RIs) / Savings Plans:** Commit to 1 or 3 years. Up to 72% discount. Best for steady-state, predictable workloads.\n- **Spot Instances:** Bid on spare AWS capacity. Up to 90% discount. AWS can terminate them with 2 minutes notice. Best for batch processing, big data, flexible workloads.\n- **Dedicated Hosts:** Physical server dedicated entirely to you. For strict licensing/compliance.` },
-            { id: 'b2', icon: '🏢', title: 'AWS Organizations', desc: 'Centrally manage multiple accounts.', summary: '• Multi-account management\n• Consolidated Billing\n• Service Control Policies (SCPs)', dive: `### AWS Organizations\nAn account management service that enables you to consolidate multiple AWS accounts into an organization that you centrally manage.\n\n#### Key Features\n- **Consolidated Billing:** Combines usage across all accounts to share volume pricing discounts. You get one single bill.\n- **Service Control Policies (SCPs):** Centrally manage security policies across all accounts (e.g., prevent anyone from launching resources outside of the US-East region).\n\n#### 💡 CLF-C02 Exam Tip\n"One bill for multiple accounts", "Volume discounts across accounts", "SCPs" = AWS Organizations.` },
-            { id: 'b3', icon: '🔍', title: 'AWS Cost Explorer', desc: 'Visualize, understand, and manage costs.', summary: '• Visualize past spend\n• Forecast future costs\n• Identify trends', dive: `### AWS Cost Explorer\nA tool that enables you to view and analyze your costs and usage.\n\n#### Key Features\n- Provides highly customizable graphs to visualize your spend over the last 12 months.\n- Forecasts how much you are likely to spend for the next 12 months based on past usage.\n- Helps identify areas where you can save money (e.g., finding unused EC2 instances).\n\n#### 💡 CLF-C02 Exam Tip\n"Visualize costs", "Forecast future spending", "Analyze trends over time" = Cost Explorer.` },
-            { id: 'b4', icon: '🚨', title: 'AWS Budgets', desc: 'Set custom budgets and receive alerts.', summary: '• Set spending limits\n• Email/SNS alerts\n• Prevent bill shock', dive: `### AWS Budgets\nGives you the ability to set custom budgets that alert you when your costs or usage exceed (or are forecasted to exceed) your budgeted amount.\n\n#### Key Features\n- Can track cost, usage, or Reservation/Savings Plans utilization.\n- Sends alerts via Email or Amazon SNS when thresholds are breached (e.g., "alert me when I hit 80% of my $1000 budget").\n\n#### 💡 CLF-C02 Exam Tip\nThe difference between Cost Explorer and Budgets: Cost Explorer is for *looking* at data and analyzing. Budgets is for *setting limits and getting alerted* before you overspend.` },
-            { id: 'b5', icon: '🧮', title: 'AWS Pricing Calculator', desc: 'Estimate the cost of AWS services.', summary: '• Estimate costs\n• Pre-deployment tool\n• Compare architectures', dive: `### AWS Pricing Calculator\nA web-based planning tool that you can use to create estimates for your AWS use cases.\n\n#### Key Features\n- Use it *before* you build anything in AWS to model your solutions and estimate the monthly cost.\n- Helps you compare the cost of running an app on EC2 vs running it Serverless (Lambda).\n- Replaced the deprecated "Simple Monthly Calculator".\n\n#### 💡 CLF-C02 Exam Tip\n"Estimate cost before deploying", "Plan a budget for a new project" = AWS Pricing Calculator.` },
-            { id: 'b6', icon: '🎧', title: 'AWS Support Plans', desc: 'Basic, Developer, Business, and Enterprise.', summary: '• Basic (Free)\n• Developer (Email)\n• Business (24x7 Chat/Phone)\n• Enterprise (TAM)', dive: `### AWS Support Plans\nAWS offers four tiers of support. Knowing the differences is crucial for the exam.\n\n#### The Tiers\n- **Basic:** Free. Access to customer service, billing support, and AWS Trusted Advisor core checks.\n- **Developer:** Business hours email support. For non-production workloads.\n- **Business:** 24x7 phone, email, and chat access to Cloud Support Engineers. Minimum for production workloads. Full Trusted Advisor access.\n- **Enterprise:** 15-minute response time for critical systems. Includes a dedicated **Technical Account Manager (TAM)** and Concierge Support Team.\n\n#### 💡 CLF-C02 Exam Tip\nIf a question asks how to get a Technical Account Manager (TAM) or Concierge Support, the answer is always the **Enterprise** support plan.` }
+            { id: 'b1', icon: '💵', title: 'EC2 Pricing Models', desc: 'On-Demand, Reserved, Spot, and Dedicated.', summary: '• On-Demand (Flexible)\n• Reserved/Savings Plans\n• Spot (Interruptible)', dive: `### EC2 Pricing Models
+Understanding exactly how and when to use different compute pricing models is a major part of the CLF-C02 exam.
+
+#### The Four Models
+1. **On-Demand Instances:** Pay for compute capacity by the second with no long-term commitments. 
+   - *Best for:* Short-term, spiky, or unpredictable workloads. Application development and testing.
+2. **Reserved Instances (RIs) / Savings Plans:** You commit to a specific instance type/usage amount for a 1-year or 3-year term. Provides up to a **72% discount** compared to On-Demand.
+   - *Best for:* Steady-state, highly predictable workloads (like a core database or primary web server).
+3. **Spot Instances:** Allows you to bid on spare, unused AWS compute capacity. Provides up to a **90% discount**. 
+   - *The Catch:* AWS can terminate these instances with a 2-minute warning if they need the capacity back. 
+   - *Best for:* Fault-tolerant, flexible, stateless workloads (batch processing, image rendering, big data analytics).
+4. **Dedicated Hosts:** A physical EC2 server dedicated entirely for your use.
+   - *Best for:* Meeting strict corporate compliance requirements or using existing server-bound software licenses (like old Windows/SQL Server licenses).` },
+            { id: 'b2', icon: '🏢', title: 'AWS Organizations', desc: 'Centrally manage multiple accounts.', summary: '• Multi-account management\n• Consolidated Billing\n• Service Control Policies (SCPs)', dive: `### AWS Organizations
+An account management service that enables you to consolidate multiple AWS accounts into an organization that you create and centrally manage.
+
+#### Key Features
+- **Consolidated Billing:** Combines usage across all accounts. You get one single monthly bill. More importantly, it combines usage to help you reach **volume pricing discounts** across the organization.
+- **Service Control Policies (SCPs):** Provide central control over the maximum available permissions for all accounts in your organization. 
+  - *Example:* An SCP can explicitly deny any user in any account (even root users) from launching EC2 instances outside of the us-east-1 region.
+- **Organizational Units (OUs):** Group accounts together (e.g., a "Dev OU" and a "Prod OU") and apply different policies to each.
+
+#### 💡 CLF-C02 Exam Tip
+"One bill for multiple accounts", "Volume discounts across multiple accounts", "Apply SCPs to restrict regions/services globally" = AWS Organizations.` },
+            { id: 'b3', icon: '🔍', title: 'AWS Cost Explorer', desc: 'Visualize, understand, and manage costs.', summary: '• Visualize past spend\n• Forecast future costs\n• Identify trends', dive: `### AWS Cost Explorer
+A highly interactive tool that enables you to view and analyze your costs and usage.
+
+#### Key Features
+- **Visualization:** Provides customizable graphs and charts to visualize your spend. You can view data up to the last 12 months.
+- **Forecasting:** Uses historical data to forecast how much you are likely to spend for the next 12 months.
+- **Granular Filtering:** Filter and group costs by Service (e.g., how much did I spend on EC2 vs S3?), by Region, or by custom **Resource Tags** (e.g., "Project: Alpha").
+- **Recommendations:** Provides automated recommendations for purchasing Reserved Instances to save money.
+
+#### 💡 CLF-C02 Exam Tip
+"Visualize costs via graphs", "Forecast future spending", "Analyze spending trends over the last 12 months", "Filter costs by tags" = AWS Cost Explorer.` },
+            { id: 'b4', icon: '🚨', title: 'AWS Budgets', desc: 'Set custom budgets and receive alerts.', summary: '• Set spending limits\n• Email/SNS alerts\n• Prevent bill shock', dive: `### AWS Budgets
+Gives you the ability to set custom budgets that alert you proactively when your costs or usage exceed (or are forecasted to exceed) your budgeted amount.
+
+#### Key Features
+- **Types of Budgets:**
+  - *Cost Budgets:* Plan how much you want to spend on a service.
+  - *Usage Budgets:* Plan how much you want to use a service (e.g., alert me if I use more than 500 hours of EC2).
+  - *Reservation Budgets:* Track RI/Savings Plans utilization.
+- **Proactive Alerts:** Sends alerts via Email or Amazon SNS when thresholds are breached. For example: "Alert me when my current spend hits 80% of my $1,000 budget, OR if my forecasted spend exceeds 100%."
+
+#### Cost Explorer vs Budgets
+- **Cost Explorer** is reactive and analytical. You look at it to figure out *why* a bill was high.
+- **Budgets** is proactive. You configure it to send you emails to *prevent* the bill from getting high in the first place.
+
+#### 💡 CLF-C02 Exam Tip
+"Set spending limits", "Receive email alerts before overspending", "Prevent bill shock" = AWS Budgets.` },
+            { id: 'b5', icon: '🧮', title: 'AWS Pricing Calculator', desc: 'Estimate the cost of AWS services.', summary: '• Estimate costs\n• Pre-deployment tool\n• Compare architectures', dive: `### AWS Pricing Calculator
+A web-based planning tool that you can use to create estimates for your AWS use cases.
+
+#### Key Features
+- **Pre-Deployment Tool:** You use this tool *before* you build anything in AWS. You input your expected usage (e.g., "I need 5 EC2 instances running 24/7 and 100GB of S3 storage"), and it generates a detailed monthly cost estimate.
+- **Architecture Comparison:** Helps you model and compare the cost of running an application on EC2 versus running it Serverless (Lambda).
+- **TCO (Total Cost of Ownership):** Crucial for building business cases and securing budget approvals before migrating workloads.
+- *(Note: This replaced the deprecated "Simple Monthly Calculator".)*
+
+#### 💡 CLF-C02 Exam Tip
+"Estimate cost before deploying anything", "Plan a budget for a new project", "Calculate monthly cost of a proposed architecture" = AWS Pricing Calculator.` },
+            { id: 'b6', icon: '🎧', title: 'AWS Support Plans', desc: 'Basic, Developer, Business, and Enterprise.', summary: '• Basic (Free)\n• Developer (Email)\n• Business (24x7 Chat)\n• Enterprise (TAM)', dive: `### AWS Support Plans
+AWS offers four tiers of support. You must memorize the differences for the CLF-C02 exam.
+
+#### 1. Basic Support (Free)
+- Customer service and billing support.
+- Access to 7 core Trusted Advisor checks.
+- Access to the Personal Health Dashboard.
+
+#### 2. Developer Support (Starts at $29/mo)
+- Best for exploring or testing non-production workloads.
+- Business hours email access to Cloud Support Associates.
+
+#### 3. Business Support (Starts at $100/mo)
+- Minimum recommended tier for production workloads.
+- **24x7 phone, email, and chat access** to Cloud Support Engineers.
+- Full access to all AWS Trusted Advisor checks.
+
+#### 4. Enterprise Support (Starts at $15,000/mo)
+- For mission-critical workloads.
+- 15-minute response time for critical business system failures.
+- **Dedicated Technical Account Manager (TAM):** A designated AWS expert who proactively monitors your environment and assists with planning.
+- **Concierge Support Team:** For complex billing and account inquiries.
+
+#### 💡 CLF-C02 Exam Tip
+If a question asks how to get a **Technical Account Manager (TAM)**, **Concierge Support**, or a **15-minute response time**, the answer is always the **Enterprise** support plan.` }
         ];
 
         const rsData = [
-            { id: 'r1', icon: '🚚', title: 'Rehost', desc: 'Lift & Shift.', summary: '• Fastest migration\n• No code changes\n• Predictable', dive: `### Rehost (Lift & Shift)\nMoving applications to the cloud as-is without architectural modifications.\n\n#### Strategic Value\n- **Speed:** Fastest way to migrate to the cloud (e.g., data center lease expiring).\n- **Reduced Risk:** Application behavior remains predictable.\n\n#### Relevant AWS Tools\n- **AWS Application Migration Service (MGN):** Automates the lift-and-shift process.` },
-            { id: 'r2', icon: '🔄', title: 'Replatform', desc: 'Lift, Tinker, and Shift.', summary: '• Minor optimizations\n• Leverage managed services\n• No core code changes', dive: `### Replatform\nApplying minor optimizations to leverage cloud-managed services without fundamentally changing the core architecture.\n\n#### Real-World Example\n- Migrating a self-hosted Oracle database running on VMs to **Amazon RDS** to offload backups and patching.\n- Moving legacy Java apps to **AWS Elastic Beanstalk**.` },
-            { id: 'r3', icon: '⚛️', title: 'Refactor', desc: 'Re-architect for the cloud.', summary: '• Serverless & Microservices\n• Maximum agility & ROI\n• Highest initial cost', dive: `### Refactor (Re-architect)\nA complete architectural redesign to leverage modern cloud-native features.\n\n#### Strategic Value\n- Fully embraces scalability, resilience, and auto-scaling.\n- Long-term operational costs are dramatically lower.\n\n#### Common Patterns\n- Breaking down a monolithic application into microservices.\n- Moving from traditional servers to entirely serverless execution (AWS Lambda).` },
-            { id: 'r4', icon: '🛍️', title: 'Repurchase', desc: 'Drop and Shop.', summary: '• Change software licensing\n• Adopt SaaS models\n• Drop technical debt', dive: `### Repurchase\nAbandoning legacy software and switching to a modern Software as a Service (SaaS) product.\n\n#### Strategic Value\n- Eliminates underlying infrastructure maintenance.\n\n#### Real-World Example\n- Moving from a heavily customized legacy CRM system to Salesforce.\n- Utilizing out-of-the-box vendor solutions from the AWS Marketplace.` },
-            { id: 'r5', icon: '🛑', title: 'Retire', desc: 'Decommission legacy systems.', summary: '• Instant cost savings\n• Reduced attack surface\n• Portfolio simplification', dive: `### Retire\nIdentifying and decommissioning applications that are no longer useful.\n\n#### Strategic Value\n- Instantly saves money on licensing, compute power, and operational maintenance.\n- Reduces the overall attack surface by eliminating unpatched, forgotten systems.` },
-            { id: 'r6', icon: '⏸️', title: 'Retain', desc: 'Do nothing (for now).', summary: '• Postpone migration\n• Compliance limits\n• Hybrid strategies', dive: `### Retain\nKeeping applications on-premises or delaying their migration.\n\n#### Strategic Value\n- Allows teams to focus engineering resources on workloads with the highest ROI.\n- Often used for systems with strict localized compliance laws or recent hardware investments that are still depreciating.` }
+            { id: 'r1', icon: '🚚', title: 'Rehost', desc: 'Lift & Shift.', summary: '• Fastest migration\n• No code changes\n• Predictable', dive: `### Rehost (Lift & Shift)
+Rehosting involves moving your application from an on-premises environment to AWS exactly as it is, without making any changes to the architecture or code.
+
+#### Strategic Value
+- **Speed:** This is the absolute fastest way to migrate a large portfolio to the cloud. It is heavily utilized when facing a tight deadline (e.g., a data center lease is expiring next month).
+- **Reduced Risk:** Because the application code doesn't change, its behavior remains highly predictable.
+- **Foundation:** Once the application is running in AWS, it is often much easier to optimize and re-architect it later.
+
+#### Relevant AWS Tools
+- **AWS Application Migration Service (MGN):** The primary service used to automate the lift-and-shift process. It continuously replicates block-level data from source machines to AWS, minimizing downtime during the cutover.` },
+            { id: 'r2', icon: '🔄', title: 'Replatform', desc: 'Lift, Tinker, and Shift.', summary: '• Minor optimizations\n• Leverage managed services\n• No core code changes', dive: `### Replatform (Lift, Tinker, and Shift)
+Replatforming entails making tangible, targeted cloud optimizations to your workload without fundamentally changing the core architecture of the application.
+
+#### Strategic Value
+- **Operational Efficiency:** Substantially reduces time spent managing underlying software and operating systems.
+- **Cost Savings:** Often avoids expensive commercial licensing or reduces database administrator overhead, all without requiring expensive software rewrites.
+
+#### Real-World Examples
+- **Databases:** Migrating a self-hosted Oracle database running on VMs to **Amazon RDS (Relational Database Service)**. The app still talks to an Oracle database, but AWS now handles backups, patching, and high availability.
+- **Web Apps:** Moving legacy Java applications to **AWS Elastic Beanstalk** or containerizing them and running them on **Amazon ECS** without rewriting the core application logic.` },
+            { id: 'r3', icon: '⚛️', title: 'Refactor', desc: 'Re-architect for the cloud.', summary: '• Serverless & Microservices\n• Maximum agility & ROI\n• Highest initial cost', dive: `### Refactor (Re-architect)
+Refactoring is completely re-imagining how the application is architected and developed using cloud-native features. This is typically driven by a strong business need to add features, scale, or improve performance that is impossible in the current environment.
+
+#### Strategic Value
+- **Cloud-Native Power:** Fully embraces scalability, resilience, and auto-scaling.
+- **Long-term ROI:** While the upfront cost and time are the highest of all strategies, the long-term operational costs are dramatically lower and the agility gains are unmatched.
+
+#### Common Patterns
+- **Monolith to Microservices:** Breaking down a monolithic legacy application into decoupled microservices using containers on **Amazon EKS**.
+- **Serverless Migration:** Moving from traditional server-based compute to entirely serverless execution using **AWS Lambda**, **Amazon API Gateway**, and **DynamoDB**.` },
+            { id: 'r4', icon: '🛍️', title: 'Repurchase', desc: 'Drop and Shop.', summary: '• Change software licensing\n• Adopt SaaS models\n• Drop technical debt', dive: `### Repurchase
+Repurchasing means moving to a completely different product, usually a Software as a Service (SaaS) platform, effectively dropping the existing legacy application entirely.
+
+#### Strategic Value
+- **Eliminates Maintenance:** The customer is no longer responsible for *any* underlying infrastructure, application maintenance, or version upgrades.
+- **Rapid Modernization:** Instantly upgrades business capabilities without engineering development effort.
+- **Drops Technical Debt:** Abandons heavy customization that is hard to maintain.
+
+#### Real-World Examples
+- Moving from a heavily customized, on-premise legacy CRM system to **Salesforce**.
+- Replacing a self-hosted HR or ERP system with **Workday**.
+- Utilizing out-of-the-box vendor firewall solutions directly from the **AWS Marketplace** instead of building custom routing software.` },
+            { id: 'r5', icon: '🛑', title: 'Retire', desc: 'Decommission legacy systems.', summary: '• Instant cost savings\n• Reduced attack surface\n• Portfolio simplification', dive: `### Retire
+Retiring involves identifying IT assets that no longer provide business value and permanently shutting them down.
+
+#### Strategic Value
+- **Cost Reduction:** Instantly saves money on licensing, compute power, facility cooling, and operational maintenance.
+- **Security Posture:** Significantly reduces the overall attack surface by eliminating unpatched, forgotten, or zombie systems.
+- **Focus:** Allows engineers to focus on maintaining modern, value-driving applications.
+
+#### The Reality of Migration
+During the discovery phase of large enterprise cloud migrations, it is incredibly common to discover that up to **10% to 20%** of an IT portfolio consists of "zombie servers" that are no longer being used by anyone. Turning these off accelerates the migration of the resources that actually matter.` },
+            { id: 'r6', icon: '⏸️', title: 'Retain', desc: 'Do nothing (for now).', summary: '• Postpone migration\n• Compliance limits\n• Hybrid strategies', dive: `### Retain
+Retaining means keeping workloads on-premises or in their current environment. Essentially, doing nothing *for now*.
+
+#### Strategic Value
+- **Prioritization:** Allows teams to focus their limited engineering resources on migrating workloads that provide the highest immediate ROI to the business.
+- **Risk Mitigation:** Avoiding the migration of highly sensitive or monolithic legacy systems that are too fragile to move without extensive, multi-year planning.
+
+#### Common Reasons to Retain
+- **Depreciation:** The application runs on hardware that was recently purchased and still has active financial depreciation.
+- **Compliance:** Strict, localized compliance or governmental laws require data to stay on physical premises.
+- **Latency:** The workload requires an ultra-low latency connection to local factory equipment (though this is often solved later via hybrid solutions like **AWS Outposts**).` }
         ];
 
         const allServices = [...securityData, ...mgmtData, ...cafData, ...wafData, ...computeData, ...storageData, ...databaseData, ...networkData, ...billingData, ...rsData];
