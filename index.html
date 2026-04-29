@@ -57,9 +57,17 @@
 <body class="min-h-screen bg-slate-50 dark:bg-[#0f172a] text-slate-900 dark:text-slate-200 antialiased overflow-x-hidden">
 
     <header class="sticky top-0 z-40 bg-white/80 dark:bg-[#0f172a]/80 backdrop-blur-xl border-b border-slate-200 dark:border-slate-800 shadow-sm">
-        <div class="max-w-7xl mx-auto px-4 h-20 flex justify-between items-center gap-4">
-            <!-- Brand -->
-            <div onclick="navigateTo('section-home')" class="flex items-center gap-3 shrink-0 cursor-pointer group">
+        <div class="max-w-7xl mx-auto px-4 h-20 grid grid-cols-3 items-center gap-4">
+            <!-- Left: Menu Button -->
+            <div class="flex items-center justify-start">
+                <button onclick="openSidebar()" class="p-2.5 px-4 bg-slate-100 dark:bg-slate-800 rounded-xl hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors shrink-0 flex items-center gap-2 text-slate-700 dark:text-slate-300">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+                    <span class="font-bold text-sm hidden sm:block">Menu</span>
+                </button>
+            </div>
+
+            <!-- Center: Brand/Title -->
+            <div onclick="navigateTo('section-home')" class="flex items-center justify-center gap-3 cursor-pointer group">
                 <div class="bg-brand-accent p-2 rounded-xl shadow-lg shadow-brand-accent/20 group-hover:scale-105 transition-transform">
                     <svg class="w-6 h-6 text-slate-900" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" /></svg>
                 </div>
@@ -68,29 +76,24 @@
                 </div>
             </div>
 
-            <!-- Global Search Bar -->
-            <div class="flex-grow max-w-md relative hidden md:block">
-                <input type="text" id="global-search" oninput="handleSearch(this.value)" placeholder="Search services (e.g. S3, IAM, Billing)..." class="w-full bg-slate-100 dark:bg-slate-800 border-none rounded-2xl px-5 py-2.5 text-sm focus:ring-2 focus:ring-brand-accent outline-none transition-all">
-                <div id="search-results" class="absolute top-full left-0 right-0 mt-2 bg-white dark:bg-slate-800 rounded-2xl shadow-2xl border border-slate-200 dark:border-slate-700 hidden overflow-hidden z-50">
+            <!-- Right: Search & Theme Toggle -->
+            <div class="flex items-center justify-end gap-3">
+                <div class="relative hidden md:block w-full max-w-[160px] lg:max-w-[200px]">
+                    <input type="text" id="global-search" oninput="handleSearch(this.value)" placeholder="Search..." class="w-full bg-slate-100 dark:bg-slate-800 border-none rounded-2xl px-4 py-2 text-sm focus:ring-2 focus:ring-brand-accent outline-none transition-all">
+                    <div id="search-results" class="absolute top-full right-0 w-[300px] mt-2 bg-white dark:bg-slate-800 rounded-2xl shadow-2xl border border-slate-200 dark:border-slate-700 hidden overflow-hidden z-50 text-left">
+                    </div>
                 </div>
-            </div>
-            
-            <div class="flex items-center gap-3">
                 <button onclick="toggleTheme()" class="p-2.5 bg-slate-100 dark:bg-slate-800 rounded-xl hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors shrink-0">
                     <span id="theme-icon">🌙</span>
-                </button>
-                <button onclick="openSidebar()" class="p-2.5 px-4 bg-slate-100 dark:bg-slate-800 rounded-xl hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors shrink-0 flex items-center gap-2 text-slate-700 dark:text-slate-300">
-                    <span class="font-bold text-sm hidden sm:block">Menu</span>
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"></path></svg>
                 </button>
             </div>
         </div>
     </header>
 
-    <!-- RIGHT SIDEBAR MENU -->
+    <!-- LEFT SIDEBAR MENU -->
     <div id="sidebar-overlay" class="fixed inset-0 bg-slate-900/40 backdrop-blur-sm z-[55] hidden opacity-0 transition-opacity duration-300" onclick="closeSidebar()"></div>
     
-    <aside id="right-sidebar" class="fixed top-0 right-0 h-full w-72 bg-white dark:bg-[#0f172a] border-l border-slate-200 dark:border-slate-800 shadow-[0_0_50px_rgba(0,0,0,0.3)] z-[60] transform translate-x-full transition-transform duration-300 flex flex-col">
+    <aside id="left-sidebar" class="fixed top-0 left-0 h-full w-72 bg-white dark:bg-[#0f172a] border-r border-slate-200 dark:border-slate-800 shadow-[0_0_50px_rgba(0,0,0,0.3)] z-[60] transform -translate-x-full transition-transform duration-300 flex flex-col">
         <div class="p-6 flex justify-between items-center border-b border-slate-200 dark:border-slate-800">
             <span class="font-black text-sm text-slate-400 uppercase tracking-widest">Navigation</span>
             <button onclick="closeSidebar()" class="text-slate-400 hover:text-brand-accent transition-colors text-3xl">&times;</button>
@@ -101,7 +104,7 @@
             <button data-target="section-home" onclick="navigateTo('section-home')" class="nav-btn text-left px-4 py-2 rounded-xl text-sm font-bold transition-all text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800">Dashboard</button>
             <button data-target="section-caf" onclick="navigateTo('section-caf')" class="nav-btn text-left px-4 py-2 rounded-xl text-sm font-bold transition-all text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800">CAF Framework</button>
             <button data-target="section-waf" onclick="navigateTo('section-waf')" class="nav-btn text-left px-4 py-2 rounded-xl text-sm font-bold transition-all text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800">WAF Pillars</button>
-            <button data-target="section-shared" onclick="navigateTo('section-shared')" class="nav-btn text-left px-4 py-2 rounded-xl text-sm font-bold transition-all text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800">Shared Resp.</button>
+            <button data-target="section-shared" onclick="navigateTo('section-shared')" class="nav-btn text-left px-4 py-2 rounded-xl text-sm font-bold transition-all text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800">Shared Responsibility</button>
             
             <span class="px-4 text-[10px] font-black text-slate-400 uppercase tracking-widest mt-6 mb-1">Technical Domains</span>
             <button data-target="section-compute" onclick="navigateTo('section-compute')" class="nav-btn text-left px-4 py-2 rounded-xl text-sm font-bold transition-all text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800">Compute</button>
@@ -109,7 +112,7 @@
             <button data-target="section-database" onclick="navigateTo('section-database')" class="nav-btn text-left px-4 py-2 rounded-xl text-sm font-bold transition-all text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800">Database</button>
             <button data-target="section-network" onclick="navigateTo('section-network')" class="nav-btn text-left px-4 py-2 rounded-xl text-sm font-bold transition-all text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800">Network</button>
             <button data-target="section-security" onclick="navigateTo('section-security')" class="nav-btn text-left px-4 py-2 rounded-xl text-sm font-bold transition-all text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800">Security & Compliance</button>
-            <button data-target="section-mgmt" onclick="navigateTo('section-mgmt')" class="nav-btn text-left px-4 py-2 rounded-xl text-sm font-bold transition-all text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800">Mgmt & Governance</button>
+            <button data-target="section-mgmt" onclick="navigateTo('section-mgmt')" class="nav-btn text-left px-4 py-2 rounded-xl text-sm font-bold transition-all text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800">Management & Governance</button>
             
             <span class="px-4 text-[10px] font-black text-slate-400 uppercase tracking-widest mt-6 mb-1">Business & Strategy</span>
             <button data-target="section-6rs" onclick="navigateTo('section-6rs')" class="nav-btn text-left px-4 py-2 rounded-xl text-sm font-bold transition-all text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800">Migration (6 Rs)</button>
@@ -127,42 +130,84 @@
                 <p class="text-slate-500 dark:text-slate-400 text-lg md:text-xl max-w-3xl mx-auto leading-relaxed">The definitive interactive guide for the CLF-C02 exam. Select a domain below to explore core services and architectural principles.</p>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                <!-- Dashboard Cards -->
-                <div onclick="navigateTo('section-caf')" class="bg-white dark:bg-slate-800/40 p-8 rounded-[2rem] border border-slate-200 dark:border-slate-700/50 shadow-xl cursor-pointer hover:-translate-y-2 hover:border-brand-accent/50 transition-all group">
-                    <div class="w-14 h-14 bg-brand-accent/10 rounded-2xl flex items-center justify-center text-3xl mb-6 group-hover:scale-110 transition-transform">🧭</div>
-                    <h3 class="text-xl font-black mb-2 text-slate-800 dark:text-white">CAF Framework</h3>
-                    <p class="text-slate-500 dark:text-slate-400 text-sm leading-relaxed">The 6 Perspectives to bridge business and technology goals.</p>
-                </div>
+            <div class="mb-12">
+                <h3 class="text-sm font-black text-slate-400 uppercase tracking-widest mb-6 pl-2 border-l-4 border-brand-accent">Foundations</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <div onclick="navigateTo('section-caf')" class="bg-white dark:bg-slate-800/40 p-8 rounded-[2rem] border border-slate-200 dark:border-slate-700/50 shadow-xl cursor-pointer hover:-translate-y-2 hover:border-brand-accent/50 transition-all group">
+                        <div class="w-14 h-14 bg-brand-accent/10 rounded-2xl flex items-center justify-center text-3xl mb-6 group-hover:scale-110 transition-transform">🧭</div>
+                        <h3 class="text-xl font-black mb-2 text-slate-800 dark:text-white">CAF Framework</h3>
+                        <p class="text-slate-500 dark:text-slate-400 text-sm leading-relaxed">The 6 Perspectives to bridge business and technology goals.</p>
+                    </div>
 
-                <div onclick="navigateTo('section-waf')" class="bg-white dark:bg-slate-800/40 p-8 rounded-[2rem] border border-slate-200 dark:border-slate-700/50 shadow-xl cursor-pointer hover:-translate-y-2 hover:border-blue-500/50 transition-all group">
-                    <div class="w-14 h-14 bg-blue-500/10 rounded-2xl flex items-center justify-center text-3xl mb-6 group-hover:scale-110 transition-transform">🏛️</div>
-                    <h3 class="text-xl font-black mb-2 text-slate-800 dark:text-white">Well-Architected</h3>
-                    <p class="text-slate-500 dark:text-slate-400 text-sm leading-relaxed">The 6 Pillars for high-performing, reliable systems.</p>
-                </div>
+                    <div onclick="navigateTo('section-waf')" class="bg-white dark:bg-slate-800/40 p-8 rounded-[2rem] border border-slate-200 dark:border-slate-700/50 shadow-xl cursor-pointer hover:-translate-y-2 hover:border-blue-500/50 transition-all group">
+                        <div class="w-14 h-14 bg-blue-500/10 rounded-2xl flex items-center justify-center text-3xl mb-6 group-hover:scale-110 transition-transform">🏛️</div>
+                        <h3 class="text-xl font-black mb-2 text-slate-800 dark:text-white">Well-Architected</h3>
+                        <p class="text-slate-500 dark:text-slate-400 text-sm leading-relaxed">The 6 Pillars for high-performing, reliable systems.</p>
+                    </div>
 
-                <div onclick="navigateTo('section-security')" class="bg-white dark:bg-slate-800/40 p-8 rounded-[2rem] border border-slate-200 dark:border-slate-700/50 shadow-xl cursor-pointer hover:-translate-y-2 hover:border-red-500/50 transition-all group">
-                    <div class="w-14 h-14 bg-red-500/10 rounded-2xl flex items-center justify-center text-3xl mb-6 group-hover:scale-110 transition-transform">🛡️</div>
-                    <h3 class="text-xl font-black mb-2 text-slate-800 dark:text-white">Security & Compliance</h3>
-                    <p class="text-slate-500 dark:text-slate-400 text-sm leading-relaxed">IAM, Shield, GuardDuty, and Infrastructure Protection.</p>
+                    <div onclick="navigateTo('section-shared')" class="bg-white dark:bg-slate-800/40 p-8 rounded-[2rem] border border-slate-200 dark:border-slate-700/50 shadow-xl cursor-pointer hover:-translate-y-2 hover:border-emerald-500/50 transition-all group">
+                        <div class="w-14 h-14 bg-emerald-500/10 rounded-2xl flex items-center justify-center text-3xl mb-6 group-hover:scale-110 transition-transform">🤝</div>
+                        <h3 class="text-xl font-black mb-2 text-slate-800 dark:text-white">Shared Responsibility</h3>
+                        <p class="text-slate-500 dark:text-slate-400 text-sm leading-relaxed">Security "OF" the cloud vs Security "IN" the cloud.</p>
+                    </div>
                 </div>
+            </div>
 
-                <div onclick="navigateTo('section-compute')" class="bg-white dark:bg-slate-800/40 p-8 rounded-[2rem] border border-slate-200 dark:border-slate-700/50 shadow-xl cursor-pointer hover:-translate-y-2 hover:border-orange-500/50 transition-all group">
-                    <div class="w-14 h-14 bg-orange-500/10 rounded-2xl flex items-center justify-center text-3xl mb-6 group-hover:scale-110 transition-transform">💻</div>
-                    <h3 class="text-xl font-black mb-2 text-slate-800 dark:text-white">Compute</h3>
-                    <p class="text-slate-500 dark:text-slate-400 text-sm leading-relaxed">EC2, Lambda, ECS, and Serverless architectures.</p>
+            <div class="mb-12">
+                <h3 class="text-sm font-black text-slate-400 uppercase tracking-widest mb-6 pl-2 border-l-4 border-slate-500">Technical Domains</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <div onclick="navigateTo('section-compute')" class="bg-white dark:bg-slate-800/40 p-8 rounded-[2rem] border border-slate-200 dark:border-slate-700/50 shadow-xl cursor-pointer hover:-translate-y-2 hover:border-orange-500/50 transition-all group">
+                        <div class="w-14 h-14 bg-orange-500/10 rounded-2xl flex items-center justify-center text-3xl mb-6 group-hover:scale-110 transition-transform">💻</div>
+                        <h3 class="text-xl font-black mb-2 text-slate-800 dark:text-white">Compute</h3>
+                        <p class="text-slate-500 dark:text-slate-400 text-sm leading-relaxed">EC2, Lambda, ECS, and Serverless architectures.</p>
+                    </div>
+
+                    <div onclick="navigateTo('section-storage')" class="bg-white dark:bg-slate-800/40 p-8 rounded-[2rem] border border-slate-200 dark:border-slate-700/50 shadow-xl cursor-pointer hover:-translate-y-2 hover:border-teal-500/50 transition-all group">
+                        <div class="w-14 h-14 bg-teal-500/10 rounded-2xl flex items-center justify-center text-3xl mb-6 group-hover:scale-110 transition-transform">🗄️</div>
+                        <h3 class="text-xl font-black mb-2 text-slate-800 dark:text-white">Storage</h3>
+                        <p class="text-slate-500 dark:text-slate-400 text-sm leading-relaxed">S3, EBS, EFS, Glacier, Storage Gateway & Snowball.</p>
+                    </div>
+
+                    <div onclick="navigateTo('section-database')" class="bg-white dark:bg-slate-800/40 p-8 rounded-[2rem] border border-slate-200 dark:border-slate-700/50 shadow-xl cursor-pointer hover:-translate-y-2 hover:border-red-500/50 transition-all group">
+                        <div class="w-14 h-14 bg-red-500/10 rounded-2xl flex items-center justify-center text-3xl mb-6 group-hover:scale-110 transition-transform">🗃️</div>
+                        <h3 class="text-xl font-black mb-2 text-slate-800 dark:text-white">Databases</h3>
+                        <p class="text-slate-500 dark:text-slate-400 text-sm leading-relaxed">RDS, DynamoDB, Aurora, Redshift & ElastiCache.</p>
+                    </div>
+
+                    <div onclick="navigateTo('section-network')" class="bg-white dark:bg-slate-800/40 p-8 rounded-[2rem] border border-slate-200 dark:border-slate-700/50 shadow-xl cursor-pointer hover:-translate-y-2 hover:border-indigo-500/50 transition-all group">
+                        <div class="w-14 h-14 bg-indigo-500/10 rounded-2xl flex items-center justify-center text-3xl mb-6 group-hover:scale-110 transition-transform">🌐</div>
+                        <h3 class="text-xl font-black mb-2 text-slate-800 dark:text-white">Networking</h3>
+                        <p class="text-slate-500 dark:text-slate-400 text-sm leading-relaxed">VPC, Route 53, CloudFront, and Load Balancing.</p>
+                    </div>
+
+                    <div onclick="navigateTo('section-security')" class="bg-white dark:bg-slate-800/40 p-8 rounded-[2rem] border border-slate-200 dark:border-slate-700/50 shadow-xl cursor-pointer hover:-translate-y-2 hover:border-red-500/50 transition-all group">
+                        <div class="w-14 h-14 bg-red-500/10 rounded-2xl flex items-center justify-center text-3xl mb-6 group-hover:scale-110 transition-transform">🛡️</div>
+                        <h3 class="text-xl font-black mb-2 text-slate-800 dark:text-white">Security & Compliance</h3>
+                        <p class="text-slate-500 dark:text-slate-400 text-sm leading-relaxed">IAM, Shield, GuardDuty, and Infrastructure Protection.</p>
+                    </div>
+
+                    <div onclick="navigateTo('section-mgmt')" class="bg-white dark:bg-slate-800/40 p-8 rounded-[2rem] border border-slate-200 dark:border-slate-700/50 shadow-xl cursor-pointer hover:-translate-y-2 hover:border-cyan-500/50 transition-all group">
+                        <div class="w-14 h-14 bg-cyan-500/10 rounded-2xl flex items-center justify-center text-3xl mb-6 group-hover:scale-110 transition-transform">👁️</div>
+                        <h3 class="text-xl font-black mb-2 text-slate-800 dark:text-white">Management & Governance</h3>
+                        <p class="text-slate-500 dark:text-slate-400 text-sm leading-relaxed">CloudWatch, CloudTrail, Config, and Trusted Advisor.</p>
+                    </div>
                 </div>
+            </div>
 
-                <div onclick="navigateTo('section-network')" class="bg-white dark:bg-slate-800/40 p-8 rounded-[2rem] border border-slate-200 dark:border-slate-700/50 shadow-xl cursor-pointer hover:-translate-y-2 hover:border-indigo-500/50 transition-all group">
-                    <div class="w-14 h-14 bg-indigo-500/10 rounded-2xl flex items-center justify-center text-3xl mb-6 group-hover:scale-110 transition-transform">🌐</div>
-                    <h3 class="text-xl font-black mb-2 text-slate-800 dark:text-white">Networking</h3>
-                    <p class="text-slate-500 dark:text-slate-400 text-sm leading-relaxed">VPC, Route 53, CloudFront, and Load Balancing.</p>
-                </div>
+            <div class="mb-12">
+                <h3 class="text-sm font-black text-slate-400 uppercase tracking-widest mb-6 pl-2 border-l-4 border-purple-500">Business & Strategy</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <div onclick="navigateTo('section-6rs')" class="bg-white dark:bg-slate-800/40 p-8 rounded-[2rem] border border-slate-200 dark:border-slate-700/50 shadow-xl cursor-pointer hover:-translate-y-2 hover:border-purple-500/50 transition-all group">
+                        <div class="w-14 h-14 bg-purple-500/10 rounded-2xl flex items-center justify-center text-3xl mb-6 group-hover:scale-110 transition-transform">📦</div>
+                        <h3 class="text-xl font-black mb-2 text-slate-800 dark:text-white">Migration (6 Rs)</h3>
+                        <p class="text-slate-500 dark:text-slate-400 text-sm leading-relaxed">Migration Strategies (Rehost, Replatform, Refactor...).</p>
+                    </div>
 
-                <div onclick="navigateTo('section-billing')" class="bg-white dark:bg-slate-800/40 p-8 rounded-[2rem] border border-slate-200 dark:border-slate-700/50 shadow-xl cursor-pointer hover:-translate-y-2 hover:border-green-500/50 transition-all group">
-                    <div class="w-14 h-14 bg-green-500/10 rounded-2xl flex items-center justify-center text-3xl mb-6 group-hover:scale-110 transition-transform">💰</div>
-                    <h3 class="text-xl font-black mb-2 text-slate-800 dark:text-white">Billing & Pricing</h3>
-                    <p class="text-slate-500 dark:text-slate-400 text-sm leading-relaxed">Cost management, Support Plans, and Organizations.</p>
+                    <div onclick="navigateTo('section-billing')" class="bg-white dark:bg-slate-800/40 p-8 rounded-[2rem] border border-slate-200 dark:border-slate-700/50 shadow-xl cursor-pointer hover:-translate-y-2 hover:border-green-500/50 transition-all group">
+                        <div class="w-14 h-14 bg-green-500/10 rounded-2xl flex items-center justify-center text-3xl mb-6 group-hover:scale-110 transition-transform">💰</div>
+                        <h3 class="text-xl font-black mb-2 text-slate-800 dark:text-white">Billing & Pricing</h3>
+                        <p class="text-slate-500 dark:text-slate-400 text-sm leading-relaxed">Cost management, Support Plans, and Organizations.</p>
+                    </div>
                 </div>
             </div>
         </section>
@@ -209,7 +254,64 @@
         </section>
 
         <section id="section-shared" class="content-section hidden fade-in">
-            <!-- Content already in original -->
+            <div class="mb-12 text-center md:text-left">
+                <h2 class="text-4xl font-black mb-2 text-emerald-500">Shared Responsibility Model</h2>
+                <p class="text-slate-500 dark:text-slate-400 italic">A comprehensive breakdown of Security "OF" the Cloud vs. Security "IN" the Cloud.</p>
+            </div>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-px bg-slate-200/50 dark:bg-slate-800/30 backdrop-blur-md rounded-[2.5rem] overflow-hidden border border-slate-200/50 dark:border-slate-800/50 shadow-2xl">
+                <!-- Customer Column -->
+                <div class="bg-white/60 dark:bg-slate-900/40 p-8 md:p-12">
+                    <div class="flex items-center gap-4 mb-8">
+                        <div class="w-16 h-16 bg-emerald-500/10 rounded-2xl flex items-center justify-center text-3xl shadow-inner">👤</div>
+                        <h3 class="text-2xl md:text-3xl font-black text-emerald-500 uppercase tracking-tight">Customer<br><span class="text-slate-400 text-sm tracking-widest">Security "IN" the Cloud</span></h3>
+                    </div>
+                    <p class="text-slate-600 dark:text-slate-400 mb-8 leading-relaxed font-medium">The customer assumes responsibility and management of the guest operating system (including updates and security patches), other associated application software, as well as the configuration of the AWS-provided security group firewall.</p>
+                    
+                    <div class="space-y-6">
+                        <div class="p-6 bg-slate-50/80 dark:bg-slate-800/30 rounded-2xl border-l-4 border-emerald-500 shadow-sm transition-transform hover:scale-[1.02]">
+                            <h4 class="font-bold text-lg mb-2 text-slate-800 dark:text-white">Customer Data</h4>
+                            <p class="text-sm text-slate-500 dark:text-slate-400 leading-relaxed">You retain absolute control over your data. You are responsible for managing data classification, client-side data encryption, server-side encryption (file system and/or data), and network traffic protection (encryption, integrity, identity).</p>
+                        </div>
+                        <div class="p-6 bg-slate-50/80 dark:bg-slate-800/30 rounded-2xl border-l-4 border-emerald-500 shadow-sm transition-transform hover:scale-[1.02]">
+                            <h4 class="font-bold text-lg mb-2 text-slate-800 dark:text-white">IAM & Access Control</h4>
+                            <p class="text-sm text-slate-500 dark:text-slate-400 leading-relaxed">Configuring robust Identity and Access Management (IAM), enforcing Multi-Factor Authentication (MFA), setting password policies, and defining strict resource-level permissions.</p>
+                        </div>
+                        <div class="p-6 bg-slate-50/80 dark:bg-slate-800/30 rounded-2xl border-l-4 border-emerald-500 shadow-sm transition-transform hover:scale-[1.02]">
+                            <h4 class="font-bold text-lg mb-2 text-slate-800 dark:text-white">OS, Network & Firewall</h4>
+                            <p class="text-sm text-slate-500 dark:text-slate-400 leading-relaxed">Patching and maintaining the Guest Operating System (e.g., EC2 instances), configuring Security Groups (virtual firewalls), and setting up Network Access Control Lists (NACLs).</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- AWS Column -->
+                <div class="bg-slate-50/60 dark:bg-slate-800/20 p-8 md:p-12">
+                    <div class="flex items-center gap-4 mb-8">
+                        <div class="w-16 h-16 bg-brand-accent/10 rounded-2xl flex items-center justify-center text-3xl shadow-inner">☁️</div>
+                        <h3 class="text-2xl md:text-3xl font-black text-brand-accent uppercase tracking-tight">AWS<br><span class="text-slate-400 text-sm tracking-widest">Security "OF" the Cloud</span></h3>
+                    </div>
+                    <p class="text-slate-600 dark:text-slate-400 mb-8 leading-relaxed font-medium">AWS is responsible for protecting the infrastructure that runs all of the services offered in the AWS Cloud. This infrastructure is composed of the hardware, software, networking, and facilities.</p>
+                    
+                    <div class="space-y-6">
+                        <div class="p-6 bg-white/80 dark:bg-slate-800/40 rounded-2xl border-l-4 border-brand-accent shadow-sm transition-transform hover:scale-[1.02]">
+                            <h4 class="font-bold text-lg mb-2 text-slate-800 dark:text-white">Global Infrastructure</h4>
+                            <p class="text-sm text-slate-500 dark:text-slate-400 leading-relaxed">Physical security and environmental controls of AWS Regions, Availability Zones (AZs), and Edge Locations. This includes power, cooling, and perimeter security.</p>
+                        </div>
+                        <div class="p-6 bg-white/80 dark:bg-slate-800/40 rounded-2xl border-l-4 border-brand-accent shadow-sm transition-transform hover:scale-[1.02]">
+                            <h4 class="font-bold text-lg mb-2 text-slate-800 dark:text-white">Foundational Compute & Storage</h4>
+                            <p class="text-sm text-slate-500 dark:text-slate-400 leading-relaxed">Maintaining and patching the physical hypervisors, storage arrays, and core networking hardware that power services like Amazon EC2, EBS, and VPC.</p>
+                        </div>
+                        <div class="p-6 bg-white/80 dark:bg-slate-800/40 rounded-2xl border-l-4 border-brand-accent shadow-sm transition-transform hover:scale-[1.02]">
+                            <h4 class="font-bold text-lg mb-2 text-slate-800 dark:text-white">Managed Services Software</h4>
+                            <p class="text-sm text-slate-500 dark:text-slate-400 leading-relaxed">For abstracted services like Amazon RDS, S3, or DynamoDB, AWS assumes additional responsibility for operating system patching, database software updates, and underlying infrastructure maintenance.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mt-8 p-8 bg-emerald-500/10 rounded-[2rem] border border-emerald-500/20 text-center">
+                <p class="text-emerald-600 dark:text-emerald-400 font-bold text-lg">💡 Exam Tip: As you move to managed services (like Lambda or S3), the customer responsibility shifts upward, but you are ALWAYS responsible for your Data and IAM.</p>
+            </div>
         </section>
 
         <section id="section-6rs" class="content-section hidden fade-in">
@@ -445,8 +547,8 @@
         }
 
         function closeModal(e) { if(e) e.stopPropagation(); const m = document.getElementById('deep-dive-modal'); m.classList.remove('opacity-100'); m.querySelector('div').classList.remove('scale-100'); setTimeout(() => m.classList.remove('active'), 300); }
-        function openSidebar() { document.getElementById('sidebar-overlay').classList.remove('hidden'); setTimeout(() => { document.getElementById('sidebar-overlay').classList.remove('opacity-0'); document.getElementById('right-sidebar').classList.remove('translate-x-full'); }, 10); }
-        function closeSidebar() { document.getElementById('sidebar-overlay').classList.add('opacity-0'); document.getElementById('right-sidebar').classList.add('translate-x-full'); setTimeout(() => { document.getElementById('sidebar-overlay').classList.add('hidden'); }, 300); }
+        function openSidebar() { document.getElementById('sidebar-overlay').classList.remove('hidden'); setTimeout(() => { document.getElementById('sidebar-overlay').classList.remove('opacity-0'); document.getElementById('left-sidebar').classList.remove('-translate-x-full'); }, 10); }
+        function closeSidebar() { document.getElementById('sidebar-overlay').classList.add('opacity-0'); document.getElementById('left-sidebar').classList.add('-translate-x-full'); setTimeout(() => { document.getElementById('sidebar-overlay').classList.add('hidden'); }, 300); }
 
         function navigateTo(targetId) {
             window.scrollTo({ top: 0, behavior: 'smooth' });
