@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AWS Frameworks - Premium Study Guide</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            accent: '#F59E0B',
+                            accentHover: '#D97706',
+                            dark: '#0f172a'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap');
+        body { font-family: 'Inter', sans-serif; transition: background-color 0.3s ease; }
+        
+        .perspective-1000 { perspective: 1000px; }
+        .transform-style-3d { transform-style: preserve-3d; }
+        .backface-hidden { backface-visibility: hidden; -webkit-backface-visibility: hidden; }
+        .rotate-y-180 { transform: rotateY(180deg); }
+        .flip-card-inner { transition: transform 0.8s cubic-bezier(0.34, 1.56, 0.64, 1); transform-style: preserve-3d; }
+        .flip-card.flipped .flip-card-inner { transform: rotateY(180deg); }
+        
+        .fade-in { animation: fadeIn 0.4s ease-out forwards; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        
+        .md-content h3 { font-weight: 800; font-size: 1.5rem; margin-top: 1rem; margin-bottom: 1rem; color: #F59E0B; border-left: 5px solid #F59E0B; padding-left: 1rem; }
+        .md-content h4 { font-weight: 700; font-size: 1.1rem; margin-top: 1.5rem; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.05em; }
+        .md-content p { margin-bottom: 1rem; line-height: 1.8; font-size: 1.05rem; }
+        .md-content ul { list-style-type: none; margin-bottom: 1.5rem; }
+        .md-content li { margin-bottom: 0.75rem; position: relative; padding-left: 1.75rem; line-height: 1.6; }
+        .md-content li::before { content: "✦"; position: absolute; left: 0; color: #F59E0B; font-weight: bold; }
+        
+        .custom-scrollbar::-webkit-scrollbar { width: 8px; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: rgba(0,0,0,0.05); }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: #475569; border-radius: 10px; }
+        
+        #deep-dive-modal.active { display: flex !important; }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+    </style>
+</head>
+<body class="min-h-screen bg-slate-50 dark:bg-[#0f172a] text-slate-900 dark:text-slate-200 antialiased">
+
+    <header class="sticky top-0 z-50 bg-white/80 dark:bg-[#0f172a]/80 backdrop-blur-xl border-b border-slate-200 dark:border-slate-800 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 h-20 flex justify-between items-center gap-4">
+            <!-- Brand (Now clickable to go home) -->
+            <div onclick="navigateTo('section-home')" class="flex items-center gap-3 shrink-0 cursor-pointer group">
+                <div class="bg-brand-accent p-2 rounded-xl shadow-lg shadow-brand-accent/20 group-hover:scale-105 transition-transform">
+                    <svg class="w-6 h-6 text-slate-900" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" /></svg>
+                </div>
+                <div class="hidden lg:block">
+                    <h1 class="text-xl font-extrabold tracking-tighter text-slate-900 dark:text-white group-hover:text-brand-accent transition-colors">AWS FRAMEWORKS</h1>
+                </div>
+            </div>
+            
+            <!-- CENTRAL NAV BAR -->
+            <nav class="flex items-center bg-slate-100 dark:bg-slate-900/80 p-1 rounded-2xl border border-slate-200 dark:border-slate-800 overflow-x-auto no-scrollbar max-w-full">
+                <button data-target="section-caf" onclick="navigateTo('section-caf')" class="nav-btn whitespace-nowrap px-4 py-2 rounded-xl text-xs font-bold transition-all text-slate-500 hover:text-brand-accent">CAF</button>
+                <button data-target="section-waf" onclick="navigateTo('section-waf')" class="nav-btn whitespace-nowrap px-4 py-2 rounded-xl text-xs font-bold transition-all text-slate-500 hover:text-brand-accent">WAF</button>
+                <button data-target="section-shared" onclick="navigateTo('section-shared')" class="nav-btn whitespace-nowrap px-4 py-2 rounded-xl text-xs font-bold transition-all text-slate-500 hover:text-brand-accent">SHARED RESP</button>
+                <button data-target="section-6rs" onclick="navigateTo('section-6rs')" class="nav-btn whitespace-nowrap px-4 py-2 rounded-xl text-xs font-bold transition-all text-slate-500 hover:text-brand-accent">6 RS</button>
+                <button data-target="section-ai-lab" onclick="navigateTo('section-ai-lab')" class="nav-btn whitespace-nowrap px-4 py-2 rounded-xl text-xs font-bold transition-all text-slate-500 hover:text-brand-accent">AI LAB</button>
+            </nav>
+
+            <button onclick="toggleTheme()" class="p-2.5 bg-slate-100 dark:bg-slate-800 rounded-xl hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors shrink-0">
+                <span id="theme-icon">🌙</span>
+            </button>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-4 py-12">
+        
+        <!-- 0. HOME / MAIN SECTION -->
+        <section id="section-home" class="content-section fade-in">
+            <div class="text-center mb-16 mt-8">
+                <div class="inline-block px-4 py-1.5 rounded-full bg-brand-accent/10 border border-brand-accent/20 text-brand-accent font-bold text-xs tracking-widest uppercase mb-6">CLF-C02 Exam Preparation</div>
+                <h2 class="text-5xl md:text-7xl font-black mb-6 tracking-tight text-slate-900 dark:text-white">Master the Cloud.</h2>
+                <p class="text-slate-500 dark:text-slate-400 text-lg md:text-xl max-w-3xl mx-auto leading-relaxed">Your definitive interactive guide to AWS Frameworks, Principles, and Migration Strategies. Choose a path below to begin your mastery journey.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- CAF Quick Card -->
+                <div onclick="navigateTo('section-caf')" class="bg-white dark:bg-slate-800/40 p-8 rounded-[2rem] border border-slate-200 dark:border-slate-700/50 shadow-xl cursor-pointer hover:-translate-y-2 hover:border-brand-accent/50 transition-all group">
+                    <div class="w-14 h-14 bg-brand-accent/10 rounded-2xl flex items-center justify-center text-3xl mb-6 group-hover:scale-110 transition-transform">🧭</div>
+                    <h3 class="text-2xl font-black mb-3 text-slate-800 dark:text-white">CAF</h3>
+                    <p class="text-slate-500 dark:text-slate-400 text-sm leading-relaxed">Cloud Adoption Framework. Explore the 6 Perspectives connecting business and tech.</p>
+                </div>
+
+                <!-- WAF Quick Card -->
+                <div onclick="navigateTo('section-waf')" class="bg-white dark:bg-slate-800/40 p-8 rounded-[2rem] border border-slate-200 dark:border-slate-700/50 shadow-xl cursor-pointer hover:-translate-y-2 hover:border-blue-500/50 transition-all group">
+                    <div class="w-14 h-14 bg-blue-500/10 rounded-2xl flex items-center justify-center text-3xl mb-6 group-hover:scale-110 transition-transform">🏛️</div>
+                    <h3 class="text-2xl font-black mb-3 text-slate-800 dark:text-white">WAF</h3>
+                    <p class="text-slate-500 dark:text-slate-400 text-sm leading-relaxed">Well-Architected Framework. Dive into the 6 Pillars of architectural excellence.</p>
+                </div>
+
+                <!-- Shared Resp Quick Card -->
+                <div onclick="navigateTo('section-shared')" class="bg-white dark:bg-slate-800/40 p-8 rounded-[2rem] border border-slate-200 dark:border-slate-700/50 shadow-xl cursor-pointer hover:-translate-y-2 hover:border-emerald-500/50 transition-all group">
+                    <div class="w-14 h-14 bg-emerald-500/10 rounded-2xl flex items-center justify-center text-3xl mb-6 group-hover:scale-110 transition-transform">🤝</div>
+                    <h3 class="text-2xl font-black mb-3 text-slate-800 dark:text-white">Shared Resp.</h3>
+                    <p class="text-slate-500 dark:text-slate-400 text-sm leading-relaxed">Understand the critical boundary of Security "OF" vs Security "IN" the cloud.</p>
+                </div>
+
+                <!-- 6 Rs Quick Card -->
+                <div onclick="navigateTo('section-6rs')" class="bg-white dark:bg-slate-800/40 p-8 rounded-[2rem] border border-slate-200 dark:border-slate-700/50 shadow-xl cursor-pointer hover:-translate-y-2 hover:border-purple-500/50 transition-all group">
+                    <div class="w-14 h-14 bg-purple-500/10 rounded-2xl flex items-center justify-center text-3xl mb-6 group-hover:scale-110 transition-transform">📦</div>
+                    <h3 class="text-2xl font-black mb-3 text-slate-800 dark:text-white">The 6 Rs</h3>
+                    <p class="text-slate-500 dark:text-slate-400 text-sm leading-relaxed">Migration Strategies. Learn how to Rehost, Replatform, Refactor and more.</p>
+                </div>
+
+                <!-- AI Lab Highlight -->
+                <div onclick="navigateTo('section-ai-lab')" class="bg-gradient-to-br from-slate-900 to-slate-800 dark:from-white dark:to-slate-200 p-10 rounded-[2.5rem] shadow-2xl cursor-pointer hover:-translate-y-2 transition-transform group lg:col-span-4 relative overflow-hidden flex flex-col md:flex-row items-center gap-8 border border-slate-800 dark:border-white/20">
+                    <div class="absolute -right-10 -top-10 w-64 h-64 bg-brand-accent/20 rounded-full blur-3xl"></div>
+                    <div class="w-24 h-24 bg-brand-accent rounded-[2rem] flex shrink-0 items-center justify-center text-5xl shadow-inner group-hover:scale-110 transition-transform z-10">✨</div>
+                    <div class="z-10 text-center md:text-left">
+                        <h3 class="text-3xl font-black mb-3 text-white dark:text-slate-900 tracking-tight">AI Study Assistant</h3>
+                        <p class="text-slate-400 dark:text-slate-600 text-lg">Put your knowledge to the test. Generate dynamic scenario questions or evaluate your understanding of core concepts with our Gemini-powered AI Lab.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 1. CAF Section -->
+        <section id="section-caf" class="content-section hidden fade-in">
+            <div class="mb-12 text-center md:text-left">
+                <h2 class="text-4xl font-black mb-2">Cloud Adoption Framework (CAF)</h2>
+                <p class="text-slate-500 dark:text-slate-400">Leverage 6 Perspectives to bridge the gap between business goals and technical implementation.</p>
+            </div>
+            <div id="caf-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+        </section>
+
+        <!-- 2. WAF Section -->
+        <section id="section-waf" class="content-section hidden fade-in">
+            <div class="mb-12 text-center md:text-left">
+                <h2 class="text-4xl font-black mb-2">Well-Architected Framework (WAF)</h2>
+                <p class="text-slate-500 dark:text-slate-400">The six pillars for designing and operating reliable, secure, efficient, and cost-effective systems.</p>
+            </div>
+            <div id="waf-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+        </section>
+
+        <!-- 3. Shared Responsibility Section -->
+        <section id="section-shared" class="content-section hidden fade-in">
+            <div class="mb-12 text-center md:text-left">
+                <h2 class="text-4xl font-black mb-2 text-emerald-500">Shared Responsibility Model</h2>
+                <p class="text-slate-500 dark:text-slate-400 italic">A comprehensive breakdown of Security "OF" the Cloud vs. Security "IN" the Cloud.</p>
+            </div>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-px bg-slate-200/50 dark:bg-slate-800/30 backdrop-blur-md rounded-[2.5rem] overflow-hidden border border-slate-200/50 dark:border-slate-800/50 shadow-2xl">
+                <!-- Customer Column -->
+                <div class="bg-white/60 dark:bg-slate-900/40 p-8 md:p-12">
+                    <div class="flex items-center gap-4 mb-8">
+                        <div class="w-16 h-16 bg-emerald-500/10 rounded-2xl flex items-center justify-center text-3xl shadow-inner">👤</div>
+                        <h3 class="text-2xl md:text-3xl font-black text-emerald-500 uppercase tracking-tight">Customer<br><span class="text-slate-400 text-sm tracking-widest">Security "IN" the Cloud</span></h3>
+                    </div>
+                    <p class="text-slate-600 dark:text-slate-400 mb-8 leading-relaxed font-medium">The customer assumes responsibility and management of the guest operating system (including updates and security patches), other associated application software, as well as the configuration of the AWS-provided security group firewall.</p>
+                    
+                    <div class="space-y-6">
+                        <div class="p-6 bg-slate-50/80 dark:bg-slate-800/30 rounded-2xl border-l-4 border-emerald-500 shadow-sm transition-transform hover:scale-[1.02]">
+                            <h4 class="font-bold text-lg mb-2 text-slate-800 dark:text-white">Customer Data</h4>
+                            <p class="text-sm text-slate-500 dark:text-slate-400 leading-relaxed">You retain absolute control over your data. You are responsible for managing data classification, client-side data encryption, server-side encryption (file system and/or data), and network traffic protection (encryption, integrity, identity).</p>
+                        </div>
+                        <div class="p-6 bg-slate-50/80 dark:bg-slate-800/30 rounded-2xl border-l-4 border-emerald-500 shadow-sm transition-transform hover:scale-[1.02]">
+                            <h4 class="font-bold text-lg mb-2 text-slate-800 dark:text-white">IAM & Access Control</h4>
+                            <p class="text-sm text-slate-500 dark:text-slate-400 leading-relaxed">Configuring robust Identity and Access Management (IAM), enforcing Multi-Factor Authentication (MFA), setting password policies, and defining strict resource-level permissions.</p>
+                        </div>
+                        <div class="p-6 bg-slate-50/80 dark:bg-slate-800/30 rounded-2xl border-l-4 border-emerald-500 shadow-sm transition-transform hover:scale-[1.02]">
+                            <h4 class="font-bold text-lg mb-2 text-slate-800 dark:text-white">OS, Network & Firewall</h4>
+                            <p class="text-sm text-slate-500 dark:text-slate-400 leading-relaxed">Patching and maintaining the Guest Operating System (e.g., EC2 instances), configuring Security Groups (virtual firewalls), and setting up Network Access Control Lists (NACLs).</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- AWS Column -->
+                <div class="bg-slate-50/60 dark:bg-slate-800/20 p-8 md:p-12">
+                    <div class="flex items-center gap-4 mb-8">
+                        <div class="w-16 h-16 bg-brand-accent/10 rounded-2xl flex items-center justify-center text-3xl shadow-inner">☁️</div>
+                        <h3 class="text-2xl md:text-3xl font-black text-brand-accent uppercase tracking-tight">AWS<br><span class="text-slate-400 text-sm tracking-widest">Security "OF" the Cloud</span></h3>
+                    </div>
+                    <p class="text-slate-600 dark:text-slate-400 mb-8 leading-relaxed font-medium">AWS is responsible for protecting the infrastructure that runs all of the services offered in the AWS Cloud. This infrastructure is composed of the hardware, software, networking, and facilities.</p>
+                    
+                    <div class="space-y-6">
+                        <div class="p-6 bg-white/80 dark:bg-slate-800/40 rounded-2xl border-l-4 border-brand-accent shadow-sm transition-transform hover:scale-[1.02]">
+                            <h4 class="font-bold text-lg mb-2 text-slate-800 dark:text-white">Global Infrastructure</h4>
+                            <p class="text-sm text-slate-500 dark:text-slate-400 leading-relaxed">Physical security and environmental controls of AWS Regions, Availability Zones (AZs), and Edge Locations. This includes power, cooling, and perimeter security.</p>
+                        </div>
+                        <div class="p-6 bg-white/80 dark:bg-slate-800/40 rounded-2xl border-l-4 border-brand-accent shadow-sm transition-transform hover:scale-[1.02]">
+                            <h4 class="font-bold text-lg mb-2 text-slate-800 dark:text-white">Foundational Compute & Storage</h4>
+                            <p class="text-sm text-slate-500 dark:text-slate-400 leading-relaxed">Maintaining and patching the physical hypervisors, storage arrays, and core networking hardware that power services like Amazon EC2, EBS, and VPC.</p>
+                        </div>
+                        <div class="p-6 bg-white/80 dark:bg-slate-800/40 rounded-2xl border-l-4 border-brand-accent shadow-sm transition-transform hover:scale-[1.02]">
+                            <h4 class="font-bold text-lg mb-2 text-slate-800 dark:text-white">Managed Services Software</h4>
+                            <p class="text-sm text-slate-500 dark:text-slate-400 leading-relaxed">For abstracted services like Amazon RDS, S3, or DynamoDB, AWS assumes additional responsibility for operating system patching, database software updates, and underlying infrastructure maintenance.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mt-8 p-8 bg-emerald-500/10 rounded-[2rem] border border-emerald-500/20 text-center">
+                <p class="text-emerald-600 dark:text-emerald-400 font-bold text-lg">💡 Exam Tip: As you move to managed services (like Lambda or S3), the customer responsibility shifts upward, but you are ALWAYS responsible for your Data and IAM.</p>
+            </div>
+        </section>
+
+        <!-- 4. 6 Rs Section -->
+        <section id="section-6rs" class="content-section hidden fade-in">
+            <div class="text-center mb-12">
+                <h2 class="text-4xl md:text-5xl font-black mb-3 text-purple-500">The 6 Rs of Migration</h2>
+                <p class="text-slate-500 dark:text-slate-400 italic">Strategies for moving workloads to AWS.</p>
+            </div>
+            <div id="rs-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 perspective-1000"></div>
+        </section>
+
+        <!-- AI Lab -->
+        <section id="section-ai-lab" class="content-section hidden fade-in">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-10">
+                <div class="bg-white dark:bg-slate-800/40 rounded-3xl p-10 shadow-2xl border border-slate-200 dark:border-slate-700/50 backdrop-blur-sm">
+                    <h3 class="text-3xl font-black mb-6 text-brand-accent">Scenario Quiz</h3>
+                    <div id="quiz-area" class="min-h-[300px] flex items-center justify-center text-slate-400 border-2 border-dashed border-slate-300 dark:border-slate-700 rounded-3xl p-8 text-center text-lg">
+                        Click below for a dynamic technical challenge.
+                    </div>
+                    <button onclick="startAiQuiz()" class="w-full mt-8 bg-brand-accent text-slate-900 font-black py-5 rounded-2xl transition-all shadow-xl shadow-brand-accent/20 active:scale-95">GENERATE QUIZ</button>
+                </div>
+
+                <div class="bg-white dark:bg-slate-800/40 rounded-3xl p-10 shadow-2xl border border-slate-200 dark:border-slate-700/50 backdrop-blur-sm">
+                    <h3 class="text-3xl font-black mb-6 text-blue-500">Deep Drill</h3>
+                    <div id="challenge-prompt" class="mb-6 text-2xl font-bold p-6 bg-blue-500/5 dark:bg-blue-500/10 rounded-2xl border border-blue-500/20 text-blue-600 dark:text-blue-400">
+                        Ask AI for a topic explanation.
+                    </div>
+                    <textarea id="user-answer" class="w-full p-6 rounded-2xl bg-slate-50 dark:bg-slate-900 border border-slate-300 dark:border-slate-700 h-48 hidden mb-6 outline-none focus:ring-4 focus:ring-blue-500/20 text-lg transition-all" placeholder="Explain the concept in detail..."></textarea>
+                    <div id="challenge-feedback" class="hidden p-6 rounded-2xl bg-slate-50 dark:bg-slate-900 border border-slate-300 dark:border-slate-700 mb-6 text-base overflow-y-auto max-h-60 custom-scrollbar"></div>
+                    <div class="flex gap-4">
+                        <button onclick="generateChallenge()" class="flex-1 py-5 bg-slate-200 dark:bg-slate-700 rounded-2xl font-black transition-all">NEW TOPIC</button>
+                        <button id="submit-btn" onclick="validateAnswer()" class="flex-1 py-5 bg-blue-600 text-white rounded-2xl font-black hidden transition-all shadow-xl shadow-blue-600/20">EVALUATE</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Modal -->
+    <div id="deep-dive-modal" class="fixed inset-0 z-[100] hidden items-center justify-center bg-slate-950/80 backdrop-blur-md p-4 opacity-0 transition-all duration-300" onclick="closeModal(event)">
+        <div class="bg-white dark:bg-slate-900 w-full max-w-3xl rounded-[2.5rem] shadow-2xl overflow-hidden transform scale-90 transition-all duration-300 border border-slate-200 dark:border-slate-800" onclick="event.stopPropagation()">
+            <div class="p-10 border-b border-slate-100 dark:border-slate-800 flex justify-between items-center bg-slate-50/50 dark:bg-slate-800/30">
+                <div class="flex items-center gap-6">
+                    <div id="m-icon-bg" class="p-5 bg-brand-accent/20 rounded-3xl text-5xl">
+                        <span id="m-icon"></span>
+                    </div>
+                    <div>
+                        <h3 id="m-title" class="text-4xl font-black text-slate-900 dark:text-white"></h3>
+                        <p class="text-brand-accent text-sm font-bold uppercase tracking-widest mt-1">Technical Reference</p>
+                    </div>
+                </div>
+                <button onclick="closeModal()" class="w-12 h-12 flex items-center justify-center rounded-full bg-slate-100 dark:bg-slate-800 text-slate-500 hover:text-brand-accent transition-all text-3xl">&times;</button>
+            </div>
+            <div id="m-content" class="p-12 overflow-y-auto max-h-[60vh] md-content custom-scrollbar bg-white dark:bg-slate-900"></div>
+        </div>
+    </div>
+
+    <script>
+        const cafData = [
+            { id: 'c1', icon: '💼', title: 'Business', desc: 'Alignment, data monetization, and ROI.', summary: '• Strategic ROI\n• Budget & Finance\n• Business Outcomes', dive: `### Business Perspective\nThe Business Perspective helps ensure that your cloud investments accelerate your digital transformation ambitions and business outcomes.\n\n#### Key Focus Areas\n- **Cloud Value Realization:** Measuring the value delivered by your cloud investments against business cases.\n- **Business Case Development:** Creating financial justifications including TCO (Total Cost of Ownership) and ROI models.\n- **IT Finance:** Transitioning from CapEx (Capital Expenditure) to OpEx (Operational Expenditure) models.\n- **Strategy Management:** Aligning IT strategy with organizational goals.\n\n#### 💡 CLF-C02 Exam Tip\nIf a scenario mentions "stakeholders", "ROI", "CapEx to OpEx", or "business outcomes", the answer is almost always the Business Perspective.` },
+            { id: 'c2', icon: '👥', title: 'People', desc: 'Skills development and organizational change.', summary: '• Training/Certifications\n• Skills Gap Analysis\n• Culture Change', dive: `### People Perspective\nThe People Perspective serves as a bridge between technology and business, focusing on workforce evolution and organizational culture.\n\n#### Key Focus Areas\n- **Culture Evolution:** Fostering a mindset of continuous learning, agility, and innovation.\n- **Transformational Leadership:** Empowering leaders to sponsor and drive cloud adoption.\n- **Cloud Fluency:** Creating comprehensive training programs and certification paths to close skills gaps.\n- **Organizational Alignment:** Establishing a Cloud Center of Excellence (CCoE) to champion the transformation.\n\n#### 💡 CLF-C02 Exam Tip\nAny question regarding "training", "skills", "staffing", "organizational change management (OCM)", or "CCoE" maps directly to the People Perspective.` },
+            { id: 'c3', icon: '⚖️', title: 'Governance', desc: 'Risk mitigation and portfolio management.', summary: '• Compliance guardrails\n• Risk management\n• Program tracking', dive: `### Governance Perspective\nThe Governance Perspective orchestrates cloud initiatives while maximizing organizational benefits and minimizing transformation-related risks.\n\n#### Key Focus Areas\n- **Program & Project Management:** Structuring and tracking complex cloud initiatives.\n- **Risk Management:** Identifying, measuring, and mitigating technical and business risks.\n- **Cloud Governance:** Establishing automated guardrails, policies, and compliance controls.\n- **Benefits Management:** Ensuring projects deliver their promised value.\n\n#### 💡 CLF-C02 Exam Tip\nLook for keywords like "compliance", "policies", "risk mitigation", "guardrails", or "portfolio management". AWS Organizations and AWS Control Tower are key governance services.` },
+            { id: 'c4', icon: '🏗️', title: 'Platform', desc: 'Infrastructure and modern app architecture.', summary: '• Cloud Landing Zones\n• IaC (CloudFormation)\n• App Modernization', dive: `### Platform Perspective\nThe Platform Perspective provides the architectural blueprints and physical foundation for your cloud environment.\n\n#### Key Focus Areas\n- **Platform Architecture:** Designing multi-account architectures, networking, and security perimeters (Landing Zones).\n- **Data Architecture:** Designing scalable data lakes and databases.\n- **Modern Application Development:** Utilizing containers, serverless architectures, and microservices.\n- **Infrastructure as Code (IaC):** Automating infrastructure provisioning.\n\n#### 💡 CLF-C02 Exam Tip\nKeywords include "architecture", "Landing Zone", "Infrastructure as Code", "network topologies", and "compute scaling".` },
+            { id: 'c5', icon: '🛡️', title: 'Security', desc: 'Data protection and identity control.', summary: '• IAM Best Practices\n• Encryption (KMS)\n• Incident Response', dive: `### Security Perspective\nThe Security Perspective helps you achieve the confidentiality, integrity, and availability of your data and cloud workloads.\n\n#### Key Focus Areas\n- **Identity and Access Management (IAM):** Enforcing the principle of least privilege.\n- **Infrastructure Protection:** Implementing network firewalls and DDoS protection.\n- **Data Protection:** Encrypting data at rest and in transit.\n- **Incident Response:** Automating the detection and remediation of security events.\n\n#### 💡 CLF-C02 Exam Tip\nQuestions featuring "encryption", "IAM", "least privilege", "Zero Trust", or "compliance auditing" belong to the Security Perspective.` },
+            { id: 'c6', icon: '⚙️', title: 'Operations', desc: 'Health monitoring and incident cycles.', summary: '• Observability (CloudWatch)\n• Patch Management\n• Inventory tracking', dive: `### Operations Perspective\nThe Operations Perspective ensures that your cloud services are delivered at a level that meets the needs of your business.\n\n#### Key Focus Areas\n- **Observability:** Implementing robust logging, monitoring, and tracing.\n- **Event & Incident Management:** Automating responses to system alerts and failures.\n- **Change & Release Management:** Ensuring smooth, automated deployment pipelines (CI/CD).\n- **Performance & Capacity Management:** Ensuring resources meet SLA demands without waste.\n\n#### 💡 CLF-C02 Exam Tip\nFocus on "health monitoring", "SLAs", "runbooks", "patching", and "daily IT management". Amazon CloudWatch and AWS Systems Manager are foundational here.` }
+        ];
+
+        const wafData = [
+            { id: 'w1', icon: '🛠️', title: 'Operational Excellence', desc: 'Improve and automate workflows.', summary: '• Operations as Code\n• Frequent changes\n• Learn from failure', dive: `### Operational Excellence Pillar\nThe Operational Excellence pillar includes the ability to support development and run workloads effectively, gain insight into their operation, and continuously improve processes.\n\n#### Core Design Principles\n1. **Perform operations as code:** Define your entire workload (applications, infrastructure) as code.\n2. **Make frequent, small, reversible changes:** Design workloads to allow components to be updated regularly to ease rollback.\n3. **Refine operations procedures frequently:** Evolve your procedures as your workloads evolve.\n4. **Anticipate failure:** Perform "game days" to test your architecture and processes in failure scenarios.\n5. **Learn from all operational failures:** Drive improvement through lessons learned across all teams.\n\n#### Key AWS Services\n- **AWS CloudFormation:** Infrastructure as Code.\n- **AWS Systems Manager:** Operational insights and automation.` },
+            { id: 'w2', icon: '🔒', title: 'Security', desc: 'Protect assets and enable traceability.', summary: '• Strong IAM\n• Data encryption\n• Audit logs (CloudTrail)', dive: `### Security Pillar\nThe Security pillar focuses on protecting information, systems, and assets while delivering business value through risk assessments and mitigation strategies.\n\n#### Core Design Principles\n1. **Implement a strong identity foundation:** Rely on centralized privilege management and least privilege.\n2. **Enable traceability:** Monitor, alert, and audit actions and changes to your environment in real-time.\n3. **Apply security at all layers:** Use multiple security controls (Defense in Depth) at Edge, VPC, OS, and App levels.\n4. **Automate security best practices:** Create secure, automated software-based security mechanisms.\n5. **Protect data in transit and at rest:** Classify your data and use encryption.\n6. **Keep people away from data:** Reduce direct access or manual processing of data.\n\n#### Key AWS Services\n- **AWS IAM:** Access control.\n- **AWS KMS:** Encryption key management.\n- **Amazon GuardDuty:** Threat detection.` },
+            { id: 'w3', icon: '📈', title: 'Reliability', desc: 'Self-healing systems that recover.', summary: '• Auto recovery\n• Horizontal scaling\n• Stop guessing capacity', dive: `### Reliability Pillar\nThe Reliability pillar encompasses the ability of a workload to perform its intended function correctly and consistently when it’s expected to.\n\n#### Core Design Principles\n1. **Automatically recover from failure:** Monitor KPIs and trigger automation when thresholds are breached.\n2. **Test recovery procedures:** Use Chaos Engineering to test how your system fails and recovers.\n3. **Scale horizontally:** Replace one large resource with multiple small resources to reduce the impact of a single failure.\n4. **Stop guessing capacity:** Monitor demand and automate the addition/removal of resources (Auto Scaling).\n5. **Manage change in automation:** Make changes to infrastructure using automation.\n\n#### Key AWS Services\n- **Amazon EC2 Auto Scaling:** Match capacity to demand.\n- **Amazon Route 53:** Highly available DNS.` },
+            { id: 'w4', icon: '⚡', title: 'Performance Efficiency', desc: 'Evolve with tech and use serverless.', summary: '• Go global in minutes\n• Use serverless\n• Experiment often', dive: `### Performance Efficiency Pillar\nThe Performance Efficiency pillar focuses on the efficient use of computing resources to meet requirements, and how to maintain efficiency as demand changes.\n\n#### Core Design Principles\n1. **Democratize advanced technologies:** Push difficult technologies (like ML or media transcoding) to the cloud vendor.\n2. **Go global in minutes:** Deploy workloads in multiple AWS Regions to lower latency for end-users.\n3. **Use serverless architectures:** Remove the need to run and maintain traditional servers.\n4. **Experiment more often:** Quickly spin up resources, perform tests, and tear down.\n5. **Mechanical sympathy:** Use the technology approach that aligns best with your specific workload goals.\n\n#### Key AWS Services\n- **AWS Lambda:** Serverless compute.\n- **Amazon CloudFront:** Global Content Delivery Network (CDN).` },
+            { id: 'w5', icon: '💰', title: 'Cost Optimization', desc: 'Maximize value and eliminate waste.', summary: '• Pay-as-you-go\n• Cloud Financial Mgmt\n• Consumption models', dive: `### Cost Optimization Pillar\nThe Cost Optimization pillar focuses on avoiding unnecessary costs, ensuring you achieve the highest possible return on your cloud investments.\n\n#### Core Design Principles\n1. **Implement Cloud Financial Management:** Build capability through knowledge building and cost-aware programs (FinOps).\n2. **Adopt a consumption model:** Pay only for the computing resources you consume.\n3. **Measure overall efficiency:** Measure the business output of the workload against the costs associated.\n4. **Stop spending money on undifferentiated heavy lifting:** Let AWS handle data center operations and OS patching.\n5. **Analyze and attribute expenditure:** Use tagging to identify system usage and attribute costs to business owners.\n\n#### Key AWS Services\n- **AWS Cost Explorer:** Visualize and forecast spending.\n- **AWS Compute Optimizer:** Right-sizing recommendations.` },
+            { id: 'w6', icon: '🌍', title: 'Sustainability', desc: 'Minimize environmental footprint.', summary: '• Maximize utilization\n• Efficient hardware\n• Carbon footprint metrics', dive: `### Sustainability Pillar\nThe Sustainability pillar focuses on environmental impacts, especially energy consumption and efficiency, across all components of a workload.\n\n#### Core Design Principles\n1. **Understand your impact:** Measure the environmental impact of your cloud workloads.\n2. **Establish sustainability goals:** Set long-term goals for reducing carbon footprint per transaction.\n3. **Maximize utilization:** Right-size workloads to avoid idle resources that consume energy.\n4. **Anticipate and adopt new hardware:** Continuously upgrade to more energy-efficient instance types (e.g., AWS Graviton).\n5. **Use managed services:** Shared services can reduce the amount of infrastructure needed.\n6. **Reduce the downstream impact:** Reduce energy required by your customers to use your services.\n\n#### Key AWS Services\n- **AWS Customer Carbon Footprint Tool**` }
+        ];
+
+        const rsData = [
+            { id: 'r1', icon: '🚚', title: 'Rehost (Lift & Shift)', desc: 'Moving applications to the cloud as-is without architectural modifications.', summary: '• Fastest migration path\n• Zero code changes\n• Predictable execution', dive: `### Rehost (Lift & Shift)\nRehosting involves moving your application from an on-premises environment to AWS without making any changes to the architecture or code.\n\n#### Strategic Value\n- **Speed:** This is the fastest way to migrate to the cloud, ideal for tight deadlines (e.g., data center lease expiring).\n- **Reduced Risk:** Because the application doesn't change, the behavior remains predictable.\n- **Foundation:** Once in the cloud, it is often easier to optimize and re-architect.\n\n#### Relevant AWS Tools\n- **AWS Application Migration Service (MGN):** Automates the lift-and-shift process by replicating block-level data from source machines to AWS, minimizing downtime.` },
+            { id: 'r2', icon: '🔄', title: 'Replatform (Lift & Reshape)', desc: 'Applying minor optimizations to leverage cloud-managed services.', summary: '• Leverage managed services\n• No core code changes\n• Instant operational relief', dive: `### Replatform (Lift, Tinker, and Shift)\nReplatforming entails making tangible, targeted cloud optimizations without fundamentally changing the core architecture of the application.\n\n#### Strategic Value\n- **Operational Efficiency:** Substantially reduces time spent managing underlying software and operating systems.\n- **Cost Savings:** Often avoids expensive commercial licensing or reduces database administrator overhead.\n\n#### Real-World Example\n- Migrating a self-hosted Oracle database running on VMs to **Amazon RDS (Relational Database Service)** to offload backups, patching, and high availability.\n- Moving legacy Java apps to **AWS Elastic Beanstalk** without rewriting them.` },
+            { id: 'r3', icon: '⚛️', title: 'Refactor (Re-architect)', desc: 'A complete architectural redesign to leverage modern cloud-native features.', summary: '• Serverless & Microservices\n• Maximum agility & ROI\n• Highest initial complexity', dive: `### Refactor (Re-architect)\nRefactoring is completely re-imagining how the application is architected and developed. This is typically driven by a strong business need to add features, scale, or improve performance that is impossible in the current environment.\n\n#### Strategic Value\n- **Cloud-Native Power:** Fully embraces scalability, resilience, and auto-scaling.\n- **Long-term ROI:** While the upfront cost and time are the highest of all strategies, the long-term operational costs are dramatically lower and agility gains are unmatched.\n\n#### Common Patterns\n- Breaking down a monolithic application into **microservices** using containers on **Amazon EKS**.\n- Moving from traditional server compute to entirely serverless execution using **AWS Lambda** and **Amazon API Gateway**.` },
+            { id: 'r4', icon: '🛍️', title: 'Repurchase (Drop & Shop)', desc: 'Abandoning legacy software and switching to a modern SaaS product.', summary: '• Change software licensing\n• Adopt SaaS models\n• Drop legacy technical debt', dive: `### Repurchase\nRepurchasing means moving to a completely different product, usually a Software as a Service (SaaS) platform, effectively dropping the existing legacy application entirely.\n\n#### Strategic Value\n- **Eliminates Maintenance:** The customer is no longer responsible for *any* underlying infrastructure, application maintenance, or version upgrades.\n- **Rapid Modernization:** Instantly upgrades business capabilities without development effort.\n\n#### Real-World Example\n- Moving from a heavily customized, on-premise legacy CRM system to **Salesforce**.\n- Replacing a self-hosted HR or ERP system with **Workday**.\n- Utilizing out-of-the-box vendor solutions directly from the **AWS Marketplace**.` },
+            { id: 'r5', icon: '🛑', title: 'Retire', desc: 'Identifying and decommissioning applications that are no longer useful.', summary: '• Instant cost savings\n• Reduced attack surface\n• Portfolio simplification', dive: `### Retire\nRetiring involves identifying IT assets that no longer provide business value and permanently shutting them down.\n\n#### Strategic Value\n- **Cost Reduction:** Instantly saves money on licensing, compute power, and operational maintenance.\n- **Security Posture:** Reduces the overall attack surface by eliminating unpatched, forgotten, or zombie systems.\n\n#### The Reality of Migration\nDuring the discovery phase of large enterprise migrations, it is common to discover that up to **10% to 20%** of an IT portfolio is no longer being used by anyone. Turning these off accelerates the migration of the resources that actually matter.` },
+            { id: 'r6', icon: '⏸️', title: 'Retain', desc: 'Keeping applications on-premises or delaying their migration.', summary: '• Postpone migration\n• Compliance / Legacy limits\n• Hybrid cloud strategy', dive: `### Retain\nRetaining means keeping workloads on-premises or in their current environment. Essentially, doing nothing *for now*.\n\n#### Strategic Value\n- **Prioritization:** Allows teams to focus limited engineering resources on migrating workloads that provide the highest immediate ROI.\n- **Risk Mitigation:** Avoiding the migration of highly sensitive legacy systems that are too fragile to move without extensive planning.\n\n#### Common Reasons to Retain\n- The application runs on hardware that was recently purchased and still has active depreciation.\n- Strict, localized compliance laws require data to stay on physical premises.\n- The workload requires an ultra-low latency connection to local factory equipment (a problem often solved later via **AWS Outposts**).` }
+        ];
+
+        function toggleTheme() {
+            const html = document.documentElement;
+            const icon = document.getElementById('theme-icon');
+            if (html.classList.contains('dark')) {
+                html.classList.remove('dark');
+                icon.innerText = '☀️';
+            } else {
+                html.classList.add('dark');
+                icon.innerText = '🌙';
+            }
+        }
+
+        function createCard(c, borderColorClass, gradientFromClass) {
+            return `
+            <div class="flip-card h-[400px] cursor-pointer group" onclick="this.classList.toggle('flipped')">
+                <div class="flip-card-inner h-full w-full relative transform-style-3d shadow-xl rounded-[2.5rem]">
+                    <!-- Front -->
+                    <div class="absolute inset-0 backface-hidden bg-white dark:bg-slate-800/60 backdrop-blur-xl rounded-[2.5rem] flex flex-col items-center justify-center p-8 border-2 border-slate-200 dark:border-slate-700/50 group-hover:border-brand-accent/50 transition-all">
+                        <div class="w-20 h-20 bg-gradient-to-br ${gradientFromClass} to-transparent rounded-2xl flex items-center justify-center text-4xl mb-6">
+                            ${c.icon}
+                        </div>
+                        <h4 class="font-black text-xl text-slate-800 dark:text-white tracking-tight text-center">${c.title}</h4>
+                        <p class="text-slate-400 text-[10px] mt-4 uppercase tracking-[0.2em] font-black">Flip for Details</p>
+                    </div>
+                    <!-- Back -->
+                    <div class="absolute inset-0 backface-hidden rotate-y-180 bg-slate-900 dark:bg-slate-900 rounded-[2.5rem] flex flex-col p-10 border-2 ${borderColorClass}">
+                        <p class="text-xs font-black text-brand-accent uppercase tracking-widest mb-4">${c.title}</p>
+                        <p class="text-slate-300 text-sm mb-6 leading-relaxed">${c.desc}</p>
+                        <div class="space-y-2 mb-8">
+                            ${c.summary.split('\n').map(line => `<div class="text-[13px] text-slate-400 font-medium">${line}</div>`).join('')}
+                        </div>
+                        <button onclick="event.stopPropagation(); showDive('${c.id}')" class="mt-auto w-full bg-brand-accent text-slate-900 py-4 rounded-2xl text-xs font-black transition-all hover:bg-white">
+                            DEEP DIVE →
+                        </button>
+                    </div>
+                </div>
+            </div>`;
+        }
+
+        function renderAll() {
+            const cG = document.getElementById('caf-grid');
+            const wG = document.getElementById('waf-grid');
+            const rG = document.getElementById('rs-grid');
+            
+            cG.innerHTML = "";
+            wG.innerHTML = "";
+            rG.innerHTML = "";
+
+            cafData.forEach(c => cG.innerHTML += createCard(c, 'border-brand-accent', 'from-brand-accent/20'));
+            wafData.forEach(w => wG.innerHTML += createCard(w, 'border-blue-500', 'from-blue-500/20'));
+            rsData.forEach(r => rG.innerHTML += createCard(r, 'border-purple-500', 'from-purple-500/20'));
+        }
+
+        function showDive(id) {
+            const all = [...cafData, ...wafData, ...rsData];
+            const c = all.find(x => x.id === id);
+            document.getElementById('m-title').innerText = c.title;
+            document.getElementById('m-icon').innerText = c.icon;
+            document.getElementById('m-content').innerHTML = marked.parse(c.dive);
+            const m = document.getElementById('deep-dive-modal');
+            m.classList.add('active');
+            setTimeout(() => { m.classList.add('opacity-100'); m.querySelector('div').classList.add('scale-100'); }, 10);
+        }
+
+        function closeModal() {
+            const m = document.getElementById('deep-dive-modal');
+            m.classList.remove('opacity-100');
+            m.querySelector('div').classList.remove('scale-100');
+            setTimeout(() => m.classList.remove('active'), 300);
+        }
+
+        // Setup generalized navigation handler
+        function navigateTo(targetId) {
+            // Hide all sections
+            document.querySelectorAll('.content-section').forEach(s => s.classList.add('hidden'));
+            
+            // Show Target
+            const targetSection = document.getElementById(targetId);
+            if (targetSection) {
+                targetSection.classList.remove('hidden');
+            }
+
+            // Update Nav buttons state
+            document.querySelectorAll('.nav-btn').forEach(x => { 
+                x.className = "nav-btn whitespace-nowrap px-4 py-2 rounded-xl text-xs font-bold transition-all text-slate-500 hover:text-brand-accent"; 
+            });
+
+            // Highlight the active pill button if it exists
+            const activeBtn = document.querySelector(`.nav-btn[data-target="${targetId}"]`);
+            if (activeBtn) {
+                activeBtn.className = "nav-btn whitespace-nowrap px-4 py-2 rounded-xl text-xs font-bold transition-all bg-brand-accent text-slate-900 shadow-md";
+            }
+        }
+
+        // AI Lab Stubs
+        const apiKey = "";
+        async function startAiQuiz() {
+            const area = document.getElementById('quiz-area');
+            area.innerHTML = "<p>Generating Question...</p>";
+            try {
+                const res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`, {
+                    method: "POST", headers: {"Content-Type": "application/json"},
+                    body: JSON.stringify({ contents: [{ parts: [{ text: "Generate 1 difficult CLF-C02 style scenario question about CAF, WAF, 6Rs or Shared Responsibility. Output JSON: {question, options, answerIndex, explanation}" }] }] })
+                });
+                const data = await res.json();
+                const q = JSON.parse(data.candidates[0].content.parts[0].text.replace(/```json|```/g, ''));
+                area.innerHTML = `<div class='text-left w-full'><p class='font-bold mb-4'>${q.question}</p>` + 
+                        q.options.map((o,i) => `<button onclick="checkAnswer(this, ${i === q.answerIndex}, '${q.explanation.replace(/'/g, "\\'")}')" class="w-full text-left p-3 border dark:border-slate-700 rounded-xl mb-2 hover:bg-slate-100 dark:hover:bg-slate-800 transition-all text-sm">${o}</button>`).join('') + "</div>";
+            } catch(e) { area.innerHTML = "Error loading. Try again."; }
+        }
+
+        function checkAnswer(btn, isCorrect, exp) {
+            btn.className = `w-full text-left p-3 border-2 rounded-xl mb-2 text-sm ${isCorrect ? 'border-green-500' : 'border-red-500'}`;
+            if (!btn.parentElement.querySelector('.fb')) {
+                const f = document.createElement('div');
+                f.className = "fb mt-4 p-4 bg-slate-100 dark:bg-slate-900 rounded-xl text-xs";
+                f.innerHTML = `<strong>Explanation:</strong> ${exp}`;
+                btn.parentElement.appendChild(f);
+            }
+        }
+
+        async function generateChallenge() {
+            const area = document.getElementById('challenge-prompt');
+            const txt = document.getElementById('user-answer');
+            const sub = document.getElementById('submit-btn');
+            area.innerHTML = "Asking AI...";
+            try {
+                const res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`, {
+                    method: "POST", headers: {"Content-Type": "application/json"},
+                    body: JSON.stringify({ contents: [{ parts: [{ text: "Ask the user to explain an AWS Cloud Practitioner concept. Prompt only: 'Explain: [Concept]'" }] }] })
+                });
+                const data = await res.json();
+                area.innerText = data.candidates[0].content.parts[0].text;
+                txt.classList.remove('hidden'); sub.classList.remove('hidden');
+            } catch(e) { area.innerText = "Error."; }
+        }
+
+        async function validateAnswer() {
+            const ans = document.getElementById('user-answer').value;
+            const feed = document.getElementById('challenge-feedback');
+            feed.classList.remove('hidden'); feed.innerHTML = "Analyzing...";
+            try {
+                const res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`, {
+                    method: "POST", headers: {"Content-Type": "application/json"},
+                    body: JSON.stringify({ contents: [{ parts: [{ text: `Evaluate this AWS explanation: ${ans}. Be concise.` }] }] })
+                });
+                const data = await res.json();
+                feed.innerHTML = marked.parse(data.candidates[0].content.parts[0].text);
+            } catch(e) { feed.innerHTML = "Error."; }
+        }
+
+        window.onload = renderAll;
+    </script>
+</body>
+</html>
