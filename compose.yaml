@@ -1,0 +1,8 @@
+services:
+  nginx:
+    image: nginx
+    ports: 
+    - 3030:80
+    volumes:
+      - ./index.html:/usr/share/nginx/html/index.html
+    restart: always
