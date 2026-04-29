@@ -100,8 +100,8 @@
         </div>
         
         <nav class="flex flex-col gap-1 p-4 overflow-y-auto custom-scrollbar flex-grow">
-            <button data-target="section-home" onclick="navigateTo('section-home')" class="nav-btn text-left px-4 py-2 rounded-xl text-sm font-bold transition-all text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800">Dashboard</button>
-            <span class="px-4 text-[10px] font-black text-slate-400 uppercase tracking-widest mt-4 mb-1">Foundations</span>
+            <button data-target="section-home" onclick="navigateTo('section-home')" class="nav-btn text-left px-5 py-4 mb-2 rounded-xl text-lg font-black transition-all text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800">Dashboard</button>
+            <span class="px-4 text-[10px] font-black text-slate-400 uppercase tracking-widest mt-2 mb-1">Foundations</span>
             <button data-target="section-caf" onclick="navigateTo('section-caf')" class="nav-btn text-left px-4 py-2 rounded-xl text-sm font-bold transition-all text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800">CAF Framework</button>
             <button data-target="section-waf" onclick="navigateTo('section-waf')" class="nav-btn text-left px-4 py-2 rounded-xl text-sm font-bold transition-all text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800">WAF Pillars</button>
             <button data-target="section-shared" onclick="navigateTo('section-shared')" class="nav-btn text-left px-4 py-2 rounded-xl text-sm font-bold transition-all text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800">Shared Responsibility</button>
@@ -496,20 +496,20 @@
 
         function createCard(c, borderColorClass, gradientFromClass) {
             return `
-            <div class="flip-card h-[400px] cursor-pointer group" onclick="this.classList.toggle('flipped')">
-                <div class="flip-card-inner h-full w-full relative transform-style-3d shadow-xl rounded-[2.5rem]">
-                    <div class="absolute inset-0 backface-hidden bg-white dark:bg-slate-800/60 backdrop-blur-xl rounded-[2.5rem] flex flex-col items-center justify-center p-8 border-2 border-slate-200 dark:border-slate-700/50 group-hover:border-brand-accent/50 transition-all">
-                        <div class="w-20 h-20 bg-gradient-to-br ${gradientFromClass} to-transparent rounded-2xl flex items-center justify-center text-4xl mb-6">${c.icon}</div>
-                        <h4 class="font-black text-xl text-slate-800 dark:text-white tracking-tight text-center">${c.title}</h4>
-                        <p class="text-slate-400 text-[10px] mt-4 uppercase tracking-[0.2em] font-black">Flip for Details</p>
+            <div class="flip-card h-[320px] cursor-pointer group" onclick="this.classList.toggle('flipped')">
+                <div class="flip-card-inner h-full w-full relative transform-style-3d shadow-xl rounded-[1.5rem]">
+                    <div class="absolute inset-0 backface-hidden bg-white dark:bg-slate-800/60 backdrop-blur-xl rounded-[1.5rem] flex flex-col items-center justify-center p-6 border-2 border-slate-200 dark:border-slate-700/50 group-hover:border-brand-accent/50 transition-all">
+                        <div class="w-16 h-16 bg-gradient-to-br ${gradientFromClass} to-transparent rounded-2xl flex items-center justify-center text-3xl mb-4">${c.icon}</div>
+                        <h4 class="font-black text-lg text-slate-800 dark:text-white tracking-tight text-center">${c.title}</h4>
+                        <p class="text-slate-400 text-[10px] mt-2 uppercase tracking-[0.2em] font-black">Flip for Details</p>
                     </div>
-                    <div class="absolute inset-0 backface-hidden rotate-y-180 bg-slate-900 dark:bg-slate-900 rounded-[2.5rem] flex flex-col p-10 border-2 ${borderColorClass}">
-                        <p class="text-xs font-black text-brand-accent uppercase tracking-widest mb-4">${c.title}</p>
-                        <p class="text-slate-300 text-sm mb-6 leading-relaxed">${c.desc}</p>
-                        <div class="space-y-2 mb-8">
-                            ${c.summary.split('\n').map(line => `<div class="text-[13px] text-slate-400 font-medium">${line}</div>`).join('')}
+                    <div class="absolute inset-0 backface-hidden rotate-y-180 bg-slate-900 dark:bg-slate-900 rounded-[1.5rem] flex flex-col p-6 border-2 ${borderColorClass}">
+                        <p class="text-xs font-black text-brand-accent uppercase tracking-widest mb-2">${c.title}</p>
+                        <p class="text-slate-300 text-xs mb-4 leading-relaxed line-clamp-2">${c.desc}</p>
+                        <div class="space-y-1.5 mb-4">
+                            ${c.summary.split('\n').map(line => `<div class="text-[11px] text-slate-400 font-medium">${line}</div>`).join('')}
                         </div>
-                        <button onclick="event.stopPropagation(); showDive('${c.id}')" class="mt-auto w-full bg-brand-accent text-slate-900 py-4 rounded-2xl text-xs font-black transition-all hover:bg-white">DEEP DIVE →</button>
+                        <button onclick="event.stopPropagation(); showDive('${c.id}')" class="mt-auto w-full bg-brand-accent text-slate-900 py-3 rounded-xl text-xs font-black transition-all hover:bg-white">DEEP DIVE →</button>
                     </div>
                 </div>
             </div>`;
