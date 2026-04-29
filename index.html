@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AWS Frameworks - Premium Study Guide</title>
+    <title>AWS CLF-C02 - Premium Study Guide</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
     <script>
@@ -51,81 +51,129 @@
         .no-scrollbar::-webkit-scrollbar { display: none; }
     </style>
 </head>
-<body class="min-h-screen bg-slate-50 dark:bg-[#0f172a] text-slate-900 dark:text-slate-200 antialiased">
+<body class="min-h-screen bg-slate-50 dark:bg-[#0f172a] text-slate-900 dark:text-slate-200 antialiased overflow-x-hidden">
 
-    <header class="sticky top-0 z-50 bg-white/80 dark:bg-[#0f172a]/80 backdrop-blur-xl border-b border-slate-200 dark:border-slate-800 shadow-sm">
+    <header class="sticky top-0 z-40 bg-white/80 dark:bg-[#0f172a]/80 backdrop-blur-xl border-b border-slate-200 dark:border-slate-800 shadow-sm">
         <div class="max-w-7xl mx-auto px-4 h-20 flex justify-between items-center gap-4">
-            <!-- Brand (Now clickable to go home) -->
+            <!-- Brand (Clickable to go home) -->
             <div onclick="navigateTo('section-home')" class="flex items-center gap-3 shrink-0 cursor-pointer group">
                 <div class="bg-brand-accent p-2 rounded-xl shadow-lg shadow-brand-accent/20 group-hover:scale-105 transition-transform">
                     <svg class="w-6 h-6 text-slate-900" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" /></svg>
                 </div>
                 <div class="hidden lg:block">
-                    <h1 class="text-xl font-extrabold tracking-tighter text-slate-900 dark:text-white group-hover:text-brand-accent transition-colors">AWS FRAMEWORKS</h1>
+                    <h1 class="text-xl font-extrabold tracking-tighter text-slate-900 dark:text-white group-hover:text-brand-accent transition-colors">CLF-C02 MASTER</h1>
                 </div>
             </div>
             
-            <!-- CENTRAL NAV BAR -->
-            <nav class="flex items-center bg-slate-100 dark:bg-slate-900/80 p-1 rounded-2xl border border-slate-200 dark:border-slate-800 overflow-x-auto no-scrollbar max-w-full">
-                <button data-target="section-caf" onclick="navigateTo('section-caf')" class="nav-btn whitespace-nowrap px-4 py-2 rounded-xl text-xs font-bold transition-all text-slate-500 hover:text-brand-accent">CAF</button>
-                <button data-target="section-waf" onclick="navigateTo('section-waf')" class="nav-btn whitespace-nowrap px-4 py-2 rounded-xl text-xs font-bold transition-all text-slate-500 hover:text-brand-accent">WAF</button>
-                <button data-target="section-shared" onclick="navigateTo('section-shared')" class="nav-btn whitespace-nowrap px-4 py-2 rounded-xl text-xs font-bold transition-all text-slate-500 hover:text-brand-accent">SHARED RESP</button>
-                <button data-target="section-6rs" onclick="navigateTo('section-6rs')" class="nav-btn whitespace-nowrap px-4 py-2 rounded-xl text-xs font-bold transition-all text-slate-500 hover:text-brand-accent">6 RS</button>
-                <button data-target="section-ai-lab" onclick="navigateTo('section-ai-lab')" class="nav-btn whitespace-nowrap px-4 py-2 rounded-xl text-xs font-bold transition-all text-slate-500 hover:text-brand-accent">AI LAB</button>
-            </nav>
-
-            <button onclick="toggleTheme()" class="p-2.5 bg-slate-100 dark:bg-slate-800 rounded-xl hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors shrink-0">
-                <span id="theme-icon">🌙</span>
-            </button>
+            <div class="ml-auto flex items-center gap-3">
+                <!-- Theme Toggle -->
+                <button onclick="toggleTheme()" class="p-2.5 bg-slate-100 dark:bg-slate-800 rounded-xl hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors shrink-0">
+                    <span id="theme-icon">🌙</span>
+                </button>
+                <!-- Hamburger Menu Button -->
+                <button onclick="openSidebar()" class="p-2.5 px-4 bg-slate-100 dark:bg-slate-800 rounded-xl hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors shrink-0 flex items-center gap-2 text-slate-700 dark:text-slate-300">
+                    <span class="font-bold text-sm hidden sm:block">Menu</span>
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+                </button>
+            </div>
         </div>
     </header>
+
+    <!-- RIGHT SIDEBAR MENU -->
+    <div id="sidebar-overlay" class="fixed inset-0 bg-slate-900/40 backdrop-blur-sm z-[55] hidden opacity-0 transition-opacity duration-300" onclick="closeSidebar()"></div>
+    
+    <aside id="right-sidebar" class="fixed top-0 right-0 h-full w-72 bg-white dark:bg-[#0f172a] border-l border-slate-200 dark:border-slate-800 shadow-[0_0_50px_rgba(0,0,0,0.3)] z-[60] transform translate-x-full transition-transform duration-300 flex flex-col">
+        <div class="p-6 flex justify-between items-center border-b border-slate-200 dark:border-slate-800">
+            <span class="font-black text-sm text-slate-400 uppercase tracking-widest">Navigation</span>
+            <button onclick="closeSidebar()" class="text-slate-400 hover:text-brand-accent transition-colors text-3xl">&times;</button>
+        </div>
+        
+        <nav class="flex flex-col gap-2 p-6 overflow-y-auto custom-scrollbar flex-grow">
+            <!-- Core Frameworks -->
+            <button data-target="section-caf" onclick="navigateTo('section-caf')" class="nav-btn w-full text-left px-4 py-3 rounded-xl text-sm font-bold transition-all text-slate-500 hover:text-brand-accent hover:bg-slate-50 dark:hover:bg-slate-800/50">CAF</button>
+            <button data-target="section-waf" onclick="navigateTo('section-waf')" class="nav-btn w-full text-left px-4 py-3 rounded-xl text-sm font-bold transition-all text-slate-500 hover:text-brand-accent hover:bg-slate-50 dark:hover:bg-slate-800/50">WAF</button>
+            <button data-target="section-shared" onclick="navigateTo('section-shared')" class="nav-btn w-full text-left px-4 py-3 rounded-xl text-sm font-bold transition-all text-slate-500 hover:text-brand-accent hover:bg-slate-50 dark:hover:bg-slate-800/50">SHARED RESP</button>
+            <button data-target="section-6rs" onclick="navigateTo('section-6rs')" class="nav-btn w-full text-left px-4 py-3 rounded-xl text-sm font-bold transition-all text-slate-500 hover:text-brand-accent hover:bg-slate-50 dark:hover:bg-slate-800/50">6 RS</button>
+            
+            <!-- Divider -->
+            <div class="w-full h-px bg-slate-200 dark:bg-slate-800 my-4"></div>
+            
+            <!-- CLF-C02 Tech Domains -->
+            <span class="px-4 text-[10px] font-black text-slate-400 uppercase tracking-widest mb-1">Tech Domains</span>
+            <button data-target="section-compute" onclick="navigateTo('section-compute')" class="nav-btn w-full text-left px-4 py-3 rounded-xl text-sm font-bold transition-all text-slate-500 hover:text-brand-accent hover:bg-slate-50 dark:hover:bg-slate-800/50">COMPUTE</button>
+            <button data-target="section-storage" onclick="navigateTo('section-storage')" class="nav-btn w-full text-left px-4 py-3 rounded-xl text-sm font-bold transition-all text-slate-500 hover:text-brand-accent hover:bg-slate-50 dark:hover:bg-slate-800/50">STORAGE</button>
+            <button data-target="section-database" onclick="navigateTo('section-database')" class="nav-btn w-full text-left px-4 py-3 rounded-xl text-sm font-bold transition-all text-slate-500 hover:text-brand-accent hover:bg-slate-50 dark:hover:bg-slate-800/50">DATABASE</button>
+            <button data-target="section-network" onclick="navigateTo('section-network')" class="nav-btn w-full text-left px-4 py-3 rounded-xl text-sm font-bold transition-all text-slate-500 hover:text-brand-accent hover:bg-slate-50 dark:hover:bg-slate-800/50">NETWORK</button>
+            <button data-target="section-billing" onclick="navigateTo('section-billing')" class="nav-btn w-full text-left px-4 py-3 rounded-xl text-sm font-bold transition-all text-slate-500 hover:text-brand-accent hover:bg-slate-50 dark:hover:bg-slate-800/50">BILLING</button>
+        </nav>
+    </aside>
 
     <main class="max-w-7xl mx-auto px-4 py-12">
         
         <!-- 0. HOME / MAIN SECTION -->
         <section id="section-home" class="content-section fade-in">
             <div class="text-center mb-16 mt-8">
-                <div class="inline-block px-4 py-1.5 rounded-full bg-brand-accent/10 border border-brand-accent/20 text-brand-accent font-bold text-xs tracking-widest uppercase mb-6">CLF-C02 Exam Preparation</div>
+                <div class="inline-block px-4 py-1.5 rounded-full bg-brand-accent/10 border border-brand-accent/20 text-brand-accent font-bold text-xs tracking-widest uppercase mb-6">AWS Certified Cloud Practitioner</div>
                 <h2 class="text-5xl md:text-7xl font-black mb-6 tracking-tight text-slate-900 dark:text-white">Master the Cloud.</h2>
-                <p class="text-slate-500 dark:text-slate-400 text-lg md:text-xl max-w-3xl mx-auto leading-relaxed">Your definitive interactive guide to AWS Frameworks, Principles, and Migration Strategies. Choose a path below to begin your mastery journey.</p>
+                <p class="text-slate-500 dark:text-slate-400 text-lg md:text-xl max-w-3xl mx-auto leading-relaxed">Your definitive interactive guide for the CLF-C02 exam. Choose a domain below to explore the core services, principles, and frameworks.</p>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                <!-- CAF Quick Card -->
+                <!-- Quick Cards -->
                 <div onclick="navigateTo('section-caf')" class="bg-white dark:bg-slate-800/40 p-8 rounded-[2rem] border border-slate-200 dark:border-slate-700/50 shadow-xl cursor-pointer hover:-translate-y-2 hover:border-brand-accent/50 transition-all group">
                     <div class="w-14 h-14 bg-brand-accent/10 rounded-2xl flex items-center justify-center text-3xl mb-6 group-hover:scale-110 transition-transform">🧭</div>
-                    <h3 class="text-2xl font-black mb-3 text-slate-800 dark:text-white">CAF</h3>
-                    <p class="text-slate-500 dark:text-slate-400 text-sm leading-relaxed">Cloud Adoption Framework. Explore the 6 Perspectives connecting business and tech.</p>
+                    <h3 class="text-xl font-black mb-2 text-slate-800 dark:text-white">CAF</h3>
+                    <p class="text-slate-500 dark:text-slate-400 text-sm leading-relaxed">Cloud Adoption Framework. The 6 Perspectives.</p>
                 </div>
 
-                <!-- WAF Quick Card -->
                 <div onclick="navigateTo('section-waf')" class="bg-white dark:bg-slate-800/40 p-8 rounded-[2rem] border border-slate-200 dark:border-slate-700/50 shadow-xl cursor-pointer hover:-translate-y-2 hover:border-blue-500/50 transition-all group">
                     <div class="w-14 h-14 bg-blue-500/10 rounded-2xl flex items-center justify-center text-3xl mb-6 group-hover:scale-110 transition-transform">🏛️</div>
-                    <h3 class="text-2xl font-black mb-3 text-slate-800 dark:text-white">WAF</h3>
-                    <p class="text-slate-500 dark:text-slate-400 text-sm leading-relaxed">Well-Architected Framework. Dive into the 6 Pillars of architectural excellence.</p>
+                    <h3 class="text-xl font-black mb-2 text-slate-800 dark:text-white">WAF</h3>
+                    <p class="text-slate-500 dark:text-slate-400 text-sm leading-relaxed">Well-Architected Framework. The 6 design Pillars.</p>
                 </div>
 
-                <!-- Shared Resp Quick Card -->
                 <div onclick="navigateTo('section-shared')" class="bg-white dark:bg-slate-800/40 p-8 rounded-[2rem] border border-slate-200 dark:border-slate-700/50 shadow-xl cursor-pointer hover:-translate-y-2 hover:border-emerald-500/50 transition-all group">
                     <div class="w-14 h-14 bg-emerald-500/10 rounded-2xl flex items-center justify-center text-3xl mb-6 group-hover:scale-110 transition-transform">🤝</div>
-                    <h3 class="text-2xl font-black mb-3 text-slate-800 dark:text-white">Shared Resp.</h3>
-                    <p class="text-slate-500 dark:text-slate-400 text-sm leading-relaxed">Understand the critical boundary of Security "OF" vs Security "IN" the cloud.</p>
+                    <h3 class="text-xl font-black mb-2 text-slate-800 dark:text-white">Shared Resp.</h3>
+                    <p class="text-slate-500 dark:text-slate-400 text-sm leading-relaxed">Security "OF" the cloud vs Security "IN" the cloud.</p>
                 </div>
 
-                <!-- 6 Rs Quick Card -->
                 <div onclick="navigateTo('section-6rs')" class="bg-white dark:bg-slate-800/40 p-8 rounded-[2rem] border border-slate-200 dark:border-slate-700/50 shadow-xl cursor-pointer hover:-translate-y-2 hover:border-purple-500/50 transition-all group">
                     <div class="w-14 h-14 bg-purple-500/10 rounded-2xl flex items-center justify-center text-3xl mb-6 group-hover:scale-110 transition-transform">📦</div>
-                    <h3 class="text-2xl font-black mb-3 text-slate-800 dark:text-white">The 6 Rs</h3>
-                    <p class="text-slate-500 dark:text-slate-400 text-sm leading-relaxed">Migration Strategies. Learn how to Rehost, Replatform, Refactor and more.</p>
+                    <h3 class="text-xl font-black mb-2 text-slate-800 dark:text-white">The 6 Rs</h3>
+                    <p class="text-slate-500 dark:text-slate-400 text-sm leading-relaxed">Migration Strategies (Rehost, Replatform, Refactor...).</p>
                 </div>
 
-                <!-- AI Lab Highlight -->
-                <div onclick="navigateTo('section-ai-lab')" class="bg-gradient-to-br from-slate-900 to-slate-800 dark:from-white dark:to-slate-200 p-10 rounded-[2.5rem] shadow-2xl cursor-pointer hover:-translate-y-2 transition-transform group lg:col-span-4 relative overflow-hidden flex flex-col md:flex-row items-center gap-8 border border-slate-800 dark:border-white/20">
-                    <div class="absolute -right-10 -top-10 w-64 h-64 bg-brand-accent/20 rounded-full blur-3xl"></div>
-                    <div class="w-24 h-24 bg-brand-accent rounded-[2rem] flex shrink-0 items-center justify-center text-5xl shadow-inner group-hover:scale-110 transition-transform z-10">✨</div>
-                    <div class="z-10 text-center md:text-left">
-                        <h3 class="text-3xl font-black mb-3 text-white dark:text-slate-900 tracking-tight">AI Study Assistant</h3>
-                        <p class="text-slate-400 dark:text-slate-600 text-lg">Put your knowledge to the test. Generate dynamic scenario questions or evaluate your understanding of core concepts with our Gemini-powered AI Lab.</p>
+                <!-- Domains -->
+                <div onclick="navigateTo('section-compute')" class="bg-white dark:bg-slate-800/40 p-8 rounded-[2rem] border border-slate-200 dark:border-slate-700/50 shadow-xl cursor-pointer hover:-translate-y-2 hover:border-orange-500/50 transition-all group">
+                    <div class="w-14 h-14 bg-orange-500/10 rounded-2xl flex items-center justify-center text-3xl mb-6 group-hover:scale-110 transition-transform">💻</div>
+                    <h3 class="text-xl font-black mb-2 text-slate-800 dark:text-white">Compute</h3>
+                    <p class="text-slate-500 dark:text-slate-400 text-sm leading-relaxed">EC2, Lambda, ECS, Elastic Beanstalk & Auto Scaling.</p>
+                </div>
+
+                <div onclick="navigateTo('section-storage')" class="bg-white dark:bg-slate-800/40 p-8 rounded-[2rem] border border-slate-200 dark:border-slate-700/50 shadow-xl cursor-pointer hover:-translate-y-2 hover:border-teal-500/50 transition-all group">
+                    <div class="w-14 h-14 bg-teal-500/10 rounded-2xl flex items-center justify-center text-3xl mb-6 group-hover:scale-110 transition-transform">🗄️</div>
+                    <h3 class="text-xl font-black mb-2 text-slate-800 dark:text-white">Storage</h3>
+                    <p class="text-slate-500 dark:text-slate-400 text-sm leading-relaxed">S3, EBS, EFS, Glacier, Storage Gateway & Snowball.</p>
+                </div>
+
+                <div onclick="navigateTo('section-database')" class="bg-white dark:bg-slate-800/40 p-8 rounded-[2rem] border border-slate-200 dark:border-slate-700/50 shadow-xl cursor-pointer hover:-translate-y-2 hover:border-red-500/50 transition-all group">
+                    <div class="w-14 h-14 bg-red-500/10 rounded-2xl flex items-center justify-center text-3xl mb-6 group-hover:scale-110 transition-transform">🗃️</div>
+                    <h3 class="text-xl font-black mb-2 text-slate-800 dark:text-white">Databases</h3>
+                    <p class="text-slate-500 dark:text-slate-400 text-sm leading-relaxed">RDS, DynamoDB, Aurora, Redshift & ElastiCache.</p>
+                </div>
+
+                <div onclick="navigateTo('section-network')" class="bg-white dark:bg-slate-800/40 p-8 rounded-[2rem] border border-slate-200 dark:border-slate-700/50 shadow-xl cursor-pointer hover:-translate-y-2 hover:border-indigo-500/50 transition-all group">
+                    <div class="w-14 h-14 bg-indigo-500/10 rounded-2xl flex items-center justify-center text-3xl mb-6 group-hover:scale-110 transition-transform">🌐</div>
+                    <h3 class="text-xl font-black mb-2 text-slate-800 dark:text-white">Networking</h3>
+                    <p class="text-slate-500 dark:text-slate-400 text-sm leading-relaxed">VPC, Route 53, CloudFront, ELB & API Gateway.</p>
+                </div>
+                
+                <div onclick="navigateTo('section-billing')" class="bg-gradient-to-br from-green-500/20 to-emerald-500/5 p-8 rounded-[2rem] border border-green-500/30 shadow-xl cursor-pointer hover:-translate-y-2 hover:border-green-500/80 transition-all group lg:col-span-4 flex flex-col md:flex-row items-center gap-6">
+                    <div class="w-16 h-16 bg-green-500 rounded-2xl flex items-center justify-center text-3xl shrink-0 shadow-inner group-hover:scale-110 transition-transform text-white">💰</div>
+                    <div class="text-center md:text-left">
+                        <h3 class="text-2xl font-black mb-2 text-slate-800 dark:text-white">Billing, Pricing & Support</h3>
+                        <p class="text-slate-600 dark:text-slate-400">Master the AWS Pricing Models, Cost Explorer, AWS Budgets, Organizations, and the four AWS Support Plans for the exam.</p>
                     </div>
                 </div>
             </div>
@@ -220,53 +268,76 @@
             <div id="rs-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 perspective-1000"></div>
         </section>
 
-        <!-- AI Lab -->
-        <section id="section-ai-lab" class="content-section hidden fade-in">
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-10">
-                <div class="bg-white dark:bg-slate-800/40 rounded-3xl p-10 shadow-2xl border border-slate-200 dark:border-slate-700/50 backdrop-blur-sm">
-                    <h3 class="text-3xl font-black mb-6 text-brand-accent">Scenario Quiz</h3>
-                    <div id="quiz-area" class="min-h-[300px] flex items-center justify-center text-slate-400 border-2 border-dashed border-slate-300 dark:border-slate-700 rounded-3xl p-8 text-center text-lg">
-                        Click below for a dynamic technical challenge.
-                    </div>
-                    <button onclick="startAiQuiz()" class="w-full mt-8 bg-brand-accent text-slate-900 font-black py-5 rounded-2xl transition-all shadow-xl shadow-brand-accent/20 active:scale-95">GENERATE QUIZ</button>
-                </div>
-
-                <div class="bg-white dark:bg-slate-800/40 rounded-3xl p-10 shadow-2xl border border-slate-200 dark:border-slate-700/50 backdrop-blur-sm">
-                    <h3 class="text-3xl font-black mb-6 text-blue-500">Deep Drill</h3>
-                    <div id="challenge-prompt" class="mb-6 text-2xl font-bold p-6 bg-blue-500/5 dark:bg-blue-500/10 rounded-2xl border border-blue-500/20 text-blue-600 dark:text-blue-400">
-                        Ask AI for a topic explanation.
-                    </div>
-                    <textarea id="user-answer" class="w-full p-6 rounded-2xl bg-slate-50 dark:bg-slate-900 border border-slate-300 dark:border-slate-700 h-48 hidden mb-6 outline-none focus:ring-4 focus:ring-blue-500/20 text-lg transition-all" placeholder="Explain the concept in detail..."></textarea>
-                    <div id="challenge-feedback" class="hidden p-6 rounded-2xl bg-slate-50 dark:bg-slate-900 border border-slate-300 dark:border-slate-700 mb-6 text-base overflow-y-auto max-h-60 custom-scrollbar"></div>
-                    <div class="flex gap-4">
-                        <button onclick="generateChallenge()" class="flex-1 py-5 bg-slate-200 dark:bg-slate-700 rounded-2xl font-black transition-all">NEW TOPIC</button>
-                        <button id="submit-btn" onclick="validateAnswer()" class="flex-1 py-5 bg-blue-600 text-white rounded-2xl font-black hidden transition-all shadow-xl shadow-blue-600/20">EVALUATE</button>
-                    </div>
-                </div>
+        <!-- 5. Compute Section -->
+        <section id="section-compute" class="content-section hidden fade-in">
+            <div class="text-center mb-12">
+                <h2 class="text-4xl md:text-5xl font-black mb-3 text-orange-500">Compute Services</h2>
+                <p class="text-slate-500 dark:text-slate-400 italic">The brains of AWS: Servers, Containers, and Serverless.</p>
             </div>
+            <div id="compute-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 perspective-1000"></div>
         </section>
+
+        <!-- 6. Storage Section -->
+        <section id="section-storage" class="content-section hidden fade-in">
+            <div class="text-center mb-12">
+                <h2 class="text-4xl md:text-5xl font-black mb-3 text-teal-500">Storage Services</h2>
+                <p class="text-slate-500 dark:text-slate-400 italic">Object, Block, File, and Archival storage solutions.</p>
+            </div>
+            <div id="storage-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 perspective-1000"></div>
+        </section>
+
+        <!-- 7. Database Section -->
+        <section id="section-database" class="content-section hidden fade-in">
+            <div class="text-center mb-12">
+                <h2 class="text-4xl md:text-5xl font-black mb-3 text-red-500">Database Services</h2>
+                <p class="text-slate-500 dark:text-slate-400 italic">Purpose-built databases for every workload.</p>
+            </div>
+            <div id="database-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 perspective-1000"></div>
+        </section>
+
+        <!-- 8. Network Section -->
+        <section id="section-network" class="content-section hidden fade-in">
+            <div class="text-center mb-12">
+                <h2 class="text-4xl md:text-5xl font-black mb-3 text-indigo-500">Networking & Content Delivery</h2>
+                <p class="text-slate-500 dark:text-slate-400 italic">Connecting and securing your cloud environment globally.</p>
+            </div>
+            <div id="network-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 perspective-1000"></div>
+        </section>
+
+        <!-- 9. Billing Section -->
+        <section id="section-billing" class="content-section hidden fade-in">
+            <div class="text-center mb-12">
+                <h2 class="text-4xl md:text-5xl font-black mb-3 text-green-500">Billing, Pricing & Support</h2>
+                <p class="text-slate-500 dark:text-slate-400 italic">Cost management tools and AWS support tiers.</p>
+            </div>
+            <div id="billing-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 perspective-1000"></div>
+        </section>
+
     </main>
 
-    <!-- Modal -->
+    <!-- Deep Dive Modal -->
     <div id="deep-dive-modal" class="fixed inset-0 z-[100] hidden items-center justify-center bg-slate-950/80 backdrop-blur-md p-4 opacity-0 transition-all duration-300" onclick="closeModal(event)">
-        <div class="bg-white dark:bg-slate-900 w-full max-w-3xl rounded-[2.5rem] shadow-2xl overflow-hidden transform scale-90 transition-all duration-300 border border-slate-200 dark:border-slate-800" onclick="event.stopPropagation()">
-            <div class="p-10 border-b border-slate-100 dark:border-slate-800 flex justify-between items-center bg-slate-50/50 dark:bg-slate-800/30">
+        <div class="bg-white dark:bg-slate-900 w-full max-w-3xl rounded-[2.5rem] shadow-2xl overflow-hidden transform scale-90 transition-all duration-300 border border-slate-200 dark:border-slate-800 flex flex-col max-h-[90vh]" onclick="event.stopPropagation()">
+            <!-- Modal Header -->
+            <div class="p-8 md:p-10 border-b border-slate-100 dark:border-slate-800 flex justify-between items-center bg-slate-50/50 dark:bg-slate-800/30 shrink-0">
                 <div class="flex items-center gap-6">
-                    <div id="m-icon-bg" class="p-5 bg-brand-accent/20 rounded-3xl text-5xl">
+                    <div id="m-icon-bg" class="p-5 bg-brand-accent/20 rounded-3xl text-4xl md:text-5xl">
                         <span id="m-icon"></span>
                     </div>
                     <div>
-                        <h3 id="m-title" class="text-4xl font-black text-slate-900 dark:text-white"></h3>
+                        <h3 id="m-title" class="text-3xl md:text-4xl font-black text-slate-900 dark:text-white"></h3>
                         <p class="text-brand-accent text-sm font-bold uppercase tracking-widest mt-1">Technical Reference</p>
                     </div>
                 </div>
-                <button onclick="closeModal()" class="w-12 h-12 flex items-center justify-center rounded-full bg-slate-100 dark:bg-slate-800 text-slate-500 hover:text-brand-accent transition-all text-3xl">&times;</button>
+                <button onclick="closeModal()" class="w-12 h-12 flex items-center justify-center rounded-full bg-slate-100 dark:bg-slate-800 text-slate-500 hover:text-brand-accent transition-all text-3xl shrink-0">&times;</button>
             </div>
-            <div id="m-content" class="p-12 overflow-y-auto max-h-[60vh] md-content custom-scrollbar bg-white dark:bg-slate-900"></div>
+            <!-- Modal Content -->
+            <div id="m-content" class="p-8 md:p-12 overflow-y-auto md-content custom-scrollbar bg-white dark:bg-slate-900 flex-grow"></div>
         </div>
     </div>
 
     <script>
+        // --- DATA OBJECTS ---
         const cafData = [
             { id: 'c1', icon: '💼', title: 'Business', desc: 'Alignment, data monetization, and ROI.', summary: '• Strategic ROI\n• Budget & Finance\n• Business Outcomes', dive: `### Business Perspective\nThe Business Perspective helps ensure that your cloud investments accelerate your digital transformation ambitions and business outcomes.\n\n#### Key Focus Areas\n- **Cloud Value Realization:** Measuring the value delivered by your cloud investments against business cases.\n- **Business Case Development:** Creating financial justifications including TCO (Total Cost of Ownership) and ROI models.\n- **IT Finance:** Transitioning from CapEx (Capital Expenditure) to OpEx (Operational Expenditure) models.\n- **Strategy Management:** Aligning IT strategy with organizational goals.\n\n#### 💡 CLF-C02 Exam Tip\nIf a scenario mentions "stakeholders", "ROI", "CapEx to OpEx", or "business outcomes", the answer is almost always the Business Perspective.` },
             { id: 'c2', icon: '👥', title: 'People', desc: 'Skills development and organizational change.', summary: '• Training/Certifications\n• Skills Gap Analysis\n• Culture Change', dive: `### People Perspective\nThe People Perspective serves as a bridge between technology and business, focusing on workforce evolution and organizational culture.\n\n#### Key Focus Areas\n- **Culture Evolution:** Fostering a mindset of continuous learning, agility, and innovation.\n- **Transformational Leadership:** Empowering leaders to sponsor and drive cloud adoption.\n- **Cloud Fluency:** Creating comprehensive training programs and certification paths to close skills gaps.\n- **Organizational Alignment:** Establishing a Cloud Center of Excellence (CCoE) to champion the transformation.\n\n#### 💡 CLF-C02 Exam Tip\nAny question regarding "training", "skills", "staffing", "organizational change management (OCM)", or "CCoE" maps directly to the People Perspective.` },
@@ -292,6 +363,51 @@
             { id: 'r4', icon: '🛍️', title: 'Repurchase (Drop & Shop)', desc: 'Abandoning legacy software and switching to a modern SaaS product.', summary: '• Change software licensing\n• Adopt SaaS models\n• Drop legacy technical debt', dive: `### Repurchase\nRepurchasing means moving to a completely different product, usually a Software as a Service (SaaS) platform, effectively dropping the existing legacy application entirely.\n\n#### Strategic Value\n- **Eliminates Maintenance:** The customer is no longer responsible for *any* underlying infrastructure, application maintenance, or version upgrades.\n- **Rapid Modernization:** Instantly upgrades business capabilities without development effort.\n\n#### Real-World Example\n- Moving from a heavily customized, on-premise legacy CRM system to **Salesforce**.\n- Replacing a self-hosted HR or ERP system with **Workday**.\n- Utilizing out-of-the-box vendor solutions directly from the **AWS Marketplace**.` },
             { id: 'r5', icon: '🛑', title: 'Retire', desc: 'Identifying and decommissioning applications that are no longer useful.', summary: '• Instant cost savings\n• Reduced attack surface\n• Portfolio simplification', dive: `### Retire\nRetiring involves identifying IT assets that no longer provide business value and permanently shutting them down.\n\n#### Strategic Value\n- **Cost Reduction:** Instantly saves money on licensing, compute power, and operational maintenance.\n- **Security Posture:** Reduces the overall attack surface by eliminating unpatched, forgotten, or zombie systems.\n\n#### The Reality of Migration\nDuring the discovery phase of large enterprise migrations, it is common to discover that up to **10% to 20%** of an IT portfolio is no longer being used by anyone. Turning these off accelerates the migration of the resources that actually matter.` },
             { id: 'r6', icon: '⏸️', title: 'Retain', desc: 'Keeping applications on-premises or delaying their migration.', summary: '• Postpone migration\n• Compliance / Legacy limits\n• Hybrid cloud strategy', dive: `### Retain\nRetaining means keeping workloads on-premises or in their current environment. Essentially, doing nothing *for now*.\n\n#### Strategic Value\n- **Prioritization:** Allows teams to focus limited engineering resources on migrating workloads that provide the highest immediate ROI.\n- **Risk Mitigation:** Avoiding the migration of highly sensitive legacy systems that are too fragile to move without extensive planning.\n\n#### Common Reasons to Retain\n- The application runs on hardware that was recently purchased and still has active depreciation.\n- Strict, localized compliance laws require data to stay on physical premises.\n- The workload requires an ultra-low latency connection to local factory equipment (a problem often solved later via **AWS Outposts**).` }
+        ];
+
+        const computeData = [
+            { id: 'cm1', icon: '💻', title: 'Amazon EC2', desc: 'Virtual servers in the cloud.', summary: '• IaaS (Infrastructure as a Service)\n• Full OS control\n• Resizable compute capacity', dive: `### Amazon Elastic Compute Cloud (EC2)\nProvides resizable, virtual machines (instances) in the cloud.\n\n#### Key Features\n- Complete control over the operating system.\n- Choose CPU, Memory, Storage, and Networking capacity.\n- **Pricing Models:** On-Demand, Reserved Instances, Spot Instances, Dedicated Hosts.\n\n#### 💡 CLF-C02 Exam Tip\nEC2 is IaaS. You are responsible for OS patching. Spot instances are for fault-tolerant, flexible workloads. Reserved instances are for 1-3 year predictable workloads.` },
+            { id: 'cm2', icon: '⚡', title: 'AWS Lambda', desc: 'Run code without thinking about servers.', summary: '• Serverless compute\n• Event-driven execution\n• Pay per millisecond', dive: `### AWS Lambda\nA serverless compute service that lets you run code without provisioning or managing servers.\n\n#### Key Features\n- Runs code in response to triggers (e.g., changes in S3, DynamoDB, or HTTP requests via API Gateway).\n- Automatically scales from zero to thousands of concurrent requests.\n- You pay only for the compute time you consume (per millisecond).\n\n#### 💡 CLF-C02 Exam Tip\nKeywords: "Serverless", "run code without servers", "event-driven", "under 15 minutes execution".` },
+            { id: 'cm3', icon: '🐳', title: 'ECS & EKS', desc: 'Container management services.', summary: '• Docker container orchestration\n• ECS (AWS native)\n• EKS (Kubernetes)', dive: `### Elastic Container Service (ECS) & Elastic Kubernetes Service (EKS)\nHighly scalable, high-performance container orchestration services.\n\n#### Key Differences\n- **Amazon ECS:** AWS's native container orchestration tool. Simple to integrate with other AWS services.\n- **Amazon EKS:** Managed Kubernetes service. Use this if you are already using Kubernetes on-premises or want open-source tooling.\n\n#### 💡 CLF-C02 Exam Tip\nIf you see "Docker" or "Containers", look for ECS or EKS. If they want open-source, choose EKS.` },
+            { id: 'cm4', icon: '🚀', title: 'AWS Fargate', desc: 'Serverless compute for containers.', summary: '• Serverless containers\n• No EC2 instances to manage\n• Works with ECS & EKS', dive: `### AWS Fargate\nA serverless compute engine for containers that works with both Amazon ECS and Amazon EKS.\n\n#### Key Features\n- Removes the need to provision and manage EC2 instances for your containers.\n- You don't have to pick server types or scale cluster capacity.\n- Fargate allocates the right amount of compute, eliminating over-provisioning.\n\n#### 💡 CLF-C02 Exam Tip\n"Serverless containers" = Fargate. You manage the container, AWS manages the underlying server.` },
+            { id: 'cm5', icon: '🌱', title: 'Elastic Beanstalk', desc: 'Platform as a Service (PaaS) for web apps.', summary: '• PaaS\n• Easy web app deployment\n• Handles capacity & scaling', dive: `### AWS Elastic Beanstalk\nAn easy-to-use service for deploying and scaling web applications and services developed with Java, .NET, PHP, Node.js, Python, Ruby, Go, and Docker.\n\n#### Key Features\n- You simply upload your code, and Elastic Beanstalk automatically handles the deployment, from capacity provisioning, load balancing, auto-scaling to application health monitoring.\n- You retain full control over the underlying AWS resources powering your application.\n\n#### 💡 CLF-C02 Exam Tip\nKeywords: "PaaS", "upload code and AWS handles the rest", "developer focus on code".` },
+            { id: 'cm6', icon: '⚖️', title: 'Auto Scaling', desc: 'Automatically adjust compute capacity.', summary: '• Scale Out (Add instances)\n• Scale In (Remove instances)\n• Maintain performance', dive: `### Amazon EC2 Auto Scaling\nHelps you maintain application availability and allows you to automatically add or remove EC2 instances according to conditions you define.\n\n#### Key Concepts\n- **Scale Out:** Adding more instances to handle spikes in traffic.\n- **Scale In:** Terminating instances when demand drops to save money.\n- **Target Tracking:** Automatically scales based on a specific metric (e.g., keep CPU at 50%).\n\n#### 💡 CLF-C02 Exam Tip\nAuto Scaling is the core service that enables "Elasticity" and "High Availability" in AWS.` }
+        ];
+
+        const storageData = [
+            { id: 's1', icon: '🪣', title: 'Amazon S3', desc: 'Scalable object storage in the cloud.', summary: '• Object storage\n• Infinite scaling\n• 99.999999999% durability', dive: `### Amazon Simple Storage Service (S3)\nAn object storage service that offers industry-leading scalability, data availability, security, and performance.\n\n#### Key Features\n- Stores data as objects within resources called "buckets".\n- Designed for 11 9s of durability (99.999999999%).\n- **Storage Classes:** Standard, Intelligent-Tiering, Standard-IA, One Zone-IA, Glacier.\n\n#### 💡 CLF-C02 Exam Tip\nUse S3 for backups, static website hosting, media files, and data lakes. It is "Object Storage", not for running databases or OS.` },
+            { id: 's2', icon: '🧊', title: 'S3 Glacier', desc: 'Low-cost archival storage.', summary: '• Data archiving\n• Long-term retention\n• Retrieval times vary', dive: `### Amazon S3 Glacier\nSecure, durable, and extremely low-cost Amazon S3 storage classes for data archiving and long-term backup.\n\n#### Key Classes\n- **Glacier Instant Retrieval:** Millisecond access for rarely accessed data.\n- **Glacier Flexible Retrieval:** Access in 1-5 minutes or 5-12 hours. Free bulk retrievals.\n- **Glacier Deep Archive:** Lowest cost storage in AWS. Retrieval in 12-48 hours. For regulatory compliance.\n\n#### 💡 CLF-C02 Exam Tip\nKeywords: "Archive", "regulatory retention for years", "lowest cost", "data not needed immediately".` },
+            { id: 's3', icon: '🧱', title: 'Amazon EBS', desc: 'Block storage for EC2 instances.', summary: '• Block storage\n• Attached to EC2\n• Boot volumes / Databases', dive: `### Amazon Elastic Block Store (EBS)\nProvides block level storage volumes for use with EC2 instances.\n\n#### Key Features\n- Behaves like a physical hard drive attached to a computer.\n- Crucial for running operating systems and databases that require low-latency, high-performance block storage.\n- Automatically replicated within its Availability Zone (AZ) to protect from hardware failure.\n- Can be backed up to S3 using "Snapshots".\n\n#### 💡 CLF-C02 Exam Tip\n"Block storage" = EBS. EBS volumes are locked to a specific Availability Zone (AZ).` },
+            { id: 's4', icon: '📁', title: 'Amazon EFS', desc: 'Elastic File System for Linux.', summary: '• File storage\n• NFS protocol (Linux)\n• Multi-AZ attachment', dive: `### Amazon Elastic File System (EFS)\nA simple, serverless, set-and-forget elastic file system for use with AWS Cloud services and on-premises resources.\n\n#### Key Features\n- Can be attached to *multiple* EC2 instances simultaneously (unlike standard EBS).\n- Uses the NFS protocol (Compatible with Linux, not Windows natively).\n- Automatically scales up and down as you add/remove files.\n- Spans multiple Availability Zones (highly available).\n\n#### 💡 CLF-C02 Exam Tip\n"Shared file system", "Linux", "attached to multiple instances" = EFS.` },
+            { id: 's5', icon: '🌉', title: 'Storage Gateway', desc: 'Hybrid cloud storage solution.', summary: '• Hybrid storage\n• Connect on-prem to AWS\n• File, Tape, Volume gateways', dive: `### AWS Storage Gateway\nA hybrid cloud storage service that gives you on-premises access to virtually unlimited cloud storage.\n\n#### Key Features\n- Connects your on-premises software appliance with cloud-based storage (S3, EBS, Glacier).\n- Caches frequently accessed data on-premises while storing the full data set in AWS.\n- Types: File Gateway, Volume Gateway, Tape Gateway.\n\n#### 💡 CLF-C02 Exam Tip\nKeywords: "Hybrid storage", "keep data on-prem but back up to cloud", "replace physical tape libraries".` },
+            { id: 's6', icon: '❄️', title: 'AWS Snow Family', desc: 'Physical devices for offline data migration.', summary: '• Petabyte-scale migration\n• Offline transfer\n• Edge computing (Snowcone)', dive: `### AWS Snow Family\nPhysical devices to migrate data into and out of AWS safely, or to run compute at the edge in disconnected environments.\n\n#### The Devices\n- **Snowcone:** Small, rugged, 8TB. For edge computing.\n- **Snowball Edge:** Up to 80TB. For large scale data migration and edge compute.\n- **Snowmobile:** Exabyte-scale migration. An actual 45-foot shipping container pulled by a semi-truck.\n\n#### 💡 CLF-C02 Exam Tip\n"Terabytes/Petabytes of data", "slow internet connection", "offline transfer" = Snow Family.` }
+        ];
+
+        const databaseData = [
+            { id: 'd1', icon: '🗄️', title: 'Amazon RDS', desc: 'Managed Relational Database Service.', summary: '• SQL / Relational\n• Automated backups\n• Multi-AZ deployments', dive: `### Amazon Relational Database Service (RDS)\nMakes it easy to set up, operate, and scale a relational database in the cloud.\n\n#### Key Features\n- Supports 6 engines: MySQL, PostgreSQL, MariaDB, Oracle, SQL Server, and Amazon Aurora.\n- AWS manages backups, software patching, automatic failure detection, and recovery.\n- Use **Multi-AZ** for high availability and disaster recovery.\n- Use **Read Replicas** for performance scaling.\n\n#### 💡 CLF-C02 Exam Tip\n"Relational", "SQL", "complex transactions/joins" = RDS.` },
+            { id: 'd2', icon: '🚀', title: 'Amazon DynamoDB', desc: 'Fast, flexible NoSQL database service.', summary: '• NoSQL / Key-Value\n• Single-digit millisecond latency\n• Serverless & Auto-scaling', dive: `### Amazon DynamoDB\nA key-value and document database (NoSQL) that delivers single-digit millisecond performance at any scale.\n\n#### Key Features\n- Fully managed, serverless database.\n- No schemas to define, handles unpredictable workloads easily.\n- Built-in security, backup and restore, and in-memory caching.\n\n#### 💡 CLF-C02 Exam Tip\nKeywords: "NoSQL", "Key-Value", "millisecond latency", "serverless database".` },
+            { id: 'd3', icon: '✨', title: 'Amazon Aurora', desc: 'High-performance AWS native relational DB.', summary: '• MySQL & PostgreSQL compatible\n• 5x faster than standard MySQL\n• Enterprise-grade', dive: `### Amazon Aurora\nA MySQL and PostgreSQL-compatible relational database built for the cloud.\n\n#### Key Features\n- Combines the performance and availability of traditional enterprise databases with the simplicity and cost-effectiveness of open-source databases.\n- Up to 5x faster than standard MySQL and 3x faster than standard PostgreSQL.\n- Storage automatically grows up to 128 TiB per database instance.\n\n#### 💡 CLF-C02 Exam Tip\n"Enterprise-class relational database", "AWS native", "MySQL/PostgreSQL compatible" = Aurora.` },
+            { id: 'd4', icon: '📊', title: 'Amazon Redshift', desc: 'Fast, simple, cost-effective data warehousing.', summary: '• Data Warehouse\n• Analytics & BI\n• Petabyte-scale', dive: `### Amazon Redshift\nA fully managed, petabyte-scale data warehouse service in the cloud.\n\n#### Key Features\n- Designed for complex analytical queries against massive datasets.\n- Uses columnar storage and parallel processing for high performance.\n- Integrates tightly with BI (Business Intelligence) tools.\n\n#### 💡 CLF-C02 Exam Tip\nKeywords: "Data warehouse", "analytics", "Business Intelligence (BI)", "querying historical data".` },
+            { id: 'd5', icon: '⚡', title: 'Amazon ElastiCache', desc: 'In-memory caching service.', summary: '• In-memory data store\n• Sub-millisecond latency\n• Redis & Memcached', dive: `### Amazon ElastiCache\nA fully managed in-memory data store and cache service by AWS.\n\n#### Key Features\n- Improves the performance of web applications by retrieving information from fast, managed, in-memory caches, instead of relying entirely on slower disk-based databases.\n- Supports two open-source engines: **Redis** and **Memcached**.\n\n#### 💡 CLF-C02 Exam Tip\n"In-memory", "caching", "sub-millisecond latency", "reduce load on primary database" = ElastiCache.` },
+            { id: 'd6', icon: '🔄', title: 'AWS DMS', desc: 'Database Migration Service.', summary: '• Migrate databases securely\n• Source DB remains active\n• Homogeneous & Heterogeneous', dive: `### AWS Database Migration Service (DMS)\nHelps you migrate databases to AWS quickly and securely.\n\n#### Key Features\n- The source database remains fully operational during the migration, minimizing downtime.\n- **Homogeneous migrations:** e.g., Oracle to Oracle.\n- **Heterogeneous migrations:** e.g., Oracle to Amazon Aurora (uses AWS Schema Conversion Tool - SCT).\n\n#### 💡 CLF-C02 Exam Tip\n"Migrate database with minimal downtime", "Oracle to Aurora" = DMS.` }
+        ];
+
+        const networkData = [
+            { id: 'n1', icon: '🌐', title: 'Amazon VPC', desc: 'Your private network in the AWS cloud.', summary: '• Virtual Private Cloud\n• Subnets (Public/Private)\n• Security Groups & NACLs', dive: `### Amazon Virtual Private Cloud (VPC)\nLets you provision a logically isolated section of the AWS Cloud where you can launch AWS resources in a virtual network that you define.\n\n#### Key Components\n- **Subnets:** Segments of a VPC's IP address range. Can be Public (has route to internet) or Private.\n- **Internet Gateway (IGW):** Allows communication between instances in your VPC and the internet.\n- **Security Groups:** Stateful firewalls at the *instance* level.\n- **NACLs:** Stateless firewalls at the *subnet* level.\n\n#### 💡 CLF-C02 Exam Tip\nVPC is the foundational network service. Know the difference between Security Groups (instance) and NACLs (subnet).` },
+            { id: 'n2', icon: '🗺️', title: 'Amazon Route 53', desc: 'Scalable Domain Name System (DNS).', summary: '• DNS routing\n• Domain registration\n• Health checks', dive: `### Amazon Route 53\nA highly available and scalable cloud Domain Name System (DNS) web service.\n\n#### Key Features\n- Routes end users to internet applications by translating names like www.example.com into IP addresses (e.g., 192.0.2.1).\n- Performs automated health checks on your application endpoints.\n- Supports complex routing policies: Simple, Weighted, Latency, Failover, Geolocation.\n\n#### 💡 CLF-C02 Exam Tip\nRoute 53 is AWS's DNS service. If a question mentions "DNS", "routing users based on latency/location", or "domain registration", it's Route 53.` },
+            { id: 'n3', icon: '⚡', title: 'Amazon CloudFront', desc: 'Global Content Delivery Network (CDN).', summary: '• CDN\n• Edge Locations\n• Low latency delivery', dive: `### Amazon CloudFront\nA fast content delivery network (CDN) service that securely delivers data, videos, applications, and APIs to customers globally with low latency.\n\n#### Key Features\n- Caches content at **Edge Locations** around the world.\n- When a user requests content, Route 53 routes them to the nearest Edge Location, dramatically reducing load times.\n- Integrates directly with S3, EC2, and ELB.\n- Provides built-in DDoS protection via AWS Shield.\n\n#### 💡 CLF-C02 Exam Tip\n"Low latency for global users", "CDN", "Edge Locations", "Caching static content" = CloudFront.` },
+            { id: 'n4', icon: '⚖️', title: 'Elastic Load Balancing', desc: 'Distribute incoming traffic automatically.', summary: '• Distributes traffic\n• High availability\n• ALB, NLB, GLB', dive: `### Elastic Load Balancing (ELB)\nAutomatically distributes incoming application traffic across multiple targets, such as EC2 instances, containers, and IP addresses.\n\n#### Types of Load Balancers\n- **Application Load Balancer (ALB):** HTTP/HTTPS traffic. Layer 7. Good for web apps.\n- **Network Load Balancer (NLB):** TCP/UDP traffic. Layer 4. Ultra-high performance, low latency.\n- **Gateway Load Balancer (GLB):** For deploying third-party virtual appliances.\n\n#### 💡 CLF-C02 Exam Tip\nELB ensures high availability by distributing traffic across multiple Availability Zones. It works hand-in-hand with Auto Scaling.` },
+            { id: 'n5', icon: '🔌', title: 'AWS Direct Connect', desc: 'Dedicated physical network connection.', summary: '• Private connection\n• Bypasses the internet\n• Consistent performance', dive: `### AWS Direct Connect\nA cloud service solution that makes it easy to establish a dedicated network connection from your premises to AWS.\n\n#### Key Features\n- Bypasses the public internet entirely.\n- Provides a private, dedicated, high-bandwidth (1Gbps - 100Gbps) physical fiber connection.\n- Ideal for massive data transfers, real-time data feeds, or strict compliance requirements.\n\n#### 💡 CLF-C02 Exam Tip\n"Dedicated physical connection", "bypass public internet", "consistent network performance" = Direct Connect. (Note: It takes weeks to set up physically, unlike a VPN).` },
+            { id: 'n6', icon: '🚪', title: 'API Gateway', desc: 'Create, maintain, and secure APIs.', summary: '• API Management\n• Front-door for Lambda\n• Throttling & Security', dive: `### Amazon API Gateway\nA fully managed service that makes it easy for developers to create, publish, maintain, monitor, and secure APIs at any scale.\n\n#### Key Features\n- Acts as the "front door" for applications to access data, business logic, or functionality from your backend services.\n- Most commonly used to trigger **AWS Lambda** functions in a serverless architecture.\n- Handles traffic management, authorization, access control, and API versioning.\n\n#### 💡 CLF-C02 Exam Tip\n"Create REST/WebSocket APIs", "Trigger Lambda from HTTP request" = API Gateway.` }
+        ];
+
+        const billingData = [
+            { id: 'b1', icon: '💵', title: 'EC2 Pricing Models', desc: 'On-Demand, Reserved, Spot, and Dedicated.', summary: '• On-Demand (Flexible)\n• Reserved (Predictable)\n• Spot (Cheap/Interruptible)', dive: `### EC2 Pricing Models\nUnderstanding how to pay for compute is a major part of the CLF-C02 exam.\n\n#### Models\n- **On-Demand:** Pay by the second. No long-term commitments. Best for unpredictable, short-term workloads.\n- **Reserved Instances (RIs):** Commit to 1 or 3 years. Up to 72% discount. Best for steady-state, predictable workloads (like a database).\n- **Spot Instances:** Bid on spare AWS capacity. Up to 90% discount. AWS can terminate them with 2 minutes notice. Best for batch processing, big data, flexible workloads.\n- **Dedicated Hosts:** Physical server dedicated entirely to you. For strict licensing/compliance.` },
+            { id: 'b2', icon: '🏢', title: 'AWS Organizations', desc: 'Centrally manage and govern multiple accounts.', summary: '• Multi-account management\n• Consolidated Billing\n• Service Control Policies (SCPs)', dive: `### AWS Organizations\nAn account management service that enables you to consolidate multiple AWS accounts into an organization that you create and centrally manage.\n\n#### Key Features\n- **Consolidated Billing:** Combines usage across all accounts to share volume pricing discounts. You get one single bill.\n- **Service Control Policies (SCPs):** Centrally manage security policies across all accounts. (e.g., prevent anyone from launching resources outside of the US-East region).\n\n#### 💡 CLF-C02 Exam Tip\n"One bill for multiple accounts", "Volume discounts across accounts", "SCPs" = AWS Organizations.` },
+            { id: 'b3', icon: '🔍', title: 'AWS Cost Explorer', desc: 'Visualize, understand, and manage your costs.', summary: '• Visualize past spend\n• Forecast future costs\n• Identify trends', dive: `### AWS Cost Explorer\nA tool that enables you to view and analyze your costs and usage.\n\n#### Key Features\n- Provides highly customizable graphs to visualize your spend over the last 12 months.\n- Forecasts how much you are likely to spend for the next 12 months based on past usage.\n- Helps identify areas where you can save money (e.g., unused EC2 instances).\n\n#### 💡 CLF-C02 Exam Tip\n"Visualize costs", "Forecast future spending", "Analyze trends over time" = Cost Explorer.` },
+            { id: 'b4', icon: '🚨', title: 'AWS Budgets', desc: 'Set custom budgets and receive alerts.', summary: '• Set spending limits\n• Email/SNS alerts\n• Prevent bill shock', dive: `### AWS Budgets\nGives you the ability to set custom budgets that alert you when your costs or usage exceed (or are forecasted to exceed) your budgeted amount.\n\n#### Key Features\n- Can track cost, usage, or Reservation/Savings Plans utilization.\n- Sends alerts via Email or Amazon SNS when thresholds are breached (e.g., alert me when I hit 80% of my $1000 budget).\n\n#### 💡 CLF-C02 Exam Tip\nThe difference between Cost Explorer and Budgets: Cost Explorer is for *looking* at data and analyzing. Budgets is for *setting limits and getting alerted* before you overspend.` },
+            { id: 'b5', icon: '🧮', title: 'AWS Pricing Calculator', desc: 'Estimate the cost of AWS services.', summary: '• Estimate costs\n• Pre-deployment tool\n• Compare architecture costs', dive: `### AWS Pricing Calculator\nA web-based planning tool that you can use to create estimates for your AWS use cases.\n\n#### Key Features\n- Use it *before* you build anything in AWS to model your solutions and estimate the monthly cost.\n- Helps you compare the cost of running an app on EC2 vs running it Serverless (Lambda).\n- Replaced the old "Simple Monthly Calculator".\n\n#### 💡 CLF-C02 Exam Tip\n"Estimate cost before deploying", "Plan a budget for a new project" = AWS Pricing Calculator.` },
+            { id: 'b6', icon: '🎧', title: 'AWS Support Plans', desc: 'Basic, Developer, Business, and Enterprise.', summary: '• Basic (Free)\n• Developer (Email)\n• Business (24x7 Chat/Phone)\n• Enterprise (TAM)', dive: `### AWS Support Plans\nAWS offers four tiers of support. Knowing the differences is crucial for the exam.\n\n#### The Tiers\n- **Basic:** Free. Access to customer service, billing support, and AWS Trusted Advisor core checks.\n- **Developer:** Business hours email support. For non-production workloads.\n- **Business:** 24x7 phone, email, and chat access to Cloud Support Engineers. Minimum for production workloads. Full Trusted Advisor access.\n- **Enterprise:** 15-minute response time for critical systems. Includes a dedicated **Technical Account Manager (TAM)** and Concierge Support Team.\n\n#### 💡 CLF-C02 Exam Tip\nIf a question asks how to get a Technical Account Manager (TAM), the answer is always the **Enterprise** support plan.` }
         ];
 
         function toggleTheme() {
@@ -334,115 +450,94 @@
         }
 
         function renderAll() {
+            // Render Grids
             const cG = document.getElementById('caf-grid');
-            const wG = document.getElementById('waf-grid');
-            const rG = document.getElementById('rs-grid');
+            if(cG) cafData.forEach(c => cG.innerHTML += createCard(c, 'border-brand-accent', 'from-brand-accent/20'));
             
-            cG.innerHTML = "";
-            wG.innerHTML = "";
-            rG.innerHTML = "";
+            const wG = document.getElementById('waf-grid');
+            if(wG) wafData.forEach(w => wG.innerHTML += createCard(w, 'border-blue-500', 'from-blue-500/20'));
 
-            cafData.forEach(c => cG.innerHTML += createCard(c, 'border-brand-accent', 'from-brand-accent/20'));
-            wafData.forEach(w => wG.innerHTML += createCard(w, 'border-blue-500', 'from-blue-500/20'));
-            rsData.forEach(r => rG.innerHTML += createCard(r, 'border-purple-500', 'from-purple-500/20'));
+            const rG = document.getElementById('rs-grid');
+            if(rG) rsData.forEach(r => rG.innerHTML += createCard(r, 'border-purple-500', 'from-purple-500/20'));
+
+            const compG = document.getElementById('compute-grid');
+            if(compG) computeData.forEach(c => compG.innerHTML += createCard(c, 'border-orange-500', 'from-orange-500/20'));
+
+            const storG = document.getElementById('storage-grid');
+            if(storG) storageData.forEach(s => storG.innerHTML += createCard(s, 'border-teal-500', 'from-teal-500/20'));
+
+            const dbG = document.getElementById('database-grid');
+            if(dbG) databaseData.forEach(d => dbG.innerHTML += createCard(d, 'border-red-500', 'from-red-500/20'));
+
+            const netG = document.getElementById('network-grid');
+            if(netG) networkData.forEach(n => netG.innerHTML += createCard(n, 'border-indigo-500', 'from-indigo-500/20'));
+
+            const billG = document.getElementById('billing-grid');
+            if(billG) billingData.forEach(b => billG.innerHTML += createCard(b, 'border-green-500', 'from-green-500/20'));
         }
 
         function showDive(id) {
-            const all = [...cafData, ...wafData, ...rsData];
+            const all = [...cafData, ...wafData, ...rsData, ...computeData, ...storageData, ...databaseData, ...networkData, ...billingData];
             const c = all.find(x => x.id === id);
+            if(!c) return;
+            
             document.getElementById('m-title').innerText = c.title;
             document.getElementById('m-icon').innerText = c.icon;
             document.getElementById('m-content').innerHTML = marked.parse(c.dive);
+            
             const m = document.getElementById('deep-dive-modal');
             m.classList.add('active');
             setTimeout(() => { m.classList.add('opacity-100'); m.querySelector('div').classList.add('scale-100'); }, 10);
         }
 
-        function closeModal() {
+        function closeModal(e) {
+            if(e) e.stopPropagation();
             const m = document.getElementById('deep-dive-modal');
             m.classList.remove('opacity-100');
             m.querySelector('div').classList.remove('scale-100');
             setTimeout(() => m.classList.remove('active'), 300);
         }
 
-        // Setup generalized navigation handler
+        function openSidebar() {
+            const sidebar = document.getElementById('right-sidebar');
+            const overlay = document.getElementById('sidebar-overlay');
+            overlay.classList.remove('hidden');
+            setTimeout(() => {
+                overlay.classList.remove('opacity-0');
+                sidebar.classList.remove('translate-x-full');
+            }, 10);
+        }
+
+        function closeSidebar() {
+            const sidebar = document.getElementById('right-sidebar');
+            const overlay = document.getElementById('sidebar-overlay');
+            overlay.classList.add('opacity-0');
+            sidebar.classList.add('translate-x-full');
+            setTimeout(() => {
+                overlay.classList.add('hidden');
+            }, 300);
+        }
+
         function navigateTo(targetId) {
-            // Hide all sections
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            
             document.querySelectorAll('.content-section').forEach(s => s.classList.add('hidden'));
             
-            // Show Target
             const targetSection = document.getElementById(targetId);
             if (targetSection) {
                 targetSection.classList.remove('hidden');
             }
 
-            // Update Nav buttons state
             document.querySelectorAll('.nav-btn').forEach(x => { 
-                x.className = "nav-btn whitespace-nowrap px-4 py-2 rounded-xl text-xs font-bold transition-all text-slate-500 hover:text-brand-accent"; 
+                x.className = "nav-btn w-full text-left px-4 py-3 rounded-xl text-sm font-bold transition-all text-slate-500 hover:text-brand-accent hover:bg-slate-50 dark:hover:bg-slate-800/50"; 
             });
 
-            // Highlight the active pill button if it exists
             const activeBtn = document.querySelector(`.nav-btn[data-target="${targetId}"]`);
             if (activeBtn) {
-                activeBtn.className = "nav-btn whitespace-nowrap px-4 py-2 rounded-xl text-xs font-bold transition-all bg-brand-accent text-slate-900 shadow-md";
+                activeBtn.className = "nav-btn w-full text-left px-4 py-3 rounded-xl text-sm font-bold transition-all bg-brand-accent text-slate-900 shadow-md";
             }
-        }
 
-        // AI Lab Stubs
-        const apiKey = "";
-        async function startAiQuiz() {
-            const area = document.getElementById('quiz-area');
-            area.innerHTML = "<p>Generating Question...</p>";
-            try {
-                const res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`, {
-                    method: "POST", headers: {"Content-Type": "application/json"},
-                    body: JSON.stringify({ contents: [{ parts: [{ text: "Generate 1 difficult CLF-C02 style scenario question about CAF, WAF, 6Rs or Shared Responsibility. Output JSON: {question, options, answerIndex, explanation}" }] }] })
-                });
-                const data = await res.json();
-                const q = JSON.parse(data.candidates[0].content.parts[0].text.replace(/```json|```/g, ''));
-                area.innerHTML = `<div class='text-left w-full'><p class='font-bold mb-4'>${q.question}</p>` + 
-                        q.options.map((o,i) => `<button onclick="checkAnswer(this, ${i === q.answerIndex}, '${q.explanation.replace(/'/g, "\\'")}')" class="w-full text-left p-3 border dark:border-slate-700 rounded-xl mb-2 hover:bg-slate-100 dark:hover:bg-slate-800 transition-all text-sm">${o}</button>`).join('') + "</div>";
-            } catch(e) { area.innerHTML = "Error loading. Try again."; }
-        }
-
-        function checkAnswer(btn, isCorrect, exp) {
-            btn.className = `w-full text-left p-3 border-2 rounded-xl mb-2 text-sm ${isCorrect ? 'border-green-500' : 'border-red-500'}`;
-            if (!btn.parentElement.querySelector('.fb')) {
-                const f = document.createElement('div');
-                f.className = "fb mt-4 p-4 bg-slate-100 dark:bg-slate-900 rounded-xl text-xs";
-                f.innerHTML = `<strong>Explanation:</strong> ${exp}`;
-                btn.parentElement.appendChild(f);
-            }
-        }
-
-        async function generateChallenge() {
-            const area = document.getElementById('challenge-prompt');
-            const txt = document.getElementById('user-answer');
-            const sub = document.getElementById('submit-btn');
-            area.innerHTML = "Asking AI...";
-            try {
-                const res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`, {
-                    method: "POST", headers: {"Content-Type": "application/json"},
-                    body: JSON.stringify({ contents: [{ parts: [{ text: "Ask the user to explain an AWS Cloud Practitioner concept. Prompt only: 'Explain: [Concept]'" }] }] })
-                });
-                const data = await res.json();
-                area.innerText = data.candidates[0].content.parts[0].text;
-                txt.classList.remove('hidden'); sub.classList.remove('hidden');
-            } catch(e) { area.innerText = "Error."; }
-        }
-
-        async function validateAnswer() {
-            const ans = document.getElementById('user-answer').value;
-            const feed = document.getElementById('challenge-feedback');
-            feed.classList.remove('hidden'); feed.innerHTML = "Analyzing...";
-            try {
-                const res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`, {
-                    method: "POST", headers: {"Content-Type": "application/json"},
-                    body: JSON.stringify({ contents: [{ parts: [{ text: `Evaluate this AWS explanation: ${ans}. Be concise.` }] }] })
-                });
-                const data = await res.json();
-                feed.innerHTML = marked.parse(data.candidates[0].content.parts[0].text);
-            } catch(e) { feed.innerHTML = "Error."; }
+            closeSidebar();
         }
 
         window.onload = renderAll;
