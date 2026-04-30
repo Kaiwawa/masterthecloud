@@ -242,6 +242,12 @@
                 class="nav-btn text-left pl-8 pr-4 py-2 rounded-xl text-sm font-semibold transition-all text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800">Management
                 & Governance</button>
 
+            <span
+                class="px-4 text-base font-black text-slate-800 dark:text-slate-200 tracking-wide mt-6 mb-1">Business</span>
+            <button data-target="section-pricing" onclick="navigateTo('section-pricing')"
+                class="nav-btn text-left pl-8 pr-4 py-2 rounded-xl text-sm font-semibold transition-all text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800">Pricing
+                & SLAs</button>
+
             <a href="index.html"
                 class="text-left px-4 py-2 rounded-xl text-sm font-bold transition-all text-brand-accent hover:bg-slate-100 dark:hover:bg-slate-800 mb-2">←
                 Back to Main Menu</a>
@@ -352,6 +358,23 @@
                     </div>
                 </div>
             </div>
+
+            <div class="mb-12">
+                <h3
+                    class="text-sm font-black text-slate-400 uppercase tracking-widest mb-6 pl-2 border-l-4 border-amber-500">
+                    Business</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <div onclick="navigateTo('section-pricing')"
+                        class="bg-white dark:bg-slate-800/40 p-8 rounded-[2rem] border border-slate-200 dark:border-slate-700/50 shadow-xl cursor-pointer hover:-translate-y-2 hover:border-amber-500/50 transition-all group">
+                        <div
+                            class="w-14 h-14 mx-auto bg-amber-500/10 rounded-2xl flex items-center justify-center text-3xl mb-6 group-hover:scale-110 transition-transform">
+                            💰</div>
+                        <h3 class="text-xl font-black mb-2 text-slate-800 dark:text-white">Pricing & SLAs</h3>
+                        <p class="text-slate-500 dark:text-slate-400 text-sm leading-relaxed">Azure pricing models,
+                            SLA guarantees, TCO Calculator, and cost optimization.</p>
+                    </div>
+                </div>
+            </div>
         </section>
 
         <section id="section-concepts" class="content-section hidden fade-in">
@@ -380,6 +403,28 @@
         <section id="section-compute" class="content-section hidden fade-in">
             <div class="mb-12 text-center md:text-left">
                 <h2 class="text-4xl font-black mb-2 text-blue-500">Compute Services</h2>
+                <p class="text-slate-500 dark:text-slate-400 italic">Virtual machines, serverless, and container
+                    orchestration on Azure.</p>
+            </div>
+            <div
+                class="mb-10 bg-slate-100 dark:bg-slate-800/50 rounded-3xl p-8 border border-slate-200 dark:border-slate-700">
+                <h3 class="text-xl font-bold mb-6 text-blue-500">Compute Service Decision Tree</h3>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <div class="p-4 bg-white dark:bg-slate-700 rounded-xl shadow-sm border-t-4 border-blue-500">
+                        <div class="font-bold text-slate-800 dark:text-white">Need full OS control?</div>
+                        <div class="text-xs text-slate-500 mt-1">Use <b>Azure VMs</b> (IaaS).</div>
+                    </div>
+                    <div class="p-4 bg-white dark:bg-slate-700 rounded-xl shadow-sm border-t-4 border-blue-500">
+                        <div class="font-bold text-slate-800 dark:text-white">Just need to deploy code?</div>
+                        <div class="text-xs text-slate-500 mt-1">Use <b>App Service</b> (PaaS) or <b>Functions</b>
+                            (Serverless).</div>
+                    </div>
+                    <div class="p-4 bg-white dark:bg-slate-700 rounded-xl shadow-sm border-t-4 border-blue-500">
+                        <div class="font-bold text-slate-800 dark:text-white">Need container orchestration?</div>
+                        <div class="text-xs text-slate-500 mt-1">Use <b>AKS</b> for complex apps, <b>ACI</b> for simple
+                            containers.</div>
+                    </div>
+                </div>
             </div>
             <div id="compute-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
         </section>
@@ -387,6 +432,39 @@
         <section id="section-storage" class="content-section hidden fade-in">
             <div class="mb-12 text-center md:text-left">
                 <h2 class="text-4xl font-black mb-2 text-green-500">Storage Services</h2>
+                <p class="text-slate-500 dark:text-slate-400 italic">Object, block, and file storage solutions on Azure.
+                </p>
+            </div>
+            <div
+                class="mb-10 bg-slate-100 dark:bg-slate-800/50 rounded-3xl p-8 border border-slate-200 dark:border-slate-700">
+                <h3 class="text-xl font-bold mb-6 text-green-500">Blob Storage Access Tier Waterfall</h3>
+                <div class="flex flex-col gap-2">
+                    <div
+                        class="p-3 bg-green-100 dark:bg-green-900/30 rounded-lg flex justify-between items-center border border-green-200">
+                        <span class="font-bold text-green-800 dark:text-green-300">Hot Tier</span> <span
+                            class="text-xs text-green-700 dark:text-green-400">Active Data / Lowest read cost / Highest
+                            storage cost</span>
+                    </div>
+                    <div class="w-4 h-4 border-l-2 border-slate-300 ml-6"></div>
+                    <div
+                        class="p-3 bg-white dark:bg-slate-700 rounded-lg flex justify-between items-center border border-slate-200">
+                        <span class="font-bold text-slate-800 dark:text-white">Cool Tier</span> <span
+                            class="text-xs text-slate-500">Infrequent Access (≥ 30 Days min)</span>
+                    </div>
+                    <div class="w-4 h-4 border-l-2 border-slate-300 ml-6"></div>
+                    <div
+                        class="p-3 bg-white dark:bg-slate-700 rounded-lg flex justify-between items-center border border-slate-200">
+                        <span class="font-bold text-slate-800 dark:text-white">Cold Tier</span> <span
+                            class="text-xs text-slate-500">Rare Access (≥ 90 Days min)</span>
+                    </div>
+                    <div class="w-4 h-4 border-l-2 border-slate-300 ml-6"></div>
+                    <div
+                        class="p-3 bg-slate-200 dark:bg-slate-800 rounded-lg flex justify-between items-center border border-slate-300 text-slate-500">
+                        <span class="font-bold text-slate-600 dark:text-slate-400">Archive Tier</span> <span
+                            class="text-xs">Long-term Retention (≥ 180 Days) / Lowest storage cost / Highest read
+                            cost</span>
+                    </div>
+                </div>
             </div>
             <div id="storage-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
         </section>
@@ -394,6 +472,50 @@
         <section id="section-database" class="content-section hidden fade-in">
             <div class="mb-12 text-center md:text-left">
                 <h2 class="text-4xl font-black mb-2 text-cyan-500">Database Services</h2>
+                <p class="text-slate-500 dark:text-slate-400 italic">Managed relational and NoSQL database solutions.
+                </p>
+            </div>
+            <div
+                class="mb-10 bg-slate-100 dark:bg-slate-800/50 rounded-3xl p-8 border border-slate-200 dark:border-slate-700">
+                <h3 class="text-xl font-bold mb-6 text-cyan-500">Azure Database Decision Matrix</h3>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-sm text-left">
+                        <thead class="text-xs text-slate-500 uppercase bg-slate-200/50 dark:bg-slate-700/50">
+                            <tr>
+                                <th class="px-4 py-3 rounded-tl-lg">Service</th>
+                                <th class="px-4 py-3">Type</th>
+                                <th class="px-4 py-3">Best For</th>
+                                <th class="px-4 py-3 rounded-tr-lg">Key Feature</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="border-b border-slate-200 dark:border-slate-700">
+                                <td class="px-4 py-3 font-bold text-slate-900 dark:text-white">Azure SQL</td>
+                                <td class="px-4 py-3">Relational</td>
+                                <td class="px-4 py-3">Traditional SQL workloads</td>
+                                <td class="px-4 py-3">Auto-patching, built-in HA</td>
+                            </tr>
+                            <tr class="border-b border-slate-200 dark:border-slate-700">
+                                <td class="px-4 py-3 font-bold text-slate-900 dark:text-white">Cosmos DB</td>
+                                <td class="px-4 py-3">NoSQL</td>
+                                <td class="px-4 py-3">Global, low-latency apps</td>
+                                <td class="px-4 py-3">Multi-API, single-digit ms</td>
+                            </tr>
+                            <tr class="border-b border-slate-200 dark:border-slate-700">
+                                <td class="px-4 py-3 font-bold text-slate-900 dark:text-white">MySQL/PostgreSQL</td>
+                                <td class="px-4 py-3">Relational</td>
+                                <td class="px-4 py-3">Open-source DB workloads</td>
+                                <td class="px-4 py-3">Community compatibility</td>
+                            </tr>
+                            <tr>
+                                <td class="px-4 py-3 font-bold text-slate-900 dark:text-white">Azure Cache</td>
+                                <td class="px-4 py-3">In-Memory</td>
+                                <td class="px-4 py-3">Session state, caching</td>
+                                <td class="px-4 py-3">Sub-millisecond latency</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
             <div id="database-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
         </section>
@@ -401,6 +523,33 @@
         <section id="section-network" class="content-section hidden fade-in">
             <div class="mb-12 text-center md:text-left">
                 <h2 class="text-4xl font-black mb-2 text-purple-500">Networking</h2>
+                <p class="text-slate-500 dark:text-slate-400 italic">Virtual networks, hybrid connectivity, and traffic
+                    management.</p>
+            </div>
+            <div
+                class="mb-10 bg-slate-100 dark:bg-slate-800/50 rounded-3xl p-8 border border-slate-200 dark:border-slate-700">
+                <h3 class="text-xl font-bold mb-6 text-purple-500">NSG vs Azure Firewall Cheat Sheet</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="p-4 bg-white dark:bg-slate-700 rounded-xl shadow-sm border-t-4 border-purple-500">
+                        <div class="font-black text-slate-800 dark:text-white text-lg mb-2">NSG (Network Security Group)
+                        </div>
+                        <div class="text-sm text-slate-500">
+                            <div class="mb-1">✦ Layer 3/4 filtering (IP, Port, Protocol)</div>
+                            <div class="mb-1">✦ Applied to NIC or Subnet level</div>
+                            <div class="mb-1">✦ <b>Free</b> to use</div>
+                            <div>✦ Stateful (return traffic auto-allowed)</div>
+                        </div>
+                    </div>
+                    <div class="p-4 bg-white dark:bg-slate-700 rounded-xl shadow-sm border-t-4 border-purple-500">
+                        <div class="font-black text-slate-800 dark:text-white text-lg mb-2">Azure Firewall</div>
+                        <div class="text-sm text-slate-500">
+                            <div class="mb-1">✦ Layer 3/4/7 filtering (FQDN, URL, TLS)</div>
+                            <div class="mb-1">✦ Centralized, hub-level firewall</div>
+                            <div class="mb-1">✦ <b>Paid</b> managed service</div>
+                            <div>✦ Threat intelligence integration</div>
+                        </div>
+                    </div>
+                </div>
             </div>
             <div id="network-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
         </section>
@@ -408,6 +557,35 @@
         <section id="section-security" class="content-section hidden fade-in">
             <div class="mb-12 text-center md:text-left">
                 <h2 class="text-4xl font-black mb-2 text-red-500">Identity & Security</h2>
+                <p class="text-slate-500 dark:text-slate-400 italic">Identity management, access control, and threat
+                    protection in Azure.</p>
+            </div>
+            <div
+                class="mb-10 bg-slate-100 dark:bg-slate-800/50 rounded-3xl p-8 border border-slate-200 dark:border-slate-700">
+                <h3 class="text-xl font-bold mb-6 text-red-500">Azure Security Layers (Defense in Depth)</h3>
+                <div class="flex flex-col gap-2">
+                    <div
+                        class="p-3 bg-red-100 dark:bg-red-900/30 rounded-t-xl border border-red-200 text-center font-bold text-red-800 dark:text-red-300">
+                        Physical Security (Data Centers)</div>
+                    <div
+                        class="p-3 bg-white dark:bg-slate-700 border-x border-slate-200 dark:border-slate-600 text-center font-bold shadow-sm">
+                        Identity & Access (Entra ID, RBAC)</div>
+                    <div
+                        class="p-3 bg-slate-50 dark:bg-slate-600 border-x border-slate-200 dark:border-slate-600 text-center font-bold shadow-sm">
+                        Perimeter (DDoS Protection, Azure Firewall)</div>
+                    <div
+                        class="p-3 bg-slate-50 dark:bg-slate-600 border-x border-slate-200 dark:border-slate-600 text-center font-bold shadow-sm">
+                        Network (NSGs, VNet, Private Endpoints)</div>
+                    <div
+                        class="p-3 bg-slate-100 dark:bg-slate-700 border-x border-slate-200 dark:border-slate-600 text-center font-bold shadow-sm">
+                        Compute (VM Patching, Endpoint Protection)</div>
+                    <div
+                        class="p-3 bg-slate-100 dark:bg-slate-700 border-x border-slate-200 dark:border-slate-600 text-center font-bold shadow-sm">
+                        Application (Secure coding, WAF)</div>
+                    <div
+                        class="p-3 bg-slate-200 dark:bg-slate-800 rounded-b-xl border border-slate-300 dark:border-slate-700 text-center font-bold text-slate-500 shadow-inner">
+                        Data (Encryption at rest & in transit)</div>
+                </div>
             </div>
             <div id="security-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
         </section>
@@ -415,8 +593,82 @@
         <section id="section-mgmt" class="content-section hidden fade-in">
             <div class="mb-12 text-center md:text-left">
                 <h2 class="text-4xl font-black mb-2 text-pink-500">Management & Governance</h2>
+                <p class="text-slate-500 dark:text-slate-400 italic">Monitoring, policy enforcement, cost control, and
+                    governance tools.</p>
+            </div>
+            <div
+                class="mb-10 bg-slate-100 dark:bg-slate-800/50 rounded-3xl p-8 border border-slate-200 dark:border-slate-700">
+                <h3 class="text-xl font-bold mb-6 text-pink-500">Governance Enforcement Flow</h3>
+                <div class="flex flex-col md:flex-row items-center justify-between gap-2">
+                    <div class="p-4 bg-white dark:bg-slate-700 rounded-xl shadow text-center w-full">
+                        <div class="font-bold text-pink-600 dark:text-pink-400">Azure Policy</div>
+                        <div class="text-xs text-slate-500">Define rules</div>
+                    </div>
+                    <div class="text-slate-400 text-xl hidden md:block">➔</div>
+                    <div class="p-4 bg-white dark:bg-slate-700 rounded-xl shadow text-center w-full">
+                        <div class="font-bold text-pink-600 dark:text-pink-400">Azure Blueprints</div>
+                        <div class="text-xs text-slate-500">Package & deploy</div>
+                    </div>
+                    <div class="text-slate-400 text-xl hidden md:block">➔</div>
+                    <div class="p-4 bg-white dark:bg-slate-700 rounded-xl shadow text-center w-full">
+                        <div class="font-bold text-pink-600 dark:text-pink-400">Azure Monitor</div>
+                        <div class="text-xs text-slate-500">Observe & alert</div>
+                    </div>
+                    <div class="text-slate-400 text-xl hidden md:block">➔</div>
+                    <div
+                        class="p-4 bg-pink-50 dark:bg-pink-900/30 border border-pink-200 rounded-xl shadow text-center w-full">
+                        <div class="font-bold text-pink-600 dark:text-pink-400">Azure Advisor</div>
+                        <div class="text-xs text-slate-500">Optimize & recommend</div>
+                    </div>
+                </div>
             </div>
             <div id="mgmt-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+        </section>
+
+        <section id="section-pricing" class="content-section hidden fade-in">
+            <div class="mb-12 text-center md:text-left">
+                <h2 class="text-4xl font-black mb-2 text-amber-500">Pricing & SLAs</h2>
+                <p class="text-slate-500 dark:text-slate-400 italic">Understand Azure pricing models, SLA guarantees,
+                    and cost optimization strategies.</p>
+            </div>
+            <div
+                class="mb-10 bg-slate-100 dark:bg-slate-800/50 rounded-3xl p-8 border border-slate-200 dark:border-slate-700">
+                <h3 class="text-xl font-bold mb-6 text-amber-500">SLA Uptime Quick Reference</h3>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-sm text-left">
+                        <thead class="text-xs text-slate-500 uppercase bg-slate-200/50 dark:bg-slate-700/50">
+                            <tr>
+                                <th class="px-4 py-3 rounded-tl-lg">SLA %</th>
+                                <th class="px-4 py-3">Monthly Downtime</th>
+                                <th class="px-4 py-3 rounded-tr-lg">Annual Downtime</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="border-b border-slate-200 dark:border-slate-700">
+                                <td class="px-4 py-3 font-bold text-slate-900 dark:text-white">99%</td>
+                                <td class="px-4 py-3">~7.2 hours</td>
+                                <td class="px-4 py-3">~3.65 days</td>
+                            </tr>
+                            <tr class="border-b border-slate-200 dark:border-slate-700">
+                                <td class="px-4 py-3 font-bold text-slate-900 dark:text-white">99.9%</td>
+                                <td class="px-4 py-3">~43.8 minutes</td>
+                                <td class="px-4 py-3">~8.76 hours</td>
+                            </tr>
+                            <tr class="border-b border-slate-200 dark:border-slate-700">
+                                <td class="px-4 py-3 font-bold text-slate-900 dark:text-white">99.95%</td>
+                                <td class="px-4 py-3">~21.9 minutes</td>
+                                <td class="px-4 py-3">~4.38 hours</td>
+                            </tr>
+                            <tr>
+                                <td class="px-4 py-3 font-bold text-slate-900 dark:text-white">99.99%</td>
+                                <td class="px-4 py-3">~4.3 minutes</td>
+                                <td class="px-4 py-3">~52.6 minutes</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div id="pricing-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
         </section>
 
     </main>
@@ -448,68 +700,62 @@
 
     <script>
         const conceptsData = [
-            { id: 'c1', icon: '☁️', title: 'Cloud Models', desc: 'Public, Private, and Hybrid Cloud.', summary: '• Public (Multi-tenant)\n• Private (Single-tenant)\n• Hybrid (Best of both)', dive: `### Cloud Computing Models\n\n#### Public Cloud\nOwned by cloud services providers (like Microsoft). Resources are delivered over the internet. You share the same hardware/network with other organizations (multi-tenant).\n\n#### Private Cloud\nOwned and used by a single organization. It can be physically located at your organization's on-site datacenter or hosted by a third-party service provider.\n\n#### Hybrid Cloud\nCombines public and private clouds, allowing data and applications to be shared between them. It gives you greater flexibility and more deployment options.` },
-            { id: 'c2', icon: '💼', title: 'Service Models', desc: 'IaaS, PaaS, SaaS.', summary: '• IaaS (Infrastructure)\n• PaaS (Platform)\n• SaaS (Software)', dive: `### Cloud Service Models\n\n#### IaaS (Infrastructure as a Service)\nProvides basic computing infrastructure: servers, storage, and networking. You manage the OS and everything above it. Example: **Azure Virtual Machines**.\n\n#### PaaS (Platform as a Service)\nProvides a complete development and deployment environment. You just bring your code and data. Example: **Azure App Service**.\n\n#### SaaS (Software as a Service)\nA complete product that is run and managed by the service provider. Example: **Microsoft 365**.` },
-            { id: 'c3', icon: '📈', title: 'High Availability', desc: 'Keep your apps running.', summary: '• Avoid downtime\n• Redundancy\n• SLAs', dive: `### High Availability (HA)\n\nEnsuring that your application remains accessible and operational, even if certain components fail.\n\n- Uses redundancy across hardware, power, and networking.\n- Measured in "Nines" (e.g., 99.9% uptime implies about 43 minutes of allowed downtime per month).` },
-            { id: 'c4', icon: '⚙️', title: 'Scalability vs Elasticity', desc: 'Handling load effectively.', summary: '• Vertical (Scale up)\n• Horizontal (Scale out)\n• Elasticity (Auto)', dive: `### Scalability & Elasticity\n\n#### Scalability\nThe ability to increase or decrease resources to meet demand.\n- **Vertical Scaling (Scale Up):** Adding more power (CPU, RAM) to an existing machine.\n- **Horizontal Scaling (Scale Out):** Adding more machines to distribute the load.\n\n#### Elasticity\nThe ability of a system to *automatically* or dynamically scale resources up or down as needed (e.g., VM Scale Sets).` },
-            { id: 'c5', icon: '💰', title: 'CapEx vs OpEx', desc: 'Cloud financial models.', summary: '• CapEx (Upfront cost)\n• OpEx (Pay-as-you-go)\n• Consumption based', dive: `### Capital Expenditure (CapEx) vs Operational Expenditure (OpEx)\n\n#### CapEx\nThe upfront spending of money on physical infrastructure (buying servers). The cost is deducted over time. High initial investment.\n\n#### OpEx\nSpending money on services or products as you use them. You are billed based on consumption. This is the model the cloud uses.` }
+            { id: 'c1', icon: '☁️', title: 'Cloud Models', desc: 'Public, Private, and Hybrid Cloud.', summary: '• Public (Multi-tenant)\n• Private (Single-tenant)\n• Hybrid (Best of both)', dive: `### Cloud Computing Models\n\n<div class="mermaid">\ngraph LR\n    A["Cloud Models"] --> B["Public Cloud"]\n    A --> C["Private Cloud"]\n    A --> D["Hybrid Cloud"]\n    B --> B1["Multi-tenant"]\n    B --> B2["Pay-as-you-go"]\n    C --> C1["Single-tenant"]\n    C --> C2["Full control"]\n    D --> D1["Best of both"]\n    D --> D2["Flexible workloads"]\n    style A fill:#0078D4,stroke:#333,color:#fff\n    style B fill:#3b82f6,stroke:#333,color:#fff\n    style C fill:#6366f1,stroke:#333,color:#fff\n    style D fill:#10b981,stroke:#333,color:#fff\n</div>\n\n#### Public Cloud\nOwned by third-party cloud providers (like Microsoft Azure). Resources are delivered over the internet and shared among multiple organizations (**multi-tenant**). No upfront capital expenditure — you only pay for what you use.\n\n- **Advantages:** No hardware to buy, near-unlimited scale, high availability.\n- **Examples:** Azure, AWS, GCP.\n\n#### Private Cloud\nCloud infrastructure operated solely for a **single organization**. It can be hosted on-premises in your own data center, or by a third-party provider. You have full control over security, compliance, and resource allocation.\n\n- **Advantages:** Greater control, meets strict regulatory requirements.\n- **Disadvantages:** Higher cost, requires IT expertise to maintain.\n\n#### Hybrid Cloud\nCombines public and private clouds, allowing data and applications to be shared between them. Organizations can run sensitive workloads in the private cloud while using the public cloud for less-sensitive, high-scale workloads.\n\n- **Key use case:** "Cloud bursting" — expanding to the public cloud during peak demand while keeping baseline workloads on-premises.\n\n#### 💡 AZ-900 Exam Tip\nIf the scenario says "keep sensitive data on-premises while leveraging the cloud for scalability," the answer is **Hybrid Cloud**. If it says "no upfront costs and shared infrastructure," it is **Public Cloud**.` },
+            { id: 'c2', icon: '💼', title: 'Service Models', desc: 'IaaS, PaaS, SaaS.', summary: '• IaaS (Infrastructure)\n• PaaS (Platform)\n• SaaS (Software)', dive: `### Cloud Service Models (IaaS, PaaS, SaaS)\n\n#### IaaS (Infrastructure as a Service)\nProvides virtualized computing resources over the internet. You rent servers, storage, and networking — but **you manage the OS, middleware, and applications**.\n\n- **You manage:** OS patching, runtime, applications, data.\n- **Azure manages:** Physical hardware, networking, storage, virtualization.\n- **Example:** Azure Virtual Machines, Azure Disk Storage.\n\n#### PaaS (Platform as a Service)\nProvides a complete development and deployment environment. You focus only on your **code and data** — Azure handles the rest.\n\n- **You manage:** Application code, data.\n- **Azure manages:** OS, runtime, middleware, infrastructure.\n- **Example:** Azure App Service, Azure SQL Database.\n\n#### SaaS (Software as a Service)\nA complete product that is fully managed by the provider. You simply use the software.\n\n- **You manage:** Your data and user access.\n- **Azure/Provider manages:** Everything else.\n- **Example:** Microsoft 365, Dynamics 365.\n\n#### 💡 AZ-900 Exam Tip\nThe shared responsibility model shifts as you move from IaaS → PaaS → SaaS. With SaaS, you have the **least** responsibility. With IaaS, you have the **most**.` },
+            { id: 'c3', icon: '📈', title: 'High Availability', desc: 'Keep your apps running.', summary: '• Avoid downtime\n• Redundancy\n• SLAs', dive: `### High Availability (HA) & Disaster Recovery\n\nHigh Availability ensures your application remains accessible even if certain components fail. Azure achieves HA through redundancy at every layer.\n\n#### Azure HA Building Blocks\n- **Availability Zones:** Physically separate locations within an Azure region. Each zone has independent power, cooling, and networking.\n- **Availability Sets:** Logical groupings of VMs distributed across **Fault Domains** (racks) and **Update Domains** (patching schedules).\n- **Region Pairs:** Each Azure region is paired with another region at least 300 miles away for disaster recovery.\n\n#### Composite SLA Formula\nWhen services are chained, multiply their individual SLAs:\n- Web App (99.95%) × SQL DB (99.99%) = **99.94% composite SLA**.\n\n#### 💡 AZ-900 Exam Tip\nAvailability Zones = protect against **data center failure**. Region Pairs = protect against **region-wide disaster**. Deploy across multiple Availability Zones to maximize uptime.` },
+            { id: 'c4', icon: '⚙️', title: 'Scalability vs Elasticity', desc: 'Handling load effectively.', summary: '• Vertical (Scale up)\n• Horizontal (Scale out)\n• Elasticity (Auto)', dive: `### Scalability & Elasticity\n\n#### Scalability\nThe ability to increase or decrease resources to meet demand.\n\n- **Vertical Scaling (Scale Up/Down):** Adding more power (CPU, RAM) to an existing machine. Has a ceiling.\n- **Horizontal Scaling (Scale Out/In):** Adding more identical instances to distribute load. Virtually unlimited. This is the preferred cloud pattern.\n\n#### Elasticity\nThe ability of a system to **automatically** adjust resources based on demand in real-time.\n\n- **Azure VM Scale Sets:** Automatically create and remove VMs based on demand metrics.\n- **Azure App Service Auto-Scale:** Built-in elastic scaling for web apps.\n\n#### Agility\nThe ability to **rapidly deploy and configure** cloud resources as business needs change. Cloud enables provisioning in minutes vs. weeks on-prem.\n\n#### 💡 AZ-900 Exam Tip\nScale Up = bigger machine. Scale Out = more machines. **Elasticity** = automatic scale out/in.` },
+            { id: 'c5', icon: '💰', title: 'CapEx vs OpEx', desc: 'Cloud financial models.', summary: '• CapEx (Upfront cost)\n• OpEx (Pay-as-you-go)\n• Consumption based', dive: `### Capital Expenditure (CapEx) vs Operational Expenditure (OpEx)\n\n#### CapEx (Capital Expenditure)\nUpfront spending on physical infrastructure — buying servers, building data centers. Cost is deducted over time (depreciation).\n\n- **Characteristics:** High initial investment, predictable costs over time, long planning cycles.\n\n#### OpEx (Operational Expenditure)\nSpending on services or products **as you use them**. Billed based on consumption with no upfront cost.\n\n- **Characteristics:** No upfront cost, pay-as-you-go, monthly operating budgets.\n\n#### The Consumption-Based Model\nCloud computing follows a **consumption-based model** (OpEx):\n- No upfront costs. Pay for additional resources when needed.\n- Stop paying for resources you no longer need.\n- **Predict costs** using the Azure Pricing Calculator.\n- **Analyze actual costs** using Azure Cost Management.\n\n#### 💡 AZ-900 Exam Tip\nCloud = **OpEx** (consumption-based). On-premises = **CapEx**. If the exam asks about "shifting from upfront costs to pay-as-you-go," it is the cloud consumption model.` },
+            { id: 'c6', icon: '🌍', title: 'Azure Geography', desc: 'Regions, Availability Zones, Pairs.', summary: '• 60+ Regions worldwide\n• Availability Zones\n• Region Pairs for DR', dive: `### Azure Global Infrastructure\n\n<div class="mermaid">\ngraph TD\n    A["Azure Geography"] --> B["Region"]\n    B --> C["Availability Zone 1"]\n    B --> D["Availability Zone 2"]\n    B --> E["Availability Zone 3"]\n    C --> F["Data Centers"]\n    D --> G["Data Centers"]\n    E --> H["Data Centers"]\n    style A fill:#0078D4,stroke:#333,color:#fff\n    style B fill:#3b82f6,stroke:#333,color:#fff\n    style C fill:#10b981,stroke:#333,color:#fff\n    style D fill:#10b981,stroke:#333,color:#fff\n    style E fill:#10b981,stroke:#333,color:#fff\n</div>\n\n#### Regions\nAzure has **60+ regions** worldwide. When you deploy a resource, you choose which region.\n\n- Choose a region **close to your users** for low latency.\n- **Data residency:** Your data stays in the region you choose (important for compliance).\n\n#### Availability Zones\nPhysically separate data centers within a single region. Each zone has independent power, cooling, and networking.\n\n- **Zonal Services:** Pin a resource to a specific zone (e.g., a specific VM).\n- **Zone-Redundant Services:** Automatically replicate across zones (e.g., ZRS storage).\n\n#### Region Pairs\nEach region is paired with another **at least 300 miles away** for DR. During maintenance, Azure updates one region at a time.\n\n#### Sovereign Regions\n**Azure Government** (US) and **Azure China** (21Vianet) are isolated for compliance.\n\n#### 💡 AZ-900 Exam Tip\nRegion = geographic location. AZ = separate data center in a region. Region Pair = DR partner. Sovereign = government isolation.` }
         ];
 
         const computeData = [
-            {
-                id: 'cm1', icon: '💻', title: 'Azure VMs', desc: 'Virtual Machines (IaaS).', summary: '• IaaS\n• Full OS control\n• Windows or Linux', dive: `### Azure Virtual Machines
-<div class="mermaid">
-graph TD
-    User((User)) --> PIP[Public IP]
-    PIP --> NIC[Network Interface]
-    NIC --> VM[Azure Virtual Machine]
-    VM --> Disk[Managed Disk]
-    style VM fill:#3b82f6,stroke:#333,stroke-width:2px,color:#fff
-</div>
-Software emulations of physical computers. They provide Infrastructure as a Service (IaaS) and can run Windows or Linux.\n\nYou have total control over the OS, but you are responsible for patching, updates, and maintenance.\n\nUse when you need custom software, specific OS configurations, or are lifting-and-shifting legacy apps.` },
-            { id: 'cm2', icon: '🖥️', title: 'VM Scale Sets', desc: 'Auto-scaling identical VMs.', summary: '• High Availability\n• Auto-scaling\n• Load balanced', dive: `### Azure Virtual Machine Scale Sets\nLet you create and manage a group of identical, load-balanced VMs.\n\n- Scale sets allow you to centrally manage, configure, and update a large number of VMs.\n- Provide true elasticity: automatically increase the number of VM instances as demand goes up, and decrease as demand goes down.` },
-            { id: 'cm3', icon: '🌐', title: 'Azure App Service', desc: 'PaaS for web apps.', summary: '• PaaS\n• Build web apps/APIs\n• Auto-scaling', dive: `### Azure App Service\nA fully managed Platform as a Service (PaaS) for building, deploying, and scaling web apps, REST APIs, and mobile back ends.\n\n- You focus on your code (supports .NET, .NET Core, Java, Ruby, Node.js, PHP, or Python).\n- Azure manages the underlying infrastructure (servers, OS patching, load balancing).` },
-            { id: 'cm4', icon: '⚡', title: 'Azure Functions', desc: 'Serverless compute.', summary: '• Serverless\n• Event-driven\n• Pay-per-execution', dive: `### Azure Functions\nA serverless compute service that lets you run event-triggered code without having to explicitly provision or manage infrastructure.\n\n- **Event-Driven:** Runs only when triggered by events (e.g., HTTP request, message in a queue, timer).\n- **Micro-billing:** You only pay for the exact time your code runs.` },
-            { id: 'cm5', icon: '🐳', title: 'ACI & AKS', desc: 'Containers in Azure.', summary: '• ACI (Simple containers)\n• AKS (Kubernetes)\n• Microservices', dive: `### Azure Container Instances (ACI) & Azure Kubernetes Service (AKS)\n\n#### Azure Container Instances (ACI)\nThe fastest and simplest way to run a container in Azure, without having to manage any virtual machines or adopt a higher-level service.\n\n#### Azure Kubernetes Service (AKS)\nA managed container orchestration service based on Kubernetes. Use it for complex, multi-container applications (microservices) requiring scaling and management.` }
+            { id: 'cm1', icon: '💻', title: 'Azure VMs', desc: 'Virtual Machines (IaaS).', summary: '• IaaS\n• Full OS control\n• Windows or Linux', dive: `### Azure Virtual Machines\n\n<div class="mermaid">\ngraph TD\n    User(("User")) --> PIP["Public IP"]\n    PIP --> NIC["Network Interface"]\n    NIC --> VM["Azure VM"]\n    VM --> Disk["Managed Disk"]\n    style VM fill:#3b82f6,stroke:#333,color:#fff\n</div>\n\nSoftware emulations of physical computers. They provide **Infrastructure as a Service (IaaS)** and can run Windows or Linux.\n\n#### Key Characteristics\n- **Full OS control** — you manage the OS, patching, runtime, and applications.\n- **VM Sizes** — General Purpose, Compute Optimized, Memory Optimized, Storage Optimized, GPU.\n- **Pricing:** Pay-per-second. Use **Reserved Instances** (1 or 3 year) for up to 72% savings.\n- **Azure Spot VMs** — Use unused Azure capacity at deep discounts (can be evicted at any time).\n\n#### When to Use VMs\n- Lift-and-shift migration of on-premises workloads.\n- Custom software requiring specific OS configurations.\n- Dev/test environments.\n\n#### 💡 AZ-900 Exam Tip\nVMs = **IaaS**. You are responsible for the OS and everything above it. If the exam says "full control over the operating system," the answer is VMs.` },
+            { id: 'cm2', icon: '🖥️', title: 'VM Scale Sets', desc: 'Auto-scaling identical VMs.', summary: '• High Availability\n• Auto-scaling\n• Load balanced', dive: `### Azure Virtual Machine Scale Sets (VMSS)\n\nLet you create and manage a group of **identical, load-balanced VMs**.\n\n#### Key Features\n- **Automatic scaling:** Increase or decrease the number of VM instances based on demand or a defined schedule.\n- **Load balancing:** Built-in integration with Azure Load Balancer or Application Gateway.\n- **High availability:** Distribute VMs across fault domains and update domains automatically.\n- All VMs in the set are created from the same base OS image and configuration.\n\n#### Scaling Modes\n- **Manual scaling:** You set the instance count.\n- **Autoscale:** Rules trigger scale-out/in based on metrics (CPU, memory, queue depth, etc.).\n\n#### 💡 AZ-900 Exam Tip\nVMSS = the Azure service that provides **elasticity** for VMs. If the exam asks about "automatically adjusting the number of VMs based on demand," the answer is VM Scale Sets.` },
+            { id: 'cm3', icon: '🌐', title: 'Azure App Service', desc: 'PaaS for web apps.', summary: '• PaaS\n• Build web apps/APIs\n• Auto-scaling', dive: `### Azure App Service\n\nA fully managed **Platform as a Service (PaaS)** for building, deploying, and scaling web apps, REST APIs, and mobile back ends.\n\n#### Key Features\n- **You focus on your code** — supports .NET, Java, Ruby, Node.js, PHP, Python.\n- Azure manages: servers, OS patching, load balancing, scaling.\n- **Deployment slots:** Stage new versions and swap to production with zero downtime.\n- **Custom domains** and SSL certificates supported.\n- Built-in **auto-scaling** and CI/CD integration.\n\n#### App Service Plans\n| Tier | Use Case | Features |\n|------|----------|----------|\n| Free/Shared | Dev/Test | Limited resources, no SLA |\n| Basic | Low traffic | Custom domains, manual scale |\n| Standard | Production | Auto-scale, deployment slots |\n| Premium | High perf | Enhanced scaling, VNET integration |\n\n#### 💡 AZ-900 Exam Tip\nApp Service = **PaaS**. You bring code, Azure manages everything else. If the exam says "deploy a web app without managing servers," the answer is App Service.` },
+            { id: 'cm4', icon: '⚡', title: 'Azure Functions', desc: 'Serverless compute.', summary: '• Serverless\n• Event-driven\n• Pay-per-execution', dive: `### Azure Functions (Serverless)\n\nA **serverless** compute service that lets you run event-triggered code without provisioning or managing infrastructure.\n\n#### Key Characteristics\n- **Event-Driven:** Runs only when triggered (HTTP request, queue message, timer, blob upload, etc.).\n- **Micro-billing:** Pay only for the time your code runs (per execution + execution time). Generous free grant: 1M executions/month.\n- **Auto-scale:** Scales automatically from zero to thousands of concurrent instances.\n- **Stateless** by default (use Durable Functions for stateful workflows).\n\n#### Hosting Plans\n| Plan | Scaling | Timeout | Use Case |\n|------|---------|---------|----------|\n| Consumption | Auto | 5 min (default) | Event-driven, low-cost |\n| Premium | Pre-warmed | 30 min | No cold start, VNET |\n| Dedicated | Manual | Unlimited | Run on App Service Plan |\n\n#### 💡 AZ-900 Exam Tip\nFunctions = **Serverless**. If the exam says "run code only when an event occurs" or "pay only when code executes," the answer is Azure Functions.` },
+            { id: 'cm5', icon: '🐳', title: 'ACI & AKS', desc: 'Containers in Azure.', summary: '• ACI (Simple containers)\n• AKS (Kubernetes)\n• Microservices', dive: `### Containers in Azure: ACI vs AKS\n\n#### Azure Container Instances (ACI)\nThe **fastest and simplest** way to run a container in Azure.\n\n- No VM management required. Just provide the container image.\n- Best for simple, single-container scenarios (batch jobs, quick tasks).\n- Per-second billing.\n\n#### Azure Kubernetes Service (AKS)\nA **managed Kubernetes** container orchestration service.\n\n- For complex, multi-container applications (microservices).\n- Automatic scaling, self-healing, rolling updates.\n- Azure manages the Kubernetes control plane for free — you only pay for worker nodes.\n\n#### When to Choose\n| Scenario | Service |\n|----------|----------|\n| Run a single container quickly | ACI |\n| Orchestrate many microservices | AKS |\n| Batch processing / simple tasks | ACI |\n| Production-grade containerized apps | AKS |\n\n#### 💡 AZ-900 Exam Tip\nACI = simple, single-container workloads. AKS = complex multi-container orchestration with Kubernetes. Both let you avoid managing full VMs.` },
+            { id: 'cm6', icon: '🖥️', title: 'Azure Virtual Desktop', desc: 'Cloud-hosted virtual desktops.', summary: '• DaaS (Desktop as a Service)\n• Windows 10/11 multi-session\n• Remote work', dive: `### Azure Virtual Desktop (AVD)\n\nA desktop and app virtualization service that runs in the cloud.\n\n#### Key Features\n- **Multi-session Windows 10/11:** Multiple users on a single VM — unique to Azure.\n- **Bring your existing Microsoft 365 licenses** — no extra OS licensing cost.\n- **Security:** Data stays in the cloud, never on the endpoint device. Integrates with Entra ID and Conditional Access.\n- **Profile management:** FSLogix user profiles for seamless experience.\n\n#### Use Cases\n- Remote/hybrid work enablement.\n- BYOD (Bring Your Own Device) policies.\n- Contractors and temporary workers who need secure desktop access.\n\n#### 💡 AZ-900 Exam Tip\nAVD = cloud-hosted desktops. If the exam mentions "multi-session Windows" or "virtual desktops in Azure," the answer is Azure Virtual Desktop.` }
         ];
 
         const storageData = [
-            { id: 's1', icon: '🪣', title: 'Blob Storage', desc: 'Object storage for unstructured data.', summary: '• Unstructured data\n• Images, Videos, Logs\n• Access Tiers', dive: `### Azure Blob Storage\nMicrosoft's object storage solution for the cloud. Optimized for storing massive amounts of unstructured data (data that doesn't adhere to a particular data model or definition, such as text or binary data).\n\n**Access Tiers:**\n- **Hot:** Optimized for storing data that is accessed frequently.\n- **Cool:** Optimized for data that is infrequently accessed and stored for at least 30 days.\n- **Archive:** Optimized for data that is rarely accessed and stored for at least 180 days (cheapest storage, highest retrieval cost).` },
-            { id: 's2', icon: '💿', title: 'Disk Storage', desc: 'Block storage for Azure VMs.', summary: '• Attached to VMs\n• Persistent storage\n• SSDs and HDDs', dive: `### Azure Disk Storage\nProvides disks for Azure Virtual Machines. These act like physical hard drives in an on-premises server.\n\n- **Managed Disks:** Azure manages the physical storage infrastructure behind the scenes.\n- Used for storing OS files and applications requiring persistent block storage.` },
-            { id: 's3', icon: '📁', title: 'Azure Files', desc: 'Managed file shares.', summary: '• SMB/NFS protocols\n• Shared across VMs\n• On-prem mounting', dive: `### Azure Files\nOffers fully managed file shares in the cloud that are accessible via the industry standard Server Message Block (SMB) protocol or Network File System (NFS) protocol.\n\n- Can be mounted concurrently by cloud or on-premises deployments of Windows, Linux, and macOS.` }
+            { id: 's1', icon: '🪣', title: 'Blob Storage', desc: 'Object storage for unstructured data.', summary: '• Unstructured data\n• Images, Videos, Logs\n• Access Tiers', dive: `### Azure Blob Storage\n\nMicrosoft's object storage solution for the cloud. Optimized for storing massive amounts of **unstructured data** (images, videos, documents, logs, backups).\n\n#### Access Tiers\n| Tier | Optimized For | Min Retention | Storage Cost | Access Cost |\n|------|--------------|---------------|-------------|------------|\n| **Hot** | Frequently accessed data | None | Highest | Lowest |\n| **Cool** | Infrequently accessed | 30 days | Lower | Higher |\n| **Cold** | Rarely accessed | 90 days | Even lower | Even higher |\n| **Archive** | Long-term archival | 180 days | Lowest | Highest |\n\n#### Blob Types\n- **Block Blobs:** Most common. Upload data in blocks (images, documents, videos).\n- **Append Blobs:** Optimized for append operations (log files).\n- **Page Blobs:** Optimized for random read/write (VHD files for VMs).\n\n#### Lifecycle Management\nAutomate moving blobs between tiers based on age or last access time. Example: Move to Cool after 30 days, Archive after 90 days, delete after 365 days.\n\n#### 💡 AZ-900 Exam Tip\nArchive tier = cheapest storage but most expensive to retrieve. Blobs must be **rehydrated** to Hot or Cool before access. If the exam asks about storing compliance data long-term, the answer is Archive tier.` },
+            { id: 's2', icon: '💿', title: 'Disk Storage', desc: 'Block storage for Azure VMs.', summary: '• Attached to VMs\n• Persistent storage\n• SSDs and HDDs', dive: `### Azure Managed Disk Storage\n\nProvides persistent block-level storage for Azure Virtual Machines.\n\n#### Disk Types\n| Type | Use Case | Max IOPS |\n|------|----------|----------|\n| **Ultra Disk** | IO-intensive (SAP HANA, databases) | 160,000 |\n| **Premium SSD v2** | Production, latency-sensitive | 80,000 |\n| **Premium SSD** | Production workloads | 20,000 |\n| **Standard SSD** | Web servers, light dev/test | 6,000 |\n| **Standard HDD** | Backup, non-critical | 2,000 |\n\n#### Key Concepts\n- **Managed Disks:** Azure manages the underlying storage accounts. Recommended for all new deployments.\n- **Encryption:** All managed disks are encrypted at rest by default using Storage Service Encryption (SSE).\n- **Snapshots:** Point-in-time backups of disks.\n\n#### 💡 AZ-900 Exam Tip\nManaged Disks are always **encrypted at rest** by default. Premium SSD is for production; Standard HDD is for backups. All disks are managed by Azure — no storage account management needed.` },
+            { id: 's3', icon: '📁', title: 'Azure Files', desc: 'Managed file shares.', summary: '• SMB/NFS protocols\n• Shared across VMs\n• On-prem mounting', dive: `### Azure Files\n\nFully managed file shares in the cloud accessible via **SMB** (Windows/Linux/macOS) or **NFS** (Linux) protocols.\n\n#### Key Features\n- **Mount file shares** concurrently from cloud VMs or on-premises machines.\n- Replace or supplement on-premises file servers.\n- **Azure File Sync:** Cache Azure file shares on Windows Server for fast local access with cloud backup.\n- **Snapshots** for point-in-time recovery.\n\n#### When to Use\n| Scenario | Azure Files? |\n|----------|-------------|\n| Shared config files across VMs | ✅ Yes |\n| Replace on-prem file server | ✅ Yes |\n| Application needs POSIX file system | ✅ NFS |\n| Unstructured object storage | ❌ Use Blob |\n\n#### 💡 AZ-900 Exam Tip\nAzure Files = managed **file shares** (SMB/NFS). Use when you need shared storage across multiple VMs. Use **Azure File Sync** to cache cloud shares on-premises.` },
+            { id: 's4', icon: '🔄', title: 'Storage Redundancy', desc: 'Data replication options.', summary: '• LRS, ZRS, GRS, RA-GRS\n• Protect against failures\n• Cross-region replication', dive: `### Azure Storage Redundancy Options\n\n<div class="mermaid">\ngraph LR\n    A["Storage Redundancy"] --> B["LRS\\n3 copies, 1 datacenter"]\n    A --> C["ZRS\\n3 copies, 3 zones"]\n    A --> D["GRS\\n6 copies, 2 regions"]\n    A --> E["RA-GRS\\n6 copies, read from secondary"]\n    style A fill:#10b981,stroke:#333,color:#fff\n</div>\n\n| Option | Copies | Regions | Durability |\n|--------|--------|---------|------------|\n| **LRS** | 3 | 1 datacenter | 11 nines |\n| **ZRS** | 3 | 3 zones, 1 region | 12 nines |\n| **GRS** | 6 | 2 regions | 16 nines |\n| **GZRS** | 6 | 3 zones + secondary region | 16 nines |\n| **RA-GRS** | 6 | 2 regions, read from secondary | 16 nines |\n| **RA-GZRS** | 6 | 3 zones + readable secondary | 16 nines |\n\n#### Key Differences\n- **LRS:** Cheapest. Protects against single drive/rack failure. Does NOT protect against datacenter outage.\n- **ZRS:** Protects against datacenter failure within a region.\n- **GRS/GZRS:** Protects against entire region outage (cross-region replication).\n- **RA-GRS/RA-GZRS:** Same as GRS but secondary region data is **readable** (read-access).\n\n#### 💡 AZ-900 Exam Tip\nLRS = cheapest. GRS = best durability. RA-GRS = readable secondary. If the exam asks about protecting against a regional outage, the answer is GRS or GZRS.` }
         ];
 
         const databaseData = [
-            { id: 'd1', icon: '🗄️', title: 'Azure SQL Database', desc: 'Managed relational SQL DB.', summary: '• Relational Database\n• PaaS\n• Auto-patching', dive: `### Azure SQL Database\nA fully managed Platform as a Service (PaaS) database engine that handles most of the database management functions such as upgrading, patching, backups, and monitoring without user involvement.\n\n- Built on the latest stable version of the Microsoft SQL Server database engine.\n- Provides built-in high availability, intelligent performance tuning, and advanced security.` },
-            { id: 'd2', icon: '🪐', title: 'Azure Cosmos DB', desc: 'Fast NoSQL database.', summary: '• NoSQL\n• Globally distributed\n• Low latency', dive: `### Azure Cosmos DB\nA fully managed NoSQL database service for modern app development.\n\n- **Global Distribution:** You can replicate your data across multiple Azure regions with a click of a button.\n- Extremely low latency (single-digit millisecond response times).\n- Supports multiple APIs including SQL, MongoDB, Cassandra, Tables, and Gremlin.` }
+            { id: 'd1', icon: '🗄️', title: 'Azure SQL Database', desc: 'Managed relational SQL DB.', summary: '• Relational Database\n• PaaS\n• Auto-patching', dive: `### Azure SQL Database\n\nA fully managed **PaaS** relational database engine built on the latest stable version of Microsoft SQL Server.\n\n#### Key Features\n- **Auto-patching, backups, and monitoring** — no DBA overhead.\n- **Built-in HA:** 99.99% availability SLA.\n- **Intelligent performance tuning** with automatic indexing recommendations.\n- **Advanced security:** Transparent data encryption (TDE), auditing, threat detection.\n- **Elastic Pools:** Share resources across multiple databases to optimize cost.\n\n#### Purchasing Models\n| Model | Description |\n|-------|------------|\n| **DTU** | Bundled compute, storage, I/O. Simple and predictable. |\n| **vCore** | Choose compute and storage independently. Supports Azure Hybrid Benefit. |\n\n#### 💡 AZ-900 Exam Tip\nAzure SQL Database = **PaaS** (fully managed). Azure SQL Managed Instance = PaaS but with near 100% SQL Server compatibility for migration. If the exam says "relational database with no infrastructure management," the answer is Azure SQL Database.` },
+            { id: 'd2', icon: '🪐', title: 'Azure Cosmos DB', desc: 'Globally distributed NoSQL.', summary: '• NoSQL\n• Globally distributed\n• Multi-model APIs', dive: `### Azure Cosmos DB\n\nA fully managed, **globally distributed**, multi-model NoSQL database.\n\n#### Key Features\n- **Single-digit millisecond** response times at the 99th percentile.\n- **Turnkey global distribution:** Replicate data to any number of Azure regions with one click.\n- **Five consistency levels:** Strong, Bounded Staleness, Session, Consistent Prefix, Eventual.\n- **Multi-model APIs:** SQL (Core), MongoDB, Cassandra, Gremlin (graph), Table.\n- **Guaranteed SLA:** 99.999% availability for multi-region configurations.\n\n#### When to Choose Cosmos DB\n- Need **global distribution** with low-latency reads worldwide.\n- Need **flexible schema** (NoSQL).\n- Building IoT, gaming, or real-time personalization applications.\n\n#### 💡 AZ-900 Exam Tip\nCosmos DB = **globally distributed NoSQL**. If the exam mentions "single-digit millisecond latency worldwide" or "multi-model API support," the answer is Cosmos DB. It's NOT relational — use Azure SQL for relational.` },
+            { id: 'd3', icon: '🗃️', title: 'Other Database Services', desc: 'MySQL, PostgreSQL, MariaDB, and more.', summary: '• Open-source databases\n• Azure managed\n• Migration tools', dive: `### Azure Database for Open Source\n\nAzure offers fully managed PaaS versions of popular open-source databases:\n\n#### Available Services\n| Service | Engine | Use Case |\n|---------|--------|----------|\n| **Azure Database for MySQL** | MySQL | Web apps, CMS (WordPress) |\n| **Azure Database for PostgreSQL** | PostgreSQL | Advanced analytics, GIS |\n| **Azure Database for MariaDB** | MariaDB | Drop-in MySQL replacement |\n| **Azure Cache for Redis** | Redis | In-memory caching, session store |\n\n#### Migration Tools\n- **Azure Database Migration Service (DMS):** Helps migrate on-premises databases to Azure with minimal downtime.\n- **Azure Migrate:** Discover and assess on-premises databases for cloud migration readiness.\n\n#### 💡 AZ-900 Exam Tip\nAll Azure Database services are **PaaS** — Azure handles patching, backups, and HA. Use Azure Database Migration Service for database migrations to Azure.` }
         ];
 
+
         const networkData = [
-            { id: 'n1', icon: '🌐', title: 'Azure VNet', desc: 'Virtual Networks in Azure.', summary: '• Private networks\n• Subnets\n• Peering', dive: `### Azure Virtual Network (VNet)\nThe fundamental building block for your private network in Azure. VNet enables many types of Azure resources (like VMs) to securely communicate with each other, the internet, and on-premises networks.\n\n- **Subnets:** Divide VNets into segments.\n- **VNet Peering:** Connect two VNets together so resources can communicate using Microsoft's private backbone network.` },
-            { id: 'n2', icon: '🔌', title: 'VPN & ExpressRoute', desc: 'Connecting on-prem to Azure.', summary: '• VPN (Over Internet)\n• ExpressRoute (Private)\n• Hybrid networking', dive: `### VPN Gateway & Azure ExpressRoute\n\n#### Azure VPN Gateway\nSends encrypted traffic between an Azure virtual network and an on-premises location over the public internet.\n\n#### Azure ExpressRoute\nLets you extend your on-premises networks into the Microsoft cloud over a **private connection** facilitated by a connectivity provider. It does not go over the public internet, offering more reliability, faster speeds, and lower latencies.` }
+            { id: 'n1', icon: '🌐', title: 'Azure VNet', desc: 'Virtual Networks in Azure.', summary: '• Private networks\n• Subnets & NSGs\n• Peering', dive: `### Azure Virtual Network (VNet)\n\nThe fundamental building block for your private network in Azure.\n\n#### Key Concepts\n- **Subnets:** Divide VNets into segments to organize and secure resources.\n- **NSGs (Network Security Groups):** Layer 3/4 firewall rules applied to subnets or NICs. Filter traffic by IP, port, and protocol. **Free to use.**\n- **VNet Peering:** Connect two VNets so resources communicate over Microsoft's private backbone (no public internet). Can peer across regions (Global VNet Peering).\n- **Service Endpoints:** Extend VNet identity to Azure services (e.g., restrict a Storage Account to only accept traffic from your VNet).\n- **Private Endpoints:** Assign a private IP from your VNet to an Azure service for fully private connectivity.\n\n#### 💡 AZ-900 Exam Tip\nVNets are **region-specific** — a VNet cannot span regions. Use VNet Peering to connect VNets across regions. NSGs are free; Azure Firewall is a paid managed service.` },
+            { id: 'n2', icon: '🔌', title: 'VPN & ExpressRoute', desc: 'Connecting on-prem to Azure.', summary: '• VPN (Over Internet)\n• ExpressRoute (Private)\n• Hybrid networking', dive: `### Hybrid Connectivity: VPN vs ExpressRoute\n\n#### Azure VPN Gateway\nSends **encrypted traffic** between Azure VNet and on-premises over the public internet.\n\n- **Site-to-Site (S2S):** Connect your on-prem network to Azure (IPsec/IKE tunnel).\n- **Point-to-Site (P2S):** Connect individual devices (laptops) to Azure VNet.\n- **VNet-to-VNet:** Connect two Azure VNets via VPN tunnel.\n\n#### Azure ExpressRoute\nExtends on-premises networks into Azure over a **dedicated private connection** via a connectivity provider.\n\n- Does **NOT** go over the public internet.\n- Faster speeds (up to 100 Gbps), lower latency, more reliability.\n- Required for workloads with strict compliance or latency requirements.\n\n| Feature | VPN Gateway | ExpressRoute |\n|---------|------------|-------------|\n| Connection | Over internet | Private line |\n| Encryption | IPsec (built-in) | Optional (not default) |\n| Speed | Up to ~10 Gbps | Up to 100 Gbps |\n| Cost | Lower | Higher |\n| Reliability | Good | Excellent |\n\n#### 💡 AZ-900 Exam Tip\nVPN = encrypted over internet. ExpressRoute = private dedicated connection (NOT over internet). If the exam says "private connection that does not traverse the public internet," the answer is ExpressRoute.` },
+            { id: 'n3', icon: '⚖️', title: 'Load Balancer & App GW', desc: 'Distribute traffic across resources.', summary: '• Layer 4 Load Balancer\n• Layer 7 App Gateway\n• Traffic Manager (DNS)', dive: `### Azure Traffic Distribution Services\n\n#### Azure Load Balancer (Layer 4)\n- Distributes traffic by **IP and port** (TCP/UDP).\n- Works at the transport layer. Ultra-low latency.\n- **Public LB:** Distributes internet traffic to VMs.\n- **Internal LB:** Distributes traffic within a VNet.\n\n#### Azure Application Gateway (Layer 7)\n- Distributes traffic by **URL path, hostname, headers** (HTTP/HTTPS).\n- Includes **Web Application Firewall (WAF)** for OWASP protection.\n- SSL termination, cookie-based session affinity.\n\n#### Azure Traffic Manager (DNS-based)\n- Routes users to the **closest or healthiest endpoint** using DNS.\n- Works globally across regions.\n\n#### Azure Front Door\n- Global Layer 7 load balancer with CDN, WAF, and SSL offloading.\n- Accelerates content delivery worldwide.\n\n| Service | Layer | Scope | Key Feature |\n|---------|-------|-------|-------------|\n| Load Balancer | 4 | Regional | Fast TCP/UDP distribution |\n| App Gateway | 7 | Regional | URL routing + WAF |\n| Traffic Manager | DNS | Global | DNS-based geo-routing |\n| Front Door | 7 | Global | CDN + WAF + acceleration |\n\n#### 💡 AZ-900 Exam Tip\nLoad Balancer = Layer 4 (IP/port). App Gateway = Layer 7 (URL/path). Traffic Manager = DNS-based global routing. Front Door = global L7 with CDN.` }
         ];
 
         const securityData = [
-            { id: 'sec1', icon: '🛡️', title: 'Microsoft Entra ID', desc: 'Identity and Access Management.', summary: '• Formerly Azure AD\n• SSO & MFA\n• Conditional Access', dive: `### Microsoft Entra ID (formerly Azure Active Directory)\nMicrosoft's cloud-based identity and access management service.\n\n- Helps your employees sign in and access internal and external resources.\n- Core features include **Single Sign-On (SSO)**, **Multi-Factor Authentication (MFA)**, and **Conditional Access** (applying smart rules before granting access, like enforcing MFA if the user logs in from an unknown location).` },
-            { id: 'sec2', icon: '🔒', title: 'RBAC', desc: 'Role-Based Access Control.', summary: '• Authorization system\n• Principle of Least Privilege\n• Built-in roles', dive: `### Azure Role-Based Access Control (RBAC)\nA system that provides fine-grained access management to Azure resources.\n\n- You use RBAC to segregate duties within your team and grant only the amount of access to users that they need to perform their jobs (Principle of Least Privilege).\n- For example: Allow one employee to manage VMs, and another to manage SQL databases.` },
-            { id: 'sec3', icon: '🏰', title: 'Defender for Cloud', desc: 'Cloud Security Posture Management.', summary: '• Security Posture\n• Threat protection\n• Secure Score', dive: `### Microsoft Defender for Cloud\nA tool for security posture management and threat protection.\n\n- It strengthens the security posture of your cloud resources.\n- Provides a **Secure Score** that evaluates your security situation and provides recommendations for improvement.\n- Uses advanced threat protection to detect and resolve threats.` },
-            {
-                id: 'sec4', icon: '🪪', title: 'Hybrid Identity', desc: 'Connect on-prem AD to Entra ID.', summary: '• Password Hash Sync\n• Pass-through Auth\n• Federation', dive: `### Hybrid Identity in Azure
-Hybrid identity lets users access cloud and on-prem resources with a single identity plane.
-
-#### Common patterns
-- **Password Hash Synchronization (PHS):** Hashes from on-prem AD are synchronized to Entra ID for cloud sign-in.
-- **Pass-through Authentication (PTA):** Authentication is validated against on-prem AD at sign-in time.
-- **Federation:** Redirects authentication to an external identity provider for stricter on-prem control.
-
-#### 💡 Exam Tip
-**Microsoft Entra ID with hybrid identity**.` }
+            { id: 'sec1', icon: '🛡️', title: 'Microsoft Entra ID', desc: 'Identity and Access Management.', summary: '• Formerly Azure AD\n• SSO & MFA\n• Conditional Access', dive: `### Microsoft Entra ID (formerly Azure Active Directory)\n\nMicrosoft's cloud-based **identity and access management** service.\n\n#### Core Features\n- **Authentication:** Verify user identity via passwords, MFA, passwordless (FIDO2, Windows Hello).\n- **Single Sign-On (SSO):** One login grants access to thousands of SaaS apps (Microsoft 365, Salesforce, etc.).\n- **Multi-Factor Authentication (MFA):** Require a second verification factor (phone, authenticator app).\n- **Conditional Access:** Policy engine that evaluates signals (user, device, location, risk) before granting access.\n- **B2B & B2C:** Invite external users (B2B) or build customer-facing identity (B2C).\n\n#### Entra ID vs On-Premises AD\n| Feature | On-Prem AD | Entra ID |\n|---------|-----------|----------|\n| Protocol | Kerberos, LDAP | OAuth 2.0, SAML, OIDC |\n| Structure | OUs, GPOs, Forests | Flat tenant |\n| Scope | Internal network | Cloud + on-prem |\n| Device mgmt | Group Policy | Intune/MDM |\n\n#### 💡 AZ-900 Exam Tip\nEntra ID is NOT a cloud version of Active Directory Domain Services. It uses different protocols (OAuth/SAML vs Kerberos/LDAP). If the exam asks about cloud identity, the answer is always **Microsoft Entra ID**.` },
+            { id: 'sec2', icon: '🔒', title: 'RBAC', desc: 'Role-Based Access Control.', summary: '• Authorization system\n• Least Privilege\n• Built-in roles', dive: `### Azure Role-Based Access Control (RBAC)\n\nFine-grained access management for Azure resources using the **Principle of Least Privilege**.\n\n#### How RBAC Works\nA **role assignment** = Security Principal + Role Definition + Scope.\n\n- **Security Principal:** Who (user, group, service principal, managed identity).\n- **Role Definition:** What they can do (Owner, Contributor, Reader, or custom).\n- **Scope:** Where it applies (Management Group > Subscription > Resource Group > Resource).\n\n#### Built-in Roles\n| Role | Permissions |\n|------|------------|\n| **Owner** | Full access + can assign roles |\n| **Contributor** | Full access, cannot assign roles |\n| **Reader** | View only, no changes |\n| **User Access Admin** | Manage user access only |\n\n#### Key Concepts\n- RBAC is **inherited** — permissions set at a parent scope flow down to children.\n- **Deny assignments** block actions even if a role allows them.\n- Always use the **most restrictive role** that still allows the job to be done.\n\n#### 💡 AZ-900 Exam Tip\nRBAC = **authorization** (what you can do). Entra ID = **authentication** (who you are). Owner can do everything including assigning roles. Contributor can do everything EXCEPT assign roles.` },
+            { id: 'sec3', icon: '🏰', title: 'Defender for Cloud', desc: 'Cloud Security Posture Management.', summary: '• Secure Score\n• Threat protection\n• Multi-cloud', dive: `### Microsoft Defender for Cloud\n\nA unified security management system for **Cloud Security Posture Management (CSPM)** and **Cloud Workload Protection (CWP)**.\n\n#### Key Features\n- **Secure Score:** A numerical score (0-100%) that measures your security posture. Higher = better. Provides actionable recommendations.\n- **Regulatory Compliance Dashboard:** Track compliance with standards (ISO 27001, PCI DSS, SOC 2).\n- **Threat Protection:** Detect and respond to threats across VMs, databases, containers, App Service.\n- **Multi-cloud:** Also protects AWS and GCP resources (not just Azure).\n- **Just-in-Time (JIT) VM Access:** Lock down VM management ports and open them only when needed.\n\n#### Free vs Paid\n| Tier | Features |\n|------|----------|\n| **Free (CSPM)** | Secure Score, recommendations, compliance |\n| **Paid (CWP)** | Threat detection, JIT access, adaptive controls |\n\n#### 💡 AZ-900 Exam Tip\nDefender for Cloud = security posture + threat protection. **Secure Score** = measure how secure your environment is. It works across Azure, AWS, and GCP.` },
+            { id: 'sec4', icon: '🪪', title: 'Zero Trust & Key Vault', desc: 'Modern security model and secrets management.', summary: '• Verify explicitly\n• Least privilege access\n• Key Vault for secrets', dive: `### Zero Trust Security Model\n\nThe modern security framework: **"Never trust, always verify."**\n\n#### Zero Trust Principles\n1. **Verify explicitly:** Always authenticate and authorize based on all available data (identity, location, device, service).\n2. **Use least privilege access:** Limit user access with Just-In-Time (JIT) and Just-Enough-Access (JEA).\n3. **Assume breach:** Minimize blast radius, segment access, verify end-to-end encryption.\n\n### Azure Key Vault\n\nA cloud service for securely storing and managing **secrets, encryption keys, and certificates**.\n\n#### What It Stores\n- **Secrets:** API keys, passwords, connection strings.\n- **Keys:** Encryption keys (RSA, EC) backed by HSMs.\n- **Certificates:** SSL/TLS certificates with auto-renewal.\n\n#### Key Benefits\n- Centralized secret management — no hardcoded credentials in code.\n- Access controlled by RBAC and access policies.\n- Audit logging of all access.\n\n#### 💡 AZ-900 Exam Tip\nZero Trust = never trust, always verify. Key Vault = centralized secret/key/certificate management. Never store secrets in code — use Key Vault.` }
         ];
 
+
         const mgmtData = [
-            { id: 'mg1', icon: '👁️', title: 'Azure Monitor', desc: 'Full-stack monitoring.', summary: '• Metrics & Logs\n• Application Insights\n• Alerts', dive: `### Azure Monitor\nA comprehensive solution for collecting, analyzing, and acting on telemetry from your cloud and on-premises environments.\n\n- Collects both **Metrics** (numerical values at a point in time) and **Logs** (events and records).\n- Allows you to set up automated alerts.\n- Includes **Application Insights** for monitoring live web applications.` },
-            { id: 'mg2', icon: '📜', title: 'Azure Policy', desc: 'Enforce corporate rules.', summary: '• Compliance\n• Prevent unauthorized resources\n• Automated remediation', dive: `### Azure Policy\nA service in Azure that you use to create, assign, and manage policies. These policies enforce different rules and effects over your resources, so those resources stay compliant with your corporate standards and service level agreements.\n\n- Example: A policy that prevents anyone from creating a VM that doesn't have an "Environment" tag, or restricting VM creation to specific regions.` },
-            { id: 'mg3', icon: '💵', title: 'Cost Management', desc: 'Monitor and control Azure spending.', summary: '• Track costs\n• Set budgets\n• Cost alerts', dive: `### Azure Cost Management and Billing\nA suite of tools provided by Microsoft that help you analyze, manage, and optimize the costs of your Azure workloads.\n\n- Perform cost analysis to visualize spending.\n- Create **Budgets** to set spending limits.\n- Set up alerts when spending exceeds thresholds.\n- Provides recommendations via Azure Advisor to reduce costs.` }
+            { id: 'mg1', icon: '👁️', title: 'Azure Monitor', desc: 'Full-stack monitoring.', summary: '• Metrics & Logs\n• Application Insights\n• Alerts', dive: `### Azure Monitor\n\nA comprehensive solution for collecting, analyzing, and acting on telemetry from cloud and on-premises environments.\n\n#### Data Types\n- **Metrics:** Numerical values at a point in time (CPU %, memory usage). Lightweight, near real-time.\n- **Logs:** Detailed event records stored in Log Analytics workspace. Queryable with **KQL (Kusto Query Language)**.\n\n#### Key Components\n- **Application Insights:** Monitor live web applications — detect performance anomalies, diagnose issues, understand usage patterns.\n- **Log Analytics Workspace:** Central repository for log data. Query with KQL.\n- **Alerts:** Automated notifications when metrics cross thresholds or log patterns are detected. Can trigger emails, SMS, webhooks, or Azure Functions.\n- **Workbooks:** Interactive reports combining metrics, logs, and visualizations.\n\n#### 💡 AZ-900 Exam Tip\nAzure Monitor = the umbrella monitoring service. Application Insights = for web apps specifically. Alerts = automated notifications. All monitoring data goes to Azure Monitor.` },
+            { id: 'mg2', icon: '📜', title: 'Azure Policy', desc: 'Enforce corporate rules.', summary: '• Compliance\n• Prevent unauthorized resources\n• Automated remediation', dive: `### Azure Policy\n\nA service to create, assign, and manage **policies** that enforce rules over your Azure resources.\n\n#### How It Works\n1. **Define a policy** — what rule to enforce (e.g., "all resources must have a 'CostCenter' tag").\n2. **Assign the policy** — to a scope (Management Group, Subscription, or Resource Group).\n3. **Evaluate compliance** — Azure Policy continuously evaluates resources and flags non-compliant ones.\n4. **Remediate** — automatically fix non-compliant resources (e.g., add missing tags).\n\n#### Policy vs Initiative\n- **Policy:** A single rule (e.g., "Allowed VM sizes").\n- **Initiative:** A collection of related policies grouped together (e.g., "CIS Benchmark" = dozens of security policies).\n\n#### Built-in Policy Examples\n- Allowed locations (restrict regions).\n- Allowed VM SKUs (restrict VM sizes).\n- Require tags on resources.\n- Enforce HTTPS on web apps.\n\n#### 💡 AZ-900 Exam Tip\nAzure Policy = **compliance enforcement**. It evaluates and can **deny** or **remediate** non-compliant resources. Azure Policy is NOT the same as RBAC — Policy controls WHAT resources can do; RBAC controls WHO can do things.` },
+            { id: 'mg3', icon: '💵', title: 'Cost Management', desc: 'Monitor and control Azure spending.', summary: '• Track costs\n• Set budgets\n• Cost alerts', dive: `### Azure Cost Management + Billing\n\nTools to analyze, manage, and optimize Azure costs.\n\n#### Key Features\n- **Cost Analysis:** Visualize spending by service, resource group, subscription, tag, or time period.\n- **Budgets:** Set spending limits and receive alerts at thresholds (e.g., alert at 80%, 100%).\n- **Advisor Recommendations:** Identifies underutilized resources and suggests cost-saving actions.\n- **Azure Reservations:** Pre-pay for 1 or 3 years for up to 72% savings on VMs, SQL, Cosmos DB.\n- **Azure Hybrid Benefit:** Use existing on-premises Windows Server or SQL Server licenses in Azure.\n\n#### Cost-Saving Strategies\n| Strategy | Savings | Best For |\n|----------|---------|----------|\n| Reserved Instances | Up to 72% | Predictable workloads |\n| Spot VMs | Up to 90% | Interruptible workloads |\n| Azure Hybrid Benefit | Up to 40% | Existing licenses |\n| Auto-shutdown | Variable | Dev/test VMs |\n| Right-sizing | Variable | Oversized resources |\n\n#### 💡 AZ-900 Exam Tip\n**Pricing Calculator** = estimate costs BEFORE deploying. **TCO Calculator** = compare on-prem vs Azure costs. **Cost Management** = analyze ACTUAL spending after deployment.` },
+            { id: 'mg4', icon: '🏗️', title: 'Resource Organization', desc: 'Management Groups, Subscriptions, RGs.', summary: '• Management Groups\n• Subscriptions\n• Resource Groups & Tags', dive: `### Azure Resource Organization Hierarchy\n\n<div class="mermaid">\ngraph TD\n    A["Entra ID Tenant"] --> B["Management Group"]\n    B --> C["Subscription"]\n    C --> D["Resource Group"]\n    D --> E["Resources"]\n    style A fill:#0078D4,stroke:#333,color:#fff\n    style B fill:#3b82f6,stroke:#333,color:#fff\n    style C fill:#6366f1,stroke:#333,color:#fff\n    style D fill:#10b981,stroke:#333,color:#fff\n</div>\n\n#### Management Groups\n- Containers for managing access, policy, and compliance **across multiple subscriptions**.\n- Can be nested up to 6 levels deep.\n\n#### Subscriptions\n- A billing boundary and access control boundary.\n- Each subscription has a trust relationship with one Entra ID tenant.\n- Common pattern: separate subscriptions for Dev, Test, Production.\n\n#### Resource Groups (RGs)\n- Logical containers for related resources.\n- Resources can only belong to **one** RG.\n- Deleting an RG deletes ALL resources inside it.\n- Apply RBAC and policies at the RG level.\n\n#### Tags\n- Key-value pairs for organizing resources (e.g., Environment:Production, CostCenter:IT).\n- NOT inherited by default from RG to resources.\n\n#### 💡 AZ-900 Exam Tip\nResources belong to exactly ONE Resource Group. RGs belong to ONE Subscription. Deleting an RG = deletes everything inside. Tags are for organization and cost tracking.` }
+        ];
+
+        const pricingData = [
+            { id: 'pr1', icon: '🧮', title: 'Pricing Calculator', desc: 'Estimate costs before deployment.', summary: '• Estimate new workloads\n• Compare configurations\n• Export estimates', dive: `### Azure Pricing Calculator\n\nA web-based tool to **estimate the cost** of Azure services BEFORE you deploy anything.\n\n#### How to Use\n1. Select the products/services you plan to use.\n2. Configure options (region, tier, instance size, hours/month).\n3. Review the estimated monthly cost.\n4. Export or share the estimate.\n\n#### Key Facts\n- Pricing varies by **region** — some regions are cheaper than others.\n- **Egress charges:** Inbound data is free. Outbound data (data leaving Azure) is charged.\n- **Bandwidth pricing:** First 5 GB outbound/month is free.\n\n#### 💡 AZ-900 Exam Tip\nPricing Calculator = estimate BEFORE deployment. TCO Calculator = compare on-prem vs cloud costs. Cost Management = track ACTUAL spending.` },
+            { id: 'pr2', icon: '📊', title: 'TCO Calculator', desc: 'Compare on-prem vs Azure costs.', summary: '• Total Cost of Ownership\n• On-prem vs Cloud\n• Include hidden costs', dive: `### Azure TCO (Total Cost of Ownership) Calculator\n\nHelps you **compare the cost** of running workloads on-premises vs. in Azure.\n\n#### What It Considers\n- **Compute:** Server hardware, virtualization, power, cooling.\n- **Storage:** SAN/NAS arrays, disk replacements.\n- **Networking:** Switches, routers, bandwidth, load balancers.\n- **IT Labor:** System administrators, DBAs, network engineers.\n- **Facilities:** Data center space, power, cooling, physical security.\n\n#### Why TCO Matters\nOn-premises costs are often underestimated because they exclude:\n- Electricity and cooling costs.\n- Hardware refresh cycles (every 3-5 years).\n- IT staff time for maintenance.\n- Physical security and compliance.\n\n#### 💡 AZ-900 Exam Tip\nTCO Calculator shows the **full cost comparison** including hidden costs. It's used to build a business case for migrating to Azure. NOT the same as the Pricing Calculator.` },
+            { id: 'pr3', icon: '📋', title: 'SLAs & Lifecycle', desc: 'Service Level Agreements and service lifecycle.', summary: '• Uptime guarantees\n• Service credits\n• Preview vs GA', dive: `### Azure SLAs & Service Lifecycle\n\n#### Service Level Agreements (SLAs)\nMicrosoft's **uptime guarantees** for each Azure service.\n\n- Expressed as a percentage (e.g., 99.9%, 99.95%, 99.99%).\n- If Azure fails to meet the SLA, you receive **service credits** (bill discount).\n- **No SLA** for Free tier services or services in Preview.\n\n#### Improving SLAs\n- Deploy across **Availability Zones** (higher SLA than single VM).\n- Use **redundant architectures** (multiple regions, load balancing).\n- A single VM with Premium SSD = 99.9% SLA.\n- VMs across Availability Zones = 99.99% SLA.\n\n#### Service Lifecycle\n| Phase | Description | SLA? |\n|-------|------------|------|\n| **Private Preview** | Limited customers, by invitation | No |\n| **Public Preview** | Available to all, may have limitations | No |\n| **General Availability (GA)** | Production-ready, fully supported | Yes |\n| **Deprecation** | Service being retired, migration required | N/A |\n\n#### 💡 AZ-900 Exam Tip\nPreview services have **no SLA** and should not be used in production. Composite SLAs are calculated by multiplying individual SLAs. Service credits are given when Azure fails to meet its SLA.` }
         ];
 
         const app = new StudyGuideApp({
@@ -520,9 +766,11 @@ Hybrid identity lets users access cloud and on-prem resources with a single iden
                 { id: 'database-grid', data: databaseData, border: 'border-cyan-500', grad: 'from-cyan-500/20', color: 'cyan-500' },
                 { id: 'network-grid', data: networkData, border: 'border-purple-500', grad: 'from-purple-500/20', color: 'purple-500' },
                 { id: 'security-grid', data: securityData, border: 'border-red-500', grad: 'from-red-500/20', color: 'red-500' },
-                { id: 'mgmt-grid', data: mgmtData, border: 'border-pink-500', grad: 'from-pink-500/20', color: 'pink-500' }
+                { id: 'mgmt-grid', data: mgmtData, border: 'border-pink-500', grad: 'from-pink-500/20', color: 'pink-500' },
+                { id: 'pricing-grid', data: pricingData, border: 'border-amber-500', grad: 'from-amber-500/20', color: 'amber-500' }
             ]
         });
+
     </script>
 </body>
 
