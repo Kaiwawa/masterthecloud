@@ -557,6 +557,19 @@ A systematic process to identify, analyze, and prioritize security weaknesses in
         const architectureData = [
             {
                 id: 'ar1', icon: '🏢', title: 'Enterprise Architecture', desc: 'Designing secure enterprise security models.', summary: '• Zero Trust Architecture\n• Defense in Depth\n• Segmentation & Zoning', dive: `### Enterprise Architecture & Security Models
+<div class="mermaid">
+graph TD
+    A["Perimeter (Firewall, IDS)"] --> B["Network (VLANs, ACLs)"]
+    B --> C["Host (EDR, Hardening)"]
+    C --> D["Application (WAF, Input Validation)"]
+    D --> E["Data (Encryption, DLP)"]
+    style A fill:#ef4444,stroke:#333,color:#fff
+    style B fill:#f97316,stroke:#333,color:#fff
+    style C fill:#eab308,stroke:#333,color:#000
+    style D fill:#3b82f6,stroke:#333,color:#fff
+    style E fill:#10b981,stroke:#333,color:#fff
+</div>
+
 Enterprise security architecture defines how an organization's systems and controls work together to protect assets and data.
 
 #### Zero Trust Architecture
@@ -945,6 +958,19 @@ Systems and mechanisms protecting physical access to secure areas.
         const operationsData = [
             {
                 id: 'op1', icon: '🚨', title: 'Incident Response', desc: 'Detecting, responding to, and recovering from security incidents.', summary: '• IR Plan & Procedures\n• Evidence Preservation\n• Post-Incident Review', dive: `### Incident Response
+<div class="mermaid">
+graph LR
+    A["1. Preparation"] --> B["2. Detection"]
+    B --> C["3. Containment"]
+    C --> D["4. Eradication"]
+    D --> E["5. Recovery"]
+    E --> F["6. Lessons Learned"]
+    F -.-> A
+    style A fill:#3b82f6,stroke:#333,color:#fff
+    style C fill:#ef4444,stroke:#333,color:#fff
+    style F fill:#10b981,stroke:#333,color:#fff
+</div>
+
 Coordinated process for handling security incidents to minimize damage and recover quickly.
 
 #### Incident Response Phases

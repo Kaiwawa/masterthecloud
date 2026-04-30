@@ -644,6 +644,20 @@
         const securityData = [
             {
                 id: 'sec1', icon: '👤', title: 'AWS IAM', desc: 'Identity and Access Management.', summary: '• Least Privilege\n• Users, Groups, Roles\n• MFA Enforcement', dive: `### AWS Identity and Access Management (IAM)
+<div class="mermaid">
+graph TD
+    ROOT["⛔ Root User"] --> ACCOUNT["AWS Account"]
+    ACCOUNT --> GROUP["IAM Group"]
+    GROUP --> USER1["IAM User"]
+    GROUP --> USER2["IAM User"]
+    ACCOUNT --> ROLE["IAM Role"]
+    ROLE --> EC2["EC2 Instance"]
+    ROLE --> LAMBDA["Lambda Function"]
+    style ROOT fill:#ef4444,stroke:#333,color:#fff
+    style GROUP fill:#3b82f6,stroke:#333,color:#fff
+    style ROLE fill:#10b981,stroke:#333,color:#fff
+</div>
+
 IAM allows you to securely control access to AWS services and resources. It is a **Global** service, meaning it applies across all AWS Regions simultaneously.
 
 #### Core Components
@@ -674,6 +688,19 @@ A managed Distributed Denial of Service (DDoS) protection service that safeguard
 If the exam asks about "DDoS Protection", the answer is Shield. If it asks about "financial protection against spikes in compute costs due to an attack", the answer is Shield Advanced.` },
             {
                 id: 'sec3', icon: '🧱', title: 'AWS WAF', desc: 'Web Application Firewall.', summary: '• Layer 7 protection\n• SQL Injection blocks\n• IP Rate limiting', dive: `### AWS WAF
+<div class="mermaid">
+graph LR
+    ATTK(("🌐 Internet<br/>Traffic")) --> SHIELD["AWS Shield<br/>DDoS - L3/L4"]
+    SHIELD --> CF["CloudFront<br/>CDN Edge"]
+    CF --> WAF["AWS WAF<br/>L7 Rules"]
+    WAF --> ALB["Load Balancer"]
+    ALB --> APP["Your Application"]
+    style SHIELD fill:#ef4444,stroke:#333,color:#fff
+    style WAF fill:#f97316,stroke:#333,color:#fff
+    style APP fill:#10b981,stroke:#333,color:#fff
+</div>
+
+
 A Web Application Firewall that helps protect your web applications or APIs against common web exploits and bots that may affect availability, compromise security, or consume excessive resources.
 
 #### Key Features & Use Cases
@@ -1057,6 +1084,18 @@ EC2 provides secure, resizable compute capacity (virtual machines) in the cloud.
 If a scenario requires "full control over the operating system", "installing custom software", or "bringing your own software licenses", EC2 is the correct answer.` },
             {
                 id: 'cm2', icon: '⚡', title: 'AWS Lambda', desc: 'Run code without thinking about servers.', summary: '• Serverless\n• Event-driven\n• Pay per ms', dive: `### AWS Lambda
+<div class="mermaid">
+graph LR
+    S3["S3 Upload"] --> LAMBDA["Lambda Function"]
+    APIGW["API Gateway"] --> LAMBDA
+    SCHED["EventBridge<br/>Schedule"] --> LAMBDA
+    DB["DynamoDB<br/>Stream"] --> LAMBDA
+    LAMBDA --> OUT["Output:<br/>DB, SQS, SNS..."]
+    style LAMBDA fill:#f97316,stroke:#333,color:#fff
+    style OUT fill:#10b981,stroke:#333,color:#fff
+</div>
+
+
 A highly popular **Serverless** compute service that lets you run code without provisioning or managing servers.
 
 #### Key Features
@@ -1332,6 +1371,21 @@ If a question specifically asks for a "JSON document database" or mentions migra
         const networkData = [
             {
                 id: 'n1', icon: '🌐', title: 'Amazon VPC', desc: 'Private network in the cloud.', summary: '• Virtual Private Cloud\n• Subnets & IGW\n• Security Groups & NACLs', dive: `### Amazon Virtual Private Cloud (VPC)
+<div class="mermaid">
+graph TD
+    IGW["🌐 Internet Gateway"] --> PubSub["Public Subnet"]
+    PubSub --> NAT["NAT Gateway"]
+    NAT --> PrivSub["Private Subnet"]
+    PubSub --> WebEC2["EC2 (Web Tier)"]
+    PrivSub --> AppEC2["EC2 (App Tier)"]
+    PrivSub --> RDS["RDS Database"]
+    style IGW fill:#f59e0b,stroke:#333,color:#fff
+    style PubSub fill:#3b82f6,stroke:#333,color:#fff
+    style PrivSub fill:#6366f1,stroke:#333,color:#fff
+    style RDS fill:#10b981,stroke:#333,color:#fff
+</div>
+
+
 VPC lets you provision a logically isolated section of the AWS Cloud where you launch your AWS resources in a virtual network that you define.
 
 #### Core Components
