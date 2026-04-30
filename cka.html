@@ -7,6 +7,7 @@
     <title>CKA (Kubernetes) - Master Study Guide</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script src="js/app.js"></script>
     <script>
         tailwind.config = {
             darkMode: 'class',
@@ -227,6 +228,26 @@
 
         <section id="section-workloads" class="content-section hidden fade-in">
             <div class="mb-12 text-center md:text-left"><h2 class="text-4xl font-black mb-2 text-blue-500">Workloads & Scheduling</h2></div>
+            
+            <div class="mb-10 bg-slate-100 dark:bg-slate-800/50 rounded-3xl p-8 border border-slate-200 dark:border-slate-700">
+                <h3 class="text-xl font-bold mb-6 text-blue-500">Pod Lifecycle States</h3>
+                <div class="flex flex-col md:flex-row items-center justify-between gap-4">
+                    <div class="p-4 bg-white dark:bg-slate-700 rounded-xl shadow border-l-4 border-slate-400 text-center w-full">
+                        <div class="font-bold text-slate-800 dark:text-white">Pending</div>
+                        <div class="text-xs text-slate-500 mt-1">Waiting for Scheduler</div>
+                    </div>
+                    <div class="text-slate-400 text-2xl hidden md:block">➔</div>
+                    <div class="p-4 bg-white dark:bg-slate-700 rounded-xl shadow border-l-4 border-blue-400 text-center w-full">
+                        <div class="font-bold text-slate-800 dark:text-white">ContainerCreating</div>
+                        <div class="text-xs text-slate-500 mt-1">Pulling images & CNI setup</div>
+                    </div>
+                    <div class="text-slate-400 text-2xl hidden md:block">➔</div>
+                    <div class="p-4 bg-white dark:bg-slate-700 rounded-xl shadow border-l-4 border-green-400 text-center w-full">
+                        <div class="font-bold text-slate-800 dark:text-white">Running</div>
+                        <div class="text-xs text-slate-500 mt-1">Bound to Node & Active</div>
+                    </div>
+                </div>
+            </div>
             <div id="workloads-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
         </section>
 
@@ -290,167 +311,19 @@
             { id: 'tr1', icon: '🕵️', title: 'Logging & JSONPATH', desc: 'Extracting data and debugging pods.', summary: '• kubectl logs\n• kubectl describe\n• jsonpath parsing', dive: `### Troubleshooting Pods & Data Extraction\n\n#### Debugging Flow for Failing Pods:\n1. \`kubectl describe pod <name>\`: The single best command. Look at the "Events" section at the very bottom for scheduling errors, image pull errors (\`ErrImagePull\`), or probe failures.\n2. \`kubectl logs <pod-name>\`: View the application's stdout/stderr.\n3. \`kubectl logs <pod-name> -c <container-name>\`: Required if it's a multi-container pod.\n4. \`kubectl logs <pod-name> --previous\`: Crucial if a pod crashed and restarted. This shows you the logs from the dead container just before it died.\n\n#### JSONPATH Queries\nThe CKA requires extracting specific cluster data and outputting it to files.\n- **Get Node IP:** \`kubectl get nodes -o jsonpath='{.items[*].status.addresses[?(@.type=="InternalIP")].address}'\`\n- **Sort by CPU:** \`kubectl top pods --sort-by=cpu\`\n\n#### 💡 Exam Tip\nDO NOT memorize complex jsonpath statements. Instead, output the resource to JSON (\`kubectl get node -o json\`), trace the visual path to the data you want, and then build your \`-o jsonpath='{.path.to.data}'\` statement.` },
             { id: 'tr2', icon: '🔧', title: 'Node & Kubelet Fixes', desc: 'Fixing broken worker nodes.', summary: '• systemctl status kubelet\n• journalctl logs\n• CNI issues', dive: `### Node & Kubelet Troubleshooting\nIf a node status is \`NotReady\`, the API server has lost contact with the node's Kubelet. This is a massive focus area in the CKA exam.\n\n#### Kubelet Debugging Flow:\n1. **SSH into the broken node.** You must be on the node to fix it.\n2. **Check the service:** \`systemctl status kubelet\`. Is it active (running) or failed?\n3. **Read the logs:** If failed, run \`journalctl -u kubelet -f\` to read the system logs. Look for obvious errors like invalid arguments, missing certificates, or port conflicts.\n4. **Check config:** Look at \`/var/lib/kubelet/config.yaml\` or the systemd drop-in files for misconfigurations (like pointing to the wrong API server IP).\n5. **Restart:** After fixing the issue, run \`systemctl daemon-reload\` and \`systemctl restart kubelet\`.\n\n#### 💡 Exam Tip\nIf a node is \`NotReady\` but Kubelet is running fine, check the CNI plugin. A node will remain \`NotReady\` if the networking overlay (Flannel/Weave/Calico) is missing or broken.` },
             { id: 'tr3', icon: '💀', title: 'Control Plane Failures', desc: 'Fixing broken core components.', summary: '• Static Pod manifests\n• Docker/Crictl logs\n• Certificate expiration', dive: `### Control Plane Troubleshooting\nStatic pods (like the API server, Scheduler, or ETCD) are managed directly by Kubelet, not by the API server. \n\n#### Static Pod Location\nTheir manifests live in \`/etc/kubernetes/manifests\`. If you edit a YAML file in that folder and make a syntax error, the control plane component will immediately crash.\n\n#### How to fix a dead API Server:\nIf the API server is dead, you can't use \`kubectl\`. You must debug it like a normal container.\n1. SSH into the Master node.\n2. Use \`crictl ps -a\` or \`docker ps -a\` to find the exited API server container.\n3. Use \`crictl logs <container-id>\` to read the error (e.g., "unknown flag: --insecure-port").\n4. Fix the typo in \`/etc/kubernetes/manifests/kube-apiserver.yaml\`.\n5. Kubelet will auto-restart it.\n\n#### 💡 Exam Tip\nBefore editing *any* static pod manifest during the exam, always make a backup: \`cp /etc/kubernetes/manifests/kube-apiserver.yaml /root/backup-api.yaml\`.` },
-            { id: 'tr4', icon: '🚑', title: 'Cluster Upgrades', desc: 'Safely upgrading kubeadm clusters.', summary: '• kubeadm upgrade\n• cordon & drain\n• kubelet restart', dive: `### Cluster Upgrades (Kubeadm)\nYou will inevitably be asked to upgrade a master or worker node from one minor version to another (e.g., v1.28.1 to v1.29.0). You must follow the precise order of operations.\n\n#### Master Node Upgrade Flow:\n1. **Drain the node:** \`kubectl drain <node-name> --ignore-daemonsets\` (safely evicts pods to other nodes).\n2. **Upgrade kubeadm:** \`apt-mark unhold kubeadm && apt-get update && apt-get install -y kubeadm=1.29.0-00\`.\n3. **Plan:** \`kubeadm upgrade plan\`.\n4. **Apply:** \`kubeadm upgrade apply v1.29.0\`.\n5. **Upgrade Kubelet/Kubectl:** \`apt-get install -y kubelet=1.29.0-00 kubectl=1.29.0-00\`.\n6. **Restart Kubelet:** \`systemctl daemon-reload && systemctl restart kubelet\`.\n7. **Uncordon:** \`kubectl uncordon <node-name>\` (allows pods to schedule on it again).\n\n#### 💡 Exam Tip\nThe exact commands for Ubuntu/Debian upgrades are listed in the official Kubernetes Documentation. During the exam, search the official docs for "Upgrading kubeadm clusters" and simply copy-paste the sequence.` }
+            { id: 'tr4', icon: '🚑', title: 'Cluster Upgrades', desc: 'Safely upgrading kubeadm clusters.', summary: '• kubeadm upgrade\n• cordon & drain\n• kubelet restart', dive: `### Cluster Upgrades (Kubeadm)\nYou will inevitably be asked to upgrade a master or worker node from one minor version to another (e.g., v1.28.1 to v1.29.0). You must follow the precise order of operations.\n\n#### Master Node Upgrade Flow:\n1. **Drain the node:** \`kubectl drain <node-name> --ignore-daemonsets\` (safely evicts pods to other nodes).\n2. **Upgrade kubeadm:** \`apt-mark unhold kubeadm && apt-get update && apt-get install -y kubeadm=1.29.0-00\`.\n3. **Plan:** \`kubeadm upgrade plan\`.\n4. **Apply:** \`kubeadm upgrade apply v1.29.0\`.\n5. **Upgrade Kubelet/Kubectl:** \`apt-get install -y kubelet=1.29.0-00 kubectl=1.29.0-00\`.\n6. **Restart Kubelet:** \`systemctl daemon-reload && systemctl restart kubelet\`.\n7. **Uncordon:** \`kubectl uncordon <node-name>\` (allows pods to schedule on it again).\n\n#### 💡 Exam Tip\nThe exact commands for Ubuntu/Debian upgrades are listed in the official Kubernetes Documentation. During the exam, search the official docs for "Upgrading kubeadm clusters" and simply copy-paste the sequence.` },
+            { id: 'tr5', icon: '🧩', title: 'Debugging Services', desc: 'Fixing network routing issues.', summary: '• Endpoint slices\n• Label Selectors\n• CoreDNS', dive: `### Debugging Services & Routing\nIf a Pod cannot reach a Service, the CKA exam expects you to systematically trace the connection.\n\n#### Diagnostic Flow:\n1. **Check the Service:** \`kubectl describe svc my-service\`. Look closely at the "Endpoints" field. If it says \`<none>\`, the Service is not routing to any pods.\n2. **Check Labels:** Ensure the Service's \`selector\` perfectly matches the Pod's \`labels\`.\n3. **Check Pod Readiness:** If Endpoints are missing but labels match perfectly, check if the Pod is passing its Readiness Probe. Unready pods are intentionally removed from Endpoints.\n4. **Check CoreDNS:** Spin up a temporary busybox pod and run \`nslookup my-service\`. If it fails, the \`coredns\` pods in the \`kube-system\` namespace might be crashing or misconfigured.` }
         ];
 
-        const allServices = [...archData, ...workloadsData, ...networkData, ...storageData, ...troubleshootingData];
-
-        function handleSearch(query) {
-            const resultsBox = document.getElementById('search-results');
-            if (!query.trim()) {
-                resultsBox.classList.add('hidden');
-                return;
-            }
-
-            const filtered = allServices.filter(s => 
-                s.title.toLowerCase().includes(query.toLowerCase()) || 
-                s.desc.toLowerCase().includes(query.toLowerCase())
-            ).slice(0, 5);
-
-            if (filtered.length > 0) {
-                resultsBox.innerHTML = filtered.map(s => `
-                    <div onclick="showDive('${s.id}'); document.getElementById('global-search').value=''" class="p-4 hover:bg-slate-50 dark:hover:bg-slate-700 cursor-pointer border-b border-slate-100 dark:border-slate-700 last:border-0 flex items-center gap-3">
-                        <span class="text-xl">${s.icon}</span>
-                        <div>
-                            <div class="font-bold text-sm text-slate-800 dark:text-white">${s.title}</div>
-                            <div class="text-xs text-slate-500">${s.desc}</div>
-                        </div>
-                    </div>
-                `).join('');
-                resultsBox.classList.remove('hidden');
-            } else {
-                resultsBox.innerHTML = `<div class="p-4 text-xs text-slate-400">No results found.</div>`;
-                resultsBox.classList.remove('hidden');
-            }
-        }
-
-        document.addEventListener('click', (e) => {
-            if (!e.target.closest('#global-search')) {
-                document.getElementById('search-results').classList.add('hidden');
-            }
+        const app = new StudyGuideApp({
+            grids: [
+                { id: 'arch-grid', data: archData, border: 'border-indigo-500', grad: 'from-indigo-500/20', color: 'indigo-500' },
+                { id: 'workloads-grid', data: workloadsData, border: 'border-blue-500', grad: 'from-blue-500/20', color: 'blue-500' },
+                { id: 'networking-grid', data: networkData, border: 'border-cyan-500', grad: 'from-cyan-500/20', color: 'cyan-500' },
+                { id: 'storage-grid', data: storageData, border: 'border-purple-500', grad: 'from-purple-500/20', color: 'purple-500' },
+                { id: 'troubleshooting-grid', data: troubleshootingData, border: 'border-pink-500', grad: 'from-pink-500/20', color: 'pink-500' }
+            ]
         });
-
-        function toggleTheme() {
-            const html = document.documentElement;
-            const icon = document.getElementById('theme-icon');
-            if (html.classList.contains('dark')) {
-                html.classList.remove('dark');
-                icon.innerText = '☀️';
-            } else {
-                html.classList.add('dark');
-                icon.innerText = '🌙';
-            }
-        }
-
-        function createCard(c, borderColorClass, gradientFromClass) {
-            const textColorClass = borderColorClass.replace('border-', 'text-');
-            const bgColorClass = borderColorClass.replace('border-', 'bg-');
-            const hoverBgColorClass = `hover:${bgColorClass.replace('500', '700')}`;
-            return `
-            <div class="flip-card h-[320px] cursor-pointer group" onclick="this.classList.toggle('flipped')">
-                <div class="flip-card-inner h-full w-full relative transform-style-3d shadow-xl rounded-[1.5rem]">
-                    <div class="absolute inset-0 backface-hidden bg-white dark:bg-slate-800/60 backdrop-blur-xl rounded-[1.5rem] flex flex-col items-center justify-center p-6 border-2 border-slate-200 dark:border-slate-700/50 group-hover:border-brand-accent/50 transition-all">
-                        <div class="w-16 h-16 bg-gradient-to-br ${gradientFromClass} to-transparent rounded-2xl flex items-center justify-center text-3xl mb-4">${c.icon}</div>
-                        <h4 class="font-black text-lg text-slate-800 dark:text-white tracking-tight text-center">${c.title}</h4>
-                        <p class="text-slate-400 text-[10px] mt-2 uppercase tracking-[0.2em] font-black">Flip for Details</p>
-                    </div>
-                    <div class="absolute inset-0 backface-hidden rotate-y-180 bg-slate-900 dark:bg-slate-900 rounded-[1.5rem] flex flex-col p-6 border-2 ${borderColorClass}">
-                        <p class="text-xs font-black ${textColorClass} uppercase tracking-widest mb-2">${c.title}</p>
-                        <p class="text-slate-300 text-s mb-4 leading-relaxed line-clamp-2">${c.desc}</p>
-                        <div class="space-y-1.5 mb-4">
-                            ${c.summary.split('\n').map(line => `<div class="text-[12px] text-slate-400 font-medium">${line}</div>`).join('')}
-                        </div>
-                        <button onclick="event.stopPropagation(); showDive('${c.id}')" class="mt-auto w-full ${bgColorClass} text-white py-3 rounded-xl text-xs font-black transition-all ${hoverBgColorClass}">DEEP DIVE →</button>
-                    </div>
-                </div>
-            </div>`;
-        }
-
-        function renderAll() {
-            const grids = [
-                { id: 'arch-grid', data: archData, border: 'border-indigo-500', grad: 'from-indigo-500/20' },
-                { id: 'workloads-grid', data: workloadsData, border: 'border-blue-500', grad: 'from-blue-500/20' },
-                { id: 'networking-grid', data: networkData, border: 'border-cyan-500', grad: 'from-cyan-500/20' },
-                { id: 'storage-grid', data: storageData, border: 'border-purple-500', grad: 'from-purple-500/20' },
-                { id: 'troubleshooting-grid', data: troubleshootingData, border: 'border-pink-500', grad: 'from-pink-500/20' }
-            ];
-
-            grids.forEach(g => {
-                const el = document.getElementById(g.id);
-                if (el) el.innerHTML = g.data.map(d => createCard(d, g.border, g.grad)).join('');
-            });
-        }
-
-        function showDive(id) {
-            const c = allServices.find(x => x.id === id);
-            if(!c) return;
-
-            const grids = [
-                { data: archData, color: 'indigo-500' },
-                { data: workloadsData, color: 'blue-500' },
-                { data: networkData, color: 'cyan-500' },
-                { data: storageData, color: 'purple-500' },
-                { data: troubleshootingData, color: 'pink-500' }
-            ];
-
-            let domainColor = 'indigo-500';
-            for (const grid of grids) {
-                if (grid.data.some(item => item.id === id)) {
-                    domainColor = grid.color;
-                    break;
-                }
-            }
-
-            const textColorClass = `text-${domainColor}`;
-            const iconBgColorClass = `bg-${domainColor}/20`;
-
-            document.getElementById('m-title').innerText = c.title;
-            document.getElementById('m-icon').innerText = c.icon;
-            
-            const mIconBg = document.getElementById('m-icon-bg');
-            const mSubtitle = document.querySelector('#deep-dive-modal p.uppercase');
-
-            const colors = ['indigo-500', 'blue-500', 'cyan-500', 'purple-500', 'pink-500'];
-            const textColors = colors.map(c => `text-${c}`);
-            const bgColors = colors.map(c => `bg-${c}/20`);
-            
-            mIconBg.classList.remove(...bgColors, 'bg-brand-accent/20');
-            mIconBg.classList.add(iconBgColorClass);
-            
-            mSubtitle.classList.remove(...textColors, 'text-brand-accent');
-            mSubtitle.classList.add(textColorClass);
-
-            document.getElementById('m-content').innerHTML = marked.parse(c.dive);
-            const m = document.getElementById('deep-dive-modal');
-            m.classList.add('active');
-            setTimeout(() => { m.classList.add('opacity-100'); m.querySelector('div').classList.add('scale-100'); }, 10);
-        }
-
-        function closeModal(e) { if(e) e.stopPropagation(); const m = document.getElementById('deep-dive-modal'); m.classList.remove('opacity-100'); m.querySelector('div').classList.remove('scale-100'); setTimeout(() => m.classList.remove('active'), 300); }
-
-        function goHome() {
-            const isOnDashboard = !document.getElementById('section-home').classList.contains('hidden');
-            if (isOnDashboard) {
-                window.location.href = 'index.html';
-            } else {
-                navigateTo('section-home');
-            }
-        }
-        
-        function openSidebar() { document.getElementById('sidebar-overlay').classList.remove('hidden'); setTimeout(() => { document.getElementById('sidebar-overlay').classList.remove('opacity-0'); document.getElementById('left-sidebar').classList.remove('-translate-x-full'); }, 10); }
-        function closeSidebar() { document.getElementById('sidebar-overlay').classList.add('opacity-0'); document.getElementById('left-sidebar').classList.add('-translate-x-full'); setTimeout(() => { document.getElementById('sidebar-overlay').classList.add('hidden'); }, 300); }
-
-        function navigateTo(targetId) {
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-            document.querySelectorAll('.content-section').forEach(s => s.classList.add('hidden'));
-            document.getElementById(targetId).classList.remove('hidden');
-            document.querySelectorAll('.nav-btn').forEach(x => { x.classList.remove('bg-brand-accent', 'text-white'); x.classList.add('text-slate-500'); });
-            const btn = document.querySelector(`.nav-btn[data-target="${targetId}"]`);
-            if (btn) { btn.classList.add('bg-brand-accent', 'text-white'); btn.classList.remove('text-slate-500'); }
-            closeSidebar();
-        }
-
-        window.onload = renderAll;
     </script>
 </body>
 </html>

@@ -6,6 +6,7 @@
     <link rel="icon" type="image/x-icon" href="images/secplus.ico">
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script src="js/app.js"></script>
     <script>
         tailwind.config = {
             darkMode: 'class',
@@ -175,6 +176,27 @@
 
         <section id="section-operations" class="content-section hidden fade-in">
             <div class="mb-12 text-center md:text-left"><h2 class="text-4xl font-black mb-2 text-orange-500">Operations &amp; Incident Response</h2></div>
+            <div class="mb-10 bg-slate-100 dark:bg-slate-800/50 rounded-3xl p-8 border border-slate-200 dark:border-slate-700">
+                <h3 class="text-xl font-bold mb-6 text-orange-500">Incident Response Lifecycle</h3>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
+                    <div class="p-4 bg-white dark:bg-slate-700 rounded-xl shadow-sm border-t-4 border-slate-400">
+                        <div class="font-bold text-slate-800 dark:text-white">1. Preparation</div>
+                        <div class="text-xs text-slate-500 mt-1">Tools, Policies, Training</div>
+                    </div>
+                    <div class="p-4 bg-white dark:bg-slate-700 rounded-xl shadow-sm border-t-4 border-orange-400">
+                        <div class="font-bold text-slate-800 dark:text-white">2. Detection</div>
+                        <div class="text-xs text-slate-500 mt-1">SIEM Alerts, Triage</div>
+                    </div>
+                    <div class="p-4 bg-white dark:bg-slate-700 rounded-xl shadow-sm border-t-4 border-red-400">
+                        <div class="font-bold text-slate-800 dark:text-white">3. Containment</div>
+                        <div class="text-xs text-slate-500 mt-1">Isolate, Eradicate, Recover</div>
+                    </div>
+                    <div class="p-4 bg-white dark:bg-slate-700 rounded-xl shadow-sm border-t-4 border-green-400">
+                        <div class="font-bold text-slate-800 dark:text-white">4. Post-Incident</div>
+                        <div class="text-xs text-slate-500 mt-1">Lessons Learned, Reports</div>
+                    </div>
+                </div>
+            </div>
             <div id="operations-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
         </section>
 

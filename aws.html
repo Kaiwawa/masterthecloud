@@ -7,6 +7,7 @@
     <link rel="icon" type="image/x-icon" href="images/aws.ico">
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script src="js/app.js"></script>
     <script>
         tailwind.config = {
             darkMode: 'class',
@@ -235,6 +236,22 @@
 
         <section id="section-storage" class="content-section hidden fade-in">
             <div class="mb-12 text-center md:text-left"><h2 class="text-4xl font-black mb-2 text-green-500">Storage Services</h2></div>
+            <div class="mb-10 bg-slate-100 dark:bg-slate-800/50 rounded-3xl p-8 border border-slate-200 dark:border-slate-700">
+                <h3 class="text-xl font-bold mb-6 text-green-500">S3 Storage Class Waterfall</h3>
+                <div class="flex flex-col gap-2">
+                    <div class="p-3 bg-green-100 dark:bg-green-900/30 rounded-lg flex justify-between items-center border border-green-200">
+                        <span class="font-bold text-green-800 dark:text-green-300">S3 Standard</span> <span class="text-xs text-green-700 dark:text-green-400">Active Data / Millisecond Access</span>
+                    </div>
+                    <div class="w-4 h-4 border-l-2 border-slate-300 ml-6"></div>
+                    <div class="p-3 bg-white dark:bg-slate-700 rounded-lg flex justify-between items-center border border-slate-200">
+                        <span class="font-bold text-slate-800 dark:text-white">S3 Standard-IA</span> <span class="text-xs text-slate-500">Infrequent Access (≥ 30 Days)</span>
+                    </div>
+                    <div class="w-4 h-4 border-l-2 border-slate-300 ml-6"></div>
+                    <div class="p-3 bg-slate-200 dark:bg-slate-800 rounded-lg flex justify-between items-center border border-slate-300 text-slate-500">
+                        <span class="font-bold text-slate-600 dark:text-slate-400">S3 Glacier Deep Archive</span> <span class="text-xs">Long-term Retention (Years)</span>
+                    </div>
+                </div>
+            </div>
             <div id="storage-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
         </section>
 
@@ -1235,132 +1252,20 @@ Retaining means keeping workloads on-premises or in their current environment. E
 - **Latency:** The workload requires an ultra-low latency connection to local factory equipment (though this is often solved later via hybrid solutions like **AWS Outposts**).` }
         ];
 
-        const allServices = [...securityData, ...mgmtData, ...cafData, ...wafData, ...computeData, ...storageData, ...databaseData, ...networkData, ...billingData, ...rsData];
-
-        function handleSearch(query) {
-            const resultsBox = document.getElementById('search-results');
-            if (!query.trim()) {
-                resultsBox.classList.add('hidden');
-                return;
-            }
-
-            const filtered = allServices.filter(s => 
-                s.title.toLowerCase().includes(query.toLowerCase()) || 
-                s.desc.toLowerCase().includes(query.toLowerCase())
-            ).slice(0, 5);
-
-            if (filtered.length > 0) {
-                resultsBox.innerHTML = filtered.map(s => `
-                    <div onclick="showDive('${s.id}'); document.getElementById('global-search').value=''" class="p-4 hover:bg-slate-50 dark:hover:bg-slate-700 cursor-pointer border-b border-slate-100 dark:border-slate-700 last:border-0 flex items-center gap-3">
-                        <span class="text-xl">${s.icon}</span>
-                        <div>
-                            <div class="font-bold text-sm text-slate-800 dark:text-white">${s.title}</div>
-                            <div class="text-xs text-slate-500">${s.desc}</div>
-                        </div>
-                    </div>
-                `).join('');
-                resultsBox.classList.remove('hidden');
-            } else {
-                resultsBox.innerHTML = `<div class="p-4 text-xs text-slate-400">No results found.</div>`;
-                resultsBox.classList.remove('hidden');
-            }
-        }
-
-        document.addEventListener('click', (e) => {
-            if (!e.target.closest('#global-search')) {
-                document.getElementById('search-results').classList.add('hidden');
-            }
+        const app = new StudyGuideApp({
+            grids: [
+                { id: 'caf-grid', data: cafData, border: 'border-brand-accent', grad: 'from-brand-accent/20', color: 'brand-accent' },
+                { id: 'waf-grid', data: wafData, border: 'border-blue-500', grad: 'from-blue-500/20', color: 'blue-500' },
+                { id: 'security-grid', data: securityData, border: 'border-red-500', grad: 'from-red-500/20', color: 'red-500' },
+                { id: 'mgmt-grid', data: mgmtData, border: 'border-pink-500', grad: 'from-pink-500/20', color: 'pink-500' },
+                { id: 'compute-grid', data: computeData, border: 'border-orange-500', grad: 'from-orange-500/20', color: 'orange-500' },
+                { id: 'storage-grid', data: storageData, border: 'border-green-500', grad: 'from-green-500/20', color: 'green-500' },
+                { id: 'database-grid', data: databaseData, border: 'border-blue-500', grad: 'from-blue-500/20', color: 'blue-500' },
+                { id: 'network-grid', data: networkData, border: 'border-purple-500', grad: 'from-purple-500/20', color: 'purple-500' },
+                { id: 'billing-grid', data: billingData, border: 'border-emerald-500', grad: 'from-emerald-500/20', color: 'emerald-500' },
+                { id: 'rs-grid', data: rsData, border: 'border-teal-500', grad: 'from-teal-500/20', color: 'teal-500' }
+            ]
         });
-
-        function toggleTheme() {
-            const html = document.documentElement;
-            const icon = document.getElementById('theme-icon');
-            if (html.classList.contains('dark')) {
-                html.classList.remove('dark');
-                icon.innerText = '☀️';
-            } else {
-                html.classList.add('dark');
-                icon.innerText = '🌙';
-            }
-        }
-
-        function createCard(c, borderColorClass, gradientFromClass) {
-            return `
-            <div class="flip-card h-[320px] cursor-pointer group" onclick="this.classList.toggle('flipped')">
-                <div class="flip-card-inner h-full w-full relative transform-style-3d shadow-xl rounded-[1.5rem]">
-                    <div class="absolute inset-0 backface-hidden bg-white dark:bg-slate-800/60 backdrop-blur-xl rounded-[1.5rem] flex flex-col items-center justify-center p-6 border-2 border-slate-200 dark:border-slate-700/50 group-hover:border-brand-accent/50 transition-all">
-                        <div class="w-16 h-16 bg-gradient-to-br ${gradientFromClass} to-transparent rounded-2xl flex items-center justify-center text-3xl mb-4">${c.icon}</div>
-                        <h4 class="font-black text-lg text-slate-800 dark:text-white tracking-tight text-center">${c.title}</h4>
-                        <p class="text-slate-400 text-[10px] mt-2 uppercase tracking-[0.2em] font-black">Flip for Details</p>
-                    </div>
-                    <div class="absolute inset-0 backface-hidden rotate-y-180 bg-slate-900 dark:bg-slate-900 rounded-[1.5rem] flex flex-col p-6 border-2 ${borderColorClass}">
-                        <p class="text-xs font-black text-brand-accent uppercase tracking-widest mb-2">${c.title}</p>
-                        <p class="text-slate-300 text-s mb-4 leading-relaxed line-clamp-2">${c.desc}</p>
-                        <div class="space-y-1.5 mb-4">
-                            ${c.summary.split('\n').map(line => `<div class="text-[12px] text-slate-400 font-medium">${line}</div>`).join('')}
-                        </div>
-                        <button onclick="event.stopPropagation(); showDive('${c.id}')" class="mt-auto w-full bg-brand-accent text-slate-900 py-3 rounded-xl text-xs font-black transition-all hover:bg-white">DEEP DIVE →</button>
-                    </div>
-                </div>
-            </div>`;
-        }
-
-        function renderAll() {
-            const grids = [
-                { id: 'caf-grid', data: cafData, border: 'border-brand-accent', grad: 'from-brand-accent/20' },
-                { id: 'waf-grid', data: wafData, border: 'border-blue-500', grad: 'from-blue-500/20' },
-                { id: 'security-grid', data: securityData, border: 'border-red-500', grad: 'from-red-500/20' },
-                { id: 'mgmt-grid', data: mgmtData, border: 'border-pink-500', grad: 'from-pink-500/20' },
-                { id: 'compute-grid', data: computeData, border: 'border-orange-500', grad: 'from-orange-500/20' },
-                { id: 'storage-grid', data: storageData, border: 'border-green-500', grad: 'from-green-500/20' },
-                { id: 'database-grid', data: databaseData, border: 'border-blue-500', grad: 'from-blue-500/20' },
-                { id: 'network-grid', data: networkData, border: 'border-purple-500', grad: 'from-purple-500/20' },
-                { id: 'billing-grid', data: billingData, border: 'border-emerald-500', grad: 'from-emerald-500/20' },
-                { id: 'rs-grid', data: rsData, border: 'border-teal-500', grad: 'from-teal-500/20' }
-            ];
-
-            grids.forEach(g => {
-                const el = document.getElementById(g.id);
-                if (el) el.innerHTML = g.data.map(d => createCard(d, g.border, g.grad)).join('');
-            });
-        }
-
-        function showDive(id) {
-            const c = allServices.find(x => x.id === id);
-            if(!c) return;
-            document.getElementById('m-title').innerText = c.title;
-            document.getElementById('m-icon').innerText = c.icon;
-            document.getElementById('m-content').innerHTML = marked.parse(c.dive);
-            const m = document.getElementById('deep-dive-modal');
-            m.classList.add('active');
-            setTimeout(() => { m.classList.add('opacity-100'); m.querySelector('div').classList.add('scale-100'); }, 10);
-        }
-
-        function closeModal(e) { if(e) e.stopPropagation(); const m = document.getElementById('deep-dive-modal'); m.classList.remove('opacity-100'); m.querySelector('div').classList.remove('scale-100'); setTimeout(() => m.classList.remove('active'), 300); }
-        
-        function goHome() {
-            const isOnDashboard = !document.getElementById('section-home').classList.contains('hidden');
-            if (isOnDashboard) {
-                window.location.href = 'index.html';
-            } else {
-                navigateTo('section-home');
-            }
-        }
-        
-        function openSidebar() { document.getElementById('sidebar-overlay').classList.remove('hidden'); setTimeout(() => { document.getElementById('sidebar-overlay').classList.remove('opacity-0'); document.getElementById('left-sidebar').classList.remove('-translate-x-full'); }, 10); }
-        function closeSidebar() { document.getElementById('sidebar-overlay').classList.add('opacity-0'); document.getElementById('left-sidebar').classList.add('-translate-x-full'); setTimeout(() => { document.getElementById('sidebar-overlay').classList.add('hidden'); }, 300); }
-
-        function navigateTo(targetId) {
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-            document.querySelectorAll('.content-section').forEach(s => s.classList.add('hidden'));
-            document.getElementById(targetId).classList.remove('hidden');
-            document.querySelectorAll('.nav-btn').forEach(x => { x.classList.remove('bg-brand-accent', 'text-slate-900'); x.classList.add('text-slate-500'); });
-            const btn = document.querySelector(`.nav-btn[data-target="${targetId}"]`);
-            if (btn) { btn.classList.add('bg-brand-accent', 'text-slate-900'); btn.classList.remove('text-slate-500'); }
-            closeSidebar();
-        }
-
-        window.onload = renderAll;
     </script>
 </body>
 </html>

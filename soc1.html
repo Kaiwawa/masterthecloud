@@ -7,6 +7,7 @@
     <title>AICPA SOC 1 - Master Study Guide</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script src="js/app.js"></script>
     <script>
         tailwind.config = {
             darkMode: 'class',
@@ -236,6 +237,31 @@
                 <p class="text-slate-500 dark:text-slate-400 italic">How CPA firms collect evidence and issue opinions.</p>
             </div>
             
+            <div class="mb-10 bg-slate-100 dark:bg-slate-800/50 rounded-3xl p-8 border border-slate-200 dark:border-slate-700">
+                <h3 class="text-xl font-bold mb-6 text-cyan-500">The SOC 1 Audit Timeline</h3>
+                <div class="flex flex-col md:flex-row items-center justify-between gap-2">
+                    <div class="p-4 bg-white dark:bg-slate-700 rounded-xl shadow text-center w-full">
+                        <div class="font-bold text-cyan-600 dark:text-cyan-400">Readiness</div>
+                        <div class="text-xs text-slate-500">Gap Assessment</div>
+                    </div>
+                    <div class="text-slate-400 text-xl hidden md:block">➔</div>
+                    <div class="p-4 bg-white dark:bg-slate-700 rounded-xl shadow text-center w-full">
+                        <div class="font-bold text-cyan-600 dark:text-cyan-400">Type I</div>
+                        <div class="text-xs text-slate-500">Point-in-Time Design</div>
+                    </div>
+                    <div class="text-slate-400 text-xl hidden md:block">➔</div>
+                    <div class="p-4 bg-white dark:bg-slate-700 rounded-xl shadow text-center w-full">
+                        <div class="font-bold text-cyan-600 dark:text-cyan-400">Observation</div>
+                        <div class="text-xs text-slate-500">6-12 Month Period</div>
+                    </div>
+                    <div class="text-slate-400 text-xl hidden md:block">➔</div>
+                    <div class="p-4 bg-cyan-50 dark:bg-cyan-900/30 border border-cyan-200 rounded-xl shadow text-center w-full">
+                        <div class="font-bold text-cyan-600 dark:text-cyan-400">Type II</div>
+                        <div class="text-xs text-slate-500">Operating Effectiveness</div>
+                    </div>
+                </div>
+            </div>
+            
             <div class="mb-10 p-6 bg-cyan-500/10 border border-cyan-500/20 rounded-2xl">
                 <h4 class="font-bold text-cyan-600 dark:text-cyan-400 mb-2">The Sampling Golden Rule</h4>
                 <p class="text-sm text-slate-600 dark:text-slate-300">Auditors do not test every single event that occurred over the year. Instead, they request a complete <strong>Population</strong> (e.g., a list of all 1,000 code deployments), and randomly select a <strong>Sample</strong> (usually 25 to 40 items) to test comprehensively via Inspection.</p>
@@ -286,162 +312,14 @@
             { id: 'a3', icon: '⚖️', title: 'The Auditor\'s Opinion', desc: 'The final result of the audit.', summary: '• Unqualified (Clean)\n• Qualified (Except for...)\n• Adverse / Disclaimer', dive: `### The Auditor's Opinion\nThe most critical component of the SOC 1 report. Found in Section 1, the independent CPA firm issues a formal, legally-binding opinion on the fairness of the presentation, the suitability of the design, and the operating effectiveness of the controls.\n\n#### Types of Opinions:\n1. **Unqualified (Clean Opinion):** The absolute best outcome. The controls are designed properly and operate effectively. No material issues were found.\n2. **Qualified Opinion:** "Except for..." The report is mostly good, but one or more specific, material controls failed testing. Customers will read this closely to see if the failure impacts them.\n3. **Adverse Opinion:** The worst outcome. The system is fundamentally broken, management's descriptions are highly misleading, or controls failed globally across the board. This can severely damage a business's reputation.\n4. **Disclaimer of Opinion:** The auditor could not form an opinion at all, usually because management refused to provide sufficient evidence or restricted the auditor's access to systems.` }
         ];
 
-        const allServices = [...frameworkData, ...controlsData, ...auditData];
-
-        function handleSearch(query) {
-            const resultsBox = document.getElementById('search-results');
-            if (!query.trim()) {
-                resultsBox.classList.add('hidden');
-                return;
-            }
-
-            const filtered = allServices.filter(s => 
-                s.title.toLowerCase().includes(query.toLowerCase()) || 
-                s.desc.toLowerCase().includes(query.toLowerCase())
-            ).slice(0, 5);
-
-            if (filtered.length > 0) {
-                resultsBox.innerHTML = filtered.map(s => `
-                    <div onclick="showDive('${s.id}'); document.getElementById('global-search').value=''" class="p-4 hover:bg-slate-50 dark:hover:bg-slate-700 cursor-pointer border-b border-slate-100 dark:border-slate-700 last:border-0 flex items-center gap-3">
-                        <span class="text-xl">${s.icon}</span>
-                        <div>
-                            <div class="font-bold text-sm text-slate-800 dark:text-white">${s.title}</div>
-                            <div class="text-xs text-slate-500">${s.desc}</div>
-                        </div>
-                    </div>
-                `).join('');
-                resultsBox.classList.remove('hidden');
-            } else {
-                resultsBox.innerHTML = `<div class="p-4 text-xs text-slate-400">No results found.</div>`;
-                resultsBox.classList.remove('hidden');
-            }
-        }
-
-        document.addEventListener('click', (e) => {
-            if (!e.target.closest('#global-search')) {
-                document.getElementById('search-results').classList.add('hidden');
-            }
+        const app = new StudyGuideApp({
+            grids: [
+                { id: 'framework-grid', data: frameworkData, border: 'border-teal-500', grad: 'from-teal-500/20', color: 'teal-500' },
+                { id: 'concepts-grid', data: frameworkData, border: 'border-blue-500', grad: 'from-blue-500/20', color: 'blue-500' },
+                { id: 'controls-grid', data: controlsData, border: 'border-emerald-500', grad: 'from-emerald-500/20', color: 'emerald-500' },
+                { id: 'audit-grid', data: auditData, border: 'border-cyan-500', grad: 'from-cyan-500/20', color: 'cyan-500' }
+            ]
         });
-
-        function toggleTheme() {
-            const html = document.documentElement;
-            const icon = document.getElementById('theme-icon');
-            if (html.classList.contains('dark')) {
-                html.classList.remove('dark');
-                icon.innerText = '☀️';
-            } else {
-                html.classList.add('dark');
-                icon.innerText = '🌙';
-            }
-        }
-
-        function createCard(c, borderColorClass, gradientFromClass) {
-            const textColorClass = borderColorClass.replace('border-', 'text-');
-            const bgColorClass = borderColorClass.replace('border-', 'bg-');
-            const hoverBgColorClass = `hover:${bgColorClass.replace('500', '700')}`;
-            return `
-            <div class="flip-card h-[320px] cursor-pointer group" onclick="this.classList.toggle('flipped')">
-                <div class="flip-card-inner h-full w-full relative transform-style-3d shadow-xl rounded-[1.5rem]">
-                    <div class="absolute inset-0 backface-hidden bg-white dark:bg-slate-800/60 backdrop-blur-xl rounded-[1.5rem] flex flex-col items-center justify-center p-6 border-2 border-slate-200 dark:border-slate-700/50 group-hover:border-brand-accent/50 transition-all">
-                        <div class="w-16 h-16 bg-gradient-to-br ${gradientFromClass} to-transparent rounded-2xl flex items-center justify-center text-3xl mb-4">${c.icon}</div>
-                        <h4 class="font-black text-lg text-slate-800 dark:text-white tracking-tight text-center">${c.title}</h4>
-                        <p class="text-slate-400 text-[10px] mt-2 uppercase tracking-[0.2em] font-black">Flip for Details</p>
-                    </div>
-                    <div class="absolute inset-0 backface-hidden rotate-y-180 bg-slate-900 dark:bg-slate-900 rounded-[1.5rem] flex flex-col p-6 border-2 ${borderColorClass}">
-                        <p class="text-xs font-black ${textColorClass} uppercase tracking-widest mb-2">${c.title}</p>
-                        <p class="text-slate-300 text-s mb-4 leading-relaxed line-clamp-2">${c.desc}</p>
-                        <div class="space-y-1.5 mb-4">
-                            ${c.summary.split('\n').map(line => `<div class="text-[12px] text-slate-400 font-medium">${line}</div>`).join('')}
-                        </div>
-                        <button onclick="event.stopPropagation(); showDive('${c.id}')" class="mt-auto w-full ${bgColorClass} text-white py-3 rounded-xl text-xs font-black transition-all ${hoverBgColorClass}">DEEP DIVE →</button>
-                    </div>
-                </div>
-            </div>`;
-        }
-
-        function renderAll() {
-            const grids = [
-                { id: 'framework-grid', data: frameworkData, border: 'border-teal-500', grad: 'from-teal-500/20' },
-                { id: 'concepts-grid', data: frameworkData, border: 'border-blue-500', grad: 'from-blue-500/20' },
-                { id: 'controls-grid', data: controlsData, border: 'border-emerald-500', grad: 'from-emerald-500/20' },
-                { id: 'audit-grid', data: auditData, border: 'border-cyan-500', grad: 'from-cyan-500/20' }
-            ];
-
-            grids.forEach(g => {
-                const el = document.getElementById(g.id);
-                if (el) el.innerHTML = g.data.map(d => createCard(d, g.border, g.grad)).join('');
-            });
-        }
-
-        function showDive(id) {
-            const c = allServices.find(x => x.id === id);
-            if(!c) return;
-
-            const grids = [
-                { data: frameworkData, color: 'teal-500' },
-                { data: frameworkData, color: 'blue-500' },
-                { data: controlsData, color: 'emerald-500' },
-                { data: auditData, color: 'cyan-500' }
-            ];
-
-            let domainColor = 'teal-500';
-            for (const grid of grids) {
-                if (grid.data.some(item => item.id === id)) {
-                    domainColor = grid.color;
-                    break;
-                }
-            }
-
-            const textColorClass = `text-${domainColor}`;
-            const iconBgColorClass = `bg-${domainColor}/20`;
-
-            document.getElementById('m-title').innerText = c.title;
-            document.getElementById('m-icon').innerText = c.icon;
-            
-            const mIconBg = document.getElementById('m-icon-bg');
-            const mSubtitle = document.querySelector('#deep-dive-modal p.uppercase');
-
-            const colors = ['teal-500', 'emerald-500', 'cyan-500', 'blue-500', 'indigo-500'];
-            const textColors = colors.map(c => `text-${c}`);
-            const bgColors = colors.map(c => `bg-${c}/20`);
-            
-            mIconBg.classList.remove(...bgColors, 'bg-brand-accent/20');
-            mIconBg.classList.add(iconBgColorClass);
-            
-            mSubtitle.classList.remove(...textColors, 'text-brand-accent');
-            mSubtitle.classList.add(textColorClass);
-
-            document.getElementById('m-content').innerHTML = marked.parse(c.dive);
-            const m = document.getElementById('deep-dive-modal');
-            m.classList.add('active');
-            setTimeout(() => { m.classList.add('opacity-100'); m.querySelector('div').classList.add('scale-100'); }, 10);
-        }
-
-        function closeModal(e) { if(e) e.stopPropagation(); const m = document.getElementById('deep-dive-modal'); m.classList.remove('opacity-100'); m.querySelector('div').classList.remove('scale-100'); setTimeout(() => m.classList.remove('active'), 300); }
-
-        function goHome() {
-            const isOnDashboard = !document.getElementById('section-home').classList.contains('hidden');
-            if (isOnDashboard) {
-                window.location.href = 'index.html';
-            } else {
-                navigateTo('section-home');
-            }
-        }
-        
-        function openSidebar() { document.getElementById('sidebar-overlay').classList.remove('hidden'); setTimeout(() => { document.getElementById('sidebar-overlay').classList.remove('opacity-0'); document.getElementById('left-sidebar').classList.remove('-translate-x-full'); }, 10); }
-        function closeSidebar() { document.getElementById('sidebar-overlay').classList.add('opacity-0'); document.getElementById('left-sidebar').classList.add('-translate-x-full'); setTimeout(() => { document.getElementById('sidebar-overlay').classList.add('hidden'); }, 300); }
-
-        function navigateTo(targetId) {
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-            document.querySelectorAll('.content-section').forEach(s => s.classList.add('hidden'));
-            document.getElementById(targetId).classList.remove('hidden');
-            document.querySelectorAll('.nav-btn').forEach(x => { x.classList.remove('bg-brand-accent', 'text-white'); x.classList.add('text-slate-500'); });
-            const btn = document.querySelector(`.nav-btn[data-target="${targetId}"]`);
-            if (btn) { btn.classList.add('bg-brand-accent', 'text-white'); btn.classList.remove('text-slate-500'); }
-            closeSidebar();
-        }
-
-        window.onload = renderAll;
     </script>
 </body>
 </html>
