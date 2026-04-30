@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="images/k8s.ico">
+    <title>CKA (Kubernetes) - Master Study Guide</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            accent: '#6366f1', // indigo-500
+                            accentHover: '#4f46e5', // indigo-600
+                            dark: '#0f172a'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap');
+        body { font-family: 'Inter', sans-serif; transition: background-color 0.3s ease; }
+        
+        .perspective-1000 { perspective: 1000px; }
+        .transform-style-3d { transform-style: preserve-3d; }
+        .backface-hidden { backface-visibility: hidden; -webkit-backface-visibility: hidden; }
+        .rotate-y-180 { transform: rotateY(180deg); }
+        .flip-card-inner { transition: transform 0.8s cubic-bezier(0.34, 1.56, 0.64, 1); transform-style: preserve-3d; }
+        .flip-card.flipped .flip-card-inner { transform: rotateY(180deg); }
+        
+        .fade-in { animation: fadeIn 0.4s ease-out forwards; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        
+        .md-content h3 { font-weight: 800; font-size: 1.5rem; margin-top: 1rem; margin-bottom: 1rem; color: #6366f1; border-left: 5px solid #6366f1; padding-left: 1rem; }
+        .md-content h4 { font-weight: 700; font-size: 1.1rem; margin-top: 1.5rem; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.05em; }
+        .md-content p { margin-bottom: 1rem; line-height: 1.8; font-size: 1.05rem; }
+        .md-content ul { list-style-type: none; margin-bottom: 1.5rem; }
+        .md-content li { margin-bottom: 0.75rem; position: relative; padding-left: 1.75rem; line-height: 1.6; }
+        .md-content li::before { content: "✦"; position: absolute; left: 0; color: #6366f1; font-weight: bold; }
+        
+        .custom-scrollbar::-webkit-scrollbar { width: 8px; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: rgba(0,0,0,0.05); }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: #475569; border-radius: 10px; }
+        
+        #deep-dive-modal.active { display: flex !important; }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+    </style>
+</head>
+<body class="min-h-screen bg-slate-50 dark:bg-[#0f172a] text-slate-900 dark:text-slate-200 antialiased overflow-x-hidden">
+
+    <header class="sticky top-0 z-40 bg-white/80 dark:bg-[#0f172a]/80 backdrop-blur-xl border-b border-slate-200 dark:border-slate-800 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 h-20 grid grid-cols-3 items-center gap-4">
+            <div class="flex items-center justify-start gap-4">
+                <button onclick="goHome()" class="hidden sm:flex p-2.5 bg-slate-100 dark:bg-slate-800 rounded-xl hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors shrink-0 text-slate-500 dark:text-slate-400 hover:text-brand-accent dark:hover:text-brand-accent items-center justify-center" title="Home">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1m-6 0h6"></path></svg>
+                </button>
+                <button onclick="openSidebar()" class="p-2.5 px-4 bg-slate-100 dark:bg-slate-800 rounded-xl hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors shrink-0 flex items-center gap-2 text-slate-700 dark:text-slate-300">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+                    <span class="font-bold text-sm hidden sm:block">Menu</span>
+                </button>
+            </div>
+
+            <div onclick="navigateTo('section-home')" class="flex items-center justify-center gap-3 cursor-pointer group">
+                <div class="hidden lg:block">
+                    <h1 class="text-xl font-extrabold tracking-tighter text-slate-900 dark:text-white group-hover:text-brand-accent transition-colors">Master CKA</h1>
+                </div>
+            </div>
+
+            <div class="flex items-center justify-end gap-3">
+                <div class="relative hidden md:block w-full max-w-[160px] lg:max-w-[200px]">
+                    <input type="text" id="global-search" oninput="handleSearch(this.value)" placeholder="Search..." class="w-full bg-slate-100 dark:bg-slate-800 border-none rounded-2xl px-4 py-2 text-sm focus:ring-2 focus:ring-brand-accent outline-none transition-all">
+                    <div id="search-results" class="absolute top-full right-0 w-[300px] mt-2 bg-white dark:bg-slate-800 rounded-2xl shadow-2xl border border-slate-200 dark:border-slate-700 hidden overflow-hidden z-50 text-left">
+                    </div>
+                </div>
+                <button onclick="toggleTheme()" class="p-2.5 bg-slate-100 dark:bg-slate-800 rounded-xl hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors shrink-0">
+                    <span id="theme-icon">🌙</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <div id="sidebar-overlay" class="fixed inset-0 bg-slate-900/40 backdrop-blur-sm z-[55] hidden opacity-0 transition-opacity duration-300" onclick="closeSidebar()"></div>
+    
+    <aside id="left-sidebar" class="fixed top-0 left-0 h-full w-72 bg-white dark:bg-[#0f172a] border-r border-slate-200 dark:border-slate-800 shadow-[0_0_50px_rgba(0,0,0,0.3)] z-[60] transform -translate-x-full transition-transform duration-300 flex flex-col">
+        <div class="p-6 flex justify-between items-center border-b border-slate-200 dark:border-slate-800">
+            <span class="font-black text-sm text-slate-400 uppercase tracking-widest">Navigation</span>
+            <button onclick="closeSidebar()" class="text-slate-400 hover:text-brand-accent transition-colors text-3xl">&times;</button>
+        </div>
+        
+        <nav class="flex flex-col gap-1 p-4 overflow-y-auto custom-scrollbar flex-grow">
+            <button data-target="section-home" onclick="navigateTo('section-home')" class="nav-btn text-left px-4 py-2 rounded-xl text-base font-bold transition-all text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800">Dashboard</button>
+            
+            <span class="px-4 text-base font-black text-slate-800 dark:text-slate-200 tracking-wide mt-4 mb-1">Fundamentals</span>
+            <button data-target="section-k8s-arch" onclick="navigateTo('section-k8s-arch')" class="nav-btn text-left pl-8 pr-4 py-2 rounded-xl text-sm font-semibold transition-all text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800">K8s Architecture</button>
+            <button data-target="section-arch" onclick="navigateTo('section-arch')" class="nav-btn text-left pl-8 pr-4 py-2 rounded-xl text-sm font-semibold transition-all text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800">Architecture</button>
+            <button data-target="section-workloads" onclick="navigateTo('section-workloads')" class="nav-btn text-left pl-8 pr-4 py-2 rounded-xl text-sm font-semibold transition-all text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800">Workloads</button>
+            <button data-target="section-networking" onclick="navigateTo('section-networking')" class="nav-btn text-left pl-8 pr-4 py-2 rounded-xl text-sm font-semibold transition-all text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800">Networking</button>
+            <button data-target="section-storage" onclick="navigateTo('section-storage')" class="nav-btn text-left pl-8 pr-4 py-2 rounded-xl text-sm font-semibold transition-all text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800">Storage</button>
+            <button data-target="section-troubleshooting" onclick="navigateTo('section-troubleshooting')" class="nav-btn text-left pl-8 pr-4 py-2 rounded-xl text-sm font-semibold transition-all text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800">Troubleshooting</button>
+            
+            <a href="index.html" class="text-left px-4 py-2 rounded-xl text-sm font-bold transition-all text-brand-accent hover:bg-slate-100 dark:hover:bg-slate-800 mb-2 mt-4">← Back to Main Menu</a>
+        </nav>
+    </aside>
+
+    <main class="max-w-7xl mx-auto px-4 py-12">
+        
+        <section id="section-home" class="content-section fade-in">
+            <div class="text-center mb-16 mt-8">
+                <div class="inline-block px-4 py-1.5 rounded-full bg-brand-accent/10 border border-brand-accent/20 text-brand-accent font-bold text-xs tracking-widest uppercase mb-6">Certified Kubernetes Administrator</div>
+                <h2 class="text-5xl md:text-7xl font-black mb-6 tracking-tight text-slate-900 dark:text-white">Master CKA.</h2>
+                <p class="text-slate-500 dark:text-slate-400 text-lg md:text-xl max-w-3xl mx-auto leading-relaxed">The definitive interactive guide for the CKA exam. Select a domain below to explore cluster operations and workload management.</p>
+            </div>
+
+            <div class="mb-12">
+                <h3 class="text-sm font-black text-slate-400 uppercase tracking-widest mb-6 pl-2 border-l-4 border-indigo-500">Core Concepts</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <div onclick="navigateTo('section-k8s-arch')" class="bg-white dark:bg-slate-800/40 p-8 rounded-[2rem] border border-slate-200 dark:border-slate-700/50 shadow-xl cursor-pointer hover:-translate-y-2 hover:border-indigo-500/50 transition-all group">
+                        <div class="w-14 h-14 bg-indigo-500/10 rounded-2xl flex items-center justify-center text-3xl mb-6 group-hover:scale-110 transition-transform">⚙️</div>
+                        <h3 class="text-xl font-black mb-2 text-slate-800 dark:text-white">K8s Architecture</h3>
+                        <p class="text-slate-500 dark:text-slate-400 text-sm leading-relaxed">Understanding the Control Plane vs Worker Node components.</p>
+                    </div>
+
+                    <div onclick="navigateTo('section-arch')" class="bg-white dark:bg-slate-800/40 p-8 rounded-[2rem] border border-slate-200 dark:border-slate-700/50 shadow-xl cursor-pointer hover:-translate-y-2 hover:border-indigo-500/50 transition-all group">
+                        <div class="w-14 h-14 bg-indigo-500/10 rounded-2xl flex items-center justify-center text-3xl mb-6 group-hover:scale-110 transition-transform">🏛️</div>
+                        <h3 class="text-xl font-black mb-2 text-slate-800 dark:text-white">Cluster Architecture</h3>
+                        <p class="text-slate-500 dark:text-slate-400 text-sm leading-relaxed">Control plane, ETCD, Kubelet, and managing nodes.</p>
+                    </div>
+
+                    <div onclick="navigateTo('section-workloads')" class="bg-white dark:bg-slate-800/40 p-8 rounded-[2rem] border border-slate-200 dark:border-slate-700/50 shadow-xl cursor-pointer hover:-translate-y-2 hover:border-blue-500/50 transition-all group">
+                        <div class="w-14 h-14 bg-blue-500/10 rounded-2xl flex items-center justify-center text-3xl mb-6 group-hover:scale-110 transition-transform">📦</div>
+                        <h3 class="text-xl font-black mb-2 text-slate-800 dark:text-white">Workloads</h3>
+                        <p class="text-slate-500 dark:text-slate-400 text-sm leading-relaxed">Pods, Deployments, DaemonSets, and scheduling.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mb-12">
+                <h3 class="text-sm font-black text-slate-400 uppercase tracking-widest mb-6 pl-2 border-l-4 border-cyan-500">Advanced Domains</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+                    <div onclick="navigateTo('section-networking')" class="bg-white dark:bg-slate-800/40 p-8 rounded-[2rem] border border-slate-200 dark:border-slate-700/50 shadow-xl cursor-pointer hover:-translate-y-2 hover:border-cyan-500/50 transition-all group">
+                        <div class="w-14 h-14 bg-cyan-500/10 rounded-2xl flex items-center justify-center text-3xl mb-6 group-hover:scale-110 transition-transform">🕸️</div>
+                        <h3 class="text-xl font-black mb-2 text-slate-800 dark:text-white">Networking</h3>
+                        <p class="text-slate-500 dark:text-slate-400 text-sm leading-relaxed">Services, Ingress, NetworkPolicies, and CNI.</p>
+                    </div>
+
+                    <div onclick="navigateTo('section-storage')" class="bg-white dark:bg-slate-800/40 p-8 rounded-[2rem] border border-slate-200 dark:border-slate-700/50 shadow-xl cursor-pointer hover:-translate-y-2 hover:border-purple-500/50 transition-all group">
+                        <div class="w-14 h-14 bg-purple-500/10 rounded-2xl flex items-center justify-center text-3xl mb-6 group-hover:scale-110 transition-transform">💽</div>
+                        <h3 class="text-xl font-black mb-2 text-slate-800 dark:text-white">Storage</h3>
+                        <p class="text-slate-500 dark:text-slate-400 text-sm leading-relaxed">Persistent Volumes (PV), PVCs, and StorageClasses.</p>
+                    </div>
+
+                    <div onclick="navigateTo('section-troubleshooting')" class="bg-white dark:bg-slate-800/40 p-8 rounded-[2rem] border border-slate-200 dark:border-slate-700/50 shadow-xl cursor-pointer hover:-translate-y-2 hover:border-pink-500/50 transition-all group">
+                        <div class="w-14 h-14 bg-pink-500/10 rounded-2xl flex items-center justify-center text-3xl mb-6 group-hover:scale-110 transition-transform">🔍</div>
+                        <h3 class="text-xl font-black mb-2 text-slate-800 dark:text-white">Troubleshooting</h3>
+                        <p class="text-slate-500 dark:text-slate-400 text-sm leading-relaxed">Logs, Events, JSONPATH queries, and cluster recovery.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="section-k8s-arch" class="content-section hidden fade-in">
+            <div class="mb-12 text-center md:text-left">
+                <h2 class="text-4xl font-black mb-2 text-indigo-500">Kubernetes Architecture Overview</h2>
+                <p class="text-slate-500 dark:text-slate-400 italic">The fundamental separation of duties in a K8s cluster.</p>
+            </div>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-px bg-slate-200/50 dark:bg-slate-800/30 backdrop-blur-md rounded-[2.5rem] overflow-hidden border border-slate-200/50 dark:border-slate-800/50 shadow-2xl">
+                <div class="bg-white/60 dark:bg-slate-900/40 p-8 md:p-12">
+                    <div class="flex items-center gap-4 mb-8">
+                        <div class="w-16 h-16 bg-indigo-500/10 rounded-2xl flex items-center justify-center text-3xl shadow-inner">🧠</div>
+                        <h3 class="text-2xl md:text-3xl font-black text-indigo-500 uppercase tracking-tight">Control Plane<br><span class="text-slate-400 text-sm tracking-widest">Master Node</span></h3>
+                    </div>
+                    <p class="text-slate-600 dark:text-slate-400 mb-8 leading-relaxed font-medium">The Control Plane manages the worker nodes and the Pods in the cluster. In production environments, the control plane usually runs across multiple computers for high availability.</p>
+                    
+                    <div class="space-y-6">
+                        <div class="p-6 bg-slate-50/80 dark:bg-slate-800/30 rounded-2xl border-l-4 border-indigo-500 shadow-sm transition-transform hover:scale-[1.02]">
+                            <h4 class="font-bold text-lg mb-2 text-slate-800 dark:text-white">kube-apiserver</h4>
+                            <p class="text-sm text-slate-500 dark:text-slate-400 leading-relaxed">The front end of the control plane. ALL communication (from kubectl, workers, etc.) goes through the API server.</p>
+                        </div>
+                        <div class="p-6 bg-slate-50/80 dark:bg-slate-800/30 rounded-2xl border-l-4 border-indigo-500 shadow-sm transition-transform hover:scale-[1.02]">
+                            <h4 class="font-bold text-lg mb-2 text-slate-800 dark:text-white">etcd</h4>
+                            <p class="text-sm text-slate-500 dark:text-slate-400 leading-relaxed">A highly-available, consistent key-value store holding the cluster's entire state. If etcd is lost, the cluster is lost. Backing up etcd is a major CKA requirement.</p>
+                        </div>
+                        <div class="p-6 bg-slate-50/80 dark:bg-slate-800/30 rounded-2xl border-l-4 border-indigo-500 shadow-sm transition-transform hover:scale-[1.02]">
+                            <h4 class="font-bold text-lg mb-2 text-slate-800 dark:text-white">kube-scheduler & controller-manager</h4>
+                            <p class="text-sm text-slate-500 dark:text-slate-400 leading-relaxed">**Scheduler:** Watches for new Pods with no assigned node, and assigns them one based on resources/taints. **Controller-Manager:** Runs controllers like the Node controller (notices when nodes go down) and ReplicaSet controller.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-slate-50/60 dark:bg-slate-800/20 p-8 md:p-12">
+                    <div class="flex items-center gap-4 mb-8">
+                        <div class="w-16 h-16 bg-blue-500/10 rounded-2xl flex items-center justify-center text-3xl shadow-inner">🖥️</div>
+                        <h3 class="text-2xl md:text-3xl font-black text-blue-500 uppercase tracking-tight">Worker Nodes<br><span class="text-slate-400 text-sm tracking-widest">Compute Instances</span></h3>
+                    </div>
+                    <p class="text-slate-600 dark:text-slate-400 mb-8 leading-relaxed font-medium">Node components run on every node, maintaining running pods and providing the Kubernetes runtime environment.</p>
+                    
+                    <div class="space-y-6">
+                        <div class="p-6 bg-white/80 dark:bg-slate-800/40 rounded-2xl border-l-4 border-blue-500 shadow-sm transition-transform hover:scale-[1.02]">
+                            <h4 class="font-bold text-lg mb-2 text-slate-800 dark:text-white">kubelet</h4>
+                            <p class="text-sm text-slate-500 dark:text-slate-400 leading-relaxed">The primary "node agent" that runs on each node. It takes PodSpecs (provided by the API server) and ensures that the containers described in those PodSpecs are running and healthy.</p>
+                        </div>
+                        <div class="p-6 bg-white/80 dark:bg-slate-800/40 rounded-2xl border-l-4 border-blue-500 shadow-sm transition-transform hover:scale-[1.02]">
+                            <h4 class="font-bold text-lg mb-2 text-slate-800 dark:text-white">kube-proxy</h4>
+                            <p class="text-sm text-slate-500 dark:text-slate-400 leading-relaxed">A network proxy that runs on each node. It maintains network rules (usually via iptables) that allow network communication to your Pods from inside or outside of your cluster.</p>
+                        </div>
+                        <div class="p-6 bg-white/80 dark:bg-slate-800/40 rounded-2xl border-l-4 border-blue-500 shadow-sm transition-transform hover:scale-[1.02]">
+                            <h4 class="font-bold text-lg mb-2 text-slate-800 dark:text-white">Container Runtime</h4>
+                            <p class="text-sm text-slate-500 dark:text-slate-400 leading-relaxed">The software that actually runs the containers (e.g., containerd, CRI-O). Docker is no longer supported directly as a runtime starting in K8s v1.24.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="section-arch" class="content-section hidden fade-in">
+            <div class="mb-12 text-center md:text-left"><h2 class="text-4xl font-black mb-2 text-indigo-500">Cluster Architecture</h2></div>
+            <div id="arch-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+        </section>
+
+        <section id="section-workloads" class="content-section hidden fade-in">
+            <div class="mb-12 text-center md:text-left"><h2 class="text-4xl font-black mb-2 text-blue-500">Workloads & Scheduling</h2></div>
+            <div id="workloads-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+        </section>
+
+        <section id="section-networking" class="content-section hidden fade-in">
+            <div class="mb-12 text-center md:text-left"><h2 class="text-4xl font-black mb-2 text-cyan-500">Networking</h2></div>
+            <div id="networking-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+        </section>
+    </main>
+
+    <div id="deep-dive-modal" class="fixed inset-0 z-[100] hidden items-center justify-center bg-slate-950/80 backdrop-blur-md p-4 opacity-0 transition-all duration-300" onclick="closeModal(event)">
+        <div class="bg-white dark:bg-slate-900 w-full max-w-3xl rounded-[2.5rem] shadow-2xl overflow-hidden transform scale-90 transition-all duration-300 border border-slate-200 dark:border-slate-800 flex flex-col max-h-[90vh]" onclick="event.stopPropagation()">
+            <div class="p-8 md:p-10 border-b border-slate-100 dark:border-slate-800 flex justify-between items-center bg-slate-50/50 dark:bg-slate-800/30 shrink-0">
+                <div class="flex items-center gap-6">
+                    <div id="m-icon-bg" class="p-5 rounded-3xl text-4xl md:text-5xl"><span id="m-icon"></span></div>
+                    <div>
+                        <h3 id="m-title" class="text-3xl md:text-4xl font-black text-slate-900 dark:text-white"></h3>
+                        <p class="text-sm font-bold uppercase tracking-widest mt-1">Technical Reference</p>
+                    </div>
+                </div>
+                <button onclick="closeModal()" class="w-12 h-12 flex items-center justify-center rounded-full bg-slate-100 dark:bg-slate-800 text-slate-500 hover:text-brand-accent transition-all text-3xl shrink-0">&times;</button>
+            </div>
+            <div id="m-content" class="p-8 md:p-12 overflow-y-auto md-content custom-scrollbar bg-white dark:bg-slate-900 flex-grow"></div>
+        </div>
+    </div>
+
+    <script>
+        /*
+            For Tailwind JIT:
+            text-indigo-500 text-blue-500 text-cyan-500 text-purple-500 text-pink-500
+            bg-indigo-500 bg-blue-500 bg-cyan-500 bg-purple-500 bg-pink-500
+            hover:bg-indigo-700 hover:bg-blue-700 hover:bg-cyan-700 hover:bg-purple-700 hover:bg-pink-700
+            bg-indigo-500/20 bg-blue-500/20 bg-cyan-500/20 bg-purple-500/20 bg-pink-500/20
+        */
+
+        const archData = [
+            { id: 'ar1', icon: '🧠', title: 'Control Plane Ports', desc: 'Critical cluster communications.', summary: '• API Server: 6443\n• ETCD: 2379-2380\n• Kubelet: 10250', dive: `### Kubernetes Default Port Requirements\nFor a cluster to function properly, specific ports must be open on the Control Plane and Worker Nodes. The CKA tests your ability to fix broken clusters where these ports might be misconfigured.\n\n#### Control Plane Nodes\n| Port | Protocol | Purpose | User |\n|---|---|---|---|\n| **6443** | TCP | Kubernetes API server | All components |\n| **2379-2380** | TCP | etcd server client API | kube-apiserver, etcd peers |\n| **10250** | TCP | Kubelet API | Control Plane, kubelet |\n| **10259** | TCP | kube-scheduler | Self |\n| **10257** | TCP | kube-controller-manager | Self |\n\n#### Worker Nodes\n| Port | Protocol | Purpose | User |\n|---|---|---|---|\n| **10250** | TCP | Kubelet API | Control Plane |\n| **30000-32767** | TCP | NodePort Services | All external traffic |\n\n#### 💡 Exam Tip\nIf a worker node is marked \`NotReady\`, or \`kubectl logs\` fails with a timeout, SSH into the node and verify that a firewall rule isn't blocking port **10250**. Similarly, if your control plane fails to start, verify etcd is accessible on **2379**.` },
+            { id: 'ar2', icon: '💾', title: 'ETCD Backup & Restore', desc: 'Backing up the cluster state.', summary: '• ETCDCTL tool\n• Snapshot save\n• Snapshot restore', dive: `### ETCD Backup & Restore\nETCD is the central key-value datastore for K8s. If it dies, the cluster dies. The CKA exam *will* test your ability to back it up and restore it.\n\n#### Backup Command:\nYou must pass the authentication certificates to \`etcdctl\`. Find these paths by inspecting \`cat /etc/kubernetes/manifests/etcd.yaml\`.\n\n\`\`\`bash\nETCDCTL_API=3 etcdctl --endpoints=https://127.0.0.1:2379 \\\n  --cacert=/etc/kubernetes/pki/etcd/ca.crt \\\n  --cert=/etc/kubernetes/pki/etcd/server.crt \\\n  --key=/etc/kubernetes/pki/etcd/server.key \\\n  snapshot save /opt/snapshot-pre-boot.db\n\`\`\`\n\n#### Restore Procedure:\n1. **Stop API Server:** \`mv /etc/kubernetes/manifests/kube-apiserver.yaml /tmp/\`\n2. **Restore to NEW directory:** \n   \`\`\`bash\n   ETCDCTL_API=3 etcdctl snapshot restore /opt/snapshot-pre-boot.db \\\n   --data-dir=/var/lib/etcd-backup\n   \`\`\`\n3. **Edit ETCD Manifest:** \`vi /etc/kubernetes/manifests/etcd.yaml\` and change the \`hostPath\` volume from \`/var/lib/etcd\` to \`/var/lib/etcd-backup\`.\n4. **Restart:** Kubelet will auto-restart ETCD with the new data directory. Move the API server manifest back to start it.` },
+            { id: 'ar3', icon: '🔐', title: 'RBAC', desc: 'Role-Based Access Control.', summary: '• Roles vs ClusterRoles\n• RoleBindings\n• ServiceAccounts', dive: `### Role-Based Access Control (RBAC)\nRBAC determines *who* can do *what* inside your cluster.\n\n#### The Big Four:\n| Resource | Scope | Purpose |\n|---|---|---|\n| **Role** | Namespaced | Grants permissions to resources within a specific namespace (e.g., Deployments in \`dev\`). |\n| **ClusterRole** | Cluster-Wide | Grants permissions to non-namespaced resources (like Nodes) or across all namespaces. |\n| **RoleBinding** | Namespaced | Attaches a Role (or ClusterRole) to a User/ServiceAccount within a single namespace. |\n| **ClusterRoleBinding** | Cluster-Wide | Attaches a ClusterRole to a User globally. |\n\n#### Service Accounts\nUsed by applications running *inside* Pods to communicate with the API server. (Users are for humans, ServiceAccounts are for Pods).\n\n#### 💡 Exam Tip\nDo not write RBAC from scratch. Use imperative commands:\n\`kubectl create role pod-reader --verb=get,list,watch --resource=pods\`\n\`kubectl create rolebinding read-bind --role=pod-reader --user=jane --namespace=default\`` }
+        ];
+
+        const workloadsData = [
+            { id: 'wl1', icon: '🐳', title: 'Pods & Multi-Container', desc: 'The smallest deployable unit.', summary: '• InitContainers\n• Sidecar pattern\n• Probes (Liveness/Readiness)', dive: `### Pods & Multi-Container Patterns\nA Pod is the basic execution unit of a K8s application. They are ephemeral by nature.\n\n#### Multi-Container Patterns:\n1. **Sidecar:** A helper container running alongside the primary container (e.g., a logging agent like Fluentd scraping logs from an Nginx container sharing an \`emptyDir\` volume).\n2. **Adapter:** Normalizes output. E.g., taking proprietary metrics from the main app and adapting them into a format Prometheus understands.\n3. **InitContainers:** Run sequentially to completion *before* the main app containers start. If an InitContainer fails, the Pod restarts.\n\n#### Container Probes\n| Probe | Purpose | Failure Action |\n|---|---|---|\n| **Liveness** | Is the container dead/frozen? | Kubelet **restarts** the container. |\n| **Readiness** | Is the app ready to serve users? | Endpoint controller **removes** Pod IP from Services. |\n| **Startup** | For slow-starting legacy apps. | Disables other probes until it succeeds. |\n\n#### 💡 Exam Tip\nBe prepared to write a YAML spec with an \`initContainers\` block, or to add an \`httpGet\` Readiness probe to a broken Pod to fix its routing.` },
+            { id: 'wl2', icon: '🔄', title: 'Deployments & DaemonSets', desc: 'Managing replica scaling and node presence.', summary: '• Rolling Updates\n• Rollbacks\n• DaemonSets (Run everywhere)', dive: `### Deployments vs DaemonSets\n\n#### Deployments\nA Deployment provides declarative updates for Pods (via ReplicaSets). You specify a desired state (e.g., "I want 3 replicas"). If a node crashes, the Deployment controller brings up a new pod on a healthy node.\n- **Rolling Updates:** \`kubectl set image deploy/nginx nginx=nginx:1.19\`. Updates pods one by one ensuring zero downtime.\n- **Rollbacks:** \`kubectl rollout undo deploy/nginx\` reverts to the previous revision if a bad image was pushed.\n\n#### DaemonSets\nEnsures that all (or specific) Nodes run exactly *one copy* of a Pod. As nodes are added to the cluster, Pods are automatically added to them.\n- **Use Cases:** Cluster storage daemons, log collection daemons (Fluentd), or monitoring agents.\n\n#### 💡 Exam Tip\nYou cannot convert a Deployment to a DaemonSet natively via CLI. \n1. \`kubectl get deploy foo -o yaml > daemon.yaml\`\n2. \`vi daemon.yaml\` -> Change \`kind: Deployment\` to \`kind: DaemonSet\`.\n3. Delete the \`replicas:\`, \`strategy:\`, and \`status:\` blocks.\n4. \`kubectl apply -f daemon.yaml\`` },
+            { id: 'wl3', icon: '🎯', title: 'Scheduling & Affinity', desc: 'Controlling where Pods land.', summary: '• NodeSelectors\n• NodeAffinity\n• Taints & Tolerations', dive: `### Scheduling: Where does my Pod go?\n\n#### Taints and Tolerations (Repelling Pods)\n- **Taints:** Applied to a *Node* to repel pods. \n  \`kubectl taint nodes node1 env=prod:NoSchedule\`\n- **Tolerations:** Applied to a *Pod* spec to allow it to bypass the taint.\n- *Analogy:* Taints are a locked door. Tolerations are the key. They do *not* force a pod to go there, they just allow it.\n\n#### Node Affinity (Attracting Pods)\n- **nodeSelector:** Simple key-value pairing to force a pod onto a node with a specific label (\`disktype: ssd\`).\n- **nodeAffinity:** Much more expressive. Can use operators like \`In\`, \`NotIn\`, \`Exists\`. \n  - *Hard:* \`requiredDuringSchedulingIgnoredDuringExecution\` (Pod will not schedule if rules aren't met).\n  - *Soft:* \`preferredDuringScheduling...\` (Scheduler will try, but will place it elsewhere if needed).\n\n#### 💡 Exam Tip\nThe Control Plane node has a default Taint (\`node-role.kubernetes.io/control-plane:NoSchedule\`). To run a pod on the master, you must add the exact matching Toleration to your pod manifest.` }
+        ];
+
+        const networkData = [
+            { id: 'nw1', icon: '📡', title: 'Services & DNS', desc: 'Exposing applications and internal routing.', summary: '• ClusterIP (Internal)\n• NodePort (External, 30000+)\n• CoreDNS Resolution', dive: `### Kubernetes Services & DNS\nBecause Pods are ephemeral, Services provide a stable IP address and DNS name to load-balance traffic across a set of healthy pods based on label selectors.\n\n#### Service Types:\n| Type | Accessibility | Use Case |\n|---|---|---|\n| **ClusterIP** | Internal Only | Default. Communication between pods (e.g., frontend to backend DB). |\n| **NodePort** | External | Exposes service on every Node's IP at a static port (30000-32767). |\n| **LoadBalancer**| External | Provisions an external LB from the cloud provider (AWS/GCP). |\n| **ExternalName**| Internal | Maps a service to a DNS name (e.g., an external RDS database). |\n\n#### CoreDNS Resolution:\nKubernetes runs CoreDNS to provide service discovery.\n- **Format:** \`<service-name>.<namespace>.svc.cluster.local\`\n- **Example:** To reach a service named \`db\` in the \`prod\` namespace, you ping \`db.prod.svc.cluster.local\`.\n\n#### 💡 Exam Tip\nImperative command to create a service extremely fast:\n\`kubectl expose deploy my-app --name=my-svc --port=80 --target-port=8080 --type=NodePort\`` },
+            { id: 'nw2', icon: '🛡️', title: 'Network Policies', desc: 'Controlling traffic flow between Pods.', summary: '• Ingress/Egress rules\n• Default Deny strategy\n• Pod & Namespace Selectors', dive: `### Network Policies\nThink of Network Policies as internal firewalls for Pods. They operate at Layer 3/Layer 4. Your cluster MUST have a network plugin (CNI like Calico or WeaveNet) that supports Network Policies for them to work.\n\n#### Key Concepts:\n- **Default State:** By default, Pods are non-isolated; they accept traffic from any source.\n- **Isolation:** Once *any* NetworkPolicy selects a particular Pod, that Pod becomes isolated. It will reject any connections that are not explicitly allowed by a NetworkPolicy. This is called establishing a "Default Deny" posture.\n- **Rules:** Can be based on \`podSelector\` (e.g., match label \`app=frontend\`), \`namespaceSelector\` (match label \`env=prod\`), or \`ipBlock\` (allow a specific CIDR range).\n\n#### 💡 Exam Tip\nExpect a question asking you to restrict traffic: *"Ensure the backend DB pods can only be accessed by the frontend pods."* \nYou must know how to write a NetworkPolicy with an \`ingress\` rule containing a \`podSelector\` that matches the frontend label.` },
+            { id: 'nw3', icon: '🚪', title: 'Ingress & CNI', desc: 'HTTP routing and cluster networking.', summary: '• Ingress (Layer 7 HTTP)\n• Path-based routing\n• CNI Plugins', dive: `### Ingress & Network Plugins\n\n#### Ingress\nAn API object that manages external Layer 7 (HTTP/HTTPS) access to the services in a cluster. It provides load balancing, SSL termination, and name-based virtual hosting.\n- **Ingress Controller:** The actual software (like NGINX, Traefik) that fulfills the rules. Creating an Ingress resource does nothing if an Ingress Controller is not running.\n- **Rules:** Route traffic based on the URL Path (\`/api\` vs \`/web\`) or Hostname (\`api.foo.com\`).\n\n#### CNI (Container Network Interface)\nKubernetes does not have a built-in networking solution for Pod-to-Pod communication across nodes. It relies on CNI plugins (Flannel, Calico, WeaveNet, Cilium) to build the overlay network and assign IP addresses to Pods.\n\n#### 💡 Exam Tip\nTo create an Ingress via CLI: \`kubectl create ingress simple --rule="foo.com/bar=svc1:8080"\`. \nFor CNI, know that if nodes are \`NotReady\` and pods are stuck in \`ContainerCreating\`, it's almost always because the CNI plugin isn't installed or is crashing.` }
+        ];
+
+        const storageData = [
+            { id: 'st1', icon: '💽', title: 'Volumes: hostPath & emptyDir', desc: 'Basic node-level storage.', summary: '• emptyDir (Ephemeral)\n• hostPath (Node tied)\n• Container sharing', dive: `### Basic Volumes\nBefore jumping into PVs, you must understand basic volume types that are tied to the lifecycle of the Pod or Node.\n\n#### emptyDir\nA temporary directory created when a Pod is assigned to a Node. \n- **Lifecycle:** Exists as long as the Pod is running on that node. If the Pod is deleted, the \`emptyDir\` is erased forever.\n- **Use Case:** Sharing files between two containers in the same pod (e.g., an app writes logs to \`emptyDir\`, a sidecar reads them and sends them to Splunk).\n\n#### hostPath\nMounts a file or directory from the host node's filesystem directly into your Pod.\n- **Lifecycle:** Data persists on the node even if the Pod is deleted.\n- **Risk:** If the Pod crashes and gets scheduled on a *different* node, it loses access to that data. A major security risk if mounting \`/etc\`.\n\n#### 💡 Exam Tip\nThe exam will ask you to create a multi-container pod where Container 1 writes a file and Container 2 reads it. Use an \`emptyDir\` volume for this.` },
+            { id: 'st2', icon: '💾', title: 'Persistent Volumes (PV/PVC)', desc: 'Decoupling storage from Pods.', summary: '• PV (Cluster resource)\n• PVC (Namespace request)\n• Access Modes', dive: `### Persistent Volumes & Claims\nBy default, a Pod's disk is ephemeral. Persistent Volumes allow storage to survive pod restarts.\n\n#### Core Concepts:\n- **PersistentVolume (PV):** A piece of storage in the cluster provisioned by an administrator. It is a **cluster-level** resource (not tied to a namespace).\n- **PersistentVolumeClaim (PVC):** A request for storage by a developer. It specifies size and access modes. It is a **namespace-level** resource.\n- **Binding:** The control plane looks for a PV that satisfies the PVC's request and binds them together 1-to-1.\n\n#### Access Modes:\n- \`ReadWriteOnce (RWO)\`: Mounted as read-write by a single node (most common for block storage).\n- \`ReadOnlyMany (ROX)\`: Mounted read-only by many nodes.\n- \`ReadWriteMany (RWX)\`: Mounted as read-write by many nodes (requires network file systems like NFS).\n\n#### 💡 Exam Tip\nA Pod uses a PVC as a volume. If you delete a pod, the PVC and PV remain intact. You will be required to write YAML to create a PV, a PVC, and a Pod that mounts that PVC to a specific path.` },
+            { id: 'st3', icon: '📦', title: 'StorageClasses', desc: 'Dynamic volume provisioning.', summary: '• Dynamic Provisioning\n• Provisioners (AWS/GCP)\n• Reclaim Policies', dive: `### StorageClasses & Reclaim Policies\nManually creating PVs for every developer request is tedious. StorageClasses enable dynamic provisioning.\n\n#### StorageClass (SC)\nAllows administrators to describe the "classes" of storage they offer. When a user creates a PVC and references a StorageClass name, Kubernetes automatically uses the SC's "Provisioner" (e.g., \`kubernetes.io/aws-ebs\`) to create the underlying cloud disk and the K8s PV on the fly.\n\n#### Reclaim Policies\nWhat happens to the PV when the user deletes the PVC?\n- **Retain:** The PV remains, but is marked as "Released". The data is safe, but another PVC cannot claim it until an admin cleans it up.\n- **Delete:** Default for dynamic provisioning. Both the PV and the underlying cloud storage asset (e.g., AWS EBS volume) are permanently deleted.\n- **Recycle:** (Deprecated) Scrubs the data (\`rm -rf /thevolume/*\`) and makes it available again.\n\n#### 💡 Exam Tip\nYou must know how to change a PV's \`persistentVolumeReclaimPolicy\` to \`Retain\` via \`kubectl edit pv <name>\`.` },
+            { id: 'st4', icon: '🔑', title: 'ConfigMaps & Secrets', desc: 'Injecting configuration data.', summary: '• Decouple config from code\n• Mount as files/Env vars\n• Base64 Encoding', dive: `### ConfigMaps & Secrets\nBest practices dictate that configuration and credentials should be decoupled from the application container image.\n\n#### ConfigMaps\nUsed to store non-confidential data in key-value pairs. Pods can consume ConfigMaps as:\n1. Environment variables.\n2. Command-line arguments to the entrypoint.\n3. Configuration files in a volume (mounted as a file in the pod).\n\n#### Secrets\nUsed to store sensitive data like passwords, OAuth tokens, and SSH keys. \n- **Crucial Note:** Secrets are **NOT encrypted** in Kubernetes by default. They are only **Base64 encoded** strings. Anyone with access to the Secret object can decode it easily using \`echo "cGFzc3dvcmQ=" | base64 -d\`.\n- To secure secrets, administrators must enable "Encryption at Rest" in the API server configuration.\n\n#### 💡 Exam Tip\nImperative commands save huge amounts of time here:\n- \`kubectl create configmap my-map --from-literal=color=blue\`\n- \`kubectl create secret generic db-pass --from-literal=password=supersecret\`` }
+        ];
+
+        const troubleshootingData = [
+            { id: 'tr1', icon: '🕵️', title: 'Logging & JSONPATH', desc: 'Extracting data and debugging pods.', summary: '• kubectl logs\n• kubectl describe\n• jsonpath parsing', dive: `### Troubleshooting Pods & Data Extraction\n\n#### Debugging Flow for Failing Pods:\n1. \`kubectl describe pod <name>\`: The single best command. Look at the "Events" section at the very bottom for scheduling errors, image pull errors (\`ErrImagePull\`), or probe failures.\n2. \`kubectl logs <pod-name>\`: View the application's stdout/stderr.\n3. \`kubectl logs <pod-name> -c <container-name>\`: Required if it's a multi-container pod.\n4. \`kubectl logs <pod-name> --previous\`: Crucial if a pod crashed and restarted. This shows you the logs from the dead container just before it died.\n\n#### JSONPATH Queries\nThe CKA requires extracting specific cluster data and outputting it to files.\n- **Get Node IP:** \`kubectl get nodes -o jsonpath='{.items[*].status.addresses[?(@.type=="InternalIP")].address}'\`\n- **Sort by CPU:** \`kubectl top pods --sort-by=cpu\`\n\n#### 💡 Exam Tip\nDO NOT memorize complex jsonpath statements. Instead, output the resource to JSON (\`kubectl get node -o json\`), trace the visual path to the data you want, and then build your \`-o jsonpath='{.path.to.data}'\` statement.` },
+            { id: 'tr2', icon: '🔧', title: 'Node & Kubelet Fixes', desc: 'Fixing broken worker nodes.', summary: '• systemctl status kubelet\n• journalctl logs\n• CNI issues', dive: `### Node & Kubelet Troubleshooting\nIf a node status is \`NotReady\`, the API server has lost contact with the node's Kubelet. This is a massive focus area in the CKA exam.\n\n#### Kubelet Debugging Flow:\n1. **SSH into the broken node.** You must be on the node to fix it.\n2. **Check the service:** \`systemctl status kubelet\`. Is it active (running) or failed?\n3. **Read the logs:** If failed, run \`journalctl -u kubelet -f\` to read the system logs. Look for obvious errors like invalid arguments, missing certificates, or port conflicts.\n4. **Check config:** Look at \`/var/lib/kubelet/config.yaml\` or the systemd drop-in files for misconfigurations (like pointing to the wrong API server IP).\n5. **Restart:** After fixing the issue, run \`systemctl daemon-reload\` and \`systemctl restart kubelet\`.\n\n#### 💡 Exam Tip\nIf a node is \`NotReady\` but Kubelet is running fine, check the CNI plugin. A node will remain \`NotReady\` if the networking overlay (Flannel/Weave/Calico) is missing or broken.` },
+            { id: 'tr3', icon: '💀', title: 'Control Plane Failures', desc: 'Fixing broken core components.', summary: '• Static Pod manifests\n• Docker/Crictl logs\n• Certificate expiration', dive: `### Control Plane Troubleshooting\nStatic pods (like the API server, Scheduler, or ETCD) are managed directly by Kubelet, not by the API server. \n\n#### Static Pod Location\nTheir manifests live in \`/etc/kubernetes/manifests\`. If you edit a YAML file in that folder and make a syntax error, the control plane component will immediately crash.\n\n#### How to fix a dead API Server:\nIf the API server is dead, you can't use \`kubectl\`. You must debug it like a normal container.\n1. SSH into the Master node.\n2. Use \`crictl ps -a\` or \`docker ps -a\` to find the exited API server container.\n3. Use \`crictl logs <container-id>\` to read the error (e.g., "unknown flag: --insecure-port").\n4. Fix the typo in \`/etc/kubernetes/manifests/kube-apiserver.yaml\`.\n5. Kubelet will auto-restart it.\n\n#### 💡 Exam Tip\nBefore editing *any* static pod manifest during the exam, always make a backup: \`cp /etc/kubernetes/manifests/kube-apiserver.yaml /root/backup-api.yaml\`.` },
+            { id: 'tr4', icon: '🚑', title: 'Cluster Upgrades', desc: 'Safely upgrading kubeadm clusters.', summary: '• kubeadm upgrade\n• cordon & drain\n• kubelet restart', dive: `### Cluster Upgrades (Kubeadm)\nYou will inevitably be asked to upgrade a master or worker node from one minor version to another (e.g., v1.28.1 to v1.29.0). You must follow the precise order of operations.\n\n#### Master Node Upgrade Flow:\n1. **Drain the node:** \`kubectl drain <node-name> --ignore-daemonsets\` (safely evicts pods to other nodes).\n2. **Upgrade kubeadm:** \`apt-mark unhold kubeadm && apt-get update && apt-get install -y kubeadm=1.29.0-00\`.\n3. **Plan:** \`kubeadm upgrade plan\`.\n4. **Apply:** \`kubeadm upgrade apply v1.29.0\`.\n5. **Upgrade Kubelet/Kubectl:** \`apt-get install -y kubelet=1.29.0-00 kubectl=1.29.0-00\`.\n6. **Restart Kubelet:** \`systemctl daemon-reload && systemctl restart kubelet\`.\n7. **Uncordon:** \`kubectl uncordon <node-name>\` (allows pods to schedule on it again).\n\n#### 💡 Exam Tip\nThe exact commands for Ubuntu/Debian upgrades are listed in the official Kubernetes Documentation. During the exam, search the official docs for "Upgrading kubeadm clusters" and simply copy-paste the sequence.` }
+        ];
+
+        const allServices = [...archData, ...workloadsData, ...networkData, ...storageData, ...troubleshootingData];
+
+        function handleSearch(query) {
+            const resultsBox = document.getElementById('search-results');
+            if (!query.trim()) {
+                resultsBox.classList.add('hidden');
+                return;
+            }
+
+            const filtered = allServices.filter(s => 
+                s.title.toLowerCase().includes(query.toLowerCase()) || 
+                s.desc.toLowerCase().includes(query.toLowerCase())
+            ).slice(0, 5);
+
+            if (filtered.length > 0) {
+                resultsBox.innerHTML = filtered.map(s => `
+                    <div onclick="showDive('${s.id}'); document.getElementById('global-search').value=''" class="p-4 hover:bg-slate-50 dark:hover:bg-slate-700 cursor-pointer border-b border-slate-100 dark:border-slate-700 last:border-0 flex items-center gap-3">
+                        <span class="text-xl">${s.icon}</span>
+                        <div>
+                            <div class="font-bold text-sm text-slate-800 dark:text-white">${s.title}</div>
+                            <div class="text-xs text-slate-500">${s.desc}</div>
+                        </div>
+                    </div>
+                `).join('');
+                resultsBox.classList.remove('hidden');
+            } else {
+                resultsBox.innerHTML = `<div class="p-4 text-xs text-slate-400">No results found.</div>`;
+                resultsBox.classList.remove('hidden');
+            }
+        }
+
+        document.addEventListener('click', (e) => {
+            if (!e.target.closest('#global-search')) {
+                document.getElementById('search-results').classList.add('hidden');
+            }
+        });
+
+        function toggleTheme() {
+            const html = document.documentElement;
+            const icon = document.getElementById('theme-icon');
+            if (html.classList.contains('dark')) {
+                html.classList.remove('dark');
+                icon.innerText = '☀️';
+            } else {
+                html.classList.add('dark');
+                icon.innerText = '🌙';
+            }
+        }
+
+        function createCard(c, borderColorClass, gradientFromClass) {
+            const textColorClass = borderColorClass.replace('border-', 'text-');
+            const bgColorClass = borderColorClass.replace('border-', 'bg-');
+            const hoverBgColorClass = `hover:${bgColorClass.replace('500', '700')}`;
+            return `
+            <div class="flip-card h-[320px] cursor-pointer group" onclick="this.classList.toggle('flipped')">
+                <div class="flip-card-inner h-full w-full relative transform-style-3d shadow-xl rounded-[1.5rem]">
+                    <div class="absolute inset-0 backface-hidden bg-white dark:bg-slate-800/60 backdrop-blur-xl rounded-[1.5rem] flex flex-col items-center justify-center p-6 border-2 border-slate-200 dark:border-slate-700/50 group-hover:border-brand-accent/50 transition-all">
+                        <div class="w-16 h-16 bg-gradient-to-br ${gradientFromClass} to-transparent rounded-2xl flex items-center justify-center text-3xl mb-4">${c.icon}</div>
+                        <h4 class="font-black text-lg text-slate-800 dark:text-white tracking-tight text-center">${c.title}</h4>
+                        <p class="text-slate-400 text-[10px] mt-2 uppercase tracking-[0.2em] font-black">Flip for Details</p>
+                    </div>
+                    <div class="absolute inset-0 backface-hidden rotate-y-180 bg-slate-900 dark:bg-slate-900 rounded-[1.5rem] flex flex-col p-6 border-2 ${borderColorClass}">
+                        <p class="text-xs font-black ${textColorClass} uppercase tracking-widest mb-2">${c.title}</p>
+                        <p class="text-slate-300 text-s mb-4 leading-relaxed line-clamp-2">${c.desc}</p>
+                        <div class="space-y-1.5 mb-4">
+                            ${c.summary.split('\n').map(line => `<div class="text-[12px] text-slate-400 font-medium">${line}</div>`).join('')}
+                        </div>
+                        <button onclick="event.stopPropagation(); showDive('${c.id}')" class="mt-auto w-full ${bgColorClass} text-white py-3 rounded-xl text-xs font-black transition-all ${hoverBgColorClass}">DEEP DIVE →</button>
+                    </div>
+                </div>
+            </div>`;
+        }
+
+        function renderAll() {
+            const grids = [
+                { id: 'arch-grid', data: archData, border: 'border-indigo-500', grad: 'from-indigo-500/20' },
+                { id: 'workloads-grid', data: workloadsData, border: 'border-blue-500', grad: 'from-blue-500/20' },
+                { id: 'networking-grid', data: networkData, border: 'border-cyan-500', grad: 'from-cyan-500/20' },
+                { id: 'storage-grid', data: storageData, border: 'border-purple-500', grad: 'from-purple-500/20' },
+                { id: 'troubleshooting-grid', data: troubleshootingData, border: 'border-pink-500', grad: 'from-pink-500/20' }
+            ];
+
+            grids.forEach(g => {
+                const el = document.getElementById(g.id);
+                if (el) el.innerHTML = g.data.map(d => createCard(d, g.border, g.grad)).join('');
+            });
+        }
+
+        function showDive(id) {
+            const c = allServices.find(x => x.id === id);
+            if(!c) return;
+
+            const grids = [
+                { data: archData, color: 'indigo-500' },
+                { data: workloadsData, color: 'blue-500' },
+                { data: networkData, color: 'cyan-500' },
+                { data: storageData, color: 'purple-500' },
+                { data: troubleshootingData, color: 'pink-500' }
+            ];
+
+            let domainColor = 'indigo-500';
+            for (const grid of grids) {
+                if (grid.data.some(item => item.id === id)) {
+                    domainColor = grid.color;
+                    break;
+                }
+            }
+
+            const textColorClass = `text-${domainColor}`;
+            const iconBgColorClass = `bg-${domainColor}/20`;
+
+            document.getElementById('m-title').innerText = c.title;
+            document.getElementById('m-icon').innerText = c.icon;
+            
+            const mIconBg = document.getElementById('m-icon-bg');
+            const mSubtitle = document.querySelector('#deep-dive-modal p.uppercase');
+
+            const colors = ['indigo-500', 'blue-500', 'cyan-500', 'purple-500', 'pink-500'];
+            const textColors = colors.map(c => `text-${c}`);
+            const bgColors = colors.map(c => `bg-${c}/20`);
+            
+            mIconBg.classList.remove(...bgColors, 'bg-brand-accent/20');
+            mIconBg.classList.add(iconBgColorClass);
+            
+            mSubtitle.classList.remove(...textColors, 'text-brand-accent');
+            mSubtitle.classList.add(textColorClass);
+
+            document.getElementById('m-content').innerHTML = marked.parse(c.dive);
+            const m = document.getElementById('deep-dive-modal');
+            m.classList.add('active');
+            setTimeout(() => { m.classList.add('opacity-100'); m.querySelector('div').classList.add('scale-100'); }, 10);
+        }
+
+        function closeModal(e) { if(e) e.stopPropagation(); const m = document.getElementById('deep-dive-modal'); m.classList.remove('opacity-100'); m.querySelector('div').classList.remove('scale-100'); setTimeout(() => m.classList.remove('active'), 300); }
+
+        function goHome() {
+            const isOnDashboard = !document.getElementById('section-home').classList.contains('hidden');
+            if (isOnDashboard) {
+                window.location.href = 'index.html';
+            } else {
+                navigateTo('section-home');
+            }
+        }
+        
+        function openSidebar() { document.getElementById('sidebar-overlay').classList.remove('hidden'); setTimeout(() => { document.getElementById('sidebar-overlay').classList.remove('opacity-0'); document.getElementById('left-sidebar').classList.remove('-translate-x-full'); }, 10); }
+        function closeSidebar() { document.getElementById('sidebar-overlay').classList.add('opacity-0'); document.getElementById('left-sidebar').classList.add('-translate-x-full'); setTimeout(() => { document.getElementById('sidebar-overlay').classList.add('hidden'); }, 300); }
+
+        function navigateTo(targetId) {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            document.querySelectorAll('.content-section').forEach(s => s.classList.add('hidden'));
+            document.getElementById(targetId).classList.remove('hidden');
+            document.querySelectorAll('.nav-btn').forEach(x => { x.classList.remove('bg-brand-accent', 'text-white'); x.classList.add('text-slate-500'); });
+            const btn = document.querySelector(`.nav-btn[data-target="${targetId}"]`);
+            if (btn) { btn.classList.add('bg-brand-accent', 'text-white'); btn.classList.remove('text-slate-500'); }
+            closeSidebar();
+        }
+
+        window.onload = renderAll;
+    </script>
+</body>
+</html>
