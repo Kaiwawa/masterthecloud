@@ -341,6 +341,33 @@
             <div class="mb-12 text-center md:text-left">
                 <h2 class="text-4xl font-black mb-2 text-green-500">Implementation</h2>
             </div>
+
+            <div
+                class="mb-10 bg-slate-100 dark:bg-slate-800/50 rounded-3xl p-8 border border-slate-200 dark:border-slate-700">
+                <h3 class="text-xl font-bold mb-6 text-indigo-500">🛡️ Common Port Numbers Cheat Sheet</h3>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                    <div class="p-4 bg-white dark:bg-slate-700 rounded-xl shadow-sm border-t-4 border-indigo-500">
+                        <div class="font-bold text-slate-800 dark:text-white">FTP / SSH</div>
+                        <div class="text-xs text-slate-500 mt-1">20, 21 / 22</div>
+                    </div>
+                    <div class="p-4 bg-white dark:bg-slate-700 rounded-xl shadow-sm border-t-4 border-indigo-500">
+                        <div class="font-bold text-slate-800 dark:text-white">Telnet / SMTP</div>
+                        <div class="text-xs text-slate-500 mt-1">23 (Insecure!) / 25</div>
+                    </div>
+                    <div class="p-4 bg-white dark:bg-slate-700 rounded-xl shadow-sm border-t-4 border-indigo-500">
+                        <div class="font-bold text-slate-800 dark:text-white">DNS / DHCP</div>
+                        <div class="text-xs text-slate-500 mt-1">53 / 67, 68</div>
+                    </div>
+                    <div class="p-4 bg-white dark:bg-slate-700 rounded-xl shadow-sm border-t-4 border-indigo-500">
+                        <div class="font-bold text-slate-800 dark:text-white">HTTP / HTTPS</div>
+                        <div class="text-xs text-slate-500 mt-1">80 / 443</div>
+                    </div>
+                    <div class="p-4 bg-white dark:bg-slate-700 rounded-xl shadow-sm border-t-4 border-indigo-500">
+                        <div class="font-bold text-slate-800 dark:text-white">RDP / LDAP</div>
+                        <div class="text-xs text-slate-500 mt-1">3389 / 389 (Secure: 636)</div>
+                    </div>
+                </div>
+            </div>
             <div id="implementation-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
         </section>
 
@@ -370,6 +397,26 @@
                     </div>
                 </div>
             </div>
+
+            <div
+                class="mb-10 bg-slate-100 dark:bg-slate-800/50 rounded-3xl p-8 border border-slate-200 dark:border-slate-700">
+                <h3 class="text-xl font-bold mb-6 text-orange-500">🚨 Incident Response Phases</h3>
+                <ol
+                    class="list-decimal list-inside text-slate-700 dark:text-slate-300 space-y-2 marker:text-orange-500 font-medium">
+                    <li><strong class="text-slate-900 dark:text-white">Preparation:</strong> Policies, training, and
+                        tools setup before an incident.</li>
+                    <li><strong class="text-slate-900 dark:text-white">Identification:</strong> Detecting the incident
+                        and determining its scope.</li>
+                    <li><strong class="text-slate-900 dark:text-white">Containment:</strong> Isolating the threat to
+                        prevent further damage.</li>
+                    <li><strong class="text-slate-900 dark:text-white">Eradication:</strong> Removing the root cause and
+                        restoring clean systems.</li>
+                    <li><strong class="text-slate-900 dark:text-white">Recovery:</strong> Bringing systems back online
+                        and monitoring closely.</li>
+                    <li><strong class="text-slate-900 dark:text-white">Lessons Learned:</strong> Post-incident review to
+                        improve future responses.</li>
+                </ol>
+            </div>
             <div id="operations-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
         </section>
 
@@ -388,6 +435,16 @@
         </section>
 
     </main>
+    <footer class="w-full max-w-7xl mx-auto px-4 pb-4 mt-12 text-center fade-in">
+        <p class="text-xs md:text-sm text-slate-600 dark:text-slate-400 font-semibold tracking-wide">
+            Version v0.7.98 •
+            <a href="https://github.com/Kaiwawa/masterthecloud" target="_blank" rel="noopener noreferrer"
+                class="text-brand-accent hover:underline">
+                Main GitHub Repository
+            </a>
+        </p>
+    </footer>
+
 
     <div id="deep-dive-modal"
         class="fixed inset-0 z-[100] hidden items-center justify-center bg-slate-950/80 backdrop-blur-md p-4 opacity-0 transition-all duration-300"
@@ -505,7 +562,7 @@ Vulnerabilities in application code can be exploited to gain unauthorized access
 - Keep frameworks and libraries updated
 - Secure coding practices training` },
             {
-                id: 'th5', icon: '🔓', title: 'Cryptographic Attacks', desc: 'Exploiting encryption and hashing weaknesses.', summary: '• Brute Force & Dictionary\n• Rainbow Tables\n• Downgrade Attacks', dive: `### Cryptographic Attacks
+                id: 'th5', icon: '🔓', title: 'Cryptographic Attacks', desc: 'Exploiting encryption and hashing weaknesses.', summary: '• Brute Force & Dictionary\\n• Rainbow Tables & Salts\\n• Downgrade Attacks', dive: `### Cryptographic Attacks
 These attacks target encryption schemes, hashing algorithms, and key management to compromise confidentiality and integrity.
 
 #### Types of Cryptographic Attacks
@@ -523,7 +580,20 @@ These attacks target encryption schemes, hashing algorithms, and key management 
 - Use strong encryption (AES-256, TLS 1.2+)
 - Key rotation and secure key management
 - Disable weak cipher suites and protocols
-- Use HTTPS everywhere` },
+- Use HTTPS everywhere
+
+### Cryptographic Attacks
+These attacks target the mathematical implementation or key management of cryptographic systems.
+
+#### Key Attack Types
+- **Downgrade Attack:** Forcing a system to use a weaker, older, and more vulnerable encryption protocol (e.g., POODLE attack forcing SSLv3).
+- **Collision Attack:** Finding two different inputs that produce the same hash output (e.g., breaking MD5 or SHA-1).
+- **Rainbow Tables:** Using precomputed tables of hash values to rapidly crack password hashes. Prevented by using **salts**.
+- **Known Plaintext Attack:** The attacker has access to both the plaintext and its encrypted ciphertext, helping them deduce the key.
+- **Birthday Attack:** Based on the birthday paradox; focuses on finding collisions in hashing algorithms.
+
+#### Exam Tip
+The universal defense against Rainbow Tables is **salting** the hashes. The defense against Downgrade Attacks is disabling legacy protocols.` },
             {
                 id: 'th6', icon: '🚨', title: 'Vulnerability Assessment', desc: 'Identifying and prioritizing security weaknesses.', summary: '• Scanning & Enumeration\n• CVSS Scoring\n• Remediation Planning', dive: `### Vulnerability Assessment
 A systematic process to identify, analyze, and prioritize security weaknesses in systems and applications.
@@ -551,7 +621,34 @@ A systematic process to identify, analyze, and prioritize security weaknesses in
 - False positives require manual validation
 - Context matters (criticality of affected asset)
 - Continuous scanning for emerging vulnerabilities
-- Report should include proof of concept and remediation steps` }
+- Report should include proof of concept and remediation steps` },
+            {
+                id: 'th7', icon: '☁️', title: 'Cloud & Virtualization Threats', desc: 'Attacks targeting cloud infrastructure and VMs.', summary: '• Misconfigurations\n• VM Escape\n• API Attacks', dive: `### Cloud & Virtualization Threats
+Cloud environments introduce unique attack vectors that exploit shared resources and management interfaces.
+
+#### Key Cloud Threats
+- **Misconfigurations:** The #1 cause of cloud breaches (e.g., publicly accessible S3 buckets or open security groups).
+- **Insecure APIs:** APIs are the control plane of the cloud. Without proper authentication and rate limiting, they can be easily abused.
+- **VM Escape:** An attacker exploits a vulnerability in a virtual machine to interact directly with the hypervisor or other VMs on the same host.
+- **Resource Exhaustion:** Attacks designed to consume cloud resources, often leading to unexpected "Denial of Wallet" bills rather than service outages.
+
+#### Exam Tip
+Always prioritize **secure configurations** and **least privilege IAM** to mitigate cloud-specific threats.` },
+            {
+                id: 'th8', icon: '💻', title: 'Application Attacks', desc: 'Exploiting vulnerabilities in software applications.', summary: '• SQLi & XSS\n• CSRF & SSRF\n• Buffer Overflows', dive: `### Application Attacks
+Applications, particularly web applications, are prime targets due to their external exposure.
+
+#### Common Web Attacks
+- **SQL Injection (SQLi):** Inserting malicious SQL code into input fields to manipulate backend databases.
+- **Cross-Site Scripting (XSS):** Injecting malicious scripts into web pages viewed by other users. 
+  - *Stored:* Script is saved on the server.
+  - *Reflected:* Script is bounced off the web server via a malicious link.
+- **Cross-Site Request Forgery (CSRF):** Tricking an authenticated user into executing unwanted actions on a web application.
+- **Server-Side Request Forgery (SSRF):** Tricking a server into making unauthorized requests to internal resources.
+- **Buffer Overflow:** Sending more data than a memory buffer can handle, overwriting adjacent memory to execute arbitrary code.
+
+#### Mitigation
+Input validation, parameterized queries, Web Application Firewalls (WAF), and secure coding practices (OWASP Top 10).` }
         ];
 
         const architectureData = [
@@ -602,7 +699,7 @@ Multiple layers of security controls working together:
 - Every boundary requires authentication/authorization
 - Monitor and log crossing of boundaries` },
             {
-                id: 'ar2', icon: '☁️', title: 'Cloud Security', desc: 'Securing cloud infrastructure and data.', summary: '• Shared Responsibility Model\n• Cloud Compliance\n• Data Residency', dive: `### Cloud Security Architecture
+                id: 'ar2', icon: '☁️', title: 'Cloud Security', desc: 'Securing cloud infrastructure and data.', summary: '• Shared Responsibility\\n• IaaS/PaaS/SaaS\\n• Cloud Compliance', dive: `### Cloud Security Architecture
 Cloud security requires understanding the shared responsibility model and cloud-specific threats.
 
 #### Shared Responsibility Model
@@ -628,7 +725,19 @@ Cloud security requires understanding the shared responsibility model and cloud-
 - Regular security assessments and penetration testing
 - Multi-factor authentication
 - Monitor cloud activity logs
-- Compliance with standards (PCI-DSS, HIPAA, SOC 2)` },
+- Compliance with standards (PCI-DSS, HIPAA, SOC 2)
+
+### Cloud Security Models
+When moving to the cloud, the organization shares security responsibilities with the Cloud Service Provider (CSP).
+
+#### Service Models
+- **IaaS (Infrastructure as a Service):** You manage the OS, runtime, applications, and data. The CSP manages the hardware and physical network.
+- **PaaS (Platform as a Service):** You manage the applications and data. The CSP manages the OS, runtime, and hardware.
+- **SaaS (Software as a Service):** You only manage the data and access. The CSP manages everything else (e.g., Salesforce, Office 365).
+
+#### Key Cloud Tools
+- **CASB (Cloud Access Security Broker):** A software tool or service that sits between an organization's on-premises infrastructure and a cloud provider's infrastructure. It enforces security policies, DLP, and IAM integration.
+- **CSPM (Cloud Security Posture Management):** Automated identification and remediation of risks across cloud infrastructures.` },
             {
                 id: 'ar3', icon: '📱', title: 'Mobile & IoT Security', desc: 'Securing mobile devices and internet-connected devices.', summary: '• Mobile Device Management\n• App Security\n• IoT Protocols', dive: `### Mobile & IoT Security
 Mobile devices and IoT systems present unique security challenges due to their distributed nature and limited processing power.
@@ -742,7 +851,22 @@ Ensuring security throughout the entire lifecycle of hardware, software, and ser
 - **Chain of Custody:** Track hardware from manufacture to deployment
 
 #### Log4j Vulnerability as Example
-Shows importance of tracking dependencies and rapid patching` }
+Shows importance of tracking dependencies and rapid patching` },
+            {
+                id: 'ar8', icon: '⚙️', title: 'Secure App Development', desc: 'Integrating security into the software lifecycle.', summary: '• DevSecOps\n• SAST vs DAST\n• Fuzzing', dive: `### Secure Application Development (SDLC)
+Security must be integrated into every phase of the Software Development Life Cycle, not just tested at the end.
+
+#### DevSecOps
+The practice of integrating security testing and tooling directly into the CI/CD pipeline (Continuous Integration / Continuous Deployment). It shifts security "left" (earlier in the development process).
+
+#### Testing Methodologies
+- **SAST (Static Application Security Testing):** Analyzes source code for vulnerabilities *without* executing the program. Finds issues early but can have high false positives.
+- **DAST (Dynamic Application Security Testing):** Analyzes the application *while it is running* to find vulnerabilities (like XSS or SQLi). Cannot pinpoint the exact line of code.
+- **Fuzzing (Fuzz Testing):** Injecting invalid, unexpected, or random data into an application to trigger crashes or memory leaks, revealing vulnerabilities.
+
+#### Secure Coding Practices
+- **Input Validation:** Ensure all input is properly sanitized.
+- **Error Handling:** Avoid revealing sensitive system details in error messages.` }
         ];
 
         const implementationData = [
@@ -1239,7 +1363,42 @@ Systematic approach to identifying, prioritizing, and remediating security vulne
 - Vulnerabilities that don't apply to your environment
 - Default credentials that have been changed
 - Unpatched services that are disabled
-- Regular verification and tuning needed` }
+- Regular verification and tuning needed` },
+            {
+                id: 'op7', icon: '🔎', title: 'Digital Forensics', desc: 'Preserving and analyzing digital evidence.', summary: '• Order of Volatility\n• Chain of Custody\n• Write Blockers', dive: `### Digital Forensics
+Forensics involves identifying, preserving, extracting, and documenting computer evidence.
+
+#### Order of Volatility
+When collecting evidence, you MUST collect the most volatile data first (data that disappears when power is lost):
+1. **CPU Registers and Cache**
+2. **Routing tables, ARP cache, process tables, kernel statistics**
+3. **RAM (System Memory)**
+4. **Temporary file systems / Swap space**
+5. **Hard Disks / SSDs**
+6. **Remote logging and monitoring data**
+7. **Physical configuration and network topology**
+8. **Archival Media (Backups, DVDs)**
+
+#### Key Forensic Principles
+- **Chain of Custody:** A chronological paper trail that records the sequence of custody, control, transfer, analysis, and disposition of physical or electronic evidence. Crucial for court admissibility.
+- **Write Blockers:** Hardware or software devices used to prevent any data from being written to the evidence drive during imaging, preserving its original state.
+- **Hashing:** Take a hash (SHA-256 or MD5) of the drive before and after imaging to prove the image is an exact, unaltered copy of the original.` },
+            {
+                id: 'op8', icon: '📝', title: 'Log Analysis & Tuning', desc: 'Extracting actionable intelligence from logs.', summary: '• Syslog\n• SIEM Tuning\n• False Positives', dive: `### Log Analysis & Tuning
+Logs provide the breadcrumbs needed to detect attacks and investigate incidents.
+
+#### Common Log Sources
+- **Syslog:** The standard logging protocol for Linux/Unix systems. Often centralized to a dedicated Syslog server.
+- **Event Viewer:** The logging system for Windows (Security, System, and Application logs).
+- **Firewall Logs:** Show allowed and dropped connections (crucial for detecting scans or block evasion).
+
+#### SIEM Operations
+- **Aggregation:** Collecting logs from thousands of devices into one central location.
+- **Correlation:** Linking seemingly unrelated events across different devices to identify an attack (e.g., a failed login on VPN followed by a successful login from a new country 5 minutes later).
+- **Tuning:** Adjusting the SIEM rules to reduce **False Positives** (alerting on normal behavior) without increasing **False Negatives** (missing actual attacks).
+
+#### Exam Tip
+If a SIEM is overwhelming analysts with thousands of alerts every day, the primary solution is to **tune the SIEM rules** to reduce false positives.` }
         ];
 
         const governanceData = [
