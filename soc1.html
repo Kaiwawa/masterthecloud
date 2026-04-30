@@ -1,13 +1,15 @@
 <!DOCTYPE html>
 <html lang="en" class="dark">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" type="image/x-icon" href="images/aicpa.ico">
+    <link rel="icon" type="image/x-icon" href="assets/images/aicpa.ico">
     <title>AICPA SOC 1 - Master Study Guide</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
-    <script src="js/app.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+    <script src="assets/js/app.js"></script>
     <link rel="stylesheet" href="assets/css/site.css">
     <script>
         tailwind.config = {
@@ -27,128 +29,277 @@
     </script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap');
-        body { font-family: 'Inter', sans-serif; transition: background-color 0.3s ease; }
-        
-        .perspective-1000 { perspective: 1000px; }
-        .transform-style-3d { transform-style: preserve-3d; }
-        .backface-hidden { backface-visibility: hidden; -webkit-backface-visibility: hidden; }
-        .rotate-y-180 { transform: rotateY(180deg); }
-        .flip-card-inner { transition: transform 0.8s cubic-bezier(0.34, 1.56, 0.64, 1); transform-style: preserve-3d; }
-        .flip-card.flipped .flip-card-inner { transform: rotateY(180deg); }
-        
-        .fade-in { animation: fadeIn 0.4s ease-out forwards; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-        
-        .md-content h3 { font-weight: 800; font-size: 1.5rem; margin-top: 1rem; margin-bottom: 1rem; color: #14b8a6; border-left: 5px solid #14b8a6; padding-left: 1rem; }
-        .md-content h4 { font-weight: 700; font-size: 1.1rem; margin-top: 1.5rem; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.05em; }
-        .md-content p { margin-bottom: 1rem; line-height: 1.8; font-size: 1.05rem; }
-        .md-content ul { list-style-type: none; margin-bottom: 1.5rem; }
-        .md-content li { margin-bottom: 0.75rem; position: relative; padding-left: 1.75rem; line-height: 1.6; }
-        .md-content li::before { content: "✦"; position: absolute; left: 0; color: #14b8a6; font-weight: bold; }
-        
-        .custom-scrollbar::-webkit-scrollbar { width: 8px; }
-        .custom-scrollbar::-webkit-scrollbar-track { background: rgba(0,0,0,0.05); }
-        .custom-scrollbar::-webkit-scrollbar-thumb { background: #475569; border-radius: 10px; }
-        
-        #deep-dive-modal.active { display: flex !important; }
-        .no-scrollbar::-webkit-scrollbar { display: none; }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            transition: background-color 0.3s ease;
+        }
+
+        .perspective-1000 {
+            perspective: 1000px;
+        }
+
+        .transform-style-3d {
+            transform-style: preserve-3d;
+        }
+
+        .backface-hidden {
+            backface-visibility: hidden;
+            -webkit-backface-visibility: hidden;
+        }
+
+        .rotate-y-180 {
+            transform: rotateY(180deg);
+        }
+
+        .flip-card-inner {
+            transition: transform 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+            transform-style: preserve-3d;
+        }
+
+        .flip-card.flipped .flip-card-inner {
+            transform: rotateY(180deg);
+        }
+
+        .fade-in {
+            animation: fadeIn 0.4s ease-out forwards;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .md-content h3 {
+            font-weight: 800;
+            font-size: 1.5rem;
+            margin-top: 1rem;
+            margin-bottom: 1rem;
+            color: #14b8a6;
+            border-left: 5px solid #14b8a6;
+            padding-left: 1rem;
+        }
+
+        .md-content h4 {
+            font-weight: 700;
+            font-size: 1.1rem;
+            margin-top: 1.5rem;
+            color: #94a3b8;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .md-content p {
+            margin-bottom: 1rem;
+            line-height: 1.8;
+            font-size: 1.05rem;
+        }
+
+        .md-content ul {
+            list-style-type: none;
+            margin-bottom: 1.5rem;
+        }
+
+        .md-content li {
+            margin-bottom: 0.75rem;
+            position: relative;
+            padding-left: 1.75rem;
+            line-height: 1.6;
+        }
+
+        .md-content li::before {
+            content: "✦";
+            position: absolute;
+            left: 0;
+            color: #14b8a6;
+            font-weight: bold;
+        }
+
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: rgba(0, 0, 0, 0.05);
+        }
+
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #475569;
+            border-radius: 10px;
+        }
+
+        #deep-dive-modal.active {
+            display: flex !important;
+        }
+
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
     </style>
 </head>
-<body class="min-h-screen bg-slate-50 dark:bg-[#0f172a] text-slate-900 dark:text-slate-200 antialiased overflow-x-hidden" style="--brand-accent:#14b8a6;">
 
-    <header class="sticky top-0 z-40 bg-white/80 dark:bg-[#0f172a]/80 backdrop-blur-xl border-b border-slate-200 dark:border-slate-800 shadow-sm">
+<body
+    class="min-h-screen bg-slate-50 dark:bg-[#0f172a] text-slate-900 dark:text-slate-200 antialiased overflow-x-hidden"
+    style="--brand-accent:#14b8a6;">
+
+    <header
+        class="sticky top-0 z-40 bg-white/80 dark:bg-[#0f172a]/80 backdrop-blur-xl border-b border-slate-200 dark:border-slate-800 shadow-sm">
         <div class="max-w-7xl mx-auto px-4 h-20 grid grid-cols-3 items-center gap-4">
             <div class="flex items-center justify-start gap-4">
-                <button onclick="goHome()" class="hidden sm:flex p-2.5 bg-slate-100 dark:bg-slate-800 rounded-xl hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors shrink-0 text-slate-500 dark:text-slate-400 hover:text-brand-accent dark:hover:text-brand-accent items-center justify-center" title="Home">
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1m-6 0h6"></path></svg>
+                <button onclick="goHome()"
+                    class="hidden sm:flex p-2.5 bg-slate-100 dark:bg-slate-800 rounded-xl hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors shrink-0 text-slate-500 dark:text-slate-400 hover:text-brand-accent dark:hover:text-brand-accent items-center justify-center"
+                    title="Home">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1m-6 0h6">
+                        </path>
+                    </svg>
                 </button>
-                <button onclick="openSidebar()" class="p-2.5 px-4 bg-slate-100 dark:bg-slate-800 rounded-xl hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors shrink-0 flex items-center gap-2 text-slate-700 dark:text-slate-300">
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+                <button onclick="openSidebar()"
+                    class="p-2.5 px-4 bg-slate-100 dark:bg-slate-800 rounded-xl hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors shrink-0 flex items-center gap-2 text-slate-700 dark:text-slate-300">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
                     <span class="font-bold text-sm hidden sm:block">Menu</span>
                 </button>
             </div>
 
-            <div onclick="navigateTo('section-home')" class="flex items-center justify-center gap-3 cursor-pointer group">
+            <div onclick="navigateTo('section-home')"
+                class="flex items-center justify-center gap-3 cursor-pointer group">
                 <div class="hidden lg:block">
-                    <h1 class="text-xl font-extrabold tracking-tighter text-slate-900 dark:text-white group-hover:text-brand-accent transition-colors">Master SOC 1</h1>
+                    <h1
+                        class="text-xl font-extrabold tracking-tighter text-slate-900 dark:text-white group-hover:text-brand-accent transition-colors">
+                        Master SOC 1</h1>
                 </div>
             </div>
 
             <div class="flex items-center justify-end gap-3">
                 <div class="relative hidden md:block w-full max-w-[160px] lg:max-w-[200px]">
-                    <input type="text" id="global-search" oninput="handleSearch(this.value)" placeholder="Search..." class="w-full bg-slate-100 dark:bg-slate-800 border-none rounded-2xl px-4 py-2 text-sm focus:ring-2 focus:ring-brand-accent outline-none transition-all">
-                    <div id="search-results" class="absolute top-full right-0 w-[300px] mt-2 bg-white dark:bg-slate-800 rounded-2xl shadow-2xl border border-slate-200 dark:border-slate-700 hidden overflow-hidden z-50 text-left">
+                    <input type="text" id="global-search" oninput="handleSearch(this.value)" placeholder="Search..."
+                        class="w-full bg-slate-100 dark:bg-slate-800 border-none rounded-2xl px-4 py-2 text-sm focus:ring-2 focus:ring-brand-accent outline-none transition-all">
+                    <div id="search-results"
+                        class="absolute top-full right-0 w-[300px] mt-2 bg-white dark:bg-slate-800 rounded-2xl shadow-2xl border border-slate-200 dark:border-slate-700 hidden overflow-hidden z-50 text-left">
                     </div>
                 </div>
-                <button onclick="toggleTheme()" class="p-2.5 bg-slate-100 dark:bg-slate-800 rounded-xl hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors shrink-0">
+                <button onclick="toggleTheme()"
+                    class="p-2.5 bg-slate-100 dark:bg-slate-800 rounded-xl hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors shrink-0">
                     <span id="theme-icon">🌙</span>
                 </button>
             </div>
         </div>
     </header>
 
-    <div id="sidebar-overlay" class="fixed inset-0 bg-slate-900/40 backdrop-blur-sm z-[55] hidden opacity-0 transition-opacity duration-300" onclick="closeSidebar()"></div>
-    
-    <aside id="left-sidebar" class="fixed top-0 left-0 h-full w-72 bg-white dark:bg-[#0f172a] border-r border-slate-200 dark:border-slate-800 shadow-[0_0_50px_rgba(0,0,0,0.3)] z-[60] transform -translate-x-full transition-transform duration-300 flex flex-col">
+    <div id="sidebar-overlay"
+        class="fixed inset-0 bg-slate-900/40 backdrop-blur-sm z-[55] hidden opacity-0 transition-opacity duration-300"
+        onclick="closeSidebar()"></div>
+
+    <aside id="left-sidebar"
+        class="fixed top-0 left-0 h-full w-72 bg-white dark:bg-[#0f172a] border-r border-slate-200 dark:border-slate-800 shadow-[0_0_50px_rgba(0,0,0,0.3)] z-[60] transform -translate-x-full transition-transform duration-300 flex flex-col">
         <div class="p-6 flex justify-between items-center border-b border-slate-200 dark:border-slate-800">
             <span class="font-black text-sm text-slate-400 uppercase tracking-widest">Navigation</span>
-            <button onclick="closeSidebar()" class="text-slate-400 hover:text-brand-accent transition-colors text-3xl">&times;</button>
+            <button onclick="closeSidebar()"
+                class="text-slate-400 hover:text-brand-accent transition-colors text-3xl">&times;</button>
         </div>
-        
+
         <nav class="flex flex-col gap-1 p-4 overflow-y-auto custom-scrollbar flex-grow">
-            <button data-target="section-home" onclick="navigateTo('section-home')" class="nav-btn text-left px-4 py-2 rounded-xl text-base font-bold transition-all text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800">Dashboard</button>
-            
-            <span class="px-4 text-base font-black text-slate-800 dark:text-slate-200 tracking-wide mt-4 mb-1">Reporting Framework</span>
-            <button data-target="section-reports" onclick="navigateTo('section-reports')" class="nav-btn text-left pl-8 pr-4 py-2 rounded-xl text-sm font-semibold transition-all text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800">Type I vs Type II</button>
-            <button data-target="section-concepts" onclick="navigateTo('section-concepts')" class="nav-btn text-left pl-8 pr-4 py-2 rounded-xl text-sm font-semibold transition-all text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800">Key Concepts</button>
-            
-            <span class="px-4 text-base font-black text-slate-800 dark:text-slate-200 tracking-wide mt-6 mb-1">Control & Audit</span>
-            <button data-target="section-controls" onclick="navigateTo('section-controls')" class="nav-btn text-left pl-8 pr-4 py-2 rounded-xl text-sm font-semibold transition-all text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800">Control Environment</button>
-            <button data-target="section-audit" onclick="navigateTo('section-audit')" class="nav-btn text-left pl-8 pr-4 py-2 rounded-xl text-sm font-semibold transition-all text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800">The Audit Process</button>
-            
-            <a href="index.html" class="text-left px-4 py-2 rounded-xl text-sm font-bold transition-all text-brand-accent hover:bg-slate-100 dark:hover:bg-slate-800 mb-2 mt-4">← Back to Main Menu</a>
+            <button data-target="section-home" onclick="navigateTo('section-home')"
+                class="nav-btn text-left px-4 py-2 rounded-xl text-base font-bold transition-all text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800">Dashboard</button>
+
+            <span class="px-4 text-base font-black text-slate-800 dark:text-slate-200 tracking-wide mt-4 mb-1">Reporting
+                Framework</span>
+            <button data-target="section-reports" onclick="navigateTo('section-reports')"
+                class="nav-btn text-left pl-8 pr-4 py-2 rounded-xl text-sm font-semibold transition-all text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800">Type
+                I vs Type II</button>
+            <button data-target="section-concepts" onclick="navigateTo('section-concepts')"
+                class="nav-btn text-left pl-8 pr-4 py-2 rounded-xl text-sm font-semibold transition-all text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800">Key
+                Concepts</button>
+
+            <span class="px-4 text-base font-black text-slate-800 dark:text-slate-200 tracking-wide mt-6 mb-1">Control &
+                Audit</span>
+            <button data-target="section-controls" onclick="navigateTo('section-controls')"
+                class="nav-btn text-left pl-8 pr-4 py-2 rounded-xl text-sm font-semibold transition-all text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800">Control
+                Environment</button>
+            <button data-target="section-audit" onclick="navigateTo('section-audit')"
+                class="nav-btn text-left pl-8 pr-4 py-2 rounded-xl text-sm font-semibold transition-all text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800">The
+                Audit Process</button>
+
+            <a href="index.html"
+                class="text-left px-4 py-2 rounded-xl text-sm font-bold transition-all text-brand-accent hover:bg-slate-100 dark:hover:bg-slate-800 mb-2 mt-4">←
+                Back to Main Menu</a>
         </nav>
     </aside>
 
     <main class="max-w-7xl mx-auto px-4 py-12">
-        
+
         <section id="section-home" class="content-section fade-in">
             <div class="text-center mb-16 mt-8">
-                <div class="inline-block px-4 py-1.5 rounded-full bg-brand-accent/10 border border-brand-accent/20 text-brand-accent font-bold text-xs tracking-widest uppercase mb-6">AICPA SOC 1 Compliance</div>
-                <h2 class="text-5xl md:text-7xl font-black mb-6 tracking-tight text-slate-900 dark:text-white">Master SOC 1.</h2>
-                <p class="text-slate-500 dark:text-slate-400 text-lg md:text-xl max-w-3xl mx-auto leading-relaxed">The definitive guide for understanding Service Organization Controls reporting over financial operations.</p>
+                <div
+                    class="inline-block px-4 py-1.5 rounded-full bg-brand-accent/10 border border-brand-accent/20 text-brand-accent font-bold text-xs tracking-widest uppercase mb-6">
+                    AICPA SOC 1 Compliance</div>
+                <h2 class="text-5xl md:text-7xl font-black mb-6 tracking-tight text-slate-900 dark:text-white">Master
+                    SOC 1.</h2>
+                <p class="text-slate-500 dark:text-slate-400 text-lg md:text-xl max-w-3xl mx-auto leading-relaxed">The
+                    definitive guide for understanding Service Organization Controls reporting over financial
+                    operations.</p>
             </div>
 
             <div class="mb-12">
-                <h3 class="text-sm font-black text-slate-400 uppercase tracking-widest mb-6 pl-2 border-l-4 border-teal-500">Reporting Framework</h3>
+                <h3
+                    class="text-sm font-black text-slate-400 uppercase tracking-widest mb-6 pl-2 border-l-4 border-teal-500">
+                    Reporting Framework</h3>
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    <div onclick="navigateTo('section-reports')" class="bg-white dark:bg-slate-800/40 p-8 rounded-[2rem] border border-slate-200 dark:border-slate-700/50 shadow-xl cursor-pointer hover:-translate-y-2 hover:border-teal-500/50 transition-all group">
-                        <div class="w-14 h-14 bg-teal-500/10 rounded-2xl flex items-center justify-center text-3xl mb-6 group-hover:scale-110 transition-transform">📋</div>
+                    <div onclick="navigateTo('section-reports')"
+                        class="bg-white dark:bg-slate-800/40 p-8 rounded-[2rem] border border-slate-200 dark:border-slate-700/50 shadow-xl cursor-pointer hover:-translate-y-2 hover:border-teal-500/50 transition-all group">
+                        <div
+                            class="w-14 h-14 mx-auto bg-teal-500/10 rounded-2xl flex items-center justify-center text-3xl mb-6 group-hover:scale-110 transition-transform">
+                            📋</div>
                         <h3 class="text-xl font-black mb-2 text-slate-800 dark:text-white">Report Types</h3>
-                        <p class="text-slate-500 dark:text-slate-400 text-sm leading-relaxed">Type I vs Type II reports and their specific applications.</p>
+                        <p class="text-slate-500 dark:text-slate-400 text-sm leading-relaxed">Type I vs Type II reports
+                            and their specific applications.</p>
                     </div>
 
-                    <div onclick="navigateTo('section-concepts')" class="bg-white dark:bg-slate-800/40 p-8 rounded-[2rem] border border-slate-200 dark:border-slate-700/50 shadow-xl cursor-pointer hover:-translate-y-2 hover:border-blue-500/50 transition-all group">
-                        <div class="w-14 h-14 bg-blue-500/10 rounded-2xl flex items-center justify-center text-3xl mb-6 group-hover:scale-110 transition-transform">🧠</div>
+                    <div onclick="navigateTo('section-concepts')"
+                        class="bg-white dark:bg-slate-800/40 p-8 rounded-[2rem] border border-slate-200 dark:border-slate-700/50 shadow-xl cursor-pointer hover:-translate-y-2 hover:border-blue-500/50 transition-all group">
+                        <div
+                            class="w-14 h-14 mx-auto bg-blue-500/10 rounded-2xl flex items-center justify-center text-3xl mb-6 group-hover:scale-110 transition-transform">
+                            🧠</div>
                         <h3 class="text-xl font-black mb-2 text-slate-800 dark:text-white">Key Concepts</h3>
-                        <p class="text-slate-500 dark:text-slate-400 text-sm leading-relaxed">SOC 1 vs SOC 2, SSAE 18, and ICFR definitions.</p>
+                        <p class="text-slate-500 dark:text-slate-400 text-sm leading-relaxed">SOC 1 vs SOC 2, SSAE 18,
+                            and ICFR definitions.</p>
                     </div>
                 </div>
             </div>
 
             <div class="mb-12">
-                <h3 class="text-sm font-black text-slate-400 uppercase tracking-widest mb-6 pl-2 border-l-4 border-emerald-500">Control & Audit</h3>
+                <h3
+                    class="text-sm font-black text-slate-400 uppercase tracking-widest mb-6 pl-2 border-l-4 border-emerald-500">
+                    Control & Audit</h3>
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    <div onclick="navigateTo('section-controls')" class="bg-white dark:bg-slate-800/40 p-8 rounded-[2rem] border border-slate-200 dark:border-slate-700/50 shadow-xl cursor-pointer hover:-translate-y-2 hover:border-emerald-500/50 transition-all group">
-                        <div class="w-14 h-14 bg-emerald-500/10 rounded-2xl flex items-center justify-center text-3xl mb-6 group-hover:scale-110 transition-transform">🛡️</div>
+                    <div onclick="navigateTo('section-controls')"
+                        class="bg-white dark:bg-slate-800/40 p-8 rounded-[2rem] border border-slate-200 dark:border-slate-700/50 shadow-xl cursor-pointer hover:-translate-y-2 hover:border-emerald-500/50 transition-all group">
+                        <div
+                            class="w-14 h-14 mx-auto bg-emerald-500/10 rounded-2xl flex items-center justify-center text-3xl mb-6 group-hover:scale-110 transition-transform">
+                            🛡️</div>
                         <h3 class="text-xl font-black mb-2 text-slate-800 dark:text-white">Internal Controls</h3>
-                        <p class="text-slate-500 dark:text-slate-400 text-sm leading-relaxed">Control Objectives, IT General Controls (ITGCs), and CUECs.</p>
+                        <p class="text-slate-500 dark:text-slate-400 text-sm leading-relaxed">Control Objectives, IT
+                            General Controls (ITGCs), and CUECs.</p>
                     </div>
 
-                    <div onclick="navigateTo('section-audit')" class="bg-white dark:bg-slate-800/40 p-8 rounded-[2rem] border border-slate-200 dark:border-slate-700/50 shadow-xl cursor-pointer hover:-translate-y-2 hover:border-cyan-500/50 transition-all group">
-                        <div class="w-14 h-14 bg-cyan-500/10 rounded-2xl flex items-center justify-center text-3xl mb-6 group-hover:scale-110 transition-transform">🔍</div>
+                    <div onclick="navigateTo('section-audit')"
+                        class="bg-white dark:bg-slate-800/40 p-8 rounded-[2rem] border border-slate-200 dark:border-slate-700/50 shadow-xl cursor-pointer hover:-translate-y-2 hover:border-cyan-500/50 transition-all group">
+                        <div
+                            class="w-14 h-14 mx-auto bg-cyan-500/10 rounded-2xl flex items-center justify-center text-3xl mb-6 group-hover:scale-110 transition-transform">
+                            🔍</div>
                         <h3 class="text-xl font-black mb-2 text-slate-800 dark:text-white">The Audit Process</h3>
-                        <p class="text-slate-500 dark:text-slate-400 text-sm leading-relaxed">Evidence collection, testing, exceptions, and the auditor's opinion.</p>
+                        <p class="text-slate-500 dark:text-slate-400 text-sm leading-relaxed">Evidence collection,
+                            testing, exceptions, and the auditor's opinion.</p>
                     </div>
                 </div>
             </div>
@@ -157,44 +308,71 @@
         <section id="section-reports" class="content-section hidden fade-in">
             <div class="mb-12 text-center md:text-left">
                 <h2 class="text-4xl font-black mb-2 text-teal-500">Type I vs Type II Reports</h2>
-                <p class="text-slate-500 dark:text-slate-400 italic">Understanding the fundamental difference in audit report delivery.</p>
+                <p class="text-slate-500 dark:text-slate-400 italic">Understanding the fundamental difference in audit
+                    report delivery.</p>
             </div>
-            
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-px bg-slate-200/50 dark:bg-slate-800/30 backdrop-blur-md rounded-[2.5rem] overflow-hidden border border-slate-200/50 dark:border-slate-800/50 shadow-2xl">
+
+            <div
+                class="grid grid-cols-1 lg:grid-cols-2 gap-px bg-slate-200/50 dark:bg-slate-800/30 backdrop-blur-md rounded-[2.5rem] overflow-hidden border border-slate-200/50 dark:border-slate-800/50 shadow-2xl">
                 <div class="bg-white/60 dark:bg-slate-900/40 p-8 md:p-12">
                     <div class="flex items-center gap-4 mb-8">
-                        <div class="w-16 h-16 bg-teal-500/10 rounded-2xl flex items-center justify-center text-3xl shadow-inner">⏱️</div>
-                        <h3 class="text-2xl md:text-3xl font-black text-teal-500 uppercase tracking-tight">Type I<br><span class="text-slate-400 text-sm tracking-widest">Point In Time</span></h3>
+                        <div
+                            class="w-16 h-16 bg-teal-500/10 rounded-2xl flex items-center justify-center text-3xl shadow-inner">
+                            ⏱️</div>
+                        <h3 class="text-2xl md:text-3xl font-black text-teal-500 uppercase tracking-tight">Type
+                            I<br><span class="text-slate-400 text-sm tracking-widest">Point In Time</span></h3>
                     </div>
-                    <p class="text-slate-600 dark:text-slate-400 mb-8 leading-relaxed font-medium">A Type I report attests to the design of a service organization's controls at a specific date. It does not test if the controls were followed over time.</p>
-                    
+                    <p class="text-slate-600 dark:text-slate-400 mb-8 leading-relaxed font-medium">A Type I report
+                        attests to the design of a service organization's controls at a specific date. It does not test
+                        if the controls were followed over time.</p>
+
                     <div class="space-y-6">
-                        <div class="p-6 bg-slate-50/80 dark:bg-slate-800/30 rounded-2xl border-l-4 border-teal-500 shadow-sm transition-transform hover:scale-[1.02]">
-                            <h4 class="font-bold text-lg mb-2 text-slate-800 dark:text-white">Design & Implementation</h4>
-                            <p class="text-sm text-slate-500 dark:text-slate-400 leading-relaxed">The auditor evaluates Management's description of the system and verifies that the described controls are suitably designed and implemented as of a specific date (e.g., December 31).</p>
+                        <div
+                            class="p-6 bg-slate-50/80 dark:bg-slate-800/30 rounded-2xl border-l-4 border-teal-500 shadow-sm transition-transform hover:scale-[1.02]">
+                            <h4 class="font-bold text-lg mb-2 text-slate-800 dark:text-white">Design & Implementation
+                            </h4>
+                            <p class="text-sm text-slate-500 dark:text-slate-400 leading-relaxed">The auditor evaluates
+                                Management's description of the system and verifies that the described controls are
+                                suitably designed and implemented as of a specific date (e.g., December 31).</p>
                         </div>
-                        <div class="p-6 bg-slate-50/80 dark:bg-slate-800/30 rounded-2xl border-l-4 border-teal-500 shadow-sm transition-transform hover:scale-[1.02]">
+                        <div
+                            class="p-6 bg-slate-50/80 dark:bg-slate-800/30 rounded-2xl border-l-4 border-teal-500 shadow-sm transition-transform hover:scale-[1.02]">
                             <h4 class="font-bold text-lg mb-2 text-slate-800 dark:text-white">Use Case</h4>
-                            <p class="text-sm text-slate-500 dark:text-slate-400 leading-relaxed">Often used as a "stepping stone" for companies seeking SOC 1 compliance for the first time. It establishes the baseline before moving to a Type II audit.</p>
+                            <p class="text-sm text-slate-500 dark:text-slate-400 leading-relaxed">Often used as a
+                                "stepping stone" for companies seeking SOC 1 compliance for the first time. It
+                                establishes the baseline before moving to a Type II audit.</p>
                         </div>
                     </div>
                 </div>
 
                 <div class="bg-slate-50/60 dark:bg-slate-800/20 p-8 md:p-12">
                     <div class="flex items-center gap-4 mb-8">
-                        <div class="w-16 h-16 bg-emerald-500/10 rounded-2xl flex items-center justify-center text-3xl shadow-inner">📅</div>
-                        <h3 class="text-2xl md:text-3xl font-black text-emerald-500 uppercase tracking-tight">Type II<br><span class="text-slate-400 text-sm tracking-widest">Period Of Time</span></h3>
+                        <div
+                            class="w-16 h-16 bg-emerald-500/10 rounded-2xl flex items-center justify-center text-3xl shadow-inner">
+                            📅</div>
+                        <h3 class="text-2xl md:text-3xl font-black text-emerald-500 uppercase tracking-tight">Type
+                            II<br><span class="text-slate-400 text-sm tracking-widest">Period Of Time</span></h3>
                     </div>
-                    <p class="text-slate-600 dark:text-slate-400 mb-8 leading-relaxed font-medium">A Type II report attests to both the design AND the operating effectiveness of controls over a specified period, typically 6 to 12 months.</p>
-                    
+                    <p class="text-slate-600 dark:text-slate-400 mb-8 leading-relaxed font-medium">A Type II report
+                        attests to both the design AND the operating effectiveness of controls over a specified period,
+                        typically 6 to 12 months.</p>
+
                     <div class="space-y-6">
-                        <div class="p-6 bg-white/80 dark:bg-slate-800/40 rounded-2xl border-l-4 border-emerald-500 shadow-sm transition-transform hover:scale-[1.02]">
-                            <h4 class="font-bold text-lg mb-2 text-slate-800 dark:text-white">Operating Effectiveness</h4>
-                            <p class="text-sm text-slate-500 dark:text-slate-400 leading-relaxed">The auditor pulls samples throughout the audit period (e.g., Jan 1 - Dec 31) to prove the controls actually worked. Did every new hire get approved? Did every code push have a code review?</p>
+                        <div
+                            class="p-6 bg-white/80 dark:bg-slate-800/40 rounded-2xl border-l-4 border-emerald-500 shadow-sm transition-transform hover:scale-[1.02]">
+                            <h4 class="font-bold text-lg mb-2 text-slate-800 dark:text-white">Operating Effectiveness
+                            </h4>
+                            <p class="text-sm text-slate-500 dark:text-slate-400 leading-relaxed">The auditor pulls
+                                samples throughout the audit period (e.g., Jan 1 - Dec 31) to prove the controls
+                                actually worked. Did every new hire get approved? Did every code push have a code
+                                review?</p>
                         </div>
-                        <div class="p-6 bg-white/80 dark:bg-slate-800/40 rounded-2xl border-l-4 border-emerald-500 shadow-sm transition-transform hover:scale-[1.02]">
+                        <div
+                            class="p-6 bg-white/80 dark:bg-slate-800/40 rounded-2xl border-l-4 border-emerald-500 shadow-sm transition-transform hover:scale-[1.02]">
                             <h4 class="font-bold text-lg mb-2 text-slate-800 dark:text-white">The Gold Standard</h4>
-                            <p class="text-sm text-slate-500 dark:text-slate-400 leading-relaxed">User entities and their financial auditors strongly prefer (and often require) a Type II report because it proves a history of secure and reliable operations, not just a promise.</p>
+                            <p class="text-sm text-slate-500 dark:text-slate-400 leading-relaxed">User entities and
+                                their financial auditors strongly prefer (and often require) a Type II report because it
+                                proves a history of secure and reliable operations, not just a promise.</p>
                         </div>
                     </div>
                 </div>
@@ -202,30 +380,37 @@
         </section>
 
         <section id="section-concepts" class="content-section hidden fade-in">
-            <div class="mb-12 text-center md:text-left"><h2 class="text-4xl font-black mb-2 text-blue-500">Key Concepts</h2></div>
+            <div class="mb-12 text-center md:text-left">
+                <h2 class="text-4xl font-black mb-2 text-blue-500">Key Concepts</h2>
+            </div>
             <div id="concepts-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
         </section>
 
         <section id="section-controls" class="content-section hidden fade-in">
             <div class="mb-8 text-center md:text-left">
                 <h2 class="text-4xl font-black mb-2 text-emerald-500">Internal Controls</h2>
-                <p class="text-slate-500 dark:text-slate-400 italic">The ITGC framework that protects financial reporting data.</p>
+                <p class="text-slate-500 dark:text-slate-400 italic">The ITGC framework that protects financial
+                    reporting data.</p>
             </div>
-            
-            <div class="mb-10 bg-slate-100 dark:bg-slate-800/50 rounded-3xl p-8 border border-slate-200 dark:border-slate-700">
+
+            <div
+                class="mb-10 bg-slate-100 dark:bg-slate-800/50 rounded-3xl p-8 border border-slate-200 dark:border-slate-700">
                 <h3 class="text-xl font-bold mb-6 text-emerald-500">The 3 Pillars of ITGCs</h3>
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                     <div class="p-6 bg-white dark:bg-slate-700 rounded-xl shadow-sm border-t-4 border-emerald-500">
                         <div class="font-black text-slate-800 dark:text-white text-lg mb-2">1. Logical Access</div>
-                        <div class="text-sm text-slate-500">Ensuring only authorized individuals can access systems. Includes New Hires, Terminations, and Access Reviews.</div>
+                        <div class="text-sm text-slate-500">Ensuring only authorized individuals can access systems.
+                            Includes New Hires, Terminations, and Access Reviews.</div>
                     </div>
                     <div class="p-6 bg-white dark:bg-slate-700 rounded-xl shadow-sm border-t-4 border-emerald-500">
                         <div class="font-black text-slate-800 dark:text-white text-lg mb-2">2. Change Management</div>
-                        <div class="text-sm text-slate-500">Ensuring code changes are tested, approved, and pushed to production by someone other than the developer (Segregation of Duties).</div>
+                        <div class="text-sm text-slate-500">Ensuring code changes are tested, approved, and pushed to
+                            production by someone other than the developer (Segregation of Duties).</div>
                     </div>
                     <div class="p-6 bg-white dark:bg-slate-700 rounded-xl shadow-sm border-t-4 border-emerald-500">
                         <div class="font-black text-slate-800 dark:text-white text-lg mb-2">3. IT Operations</div>
-                        <div class="text-sm text-slate-500">Ensuring data is not lost and systems stay online. Includes Backups, Batch processing, and Incident Management.</div>
+                        <div class="text-sm text-slate-500">Ensuring data is not lost and systems stay online. Includes
+                            Backups, Batch processing, and Incident Management.</div>
                     </div>
                 </div>
             </div>
@@ -235,10 +420,12 @@
         <section id="section-audit" class="content-section hidden fade-in">
             <div class="mb-8 text-center md:text-left">
                 <h2 class="text-4xl font-black mb-2 text-cyan-500">The Audit Process</h2>
-                <p class="text-slate-500 dark:text-slate-400 italic">How CPA firms collect evidence and issue opinions.</p>
+                <p class="text-slate-500 dark:text-slate-400 italic">How CPA firms collect evidence and issue opinions.
+                </p>
             </div>
-            
-            <div class="mb-10 bg-slate-100 dark:bg-slate-800/50 rounded-3xl p-8 border border-slate-200 dark:border-slate-700">
+
+            <div
+                class="mb-10 bg-slate-100 dark:bg-slate-800/50 rounded-3xl p-8 border border-slate-200 dark:border-slate-700">
                 <h3 class="text-xl font-bold mb-6 text-cyan-500">The SOC 1 Audit Timeline</h3>
                 <div class="flex flex-col md:flex-row items-center justify-between gap-2">
                     <div class="p-4 bg-white dark:bg-slate-700 rounded-xl shadow text-center w-full">
@@ -256,18 +443,23 @@
                         <div class="text-xs text-slate-500">6-12 Month Period</div>
                     </div>
                     <div class="text-slate-400 text-xl hidden md:block">➔</div>
-                    <div class="p-4 bg-cyan-50 dark:bg-cyan-900/30 border border-cyan-200 rounded-xl shadow text-center w-full">
+                    <div
+                        class="p-4 bg-cyan-50 dark:bg-cyan-900/30 border border-cyan-200 rounded-xl shadow text-center w-full">
                         <div class="font-bold text-cyan-600 dark:text-cyan-400">Type II</div>
                         <div class="text-xs text-slate-500">Operating Effectiveness</div>
                     </div>
                 </div>
             </div>
-            
+
             <div class="mb-10 p-6 bg-cyan-500/10 border border-cyan-500/20 rounded-2xl">
                 <h4 class="font-bold text-cyan-600 dark:text-cyan-400 mb-2">The Sampling Golden Rule</h4>
-                <p class="text-sm text-slate-600 dark:text-slate-300">Auditors do not test every single event that occurred over the year. Instead, they request a complete <strong>Population</strong> (e.g., a list of all 1,000 code deployments), and randomly select a <strong>Sample</strong> (usually 25 to 40 items) to test comprehensively via Inspection.</p>
+                <p class="text-sm text-slate-600 dark:text-slate-300">Auditors do not test every single event that
+                    occurred over the year. Instead, they request a complete <strong>Population</strong> (e.g., a list
+                    of all 1,000 code deployments), and randomly select a <strong>Sample</strong> (usually 25 to 40
+                    items) to test comprehensively via Inspection.</p>
             </div>
-            <div class="mb-10 bg-slate-100 dark:bg-slate-800/50 rounded-3xl p-8 border border-slate-200 dark:border-slate-700">
+            <div
+                class="mb-10 bg-slate-100 dark:bg-slate-800/50 rounded-3xl p-8 border border-slate-200 dark:border-slate-700">
                 <h3 class="text-xl font-bold mb-6 text-cyan-500">Materiality Lens</h3>
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
                     <div class="p-4 bg-white dark:bg-slate-700 rounded-xl shadow-sm border-t-4 border-cyan-500">
@@ -276,7 +468,8 @@
                     </div>
                     <div class="p-4 bg-white dark:bg-slate-700 rounded-xl shadow-sm border-t-4 border-cyan-500">
                         <div class="font-bold text-slate-800 dark:text-white">Material Exception</div>
-                        <div class="text-xs text-slate-500 mt-1">Could affect financial reporting or trust in the report.</div>
+                        <div class="text-xs text-slate-500 mt-1">Could affect financial reporting or trust in the
+                            report.</div>
                     </div>
                     <div class="p-4 bg-white dark:bg-slate-700 rounded-xl shadow-sm border-t-4 border-cyan-500">
                         <div class="font-bold text-slate-800 dark:text-white">Control Deficiency</div>
@@ -288,19 +481,27 @@
         </section>
     </main>
 
-    <div id="deep-dive-modal" class="fixed inset-0 z-[100] hidden items-center justify-center bg-slate-950/80 backdrop-blur-md p-4 opacity-0 transition-all duration-300" onclick="closeModal(event)">
-        <div class="bg-white dark:bg-slate-900 w-full max-w-3xl rounded-[2.5rem] shadow-2xl overflow-hidden transform scale-90 transition-all duration-300 border border-slate-200 dark:border-slate-800 flex flex-col max-h-[90vh]" onclick="event.stopPropagation()">
-            <div class="p-8 md:p-10 border-b border-slate-100 dark:border-slate-800 flex justify-between items-center bg-slate-50/50 dark:bg-slate-800/30 shrink-0">
+    <div id="deep-dive-modal"
+        class="fixed inset-0 z-[100] hidden items-center justify-center bg-slate-950/80 backdrop-blur-md p-4 opacity-0 transition-all duration-300"
+        onclick="closeModal(event)">
+        <div class="bg-white dark:bg-slate-900 w-full max-w-3xl rounded-[2.5rem] shadow-2xl overflow-hidden transform scale-90 transition-all duration-300 border border-slate-200 dark:border-slate-800 flex flex-col max-h-[90vh]"
+            onclick="event.stopPropagation()">
+            <div
+                class="p-8 md:p-10 border-b border-slate-100 dark:border-slate-800 flex justify-between items-center bg-slate-50/50 dark:bg-slate-800/30 shrink-0">
                 <div class="flex items-center gap-6">
                     <div id="m-icon-bg" class="p-5 rounded-3xl text-4xl md:text-5xl"><span id="m-icon"></span></div>
                     <div>
                         <h3 id="m-title" class="text-3xl md:text-4xl font-black text-slate-900 dark:text-white"></h3>
-                        <p id="m-subtitle" class="text-sm font-bold uppercase tracking-widest mt-1">Technical Reference</p>
+                        <p id="m-subtitle" class="text-sm font-bold uppercase tracking-widest mt-1">Technical Reference
+                        </p>
                     </div>
                 </div>
-                <button onclick="closeModal()" class="w-12 h-12 flex items-center justify-center rounded-full bg-slate-100 dark:bg-slate-800 text-slate-500 hover:text-brand-accent transition-all text-3xl shrink-0">&times;</button>
+                <button onclick="closeModal()"
+                    class="w-12 h-12 flex items-center justify-center rounded-full bg-slate-100 dark:bg-slate-800 text-slate-500 hover:text-brand-accent transition-all text-3xl shrink-0">&times;</button>
             </div>
-            <div id="m-content" class="p-8 md:p-12 overflow-y-auto md-content custom-scrollbar bg-white dark:bg-slate-900 flex-grow"></div>
+            <div id="m-content"
+                class="p-8 md:p-12 overflow-y-auto md-content custom-scrollbar bg-white dark:bg-slate-900 flex-grow">
+            </div>
         </div>
     </div>
 
@@ -317,7 +518,19 @@
         ];
 
         const auditData = [
-            { id: 'a1', icon: '🔍', title: 'Audit Testing Methods', desc: 'How auditors verify controls.', summary: '• Inquiry (Weakest)\n• Observation\n• Inspection\n• Reperformance (Strongest)', dive: `### Audit Testing Methods\nTo issue a Type II report, auditors cannot just take management's word. They must independently pull samples across the audit period and test them using a strict hierarchy of evidence.\n\n#### The Four Testing Methods:\n1. **Inquiry:** Asking management or employees questions. *Weakest form of evidence. Must always be corroborated with other methods.*\n2. **Observation:** Watching an employee perform a process (e.g., watching an admin provision a user via screen-share). *Good for verifying design, but it doesn't prove the control was followed historically.*\n3. **Inspection / Examination:** Reviewing historical documents and system records (e.g., looking at Jira tickets, Git pull requests, or timestamped HR termination emails). *Highly reliable, the primary method used in Type II audits.*\n4. **Reperformance:** The auditor manually executes the control themselves to verify it works (e.g., trying to log in with a terminated account to ensure access is denied). *The absolute strongest form of evidence.*` },
+            {
+                id: 'a1', icon: '🔍', title: 'Audit Testing Methods', desc: 'How auditors verify controls.', summary: '• Inquiry (Weakest)\n• Observation\n• Inspection\n• Reperformance (Strongest)', dive: `### Audit Testing Methods
+<div class="mermaid">
+graph TD
+    A[Inquiry] --> B[Observation]
+    B --> C[Inspection]
+    C --> D[Reperformance]
+    style A fill:#ef4444,color:#fff
+    style B fill:#f97316,color:#fff
+    style C fill:#eab308,color:#000
+    style D fill:#22c55e,color:#fff
+</div>
+To issue a Type II report, auditors cannot just take management's word. They must independently pull samples across the audit period and test them using a strict hierarchy of evidence.\n\n#### The Four Testing Methods:\n1. **Inquiry:** Asking management or employees questions. *Weakest form of evidence. Must always be corroborated with other methods.*\n2. **Observation:** Watching an employee perform a process (e.g., watching an admin provision a user via screen-share). *Good for verifying design, but it doesn't prove the control was followed historically.*\n3. **Inspection / Examination:** Reviewing historical documents and system records (e.g., looking at Jira tickets, Git pull requests, or timestamped HR termination emails). *Highly reliable, the primary method used in Type II audits.*\n4. **Reperformance:** The auditor manually executes the control themselves to verify it works (e.g., trying to log in with a terminated account to ensure access is denied). *The absolute strongest form of evidence.*` },
             { id: 'a2', icon: '⚠️', title: 'Sampling & Exceptions', desc: 'When controls fail testing.', summary: '• Population sampling\n• Deviations vs Exceptions\n• Management Responses', dive: `### Sampling and Exceptions\n\n#### Population Sampling\nAuditors don't test every single event. If there were 1,000 code changes in a year, the auditor will request a "Population" list of all 1,000 changes, and select a random sample (usually between 25 and 40 items) to test via Inspection.\n\n#### Deviations and Exceptions\nIf the auditor finds a code change in the sample that lacked a required approval, it is noted as an **Exception**.\n- A single exception does not necessarily fail the entire audit. The auditor usually expands the sample size (e.g., testing 10 more items). If more exceptions are found, the control is officially deemed "Ineffective."\n- All exceptions are documented publicly in Section 4 of the SOC 1 report for customers to read.\n\n#### Management Response\nIf an exception is published in the report, management is given a section to write a "Management Response." This is where the company explains *why* the failure occurred and what corrective steps they have taken to remediate it so it doesn't happen next year.` },
             { id: 'a3', icon: '⚖️', title: 'The Auditor\'s Opinion', desc: 'The final result of the audit.', summary: '• Unqualified (Clean)\n• Qualified (Except for...)\n• Adverse / Disclaimer', dive: `### The Auditor's Opinion\nThe most critical component of the SOC 1 report. Found in Section 1, the independent CPA firm issues a formal, legally-binding opinion on the fairness of the presentation, the suitability of the design, and the operating effectiveness of the controls.\n\n#### Types of Opinions:\n1. **Unqualified (Clean Opinion):** The absolute best outcome. The controls are designed properly and operate effectively. No material issues were found.\n2. **Qualified Opinion:** "Except for..." The report is mostly good, but one or more specific, material controls failed testing. Customers will read this closely to see if the failure impacts them.\n3. **Adverse Opinion:** The worst outcome. The system is fundamentally broken, management's descriptions are highly misleading, or controls failed globally across the board. This can severely damage a business's reputation.\n4. **Disclaimer of Opinion:** The auditor could not form an opinion at all, usually because management refused to provide sufficient evidence or restricted the auditor's access to systems.` }
         ];
@@ -332,4 +545,5 @@
         });
     </script>
 </body>
+
 </html>

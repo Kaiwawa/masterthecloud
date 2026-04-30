@@ -1,12 +1,15 @@
 <!DOCTYPE html>
-<html lang="en" class="dark"><head>
+<html lang="en" class="dark">
+
+<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CompTIA Security+ SY0-701 - Master Study Guide</title>
-    <link rel="icon" type="image/x-icon" href="images/secplus.ico">
+    <link rel="icon" type="image/x-icon" href="assets/images/secplus.ico">
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
-    <script src="js/app.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+    <script src="assets/js/app.js"></script>
     <link rel="stylesheet" href="assets/css/site.css">
     <script>
         tailwind.config = {
@@ -26,158 +29,327 @@
     </script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap');
-        body { font-family: 'Inter', sans-serif; transition: background-color 0.3s ease; }
-        
-        .perspective-1000 { perspective: 1000px; }
-        .transform-style-3d { transform-style: preserve-3d; }
-        .backface-hidden { backface-visibility: hidden; -webkit-backface-visibility: hidden; }
-        .rotate-y-180 { transform: rotateY(180deg); }
-        .flip-card-inner { transition: transform 0.8s cubic-bezier(0.34, 1.56, 0.64, 1); transform-style: preserve-3d; }
-        .flip-card.flipped .flip-card-inner { transform: rotateY(180deg); }
-        
-        .fade-in { animation: fadeIn 0.4s ease-out forwards; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-        
-        .md-content h3 { font-weight: 800; font-size: 1.5rem; margin-top: 1rem; margin-bottom: 1rem; color: #ef4444; border-left: 5px solid #ef4444; padding-left: 1rem; }
-        .md-content h4 { font-weight: 700; font-size: 1.1rem; margin-top: 1.5rem; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.05em; }
-        .md-content p { margin-bottom: 1rem; line-height: 1.8; font-size: 1.05rem; }
-        .md-content ul { list-style-type: none; margin-bottom: 1.5rem; }
-        .md-content li { margin-bottom: 0.75rem; position: relative; padding-left: 1.75rem; line-height: 1.6; }
-        .md-content li::before { content: "✦"; position: absolute; left: 0; color: #ef4444; font-weight: bold; }
-        
-        .custom-scrollbar::-webkit-scrollbar { width: 8px; }
-        .custom-scrollbar::-webkit-scrollbar-track { background: rgba(0,0,0,0.05); }
-        .custom-scrollbar::-webkit-scrollbar-thumb { background: #475569; border-radius: 10px; }
-        
-        #deep-dive-modal.active { display: flex !important; }
-        .no-scrollbar::-webkit-scrollbar { display: none; }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            transition: background-color 0.3s ease;
+        }
+
+        .perspective-1000 {
+            perspective: 1000px;
+        }
+
+        .transform-style-3d {
+            transform-style: preserve-3d;
+        }
+
+        .backface-hidden {
+            backface-visibility: hidden;
+            -webkit-backface-visibility: hidden;
+        }
+
+        .rotate-y-180 {
+            transform: rotateY(180deg);
+        }
+
+        .flip-card-inner {
+            transition: transform 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+            transform-style: preserve-3d;
+        }
+
+        .flip-card.flipped .flip-card-inner {
+            transform: rotateY(180deg);
+        }
+
+        .fade-in {
+            animation: fadeIn 0.4s ease-out forwards;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .md-content h3 {
+            font-weight: 800;
+            font-size: 1.5rem;
+            margin-top: 1rem;
+            margin-bottom: 1rem;
+            color: #ef4444;
+            border-left: 5px solid #ef4444;
+            padding-left: 1rem;
+        }
+
+        .md-content h4 {
+            font-weight: 700;
+            font-size: 1.1rem;
+            margin-top: 1.5rem;
+            color: #94a3b8;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .md-content p {
+            margin-bottom: 1rem;
+            line-height: 1.8;
+            font-size: 1.05rem;
+        }
+
+        .md-content ul {
+            list-style-type: none;
+            margin-bottom: 1.5rem;
+        }
+
+        .md-content li {
+            margin-bottom: 0.75rem;
+            position: relative;
+            padding-left: 1.75rem;
+            line-height: 1.6;
+        }
+
+        .md-content li::before {
+            content: "✦";
+            position: absolute;
+            left: 0;
+            color: #ef4444;
+            font-weight: bold;
+        }
+
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: rgba(0, 0, 0, 0.05);
+        }
+
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #475569;
+            border-radius: 10px;
+        }
+
+        #deep-dive-modal.active {
+            display: flex !important;
+        }
+
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
     </style>
 </head>
-<body class="min-h-screen bg-slate-50 dark:bg-[#0f172a] text-slate-900 dark:text-slate-200 antialiased overflow-x-hidden" style="--brand-accent:#ef4444;">
 
-    <header class="sticky top-0 z-40 bg-white/80 dark:bg-[#0f172a]/80 backdrop-blur-xl border-b border-slate-200 dark:border-slate-800 shadow-sm">
+<body
+    class="min-h-screen bg-slate-50 dark:bg-[#0f172a] text-slate-900 dark:text-slate-200 antialiased overflow-x-hidden"
+    style="--brand-accent:#ef4444;">
+
+    <header
+        class="sticky top-0 z-40 bg-white/80 dark:bg-[#0f172a]/80 backdrop-blur-xl border-b border-slate-200 dark:border-slate-800 shadow-sm">
         <div class="max-w-7xl mx-auto px-4 h-20 grid grid-cols-3 items-center gap-4">
             <div class="flex items-center justify-start gap-4">
-                <button onclick="goHome()" class="hidden sm:flex p-2.5 bg-slate-100 dark:bg-slate-800 rounded-xl hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors shrink-0 text-slate-500 dark:text-slate-400 hover:text-brand-accent dark:hover:text-brand-accent items-center justify-center" title="Home">
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1m-6 0h6"></path></svg>
+                <button onclick="goHome()"
+                    class="hidden sm:flex p-2.5 bg-slate-100 dark:bg-slate-800 rounded-xl hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors shrink-0 text-slate-500 dark:text-slate-400 hover:text-brand-accent dark:hover:text-brand-accent items-center justify-center"
+                    title="Home">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1m-6 0h6">
+                        </path>
+                    </svg>
                 </button>
-                <button onclick="openSidebar()" class="p-2.5 px-4 bg-slate-100 dark:bg-slate-800 rounded-xl hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors shrink-0 flex items-center gap-2 text-slate-700 dark:text-slate-300">
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+                <button onclick="openSidebar()"
+                    class="p-2.5 px-4 bg-slate-100 dark:bg-slate-800 rounded-xl hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors shrink-0 flex items-center gap-2 text-slate-700 dark:text-slate-300">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
                     <span class="font-bold text-sm hidden sm:block">Menu</span>
                 </button>
             </div>
 
-            <div onclick="navigateTo('section-home')" class="flex items-center justify-center gap-3 cursor-pointer group">
+            <div onclick="navigateTo('section-home')"
+                class="flex items-center justify-center gap-3 cursor-pointer group">
                 <div class="hidden lg:block">
-                    <h1 class="text-xl font-extrabold tracking-tighter text-slate-900 dark:text-white group-hover:text-brand-accent transition-colors">Master Security+</h1>
+                    <h1
+                        class="text-xl font-extrabold tracking-tighter text-slate-900 dark:text-white group-hover:text-brand-accent transition-colors">
+                        Master Security+</h1>
                 </div>
             </div>
 
             <div class="flex items-center justify-end gap-3">
                 <div class="relative hidden md:block w-full max-w-[160px] lg:max-w-[200px]">
-                    <input type="text" id="global-search" oninput="handleSearch(this.value)" placeholder="Search..." class="w-full bg-slate-100 dark:bg-slate-800 border-none rounded-2xl px-4 py-2 text-sm focus:ring-2 focus:ring-brand-accent outline-none transition-all">
-                    <div id="search-results" class="absolute top-full right-0 w-[300px] mt-2 bg-white dark:bg-slate-800 rounded-2xl shadow-2xl border border-slate-200 dark:border-slate-700 hidden overflow-hidden z-50 text-left">
+                    <input type="text" id="global-search" oninput="handleSearch(this.value)" placeholder="Search..."
+                        class="w-full bg-slate-100 dark:bg-slate-800 border-none rounded-2xl px-4 py-2 text-sm focus:ring-2 focus:ring-brand-accent outline-none transition-all">
+                    <div id="search-results"
+                        class="absolute top-full right-0 w-[300px] mt-2 bg-white dark:bg-slate-800 rounded-2xl shadow-2xl border border-slate-200 dark:border-slate-700 hidden overflow-hidden z-50 text-left">
                     </div>
                 </div>
-                <button onclick="toggleTheme()" class="p-2.5 bg-slate-100 dark:bg-slate-800 rounded-xl hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors shrink-0">
+                <button onclick="toggleTheme()"
+                    class="p-2.5 bg-slate-100 dark:bg-slate-800 rounded-xl hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors shrink-0">
                     <span id="theme-icon">🌙</span>
                 </button>
             </div>
         </div>
     </header>
 
-    <div id="sidebar-overlay" class="fixed inset-0 bg-slate-900/40 backdrop-blur-sm z-[55] hidden opacity-0 transition-opacity duration-300" onclick="closeSidebar()"></div>
-    
-    <aside id="left-sidebar" class="fixed top-0 left-0 h-full w-72 bg-white dark:bg-[#0f172a] border-r border-slate-200 dark:border-slate-800 shadow-[0_0_50px_rgba(0,0,0,0.3)] z-[60] transform -translate-x-full transition-transform duration-300 flex flex-col">
+    <div id="sidebar-overlay"
+        class="fixed inset-0 bg-slate-900/40 backdrop-blur-sm z-[55] hidden opacity-0 transition-opacity duration-300"
+        onclick="closeSidebar()"></div>
+
+    <aside id="left-sidebar"
+        class="fixed top-0 left-0 h-full w-72 bg-white dark:bg-[#0f172a] border-r border-slate-200 dark:border-slate-800 shadow-[0_0_50px_rgba(0,0,0,0.3)] z-[60] transform -translate-x-full transition-transform duration-300 flex flex-col">
         <div class="p-6 flex justify-between items-center border-b border-slate-200 dark:border-slate-800">
             <span class="font-black text-sm text-slate-400 uppercase tracking-widest">Navigation</span>
-            <button onclick="closeSidebar()" class="text-slate-400 hover:text-brand-accent transition-colors text-3xl">&times;</button>
+            <button onclick="closeSidebar()"
+                class="text-slate-400 hover:text-brand-accent transition-colors text-3xl">&times;</button>
         </div>
-        
+
         <nav class="flex flex-col gap-1 p-4 overflow-y-auto custom-scrollbar flex-grow">
-            <button data-target="section-home" onclick="navigateTo('section-home')" class="nav-btn text-left px-4 py-2 rounded-xl text-base font-bold transition-all text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800">Dashboard</button>
-            
-            <span class="px-4 text-base font-black text-slate-800 dark:text-slate-200 tracking-wide mt-4 mb-1">Exam Domains</span>
-            <button data-target="section-threats" onclick="navigateTo('section-threats')" class="nav-btn text-left pl-8 pr-4 py-2 rounded-xl text-sm font-semibold transition-all text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800">Threats, Attacks & Vulnerabilities</button>
-            <button data-target="section-architecture" onclick="navigateTo('section-architecture')" class="nav-btn text-left pl-8 pr-4 py-2 rounded-xl text-sm font-semibold transition-all text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800">Architecture & Design</button>
-            <button data-target="section-implementation" onclick="navigateTo('section-implementation')" class="nav-btn text-left pl-8 pr-4 py-2 rounded-xl text-sm font-semibold transition-all text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800">Implementation</button>
-            <button data-target="section-operations" onclick="navigateTo('section-operations')" class="nav-btn text-left pl-8 pr-4 py-2 rounded-xl text-sm font-semibold transition-all text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800">Operations & Incident Response</button>
-            <button data-target="section-governance" onclick="navigateTo('section-governance')" class="nav-btn text-left pl-8 pr-4 py-2 rounded-xl text-sm font-semibold transition-all text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800">Governance, Risk & Compliance</button>
-            <button data-target="section-cryptography" onclick="navigateTo('section-cryptography')" class="nav-btn text-left pl-8 pr-4 py-2 rounded-xl text-sm font-semibold transition-all text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800">Cryptography & PKI</button>
-            
-            <a href="index.html" class="text-left px-4 py-2 rounded-xl text-sm font-bold transition-all text-brand-accent hover:bg-slate-100 dark:hover:bg-slate-800 mb-2">← Back to Main Menu</a>
+            <button data-target="section-home" onclick="navigateTo('section-home')"
+                class="nav-btn text-left px-4 py-2 rounded-xl text-base font-bold transition-all text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800">Dashboard</button>
+
+            <span class="px-4 text-base font-black text-slate-800 dark:text-slate-200 tracking-wide mt-4 mb-1">Exam
+                Domains</span>
+            <button data-target="section-threats" onclick="navigateTo('section-threats')"
+                class="nav-btn text-left pl-8 pr-4 py-2 rounded-xl text-sm font-semibold transition-all text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800">Threats,
+                Attacks & Vulnerabilities</button>
+            <button data-target="section-architecture" onclick="navigateTo('section-architecture')"
+                class="nav-btn text-left pl-8 pr-4 py-2 rounded-xl text-sm font-semibold transition-all text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800">Architecture
+                & Design</button>
+            <button data-target="section-implementation" onclick="navigateTo('section-implementation')"
+                class="nav-btn text-left pl-8 pr-4 py-2 rounded-xl text-sm font-semibold transition-all text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800">Implementation</button>
+            <button data-target="section-operations" onclick="navigateTo('section-operations')"
+                class="nav-btn text-left pl-8 pr-4 py-2 rounded-xl text-sm font-semibold transition-all text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800">Operations
+                & Incident Response</button>
+            <button data-target="section-governance" onclick="navigateTo('section-governance')"
+                class="nav-btn text-left pl-8 pr-4 py-2 rounded-xl text-sm font-semibold transition-all text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800">Governance,
+                Risk & Compliance</button>
+            <button data-target="section-cryptography" onclick="navigateTo('section-cryptography')"
+                class="nav-btn text-left pl-8 pr-4 py-2 rounded-xl text-sm font-semibold transition-all text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800">Cryptography
+                & PKI</button>
+
+            <a href="index.html"
+                class="text-left px-4 py-2 rounded-xl text-sm font-bold transition-all text-brand-accent hover:bg-slate-100 dark:hover:bg-slate-800 mb-2">←
+                Back to Main Menu</a>
         </nav>
     </aside>
 
     <main class="max-w-7xl mx-auto px-4 py-12">
-        
+
         <section id="section-home" class="content-section fade-in">
             <div class="text-center mb-16 mt-8">
-                <div class="inline-block px-4 py-1.5 rounded-full bg-brand-accent/10 border border-brand-accent/20 text-brand-accent font-bold text-xs tracking-widest uppercase mb-6">CompTIA Security+ SY0-701</div>
-                <h2 class="text-5xl md:text-7xl font-black mb-6 tracking-tight text-slate-900 dark:text-white">Master Security+.</h2>
-                <p class="text-slate-500 dark:text-slate-400 text-lg md:text-xl max-w-3xl mx-auto leading-relaxed">The definitive interactive guide for the SY0-701 exam. Select a domain below to explore core concepts and security principles.</p>
+                <div
+                    class="inline-block px-4 py-1.5 rounded-full bg-brand-accent/10 border border-brand-accent/20 text-brand-accent font-bold text-xs tracking-widest uppercase mb-6">
+                    CompTIA Security+ SY0-701</div>
+                <h2 class="text-5xl md:text-7xl font-black mb-6 tracking-tight text-slate-900 dark:text-white">Master
+                    Security+.</h2>
+                <p class="text-slate-500 dark:text-slate-400 text-lg md:text-xl max-w-3xl mx-auto leading-relaxed">The
+                    definitive interactive guide for the SY0-701 exam. Select a domain below to explore core concepts
+                    and security principles.</p>
             </div>
 
             <div class="mb-12">
-                <h3 class="text-sm font-black text-slate-400 uppercase tracking-widest mb-6 pl-2 border-l-4 border-brand-accent">Exam Domains</h3>
+                <h3
+                    class="text-sm font-black text-slate-400 uppercase tracking-widest mb-6 pl-2 border-l-4 border-brand-accent">
+                    Exam Domains</h3>
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    <div onclick="navigateTo('section-threats')" class="bg-white dark:bg-slate-800/40 p-8 rounded-[2rem] border border-slate-200 dark:border-slate-700/50 shadow-xl cursor-pointer hover:-translate-y-2 hover:border-brand-accent/50 transition-all group">
-                        <div class="w-14 h-14 bg-brand-accent/10 rounded-2xl flex items-center justify-center text-3xl mb-6 group-hover:scale-110 transition-transform">⚠️</div>
-                        <h3 class="text-xl font-black mb-2 text-slate-800 dark:text-white">Threats, Attacks & Vulnerabilities</h3>
-                        <p class="text-slate-500 dark:text-slate-400 text-sm leading-relaxed">Social engineering, malware, vulnerability assessment, and threat modeling.</p>
+                    <div onclick="navigateTo('section-threats')"
+                        class="bg-white dark:bg-slate-800/40 p-8 rounded-[2rem] border border-slate-200 dark:border-slate-700/50 shadow-xl cursor-pointer hover:-translate-y-2 hover:border-brand-accent/50 transition-all group">
+                        <div
+                            class="w-14 h-14 mx-auto bg-brand-accent/10 rounded-2xl flex items-center justify-center text-3xl mb-6 group-hover:scale-110 transition-transform">
+                            ⚠️</div>
+                        <h3 class="text-xl font-black mb-2 text-slate-800 dark:text-white">Threats, Attacks &
+                            Vulnerabilities</h3>
+                        <p class="text-slate-500 dark:text-slate-400 text-sm leading-relaxed">Social engineering,
+                            malware, vulnerability assessment, and threat modeling.</p>
                     </div>
 
-                    <div onclick="navigateTo('section-architecture')" class="bg-white dark:bg-slate-800/40 p-8 rounded-[2rem] border border-slate-200 dark:border-slate-700/50 shadow-xl cursor-pointer hover:-translate-y-2 hover:border-purple-500/50 transition-all group">
-                        <div class="w-14 h-14 bg-purple-500/10 rounded-2xl flex items-center justify-center text-3xl mb-6 group-hover:scale-110 transition-transform">🏗️</div>
+                    <div onclick="navigateTo('section-architecture')"
+                        class="bg-white dark:bg-slate-800/40 p-8 rounded-[2rem] border border-slate-200 dark:border-slate-700/50 shadow-xl cursor-pointer hover:-translate-y-2 hover:border-purple-500/50 transition-all group">
+                        <div
+                            class="w-14 h-14 mx-auto bg-purple-500/10 rounded-2xl flex items-center justify-center text-3xl mb-6 group-hover:scale-110 transition-transform">
+                            🏗️</div>
                         <h3 class="text-xl font-black mb-2 text-slate-800 dark:text-white">Architecture & Design</h3>
-                        <p class="text-slate-500 dark:text-slate-400 text-sm leading-relaxed">Enterprise architecture, cloud security, mobile security, and IoT.</p>
+                        <p class="text-slate-500 dark:text-slate-400 text-sm leading-relaxed">Enterprise architecture,
+                            cloud security, mobile security, and IoT.</p>
                     </div>
 
-                    <div onclick="navigateTo('section-implementation')" class="bg-white dark:bg-slate-800/40 p-8 rounded-[2rem] border border-slate-200 dark:border-slate-700/50 shadow-xl cursor-pointer hover:-translate-y-2 hover:border-green-500/50 transition-all group">
-                        <div class="w-14 h-14 bg-green-500/10 rounded-2xl flex items-center justify-center text-3xl mb-6 group-hover:scale-110 transition-transform">⚙️</div>
+                    <div onclick="navigateTo('section-implementation')"
+                        class="bg-white dark:bg-slate-800/40 p-8 rounded-[2rem] border border-slate-200 dark:border-slate-700/50 shadow-xl cursor-pointer hover:-translate-y-2 hover:border-green-500/50 transition-all group">
+                        <div
+                            class="w-14 h-14 mx-auto bg-green-500/10 rounded-2xl flex items-center justify-center text-3xl mb-6 group-hover:scale-110 transition-transform">
+                            ⚙️</div>
                         <h3 class="text-xl font-black mb-2 text-slate-800 dark:text-white">Implementation</h3>
-                        <p class="text-slate-500 dark:text-slate-400 text-sm leading-relaxed">Access control, identity management, network security controls.</p>
+                        <p class="text-slate-500 dark:text-slate-400 text-sm leading-relaxed">Access control, identity
+                            management, network security controls.</p>
                     </div>
 
-                    <div onclick="navigateTo('section-operations')" class="bg-white dark:bg-slate-800/40 p-8 rounded-[2rem] border border-slate-200 dark:border-slate-700/50 shadow-xl cursor-pointer hover:-translate-y-2 hover:border-orange-500/50 transition-all group">
-                        <div class="w-14 h-14 bg-orange-500/10 rounded-2xl flex items-center justify-center text-3xl mb-6 group-hover:scale-110 transition-transform">🚨</div>
-                        <h3 class="text-xl font-black mb-2 text-slate-800 dark:text-white">Operations & Incident Response</h3>
-                        <p class="text-slate-500 dark:text-slate-400 text-sm leading-relaxed">Security operations, incident response, disaster recovery, and forensics.</p>
+                    <div onclick="navigateTo('section-operations')"
+                        class="bg-white dark:bg-slate-800/40 p-8 rounded-[2rem] border border-slate-200 dark:border-slate-700/50 shadow-xl cursor-pointer hover:-translate-y-2 hover:border-orange-500/50 transition-all group">
+                        <div
+                            class="w-14 h-14 mx-auto bg-orange-500/10 rounded-2xl flex items-center justify-center text-3xl mb-6 group-hover:scale-110 transition-transform">
+                            🚨</div>
+                        <h3 class="text-xl font-black mb-2 text-slate-800 dark:text-white">Operations & Incident
+                            Response</h3>
+                        <p class="text-slate-500 dark:text-slate-400 text-sm leading-relaxed">Security operations,
+                            incident response, disaster recovery, and forensics.</p>
                     </div>
 
-                    <div onclick="navigateTo('section-governance')" class="bg-white dark:bg-slate-800/40 p-8 rounded-[2rem] border border-slate-200 dark:border-slate-700/50 shadow-xl cursor-pointer hover:-translate-y-2 hover:border-red-500/50 transition-all group">
-                        <div class="w-14 h-14 bg-red-500/10 rounded-2xl flex items-center justify-center text-3xl mb-6 group-hover:scale-110 transition-transform">📋</div>
-                        <h3 class="text-xl font-black mb-2 text-slate-800 dark:text-white">Governance, Risk & Compliance</h3>
-                        <p class="text-slate-500 dark:text-slate-400 text-sm leading-relaxed">Policies, regulations, risk management, and security governance.</p>
+                    <div onclick="navigateTo('section-governance')"
+                        class="bg-white dark:bg-slate-800/40 p-8 rounded-[2rem] border border-slate-200 dark:border-slate-700/50 shadow-xl cursor-pointer hover:-translate-y-2 hover:border-red-500/50 transition-all group">
+                        <div
+                            class="w-14 h-14 mx-auto bg-red-500/10 rounded-2xl flex items-center justify-center text-3xl mb-6 group-hover:scale-110 transition-transform">
+                            📋</div>
+                        <h3 class="text-xl font-black mb-2 text-slate-800 dark:text-white">Governance, Risk & Compliance
+                        </h3>
+                        <p class="text-slate-500 dark:text-slate-400 text-sm leading-relaxed">Policies, regulations,
+                            risk management, and security governance.</p>
                     </div>
 
-                    <div onclick="navigateTo('section-cryptography')" class="bg-white dark:bg-slate-800/40 p-8 rounded-[2rem] border border-slate-200 dark:border-slate-700/50 shadow-xl cursor-pointer hover:-translate-y-2 hover:border-blue-500/50 transition-all group">
-                        <div class="w-14 h-14 bg-blue-500/10 rounded-2xl flex items-center justify-center text-3xl mb-6 group-hover:scale-110 transition-transform">🔐</div>
+                    <div onclick="navigateTo('section-cryptography')"
+                        class="bg-white dark:bg-slate-800/40 p-8 rounded-[2rem] border border-slate-200 dark:border-slate-700/50 shadow-xl cursor-pointer hover:-translate-y-2 hover:border-blue-500/50 transition-all group">
+                        <div
+                            class="w-14 h-14 mx-auto bg-blue-500/10 rounded-2xl flex items-center justify-center text-3xl mb-6 group-hover:scale-110 transition-transform">
+                            🔐</div>
                         <h3 class="text-xl font-black mb-2 text-slate-800 dark:text-white">Cryptography & PKI</h3>
-                        <p class="text-slate-500 dark:text-slate-400 text-sm leading-relaxed">Encryption, certificates, digital signatures, and key management.</p>
+                        <p class="text-slate-500 dark:text-slate-400 text-sm leading-relaxed">Encryption, certificates,
+                            digital signatures, and key management.</p>
                     </div>
                 </div>
             </div>
         </section>
 
         <section id="section-threats" class="content-section hidden fade-in">
-            <div class="mb-12 text-center md:text-left"><h2 class="text-4xl font-black mb-2 text-red-500">Threats, Attacks & Vulnerabilities</h2></div>
+            <div class="mb-12 text-center md:text-left">
+                <h2 class="text-4xl font-black mb-2 text-red-500">Threats, Attacks & Vulnerabilities</h2>
+            </div>
             <div id="threats-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
         </section>
 
         <section id="section-architecture" class="content-section hidden fade-in">
-            <div class="mb-12 text-center md:text-left"><h2 class="text-4xl font-black mb-2 text-purple-500">Architecture &amp; Design</h2></div>
+            <div class="mb-12 text-center md:text-left">
+                <h2 class="text-4xl font-black mb-2 text-purple-500">Architecture &amp; Design</h2>
+            </div>
             <div id="architecture-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
         </section>
 
         <section id="section-implementation" class="content-section hidden fade-in">
-            <div class="mb-12 text-center md:text-left"><h2 class="text-4xl font-black mb-2 text-green-500">Implementation</h2></div>
+            <div class="mb-12 text-center md:text-left">
+                <h2 class="text-4xl font-black mb-2 text-green-500">Implementation</h2>
+            </div>
             <div id="implementation-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
         </section>
 
         <section id="section-operations" class="content-section hidden fade-in">
-            <div class="mb-12 text-center md:text-left"><h2 class="text-4xl font-black mb-2 text-orange-500">Operations &amp; Incident Response</h2></div>
-            <div class="mb-10 bg-slate-100 dark:bg-slate-800/50 rounded-3xl p-8 border border-slate-200 dark:border-slate-700">
+            <div class="mb-12 text-center md:text-left">
+                <h2 class="text-4xl font-black mb-2 text-orange-500">Operations &amp; Incident Response</h2>
+            </div>
+            <div
+                class="mb-10 bg-slate-100 dark:bg-slate-800/50 rounded-3xl p-8 border border-slate-200 dark:border-slate-700">
                 <h3 class="text-xl font-bold mb-6 text-orange-500">Incident Response Lifecycle</h3>
                 <div class="grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
                     <div class="p-4 bg-white dark:bg-slate-700 rounded-xl shadow-sm border-t-4 border-slate-400">
@@ -202,36 +374,50 @@
         </section>
 
         <section id="section-governance" class="content-section hidden fade-in">
-            <div class="mb-12 text-center md:text-left"><h2 class="text-4xl font-black mb-2 text-red-500">Governance, Risk &amp; Compliance</h2></div>
+            <div class="mb-12 text-center md:text-left">
+                <h2 class="text-4xl font-black mb-2 text-red-500">Governance, Risk &amp; Compliance</h2>
+            </div>
             <div id="governance-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
         </section>
 
         <section id="section-cryptography" class="content-section hidden fade-in">
-            <div class="mb-12 text-center md:text-left"><h2 class="text-4xl font-black mb-2 text-blue-500">Cryptography &amp; PKI</h2></div>
+            <div class="mb-12 text-center md:text-left">
+                <h2 class="text-4xl font-black mb-2 text-blue-500">Cryptography &amp; PKI</h2>
+            </div>
             <div id="cryptography-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
         </section>
 
     </main>
 
-    <div id="deep-dive-modal" class="fixed inset-0 z-[100] hidden items-center justify-center bg-slate-950/80 backdrop-blur-md p-4 opacity-0 transition-all duration-300" onclick="closeModal(event)">
-        <div class="bg-white dark:bg-slate-900 w-full max-w-3xl rounded-[2.5rem] shadow-2xl overflow-hidden transform scale-90 transition-all duration-300 border border-slate-200 dark:border-slate-800 flex flex-col max-h-[90vh]" onclick="event.stopPropagation()">
-            <div class="p-8 md:p-10 border-b border-slate-100 dark:border-slate-800 flex justify-between items-center bg-slate-50/50 dark:bg-slate-800/30 shrink-0">
+    <div id="deep-dive-modal"
+        class="fixed inset-0 z-[100] hidden items-center justify-center bg-slate-950/80 backdrop-blur-md p-4 opacity-0 transition-all duration-300"
+        onclick="closeModal(event)">
+        <div class="bg-white dark:bg-slate-900 w-full max-w-3xl rounded-[2.5rem] shadow-2xl overflow-hidden transform scale-90 transition-all duration-300 border border-slate-200 dark:border-slate-800 flex flex-col max-h-[90vh]"
+            onclick="event.stopPropagation()">
+            <div
+                class="p-8 md:p-10 border-b border-slate-100 dark:border-slate-800 flex justify-between items-center bg-slate-50/50 dark:bg-slate-800/30 shrink-0">
                 <div class="flex items-center gap-6">
-                    <div id="m-icon-bg" class="p-5 bg-brand-accent/20 rounded-3xl text-4xl md:text-5xl"><span id="m-icon"></span></div>
+                    <div id="m-icon-bg" class="p-5 bg-brand-accent/20 rounded-3xl text-4xl md:text-5xl"><span
+                            id="m-icon"></span></div>
                     <div>
                         <h3 id="m-title" class="text-3xl md:text-4xl font-black text-slate-900 dark:text-white"></h3>
-                        <p id="m-subtitle" class="text-brand-accent text-sm font-bold uppercase tracking-widest mt-1">Technical Reference</p>
+                        <p id="m-subtitle" class="text-brand-accent text-sm font-bold uppercase tracking-widest mt-1">
+                            Technical Reference</p>
                     </div>
                 </div>
-                <button onclick="closeModal()" class="w-12 h-12 flex items-center justify-center rounded-full bg-slate-100 dark:bg-slate-800 text-slate-500 hover:text-brand-accent transition-all text-3xl shrink-0">&times;</button>
+                <button onclick="closeModal()"
+                    class="w-12 h-12 flex items-center justify-center rounded-full bg-slate-100 dark:bg-slate-800 text-slate-500 hover:text-brand-accent transition-all text-3xl shrink-0">&times;</button>
             </div>
-            <div id="m-content" class="p-8 md:p-12 overflow-y-auto md-content custom-scrollbar bg-white dark:bg-slate-900 flex-grow"></div>
+            <div id="m-content"
+                class="p-8 md:p-12 overflow-y-auto md-content custom-scrollbar bg-white dark:bg-slate-900 flex-grow">
+            </div>
         </div>
     </div>
 
     <script>
         const threatsData = [
-            { id: 'th1', icon: '🎣', title: 'Social Engineering', desc: 'Exploiting human psychology for unauthorized access.', summary: '• Phishing & Spear Phishing\n• Pretexting & Vishing\n• Tailgating & Baiting', dive: `### Social Engineering Attacks
+            {
+                id: 'th1', icon: '🎣', title: 'Social Engineering', desc: 'Exploiting human psychology for unauthorized access.', summary: '• Phishing & Spear Phishing\n• Pretexting & Vishing\n• Tailgating & Baiting', dive: `### Social Engineering Attacks
 Social engineering is the art of manipulating people into divulging confidential information or performing actions that compromise security. It exploits human psychology rather than technical vulnerabilities.
 
 #### Common Social Engineering Attacks
@@ -249,7 +435,8 @@ Social engineering is the art of manipulating people into divulging confidential
 - Email filtering and threat intelligence
 - Strict access control policies and need-to-know basis
 - Verification protocols before sharing sensitive data` },
-            { id: 'th2', icon: '🦠', title: 'Malware & Ransomware', desc: 'Malicious software threatening confidentiality, integrity, and availability.', summary: '• Viruses, Worms, Trojans\n• Ransomware & Cryptolocker\n• Detection & Prevention', dive: `### Malware & Ransomware
+            {
+                id: 'th2', icon: '🦠', title: 'Malware & Ransomware', desc: 'Malicious software threatening confidentiality, integrity, and availability.', summary: '• Viruses, Worms, Trojans\n• Ransomware & Cryptolocker\n• Detection & Prevention', dive: `### Malware & Ransomware
 Malware is any software designed to harm, exploit, or otherwise compromise your computer systems. Ransomware is a subset that encrypts your data and demands payment for decryption.
 
 #### Malware Types
@@ -270,7 +457,8 @@ Malware is any software designed to harm, exploit, or otherwise compromise your 
 - Regular backups for ransomware recovery
 - Monitor network traffic for command-and-control communication
 - User education on avoiding suspicious downloads` },
-            { id: 'th3', icon: '📡', title: 'Network Attacks', desc: 'Exploiting network protocols and infrastructure.', summary: '• DDoS & Flooding\n• Man-in-the-Middle\n• DNS Spoofing', dive: `### Network Attacks
+            {
+                id: 'th3', icon: '📡', title: 'Network Attacks', desc: 'Exploiting network protocols and infrastructure.', summary: '• DDoS & Flooding\n• Man-in-the-Middle\n• DNS Spoofing', dive: `### Network Attacks
 Network attacks exploit vulnerabilities in network protocols, infrastructure, and services to disrupt, intercept, or modify communications.
 
 #### Types of Network Attacks
@@ -290,7 +478,8 @@ Network attacks exploit vulnerabilities in network protocols, infrastructure, an
 - Monitor for suspicious patterns
 - Rate limiting and traffic shaping
 - Address spoofing with port security and DHCP snooping` },
-            { id: 'th4', icon: '🎯', title: 'Application Vulnerabilities', desc: 'Flaws in software code and logic.', summary: '• SQL Injection & XSS\n• Buffer Overflow\n• OWASP Top 10', dive: `### Application Vulnerabilities
+            {
+                id: 'th4', icon: '🎯', title: 'Application Vulnerabilities', desc: 'Flaws in software code and logic.', summary: '• SQL Injection & XSS\n• Buffer Overflow\n• OWASP Top 10', dive: `### Application Vulnerabilities
 Vulnerabilities in application code can be exploited to gain unauthorized access, steal data, or execute arbitrary code.
 
 #### Common Web Application Vulnerabilities (OWASP Top 10)
@@ -315,7 +504,8 @@ Vulnerabilities in application code can be exploited to gain unauthorized access
 - Code review and security testing
 - Keep frameworks and libraries updated
 - Secure coding practices training` },
-            { id: 'th5', icon: '🔓', title: 'Cryptographic Attacks', desc: 'Exploiting encryption and hashing weaknesses.', summary: '• Brute Force & Dictionary\n• Rainbow Tables\n• Downgrade Attacks', dive: `### Cryptographic Attacks
+            {
+                id: 'th5', icon: '🔓', title: 'Cryptographic Attacks', desc: 'Exploiting encryption and hashing weaknesses.', summary: '• Brute Force & Dictionary\n• Rainbow Tables\n• Downgrade Attacks', dive: `### Cryptographic Attacks
 These attacks target encryption schemes, hashing algorithms, and key management to compromise confidentiality and integrity.
 
 #### Types of Cryptographic Attacks
@@ -334,7 +524,8 @@ These attacks target encryption schemes, hashing algorithms, and key management 
 - Key rotation and secure key management
 - Disable weak cipher suites and protocols
 - Use HTTPS everywhere` },
-            { id: 'th6', icon: '🚨', title: 'Vulnerability Assessment', desc: 'Identifying and prioritizing security weaknesses.', summary: '• Scanning & Enumeration\n• CVSS Scoring\n• Remediation Planning', dive: `### Vulnerability Assessment
+            {
+                id: 'th6', icon: '🚨', title: 'Vulnerability Assessment', desc: 'Identifying and prioritizing security weaknesses.', summary: '• Scanning & Enumeration\n• CVSS Scoring\n• Remediation Planning', dive: `### Vulnerability Assessment
 A systematic process to identify, analyze, and prioritize security weaknesses in systems and applications.
 
 #### VA Process
@@ -364,7 +555,8 @@ A systematic process to identify, analyze, and prioritize security weaknesses in
         ];
 
         const architectureData = [
-            { id: 'ar1', icon: '🏢', title: 'Enterprise Architecture', desc: 'Designing secure enterprise security models.', summary: '• Zero Trust Architecture\n• Defense in Depth\n• Segmentation & Zoning', dive: `### Enterprise Architecture & Security Models
+            {
+                id: 'ar1', icon: '🏢', title: 'Enterprise Architecture', desc: 'Designing secure enterprise security models.', summary: '• Zero Trust Architecture\n• Defense in Depth\n• Segmentation & Zoning', dive: `### Enterprise Architecture & Security Models
 Enterprise security architecture defines how an organization's systems and controls work together to protect assets and data.
 
 #### Zero Trust Architecture
@@ -396,7 +588,8 @@ Multiple layers of security controls working together:
 - Define where trust changes
 - Every boundary requires authentication/authorization
 - Monitor and log crossing of boundaries` },
-            { id: 'ar2', icon: '☁️', title: 'Cloud Security', desc: 'Securing cloud infrastructure and data.', summary: '• Shared Responsibility Model\n• Cloud Compliance\n• Data Residency', dive: `### Cloud Security Architecture
+            {
+                id: 'ar2', icon: '☁️', title: 'Cloud Security', desc: 'Securing cloud infrastructure and data.', summary: '• Shared Responsibility Model\n• Cloud Compliance\n• Data Residency', dive: `### Cloud Security Architecture
 Cloud security requires understanding the shared responsibility model and cloud-specific threats.
 
 #### Shared Responsibility Model
@@ -423,7 +616,8 @@ Cloud security requires understanding the shared responsibility model and cloud-
 - Multi-factor authentication
 - Monitor cloud activity logs
 - Compliance with standards (PCI-DSS, HIPAA, SOC 2)` },
-            { id: 'ar3', icon: '📱', title: 'Mobile & IoT Security', desc: 'Securing mobile devices and internet-connected devices.', summary: '• Mobile Device Management\n• App Security\n• IoT Protocols', dive: `### Mobile & IoT Security
+            {
+                id: 'ar3', icon: '📱', title: 'Mobile & IoT Security', desc: 'Securing mobile devices and internet-connected devices.', summary: '• Mobile Device Management\n• App Security\n• IoT Protocols', dive: `### Mobile & IoT Security
 Mobile devices and IoT systems present unique security challenges due to their distributed nature and limited processing power.
 
 #### Mobile Security
@@ -453,7 +647,8 @@ Mobile devices and IoT systems present unique security challenges due to their d
 - Change default credentials
 - Implement device identity (certificates)
 - Monitor for anomalous traffic` },
-            { id: 'ar4', icon: '🌐', title: 'Virtualization & Containers', desc: 'Securing virtualized environments and containerized applications.', summary: '• Hypervisor Security\n• Container Isolation\n• VM Escape Risks', dive: `### Virtualization & Container Security
+            {
+                id: 'ar4', icon: '🌐', title: 'Virtualization & Containers', desc: 'Securing virtualized environments and containerized applications.', summary: '• Hypervisor Security\n• Container Isolation\n• VM Escape Risks', dive: `### Virtualization & Container Security
 Virtualization and containerization introduce new security challenges around isolation and resource sharing.
 
 #### Hypervisor Security
@@ -481,7 +676,8 @@ Virtualization and containerization introduce new security challenges around iso
 - RBAC for access control
 - Secret management for credentials
 - Regular updates and vulnerability scanning` },
-            { id: 'ar5', icon: '📊', title: 'Datacenter Design', desc: 'Physical and logical security of data centers.', summary: '• Facility Controls\n• Environmental Security\n• Redundancy & HA', dive: `### Data Center Security Design
+            {
+                id: 'ar5', icon: '📊', title: 'Datacenter Design', desc: 'Physical and logical security of data centers.', summary: '• Facility Controls\n• Environmental Security\n• Redundancy & HA', dive: `### Data Center Security Design
 Securing physical infrastructure where systems and data reside.
 
 #### Physical Security Controls
@@ -508,7 +704,8 @@ Securing physical infrastructure where systems and data reside.
 - Water detection systems
 - Air quality monitoring
 - Fire detection and suppression (FM-200, halon alternatives)` },
-            { id: 'ar6', icon: '🔌', title: 'Supply Chain Security', desc: 'Securing the entire software and hardware supply chain.', summary: '• Third-party Risk\n• Software Integrity\n• Hardware Security', dive: `### Supply Chain Security
+            {
+                id: 'ar6', icon: '🔌', title: 'Supply Chain Security', desc: 'Securing the entire software and hardware supply chain.', summary: '• Third-party Risk\n• Software Integrity\n• Hardware Security', dive: `### Supply Chain Security
 Ensuring security throughout the entire lifecycle of hardware, software, and services obtained from external sources.
 
 #### Third-Party Risk Management
@@ -536,7 +733,8 @@ Shows importance of tracking dependencies and rapid patching` }
         ];
 
         const implementationData = [
-            { id: 'im1', icon: '🔑', title: 'Identity & Access Management', desc: 'Managing user identities and access rights.', summary: '• AAA (Authentication, Authorization, Accounting)\n• Privilege Escalation\n• Account Lifecycle', dive: `### Identity & Access Management (IAM)
+            {
+                id: 'im1', icon: '🔑', title: 'Identity & Access Management', desc: 'Managing user identities and access rights.', summary: '• AAA (Authentication, Authorization, Accounting)\n• Privilege Escalation\n• Account Lifecycle', dive: `### Identity & Access Management (IAM)
 IAM systems manage user identities and control what authenticated users are authorized to do.
 
 #### AAA Framework
@@ -567,7 +765,8 @@ IAM systems manage user identities and control what authenticated users are auth
 - **Privilege Escalation:** Temporary elevation when needed
 - **Password Policies:** Complexity, age, reuse restrictions
 - **Credential Rotation:** Changing passwords/keys regularly` },
-            { id: 'im2', icon: '🛡️', title: 'Network Access Control', desc: 'Controlling who and what connects to the network.', summary: '• Firewalls & ACLs\n• NAC (Network Access Control)\n• VLANs & Segmentation', dive: `### Network Access Control
+            {
+                id: 'im2', icon: '🛡️', title: 'Network Access Control', desc: 'Controlling who and what connects to the network.', summary: '• Firewalls & ACLs\n• NAC (Network Access Control)\n• VLANs & Segmentation', dive: `### Network Access Control
 Controls determining which devices and users can access network resources.
 
 #### Firewalls
@@ -600,7 +799,8 @@ Controls determining which devices and users can access network resources.
 - **Standard ACLs:** Filter by source IP only
 - **Extended ACLs:** Filter by source/destination IP, protocol, ports
 - **Numbered vs Named:** Names are more readable and maintainable` },
-            { id: 'im3', icon: '📡', title: 'Secure Communication Protocols', desc: 'Encrypting data in transit.', summary: '• TLS/SSL\n• VPN & Tunneling\n• Wireless Security (WPA3)', dive: `### Secure Communication Protocols
+            {
+                id: 'im3', icon: '📡', title: 'Secure Communication Protocols', desc: 'Encrypting data in transit.', summary: '• TLS/SSL\n• VPN & Tunneling\n• Wireless Security (WPA3)', dive: `### Secure Communication Protocols
 Protocols and mechanisms to encrypt data while in transit between systems.
 
 #### TLS/SSL
@@ -635,7 +835,8 @@ Protocols and mechanisms to encrypt data while in transit between systems.
 - **DNSSEC:** Cryptographic signatures for DNS responses
 - **DNS over TLS (DoT):** Encrypted DNS queries
 - **DNS over HTTPS (DoH):** DNS queries over HTTPS` },
-            { id: 'im4', icon: '🔓', title: 'Endpoint Protection', desc: 'Securing individual devices and endpoints.', summary: '• Antivirus & EDR\n• Host Firewall\n• USB Device Control', dive: `### Endpoint Protection
+            {
+                id: 'im4', icon: '🔓', title: 'Endpoint Protection', desc: 'Securing individual devices and endpoints.', summary: '• Antivirus & EDR\n• Host Firewall\n• USB Device Control', dive: `### Endpoint Protection
 Security measures protecting individual computers, servers, and devices.
 
 #### Antivirus & Malware Detection
@@ -674,7 +875,8 @@ Security measures protecting individual computers, servers, and devices.
 - **App Whitelisting:** Only approved apps allowed
 - **Remote wipe:** Delete data if device lost/stolen
 - **Jailbreak detection:** Detect rooted/jailbroken devices` },
-            { id: 'im5', icon: '🌐', title: 'Proxy & Content Filtering', desc: 'Monitoring and controlling network traffic.', summary: '• Forward Proxy\n• Reverse Proxy\n• Content Filtering & DLP', dive: `### Proxy & Content Filtering
+            {
+                id: 'im5', icon: '🌐', title: 'Proxy & Content Filtering', desc: 'Monitoring and controlling network traffic.', summary: '• Forward Proxy\n• Reverse Proxy\n• Content Filtering & DLP', dive: `### Proxy & Content Filtering
 Systems that intercept, inspect, and control network traffic.
 
 #### Forward Proxy
@@ -703,7 +905,8 @@ Systems that intercept, inspect, and control network traffic.
 - **Enforcement:** Prevent unauthorized transmission
 - **Logging & Alerting:** Monitor for violations
 - **Examples:** Credit cards, Social Security numbers, credentials` },
-            { id: 'im6', icon: '🔒', title: 'Physical Access Control', desc: 'Protecting physical infrastructure security.', summary: '• Card Readers & Biometrics\n• Mantrap/Mantrap\n• Badge Management', dive: `### Physical Access Control
+            {
+                id: 'im6', icon: '🔒', title: 'Physical Access Control', desc: 'Protecting physical infrastructure security.', summary: '• Card Readers & Biometrics\n• Mantrap/Mantrap\n• Badge Management', dive: `### Physical Access Control
 Systems and mechanisms protecting physical access to secure areas.
 
 #### Access Control Technologies
@@ -740,7 +943,8 @@ Systems and mechanisms protecting physical access to secure areas.
         ];
 
         const operationsData = [
-            { id: 'op1', icon: '🚨', title: 'Incident Response', desc: 'Detecting, responding to, and recovering from security incidents.', summary: '• IR Plan & Procedures\n• Evidence Preservation\n• Post-Incident Review', dive: `### Incident Response
+            {
+                id: 'op1', icon: '🚨', title: 'Incident Response', desc: 'Detecting, responding to, and recovering from security incidents.', summary: '• IR Plan & Procedures\n• Evidence Preservation\n• Post-Incident Review', dive: `### Incident Response
 Coordinated process for handling security incidents to minimize damage and recover quickly.
 
 #### Incident Response Phases
@@ -776,7 +980,8 @@ Coordinated process for handling security incidents to minimize damage and recov
 - Memory analysis (Volatility)
 - Log analysis tools
 - Network capture tools (Wireshark)` },
-            { id: 'op2', icon: '📊', title: 'Security Information & Event Management (SIEM)', desc: 'Centralized logging and monitoring for security events.', summary: '• Log Aggregation\n• Correlation & Alerts\n• Forensics & Investigation', dive: `### SIEM (Security Information & Event Management)
+            {
+                id: 'op2', icon: '📊', title: 'Security Information & Event Management (SIEM)', desc: 'Centralized logging and monitoring for security events.', summary: '• Log Aggregation\n• Correlation & Alerts\n• Forensics & Investigation', dive: `### SIEM (Security Information & Event Management)
 Collects, aggregates, and analyzes security data from across the infrastructure.
 
 #### SIEM Capabilities
@@ -817,7 +1022,17 @@ Collects, aggregates, and analyzes security data from across the infrastructure.
 - IBM QRadar
 - ArcSight
 - Sumo Logic` },
-            { id: 'op3', icon: '🛡️', title: 'Intrusion Detection & Prevention', desc: 'Detecting and blocking network-based attacks.', summary: '• Network IDS/IPS\n• Host-Based IDS\n• Signature vs Anomaly', dive: `### Intrusion Detection & Prevention (IDS/IPS)
+            {
+                id: 'op3', icon: '🛡️', title: 'Intrusion Detection & Prevention', desc: 'Detecting and blocking network-based attacks.', summary: '• Network IDS/IPS\n• Host-Based IDS\n• Signature vs Anomaly', dive: `### Intrusion Detection & Prevention (IDS/IPS)
+<div class="mermaid">
+graph LR
+    Attacker((Attacker)) --> FW[Firewall]
+    FW --> IPS[IPS Inline]
+    IPS --> Web[Web Server]
+    FW -.-> IDS[IDS Passive]
+    style IPS fill:#ef4444,stroke:#333,color:#fff
+    style IDS fill:#f59e0b,stroke:#333,color:#fff
+</div>
 Systems that monitor network traffic for malicious activity and can take action to prevent attacks.
 
 #### IDS vs IPS
@@ -865,7 +1080,8 @@ Systems that monitor network traffic for malicious activity and can take action 
 - Suricata (open source)
 - Zeek (network monitoring, IDS capabilities)
 - Palo Alto Networks (commercial)` },
-            { id: 'op4', icon: '🔍', title: 'Digital Forensics', desc: 'Investigating and analyzing digital incidents.', summary: '• Evidence Collection\n• Timeline Analysis\n• Tool & Report', dive: `### Digital Forensics
+            {
+                id: 'op4', icon: '🔍', title: 'Digital Forensics', desc: 'Investigating and analyzing digital incidents.', summary: '• Evidence Collection\n• Timeline Analysis\n• Tool & Report', dive: `### Digital Forensics
 Process of uncovering, interpreting, and presenting digital evidence from computer systems.
 
 #### Forensic Process
@@ -912,7 +1128,8 @@ Process of uncovering, interpreting, and presenting digital evidence from comput
 - **Anti-forensics:** Malware designed to destroy evidence
 - **Expertise:** Requires skilled forensic analysts
 - **Legal:** Admissibility standards vary by jurisdiction` },
-            { id: 'op5', icon: '📋', title: 'Business Continuity & Disaster Recovery', desc: 'Planning for and recovering from major incidents.', summary: '• BCP vs DRP\n• RTO, RPO, MTTR\n• Recovery Strategies', dive: `### Business Continuity & Disaster Recovery
+            {
+                id: 'op5', icon: '📋', title: 'Business Continuity & Disaster Recovery', desc: 'Planning for and recovering from major incidents.', summary: '• BCP vs DRP\n• RTO, RPO, MTTR\n• Recovery Strategies', dive: `### Business Continuity & Disaster Recovery
 Planning and preparation to maintain/restore critical business functions after disruptions.
 
 #### Key Concepts
@@ -954,7 +1171,8 @@ Planning and preparation to maintain/restore critical business functions after d
 - Documentation and training
 - Communication plan during outage
 - Vendor/supplier dependencies` },
-            { id: 'op6', icon: '📊', title: 'Vulnerability Management', desc: 'Continuous identification and remediation of vulnerabilities.', summary: '• VM Lifecycle\n• Patch Management\n• Vulnerability Prioritization', dive: `### Vulnerability Management Program
+            {
+                id: 'op6', icon: '📊', title: 'Vulnerability Management', desc: 'Continuous identification and remediation of vulnerabilities.', summary: '• VM Lifecycle\n• Patch Management\n• Vulnerability Prioritization', dive: `### Vulnerability Management Program
 Systematic approach to identifying, prioritizing, and remediating security vulnerabilities.
 
 #### VM Lifecycle
@@ -999,7 +1217,8 @@ Systematic approach to identifying, prioritizing, and remediating security vulne
         ];
 
         const governanceData = [
-            { id: 'go1', icon: '📋', title: 'Policies & Standards', desc: 'Creating and enforcing security policies.', summary: '• Policy Development\n• Standards & Baselines\n• Policy Enforcement', dive: `### Security Policies & Standards
+            {
+                id: 'go1', icon: '📋', title: 'Policies & Standards', desc: 'Creating and enforcing security policies.', summary: '• Policy Development\n• Standards & Baselines\n• Policy Enforcement', dive: `### Security Policies & Standards
 Documented rules governing security in the organization.
 
 #### Policy Development
@@ -1040,7 +1259,8 @@ Documented rules governing security in the organization.
 - **NIST Cybersecurity Framework:** High-level guidance
 - **ISO 27001:** Information security management system
 - **COBIT:** IT governance framework` },
-            { id: 'go2', icon: '⚖️', title: 'Regulations & Compliance', desc: 'Meeting legal and regulatory requirements.', summary: '• GDPR, HIPAA, PCI-DSS\n• SOC 2\n• Audit & Compliance', dive: `### Regulations & Compliance
+            {
+                id: 'go2', icon: '⚖️', title: 'Regulations & Compliance', desc: 'Meeting legal and regulatory requirements.', summary: '• GDPR, HIPAA, PCI-DSS\n• SOC 2\n• Audit & Compliance', dive: `### Regulations & Compliance
 Legal requirements and standards organizations must meet to operate in specific industries/regions.
 
 #### Major Regulations
@@ -1084,7 +1304,8 @@ Legal requirements and standards organizations must meet to operate in specific 
 - Type of notification (individuals, regulators, press)
 - Information to include (what happened, data affected, mitigation)
 - Legal implications and fines` },
-            { id: 'go3', icon: '🎯', title: 'Risk Management', desc: 'Identifying, assessing, and managing security risks.', summary: '• Risk Analysis\n• Qualitative vs Quantitative\n• Risk Appetite', dive: `### Risk Management
+            {
+                id: 'go3', icon: '🎯', title: 'Risk Management', desc: 'Identifying, assessing, and managing security risks.', summary: '• Risk Analysis\n• Qualitative vs Quantitative\n• Risk Appetite', dive: `### Risk Management
 Systematic process of identifying threats and vulnerabilities, assessing impact, and implementing controls.
 
 #### Risk Management Process
@@ -1128,7 +1349,8 @@ Systematic process of identifying threats and vulnerabilities, assessing impact,
 #### Risk Tolerance vs Risk Appetite
 - **Risk Tolerance:** Acceptable variance from objectives (measurement of risk)
 - **Risk Appetite:** Organization's willingness to take risks (strategic choice)` },
-            { id: 'go4', icon: '👥', title: 'Third-Party & Vendor Management', desc: 'Managing security risks from external vendors.', summary: '• Vendor Assessment\n• SLA & Contracts\n• Continuous Monitoring', dive: `### Third-Party & Vendor Management
+            {
+                id: 'go4', icon: '👥', title: 'Third-Party & Vendor Management', desc: 'Managing security risks from external vendors.', summary: '• Vendor Assessment\n• SLA & Contracts\n• Continuous Monitoring', dive: `### Third-Party & Vendor Management
 Managing security risks associated with vendors, partners, and service providers.
 
 #### Vendor Assessment
@@ -1170,7 +1392,8 @@ Managing security risks associated with vendors, partners, and service providers
 - **Secure Deletion:** Destroying copies
 - **Transition Period:** Overlap for data migration
 - **Disputes:** How to handle disagreements` },
-            { id: 'go5', icon: '🎓', title: 'Security Awareness Training', desc: 'Educating employees about security.', summary: '• Mandatory Training\n• Phishing Simulations\n• Culture Change', dive: `### Security Awareness Training & Culture
+            {
+                id: 'go5', icon: '🎓', title: 'Security Awareness Training', desc: 'Educating employees about security.', summary: '• Mandatory Training\n• Phishing Simulations\n• Culture Change', dive: `### Security Awareness Training & Culture
 Creating a security-conscious workforce through education and engagement.
 
 #### Training Topics
@@ -1218,7 +1441,8 @@ Creating a security-conscious workforce through education and engagement.
 - Too technical for non-technical staff
 - Generic training not tailored to role
 - Blame for security incidents (kills reporting)` },
-            { id: 'go6', icon: '📊', title: 'Security Metrics & Reporting', desc: 'Measuring security effectiveness.', summary: '• KPIs & Dashboards\n• Executive Reporting\n• Trend Analysis', dive: `### Security Metrics & Reporting
+            {
+                id: 'go6', icon: '📊', title: 'Security Metrics & Reporting', desc: 'Measuring security effectiveness.', summary: '• KPIs & Dashboards\n• Executive Reporting\n• Trend Analysis', dive: `### Security Metrics & Reporting
 Measuring and communicating security effectiveness to stakeholders.
 
 #### Key Security Metrics
@@ -1260,7 +1484,8 @@ Measuring and communicating security effectiveness to stakeholders.
         ];
 
         const cryptographyData = [
-            { id: 'cr1', icon: '🔐', title: 'Encryption Fundamentals', desc: 'Core concepts of encryption and confidentiality.', summary: '• Symmetric vs Asymmetric\n• Encryption Algorithms\n• Key Management', dive: `### Encryption Fundamentals
+            {
+                id: 'cr1', icon: '🔐', title: 'Encryption Fundamentals', desc: 'Core concepts of encryption and confidentiality.', summary: '• Symmetric vs Asymmetric\n• Encryption Algorithms\n• Key Management', dive: `### Encryption Fundamentals
 Using mathematical algorithms to convert plaintext to ciphertext to ensure confidentiality.
 
 #### Encryption Goals
@@ -1316,7 +1541,8 @@ Uses public key (encrypt) and private key (decrypt).
 - 2048-bit RSA ≈ 112-bit symmetric strength
 - 3072-bit RSA ≈ 128-bit symmetric strength
 - 256-bit ECC ≈ 128-bit symmetric strength` },
-            { id: 'cr2', icon: '🔏', title: 'Hashing & Integrity', desc: 'Ensuring data integrity with hash functions.', summary: '• Hash Functions\n• Digital Signatures\n• HMAC', dive: `### Hashing & Data Integrity
+            {
+                id: 'cr2', icon: '🔏', title: 'Hashing & Integrity', desc: 'Ensuring data integrity with hash functions.', summary: '• Hash Functions\n• Digital Signatures\n• HMAC', dive: `### Hashing & Data Integrity
 One-way functions creating fixed-size fingerprints of data.
 
 #### Hash Functions Characteristics
@@ -1363,7 +1589,8 @@ Using asymmetric cryptography to verify authenticity and non-repudiation.
 - MD5 collisions practically possible
 - SHA-1 collisions now feasible
 - Reason for transition to SHA-256/SHA-3` },
-            { id: 'cr3', icon: '📜', title: 'Public Key Infrastructure (PKI)', desc: 'System for managing public key encryption.', summary: '• X.509 Certificates\n• Certificate Authority\n• Certificate Lifecycle', dive: `### Public Key Infrastructure (PKI)
+            {
+                id: 'cr3', icon: '📜', title: 'Public Key Infrastructure (PKI)', desc: 'System for managing public key encryption.', summary: '• X.509 Certificates\n• Certificate Authority\n• Certificate Lifecycle', dive: `### Public Key Infrastructure (PKI)
 Framework for managing digital certificates and public key cryptography.
 
 #### X.509 Certificates
@@ -1412,7 +1639,8 @@ Example: Google.com Cert → Intermediate CA → Root CA (Google)
 - **Hierarchical:** Single root CA (X.500, X.509)
 - **Mesh:** Multiple CAs trust each other (PGP model)
 - **Web of Trust:** Users sign each other's keys (PGP)` },
-            { id: 'cr4', icon: '🔑', title: 'Key Management', desc: 'Generating, storing, and protecting cryptographic keys.', summary: '• Key Generation\n• Key Storage & Protection\n• Key Rotation', dive: `### Key Management
+            {
+                id: 'cr4', icon: '🔑', title: 'Key Management', desc: 'Generating, storing, and protecting cryptographic keys.', summary: '• Key Generation\n• Key Storage & Protection\n• Key Rotation', dive: `### Key Management
 Entire lifecycle of cryptographic keys from generation to destruction.
 
 #### Key Generation
@@ -1464,7 +1692,8 @@ Entire lifecycle of cryptographic keys from generation to destruction.
 - **Master Key:** Long-term, high security, rarely used directly
 - **Session Keys:** Temporary, derived from master key, used for encryption
 - **Key Derivation:** Process of creating session keys from master key` },
-            { id: 'cr5', icon: '📡', title: 'Secure Protocols', desc: 'Cryptographic protocols for secure communication.', summary: '• TLS/SSL Handshake\n• IPsec\n• SSH & Secure Shell', dive: `### Secure Cryptographic Protocols
+            {
+                id: 'cr5', icon: '📡', title: 'Secure Protocols', desc: 'Cryptographic protocols for secure communication.', summary: '• TLS/SSL Handshake\n• IPsec\n• SSH & Secure Shell', dive: `### Secure Cryptographic Protocols
 Protocols combining encryption, hashing, and authentication for secure communication.
 
 #### TLS (Transport Layer Security)
@@ -1530,7 +1759,8 @@ Digital signatures for DNS responses preventing DNS spoofing.
 - **RRSIG:** Digital signatures on DNS record sets
 - **DS:** Delegation Signer (trust anchor)
 - **Chain of Trust:** Root → TLD → Authoritative nameservers` },
-            { id: 'cr6', icon: '🧮', title: 'Cryptanalysis & Attacks', desc: 'Breaking cryptography and defending against attacks.', summary: '• Cryptanalysis Methods\n• Side-Channel Attacks\n• Quantum Cryptography', dive: `### Cryptanalysis & Cryptographic Attacks
+            {
+                id: 'cr6', icon: '🧮', title: 'Cryptanalysis & Attacks', desc: 'Breaking cryptography and defending against attacks.', summary: '• Cryptanalysis Methods\n• Side-Channel Attacks\n• Quantum Cryptography', dive: `### Cryptanalysis & Cryptographic Attacks
 Methods for breaking encryption and protecting against such attacks.
 
 #### Brute Force Attacks
@@ -1585,168 +1815,21 @@ Methods for breaking encryption and protecting against such attacks.
 - Requires protocol flexibility and regular updates` }
         ];
 
-        const allServices = [...threatsData, ...architectureData, ...implementationData, ...operationsData, ...governanceData, ...cryptographyData];
+        const domains = [
+            { id: 'threats-grid', data: threatsData, color: 'red-500' },
+            { id: 'architecture-grid', data: architectureData, color: 'purple-500' },
+            { id: 'implementation-grid', data: implementationData, color: 'green-500' },
+            { id: 'operations-grid', data: operationsData, color: 'orange-500' },
+            { id: 'governance-grid', data: governanceData, color: 'red-500' },
+            { id: 'cryptography-grid', data: cryptographyData, color: 'blue-500' }
+        ];
 
-        function handleSearch(query) {
-            const resultsBox = document.getElementById('search-results');
-            if (!query.trim()) {
-                resultsBox.classList.add('hidden');
-                return;
-            }
-
-            const filtered = allServices.filter(s => 
-                s.title.toLowerCase().includes(query.toLowerCase()) || 
-                s.desc.toLowerCase().includes(query.toLowerCase())
-            ).slice(0, 5);
-
-            if (filtered.length > 0) {
-                resultsBox.innerHTML = filtered.map(s => `
-                    <div onclick="showDive('${s.id}'); document.getElementById('global-search').value=''" class="p-4 hover:bg-slate-50 dark:hover:bg-slate-700 cursor-pointer border-b border-slate-100 dark:border-slate-700 last:border-0 flex items-center gap-3">
-                        <span class="text-xl">${s.icon}</span>
-                        <div>
-                            <div class="font-bold text-sm text-slate-800 dark:text-white">${s.title}</div>
-                            <div class="text-xs text-slate-500">${s.desc}</div>
-                        </div>
-                    </div>
-                `).join('');
-                resultsBox.classList.remove('hidden');
-            } else {
-                resultsBox.innerHTML = `<div class="p-4 text-xs text-slate-400">No results found.</div>`;
-                resultsBox.classList.remove('hidden');
-            }
-        }
-
-        // Logic for closing search when clicking outside
-        document.addEventListener('click', (e) => {
-            if (!e.target.closest('#global-search')) {
-                document.getElementById('search-results').classList.add('hidden');
-            }
+        document.addEventListener('DOMContentLoaded', () => {
+            window.app = new StudyGuideApp({ grids: domains });
         });
-
-        function toggleTheme() {
-            const html = document.documentElement;
-            const icon = document.getElementById('theme-icon');
-            if (html.classList.contains('dark')) {
-                html.classList.remove('dark');
-                icon.innerText = '☀️';
-            } else {
-                html.classList.add('dark');
-                icon.innerText = '🌙';
-            }
-        }
-
-        function createCard(c, borderColorClass, gradientFromClass) {
-            const textColorClass = borderColorClass.replace('border-', 'text-');
-            const bgColorClass = borderColorClass.replace('border-', 'bg-');
-            const hoverBgColorClass = `hover:${bgColorClass.replace('500', '700')}`;
-            return `
-            <div class="flip-card h-[320px] cursor-pointer group" onclick="this.classList.toggle('flipped')">
-                <div class="flip-card-inner h-full w-full relative transform-style-3d shadow-xl rounded-[1.5rem]">
-                    <div class="absolute inset-0 backface-hidden bg-white dark:bg-slate-800/60 backdrop-blur-xl rounded-[1.5rem] flex flex-col items-center justify-center p-6 border-2 border-slate-200 dark:border-slate-700/50 group-hover:border-brand-accent/50 transition-all">
-                        <div class="w-16 h-16 bg-gradient-to-br ${gradientFromClass} to-transparent rounded-2xl flex items-center justify-center text-3xl mb-4">${c.icon}</div>
-                        <h4 class="font-black text-lg text-slate-800 dark:text-white tracking-tight text-center">${c.title}</h4>
-                        <p class="text-slate-400 text-[10px] mt-2 uppercase tracking-[0.2em] font-black">Flip for Details</p>
-                    </div>
-                    <div class="absolute inset-0 backface-hidden rotate-y-180 bg-slate-900 dark:bg-slate-900 rounded-[1.5rem] flex flex-col p-6 border-2 ${borderColorClass}">
-                        <p class="text-xs font-black ${textColorClass} uppercase tracking-widest mb-2">${c.title}</p>
-                        <p class="text-slate-300 text-s mb-4 leading-relaxed line-clamp-2">${c.desc}</p>
-                        <div class="space-y-1.5 mb-4">
-                            ${c.summary.split('\n').map(line => `<div class="text-[12px] text-slate-400 font-medium">${line}</div>`).join('')}
-                        </div>
-                        <button onclick="event.stopPropagation(); showDive('${c.id}')" class="mt-auto w-full ${bgColorClass} text-white py-3 rounded-xl text-xs font-black transition-all ${hoverBgColorClass}">DEEP DIVE →</button>
-                    </div>
-                </div>
-            </div>`;
-        }
-
-        function renderAll() {
-            const grids = [
-                { id: 'threats-grid', data: threatsData, border: 'border-red-500', grad: 'from-red-500/20' },
-                { id: 'architecture-grid', data: architectureData, border: 'border-purple-500', grad: 'from-purple-500/20' },
-                { id: 'implementation-grid', data: implementationData, border: 'border-green-500', grad: 'from-green-500/20' },
-                { id: 'operations-grid', data: operationsData, border: 'border-orange-500', grad: 'from-orange-500/20' },
-                { id: 'governance-grid', data: governanceData, border: 'border-red-500', grad: 'from-red-500/20' },
-                { id: 'cryptography-grid', data: cryptographyData, border: 'border-blue-500', grad: 'from-blue-500/20' }
-            ];
-
-            grids.forEach(g => {
-                const el = document.getElementById(g.id);
-                if (el) el.innerHTML = g.data.map(d => createCard(d, g.border, g.grad)).join('');
-            });
-        }
-
-        function showDive(id) {
-            const c = allServices.find(x => x.id === id);
-            if(!c) return;
-
-            const grids = [
-                { data: threatsData, color: 'red-500' },
-                { data: architectureData, color: 'purple-500' },
-                { data: implementationData, color: 'green-500' },
-                { data: operationsData, color: 'orange-500' },
-                { data: governanceData, color: 'red-500' },
-                { data: cryptographyData, color: 'blue-500' }
-            ];
-
-            let domainColor = 'red-500';
-            for (const grid of grids) {
-                if (grid.data.some(item => item.id === id)) {
-                    domainColor = grid.color;
-                    break;
-                }
-            }
-
-            const textColorClass = `text-${domainColor}`;
-            const iconBgColorClass = `bg-${domainColor}/20`;
-
-            document.getElementById('m-title').innerText = c.title;
-            document.getElementById('m-icon').innerText = c.icon;
-            
-            const mIconBg = document.getElementById('m-icon-bg');
-            const mSubtitle = document.querySelector('#deep-dive-modal p.uppercase');
-
-            const colors = ['red-500', 'purple-500', 'green-500', 'orange-500', 'blue-500'];
-            const textColors = colors.map(c => `text-${c}`);
-            const bgColors = colors.map(c => `bg-${c}/20`);
-            
-            mIconBg.classList.remove(...bgColors, 'bg-brand-accent/20');
-            mIconBg.classList.add(iconBgColorClass);
-            
-            mSubtitle.classList.remove(...textColors, 'text-brand-accent');
-            mSubtitle.classList.add(textColorClass);
-
-            document.getElementById('m-content').innerHTML = marked.parse(c.dive);
-            const m = document.getElementById('deep-dive-modal');
-            m.classList.add('active');
-            setTimeout(() => { m.classList.add('opacity-100'); m.querySelector('div').classList.add('scale-100'); }, 10);
-        }
-
-        function closeModal(e) { if(e) e.stopPropagation(); const m = document.getElementById('deep-dive-modal'); m.classList.remove('opacity-100'); m.querySelector('div').classList.remove('scale-100'); setTimeout(() => m.classList.remove('active'), 300); }
-
-        function goHome() {
-            const isOnDashboard = !document.getElementById('section-home').classList.contains('hidden');
-            if (isOnDashboard) {
-                window.location.href = 'index.html';
-            } else {
-                navigateTo('section-home');
-            }
-        }
-        
-        function openSidebar() { document.getElementById('sidebar-overlay').classList.remove('hidden'); setTimeout(() => { document.getElementById('sidebar-overlay').classList.remove('opacity-0'); document.getElementById('left-sidebar').classList.remove('-translate-x-full'); }, 10); }
-        function closeSidebar() { document.getElementById('sidebar-overlay').classList.add('opacity-0'); document.getElementById('left-sidebar').classList.add('-translate-x-full'); setTimeout(() => { document.getElementById('sidebar-overlay').classList.add('hidden'); }, 300); }
-
-        function navigateTo(targetId) {
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-            document.querySelectorAll('.content-section').forEach(s => s.classList.add('hidden'));
-            document.getElementById(targetId).classList.remove('hidden');
-            document.querySelectorAll('.nav-btn').forEach(x => { x.classList.remove('bg-brand-accent', 'text-white'); x.classList.add('text-slate-500'); });
-            const btn = document.querySelector(`.nav-btn[data-target="${targetId}"]`);
-            if (btn) { btn.classList.add('bg-brand-accent', 'text-white'); btn.classList.remove('text-slate-500'); }
-            closeSidebar();
-        }
-
-        window.onload = renderAll;
     </script>
 
 
-</body></html>
+</body>
+
+</html>

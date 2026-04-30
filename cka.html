@@ -1,13 +1,15 @@
 <!DOCTYPE html>
 <html lang="en" class="dark">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" type="image/x-icon" href="images/k8s.ico">
+    <link rel="icon" type="image/x-icon" href="assets/images/k8s.ico">
     <title>CKA (Kubernetes) - Master Study Guide</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
-    <script src="js/app.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+    <script src="assets/js/app.js"></script>
     <link rel="stylesheet" href="assets/css/site.css">
     <script>
         tailwind.config = {
@@ -27,141 +29,296 @@
     </script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap');
-        body { font-family: 'Inter', sans-serif; transition: background-color 0.3s ease; }
-        
-        .perspective-1000 { perspective: 1000px; }
-        .transform-style-3d { transform-style: preserve-3d; }
-        .backface-hidden { backface-visibility: hidden; -webkit-backface-visibility: hidden; }
-        .rotate-y-180 { transform: rotateY(180deg); }
-        .flip-card-inner { transition: transform 0.8s cubic-bezier(0.34, 1.56, 0.64, 1); transform-style: preserve-3d; }
-        .flip-card.flipped .flip-card-inner { transform: rotateY(180deg); }
-        
-        .fade-in { animation: fadeIn 0.4s ease-out forwards; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-        
-        .md-content h3 { font-weight: 800; font-size: 1.5rem; margin-top: 1rem; margin-bottom: 1rem; color: #6366f1; border-left: 5px solid #6366f1; padding-left: 1rem; }
-        .md-content h4 { font-weight: 700; font-size: 1.1rem; margin-top: 1.5rem; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.05em; }
-        .md-content p { margin-bottom: 1rem; line-height: 1.8; font-size: 1.05rem; }
-        .md-content ul { list-style-type: none; margin-bottom: 1.5rem; }
-        .md-content li { margin-bottom: 0.75rem; position: relative; padding-left: 1.75rem; line-height: 1.6; }
-        .md-content li::before { content: "✦"; position: absolute; left: 0; color: #6366f1; font-weight: bold; }
-        
-        .custom-scrollbar::-webkit-scrollbar { width: 8px; }
-        .custom-scrollbar::-webkit-scrollbar-track { background: rgba(0,0,0,0.05); }
-        .custom-scrollbar::-webkit-scrollbar-thumb { background: #475569; border-radius: 10px; }
-        
-        #deep-dive-modal.active { display: flex !important; }
-        .no-scrollbar::-webkit-scrollbar { display: none; }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            transition: background-color 0.3s ease;
+        }
+
+        .perspective-1000 {
+            perspective: 1000px;
+        }
+
+        .transform-style-3d {
+            transform-style: preserve-3d;
+        }
+
+        .backface-hidden {
+            backface-visibility: hidden;
+            -webkit-backface-visibility: hidden;
+        }
+
+        .rotate-y-180 {
+            transform: rotateY(180deg);
+        }
+
+        .flip-card-inner {
+            transition: transform 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+            transform-style: preserve-3d;
+        }
+
+        .flip-card.flipped .flip-card-inner {
+            transform: rotateY(180deg);
+        }
+
+        .fade-in {
+            animation: fadeIn 0.4s ease-out forwards;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .md-content h3 {
+            font-weight: 800;
+            font-size: 1.5rem;
+            margin-top: 1rem;
+            margin-bottom: 1rem;
+            color: #6366f1;
+            border-left: 5px solid #6366f1;
+            padding-left: 1rem;
+        }
+
+        .md-content h4 {
+            font-weight: 700;
+            font-size: 1.1rem;
+            margin-top: 1.5rem;
+            color: #94a3b8;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .md-content p {
+            margin-bottom: 1rem;
+            line-height: 1.8;
+            font-size: 1.05rem;
+        }
+
+        .md-content ul {
+            list-style-type: none;
+            margin-bottom: 1.5rem;
+        }
+
+        .md-content li {
+            margin-bottom: 0.75rem;
+            position: relative;
+            padding-left: 1.75rem;
+            line-height: 1.6;
+        }
+
+        .md-content li::before {
+            content: "✦";
+            position: absolute;
+            left: 0;
+            color: #6366f1;
+            font-weight: bold;
+        }
+
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: rgba(0, 0, 0, 0.05);
+        }
+
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #475569;
+            border-radius: 10px;
+        }
+
+        #deep-dive-modal.active {
+            display: flex !important;
+        }
+
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
     </style>
 </head>
-<body class="min-h-screen bg-slate-50 dark:bg-[#0f172a] text-slate-900 dark:text-slate-200 antialiased overflow-x-hidden" style="--brand-accent:#6366f1;">
 
-    <header class="sticky top-0 z-40 bg-white/80 dark:bg-[#0f172a]/80 backdrop-blur-xl border-b border-slate-200 dark:border-slate-800 shadow-sm">
+<body
+    class="min-h-screen bg-slate-50 dark:bg-[#0f172a] text-slate-900 dark:text-slate-200 antialiased overflow-x-hidden"
+    style="--brand-accent:#6366f1;">
+
+    <header
+        class="sticky top-0 z-40 bg-white/80 dark:bg-[#0f172a]/80 backdrop-blur-xl border-b border-slate-200 dark:border-slate-800 shadow-sm">
         <div class="max-w-7xl mx-auto px-4 h-20 grid grid-cols-3 items-center gap-4">
             <div class="flex items-center justify-start gap-4">
-                <button onclick="goHome()" class="hidden sm:flex p-2.5 bg-slate-100 dark:bg-slate-800 rounded-xl hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors shrink-0 text-slate-500 dark:text-slate-400 hover:text-brand-accent dark:hover:text-brand-accent items-center justify-center" title="Home">
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1m-6 0h6"></path></svg>
+                <button onclick="goHome()"
+                    class="hidden sm:flex p-2.5 bg-slate-100 dark:bg-slate-800 rounded-xl hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors shrink-0 text-slate-500 dark:text-slate-400 hover:text-brand-accent dark:hover:text-brand-accent items-center justify-center"
+                    title="Home">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1m-6 0h6">
+                        </path>
+                    </svg>
                 </button>
-                <button onclick="openSidebar()" class="p-2.5 px-4 bg-slate-100 dark:bg-slate-800 rounded-xl hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors shrink-0 flex items-center gap-2 text-slate-700 dark:text-slate-300">
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+                <button onclick="openSidebar()"
+                    class="p-2.5 px-4 bg-slate-100 dark:bg-slate-800 rounded-xl hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors shrink-0 flex items-center gap-2 text-slate-700 dark:text-slate-300">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
                     <span class="font-bold text-sm hidden sm:block">Menu</span>
                 </button>
             </div>
 
-            <div onclick="navigateTo('section-home')" class="flex items-center justify-center gap-3 cursor-pointer group">
+            <div onclick="navigateTo('section-home')"
+                class="flex items-center justify-center gap-3 cursor-pointer group">
                 <div class="hidden lg:block">
-                    <h1 class="text-xl font-extrabold tracking-tighter text-slate-900 dark:text-white group-hover:text-brand-accent transition-colors">Master CKA</h1>
+                    <h1
+                        class="text-xl font-extrabold tracking-tighter text-slate-900 dark:text-white group-hover:text-brand-accent transition-colors">
+                        Master CKA</h1>
                 </div>
             </div>
 
             <div class="flex items-center justify-end gap-3">
                 <div class="relative hidden md:block w-full max-w-[160px] lg:max-w-[200px]">
-                    <input type="text" id="global-search" oninput="handleSearch(this.value)" placeholder="Search..." class="w-full bg-slate-100 dark:bg-slate-800 border-none rounded-2xl px-4 py-2 text-sm focus:ring-2 focus:ring-brand-accent outline-none transition-all">
-                    <div id="search-results" class="absolute top-full right-0 w-[300px] mt-2 bg-white dark:bg-slate-800 rounded-2xl shadow-2xl border border-slate-200 dark:border-slate-700 hidden overflow-hidden z-50 text-left">
+                    <input type="text" id="global-search" oninput="handleSearch(this.value)" placeholder="Search..."
+                        class="w-full bg-slate-100 dark:bg-slate-800 border-none rounded-2xl px-4 py-2 text-sm focus:ring-2 focus:ring-brand-accent outline-none transition-all">
+                    <div id="search-results"
+                        class="absolute top-full right-0 w-[300px] mt-2 bg-white dark:bg-slate-800 rounded-2xl shadow-2xl border border-slate-200 dark:border-slate-700 hidden overflow-hidden z-50 text-left">
                     </div>
                 </div>
-                <button onclick="toggleTheme()" class="p-2.5 bg-slate-100 dark:bg-slate-800 rounded-xl hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors shrink-0">
+                <button onclick="toggleTheme()"
+                    class="p-2.5 bg-slate-100 dark:bg-slate-800 rounded-xl hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors shrink-0">
                     <span id="theme-icon">🌙</span>
                 </button>
             </div>
         </div>
     </header>
 
-    <div id="sidebar-overlay" class="fixed inset-0 bg-slate-900/40 backdrop-blur-sm z-[55] hidden opacity-0 transition-opacity duration-300" onclick="closeSidebar()"></div>
-    
-    <aside id="left-sidebar" class="fixed top-0 left-0 h-full w-72 bg-white dark:bg-[#0f172a] border-r border-slate-200 dark:border-slate-800 shadow-[0_0_50px_rgba(0,0,0,0.3)] z-[60] transform -translate-x-full transition-transform duration-300 flex flex-col">
+    <div id="sidebar-overlay"
+        class="fixed inset-0 bg-slate-900/40 backdrop-blur-sm z-[55] hidden opacity-0 transition-opacity duration-300"
+        onclick="closeSidebar()"></div>
+
+    <aside id="left-sidebar"
+        class="fixed top-0 left-0 h-full w-72 bg-white dark:bg-[#0f172a] border-r border-slate-200 dark:border-slate-800 shadow-[0_0_50px_rgba(0,0,0,0.3)] z-[60] transform -translate-x-full transition-transform duration-300 flex flex-col">
         <div class="p-6 flex justify-between items-center border-b border-slate-200 dark:border-slate-800">
             <span class="font-black text-sm text-slate-400 uppercase tracking-widest">Navigation</span>
-            <button onclick="closeSidebar()" class="text-slate-400 hover:text-brand-accent transition-colors text-3xl">&times;</button>
+            <button onclick="closeSidebar()"
+                class="text-slate-400 hover:text-brand-accent transition-colors text-3xl">&times;</button>
         </div>
-        
+
         <nav class="flex flex-col gap-1 p-4 overflow-y-auto custom-scrollbar flex-grow">
-            <button data-target="section-home" onclick="navigateTo('section-home')" class="nav-btn text-left px-4 py-2 rounded-xl text-base font-bold transition-all text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800">Dashboard</button>
-            
-            <span class="px-4 text-base font-black text-slate-800 dark:text-slate-200 tracking-wide mt-4 mb-1">Fundamentals</span>
-            <button data-target="section-k8s-arch" onclick="navigateTo('section-k8s-arch')" class="nav-btn text-left pl-8 pr-4 py-2 rounded-xl text-sm font-semibold transition-all text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800">K8s Architecture</button>
-            <button data-target="section-arch" onclick="navigateTo('section-arch')" class="nav-btn text-left pl-8 pr-4 py-2 rounded-xl text-sm font-semibold transition-all text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800">Architecture</button>
-            <button data-target="section-workloads" onclick="navigateTo('section-workloads')" class="nav-btn text-left pl-8 pr-4 py-2 rounded-xl text-sm font-semibold transition-all text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800">Workloads</button>
-            <button data-target="section-networking" onclick="navigateTo('section-networking')" class="nav-btn text-left pl-8 pr-4 py-2 rounded-xl text-sm font-semibold transition-all text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800">Networking</button>
-            <button data-target="section-storage" onclick="navigateTo('section-storage')" class="nav-btn text-left pl-8 pr-4 py-2 rounded-xl text-sm font-semibold transition-all text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800">Storage</button>
-            <button data-target="section-troubleshooting" onclick="navigateTo('section-troubleshooting')" class="nav-btn text-left pl-8 pr-4 py-2 rounded-xl text-sm font-semibold transition-all text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800">Troubleshooting</button>
-            
-            <a href="index.html" class="text-left px-4 py-2 rounded-xl text-sm font-bold transition-all text-brand-accent hover:bg-slate-100 dark:hover:bg-slate-800 mb-2 mt-4">← Back to Main Menu</a>
+            <button data-target="section-home" onclick="navigateTo('section-home')"
+                class="nav-btn text-left px-4 py-2 rounded-xl text-base font-bold transition-all text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800">Dashboard</button>
+
+            <span
+                class="px-4 text-base font-black text-slate-800 dark:text-slate-200 tracking-wide mt-4 mb-1">Fundamentals</span>
+            <button data-target="section-k8s-arch" onclick="navigateTo('section-k8s-arch')"
+                class="nav-btn text-left pl-8 pr-4 py-2 rounded-xl text-sm font-semibold transition-all text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800">K8s
+                Architecture</button>
+            <button data-target="section-arch" onclick="navigateTo('section-arch')"
+                class="nav-btn text-left pl-8 pr-4 py-2 rounded-xl text-sm font-semibold transition-all text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800">Architecture</button>
+            <button data-target="section-workloads" onclick="navigateTo('section-workloads')"
+                class="nav-btn text-left pl-8 pr-4 py-2 rounded-xl text-sm font-semibold transition-all text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800">Workloads</button>
+            <button data-target="section-networking" onclick="navigateTo('section-networking')"
+                class="nav-btn text-left pl-8 pr-4 py-2 rounded-xl text-sm font-semibold transition-all text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800">Networking</button>
+            <button data-target="section-storage" onclick="navigateTo('section-storage')"
+                class="nav-btn text-left pl-8 pr-4 py-2 rounded-xl text-sm font-semibold transition-all text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800">Storage</button>
+            <button data-target="section-troubleshooting" onclick="navigateTo('section-troubleshooting')"
+                class="nav-btn text-left pl-8 pr-4 py-2 rounded-xl text-sm font-semibold transition-all text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800">Troubleshooting</button>
+
+            <a href="index.html"
+                class="text-left px-4 py-2 rounded-xl text-sm font-bold transition-all text-brand-accent hover:bg-slate-100 dark:hover:bg-slate-800 mb-2 mt-4">←
+                Back to Main Menu</a>
         </nav>
     </aside>
 
     <main class="max-w-7xl mx-auto px-4 py-12">
-        
+
         <section id="section-home" class="content-section fade-in">
             <div class="text-center mb-16 mt-8">
-                <div class="inline-block px-4 py-1.5 rounded-full bg-brand-accent/10 border border-brand-accent/20 text-brand-accent font-bold text-xs tracking-widest uppercase mb-6">Certified Kubernetes Administrator</div>
-                <h2 class="text-5xl md:text-7xl font-black mb-6 tracking-tight text-slate-900 dark:text-white">Master CKA.</h2>
-                <p class="text-slate-500 dark:text-slate-400 text-lg md:text-xl max-w-3xl mx-auto leading-relaxed">The definitive interactive guide for the CKA exam. Select a domain below to explore cluster operations and workload management.</p>
+                <div
+                    class="inline-block px-4 py-1.5 rounded-full bg-brand-accent/10 border border-brand-accent/20 text-brand-accent font-bold text-xs tracking-widest uppercase mb-6">
+                    Certified Kubernetes Administrator</div>
+                <h2 class="text-5xl md:text-7xl font-black mb-6 tracking-tight text-slate-900 dark:text-white">Master
+                    CKA.</h2>
+                <p class="text-slate-500 dark:text-slate-400 text-lg md:text-xl max-w-3xl mx-auto leading-relaxed">The
+                    definitive interactive guide for the CKA exam. Select a domain below to explore cluster operations
+                    and workload management.</p>
             </div>
 
             <div class="mb-12">
-                <h3 class="text-sm font-black text-slate-400 uppercase tracking-widest mb-6 pl-2 border-l-4 border-indigo-500">Core Concepts</h3>
+                <h3
+                    class="text-sm font-black text-slate-400 uppercase tracking-widest mb-6 pl-2 border-l-4 border-indigo-500">
+                    Core Concepts</h3>
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    <div onclick="navigateTo('section-k8s-arch')" class="bg-white dark:bg-slate-800/40 p-8 rounded-[2rem] border border-slate-200 dark:border-slate-700/50 shadow-xl cursor-pointer hover:-translate-y-2 hover:border-indigo-500/50 transition-all group">
-                        <div class="w-14 h-14 bg-indigo-500/10 rounded-2xl flex items-center justify-center text-3xl mb-6 group-hover:scale-110 transition-transform">⚙️</div>
+                    <div onclick="navigateTo('section-k8s-arch')"
+                        class="bg-white dark:bg-slate-800/40 p-8 rounded-[2rem] border border-slate-200 dark:border-slate-700/50 shadow-xl cursor-pointer hover:-translate-y-2 hover:border-indigo-500/50 transition-all group">
+                        <div
+                            class="w-14 h-14 mx-auto bg-indigo-500/10 rounded-2xl flex items-center justify-center text-3xl mb-6 group-hover:scale-110 transition-transform">
+                            ⚙️</div>
                         <h3 class="text-xl font-black mb-2 text-slate-800 dark:text-white">K8s Architecture</h3>
-                        <p class="text-slate-500 dark:text-slate-400 text-sm leading-relaxed">Understanding the Control Plane vs Worker Node components.</p>
+                        <p class="text-slate-500 dark:text-slate-400 text-sm leading-relaxed">Understanding the Control
+                            Plane vs Worker Node components.</p>
                     </div>
 
-                    <div onclick="navigateTo('section-arch')" class="bg-white dark:bg-slate-800/40 p-8 rounded-[2rem] border border-slate-200 dark:border-slate-700/50 shadow-xl cursor-pointer hover:-translate-y-2 hover:border-indigo-500/50 transition-all group">
-                        <div class="w-14 h-14 bg-indigo-500/10 rounded-2xl flex items-center justify-center text-3xl mb-6 group-hover:scale-110 transition-transform">🏛️</div>
+                    <div onclick="navigateTo('section-arch')"
+                        class="bg-white dark:bg-slate-800/40 p-8 rounded-[2rem] border border-slate-200 dark:border-slate-700/50 shadow-xl cursor-pointer hover:-translate-y-2 hover:border-indigo-500/50 transition-all group">
+                        <div
+                            class="w-14 h-14 mx-auto bg-indigo-500/10 rounded-2xl flex items-center justify-center text-3xl mb-6 group-hover:scale-110 transition-transform">
+                            🏛️</div>
                         <h3 class="text-xl font-black mb-2 text-slate-800 dark:text-white">Cluster Architecture</h3>
-                        <p class="text-slate-500 dark:text-slate-400 text-sm leading-relaxed">Control plane, ETCD, Kubelet, and managing nodes.</p>
+                        <p class="text-slate-500 dark:text-slate-400 text-sm leading-relaxed">Control plane, ETCD,
+                            Kubelet, and managing nodes.</p>
                     </div>
 
-                    <div onclick="navigateTo('section-workloads')" class="bg-white dark:bg-slate-800/40 p-8 rounded-[2rem] border border-slate-200 dark:border-slate-700/50 shadow-xl cursor-pointer hover:-translate-y-2 hover:border-blue-500/50 transition-all group">
-                        <div class="w-14 h-14 bg-blue-500/10 rounded-2xl flex items-center justify-center text-3xl mb-6 group-hover:scale-110 transition-transform">📦</div>
+                    <div onclick="navigateTo('section-workloads')"
+                        class="bg-white dark:bg-slate-800/40 p-8 rounded-[2rem] border border-slate-200 dark:border-slate-700/50 shadow-xl cursor-pointer hover:-translate-y-2 hover:border-blue-500/50 transition-all group">
+                        <div
+                            class="w-14 h-14 mx-auto bg-blue-500/10 rounded-2xl flex items-center justify-center text-3xl mb-6 group-hover:scale-110 transition-transform">
+                            📦</div>
                         <h3 class="text-xl font-black mb-2 text-slate-800 dark:text-white">Workloads</h3>
-                        <p class="text-slate-500 dark:text-slate-400 text-sm leading-relaxed">Pods, Deployments, DaemonSets, and scheduling.</p>
+                        <p class="text-slate-500 dark:text-slate-400 text-sm leading-relaxed">Pods, Deployments,
+                            DaemonSets, and scheduling.</p>
                     </div>
                 </div>
             </div>
 
             <div class="mb-12">
-                <h3 class="text-sm font-black text-slate-400 uppercase tracking-widest mb-6 pl-2 border-l-4 border-cyan-500">Advanced Domains</h3>
+                <h3
+                    class="text-sm font-black text-slate-400 uppercase tracking-widest mb-6 pl-2 border-l-4 border-cyan-500">
+                    Advanced Domains</h3>
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
 
-                    <div onclick="navigateTo('section-networking')" class="bg-white dark:bg-slate-800/40 p-8 rounded-[2rem] border border-slate-200 dark:border-slate-700/50 shadow-xl cursor-pointer hover:-translate-y-2 hover:border-cyan-500/50 transition-all group">
-                        <div class="w-14 h-14 bg-cyan-500/10 rounded-2xl flex items-center justify-center text-3xl mb-6 group-hover:scale-110 transition-transform">🕸️</div>
+                    <div onclick="navigateTo('section-networking')"
+                        class="bg-white dark:bg-slate-800/40 p-8 rounded-[2rem] border border-slate-200 dark:border-slate-700/50 shadow-xl cursor-pointer hover:-translate-y-2 hover:border-cyan-500/50 transition-all group">
+                        <div
+                            class="w-14 h-14 mx-auto bg-cyan-500/10 rounded-2xl flex items-center justify-center text-3xl mb-6 group-hover:scale-110 transition-transform">
+                            🕸️</div>
                         <h3 class="text-xl font-black mb-2 text-slate-800 dark:text-white">Networking</h3>
-                        <p class="text-slate-500 dark:text-slate-400 text-sm leading-relaxed">Services, Ingress, NetworkPolicies, and CNI.</p>
+                        <p class="text-slate-500 dark:text-slate-400 text-sm leading-relaxed">Services, Ingress,
+                            NetworkPolicies, and CNI.</p>
                     </div>
 
-                    <div onclick="navigateTo('section-storage')" class="bg-white dark:bg-slate-800/40 p-8 rounded-[2rem] border border-slate-200 dark:border-slate-700/50 shadow-xl cursor-pointer hover:-translate-y-2 hover:border-purple-500/50 transition-all group">
-                        <div class="w-14 h-14 bg-purple-500/10 rounded-2xl flex items-center justify-center text-3xl mb-6 group-hover:scale-110 transition-transform">💽</div>
+                    <div onclick="navigateTo('section-storage')"
+                        class="bg-white dark:bg-slate-800/40 p-8 rounded-[2rem] border border-slate-200 dark:border-slate-700/50 shadow-xl cursor-pointer hover:-translate-y-2 hover:border-purple-500/50 transition-all group">
+                        <div
+                            class="w-14 h-14 mx-auto bg-purple-500/10 rounded-2xl flex items-center justify-center text-3xl mb-6 group-hover:scale-110 transition-transform">
+                            💽</div>
                         <h3 class="text-xl font-black mb-2 text-slate-800 dark:text-white">Storage</h3>
-                        <p class="text-slate-500 dark:text-slate-400 text-sm leading-relaxed">Persistent Volumes (PV), PVCs, and StorageClasses.</p>
+                        <p class="text-slate-500 dark:text-slate-400 text-sm leading-relaxed">Persistent Volumes (PV),
+                            PVCs, and StorageClasses.</p>
                     </div>
 
-                    <div onclick="navigateTo('section-troubleshooting')" class="bg-white dark:bg-slate-800/40 p-8 rounded-[2rem] border border-slate-200 dark:border-slate-700/50 shadow-xl cursor-pointer hover:-translate-y-2 hover:border-pink-500/50 transition-all group">
-                        <div class="w-14 h-14 bg-pink-500/10 rounded-2xl flex items-center justify-center text-3xl mb-6 group-hover:scale-110 transition-transform">🔍</div>
+                    <div onclick="navigateTo('section-troubleshooting')"
+                        class="bg-white dark:bg-slate-800/40 p-8 rounded-[2rem] border border-slate-200 dark:border-slate-700/50 shadow-xl cursor-pointer hover:-translate-y-2 hover:border-pink-500/50 transition-all group">
+                        <div
+                            class="w-14 h-14 mx-auto bg-pink-500/10 rounded-2xl flex items-center justify-center text-3xl mb-6 group-hover:scale-110 transition-transform">
+                            🔍</div>
                         <h3 class="text-xl font-black mb-2 text-slate-800 dark:text-white">Troubleshooting</h3>
-                        <p class="text-slate-500 dark:text-slate-400 text-sm leading-relaxed">Logs, Events, JSONPATH queries, and cluster recovery.</p>
+                        <p class="text-slate-500 dark:text-slate-400 text-sm leading-relaxed">Logs, Events, JSONPATH
+                            queries, and cluster recovery.</p>
                     </div>
                 </div>
             </div>
@@ -170,52 +327,84 @@
         <section id="section-k8s-arch" class="content-section hidden fade-in">
             <div class="mb-12 text-center md:text-left">
                 <h2 class="text-4xl font-black mb-2 text-indigo-500">Kubernetes Architecture Overview</h2>
-                <p class="text-slate-500 dark:text-slate-400 italic">The fundamental separation of duties in a K8s cluster.</p>
+                <p class="text-slate-500 dark:text-slate-400 italic">The fundamental separation of duties in a K8s
+                    cluster.</p>
             </div>
-            
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-px bg-slate-200/50 dark:bg-slate-800/30 backdrop-blur-md rounded-[2.5rem] overflow-hidden border border-slate-200/50 dark:border-slate-800/50 shadow-2xl">
+
+            <div
+                class="grid grid-cols-1 lg:grid-cols-2 gap-px bg-slate-200/50 dark:bg-slate-800/30 backdrop-blur-md rounded-[2.5rem] overflow-hidden border border-slate-200/50 dark:border-slate-800/50 shadow-2xl">
                 <div class="bg-white/60 dark:bg-slate-900/40 p-8 md:p-12">
                     <div class="flex items-center gap-4 mb-8">
-                        <div class="w-16 h-16 bg-indigo-500/10 rounded-2xl flex items-center justify-center text-3xl shadow-inner">🧠</div>
-                        <h3 class="text-2xl md:text-3xl font-black text-indigo-500 uppercase tracking-tight">Control Plane<br><span class="text-slate-400 text-sm tracking-widest">Master Node</span></h3>
+                        <div
+                            class="w-16 h-16 bg-indigo-500/10 rounded-2xl flex items-center justify-center text-3xl shadow-inner">
+                            🧠</div>
+                        <h3 class="text-2xl md:text-3xl font-black text-indigo-500 uppercase tracking-tight">Control
+                            Plane<br><span class="text-slate-400 text-sm tracking-widest">Master Node</span></h3>
                     </div>
-                    <p class="text-slate-600 dark:text-slate-400 mb-8 leading-relaxed font-medium">The Control Plane manages the worker nodes and the Pods in the cluster. In production environments, the control plane usually runs across multiple computers for high availability.</p>
-                    
+                    <p class="text-slate-600 dark:text-slate-400 mb-8 leading-relaxed font-medium">The Control Plane
+                        manages the worker nodes and the Pods in the cluster. In production environments, the control
+                        plane usually runs across multiple computers for high availability.</p>
+
                     <div class="space-y-6">
-                        <div class="p-6 bg-slate-50/80 dark:bg-slate-800/30 rounded-2xl border-l-4 border-indigo-500 shadow-sm transition-transform hover:scale-[1.02]">
+                        <div
+                            class="p-6 bg-slate-50/80 dark:bg-slate-800/30 rounded-2xl border-l-4 border-indigo-500 shadow-sm transition-transform hover:scale-[1.02]">
                             <h4 class="font-bold text-lg mb-2 text-slate-800 dark:text-white">kube-apiserver</h4>
-                            <p class="text-sm text-slate-500 dark:text-slate-400 leading-relaxed">The front end of the control plane. ALL communication (from kubectl, workers, etc.) goes through the API server.</p>
+                            <p class="text-sm text-slate-500 dark:text-slate-400 leading-relaxed">The front end of the
+                                control plane. ALL communication (from kubectl, workers, etc.) goes through the API
+                                server.</p>
                         </div>
-                        <div class="p-6 bg-slate-50/80 dark:bg-slate-800/30 rounded-2xl border-l-4 border-indigo-500 shadow-sm transition-transform hover:scale-[1.02]">
+                        <div
+                            class="p-6 bg-slate-50/80 dark:bg-slate-800/30 rounded-2xl border-l-4 border-indigo-500 shadow-sm transition-transform hover:scale-[1.02]">
                             <h4 class="font-bold text-lg mb-2 text-slate-800 dark:text-white">etcd</h4>
-                            <p class="text-sm text-slate-500 dark:text-slate-400 leading-relaxed">A highly-available, consistent key-value store holding the cluster's entire state. If etcd is lost, the cluster is lost. Backing up etcd is a major CKA requirement.</p>
+                            <p class="text-sm text-slate-500 dark:text-slate-400 leading-relaxed">A highly-available,
+                                consistent key-value store holding the cluster's entire state. If etcd is lost, the
+                                cluster is lost. Backing up etcd is a major CKA requirement.</p>
                         </div>
-                        <div class="p-6 bg-slate-50/80 dark:bg-slate-800/30 rounded-2xl border-l-4 border-indigo-500 shadow-sm transition-transform hover:scale-[1.02]">
-                            <h4 class="font-bold text-lg mb-2 text-slate-800 dark:text-white">kube-scheduler & controller-manager</h4>
-                            <p class="text-sm text-slate-500 dark:text-slate-400 leading-relaxed">**Scheduler:** Watches for new Pods with no assigned node, and assigns them one based on resources/taints. **Controller-Manager:** Runs controllers like the Node controller (notices when nodes go down) and ReplicaSet controller.</p>
+                        <div
+                            class="p-6 bg-slate-50/80 dark:bg-slate-800/30 rounded-2xl border-l-4 border-indigo-500 shadow-sm transition-transform hover:scale-[1.02]">
+                            <h4 class="font-bold text-lg mb-2 text-slate-800 dark:text-white">kube-scheduler &
+                                controller-manager</h4>
+                            <p class="text-sm text-slate-500 dark:text-slate-400 leading-relaxed">**Scheduler:** Watches
+                                for new Pods with no assigned node, and assigns them one based on resources/taints.
+                                **Controller-Manager:** Runs controllers like the Node controller (notices when nodes go
+                                down) and ReplicaSet controller.</p>
                         </div>
                     </div>
                 </div>
 
                 <div class="bg-slate-50/60 dark:bg-slate-800/20 p-8 md:p-12">
                     <div class="flex items-center gap-4 mb-8">
-                        <div class="w-16 h-16 bg-blue-500/10 rounded-2xl flex items-center justify-center text-3xl shadow-inner">🖥️</div>
-                        <h3 class="text-2xl md:text-3xl font-black text-blue-500 uppercase tracking-tight">Worker Nodes<br><span class="text-slate-400 text-sm tracking-widest">Compute Instances</span></h3>
+                        <div
+                            class="w-16 h-16 bg-blue-500/10 rounded-2xl flex items-center justify-center text-3xl shadow-inner">
+                            🖥️</div>
+                        <h3 class="text-2xl md:text-3xl font-black text-blue-500 uppercase tracking-tight">Worker
+                            Nodes<br><span class="text-slate-400 text-sm tracking-widest">Compute Instances</span></h3>
                     </div>
-                    <p class="text-slate-600 dark:text-slate-400 mb-8 leading-relaxed font-medium">Node components run on every node, maintaining running pods and providing the Kubernetes runtime environment.</p>
-                    
+                    <p class="text-slate-600 dark:text-slate-400 mb-8 leading-relaxed font-medium">Node components run
+                        on every node, maintaining running pods and providing the Kubernetes runtime environment.</p>
+
                     <div class="space-y-6">
-                        <div class="p-6 bg-white/80 dark:bg-slate-800/40 rounded-2xl border-l-4 border-blue-500 shadow-sm transition-transform hover:scale-[1.02]">
+                        <div
+                            class="p-6 bg-white/80 dark:bg-slate-800/40 rounded-2xl border-l-4 border-blue-500 shadow-sm transition-transform hover:scale-[1.02]">
                             <h4 class="font-bold text-lg mb-2 text-slate-800 dark:text-white">kubelet</h4>
-                            <p class="text-sm text-slate-500 dark:text-slate-400 leading-relaxed">The primary "node agent" that runs on each node. It takes PodSpecs (provided by the API server) and ensures that the containers described in those PodSpecs are running and healthy.</p>
+                            <p class="text-sm text-slate-500 dark:text-slate-400 leading-relaxed">The primary "node
+                                agent" that runs on each node. It takes PodSpecs (provided by the API server) and
+                                ensures that the containers described in those PodSpecs are running and healthy.</p>
                         </div>
-                        <div class="p-6 bg-white/80 dark:bg-slate-800/40 rounded-2xl border-l-4 border-blue-500 shadow-sm transition-transform hover:scale-[1.02]">
+                        <div
+                            class="p-6 bg-white/80 dark:bg-slate-800/40 rounded-2xl border-l-4 border-blue-500 shadow-sm transition-transform hover:scale-[1.02]">
                             <h4 class="font-bold text-lg mb-2 text-slate-800 dark:text-white">kube-proxy</h4>
-                            <p class="text-sm text-slate-500 dark:text-slate-400 leading-relaxed">A network proxy that runs on each node. It maintains network rules (usually via iptables) that allow network communication to your Pods from inside or outside of your cluster.</p>
+                            <p class="text-sm text-slate-500 dark:text-slate-400 leading-relaxed">A network proxy that
+                                runs on each node. It maintains network rules (usually via iptables) that allow network
+                                communication to your Pods from inside or outside of your cluster.</p>
                         </div>
-                        <div class="p-6 bg-white/80 dark:bg-slate-800/40 rounded-2xl border-l-4 border-blue-500 shadow-sm transition-transform hover:scale-[1.02]">
+                        <div
+                            class="p-6 bg-white/80 dark:bg-slate-800/40 rounded-2xl border-l-4 border-blue-500 shadow-sm transition-transform hover:scale-[1.02]">
                             <h4 class="font-bold text-lg mb-2 text-slate-800 dark:text-white">Container Runtime</h4>
-                            <p class="text-sm text-slate-500 dark:text-slate-400 leading-relaxed">The software that actually runs the containers (e.g., containerd, CRI-O). Kubernetes removed the Docker Engine as a built-in node runtime in v1.24, but the Docker CLI and images still exist.</p>
+                            <p class="text-sm text-slate-500 dark:text-slate-400 leading-relaxed">The software that
+                                actually runs the containers (e.g., containerd, CRI-O). Kubernetes removed the Docker
+                                Engine as a built-in node runtime in v1.24, but the Docker CLI and images still exist.
+                            </p>
                         </div>
                     </div>
                 </div>
@@ -223,33 +412,42 @@
         </section>
 
         <section id="section-arch" class="content-section hidden fade-in">
-            <div class="mb-12 text-center md:text-left"><h2 class="text-4xl font-black mb-2 text-indigo-500">Cluster Architecture</h2></div>
+            <div class="mb-12 text-center md:text-left">
+                <h2 class="text-4xl font-black mb-2 text-indigo-500">Cluster Architecture</h2>
+            </div>
             <div id="arch-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
         </section>
 
         <section id="section-workloads" class="content-section hidden fade-in">
-            <div class="mb-12 text-center md:text-left"><h2 class="text-4xl font-black mb-2 text-blue-500">Workloads & Scheduling</h2></div>
-            
-            <div class="mb-10 bg-slate-100 dark:bg-slate-800/50 rounded-3xl p-8 border border-slate-200 dark:border-slate-700">
+            <div class="mb-12 text-center md:text-left">
+                <h2 class="text-4xl font-black mb-2 text-blue-500">Workloads & Scheduling</h2>
+            </div>
+
+            <div
+                class="mb-10 bg-slate-100 dark:bg-slate-800/50 rounded-3xl p-8 border border-slate-200 dark:border-slate-700">
                 <h3 class="text-xl font-bold mb-6 text-blue-500">Pod Lifecycle States</h3>
                 <div class="flex flex-col md:flex-row items-center justify-between gap-4">
-                    <div class="p-4 bg-white dark:bg-slate-700 rounded-xl shadow border-l-4 border-slate-400 text-center w-full">
+                    <div
+                        class="p-4 bg-white dark:bg-slate-700 rounded-xl shadow border-l-4 border-slate-400 text-center w-full">
                         <div class="font-bold text-slate-800 dark:text-white">Pending</div>
                         <div class="text-xs text-slate-500 mt-1">Waiting for Scheduler</div>
                     </div>
                     <div class="text-slate-400 text-2xl hidden md:block">➔</div>
-                    <div class="p-4 bg-white dark:bg-slate-700 rounded-xl shadow border-l-4 border-blue-400 text-center w-full">
+                    <div
+                        class="p-4 bg-white dark:bg-slate-700 rounded-xl shadow border-l-4 border-blue-400 text-center w-full">
                         <div class="font-bold text-slate-800 dark:text-white">ContainerCreating</div>
                         <div class="text-xs text-slate-500 mt-1">Pulling images & CNI setup</div>
                     </div>
                     <div class="text-slate-400 text-2xl hidden md:block">➔</div>
-                    <div class="p-4 bg-white dark:bg-slate-700 rounded-xl shadow border-l-4 border-green-400 text-center w-full">
+                    <div
+                        class="p-4 bg-white dark:bg-slate-700 rounded-xl shadow border-l-4 border-green-400 text-center w-full">
                         <div class="font-bold text-slate-800 dark:text-white">Running</div>
                         <div class="text-xs text-slate-500 mt-1">Bound to Node & Active</div>
                     </div>
                 </div>
             </div>
-            <div class="mb-10 bg-slate-100 dark:bg-slate-800/50 rounded-3xl p-8 border border-slate-200 dark:border-slate-700">
+            <div
+                class="mb-10 bg-slate-100 dark:bg-slate-800/50 rounded-3xl p-8 border border-slate-200 dark:border-slate-700">
                 <h3 class="text-xl font-bold mb-6 text-blue-500">Security & Access Cheat Sheet</h3>
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
                     <div class="p-4 bg-white dark:bg-slate-700 rounded-xl shadow-sm border-t-4 border-blue-500">
@@ -270,40 +468,63 @@
         </section>
 
         <section id="section-networking" class="content-section hidden fade-in">
-            <div class="mb-12 text-center md:text-left"><h2 class="text-4xl font-black mb-2 text-cyan-500">Networking</h2></div>
+            <div class="mb-12 text-center md:text-left">
+                <h2 class="text-4xl font-black mb-2 text-cyan-500">Networking</h2>
+            </div>
             <div id="networking-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
         </section>
 
         <section id="section-storage" class="content-section hidden fade-in">
-            <div class="mb-12 text-center md:text-left"><h2 class="text-4xl font-black mb-2 text-purple-500">Storage</h2></div>
+            <div class="mb-12 text-center md:text-left">
+                <h2 class="text-4xl font-black mb-2 text-purple-500">Storage</h2>
+            </div>
             <div id="storage-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
         </section>
 
         <section id="section-troubleshooting" class="content-section hidden fade-in">
-            <div class="mb-12 text-center md:text-left"><h2 class="text-4xl font-black mb-2 text-pink-500">Troubleshooting</h2></div>
+            <div class="mb-12 text-center md:text-left">
+                <h2 class="text-4xl font-black mb-2 text-pink-500">Troubleshooting</h2>
+            </div>
             <div id="troubleshooting-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
         </section>
     </main>
 
-    <div id="deep-dive-modal" class="fixed inset-0 z-[100] hidden items-center justify-center bg-slate-950/80 backdrop-blur-md p-4 opacity-0 transition-all duration-300" onclick="closeModal(event)">
-        <div class="bg-white dark:bg-slate-900 w-full max-w-3xl rounded-[2.5rem] shadow-2xl overflow-hidden transform scale-90 transition-all duration-300 border border-slate-200 dark:border-slate-800 flex flex-col max-h-[90vh]" onclick="event.stopPropagation()">
-            <div class="p-8 md:p-10 border-b border-slate-100 dark:border-slate-800 flex justify-between items-center bg-slate-50/50 dark:bg-slate-800/30 shrink-0">
+    <div id="deep-dive-modal"
+        class="fixed inset-0 z-[100] hidden items-center justify-center bg-slate-950/80 backdrop-blur-md p-4 opacity-0 transition-all duration-300"
+        onclick="closeModal(event)">
+        <div class="bg-white dark:bg-slate-900 w-full max-w-3xl rounded-[2.5rem] shadow-2xl overflow-hidden transform scale-90 transition-all duration-300 border border-slate-200 dark:border-slate-800 flex flex-col max-h-[90vh]"
+            onclick="event.stopPropagation()">
+            <div
+                class="p-8 md:p-10 border-b border-slate-100 dark:border-slate-800 flex justify-between items-center bg-slate-50/50 dark:bg-slate-800/30 shrink-0">
                 <div class="flex items-center gap-6">
                     <div id="m-icon-bg" class="p-5 rounded-3xl text-4xl md:text-5xl"><span id="m-icon"></span></div>
                     <div>
                         <h3 id="m-title" class="text-3xl md:text-4xl font-black text-slate-900 dark:text-white"></h3>
-                        <p id="m-subtitle" class="text-sm font-bold uppercase tracking-widest mt-1">Technical Reference</p>
+                        <p id="m-subtitle" class="text-sm font-bold uppercase tracking-widest mt-1">Technical Reference
+                        </p>
                     </div>
                 </div>
-                <button onclick="closeModal()" class="w-12 h-12 flex items-center justify-center rounded-full bg-slate-100 dark:bg-slate-800 text-slate-500 hover:text-brand-accent transition-all text-3xl shrink-0">&times;</button>
+                <button onclick="closeModal()"
+                    class="w-12 h-12 flex items-center justify-center rounded-full bg-slate-100 dark:bg-slate-800 text-slate-500 hover:text-brand-accent transition-all text-3xl shrink-0">&times;</button>
             </div>
-            <div id="m-content" class="p-8 md:p-12 overflow-y-auto md-content custom-scrollbar bg-white dark:bg-slate-900 flex-grow"></div>
+            <div id="m-content"
+                class="p-8 md:p-12 overflow-y-auto md-content custom-scrollbar bg-white dark:bg-slate-900 flex-grow">
+            </div>
         </div>
     </div>
 
     <script>
         const archData = [
-            { id: 'ar1', icon: '🧠', title: 'Control Plane Ports', desc: 'Critical cluster communications.', summary: '• API Server: 6443\n• ETCD: 2379-2380\n• Kubelet: 10250', dive: `### Kubernetes Default Port Requirements\nFor a cluster to function properly, specific ports must be open on the Control Plane and Worker Nodes. The CKA tests your ability to fix broken clusters where these ports might be misconfigured.\n\n#### Control Plane Nodes\n| Port | Protocol | Purpose | User |\n|---|---|---|---|\n| **6443** | TCP | Kubernetes API server | All components |\n| **2379-2380** | TCP | etcd server client API | kube-apiserver, etcd peers |\n| **10250** | TCP | Kubelet API | Control Plane, kubelet |\n| **10259** | TCP | kube-scheduler | Self |\n| **10257** | TCP | kube-controller-manager | Self |\n\n#### Worker Nodes\n| Port | Protocol | Purpose | User |\n|---|---|---|---|\n| **10250** | TCP | Kubelet API | Control Plane |\n| **30000-32767** | TCP | NodePort Services | All external traffic |\n\n#### 💡 Exam Tip\nIf a worker node is marked \`NotReady\`, or \`kubectl logs\` fails with a timeout, SSH into the node and verify that a firewall rule isn't blocking port **10250**. Similarly, if your control plane fails to start, verify etcd is accessible on **2379**.` },
+            {
+                id: 'ar1', icon: '🧠', title: 'Control Plane Ports', desc: 'Critical cluster communications.', summary: '• API Server: 6443\n• ETCD: 2379-2380\n• Kubelet: 10250', dive: `### Kubernetes Default Port Requirements
+<div class="mermaid">
+graph LR
+    Worker[Worker Node] -- 6443 --> API[API Server]
+    API -- 2379 --> ETCD[etcd]
+    API -- 10250 --> Worker
+    style API fill:#6366f1,stroke:#333,stroke-width:2px,color:#fff
+</div>
+For a cluster to function properly, specific ports must be open on the Control Plane and Worker Nodes. The CKA tests your ability to fix broken clusters where these ports might be misconfigured.\n\n#### Control Plane Nodes\n| Port | Protocol | Purpose | User |\n|---|---|---|---|\n| **6443** | TCP | Kubernetes API server | All components |\n| **2379-2380** | TCP | etcd server client API | kube-apiserver, etcd peers |\n| **10250** | TCP | Kubelet API | Control Plane, kubelet |\n| **10259** | TCP | kube-scheduler | Self |\n| **10257** | TCP | kube-controller-manager | Self |\n\n#### Worker Nodes\n| Port | Protocol | Purpose | User |\n|---|---|---|---|\n| **10250** | TCP | Kubelet API | Control Plane |\n| **30000-32767** | TCP | NodePort Services | All external traffic |\n\n#### 💡 Exam Tip\nIf a worker node is marked \`NotReady\`, or \`kubectl logs\` fails with a timeout, SSH into the node and verify that a firewall rule isn't blocking port **10250**. Similarly, if your control plane fails to start, verify etcd is accessible on **2379**.` },
             { id: 'ar2', icon: '💾', title: 'ETCD Backup & Restore', desc: 'Backing up the cluster state.', summary: '• ETCDCTL tool\n• Snapshot save\n• Snapshot restore', dive: `### ETCD Backup & Restore\nETCD is the central key-value datastore for K8s. If it dies, the cluster dies. The CKA exam *will* test your ability to back it up and restore it.\n\n#### Backup Command:\nYou must pass the authentication certificates to \`etcdctl\`. Find these paths by inspecting \`cat /etc/kubernetes/manifests/etcd.yaml\`.\n\n\`\`\`bash\nETCDCTL_API=3 etcdctl --endpoints=https://127.0.0.1:2379 \\\n  --cacert=/etc/kubernetes/pki/etcd/ca.crt \\\n  --cert=/etc/kubernetes/pki/etcd/server.crt \\\n  --key=/etc/kubernetes/pki/etcd/server.key \\\n  snapshot save /opt/snapshot-pre-boot.db\n\`\`\`\n\n#### Restore Procedure:\n1. **Stop API Server:** \`mv /etc/kubernetes/manifests/kube-apiserver.yaml /tmp/\`\n2. **Restore to NEW directory:** \n   \`\`\`bash\n   ETCDCTL_API=3 etcdctl snapshot restore /opt/snapshot-pre-boot.db \\\n   --data-dir=/var/lib/etcd-backup\n   \`\`\`\n3. **Edit ETCD Manifest:** \`vi /etc/kubernetes/manifests/etcd.yaml\` and change the \`hostPath\` volume from \`/var/lib/etcd\` to \`/var/lib/etcd-backup\`.\n4. **Restart:** Kubelet will auto-restart ETCD with the new data directory. Move the API server manifest back to start it.` },
             { id: 'ar3', icon: '🔐', title: 'RBAC', desc: 'Role-Based Access Control.', summary: '• Roles vs ClusterRoles\n• RoleBindings\n• ServiceAccounts', dive: `### Role-Based Access Control (RBAC)\nRBAC determines *who* can do *what* inside your cluster.\n\n#### The Big Four:\n| Resource | Scope | Purpose |\n|---|---|---|\n| **Role** | Namespaced | Grants permissions to resources within a specific namespace (e.g., Deployments in \`dev\`). |\n| **ClusterRole** | Cluster-Wide | Grants permissions to non-namespaced resources (like Nodes) or across all namespaces. |\n| **RoleBinding** | Namespaced | Attaches a Role (or ClusterRole) to a User/ServiceAccount within a single namespace. |\n| **ClusterRoleBinding** | Cluster-Wide | Attaches a ClusterRole to a User globally. |\n\n#### Service Accounts\nUsed by applications running *inside* Pods to communicate with the API server. (Users are for humans, ServiceAccounts are for Pods).\n\n#### 💡 Exam Tip\nDo not write RBAC from scratch. Use imperative commands:\n\`kubectl create role pod-reader --verb=get,list,watch --resource=pods\`\n\`kubectl create rolebinding read-bind --role=pod-reader --user=jane --namespace=default\`` }
         ];
@@ -346,4 +567,5 @@
         });
     </script>
 </body>
+
 </html>

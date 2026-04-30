@@ -1,12 +1,14 @@
 <!DOCTYPE html>
 <html lang="en" class="dark">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" type="image/x-icon" href="images/gcp.ico">
+    <link rel="icon" type="image/x-icon" href="assets/images/gcp.ico">
     <title>GCP Foundational - Master Study Guide</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
     <link rel="stylesheet" href="assets/css/site.css">
     <script>
         tailwind.config = {
@@ -26,135 +28,290 @@
     </script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap');
-        body { font-family: 'Inter', sans-serif; transition: background-color 0.3s ease; }
-        
-        .perspective-1000 { perspective: 1000px; }
-        .transform-style-3d { transform-style: preserve-3d; }
-        .backface-hidden { backface-visibility: hidden; -webkit-backface-visibility: hidden; }
-        .rotate-y-180 { transform: rotateY(180deg); }
-        .flip-card-inner { transition: transform 0.8s cubic-bezier(0.34, 1.56, 0.64, 1); transform-style: preserve-3d; }
-        .flip-card.flipped .flip-card-inner { transform: rotateY(180deg); }
-        
-        .fade-in { animation: fadeIn 0.4s ease-out forwards; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-        
-        .md-content h3 { font-weight: 800; font-size: 1.5rem; margin-top: 1rem; margin-bottom: 1rem; color: #f59e0b; border-left: 5px solid #f59e0b; padding-left: 1rem; }
-        .md-content h4 { font-weight: 700; font-size: 1.1rem; margin-top: 1.5rem; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.05em; }
-        .md-content p { margin-bottom: 1rem; line-height: 1.8; font-size: 1.05rem; }
-        .md-content ul { list-style-type: none; margin-bottom: 1.5rem; }
-        .md-content li { margin-bottom: 0.75rem; position: relative; padding-left: 1.75rem; line-height: 1.6; }
-        .md-content li::before { content: "✦"; position: absolute; left: 0; color: #f59e0b; font-weight: bold; }
-        
-        .custom-scrollbar::-webkit-scrollbar { width: 8px; }
-        .custom-scrollbar::-webkit-scrollbar-track { background: rgba(0,0,0,0.05); }
-        .custom-scrollbar::-webkit-scrollbar-thumb { background: #475569; border-radius: 10px; }
-        
-        #deep-dive-modal.active { display: flex !important; }
-        .no-scrollbar::-webkit-scrollbar { display: none; }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            transition: background-color 0.3s ease;
+        }
+
+        .perspective-1000 {
+            perspective: 1000px;
+        }
+
+        .transform-style-3d {
+            transform-style: preserve-3d;
+        }
+
+        .backface-hidden {
+            backface-visibility: hidden;
+            -webkit-backface-visibility: hidden;
+        }
+
+        .rotate-y-180 {
+            transform: rotateY(180deg);
+        }
+
+        .flip-card-inner {
+            transition: transform 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+            transform-style: preserve-3d;
+        }
+
+        .flip-card.flipped .flip-card-inner {
+            transform: rotateY(180deg);
+        }
+
+        .fade-in {
+            animation: fadeIn 0.4s ease-out forwards;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .md-content h3 {
+            font-weight: 800;
+            font-size: 1.5rem;
+            margin-top: 1rem;
+            margin-bottom: 1rem;
+            color: #f59e0b;
+            border-left: 5px solid #f59e0b;
+            padding-left: 1rem;
+        }
+
+        .md-content h4 {
+            font-weight: 700;
+            font-size: 1.1rem;
+            margin-top: 1.5rem;
+            color: #94a3b8;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .md-content p {
+            margin-bottom: 1rem;
+            line-height: 1.8;
+            font-size: 1.05rem;
+        }
+
+        .md-content ul {
+            list-style-type: none;
+            margin-bottom: 1.5rem;
+        }
+
+        .md-content li {
+            margin-bottom: 0.75rem;
+            position: relative;
+            padding-left: 1.75rem;
+            line-height: 1.6;
+        }
+
+        .md-content li::before {
+            content: "✦";
+            position: absolute;
+            left: 0;
+            color: #f59e0b;
+            font-weight: bold;
+        }
+
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: rgba(0, 0, 0, 0.05);
+        }
+
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #475569;
+            border-radius: 10px;
+        }
+
+        #deep-dive-modal.active {
+            display: flex !important;
+        }
+
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
     </style>
 </head>
-<body class="min-h-screen bg-slate-50 dark:bg-[#0f172a] text-slate-900 dark:text-slate-200 antialiased overflow-x-hidden" style="--brand-accent:#f59e0b;">
 
-    <header class="sticky top-0 z-40 bg-white/80 dark:bg-[#0f172a]/80 backdrop-blur-xl border-b border-slate-200 dark:border-slate-800 shadow-sm">
+<body
+    class="min-h-screen bg-slate-50 dark:bg-[#0f172a] text-slate-900 dark:text-slate-200 antialiased overflow-x-hidden"
+    style="--brand-accent:#f59e0b;">
+
+    <header
+        class="sticky top-0 z-40 bg-white/80 dark:bg-[#0f172a]/80 backdrop-blur-xl border-b border-slate-200 dark:border-slate-800 shadow-sm">
         <div class="max-w-7xl mx-auto px-4 h-20 grid grid-cols-3 items-center gap-4">
             <div class="flex items-center justify-start gap-4">
-                <button onclick="goHome()" class="hidden sm:flex p-2.5 bg-slate-100 dark:bg-slate-800 rounded-xl hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors shrink-0 text-slate-500 dark:text-slate-400 hover:text-brand-accent dark:hover:text-brand-accent items-center justify-center" title="Home">
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1m-6 0h6"></path></svg>
+                <button onclick="goHome()"
+                    class="hidden sm:flex p-2.5 bg-slate-100 dark:bg-slate-800 rounded-xl hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors shrink-0 text-slate-500 dark:text-slate-400 hover:text-brand-accent dark:hover:text-brand-accent items-center justify-center"
+                    title="Home">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1m-6 0h6">
+                        </path>
+                    </svg>
                 </button>
-                <button onclick="openSidebar()" class="p-2.5 px-4 bg-slate-100 dark:bg-slate-800 rounded-xl hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors shrink-0 flex items-center gap-2 text-slate-700 dark:text-slate-300">
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+                <button onclick="openSidebar()"
+                    class="p-2.5 px-4 bg-slate-100 dark:bg-slate-800 rounded-xl hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors shrink-0 flex items-center gap-2 text-slate-700 dark:text-slate-300">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
                     <span class="font-bold text-sm hidden sm:block">Menu</span>
                 </button>
             </div>
 
-            <div onclick="navigateTo('section-home')" class="flex items-center justify-center gap-3 cursor-pointer group">
+            <div onclick="navigateTo('section-home')"
+                class="flex items-center justify-center gap-3 cursor-pointer group">
                 <div class="hidden lg:block">
-                    <h1 class="text-xl font-extrabold tracking-tighter text-slate-900 dark:text-white group-hover:text-brand-accent transition-colors">Master GCP</h1>
+                    <h1
+                        class="text-xl font-extrabold tracking-tighter text-slate-900 dark:text-white group-hover:text-brand-accent transition-colors">
+                        Master GCP</h1>
                 </div>
             </div>
 
             <div class="flex items-center justify-end gap-3">
                 <div class="relative hidden md:block w-full max-w-[160px] lg:max-w-[200px]">
-                    <input type="text" id="global-search" oninput="handleSearch(this.value)" placeholder="Search..." class="w-full bg-slate-100 dark:bg-slate-800 border-none rounded-2xl px-4 py-2 text-sm focus:ring-2 focus:ring-brand-accent outline-none transition-all">
-                    <div id="search-results" class="absolute top-full right-0 w-[300px] mt-2 bg-white dark:bg-slate-800 rounded-2xl shadow-2xl border border-slate-200 dark:border-slate-700 hidden overflow-hidden z-50 text-left">
+                    <input type="text" id="global-search" oninput="handleSearch(this.value)" placeholder="Search..."
+                        class="w-full bg-slate-100 dark:bg-slate-800 border-none rounded-2xl px-4 py-2 text-sm focus:ring-2 focus:ring-brand-accent outline-none transition-all">
+                    <div id="search-results"
+                        class="absolute top-full right-0 w-[300px] mt-2 bg-white dark:bg-slate-800 rounded-2xl shadow-2xl border border-slate-200 dark:border-slate-700 hidden overflow-hidden z-50 text-left">
                     </div>
                 </div>
-                <button onclick="toggleTheme()" class="p-2.5 bg-slate-100 dark:bg-slate-800 rounded-xl hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors shrink-0">
+                <button onclick="toggleTheme()"
+                    class="p-2.5 bg-slate-100 dark:bg-slate-800 rounded-xl hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors shrink-0">
                     <span id="theme-icon">🌙</span>
                 </button>
             </div>
         </div>
     </header>
 
-    <div id="sidebar-overlay" class="fixed inset-0 bg-slate-900/40 backdrop-blur-sm z-[55] hidden opacity-0 transition-opacity duration-300" onclick="closeSidebar()"></div>
-    
-    <aside id="left-sidebar" class="fixed top-0 left-0 h-full w-72 bg-white dark:bg-[#0f172a] border-r border-slate-200 dark:border-slate-800 shadow-[0_0_50px_rgba(0,0,0,0.3)] z-[60] transform -translate-x-full transition-transform duration-300 flex flex-col">
+    <div id="sidebar-overlay"
+        class="fixed inset-0 bg-slate-900/40 backdrop-blur-sm z-[55] hidden opacity-0 transition-opacity duration-300"
+        onclick="closeSidebar()"></div>
+
+    <aside id="left-sidebar"
+        class="fixed top-0 left-0 h-full w-72 bg-white dark:bg-[#0f172a] border-r border-slate-200 dark:border-slate-800 shadow-[0_0_50px_rgba(0,0,0,0.3)] z-[60] transform -translate-x-full transition-transform duration-300 flex flex-col">
         <div class="p-6 flex justify-between items-center border-b border-slate-200 dark:border-slate-800">
             <span class="font-black text-sm text-slate-400 uppercase tracking-widest">Navigation</span>
-            <button onclick="closeSidebar()" class="text-slate-400 hover:text-brand-accent transition-colors text-3xl">&times;</button>
+            <button onclick="closeSidebar()"
+                class="text-slate-400 hover:text-brand-accent transition-colors text-3xl">&times;</button>
         </div>
-        
+
         <nav class="flex flex-col gap-1 p-4 overflow-y-auto custom-scrollbar flex-grow">
-            <button data-target="section-home" onclick="navigateTo('section-home')" class="nav-btn text-left px-4 py-2 rounded-xl text-base font-bold transition-all text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800">Dashboard</button>
-            
-            <span class="px-4 text-base font-black text-slate-800 dark:text-slate-200 tracking-wide mt-4 mb-1">Foundations</span>
-            <button data-target="section-hierarchy" onclick="navigateTo('section-hierarchy')" class="nav-btn text-left pl-8 pr-4 py-2 rounded-xl text-sm font-semibold transition-all text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800">Resource Hierarchy</button>
-            <button data-target="section-concepts" onclick="navigateTo('section-concepts')" class="nav-btn text-left pl-8 pr-4 py-2 rounded-xl text-sm font-semibold transition-all text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800">Cloud Concepts</button>
-            
-            <span class="px-4 text-base font-black text-slate-800 dark:text-slate-200 tracking-wide mt-6 mb-1">Technical Domains</span>
-            <button data-target="section-compute" onclick="navigateTo('section-compute')" class="nav-btn text-left pl-8 pr-4 py-2 rounded-xl text-sm font-semibold transition-all text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800">Compute & Services</button>
-            <button data-target="section-storage" onclick="navigateTo('section-storage')" class="nav-btn text-left pl-8 pr-4 py-2 rounded-xl text-sm font-semibold transition-all text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800">Data & Storage</button>
-            <button data-target="section-network" onclick="navigateTo('section-network')" class="nav-btn text-left pl-8 pr-4 py-2 rounded-xl text-sm font-semibold transition-all text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800">Network & Security</button>
-            
-            <a href="index.html" class="text-left px-4 py-2 rounded-xl text-sm font-bold transition-all text-brand-accent hover:bg-slate-100 dark:hover:bg-slate-800 mb-2 mt-4">← Back to Main Menu</a>
+            <button data-target="section-home" onclick="navigateTo('section-home')"
+                class="nav-btn text-left px-4 py-2 rounded-xl text-base font-bold transition-all text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800">Dashboard</button>
+
+            <span
+                class="px-4 text-base font-black text-slate-800 dark:text-slate-200 tracking-wide mt-4 mb-1">Foundations</span>
+            <button data-target="section-hierarchy" onclick="navigateTo('section-hierarchy')"
+                class="nav-btn text-left pl-8 pr-4 py-2 rounded-xl text-sm font-semibold transition-all text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800">Resource
+                Hierarchy</button>
+            <button data-target="section-concepts" onclick="navigateTo('section-concepts')"
+                class="nav-btn text-left pl-8 pr-4 py-2 rounded-xl text-sm font-semibold transition-all text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800">Cloud
+                Concepts</button>
+
+            <span class="px-4 text-base font-black text-slate-800 dark:text-slate-200 tracking-wide mt-6 mb-1">Technical
+                Domains</span>
+            <button data-target="section-compute" onclick="navigateTo('section-compute')"
+                class="nav-btn text-left pl-8 pr-4 py-2 rounded-xl text-sm font-semibold transition-all text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800">Compute
+                & Services</button>
+            <button data-target="section-storage" onclick="navigateTo('section-storage')"
+                class="nav-btn text-left pl-8 pr-4 py-2 rounded-xl text-sm font-semibold transition-all text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800">Data
+                & Storage</button>
+            <button data-target="section-network" onclick="navigateTo('section-network')"
+                class="nav-btn text-left pl-8 pr-4 py-2 rounded-xl text-sm font-semibold transition-all text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800">Network
+                & Security</button>
+
+            <a href="index.html"
+                class="text-left px-4 py-2 rounded-xl text-sm font-bold transition-all text-brand-accent hover:bg-slate-100 dark:hover:bg-slate-800 mb-2 mt-4">←
+                Back to Main Menu</a>
         </nav>
     </aside>
 
     <main class="max-w-7xl mx-auto px-4 py-12">
-        
+
         <section id="section-home" class="content-section fade-in">
             <div class="text-center mb-16 mt-8">
-                <div class="inline-block px-4 py-1.5 rounded-full bg-brand-accent/10 border border-brand-accent/20 text-brand-accent font-bold text-xs tracking-widest uppercase mb-6">Google Cloud Digital Leader</div>
-                <h2 class="text-5xl md:text-7xl font-black mb-6 tracking-tight text-slate-900 dark:text-white">Master GCP.</h2>
-                <p class="text-slate-500 dark:text-slate-400 text-lg md:text-xl max-w-3xl mx-auto leading-relaxed">The definitive interactive guide for the GCP Foundational exam. Select a domain below to explore core services and concepts.</p>
+                <div
+                    class="inline-block px-4 py-1.5 rounded-full bg-brand-accent/10 border border-brand-accent/20 text-brand-accent font-bold text-xs tracking-widest uppercase mb-6">
+                    Google Cloud Digital Leader</div>
+                <h2 class="text-5xl md:text-7xl font-black mb-6 tracking-tight text-slate-900 dark:text-white">Master
+                    GCP.</h2>
+                <p class="text-slate-500 dark:text-slate-400 text-lg md:text-xl max-w-3xl mx-auto leading-relaxed">The
+                    definitive interactive guide for the GCP Foundational exam. Select a domain below to explore core
+                    services and concepts.</p>
             </div>
 
             <div class="mb-12">
-                <h3 class="text-sm font-black text-slate-400 uppercase tracking-widest mb-6 pl-2 border-l-4 border-amber-500">Foundations</h3>
+                <h3
+                    class="text-sm font-black text-slate-400 uppercase tracking-widest mb-6 pl-2 border-l-4 border-amber-500">
+                    Foundations</h3>
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    <div onclick="navigateTo('section-hierarchy')" class="bg-white dark:bg-slate-800/40 p-8 rounded-[2rem] border border-slate-200 dark:border-slate-700/50 shadow-xl cursor-pointer hover:-translate-y-2 hover:border-amber-500/50 transition-all group">
-                        <div class="w-14 h-14 bg-amber-500/10 rounded-2xl flex items-center justify-center text-3xl mb-6 group-hover:scale-110 transition-transform">🏢</div>
+                    <div onclick="navigateTo('section-hierarchy')"
+                        class="bg-white dark:bg-slate-800/40 p-8 rounded-[2rem] border border-slate-200 dark:border-slate-700/50 shadow-xl cursor-pointer hover:-translate-y-2 hover:border-amber-500/50 transition-all group">
+                        <div
+                            class="w-14 h-14 mx-auto bg-amber-500/10 rounded-2xl flex items-center justify-center text-3xl mb-6 group-hover:scale-110 transition-transform">
+                            🏢</div>
                         <h3 class="text-xl font-black mb-2 text-slate-800 dark:text-white">Resource Hierarchy</h3>
-                        <p class="text-slate-500 dark:text-slate-400 text-sm leading-relaxed">Organizations, Folders, Projects, and how IAM policies flow downwards.</p>
+                        <p class="text-slate-500 dark:text-slate-400 text-sm leading-relaxed">Organizations, Folders,
+                            Projects, and how IAM policies flow downwards.</p>
                     </div>
 
-                    <div onclick="navigateTo('section-concepts')" class="bg-white dark:bg-slate-800/40 p-8 rounded-[2rem] border border-slate-200 dark:border-slate-700/50 shadow-xl cursor-pointer hover:-translate-y-2 hover:border-amber-500/50 transition-all group">
-                        <div class="w-14 h-14 bg-amber-500/10 rounded-2xl flex items-center justify-center text-3xl mb-6 group-hover:scale-110 transition-transform">🧠</div>
+                    <div onclick="navigateTo('section-concepts')"
+                        class="bg-white dark:bg-slate-800/40 p-8 rounded-[2rem] border border-slate-200 dark:border-slate-700/50 shadow-xl cursor-pointer hover:-translate-y-2 hover:border-amber-500/50 transition-all group">
+                        <div
+                            class="w-14 h-14 mx-auto bg-amber-500/10 rounded-2xl flex items-center justify-center text-3xl mb-6 group-hover:scale-110 transition-transform">
+                            🧠</div>
                         <h3 class="text-xl font-black mb-2 text-slate-800 dark:text-white">Cloud Concepts</h3>
-                        <p class="text-slate-500 dark:text-slate-400 text-sm leading-relaxed">CapEx vs OpEx, multi-cloud, hybrid cloud, and global infrastructure.</p>
+                        <p class="text-slate-500 dark:text-slate-400 text-sm leading-relaxed">CapEx vs OpEx,
+                            multi-cloud, hybrid cloud, and global infrastructure.</p>
                     </div>
                 </div>
             </div>
 
             <div class="mb-12">
-                <h3 class="text-sm font-black text-slate-400 uppercase tracking-widest mb-6 pl-2 border-l-4 border-orange-500">Technical Domains</h3>
+                <h3
+                    class="text-sm font-black text-slate-400 uppercase tracking-widest mb-6 pl-2 border-l-4 border-orange-500">
+                    Technical Domains</h3>
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    <div onclick="navigateTo('section-compute')" class="bg-white dark:bg-slate-800/40 p-8 rounded-[2rem] border border-slate-200 dark:border-slate-700/50 shadow-xl cursor-pointer hover:-translate-y-2 hover:border-orange-500/50 transition-all group">
-                        <div class="w-14 h-14 bg-orange-500/10 rounded-2xl flex items-center justify-center text-3xl mb-6 group-hover:scale-110 transition-transform">💻</div>
+                    <div onclick="navigateTo('section-compute')"
+                        class="bg-white dark:bg-slate-800/40 p-8 rounded-[2rem] border border-slate-200 dark:border-slate-700/50 shadow-xl cursor-pointer hover:-translate-y-2 hover:border-orange-500/50 transition-all group">
+                        <div
+                            class="w-14 h-14 mx-auto bg-orange-500/10 rounded-2xl flex items-center justify-center text-3xl mb-6 group-hover:scale-110 transition-transform">
+                            💻</div>
                         <h3 class="text-xl font-black mb-2 text-slate-800 dark:text-white">Compute & Services</h3>
-                        <p class="text-slate-500 dark:text-slate-400 text-sm leading-relaxed">Compute Engine, App Engine, GKE, and Cloud Run.</p>
+                        <p class="text-slate-500 dark:text-slate-400 text-sm leading-relaxed">Compute Engine, App
+                            Engine, GKE, and Cloud Run.</p>
                     </div>
 
-                    <div onclick="navigateTo('section-storage')" class="bg-white dark:bg-slate-800/40 p-8 rounded-[2rem] border border-slate-200 dark:border-slate-700/50 shadow-xl cursor-pointer hover:-translate-y-2 hover:border-yellow-500/50 transition-all group">
-                        <div class="w-14 h-14 bg-yellow-500/10 rounded-2xl flex items-center justify-center text-3xl mb-6 group-hover:scale-110 transition-transform">🗄️</div>
+                    <div onclick="navigateTo('section-storage')"
+                        class="bg-white dark:bg-slate-800/40 p-8 rounded-[2rem] border border-slate-200 dark:border-slate-700/50 shadow-xl cursor-pointer hover:-translate-y-2 hover:border-yellow-500/50 transition-all group">
+                        <div
+                            class="w-14 h-14 mx-auto bg-yellow-500/10 rounded-2xl flex items-center justify-center text-3xl mb-6 group-hover:scale-110 transition-transform">
+                            🗄️</div>
                         <h3 class="text-xl font-black mb-2 text-slate-800 dark:text-white">Data & Storage</h3>
-                        <p class="text-slate-500 dark:text-slate-400 text-sm leading-relaxed">Cloud Storage, Cloud SQL, Spanner, and BigQuery.</p>
+                        <p class="text-slate-500 dark:text-slate-400 text-sm leading-relaxed">Cloud Storage, Cloud SQL,
+                            Spanner, and BigQuery.</p>
                     </div>
 
-                    <div onclick="navigateTo('section-network')" class="bg-white dark:bg-slate-800/40 p-8 rounded-[2rem] border border-slate-200 dark:border-slate-700/50 shadow-xl cursor-pointer hover:-translate-y-2 hover:border-red-500/50 transition-all group">
-                        <div class="w-14 h-14 bg-red-500/10 rounded-2xl flex items-center justify-center text-3xl mb-6 group-hover:scale-110 transition-transform">🌐</div>
+                    <div onclick="navigateTo('section-network')"
+                        class="bg-white dark:bg-slate-800/40 p-8 rounded-[2rem] border border-slate-200 dark:border-slate-700/50 shadow-xl cursor-pointer hover:-translate-y-2 hover:border-red-500/50 transition-all group">
+                        <div
+                            class="w-14 h-14 mx-auto bg-red-500/10 rounded-2xl flex items-center justify-center text-3xl mb-6 group-hover:scale-110 transition-transform">
+                            🌐</div>
                         <h3 class="text-xl font-black mb-2 text-slate-800 dark:text-white">Network & Security</h3>
-                        <p class="text-slate-500 dark:text-slate-400 text-sm leading-relaxed">VPC, Load Balancing, Cloud CDN, IAM, and Security Command Center.</p>
+                        <p class="text-slate-500 dark:text-slate-400 text-sm leading-relaxed">VPC, Load Balancing, Cloud
+                            CDN, IAM, and Security Command Center.</p>
                     </div>
                 </div>
             </div>
@@ -163,44 +320,69 @@
         <section id="section-hierarchy" class="content-section hidden fade-in">
             <div class="mb-12 text-center md:text-left">
                 <h2 class="text-4xl font-black mb-2 text-amber-500">GCP Resource Hierarchy</h2>
-                <p class="text-slate-500 dark:text-slate-400 italic">How Google Cloud organizes resources and how policies are inherited top-down.</p>
+                <p class="text-slate-500 dark:text-slate-400 italic">How Google Cloud organizes resources and how
+                    policies are inherited top-down.</p>
             </div>
-            
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-px bg-slate-200/50 dark:bg-slate-800/30 backdrop-blur-md rounded-[2.5rem] overflow-hidden border border-slate-200/50 dark:border-slate-800/50 shadow-2xl">
+
+            <div
+                class="grid grid-cols-1 lg:grid-cols-2 gap-px bg-slate-200/50 dark:bg-slate-800/30 backdrop-blur-md rounded-[2.5rem] overflow-hidden border border-slate-200/50 dark:border-slate-800/50 shadow-2xl">
                 <div class="bg-white/60 dark:bg-slate-900/40 p-8 md:p-12">
                     <div class="flex items-center gap-4 mb-8">
-                        <div class="w-16 h-16 bg-amber-500/10 rounded-2xl flex items-center justify-center text-3xl shadow-inner">🏢</div>
-                        <h3 class="text-2xl md:text-3xl font-black text-amber-500 uppercase tracking-tight">Organization &<br>Folders</h3>
+                        <div
+                            class="w-16 h-16 bg-amber-500/10 rounded-2xl flex items-center justify-center text-3xl shadow-inner">
+                            🏢</div>
+                        <h3 class="text-2xl md:text-3xl font-black text-amber-500 uppercase tracking-tight">Organization
+                            &<br>Folders</h3>
                     </div>
-                    <p class="text-slate-600 dark:text-slate-400 mb-8 leading-relaxed font-medium">The root node of the GCP hierarchy. Policies defined here automatically cascade down to every folder, project, and resource beneath them.</p>
-                    
+                    <p class="text-slate-600 dark:text-slate-400 mb-8 leading-relaxed font-medium">The root node of the
+                        GCP hierarchy. Policies defined here automatically cascade down to every folder, project, and
+                        resource beneath them.</p>
+
                     <div class="space-y-6">
-                        <div class="p-6 bg-slate-50/80 dark:bg-slate-800/30 rounded-2xl border-l-4 border-amber-500 shadow-sm transition-transform hover:scale-[1.02]">
+                        <div
+                            class="p-6 bg-slate-50/80 dark:bg-slate-800/30 rounded-2xl border-l-4 border-amber-500 shadow-sm transition-transform hover:scale-[1.02]">
                             <h4 class="font-bold text-lg mb-2 text-slate-800 dark:text-white">Organization Node</h4>
-                            <p class="text-sm text-slate-500 dark:text-slate-400 leading-relaxed">The absolute top level. Represents your company (e.g., example.com). Tied to a Google Workspace or Cloud Identity domain. Centralizes visibility and auditing across all projects.</p>
+                            <p class="text-sm text-slate-500 dark:text-slate-400 leading-relaxed">The absolute top
+                                level. Represents your company (e.g., example.com). Tied to a Google Workspace or Cloud
+                                Identity domain. Centralizes visibility and auditing across all projects.</p>
                         </div>
-                        <div class="p-6 bg-slate-50/80 dark:bg-slate-800/30 rounded-2xl border-l-4 border-amber-500 shadow-sm transition-transform hover:scale-[1.02]">
+                        <div
+                            class="p-6 bg-slate-50/80 dark:bg-slate-800/30 rounded-2xl border-l-4 border-amber-500 shadow-sm transition-transform hover:scale-[1.02]">
                             <h4 class="font-bold text-lg mb-2 text-slate-800 dark:text-white">Folders</h4>
-                            <p class="text-sm text-slate-500 dark:text-slate-400 leading-relaxed">Used to group projects. You can map them to your business structure (e.g., "Engineering", "Marketing", or "Production", "Development"). Folders can contain other folders or projects.</p>
+                            <p class="text-sm text-slate-500 dark:text-slate-400 leading-relaxed">Used to group
+                                projects. You can map them to your business structure (e.g., "Engineering", "Marketing",
+                                or "Production", "Development"). Folders can contain other folders or projects.</p>
                         </div>
                     </div>
                 </div>
 
                 <div class="bg-slate-50/60 dark:bg-slate-800/20 p-8 md:p-12">
                     <div class="flex items-center gap-4 mb-8">
-                        <div class="w-16 h-16 bg-orange-500/10 rounded-2xl flex items-center justify-center text-3xl shadow-inner">📁</div>
-                        <h3 class="text-2xl md:text-3xl font-black text-orange-500 uppercase tracking-tight">Projects &<br>Resources</h3>
+                        <div
+                            class="w-16 h-16 bg-orange-500/10 rounded-2xl flex items-center justify-center text-3xl shadow-inner">
+                            📁</div>
+                        <h3 class="text-2xl md:text-3xl font-black text-orange-500 uppercase tracking-tight">Projects
+                            &<br>Resources</h3>
                     </div>
-                    <p class="text-slate-600 dark:text-slate-400 mb-8 leading-relaxed font-medium">The functional levels where work actually gets done. Billing, APIs, and specific resource limits are tracked at the project level.</p>
-                    
+                    <p class="text-slate-600 dark:text-slate-400 mb-8 leading-relaxed font-medium">The functional levels
+                        where work actually gets done. Billing, APIs, and specific resource limits are tracked at the
+                        project level.</p>
+
                     <div class="space-y-6">
-                        <div class="p-6 bg-white/80 dark:bg-slate-800/40 rounded-2xl border-l-4 border-orange-500 shadow-sm transition-transform hover:scale-[1.02]">
+                        <div
+                            class="p-6 bg-white/80 dark:bg-slate-800/40 rounded-2xl border-l-4 border-orange-500 shadow-sm transition-transform hover:scale-[1.02]">
                             <h4 class="font-bold text-lg mb-2 text-slate-800 dark:text-white">Projects</h4>
-                            <p class="text-sm text-slate-500 dark:text-slate-400 leading-relaxed">The fundamental trust domain. ALL resources must belong to exactly one project. Projects are the basis for enabling APIs, setting up billing, and managing specific permissions.</p>
+                            <p class="text-sm text-slate-500 dark:text-slate-400 leading-relaxed">The fundamental trust
+                                domain. ALL resources must belong to exactly one project. Projects are the basis for
+                                enabling APIs, setting up billing, and managing specific permissions.</p>
                         </div>
-                        <div class="p-6 bg-white/80 dark:bg-slate-800/40 rounded-2xl border-l-4 border-orange-500 shadow-sm transition-transform hover:scale-[1.02]">
+                        <div
+                            class="p-6 bg-white/80 dark:bg-slate-800/40 rounded-2xl border-l-4 border-orange-500 shadow-sm transition-transform hover:scale-[1.02]">
                             <h4 class="font-bold text-lg mb-2 text-slate-800 dark:text-white">Resources</h4>
-                            <p class="text-sm text-slate-500 dark:text-slate-400 leading-relaxed">The lowest level (e.g., a Compute Engine VM, a Cloud Storage bucket, a BigQuery dataset). They inherit policies from the Project, which inherits from the Folder, which inherits from the Organization.</p>
+                            <p class="text-sm text-slate-500 dark:text-slate-400 leading-relaxed">The lowest level
+                                (e.g., a Compute Engine VM, a Cloud Storage bucket, a BigQuery dataset). They inherit
+                                policies from the Project, which inherits from the Folder, which inherits from the
+                                Organization.</p>
                         </div>
                     </div>
                 </div>
@@ -208,16 +390,20 @@
         </section>
 
         <section id="section-concepts" class="content-section hidden fade-in">
-            <div class="mb-12 text-center md:text-left"><h2 class="text-4xl font-black mb-2 text-amber-500">Cloud Concepts</h2></div>
+            <div class="mb-12 text-center md:text-left">
+                <h2 class="text-4xl font-black mb-2 text-amber-500">Cloud Concepts</h2>
+            </div>
             <div id="concepts-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
         </section>
 
         <section id="section-compute" class="content-section hidden fade-in">
             <div class="mb-8 text-center md:text-left">
                 <h2 class="text-4xl font-black mb-2 text-orange-500">Compute & Services</h2>
-                <p class="text-slate-500 dark:text-slate-400 italic">Virtual machines, serverless, and orchestration.</p>
+                <p class="text-slate-500 dark:text-slate-400 italic">Virtual machines, serverless, and orchestration.
+                </p>
             </div>
-            <div class="mb-10 bg-slate-100 dark:bg-slate-800/50 rounded-3xl p-8 border border-slate-200 dark:border-slate-700">
+            <div
+                class="mb-10 bg-slate-100 dark:bg-slate-800/50 rounded-3xl p-8 border border-slate-200 dark:border-slate-700">
                 <h3 class="text-xl font-bold mb-6 text-orange-500">Compute Service Decision Tree</h3>
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
                     <div class="p-4 bg-white dark:bg-slate-700 rounded-xl shadow-sm border-t-4 border-orange-500">
@@ -240,27 +426,33 @@
         <section id="section-storage" class="content-section hidden fade-in">
             <div class="mb-8 text-center md:text-left">
                 <h2 class="text-4xl font-black mb-2 text-yellow-500">Data & Storage</h2>
-                <p class="text-slate-500 dark:text-slate-400 italic">Database decision trees and Cloud Storage classes.</p>
+                <p class="text-slate-500 dark:text-slate-400 italic">Database decision trees and Cloud Storage classes.
+                </p>
             </div>
-            
-            <div class="mb-10 bg-slate-100 dark:bg-slate-800/50 rounded-3xl p-8 border border-slate-200 dark:border-slate-700">
+
+            <div
+                class="mb-10 bg-slate-100 dark:bg-slate-800/50 rounded-3xl p-8 border border-slate-200 dark:border-slate-700">
                 <h3 class="text-xl font-bold mb-6 text-yellow-500">Storage Class Decision Guide</h3>
                 <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
                     <div class="p-4 bg-white dark:bg-slate-700 rounded-xl shadow-sm text-center">
                         <div class="font-black text-slate-800 dark:text-white text-lg">Standard</div>
-                        <div class="text-xs text-slate-500 mt-2">Active data, website content, streaming. <br><b>0 days min.</b></div>
+                        <div class="text-xs text-slate-500 mt-2">Active data, website content, streaming. <br><b>0 days
+                                min.</b></div>
                     </div>
                     <div class="p-4 bg-white dark:bg-slate-700 rounded-xl shadow-sm text-center">
                         <div class="font-black text-slate-800 dark:text-white text-lg">Nearline</div>
-                        <div class="text-xs text-slate-500 mt-2">Accessed less than once a month. <br><b>30 days min.</b></div>
+                        <div class="text-xs text-slate-500 mt-2">Accessed less than once a month. <br><b>30 days
+                                min.</b></div>
                     </div>
                     <div class="p-4 bg-white dark:bg-slate-700 rounded-xl shadow-sm text-center">
                         <div class="font-black text-slate-800 dark:text-white text-lg">Coldline</div>
-                        <div class="text-xs text-slate-500 mt-2">Accessed less than once a quarter. <br><b>90 days min.</b></div>
+                        <div class="text-xs text-slate-500 mt-2">Accessed less than once a quarter. <br><b>90 days
+                                min.</b></div>
                     </div>
                     <div class="p-4 bg-white dark:bg-slate-700 rounded-xl shadow-sm text-center">
                         <div class="font-black text-slate-800 dark:text-white text-lg">Archive</div>
-                        <div class="text-xs text-slate-500 mt-2">Accessed less than once a year. <br><b>365 days min.</b></div>
+                        <div class="text-xs text-slate-500 mt-2">Accessed less than once a year. <br><b>365 days
+                                min.</b></div>
                     </div>
                 </div>
             </div>
@@ -270,20 +462,42 @@
         <section id="section-network" class="content-section hidden fade-in">
             <div class="mb-8 text-center md:text-left">
                 <h2 class="text-4xl font-black mb-2 text-red-500">Network & Security</h2>
-                <p class="text-slate-500 dark:text-slate-400 italic">VPC architecture, load balancing, and identity frameworks.</p>
+                <p class="text-slate-500 dark:text-slate-400 italic">VPC architecture, load balancing, and identity
+                    frameworks.</p>
             </div>
-            
-            <div class="mb-10 bg-slate-100 dark:bg-slate-800/50 rounded-3xl p-8 border border-slate-200 dark:border-slate-700">
+
+            <div
+                class="mb-10 bg-slate-100 dark:bg-slate-800/50 rounded-3xl p-8 border border-slate-200 dark:border-slate-700">
                 <h3 class="text-xl font-bold mb-6 text-red-500">GCP Load Balancers</h3>
                 <div class="overflow-x-auto">
                     <table class="w-full text-sm text-left">
                         <thead class="text-xs text-slate-500 uppercase bg-slate-200/50 dark:bg-slate-700/50">
-                            <tr><th class="px-4 py-3 rounded-tl-lg">Load Balancer</th><th class="px-4 py-3">Traffic Type</th><th class="px-4 py-3">Scope</th><th class="px-4 py-3 rounded-tr-lg">Use Case</th></tr>
+                            <tr>
+                                <th class="px-4 py-3 rounded-tl-lg">Load Balancer</th>
+                                <th class="px-4 py-3">Traffic Type</th>
+                                <th class="px-4 py-3">Scope</th>
+                                <th class="px-4 py-3 rounded-tr-lg">Use Case</th>
+                            </tr>
                         </thead>
                         <tbody>
-                            <tr class="border-b border-slate-200 dark:border-slate-700"><td class="px-4 py-3 font-bold text-slate-900 dark:text-white">HTTP(S)</td><td class="px-4 py-3">Layer 7</td><td class="px-4 py-3">Global</td><td class="px-4 py-3">Routing global web traffic based on URL.</td></tr>
-                            <tr class="border-b border-slate-200 dark:border-slate-700"><td class="px-4 py-3 font-bold text-slate-900 dark:text-white">TCP Proxy</td><td class="px-4 py-3">Layer 4</td><td class="px-4 py-3">Global</td><td class="px-4 py-3">Non-HTTP traffic spanning multiple regions.</td></tr>
-                            <tr><td class="px-4 py-3 font-bold text-slate-900 dark:text-white">Internal</td><td class="px-4 py-3">Layer 4/7</td><td class="px-4 py-3">Regional</td><td class="px-4 py-3">Balancing traffic between internal app tiers.</td></tr>
+                            <tr class="border-b border-slate-200 dark:border-slate-700">
+                                <td class="px-4 py-3 font-bold text-slate-900 dark:text-white">HTTP(S)</td>
+                                <td class="px-4 py-3">Layer 7</td>
+                                <td class="px-4 py-3">Global</td>
+                                <td class="px-4 py-3">Routing global web traffic based on URL.</td>
+                            </tr>
+                            <tr class="border-b border-slate-200 dark:border-slate-700">
+                                <td class="px-4 py-3 font-bold text-slate-900 dark:text-white">TCP Proxy</td>
+                                <td class="px-4 py-3">Layer 4</td>
+                                <td class="px-4 py-3">Global</td>
+                                <td class="px-4 py-3">Non-HTTP traffic spanning multiple regions.</td>
+                            </tr>
+                            <tr>
+                                <td class="px-4 py-3 font-bold text-slate-900 dark:text-white">Internal</td>
+                                <td class="px-4 py-3">Layer 4/7</td>
+                                <td class="px-4 py-3">Regional</td>
+                                <td class="px-4 py-3">Balancing traffic between internal app tiers.</td>
+                            </tr>
                         </tbody>
                     </table>
                 </div>
@@ -292,19 +506,27 @@
         </section>
     </main>
 
-    <div id="deep-dive-modal" class="fixed inset-0 z-[100] hidden items-center justify-center bg-slate-950/80 backdrop-blur-md p-4 opacity-0 transition-all duration-300" onclick="closeModal(event)">
-        <div class="bg-white dark:bg-slate-900 w-full max-w-3xl rounded-[2.5rem] shadow-2xl overflow-hidden transform scale-90 transition-all duration-300 border border-slate-200 dark:border-slate-800 flex flex-col max-h-[90vh]" onclick="event.stopPropagation()">
-            <div class="p-8 md:p-10 border-b border-slate-100 dark:border-slate-800 flex justify-between items-center bg-slate-50/50 dark:bg-slate-800/30 shrink-0">
+    <div id="deep-dive-modal"
+        class="fixed inset-0 z-[100] hidden items-center justify-center bg-slate-950/80 backdrop-blur-md p-4 opacity-0 transition-all duration-300"
+        onclick="closeModal(event)">
+        <div class="bg-white dark:bg-slate-900 w-full max-w-3xl rounded-[2.5rem] shadow-2xl overflow-hidden transform scale-90 transition-all duration-300 border border-slate-200 dark:border-slate-800 flex flex-col max-h-[90vh]"
+            onclick="event.stopPropagation()">
+            <div
+                class="p-8 md:p-10 border-b border-slate-100 dark:border-slate-800 flex justify-between items-center bg-slate-50/50 dark:bg-slate-800/30 shrink-0">
                 <div class="flex items-center gap-6">
                     <div id="m-icon-bg" class="p-5 rounded-3xl text-4xl md:text-5xl"><span id="m-icon"></span></div>
                     <div>
                         <h3 id="m-title" class="text-3xl md:text-4xl font-black text-slate-900 dark:text-white"></h3>
-                        <p id="m-subtitle" class="text-sm font-bold uppercase tracking-widest mt-1">Technical Reference</p>
+                        <p id="m-subtitle" class="text-sm font-bold uppercase tracking-widest mt-1">Technical Reference
+                        </p>
                     </div>
                 </div>
-                <button onclick="closeModal()" class="w-12 h-12 flex items-center justify-center rounded-full bg-slate-100 dark:bg-slate-800 text-slate-500 hover:text-brand-accent transition-all text-3xl shrink-0">&times;</button>
+                <button onclick="closeModal()"
+                    class="w-12 h-12 flex items-center justify-center rounded-full bg-slate-100 dark:bg-slate-800 text-slate-500 hover:text-brand-accent transition-all text-3xl shrink-0">&times;</button>
             </div>
-            <div id="m-content" class="p-8 md:p-12 overflow-y-auto md-content custom-scrollbar bg-white dark:bg-slate-900 flex-grow"></div>
+            <div id="m-content"
+                class="p-8 md:p-12 overflow-y-auto md-content custom-scrollbar bg-white dark:bg-slate-900 flex-grow">
+            </div>
         </div>
     </div>
 
@@ -316,7 +538,16 @@
         ];
 
         const computeData = [
-            { id: 'cm1', icon: '💻', title: 'Compute Engine', desc: 'Virtual Machines on GCP (IaaS).', summary: '• IaaS / Total Control\n• Custom Machine Types\n• Preemptible/Spot VMs', dive: `### Compute Engine (GCE)\nProvides highly customizable Virtual Machines (VMs). It is a pure **IaaS** offering where you have root/admin access to the OS.\n\n#### Key Features:\n- **Custom Machine Types:** GCP lets you specify the exact amount of vCPU and memory you need, which can improve right-sizing. Depending on your workload, predefined machine families or committed use discounts may still be cheaper.\n- **Spot VMs (formerly Preemptible):** Short-lived compute instances offered at up to a 91% discount. Google can terminate them at any time with a 30-second warning. *Perfect for: Batch jobs, media rendering, fault-tolerant workloads.* NEVER use for databases.\n- **Live Migration:** Google can move your running VM to a different physical host without downtime during hardware maintenance.\n- **MIGs (Managed Instance Groups):** Allows you to scale identical VMs automatically based on CPU/load, ensuring high availability.\n\n#### 💡 Exam Tip\nIf a question requires "full control over the OS", "legacy application support", or "custom software licensing", the answer is **Compute Engine**.` },
+            {
+                id: 'cm1', icon: '💻', title: 'Compute Engine', desc: 'Virtual Machines on GCP (IaaS).', summary: '• IaaS / Total Control\n• Custom Machine Types\n• Preemptible/Spot VMs', dive: `### Compute Engine (GCE)
+<div class="mermaid">
+graph LR
+    Disk[(Persistent Disk)] --- VM[Compute Engine VM]
+    VM --- VPC[VPC Subnet]
+    VPC --- NAT[Cloud NAT]
+    style VM fill:#f59e0b,stroke:#333,stroke-width:2px,color:#fff
+</div>
+Provides highly customizable Virtual Machines (VMs). It is a pure **IaaS** offering where you have root/admin access to the OS.\n\n#### Key Features:\n- **Custom Machine Types:** GCP lets you specify the exact amount of vCPU and memory you need, which can improve right-sizing. Depending on your workload, predefined machine families or committed use discounts may still be cheaper.\n- **Spot VMs (formerly Preemptible):** Short-lived compute instances offered at up to a 91% discount. Google can terminate them at any time with a 30-second warning. *Perfect for: Batch jobs, media rendering, fault-tolerant workloads.* NEVER use for databases.\n- **Live Migration:** Google can move your running VM to a different physical host without downtime during hardware maintenance.\n- **MIGs (Managed Instance Groups):** Allows you to scale identical VMs automatically based on CPU/load, ensuring high availability.\n\n#### 💡 Exam Tip\nIf a question requires "full control over the OS", "legacy application support", or "custom software licensing", the answer is **Compute Engine**.` },
             { id: 'cm2', icon: '🚀', title: 'Cloud Run & App Engine', desc: 'Serverless application environments.', summary: '• App Engine (Code-based PaaS)\n• Cloud Run (Container PaaS)\n• Scale to zero capability', dive: `### Serverless Compute Options\nServerless means you do not provision or manage any servers. You only pay for the exact compute time your code is running.\n\n#### App Engine\nA fully managed **PaaS** for web applications. You upload your raw code (Python, Java, Node.js, Go) and Google handles everything else (provisioning, scaling, load balancing). \n- *Standard Environment:* Scales to zero instantly, runs in a secure sandbox.\n- *Flexible Environment:* Runs in Docker containers on Compute Engine, slower scaling but allows background processes.\n\n#### Cloud Run\nA fully managed serverless platform for running **stateless Docker containers**. You give it a container image, and it handles the scaling and HTTP routing. It can automatically scale from zero to thousands of instances in seconds.\n\n#### 💡 Exam Tip\nIf you have existing raw code and want zero infrastructure management, use **App Engine**. If you have a *stateless Docker container* and want it to run serverlessly, use **Cloud Run**.` },
             { id: 'cm3', icon: '🚢', title: 'Google Kubernetes Engine', desc: 'Managed container orchestration.', summary: '• K8s Orchestration\n• Microservices\n• AutoPilot vs Standard', dive: `### GKE (Google Kubernetes Engine)\nProvides a managed environment for deploying, managing, and scaling containerized applications using Kubernetes. Kubernetes was originally created by Google (project Borg).\n\n#### Key Features:\n- **Orchestration:** Automates the deployment, scaling, and self-healing of hundreds or thousands of containers (ideal for massive microservices architectures).\n- **GKE Autopilot:** A hands-off mode where Google fully manages the cluster infrastructure, nodes, and scaling for you. You only pay for the pods you run, dramatically reducing operational overhead.\n- **GKE Standard:** You manage the underlying Compute Engine nodes yourself for maximum control over the OS and hardware.\n\n#### 💡 Exam Tip\nIf the scenario mentions "microservices architecture at scale", "container orchestration", or "hybrid cloud fleet management", the answer is **GKE**. For hybrid/multi-cloud Kubernetes management across AWS/Azure, the specific tool is **Anthos**.` }
         ];
@@ -334,162 +565,17 @@
             { id: 'n4', icon: '🛡️', title: 'IAM & Cloud Armor', desc: 'Identity, Access, and Perimeter Security.', summary: '• IAM (Who, What, Where)\n• Cloud Armor (WAF/DDoS)\n• Identity-Aware Proxy (IAP)', dive: `### Security Services in GCP\n\n#### Identity and Access Management (IAM)\nIAM lets you authorize **WHO** (identity) can do **WHAT** (role) on **WHICH** resource. \n- **Basic Roles:** Owner, Editor, Viewer (Avoid these in production because they are too broad).\n- **Predefined Roles:** Created by Google (e.g., \`Storage Object Viewer\`). These are the best practice.\n- **Principle of Least Privilege:** Always grant the absolute minimum permissions needed to perform a job.\n\n#### Cloud Armor\nGoogle's Web Application Firewall (WAF) and DDoS mitigation service. It sits at the edge of the network and helps protect your applications against OWASP Top 10 vulnerabilities (like SQL Injection and Cross-Site Scripting) and Layer 3/Layer 4 DDoS attacks.\n\n#### Identity-Aware Proxy (IAP)\nAllows you to control access to your cloud applications and VMs without using a VPN. It verifies user identity and context before granting access. (Zero Trust approach).\n\n#### 💡 Exam Tip\nIf a question asks how to protect an application from "SQL Injection", "XSS", or "DDoS attacks", the answer is **Cloud Armor**.` }
         ];
 
-        const allServices = [...conceptsData, ...computeData, ...storageData, ...networkData];
+        const domains = [
+            { id: 'concepts-grid', data: conceptsData, color: 'amber-500' },
+            { id: 'compute-grid', data: computeData, color: 'orange-500' },
+            { id: 'storage-grid', data: storageData, color: 'yellow-500' },
+            { id: 'network-grid', data: networkData, color: 'red-500' }
+        ];
 
-        function handleSearch(query) {
-            const resultsBox = document.getElementById('search-results');
-            if (!query.trim()) {
-                resultsBox.classList.add('hidden');
-                return;
-            }
-
-            const filtered = allServices.filter(s => 
-                s.title.toLowerCase().includes(query.toLowerCase()) || 
-                s.desc.toLowerCase().includes(query.toLowerCase())
-            ).slice(0, 5);
-
-            if (filtered.length > 0) {
-                resultsBox.innerHTML = filtered.map(s => `
-                    <div onclick="showDive('${s.id}'); document.getElementById('global-search').value=''" class="p-4 hover:bg-slate-50 dark:hover:bg-slate-700 cursor-pointer border-b border-slate-100 dark:border-slate-700 last:border-0 flex items-center gap-3">
-                        <span class="text-xl">${s.icon}</span>
-                        <div>
-                            <div class="font-bold text-sm text-slate-800 dark:text-white">${s.title}</div>
-                            <div class="text-xs text-slate-500">${s.desc}</div>
-                        </div>
-                    </div>
-                `).join('');
-                resultsBox.classList.remove('hidden');
-            } else {
-                resultsBox.innerHTML = `<div class="p-4 text-xs text-slate-400">No results found.</div>`;
-                resultsBox.classList.remove('hidden');
-            }
-        }
-
-        document.addEventListener('click', (e) => {
-            if (!e.target.closest('#global-search')) {
-                document.getElementById('search-results').classList.add('hidden');
-            }
+        document.addEventListener('DOMContentLoaded', () => {
+            window.app = new StudyGuideApp({ grids: domains });
         });
-
-        function toggleTheme() {
-            const html = document.documentElement;
-            const icon = document.getElementById('theme-icon');
-            if (html.classList.contains('dark')) {
-                html.classList.remove('dark');
-                icon.innerText = '☀️';
-            } else {
-                html.classList.add('dark');
-                icon.innerText = '🌙';
-            }
-        }
-
-        function createCard(c, borderColorClass, gradientFromClass) {
-            const textColorClass = borderColorClass.replace('border-', 'text-');
-            const bgColorClass = borderColorClass.replace('border-', 'bg-');
-            const hoverBgColorClass = `hover:${bgColorClass.replace('500', '700')}`;
-            return `
-            <div class="flip-card h-[320px] cursor-pointer group" onclick="this.classList.toggle('flipped')">
-                <div class="flip-card-inner h-full w-full relative transform-style-3d shadow-xl rounded-[1.5rem]">
-                    <div class="absolute inset-0 backface-hidden bg-white dark:bg-slate-800/60 backdrop-blur-xl rounded-[1.5rem] flex flex-col items-center justify-center p-6 border-2 border-slate-200 dark:border-slate-700/50 group-hover:border-brand-accent/50 transition-all">
-                        <div class="w-16 h-16 bg-gradient-to-br ${gradientFromClass} to-transparent rounded-2xl flex items-center justify-center text-3xl mb-4">${c.icon}</div>
-                        <h4 class="font-black text-lg text-slate-800 dark:text-white tracking-tight text-center">${c.title}</h4>
-                        <p class="text-slate-400 text-[10px] mt-2 uppercase tracking-[0.2em] font-black">Flip for Details</p>
-                    </div>
-                    <div class="absolute inset-0 backface-hidden rotate-y-180 bg-slate-900 dark:bg-slate-900 rounded-[1.5rem] flex flex-col p-6 border-2 ${borderColorClass}">
-                        <p class="text-xs font-black ${textColorClass} uppercase tracking-widest mb-2">${c.title}</p>
-                        <p class="text-slate-300 text-s mb-4 leading-relaxed line-clamp-2">${c.desc}</p>
-                        <div class="space-y-1.5 mb-4">
-                            ${c.summary.split('\n').map(line => `<div class="text-[12px] text-slate-400 font-medium">${line}</div>`).join('')}
-                        </div>
-                        <button onclick="event.stopPropagation(); showDive('${c.id}')" class="mt-auto w-full ${bgColorClass} text-white py-3 rounded-xl text-xs font-black transition-all ${hoverBgColorClass}">DEEP DIVE →</button>
-                    </div>
-                </div>
-            </div>`;
-        }
-
-        function renderAll() {
-            const grids = [
-                { id: 'concepts-grid', data: conceptsData, border: 'border-amber-500', grad: 'from-amber-500/20' },
-                { id: 'compute-grid', data: computeData, border: 'border-orange-500', grad: 'from-orange-500/20' },
-                { id: 'storage-grid', data: storageData, border: 'border-yellow-500', grad: 'from-yellow-500/20' },
-                { id: 'network-grid', data: networkData, border: 'border-red-500', grad: 'from-red-500/20' }
-            ];
-
-            grids.forEach(g => {
-                const el = document.getElementById(g.id);
-                if (el) el.innerHTML = g.data.map(d => createCard(d, g.border, g.grad)).join('');
-            });
-        }
-
-        function showDive(id) {
-            const c = allServices.find(x => x.id === id);
-            if(!c) return;
-
-            const grids = [
-                { data: conceptsData, color: 'amber-500' },
-                { data: computeData, color: 'orange-500' },
-                { data: storageData, color: 'yellow-500' },
-                { data: networkData, color: 'red-500' }
-            ];
-
-            let domainColor = 'amber-500';
-            for (const grid of grids) {
-                if (grid.data.some(item => item.id === id)) {
-                    domainColor = grid.color;
-                    break;
-                }
-            }
-
-            const textColorClass = `text-${domainColor}`;
-            const iconBgColorClass = `bg-${domainColor}/20`;
-
-            document.getElementById('m-title').innerText = c.title;
-            document.getElementById('m-icon').innerText = c.icon;
-            
-            const mIconBg = document.getElementById('m-icon-bg');
-            const mSubtitle = document.querySelector('#deep-dive-modal p.uppercase');
-
-            const colors = ['amber-500', 'orange-500', 'yellow-500', 'red-500', 'green-500'];
-            const textColors = colors.map(c => `text-${c}`);
-            const bgColors = colors.map(c => `bg-${c}/20`);
-            
-            mIconBg.classList.remove(...bgColors, 'bg-brand-accent/20');
-            mIconBg.classList.add(iconBgColorClass);
-            
-            mSubtitle.classList.remove(...textColors, 'text-brand-accent');
-            mSubtitle.classList.add(textColorClass);
-
-            document.getElementById('m-content').innerHTML = marked.parse(c.dive);
-            const m = document.getElementById('deep-dive-modal');
-            m.classList.add('active');
-            setTimeout(() => { m.classList.add('opacity-100'); m.querySelector('div').classList.add('scale-100'); }, 10);
-        }
-
-        function closeModal(e) { if(e) e.stopPropagation(); const m = document.getElementById('deep-dive-modal'); m.classList.remove('opacity-100'); m.querySelector('div').classList.remove('scale-100'); setTimeout(() => m.classList.remove('active'), 300); }
-
-        function goHome() {
-            const isOnDashboard = !document.getElementById('section-home').classList.contains('hidden');
-            if (isOnDashboard) {
-                window.location.href = 'index.html';
-            } else {
-                navigateTo('section-home');
-            }
-        }
-        
-        function openSidebar() { document.getElementById('sidebar-overlay').classList.remove('hidden'); setTimeout(() => { document.getElementById('sidebar-overlay').classList.remove('opacity-0'); document.getElementById('left-sidebar').classList.remove('-translate-x-full'); }, 10); }
-        function closeSidebar() { document.getElementById('sidebar-overlay').classList.add('opacity-0'); document.getElementById('left-sidebar').classList.add('-translate-x-full'); setTimeout(() => { document.getElementById('sidebar-overlay').classList.add('hidden'); }, 300); }
-
-        function navigateTo(targetId) {
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-            document.querySelectorAll('.content-section').forEach(s => s.classList.add('hidden'));
-            document.getElementById(targetId).classList.remove('hidden');
-            document.querySelectorAll('.nav-btn').forEach(x => { x.classList.remove('bg-brand-accent', 'text-white'); x.classList.add('text-slate-500'); });
-            const btn = document.querySelector(`.nav-btn[data-target="${targetId}"]`);
-            if (btn) { btn.classList.add('bg-brand-accent', 'text-white'); btn.classList.remove('text-slate-500'); }
-            closeSidebar();
-        }
-
-        window.onload = renderAll;
     </script>
 </body>
+
 </html>

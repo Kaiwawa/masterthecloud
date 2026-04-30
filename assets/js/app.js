@@ -46,7 +46,7 @@ class StudyGuideApp {
         document.addEventListener('click', (e) => {
             if (!e.target.closest('#global-search')) {
                 const res = document.getElementById('search-results');
-                if(res) res.classList.add('hidden');
+                if (res) res.classList.add('hidden');
             }
         });
     }
@@ -55,8 +55,8 @@ class StudyGuideApp {
         const resultsBox = document.getElementById('search-results');
         if (!resultsBox) return;
         if (!query.trim()) { resultsBox.classList.add('hidden'); return; }
-        const filtered = this.allServices.filter(s => 
-            s.title.toLowerCase().includes(query.toLowerCase()) || 
+        const filtered = this.allServices.filter(s =>
+            s.title.toLowerCase().includes(query.toLowerCase()) ||
             s.desc.toLowerCase().includes(query.toLowerCase())
         ).slice(0, 5);
         if (filtered.length > 0) {
@@ -81,10 +81,10 @@ class StudyGuideApp {
         const icon = document.getElementById('theme-icon');
         if (html.classList.contains('dark')) {
             html.classList.remove('dark');
-            if(icon) icon.innerText = '☀️';
+            if (icon) icon.innerText = '☀️';
         } else {
             html.classList.add('dark');
-            if(icon) icon.innerText = '🌙';
+            if (icon) icon.innerText = '🌙';
         }
     }
 
@@ -116,7 +116,7 @@ class StudyGuideApp {
 
     showDive(id) {
         const c = this.allServices.find(x => x.id === id);
-        if(!c) return;
+        if (!c) return;
         let domainColor = 'brand-accent';
         for (const grid of this.grids) { if (grid.data.some(item => item.id === id)) { domainColor = grid.color; break; } }
         const accentHex = this.resolveColorHex(domainColor);
@@ -131,13 +131,19 @@ class StudyGuideApp {
         if (mContent) {
             mContent.style.setProperty('--brand-accent', accentHex);
             mContent.innerHTML = window.marked?.parse ? marked.parse(c.dive) : c.dive;
+            setTimeout(() => {
+                if (window.mermaid) {
+                    try { mermaid.init(undefined, mContent.querySelectorAll('.mermaid')); }
+                    catch (e) { console.error('Mermaid init error:', e); }
+                }
+            }, 50);
         }
         const m = document.getElementById('deep-dive-modal');
         m.classList.add('active'); setTimeout(() => { m.classList.add('opacity-100'); m.querySelector('div').classList.add('scale-100'); }, 10);
     }
 
-    closeModal(e) { if(e) e.stopPropagation(); const m = document.getElementById('deep-dive-modal'); if (!m) return; m.classList.remove('opacity-100'); const shell = m.querySelector('div'); if (shell) shell.classList.remove('scale-100'); setTimeout(() => m.classList.remove('active'), 300); }
-    goHome() { const s = document.getElementById('section-home'); if(s && !s.classList.contains('hidden')) window.location.href = 'index.html'; else this.navigateTo('section-home'); }
+    closeModal(e) { if (e) e.stopPropagation(); const m = document.getElementById('deep-dive-modal'); if (!m) return; m.classList.remove('opacity-100'); const shell = m.querySelector('div'); if (shell) shell.classList.remove('scale-100'); setTimeout(() => m.classList.remove('active'), 300); }
+    goHome() { const s = document.getElementById('section-home'); if (s && !s.classList.contains('hidden')) window.location.href = 'index.html'; else this.navigateTo('section-home'); }
     openSidebar() { const overlay = document.getElementById('sidebar-overlay'); const sidebar = document.getElementById('left-sidebar'); if (!overlay || !sidebar) return; overlay.classList.remove('hidden'); setTimeout(() => { overlay.classList.remove('opacity-0'); sidebar.classList.remove('-translate-x-full'); }, 10); }
     closeSidebar() { const overlay = document.getElementById('sidebar-overlay'); const sidebar = document.getElementById('left-sidebar'); if (!overlay || !sidebar) return; overlay.classList.add('opacity-0'); sidebar.classList.add('-translate-x-full'); setTimeout(() => overlay.classList.add('hidden'), 300); }
     navigateTo(targetId) { window.scrollTo({ top: 0, behavior: 'smooth' }); document.querySelectorAll('.content-section').forEach(s => s.classList.add('hidden')); const targetSection = document.getElementById(targetId); if (!targetSection) return; targetSection.classList.remove('hidden'); document.querySelectorAll('.nav-btn').forEach(x => { x.classList.remove('bg-brand-accent', 'text-white', 'text-slate-900'); x.classList.add('text-slate-500'); }); const btn = document.querySelector(`.nav-btn[data-target="${targetId}"]`); if (btn) { btn.classList.add('bg-brand-accent', 'text-white'); btn.classList.remove('text-slate-500'); } this.closeSidebar(); }
