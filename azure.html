@@ -50,8 +50,6 @@
         
         #deep-dive-modal.active { display: flex !important; }
         .no-scrollbar::-webkit-scrollbar { display: none; }
-
-        .highlight { background-color: rgba(0, 120, 212, 0.3); border-radius: 4px; padding: 0 2px; }
     </style>
 </head>
 <body class="min-h-screen bg-slate-50 dark:bg-[#0f172a] text-slate-900 dark:text-slate-200 antialiased overflow-x-hidden">
@@ -182,7 +180,6 @@
             </div>
         </section>
 
-        <!-- Dynamic Sections -->
         <section id="section-concepts" class="content-section hidden fade-in">
             <div class="mb-12 text-center md:text-left"><h2 class="text-4xl font-black mb-2 text-teal-500">Cloud Concepts</h2></div>
             <div id="concepts-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
@@ -220,7 +217,6 @@
 
     </main>
 
-    <!-- Deep Dive Modal -->
     <div id="deep-dive-modal" class="fixed inset-0 z-[100] hidden items-center justify-center bg-slate-950/80 backdrop-blur-md p-4 opacity-0 transition-all duration-300" onclick="closeModal(event)">
         <div class="bg-white dark:bg-slate-900 w-full max-w-3xl rounded-[2.5rem] shadow-2xl overflow-hidden transform scale-90 transition-all duration-300 border border-slate-200 dark:border-slate-800 flex flex-col max-h-[90vh]" onclick="event.stopPropagation()">
             <div class="p-8 md:p-10 border-b border-slate-100 dark:border-slate-800 flex justify-between items-center bg-slate-50/50 dark:bg-slate-800/30 shrink-0">
@@ -238,7 +234,6 @@
     </div>
 
     <script>
-        // AZURE DATA OBJECTS
         const conceptsData = [
             { id: 'c1', icon: '☁️', title: 'Cloud Models', desc: 'Public, Private, and Hybrid Cloud.', summary: '• Public (Multi-tenant)\n• Private (Single-tenant)\n• Hybrid (Best of both)', dive: `### Cloud Computing Models\n\n#### Public Cloud\nOwned by cloud services providers (like Microsoft). Resources are delivered over the internet. You share the same hardware/network with other organizations (multi-tenant).\n\n#### Private Cloud\nOwned and used by a single organization. It can be physically located at your organization's on-site datacenter or hosted by a third-party service provider.\n\n#### Hybrid Cloud\nCombines public and private clouds, allowing data and applications to be shared between them. It gives you greater flexibility and more deployment options.` },
             { id: 'c2', icon: '💼', title: 'Service Models', desc: 'IaaS, PaaS, SaaS.', summary: '• IaaS (Infrastructure)\n• PaaS (Platform)\n• SaaS (Software)', dive: `### Cloud Service Models\n\n#### IaaS (Infrastructure as a Service)\nProvides basic computing infrastructure: servers, storage, and networking. You manage the OS and everything above it. Example: **Azure Virtual Machines**.\n\n#### PaaS (Platform as a Service)\nProvides a complete development and deployment environment. You just bring your code and data. Example: **Azure App Service**.\n\n#### SaaS (Software as a Service)\nA complete product that is run and managed by the service provider. Example: **Microsoft 365**.` },

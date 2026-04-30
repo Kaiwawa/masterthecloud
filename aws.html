@@ -50,16 +50,12 @@
         
         #deep-dive-modal.active { display: flex !important; }
         .no-scrollbar::-webkit-scrollbar { display: none; }
-
-        /* Search Highlight */
-        .highlight { background-color: rgba(245, 158, 11, 0.3); border-radius: 4px; padding: 0 2px; }
     </style>
 </head>
 <body class="min-h-screen bg-slate-50 dark:bg-[#0f172a] text-slate-900 dark:text-slate-200 antialiased overflow-x-hidden">
 
     <header class="sticky top-0 z-40 bg-white/80 dark:bg-[#0f172a]/80 backdrop-blur-xl border-b border-slate-200 dark:border-slate-800 shadow-sm">
         <div class="max-w-7xl mx-auto px-4 h-20 grid grid-cols-3 items-center gap-4">
-            <!-- Left: Menu Button -->
             <div class="flex items-center justify-start gap-4">
                 <button onclick="goHome()" class="hidden sm:flex p-2.5 bg-slate-100 dark:bg-slate-800 rounded-xl hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors shrink-0 text-slate-500 dark:text-slate-400 hover:text-brand-accent dark:hover:text-brand-accent items-center justify-center" title="Home">
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1m-6 0h6"></path></svg>
@@ -70,14 +66,12 @@
                 </button>
             </div>
 
-            <!-- Center: Brand/Title -->
             <div onclick="navigateTo('section-home')" class="flex items-center justify-center gap-3 cursor-pointer group">
                 <div class="hidden lg:block">
                     <h1 class="text-xl font-extrabold tracking-tighter text-slate-900 dark:text-white group-hover:text-brand-accent transition-colors">Master AWS</h1>
                 </div>
             </div>
 
-            <!-- Right: Search & Theme Toggle -->
             <div class="flex items-center justify-end gap-3">
                 <div class="relative hidden md:block w-full max-w-[160px] lg:max-w-[200px]">
                     <input type="text" id="global-search" oninput="handleSearch(this.value)" placeholder="Search..." class="w-full bg-slate-100 dark:bg-slate-800 border-none rounded-2xl px-4 py-2 text-sm focus:ring-2 focus:ring-brand-accent outline-none transition-all">
@@ -91,7 +85,6 @@
         </div>
     </header>
 
-    <!-- LEFT SIDEBAR MENU -->
     <div id="sidebar-overlay" class="fixed inset-0 bg-slate-900/40 backdrop-blur-sm z-[55] hidden opacity-0 transition-opacity duration-300" onclick="closeSidebar()"></div>
     
     <aside id="left-sidebar" class="fixed top-0 left-0 h-full w-72 bg-white dark:bg-[#0f172a] border-r border-slate-200 dark:border-slate-800 shadow-[0_0_50px_rgba(0,0,0,0.3)] z-[60] transform -translate-x-full transition-transform duration-300 flex flex-col">
@@ -126,7 +119,6 @@
 
     <main class="max-w-7xl mx-auto px-4 py-12">
         
-        <!-- HOME SECTION -->
         <section id="section-home" class="content-section fade-in">
             <div class="text-center mb-16 mt-8">
                 <div class="inline-block px-4 py-1.5 rounded-full bg-brand-accent/10 border border-brand-accent/20 text-brand-accent font-bold text-xs tracking-widest uppercase mb-6">AWS Certified Cloud Practitioner</div>
@@ -216,7 +208,6 @@
             </div>
         </section>
 
-        <!-- Dynamic Sections will be injected with similar headers -->
         <section id="section-caf" class="content-section hidden fade-in">
             <div class="mb-12 text-center md:text-left"><h2 class="text-4xl font-black mb-2">Cloud Adoption Framework (CAF)</h2></div>
             <div id="caf-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
@@ -264,7 +255,6 @@
             </div>
             
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-px bg-slate-200/50 dark:bg-slate-800/30 backdrop-blur-md rounded-[2.5rem] overflow-hidden border border-slate-200/50 dark:border-slate-800/50 shadow-2xl">
-                <!-- Customer Column -->
                 <div class="bg-white/60 dark:bg-slate-900/40 p-8 md:p-12">
                     <div class="flex items-center gap-4 mb-8">
                         <div class="w-16 h-16 bg-emerald-500/10 rounded-2xl flex items-center justify-center text-3xl shadow-inner">👤</div>
@@ -288,7 +278,6 @@
                     </div>
                 </div>
 
-                <!-- AWS Column -->
                 <div class="bg-slate-50/60 dark:bg-slate-800/20 p-8 md:p-12">
                     <div class="flex items-center gap-4 mb-8">
                         <div class="w-16 h-16 bg-brand-accent/10 rounded-2xl flex items-center justify-center text-3xl shadow-inner">☁️</div>
@@ -330,7 +319,6 @@
 
     </main>
 
-    <!-- Deep Dive Modal -->
     <div id="deep-dive-modal" class="fixed inset-0 z-[100] hidden items-center justify-center bg-slate-950/80 backdrop-blur-md p-4 opacity-0 transition-all duration-300" onclick="closeModal(event)">
         <div class="bg-white dark:bg-slate-900 w-full max-w-3xl rounded-[2.5rem] shadow-2xl overflow-hidden transform scale-90 transition-all duration-300 border border-slate-200 dark:border-slate-800 flex flex-col max-h-[90vh]" onclick="event.stopPropagation()">
             <div class="p-8 md:p-10 border-b border-slate-100 dark:border-slate-800 flex justify-between items-center bg-slate-50/50 dark:bg-slate-800/30 shrink-0">
@@ -348,7 +336,6 @@
     </div>
 
     <script>
-        // DATA OBJECTS (Enriched with maximum detail for CLF-C02)
         const securityData = [
             { id: 'sec1', icon: '👤', title: 'AWS IAM', desc: 'Identity and Access Management.', summary: '• Least Privilege\n• Users, Groups, Roles\n• MFA Enforcement', dive: `### AWS Identity and Access Management (IAM)
 IAM allows you to securely control access to AWS services and resources. It is a **Global** service, meaning it applies across all AWS Regions simultaneously.
@@ -1279,7 +1266,6 @@ Retaining means keeping workloads on-premises or in their current environment. E
             }
         }
 
-        // Logic for closing search when clicking outside
         document.addEventListener('click', (e) => {
             if (!e.target.closest('#global-search')) {
                 document.getElementById('search-results').classList.add('hidden');

@@ -49,16 +49,12 @@
         
         #deep-dive-modal.active { display: flex !important; }
         .no-scrollbar::-webkit-scrollbar { display: none; }
-
-        /* Search Highlight */
-        .highlight { background-color: rgba(239, 68, 68, 0.3); border-radius: 4px; padding: 0 2px; }
     </style>
 </head>
 <body class="min-h-screen bg-slate-50 dark:bg-[#0f172a] text-slate-900 dark:text-slate-200 antialiased overflow-x-hidden">
 
     <header class="sticky top-0 z-40 bg-white/80 dark:bg-[#0f172a]/80 backdrop-blur-xl border-b border-slate-200 dark:border-slate-800 shadow-sm">
         <div class="max-w-7xl mx-auto px-4 h-20 grid grid-cols-3 items-center gap-4">
-            <!-- Left: Menu Button -->
             <div class="flex items-center justify-start gap-4">
                 <button onclick="goHome()" class="hidden sm:flex p-2.5 bg-slate-100 dark:bg-slate-800 rounded-xl hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors shrink-0 text-slate-500 dark:text-slate-400 hover:text-brand-accent dark:hover:text-brand-accent items-center justify-center" title="Home">
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1m-6 0h6"></path></svg>
@@ -69,14 +65,12 @@
                 </button>
             </div>
 
-            <!-- Center: Brand/Title -->
             <div onclick="navigateTo('section-home')" class="flex items-center justify-center gap-3 cursor-pointer group">
                 <div class="hidden lg:block">
                     <h1 class="text-xl font-extrabold tracking-tighter text-slate-900 dark:text-white group-hover:text-brand-accent transition-colors">Master Security+</h1>
                 </div>
             </div>
 
-            <!-- Right: Search & Theme Toggle -->
             <div class="flex items-center justify-end gap-3">
                 <div class="relative hidden md:block w-full max-w-[160px] lg:max-w-[200px]">
                     <input type="text" id="global-search" oninput="handleSearch(this.value)" placeholder="Search..." class="w-full bg-slate-100 dark:bg-slate-800 border-none rounded-2xl px-4 py-2 text-sm focus:ring-2 focus:ring-brand-accent outline-none transition-all">
@@ -90,7 +84,6 @@
         </div>
     </header>
 
-    <!-- LEFT SIDEBAR MENU -->
     <div id="sidebar-overlay" class="fixed inset-0 bg-slate-900/40 backdrop-blur-sm z-[55] hidden opacity-0 transition-opacity duration-300" onclick="closeSidebar()"></div>
     
     <aside id="left-sidebar" class="fixed top-0 left-0 h-full w-72 bg-white dark:bg-[#0f172a] border-r border-slate-200 dark:border-slate-800 shadow-[0_0_50px_rgba(0,0,0,0.3)] z-[60] transform -translate-x-full transition-transform duration-300 flex flex-col">
@@ -116,7 +109,6 @@
 
     <main class="max-w-7xl mx-auto px-4 py-12">
         
-        <!-- HOME SECTION -->
         <section id="section-home" class="content-section fade-in">
             <div class="text-center mb-16 mt-8">
                 <div class="inline-block px-4 py-1.5 rounded-full bg-brand-accent/10 border border-brand-accent/20 text-brand-accent font-bold text-xs tracking-widest uppercase mb-6">CompTIA Security+ SY0-701</div>
@@ -166,7 +158,6 @@
             </div>
         </section>
 
-        <!-- DOMAIN SECTIONS -->
         <section id="section-threats" class="content-section hidden fade-in">
             <div class="mb-12 text-center md:text-left"><h2 class="text-4xl font-black mb-2 text-red-500">Threats, Attacks & Vulnerabilities</h2></div>
             <div id="threats-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
@@ -199,7 +190,6 @@
 
     </main>
 
-    <!-- Deep Dive Modal -->
     <div id="deep-dive-modal" class="fixed inset-0 z-[100] hidden items-center justify-center bg-slate-950/80 backdrop-blur-md p-4 opacity-0 transition-all duration-300" onclick="closeModal(event)">
         <div class="bg-white dark:bg-slate-900 w-full max-w-3xl rounded-[2.5rem] shadow-2xl overflow-hidden transform scale-90 transition-all duration-300 border border-slate-200 dark:border-slate-800 flex flex-col max-h-[90vh]" onclick="event.stopPropagation()">
             <div class="p-8 md:p-10 border-b border-slate-100 dark:border-slate-800 flex justify-between items-center bg-slate-50/50 dark:bg-slate-800/30 shrink-0">
@@ -225,7 +215,6 @@
             bg-red-500/20 bg-purple-500/20 bg-green-500/20 bg-orange-500/20 bg-blue-500/20
         */
 
-        // DATA OBJECTS (CompTIA Security+ SY0-701)
         const threatsData = [
             { id: 'th1', icon: '🎣', title: 'Social Engineering', desc: 'Exploiting human psychology for unauthorized access.', summary: '• Phishing & Spear Phishing\n• Pretexting & Vishing\n• Tailgating & Baiting', dive: `### Social Engineering Attacks
 Social engineering is the art of manipulating people into divulging confidential information or performing actions that compromise security. It exploits human psychology rather than technical vulnerabilities.
@@ -1684,7 +1673,7 @@ Methods for breaking encryption and protecting against such attacks.
                 { data: cryptographyData, color: 'blue-500' }
             ];
 
-            let domainColor = 'red-500'; // default to brand accent
+            let domainColor = 'red-500';
             for (const grid of grids) {
                 if (grid.data.some(item => item.id === id)) {
                     domainColor = grid.color;
@@ -1701,7 +1690,6 @@ Methods for breaking encryption and protecting against such attacks.
             const mIconBg = document.getElementById('m-icon-bg');
             const mSubtitle = document.querySelector('#deep-dive-modal p.uppercase');
 
-            // Reset classes by removing all possible color classes
             const colors = ['red-500', 'purple-500', 'green-500', 'orange-500', 'blue-500'];
             const textColors = colors.map(c => `text-${c}`);
             const bgColors = colors.map(c => `bg-${c}/20`);
