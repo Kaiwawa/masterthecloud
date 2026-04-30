@@ -1,0 +1,1749 @@
+<!DOCTYPE html>
+<html lang="en" class="dark"><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CompTIA Security+ SY0-701 - Master Study Guide</title>
+    <link rel="icon" type="image/x-icon" href="images/secplus.ico">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            accent: '#ef4444', // red-500
+                            accentHover: '#b91c1c', // red-700
+                            dark: '#0f172a'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap');
+        body { font-family: 'Inter', sans-serif; transition: background-color 0.3s ease; }
+        
+        .perspective-1000 { perspective: 1000px; }
+        .transform-style-3d { transform-style: preserve-3d; }
+        .backface-hidden { backface-visibility: hidden; -webkit-backface-visibility: hidden; }
+        .rotate-y-180 { transform: rotateY(180deg); }
+        .flip-card-inner { transition: transform 0.8s cubic-bezier(0.34, 1.56, 0.64, 1); transform-style: preserve-3d; }
+        .flip-card.flipped .flip-card-inner { transform: rotateY(180deg); }
+        
+        .fade-in { animation: fadeIn 0.4s ease-out forwards; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        
+        .md-content h3 { font-weight: 800; font-size: 1.5rem; margin-top: 1rem; margin-bottom: 1rem; color: #ef4444; border-left: 5px solid #ef4444; padding-left: 1rem; }
+        .md-content h4 { font-weight: 700; font-size: 1.1rem; margin-top: 1.5rem; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.05em; }
+        .md-content p { margin-bottom: 1rem; line-height: 1.8; font-size: 1.05rem; }
+        .md-content ul { list-style-type: none; margin-bottom: 1.5rem; }
+        .md-content li { margin-bottom: 0.75rem; position: relative; padding-left: 1.75rem; line-height: 1.6; }
+        .md-content li::before { content: "✦"; position: absolute; left: 0; color: #ef4444; font-weight: bold; }
+        
+        .custom-scrollbar::-webkit-scrollbar { width: 8px; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: rgba(0,0,0,0.05); }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: #475569; border-radius: 10px; }
+        
+        #deep-dive-modal.active { display: flex !important; }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+
+        /* Search Highlight */
+        .highlight { background-color: rgba(239, 68, 68, 0.3); border-radius: 4px; padding: 0 2px; }
+    </style>
+</head>
+<body class="min-h-screen bg-slate-50 dark:bg-[#0f172a] text-slate-900 dark:text-slate-200 antialiased overflow-x-hidden">
+
+    <header class="sticky top-0 z-40 bg-white/80 dark:bg-[#0f172a]/80 backdrop-blur-xl border-b border-slate-200 dark:border-slate-800 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 h-20 grid grid-cols-3 items-center gap-4">
+            <!-- Left: Menu Button -->
+            <div class="flex items-center justify-start gap-4">
+                <button onclick="goHome()" class="hidden sm:flex p-2.5 bg-slate-100 dark:bg-slate-800 rounded-xl hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors shrink-0 text-slate-500 dark:text-slate-400 hover:text-brand-accent dark:hover:text-brand-accent items-center justify-center" title="Home">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1m-6 0h6"></path></svg>
+                </button>
+                <button onclick="openSidebar()" class="p-2.5 px-4 bg-slate-100 dark:bg-slate-800 rounded-xl hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors shrink-0 flex items-center gap-2 text-slate-700 dark:text-slate-300">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+                    <span class="font-bold text-sm hidden sm:block">Menu</span>
+                </button>
+            </div>
+
+            <!-- Center: Brand/Title -->
+            <div onclick="navigateTo('section-home')" class="flex items-center justify-center gap-3 cursor-pointer group">
+                <div class="hidden lg:block">
+                    <h1 class="text-xl font-extrabold tracking-tighter text-slate-900 dark:text-white group-hover:text-brand-accent transition-colors">Master Security+</h1>
+                </div>
+            </div>
+
+            <!-- Right: Search & Theme Toggle -->
+            <div class="flex items-center justify-end gap-3">
+                <div class="relative hidden md:block w-full max-w-[160px] lg:max-w-[200px]">
+                    <input type="text" id="global-search" oninput="handleSearch(this.value)" placeholder="Search..." class="w-full bg-slate-100 dark:bg-slate-800 border-none rounded-2xl px-4 py-2 text-sm focus:ring-2 focus:ring-brand-accent outline-none transition-all">
+                    <div id="search-results" class="absolute top-full right-0 w-[300px] mt-2 bg-white dark:bg-slate-800 rounded-2xl shadow-2xl border border-slate-200 dark:border-slate-700 hidden overflow-hidden z-50 text-left">
+                    </div>
+                </div>
+                <button onclick="toggleTheme()" class="p-2.5 bg-slate-100 dark:bg-slate-800 rounded-xl hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors shrink-0">
+                    <span id="theme-icon">🌙</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- LEFT SIDEBAR MENU -->
+    <div id="sidebar-overlay" class="fixed inset-0 bg-slate-900/40 backdrop-blur-sm z-[55] hidden opacity-0 transition-opacity duration-300" onclick="closeSidebar()"></div>
+    
+    <aside id="left-sidebar" class="fixed top-0 left-0 h-full w-72 bg-white dark:bg-[#0f172a] border-r border-slate-200 dark:border-slate-800 shadow-[0_0_50px_rgba(0,0,0,0.3)] z-[60] transform -translate-x-full transition-transform duration-300 flex flex-col">
+        <div class="p-6 flex justify-between items-center border-b border-slate-200 dark:border-slate-800">
+            <span class="font-black text-sm text-slate-400 uppercase tracking-widest">Navigation</span>
+            <button onclick="closeSidebar()" class="text-slate-400 hover:text-brand-accent transition-colors text-3xl">&times;</button>
+        </div>
+        
+        <nav class="flex flex-col gap-1 p-4 overflow-y-auto custom-scrollbar flex-grow">
+            <button data-target="section-home" onclick="navigateTo('section-home')" class="nav-btn text-left px-4 py-2 rounded-xl text-base font-bold transition-all text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800">Dashboard</button>
+            
+            <span class="px-4 text-base font-black text-slate-800 dark:text-slate-200 tracking-wide mt-4 mb-1">Exam Domains</span>
+            <button data-target="section-threats" onclick="navigateTo('section-threats')" class="nav-btn text-left pl-8 pr-4 py-2 rounded-xl text-sm font-semibold transition-all text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800">Threats, Attacks & Vulnerabilities</button>
+            <button data-target="section-architecture" onclick="navigateTo('section-architecture')" class="nav-btn text-left pl-8 pr-4 py-2 rounded-xl text-sm font-semibold transition-all text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800">Architecture & Design</button>
+            <button data-target="section-implementation" onclick="navigateTo('section-implementation')" class="nav-btn text-left pl-8 pr-4 py-2 rounded-xl text-sm font-semibold transition-all text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800">Implementation</button>
+            <button data-target="section-operations" onclick="navigateTo('section-operations')" class="nav-btn text-left pl-8 pr-4 py-2 rounded-xl text-sm font-semibold transition-all text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800">Operations & Incident Response</button>
+            <button data-target="section-governance" onclick="navigateTo('section-governance')" class="nav-btn text-left pl-8 pr-4 py-2 rounded-xl text-sm font-semibold transition-all text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800">Governance, Risk & Compliance</button>
+            <button data-target="section-cryptography" onclick="navigateTo('section-cryptography')" class="nav-btn text-left pl-8 pr-4 py-2 rounded-xl text-sm font-semibold transition-all text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800">Cryptography & PKI</button>
+            
+            <a href="index.html" class="text-left px-4 py-2 rounded-xl text-sm font-bold transition-all text-brand-accent hover:bg-slate-100 dark:hover:bg-slate-800 mb-2">← Back to Main Menu</a>
+        </nav>
+    </aside>
+
+    <main class="max-w-7xl mx-auto px-4 py-12">
+        
+        <!-- HOME SECTION -->
+        <section id="section-home" class="content-section fade-in">
+            <div class="text-center mb-16 mt-8">
+                <div class="inline-block px-4 py-1.5 rounded-full bg-brand-accent/10 border border-brand-accent/20 text-brand-accent font-bold text-xs tracking-widest uppercase mb-6">CompTIA Security+ SY0-701</div>
+                <h2 class="text-5xl md:text-7xl font-black mb-6 tracking-tight text-slate-900 dark:text-white">Master Security+.</h2>
+                <p class="text-slate-500 dark:text-slate-400 text-lg md:text-xl max-w-3xl mx-auto leading-relaxed">The definitive interactive guide for the SY0-701 exam. Select a domain below to explore core concepts and security principles.</p>
+            </div>
+
+            <div class="mb-12">
+                <h3 class="text-sm font-black text-slate-400 uppercase tracking-widest mb-6 pl-2 border-l-4 border-brand-accent">Exam Domains</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <div onclick="navigateTo('section-threats')" class="bg-white dark:bg-slate-800/40 p-8 rounded-[2rem] border border-slate-200 dark:border-slate-700/50 shadow-xl cursor-pointer hover:-translate-y-2 hover:border-brand-accent/50 transition-all group">
+                        <div class="w-14 h-14 bg-brand-accent/10 rounded-2xl flex items-center justify-center text-3xl mb-6 group-hover:scale-110 transition-transform">⚠️</div>
+                        <h3 class="text-xl font-black mb-2 text-slate-800 dark:text-white">Threats, Attacks & Vulnerabilities</h3>
+                        <p class="text-slate-500 dark:text-slate-400 text-sm leading-relaxed">Social engineering, malware, vulnerability assessment, and threat modeling.</p>
+                    </div>
+
+                    <div onclick="navigateTo('section-architecture')" class="bg-white dark:bg-slate-800/40 p-8 rounded-[2rem] border border-slate-200 dark:border-slate-700/50 shadow-xl cursor-pointer hover:-translate-y-2 hover:border-purple-500/50 transition-all group">
+                        <div class="w-14 h-14 bg-purple-500/10 rounded-2xl flex items-center justify-center text-3xl mb-6 group-hover:scale-110 transition-transform">🏗️</div>
+                        <h3 class="text-xl font-black mb-2 text-slate-800 dark:text-white">Architecture & Design</h3>
+                        <p class="text-slate-500 dark:text-slate-400 text-sm leading-relaxed">Enterprise architecture, cloud security, mobile security, and IoT.</p>
+                    </div>
+
+                    <div onclick="navigateTo('section-implementation')" class="bg-white dark:bg-slate-800/40 p-8 rounded-[2rem] border border-slate-200 dark:border-slate-700/50 shadow-xl cursor-pointer hover:-translate-y-2 hover:border-green-500/50 transition-all group">
+                        <div class="w-14 h-14 bg-green-500/10 rounded-2xl flex items-center justify-center text-3xl mb-6 group-hover:scale-110 transition-transform">⚙️</div>
+                        <h3 class="text-xl font-black mb-2 text-slate-800 dark:text-white">Implementation</h3>
+                        <p class="text-slate-500 dark:text-slate-400 text-sm leading-relaxed">Access control, identity management, network security controls.</p>
+                    </div>
+
+                    <div onclick="navigateTo('section-operations')" class="bg-white dark:bg-slate-800/40 p-8 rounded-[2rem] border border-slate-200 dark:border-slate-700/50 shadow-xl cursor-pointer hover:-translate-y-2 hover:border-orange-500/50 transition-all group">
+                        <div class="w-14 h-14 bg-orange-500/10 rounded-2xl flex items-center justify-center text-3xl mb-6 group-hover:scale-110 transition-transform">🚨</div>
+                        <h3 class="text-xl font-black mb-2 text-slate-800 dark:text-white">Operations & Incident Response</h3>
+                        <p class="text-slate-500 dark:text-slate-400 text-sm leading-relaxed">Security operations, incident response, disaster recovery, and forensics.</p>
+                    </div>
+
+                    <div onclick="navigateTo('section-governance')" class="bg-white dark:bg-slate-800/40 p-8 rounded-[2rem] border border-slate-200 dark:border-slate-700/50 shadow-xl cursor-pointer hover:-translate-y-2 hover:border-red-500/50 transition-all group">
+                        <div class="w-14 h-14 bg-red-500/10 rounded-2xl flex items-center justify-center text-3xl mb-6 group-hover:scale-110 transition-transform">📋</div>
+                        <h3 class="text-xl font-black mb-2 text-slate-800 dark:text-white">Governance, Risk & Compliance</h3>
+                        <p class="text-slate-500 dark:text-slate-400 text-sm leading-relaxed">Policies, regulations, risk management, and security governance.</p>
+                    </div>
+
+                    <div onclick="navigateTo('section-cryptography')" class="bg-white dark:bg-slate-800/40 p-8 rounded-[2rem] border border-slate-200 dark:border-slate-700/50 shadow-xl cursor-pointer hover:-translate-y-2 hover:border-blue-500/50 transition-all group">
+                        <div class="w-14 h-14 bg-blue-500/10 rounded-2xl flex items-center justify-center text-3xl mb-6 group-hover:scale-110 transition-transform">🔐</div>
+                        <h3 class="text-xl font-black mb-2 text-slate-800 dark:text-white">Cryptography & PKI</h3>
+                        <p class="text-slate-500 dark:text-slate-400 text-sm leading-relaxed">Encryption, certificates, digital signatures, and key management.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- DOMAIN SECTIONS -->
+        <section id="section-threats" class="content-section hidden fade-in">
+            <div class="mb-12 text-center md:text-left"><h2 class="text-4xl font-black mb-2 text-red-500">Threats, Attacks & Vulnerabilities</h2></div>
+            <div id="threats-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+        </section>
+
+        <section id="section-architecture" class="content-section hidden fade-in">
+            <div class="mb-12 text-center md:text-left"><h2 class="text-4xl font-black mb-2 text-purple-500">Architecture &amp; Design</h2></div>
+            <div id="architecture-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+        </section>
+
+        <section id="section-implementation" class="content-section hidden fade-in">
+            <div class="mb-12 text-center md:text-left"><h2 class="text-4xl font-black mb-2 text-green-500">Implementation</h2></div>
+            <div id="implementation-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+        </section>
+
+        <section id="section-operations" class="content-section hidden fade-in">
+            <div class="mb-12 text-center md:text-left"><h2 class="text-4xl font-black mb-2 text-orange-500">Operations &amp; Incident Response</h2></div>
+            <div id="operations-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+        </section>
+
+        <section id="section-governance" class="content-section hidden fade-in">
+            <div class="mb-12 text-center md:text-left"><h2 class="text-4xl font-black mb-2 text-red-500">Governance, Risk &amp; Compliance</h2></div>
+            <div id="governance-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+        </section>
+
+        <section id="section-cryptography" class="content-section hidden fade-in">
+            <div class="mb-12 text-center md:text-left"><h2 class="text-4xl font-black mb-2 text-blue-500">Cryptography &amp; PKI</h2></div>
+            <div id="cryptography-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+        </section>
+
+    </main>
+
+    <!-- Deep Dive Modal -->
+    <div id="deep-dive-modal" class="fixed inset-0 z-[100] hidden items-center justify-center bg-slate-950/80 backdrop-blur-md p-4 opacity-0 transition-all duration-300" onclick="closeModal(event)">
+        <div class="bg-white dark:bg-slate-900 w-full max-w-3xl rounded-[2.5rem] shadow-2xl overflow-hidden transform scale-90 transition-all duration-300 border border-slate-200 dark:border-slate-800 flex flex-col max-h-[90vh]" onclick="event.stopPropagation()">
+            <div class="p-8 md:p-10 border-b border-slate-100 dark:border-slate-800 flex justify-between items-center bg-slate-50/50 dark:bg-slate-800/30 shrink-0">
+                <div class="flex items-center gap-6">
+                    <div id="m-icon-bg" class="p-5 bg-brand-accent/20 rounded-3xl text-4xl md:text-5xl"><span id="m-icon"></span></div>
+                    <div>
+                        <h3 id="m-title" class="text-3xl md:text-4xl font-black text-slate-900 dark:text-white"></h3>
+                        <p class="text-brand-accent text-sm font-bold uppercase tracking-widest mt-1">Technical Reference</p>
+                    </div>
+                </div>
+                <button onclick="closeModal()" class="w-12 h-12 flex items-center justify-center rounded-full bg-slate-100 dark:bg-slate-800 text-slate-500 hover:text-brand-accent transition-all text-3xl shrink-0">&times;</button>
+            </div>
+            <div id="m-content" class="p-8 md:p-12 overflow-y-auto md-content custom-scrollbar bg-white dark:bg-slate-900 flex-grow"></div>
+        </div>
+    </div>
+
+    <script>
+        /*
+            For Tailwind JIT:
+            text-red-500 text-purple-500 text-green-500 text-orange-500 text-blue-500
+            bg-red-500 bg-purple-500 bg-green-500 bg-orange-500 bg-blue-500
+            hover:bg-red-700 hover:bg-purple-700 hover:bg-green-700 hover:bg-orange-700 hover:bg-blue-700
+            bg-red-500/20 bg-purple-500/20 bg-green-500/20 bg-orange-500/20 bg-blue-500/20
+        */
+
+        // DATA OBJECTS (CompTIA Security+ SY0-701)
+        const threatsData = [
+            { id: 'th1', icon: '🎣', title: 'Social Engineering', desc: 'Exploiting human psychology for unauthorized access.', summary: '• Phishing & Spear Phishing\n• Pretexting & Vishing\n• Tailgating & Baiting', dive: `### Social Engineering Attacks
+Social engineering is the art of manipulating people into divulging confidential information or performing actions that compromise security. It exploits human psychology rather than technical vulnerabilities.
+
+#### Common Social Engineering Attacks
+- **Phishing:** Mass emails impersonating trusted entities to collect credentials.
+- **Spear Phishing:** Targeted phishing attacks against specific individuals or organizations.
+- **Vishing:** Voice phishing using phone calls to extract sensitive information.
+- **Pretexting:** Creating a fabricated scenario to gain trust and extract information.
+- **Tailgating/Piggybacking:** Following authorized personnel through secured doors without authentication.
+- **Baiting:** Leaving infected USB drives or devices in public places to entice people.
+- **Quid Pro Quo:** Offering services or benefits in exchange for information or access.
+
+#### Defense Against Social Engineering
+- Security awareness training and phishing simulations
+- Multi-factor authentication (MFA) as a secondary control
+- Email filtering and threat intelligence
+- Strict access control policies and need-to-know basis
+- Verification protocols before sharing sensitive data` },
+            { id: 'th2', icon: '🦠', title: 'Malware & Ransomware', desc: 'Malicious software threatening confidentiality, integrity, and availability.', summary: '• Viruses, Worms, Trojans\n• Ransomware & Cryptolocker\n• Detection & Prevention', dive: `### Malware & Ransomware
+Malware is any software designed to harm, exploit, or otherwise compromise your computer systems. Ransomware is a subset that encrypts your data and demands payment for decryption.
+
+#### Malware Types
+- **Virus:** Replicates by attaching to executable files and spreads through user action.
+- **Worm:** Self-replicating malware that spreads across networks without user interaction.
+- **Trojan Horse:** Disguises itself as legitimate software but performs malicious actions.
+- **Rootkit:** Provides privileged (root) access and hides its presence on the system.
+- **Ransomware:** Encrypts files/systems and demands payment for decryption keys.
+- **Spyware:** Monitors user activity and transmits data without consent.
+- **Adware:** Displays unwanted advertisements and collects user data.
+- **Bot/Botnet:** Compromised system used for automated malicious tasks in a network.
+
+#### Prevention & Detection
+- Keep OS and software patched and updated
+- Use antivirus/anti-malware software
+- Email and web filtering
+- Disable macros in Office documents
+- Regular backups for ransomware recovery
+- Monitor network traffic for command-and-control communication
+- User education on avoiding suspicious downloads` },
+            { id: 'th3', icon: '📡', title: 'Network Attacks', desc: 'Exploiting network protocols and infrastructure.', summary: '• DDoS & Flooding\n• Man-in-the-Middle\n• DNS Spoofing', dive: `### Network Attacks
+Network attacks exploit vulnerabilities in network protocols, infrastructure, and services to disrupt, intercept, or modify communications.
+
+#### Types of Network Attacks
+- **DDoS (Distributed Denial of Service):** Multiple sources flood a target with traffic, consuming bandwidth and resources.
+- **Flooding Attacks:** SYN flood, UDP flood, ICMP flood to exhaust resources.
+- **Man-in-the-Middle (MITM):** Intercepting communications between two parties to eavesdrop or modify data.
+- **ARP Spoofing:** Sending fake ARP replies to redirect traffic (MITM setup).
+- **DNS Spoofing:** Redirecting traffic to malicious sites by poisoning DNS cache.
+- **Packet Sniffing:** Capturing unencrypted network traffic to extract sensitive data.
+- **Session Hijacking:** Stealing session tokens to impersonate legitimate users.
+- **Network Segmentation Bypass:** Exploiting weak network isolation.
+
+#### Mitigation
+- Use encryption (HTTPS, VPNs, TLS)
+- Network segmentation and firewalls
+- Intrusion Detection/Prevention Systems (IDS/IPS)
+- Monitor for suspicious patterns
+- Rate limiting and traffic shaping
+- Address spoofing with port security and DHCP snooping` },
+            { id: 'th4', icon: '🎯', title: 'Application Vulnerabilities', desc: 'Flaws in software code and logic.', summary: '• SQL Injection & XSS\n• Buffer Overflow\n• OWASP Top 10', dive: `### Application Vulnerabilities
+Vulnerabilities in application code can be exploited to gain unauthorized access, steal data, or execute arbitrary code.
+
+#### Common Web Application Vulnerabilities (OWASP Top 10)
+- **SQL Injection:** Inserting malicious SQL commands into input fields to manipulate databases.
+- **Cross-Site Scripting (XSS):** Injecting malicious scripts into web pages viewed by other users.
+- **Cross-Site Request Forgery (CSRF):** Forcing users to perform unintended actions on websites.
+- **Insecure Deserialization:** Exploiting unsafe object serialization/deserialization.
+- **Broken Authentication:** Weak password policies, session management flaws.
+- **Insecure Direct Object References:** Accessing objects by manipulating IDs or references.
+- **Security Misconfiguration:** Default configurations, exposed sensitive data, unnecessary features enabled.
+
+#### API Vulnerabilities
+- Insecure API endpoints exposed without authentication
+- Insufficient rate limiting leading to brute force attacks
+- Sensitive data exposure in API responses
+- Lack of input validation
+
+#### Mitigation
+- Input validation and sanitization
+- Parameterized queries to prevent SQL injection
+- Web Application Firewalls (WAF)
+- Code review and security testing
+- Keep frameworks and libraries updated
+- Secure coding practices training` },
+            { id: 'th5', icon: '🔓', title: 'Cryptographic Attacks', desc: 'Exploiting encryption and hashing weaknesses.', summary: '• Brute Force & Dictionary\n• Rainbow Tables\n• Downgrade Attacks', dive: `### Cryptographic Attacks
+These attacks target encryption schemes, hashing algorithms, and key management to compromise confidentiality and integrity.
+
+#### Types of Cryptographic Attacks
+- **Brute Force:** Trying all possible keys or passwords until the correct one is found.
+- **Dictionary Attack:** Using a predefined list of common words/passwords.
+- **Rainbow Tables:** Pre-computed hash tables used to crack passwords quickly.
+- **Collision Attack:** Finding two inputs that produce the same hash output.
+- **Downgrade Attack:** Forcing systems to use weaker encryption (e.g., SSLv3 instead of TLS).
+- **Known Plaintext Attack:** Using known plaintext-ciphertext pairs to deduce keys.
+- **Man-in-the-Middle SSL Stripping:** Downgrading HTTPS to HTTP to intercept data.
+
+#### Defense
+- Use strong, unique passwords (>12 characters, mixed case, special characters)
+- Implement salt and strong hashing algorithms (bcrypt, Argon2)
+- Use strong encryption (AES-256, TLS 1.2+)
+- Key rotation and secure key management
+- Disable weak cipher suites and protocols
+- Use HTTPS everywhere` },
+            { id: 'th6', icon: '🚨', title: 'Vulnerability Assessment', desc: 'Identifying and prioritizing security weaknesses.', summary: '• Scanning & Enumeration\n• CVSS Scoring\n• Remediation Planning', dive: `### Vulnerability Assessment
+A systematic process to identify, analyze, and prioritize security weaknesses in systems and applications.
+
+#### VA Process
+1. **Reconnaissance:** Gathering information about the target (passive and active scanning).
+2. **Scanning:** Using tools like Nessus, OpenVAS to scan for known vulnerabilities.
+3. **Analysis:** Determining severity, exploitability, and impact of found vulnerabilities.
+4. **Prioritization:** Using CVSS scores to rank by severity.
+5. **Reporting:** Documenting findings with remediation recommendations.
+6. **Remediation:** Fixing vulnerabilities (patching, configuration changes).
+7. **Verification:** Re-scanning to confirm fixes.
+
+#### CVSS (Common Vulnerability Scoring System)
+- **Base Score:** Intrinsic characteristics of vulnerability (0-10 scale).
+- **Temporal Score:** Adjustments based on exploit availability and patch status.
+- **Environmental Score:** Organizational impact factors.
+
+#### Tools
+- Nessus, OpenVAS, Qualys for vulnerability scanning
+- Burp Suite for web application testing
+- Metasploit for exploitation and testing
+
+#### Key Considerations
+- False positives require manual validation
+- Context matters (criticality of affected asset)
+- Continuous scanning for emerging vulnerabilities
+- Report should include proof of concept and remediation steps` }
+        ];
+
+        const architectureData = [
+            { id: 'ar1', icon: '🏢', title: 'Enterprise Architecture', desc: 'Designing secure enterprise security models.', summary: '• Zero Trust Architecture\n• Defense in Depth\n• Segmentation & Zoning', dive: `### Enterprise Architecture & Security Models
+Enterprise security architecture defines how an organization's systems and controls work together to protect assets and data.
+
+#### Zero Trust Architecture
+A security model that assumes all access attempts are untrusted until proven otherwise, regardless of origin.
+
+**Principles:**
+- Verify every access request explicitly
+- Assume breach mentality (defense in depth)
+- Minimize access blast radius (least privilege)
+- Verify with all available data points
+- Authenticate and authorize every access
+- Encrypt and log everything
+
+#### Defense in Depth
+Multiple layers of security controls working together:
+- **Perimeter:** Firewalls, DDoS protection
+- **Network:** IDS/IPS, VLANs, segmentation
+- **Host:** Host-based firewalls, antivirus
+- **Application:** Input validation, WAF
+- **Data:** Encryption, DLP
+
+#### Network Segmentation
+- **DMZ (Demilitarized Zone):** Contains public-facing servers, isolated from internal network.
+- **VLAN Segmentation:** Logical separation of network traffic by function or security level.
+- **Microsegmentation:** Granular network controls between workloads.
+- **Air-Gapped Networks:** Completely isolated networks for critical systems.
+
+#### Trust Boundaries
+- Define where trust changes
+- Every boundary requires authentication/authorization
+- Monitor and log crossing of boundaries` },
+            { id: 'ar2', icon: '☁️', title: 'Cloud Security', desc: 'Securing cloud infrastructure and data.', summary: '• Shared Responsibility Model\n• Cloud Compliance\n• Data Residency', dive: `### Cloud Security Architecture
+Cloud security requires understanding the shared responsibility model and cloud-specific threats.
+
+#### Shared Responsibility Model
+- **Cloud Provider Responsibilities:** Infrastructure, hypervisor, physical security
+- **Customer Responsibilities:** Operating systems, applications, data, access controls
+
+#### Cloud Deployment Models
+- **Public Cloud:** Multi-tenant, shared resources (AWS, Azure, GCP)
+- **Private Cloud:** Single organization, dedicated infrastructure
+- **Hybrid Cloud:** Mix of public and private
+- **Community Cloud:** Shared by multiple organizations
+
+#### Cloud Security Challenges
+- Visibility and control over infrastructure
+- Misconfigured cloud storage (S3, Blob storage)
+- Insecure APIs and lack of authentication
+- Compliance with data residency requirements
+- Shared infrastructure vulnerabilities
+
+#### Cloud Security Best Practices
+- Implement least privilege access (IAM policies)
+- Encrypt data at rest and in transit
+- Regular security assessments and penetration testing
+- Multi-factor authentication
+- Monitor cloud activity logs
+- Compliance with standards (PCI-DSS, HIPAA, SOC 2)` },
+            { id: 'ar3', icon: '📱', title: 'Mobile & IoT Security', desc: 'Securing mobile devices and internet-connected devices.', summary: '• Mobile Device Management\n• App Security\n• IoT Protocols', dive: `### Mobile & IoT Security
+Mobile devices and IoT systems present unique security challenges due to their distributed nature and limited processing power.
+
+#### Mobile Security
+- **Mobile Device Management (MDM):** Centralized management of mobile devices
+- **Mobile Application Management (MAM):** Control over which apps are installed
+- **Container Approach:** Separating personal and work data on devices
+- **Jailbreaking/Rooting:** Removing OS restrictions increases security risk
+- **App Vetting:** Review apps for malicious code and permissions
+
+#### BYOD (Bring Your Own Device) Security
+- Policy definition and device enrollment
+- Remote wipe capabilities if device lost
+- VPN requirements for corporate access
+- Compliance monitoring
+
+#### IoT Security Challenges
+- Difficult to patch (embedded systems)
+- Limited processing for encryption
+- Default credentials often unchanged
+- Network segmentation critical
+- Low power consumption affects security choices
+
+#### IoT Security Best Practices
+- Network segmentation for IoT devices
+- Regular firmware updates
+- Disable unnecessary features
+- Change default credentials
+- Implement device identity (certificates)
+- Monitor for anomalous traffic` },
+            { id: 'ar4', icon: '🌐', title: 'Virtualization & Containers', desc: 'Securing virtualized environments and containerized applications.', summary: '• Hypervisor Security\n• Container Isolation\n• VM Escape Risks', dive: `### Virtualization & Container Security
+Virtualization and containerization introduce new security challenges around isolation and resource sharing.
+
+#### Hypervisor Security
+- **Type 1 Hypervisor:** Bare metal (ESXi, Hyper-V) - more secure
+- **Type 2 Hypervisor:** Hosted (VirtualBox, VMware Workstation) - runs on OS
+- **VM Isolation:** Prevent VMs from accessing each other's resources
+- **Hypervisor Hardening:** Minimize attack surface, disable unnecessary features
+- **VM Escape:** Breaking out of VM to access hypervisor (critical vulnerability)
+
+#### Virtual Machine Security
+- Regular patching of guest OS
+- Separation of duties (production, dev, test VMs)
+- Snapshots for recovery but don't rely as security
+- Secure deletion of VM files containing sensitive data
+
+#### Container Security
+- **Image Scanning:** Identify vulnerabilities in container images
+- **Registry Security:** Control who can push/pull images
+- **Runtime Security:** Monitor container behavior
+- **Namespace Isolation:** Limit container access to system resources
+- **SELinux/AppArmor:** Mandatory Access Control for containers
+
+#### Container Orchestration (Kubernetes)
+- Network policies for pod-to-pod communication
+- RBAC for access control
+- Secret management for credentials
+- Regular updates and vulnerability scanning` },
+            { id: 'ar5', icon: '📊', title: 'Datacenter Design', desc: 'Physical and logical security of data centers.', summary: '• Facility Controls\n• Environmental Security\n• Redundancy & HA', dive: `### Data Center Security Design
+Securing physical infrastructure where systems and data reside.
+
+#### Physical Security Controls
+- **Perimeter Security:** Fencing, security guards, video surveillance
+- **Access Control:** Badge readers, biometric systems, mantraps
+- **Environmental Controls:** Temperature, humidity, fire suppression
+- **Power Distribution:** Redundant UPS, generators
+- **Cable Management:** Secure routing, separation of utilities
+
+#### Facility Access
+- **Segregated Areas:** Secure server rooms, separate by classification
+- **Visitor Management:** Escorts, temporary credentials, logging
+- **Clean Desk Policy:** No sensitive data left visible
+- **Badge/Keycard:** Logs all access attempts
+
+#### Availability & Redundancy
+- **N+1 Redundancy:** One additional component for fault tolerance
+- **Geographically Diverse:** Multiple data centers for disaster recovery
+- **Hot/Warm/Cold Sites:** Different levels of readiness for failover
+- **Load Balancing:** Distribute traffic across multiple systems
+
+#### Environmental Monitoring
+- CRAC/CRAH units for temperature control
+- Water detection systems
+- Air quality monitoring
+- Fire detection and suppression (FM-200, halon alternatives)` },
+            { id: 'ar6', icon: '🔌', title: 'Supply Chain Security', desc: 'Securing the entire software and hardware supply chain.', summary: '• Third-party Risk\n• Software Integrity\n• Hardware Security', dive: `### Supply Chain Security
+Ensuring security throughout the entire lifecycle of hardware, software, and services obtained from external sources.
+
+#### Third-Party Risk Management
+- **Vendor Assessment:** Security posture evaluation before engagement
+- **SLAs & Contracts:** Security requirements and obligations
+- **Continuous Monitoring:** Ongoing assessment of vendor security
+- **Incident Notification:** Requirements for breach reporting
+- **Right to Audit:** Ability to audit vendor security practices
+
+#### Software Supply Chain
+- **Source Code Review:** Verify code integrity and absence of backdoors
+- **Code Signing:** Verify software authenticity and integrity
+- **Software Updates:** Distribute securely, verify digital signatures
+- **Dependencies:** Track and update third-party libraries
+- **SBOM (Software Bill of Materials):** Document all components used
+
+#### Hardware Supply Chain
+- **Manufacturing Security:** Prevent tampering during production
+- **Counterfeit Prevention:** Ensure genuine components
+- **Secure Disposal:** Destroy hardware properly
+- **Chain of Custody:** Track hardware from manufacture to deployment
+
+#### Log4j Vulnerability as Example
+Shows importance of tracking dependencies and rapid patching` }
+        ];
+
+        const implementationData = [
+            { id: 'im1', icon: '🔑', title: 'Identity & Access Management', desc: 'Managing user identities and access rights.', summary: '• AAA (Authentication, Authorization, Accounting)\n• Privilege Escalation\n• Account Lifecycle', dive: `### Identity & Access Management (IAM)
+IAM systems manage user identities and control what authenticated users are authorized to do.
+
+#### AAA Framework
+- **Authentication:** Verifying user identity (who you are)
+  - Passwords, biometrics, certificates, tokens
+  - MFA: Something you know, have, are
+- **Authorization:** Determining what actions user can perform (what you can do)
+  - Role-based (RBAC), attribute-based (ABAC), access control lists
+- **Accounting:** Logging and monitoring user actions (what you did)
+  - Audit logs, SIEM, monitoring systems
+
+#### Authentication Methods
+- **Passwords:** Weakest form, but common
+- **Multi-Factor Authentication:** Combines multiple factors for strength
+- **Certificates:** X.509 for user and system authentication
+- **Tokens:** TOTP, HOTP, hardware tokens
+- **Biometrics:** Fingerprint, facial recognition (convenient but not perfect)
+- **Risk-Based Authentication:** Adapt based on login context
+
+#### Authorization Models
+- **RBAC:** Roles group permissions (Administrator, User, Guest)
+- **ABAC:** Fine-grained control based on attributes
+- **DENY by default:** Explicit allow, everything else denied
+
+#### Account Management
+- **Provisioning:** Creating new accounts
+- **Deprovisioning:** Removing accounts when user leaves
+- **Privilege Escalation:** Temporary elevation when needed
+- **Password Policies:** Complexity, age, reuse restrictions
+- **Credential Rotation:** Changing passwords/keys regularly` },
+            { id: 'im2', icon: '🛡️', title: 'Network Access Control', desc: 'Controlling who and what connects to the network.', summary: '• Firewalls & ACLs\n• NAC (Network Access Control)\n• VLANs & Segmentation', dive: `### Network Access Control
+Controls determining which devices and users can access network resources.
+
+#### Firewalls
+- **Stateless:** Examines individual packets (layer 3-4)
+- **Stateful:** Tracks connection state, more intelligent
+- **Proxy:** Intermediary handling client requests
+- **Next-Gen Firewall (NGFW):** Application awareness, IPS, threat protection
+- **Cloud Firewall:** Virtualized firewall in cloud environments
+
+#### Firewall Rules
+- Default deny all traffic, then explicitly allow
+- Direction: Inbound, outbound, bidirectional
+- Logging: Track traffic for monitoring
+- Rule ordering: First match wins
+
+#### Network Access Control (NAC)
+- **Pre-admission:** Check device compliance before network access
+- **Post-admission:** Continuous monitoring during connection
+- **Agent-based:** Software on device checking compliance
+- **Agentless:** Network-based checks without client software
+
+#### VLAN Segmentation
+- **VLAN Tagging (802.1Q):** Logical separation of broadcast domains
+- **Trunk Ports:** Connect switches and carry multiple VLANs
+- **Access Ports:** End devices connect, single VLAN
+- **Management VLAN:** Out-of-band access to devices
+- **Guest VLAN:** Isolated access for visitors
+
+#### ACLs (Access Control Lists)
+- **Standard ACLs:** Filter by source IP only
+- **Extended ACLs:** Filter by source/destination IP, protocol, ports
+- **Numbered vs Named:** Names are more readable and maintainable` },
+            { id: 'im3', icon: '📡', title: 'Secure Communication Protocols', desc: 'Encrypting data in transit.', summary: '• TLS/SSL\n• VPN & Tunneling\n• Wireless Security (WPA3)', dive: `### Secure Communication Protocols
+Protocols and mechanisms to encrypt data while in transit between systems.
+
+#### TLS/SSL
+- **SSL:** Deprecated, vulnerable to attacks (SSLv3, SSLv2)
+- **TLS:** Modern secure protocol (TLS 1.2+, TLS 1.3)
+- **HTTPS:** HTTP secured with TLS
+- **Handshake:** Negotiating encryption and verifying certificates
+- **Forward Secrecy:** Session keys not compromised if private key stolen
+
+#### VPN (Virtual Private Network)
+- **Site-to-Site:** Connecting entire networks securely
+- **Remote Access:** Secure access for individual users
+- **IPsec:** IP layer encryption, lower overhead
+- **TLS/SSL VPN:** Application layer, more compatible
+- **IKE (Internet Key Exchange):** Negotiating IPsec parameters
+
+#### Wireless Security
+- **WEP:** Deprecated, easily broken
+- **WPA:** Improved over WEP but vulnerable to KRACK attacks
+- **WPA2:** Strong encryption (AES), secure configuration
+- **WPA3:** Latest standard with Enhanced Open and Simultaneous Authentication
+- **Enterprise vs Personal:** 802.1X for enterprise, PSK for consumer
+
+#### Secure Email Protocols
+- **SMTPS:** SMTP with TLS encryption
+- **IMAPS:** IMAP with TLS encryption
+- **POP3S:** POP3 with TLS encryption
+- **S/MIME:** Email encryption and digital signatures
+- **PGP:** Pretty Good Privacy for email encryption
+
+#### DNS Security
+- **DNSSEC:** Cryptographic signatures for DNS responses
+- **DNS over TLS (DoT):** Encrypted DNS queries
+- **DNS over HTTPS (DoH):** DNS queries over HTTPS` },
+            { id: 'im4', icon: '🔓', title: 'Endpoint Protection', desc: 'Securing individual devices and endpoints.', summary: '• Antivirus & EDR\n• Host Firewall\n• USB Device Control', dive: `### Endpoint Protection
+Security measures protecting individual computers, servers, and devices.
+
+#### Antivirus & Malware Detection
+- **Signature-based:** Matching known malware signatures
+- **Heuristic-based:** Analyzing behavior to detect unknown malware
+- **Sandboxing:** Running files in isolated environment
+- **Behavioral Analysis:** Detecting suspicious actions
+
+#### Endpoint Detection & Response (EDR)
+- **Agent-based monitoring:** Continuous endpoint monitoring
+- **Threat hunting:** Proactive searching for compromise indicators
+- **Incident response:** Automated remediation capabilities
+- **Forensics:** Detailed event logs for investigation
+- **C2 Detection:** Identifying command-and-control communication
+
+#### Host-Based Firewalls
+- **Inbound Rules:** Control incoming connections
+- **Outbound Rules:** Control outgoing connections
+- **Application-based:** Rules for specific applications
+- **Stateful:** Tracks connection state
+
+#### Device Control
+- **USB Restrictions:** Disable USB ports or allow only specific devices
+- **Removable Media:** Control external storage access
+- **CD/DVD:** Disable optical drives
+- **Printer:** Restrict printing to approved printers
+
+#### Full Disk Encryption
+- **BitLocker (Windows):** Encrypt entire drive
+- **FileVault (macOS):** macOS disk encryption
+- **LUKS (Linux):** Linux unified key setup
+- **TPM Integration:** Hardware-based key storage and protection
+
+#### Mobile Device Security
+- **MDM:** Centralized management of mobile devices
+- **App Whitelisting:** Only approved apps allowed
+- **Remote wipe:** Delete data if device lost/stolen
+- **Jailbreak detection:** Detect rooted/jailbroken devices` },
+            { id: 'im5', icon: '🌐', title: 'Proxy & Content Filtering', desc: 'Monitoring and controlling network traffic.', summary: '• Forward Proxy\n• Reverse Proxy\n• Content Filtering & DLP', dive: `### Proxy & Content Filtering
+Systems that intercept, inspect, and control network traffic.
+
+#### Forward Proxy
+- **Web Proxy:** Intercepts client web requests
+- **URL Filtering:** Block access to categories (adult, gambling, etc.)
+- **Content Inspection:** Scan for malware and policy violations
+- **Caching:** Improve performance for repeated requests
+- **Logging:** Audit all web access
+
+#### Reverse Proxy
+- **Load Balancing:** Distribute requests across servers
+- **Web Acceleration:** Caching, compression, optimization
+- **Security:** Hide backend server details, filter malicious requests
+- **SSL Offloading:** Handle encryption/decryption
+- **Virtual Hosting:** Host multiple domains on same IP
+
+#### Content Filtering
+- **URL Filtering:** Block by website category or keyword
+- **File Type Filtering:** Prevent download of dangerous file types
+- **Protocol Filtering:** Block specific protocols or ports
+- **Real-time Scanning:** Check files for malware
+
+#### Data Loss Prevention (DLP)
+- **Policy Definition:** What data is sensitive?
+- **Detection:** Identify sensitive data in motion
+- **Enforcement:** Prevent unauthorized transmission
+- **Logging & Alerting:** Monitor for violations
+- **Examples:** Credit cards, Social Security numbers, credentials` },
+            { id: 'im6', icon: '🔒', title: 'Physical Access Control', desc: 'Protecting physical infrastructure security.', summary: '• Card Readers & Biometrics\n• Mantrap/Mantrap\n• Badge Management', dive: `### Physical Access Control
+Systems and mechanisms protecting physical access to secure areas.
+
+#### Access Control Technologies
+- **Card/Badge:** Proximity cards, smart cards
+- **Biometric:** Fingerprint, facial recognition, iris scans
+- **PIN/Keypad:** Code entry for access
+- **Multi-factor:** Combine card + PIN or biometric
+
+#### Entry Control
+- **Single Entry/Exit:** Easier to monitor
+- **Visitor Management:** Logging, escorts, temporary credentials
+- **Turnstile:** Prevents tailgating/piggybacking
+- **Mantrap/Mantrap:** Door system holding person between two doors (prevents tailgating)
+- **Security Guards:** Human verification of identity
+
+#### Access Levels
+- **Unrestricted:** Public areas
+- **Restricted:** Employee areas (building floor)
+- **Highly Restricted:** Server rooms, sensitive data
+- **Classified:** Vault, secure compartments
+
+#### Badge System Management
+- **Issuance:** Creating and distributing badges
+- **Revocation:** Immediate deactivation when employee leaves
+- **Access Rights:** Which doors, which times
+- **Audit Trail:** Complete log of all access attempts
+- **Duress Code:** Hidden code to alert security if forced
+
+#### Environmental Sensors
+- **Alarms:** Alert on unauthorized access
+- **Motion Sensors:** Detect movement in secured areas
+- **Pressure Sensors:** Door/window contact sensors
+- **Video Surveillance:** Recording for investigation` }
+        ];
+
+        const operationsData = [
+            { id: 'op1', icon: '🚨', title: 'Incident Response', desc: 'Detecting, responding to, and recovering from security incidents.', summary: '• IR Plan & Procedures\n• Evidence Preservation\n• Post-Incident Review', dive: `### Incident Response
+Coordinated process for handling security incidents to minimize damage and recover quickly.
+
+#### Incident Response Phases
+1. **Preparation:** Develop IR plan, tools, training, communication channels
+2. **Detection & Analysis:** Identify incident occurred, determine scope
+3. **Containment:** Short-term (isolate affected system) and long-term (permanent fix)
+4. **Eradication:** Remove malware, patch vulnerabilities, close attack vector
+5. **Recovery:** Restore systems to normal operations
+6. **Post-Incident:** Analysis, documentation, lessons learned
+
+#### Incident Classification
+- **Critical:** Widespread impact, significant data exposure
+- **High:** Multiple systems affected, sensitive data at risk
+- **Medium:** Limited scope, some business impact
+- **Low:** Minimal impact, easily contained
+
+#### Evidence Preservation (Forensics)
+- **Chain of Custody:** Document handling of evidence
+- **Data Preservation:** Maintain integrity of logs, images, memory dumps
+- **Volatile Data:** Collect memory and network traffic before shutdown
+- **Disk Imaging:** Create forensic copy before analysis
+- **Avoid Contamination:** Use clean tools and systems
+
+#### Communication
+- **Notification Chain:** Management, legal, PR, law enforcement
+- **Customer Notification:** Timely disclosure of breaches (GDPR 72h)
+- **Law Enforcement:** Engage for criminal activity
+- **Public Relations:** Controlled messaging to stakeholders
+
+#### Tools
+- SIEM for detection
+- Forensic tools (EnCase, FTK)
+- Memory analysis (Volatility)
+- Log analysis tools
+- Network capture tools (Wireshark)` },
+            { id: 'op2', icon: '📊', title: 'Security Information & Event Management (SIEM)', desc: 'Centralized logging and monitoring for security events.', summary: '• Log Aggregation\n• Correlation & Alerts\n• Forensics & Investigation', dive: `### SIEM (Security Information & Event Management)
+Collects, aggregates, and analyzes security data from across the infrastructure.
+
+#### SIEM Capabilities
+- **Log Collection:** Gathering logs from firewalls, servers, applications, endpoints
+- **Normalization:** Converting different log formats to standard format
+- **Correlation:** Linking related events to identify patterns
+- **Alerting:** Triggering alarms on suspicious patterns
+- **Dashboards:** Visual representation of security posture
+- **Reporting:** Historical analysis and compliance reporting
+- **Forensics:** Long-term storage for investigation
+
+#### Log Sources
+- Firewalls and IDS/IPS
+- Web servers and web applications
+- Email servers
+- Domain controllers and authentication systems
+- Endpoint security (antivirus, EDR)
+- Database activity monitoring
+- Syslog from Linux/Unix systems
+
+#### Correlation Rules
+- Brute force attempts: Multiple failed logins
+- Lateral movement: Unusual access patterns
+- Data exfiltration: Large outbound transfers
+- Privilege escalation: Unauthorized admin access
+- Malware execution: Suspicious process execution
+
+#### Challenges
+- **Alert Fatigue:** Too many false positives
+- **Tuning:** Balancing sensitivity and false positives
+- **Storage:** Massive data volumes
+- **Skill Gap:** Requires experienced analysts
+- **Data Privacy:** Protecting PII in logs
+
+#### Popular SIEM Solutions
+- Splunk
+- ELK Stack (Elasticsearch, Logstash, Kibana)
+- IBM QRadar
+- ArcSight
+- Sumo Logic` },
+            { id: 'op3', icon: '🛡️', title: 'Intrusion Detection & Prevention', desc: 'Detecting and blocking network-based attacks.', summary: '• Network IDS/IPS\n• Host-Based IDS\n• Signature vs Anomaly', dive: `### Intrusion Detection & Prevention (IDS/IPS)
+Systems that monitor network traffic for malicious activity and can take action to prevent attacks.
+
+#### IDS vs IPS
+- **IDS (Intrusion Detection System):** Detects attacks and alerts
+- **IPS (Intrusion Prevention System):** Detects AND blocks attacks
+- **IDS in monitor mode:** Non-blocking, alerts only
+- **IPS inline:** Sits between networks, can drop packets
+
+#### Detection Methods
+- **Signature-based:** Matching against known attack patterns
+  - Fast, low false negatives
+  - Misses new attacks (zero-days)
+- **Anomaly-based:** Detecting deviations from normal behavior
+  - Detects new attacks
+  - Higher false positives
+- **Behavioral-based:** Monitoring suspicious behavior patterns
+
+#### Network-Based IDS/IPS
+- Placed at network perimeter or key segments
+- Monitors traffic between network segments
+- Detects attacks targeting multiple systems
+- Cannot see encrypted traffic (HTTPS, SSH, VPN)
+
+#### Host-Based IDS (HIDS)
+- Installed on individual systems
+- Monitors process execution, file access, network connections
+- Can detect zero-day exploits targeting specific OS
+- Resource intensive
+
+#### Common Signatures
+- Shellcode patterns
+- Known malware traffic
+- SQL injection attempts
+- Buffer overflow attempts
+- Reconnaissance scan patterns
+
+#### IDS/IPS Evasion Techniques
+- **Encryption:** Bypasses signature detection
+- **Fragmentation:** Splitting packets to avoid detection
+- **Polymorphism:** Changing malware signature
+- **Slow attacks:** Spreading actions over time to avoid thresholds
+
+#### Popular IDS/IPS
+- Snort (open source)
+- Suricata (open source)
+- Zeek (network monitoring, IDS capabilities)
+- Palo Alto Networks (commercial)` },
+            { id: 'op4', icon: '🔍', title: 'Digital Forensics', desc: 'Investigating and analyzing digital incidents.', summary: '• Evidence Collection\n• Timeline Analysis\n• Tool & Report', dive: `### Digital Forensics
+Process of uncovering, interpreting, and presenting digital evidence from computer systems.
+
+#### Forensic Process
+1. **Identification:** Recognizing evidence
+2. **Collection:** Gathering evidence without contamination
+3. **Preservation:** Protecting evidence integrity
+4. **Examination:** Analyzing evidence
+5. **Analysis:** Interpreting findings
+6. **Documentation:** Recording all steps
+7. **Presentation:** Presenting findings (legal admissibility critical)
+
+#### Evidence Integrity
+- **Hash Values:** MD5, SHA-1, SHA-256 for data integrity verification
+- **Chain of Custody:** Document who handled evidence and when
+- **Write Blockers:** Prevent modification during disk copying
+- **Forensic Imaging:** Bit-by-bit copy of storage devices
+
+#### Collection Techniques
+- **Disk Imaging:** Full hard drive copy for offline analysis
+- **Memory Dump:** Capture RAM for volatile data
+- **Network Capture:** PCAP files for network traffic
+- **Log Collection:** System, application, and network logs
+- **File Recovery:** Recovering deleted files
+- **Metadata:** File creation/modification times
+
+#### Analysis
+- **Timeline Creation:** Reconstructing events in chronological order
+- **Artifact Analysis:** File signatures, file types, timestamps
+- **Registry Analysis (Windows):** Startup programs, recent files, installed software
+- **Web Browser Artifacts:** History, cookies, cache, downloads
+- **Slack Space:** Recovering data from unallocated space
+- **Steganography Detection:** Finding hidden data in images/files
+
+#### Tools
+- **EnCase:** Commercial forensic platform
+- **FTK (Forensic Toolkit):** Full suite for digital forensics
+- **Volatility:** Memory analysis framework
+- **Sleuth Kit:** Open source forensic tools
+- **GIMP:** Image analysis and steganography detection
+
+#### Challenges
+- **Encryption:** Cannot access encrypted data without key
+- **Cloud Forensics:** Limited access to cloud provider data
+- **Anti-forensics:** Malware designed to destroy evidence
+- **Expertise:** Requires skilled forensic analysts
+- **Legal:** Admissibility standards vary by jurisdiction` },
+            { id: 'op5', icon: '📋', title: 'Business Continuity & Disaster Recovery', desc: 'Planning for and recovering from major incidents.', summary: '• BCP vs DRP\n• RTO, RPO, MTTR\n• Recovery Strategies', dive: `### Business Continuity & Disaster Recovery
+Planning and preparation to maintain/restore critical business functions after disruptions.
+
+#### Key Concepts
+- **Business Continuity Plan (BCP):** Ensuring business operations continue despite disruptions
+- **Disaster Recovery Plan (DRP):** Restoring IT systems after disaster
+- **Crisis Management:** Responding to public-facing events
+
+#### Recovery Metrics
+- **RTO (Recovery Time Objective):** Max acceptable downtime (1 hour, 4 hours, 24 hours, etc.)
+- **RPO (Recovery Point Objective):** Max acceptable data loss (data as of last hour, last backup, etc.)
+- **MTTR (Mean Time To Repair):** Average time to recover from failure
+- **MTBF (Mean Time Between Failures):** Average time between failures
+- **Downtime Cost:** Business impact per hour of outage
+
+#### Recovery Sites
+- **Hot Site:** Fully operational duplicate, can failover in minutes
+  - Most expensive, quickest recovery
+- **Warm Site:** Partially equipped, can be operational in hours
+  - Middle ground cost/time
+- **Cold Site:** Empty building with infrastructure, takes days to setup
+  - Least expensive, longest recovery time
+- **Mutual Aid Agreement:** Recover at another company's facility
+
+#### Backup Strategies
+- **Full Backup:** Complete copy of all data (largest, longest to backup)
+- **Incremental:** Only changes since last backup (smallest, requires all previous backups)
+- **Differential:** Changes since last full backup (good balance)
+- **3-2-1 Rule:** 3 copies, 2 different media, 1 offsite
+
+#### Testing
+- **Tabletop Exercise:** Discussion-based scenario planning
+- **Walkthrough:** Step-by-step review of procedures
+- **Simulation:** Realistic scenario with limited scope
+- **Full Test:** Complete failover to recovery site
+
+#### Considerations
+- Cost vs Recovery capability
+- Testing frequency (annual minimum)
+- Documentation and training
+- Communication plan during outage
+- Vendor/supplier dependencies` },
+            { id: 'op6', icon: '📊', title: 'Vulnerability Management', desc: 'Continuous identification and remediation of vulnerabilities.', summary: '• VM Lifecycle\n• Patch Management\n• Vulnerability Prioritization', dive: `### Vulnerability Management Program
+Systematic approach to identifying, prioritizing, and remediating security vulnerabilities.
+
+#### VM Lifecycle
+1. **Discovery:** Identifying vulnerabilities through scanning
+2. **Validation:** Confirming vulnerability exists in your environment
+3. **Risk Assessment:** Determining severity and impact
+4. **Prioritization:** Ranking by business risk
+5. **Remediation:** Patching or mitigating vulnerability
+6. **Verification:** Confirming fix was successful
+
+#### Vulnerability Scanning
+- **Authenticated Scanning:** Credentials for deeper assessment
+- **Unauthenticated Scanning:** External perspective
+- **Network Scanning:** Discovering active hosts and services
+- **Web Application Scanning:** Testing web apps for vulnerabilities
+- **Database Scanning:** Checking database security
+
+#### CVSS (Common Vulnerability Scoring System)
+- **Base Score (0-10):** Intrinsic vulnerability severity
+- **Temporal Score:** Adjusts for exploit availability, patch status
+- **Environmental Score:** Organizational impact
+
+#### Patch Management
+- **Patch Types:** Security patches, bug fixes, feature updates
+- **Testing:** Never patch production immediately without testing
+- **Priority:** Critical patches ASAP, non-critical monthly
+- **Exceptions:** Systems that cannot be restarted, legacy systems
+- **Documentation:** Track what was patched when
+
+#### Vulnerability Prioritization
+- **CVSS Score:** Higher scores first
+- **Exploitability:** Publicly available exploits vs unknown
+- **Asset Criticality:** Vulnerabilities on critical systems first
+- **Data Sensitivity:** Systems handling sensitive data
+- **Accessibility:** Can it be reached from external network?
+
+#### False Positives
+- Vulnerabilities that don't apply to your environment
+- Default credentials that have been changed
+- Unpatched services that are disabled
+- Regular verification and tuning needed` }
+        ];
+
+        const governanceData = [
+            { id: 'go1', icon: '📋', title: 'Policies & Standards', desc: 'Creating and enforcing security policies.', summary: '• Policy Development\n• Standards & Baselines\n• Policy Enforcement', dive: `### Security Policies & Standards
+Documented rules governing security in the organization.
+
+#### Policy Development
+- **Scope:** Who does it apply to? (employees, contractors, third parties)
+- **Responsibility:** Who enforces it? (HR, IT Security, Legal)
+- **Sanctions:** What happens if violated? (warnings, termination)
+- **Review Cycle:** How often updated? (annually recommended)
+
+#### Types of Policies
+- **Acceptable Use Policy (AUP):** Permitted use of IT resources
+- **Password Policy:** Complexity, age, reuse restrictions
+- **Access Control Policy:** User provisioning and deprovisioning
+- **Incident Response Policy:** How to handle security incidents
+- **Data Classification Policy:** Determining data sensitivity levels
+- **Business Continuity Policy:** Recovery procedures and responsibilities
+- **Third-Party Risk Policy:** Requirements for vendors and partners
+
+#### Standards vs Guidelines
+- **Standards:** Mandatory technical requirements (MUST comply)
+- **Guidelines:** Recommended practices (SHOULD follow)
+- **Baselines:** Minimum security levels for different assets
+- **Procedures:** Step-by-step instructions for specific tasks
+
+#### Compliance vs Security
+- **Compliance:** Meeting regulatory requirements
+- **Security:** Protecting assets and data
+- Sometimes they align, sometimes security requires more than compliance
+
+#### Policy Communication
+- Training for all employees
+- Acknowledgment signatures
+- Regular reminders
+- Integration into onboarding
+- Available in multiple languages
+
+#### Common Frameworks
+- **CIS Controls:** Technical security controls
+- **NIST Cybersecurity Framework:** High-level guidance
+- **ISO 27001:** Information security management system
+- **COBIT:** IT governance framework` },
+            { id: 'go2', icon: '⚖️', title: 'Regulations & Compliance', desc: 'Meeting legal and regulatory requirements.', summary: '• GDPR, HIPAA, PCI-DSS\n• SOC 2\n• Audit & Compliance', dive: `### Regulations & Compliance
+Legal requirements and standards organizations must meet to operate in specific industries/regions.
+
+#### Major Regulations
+- **GDPR (EU):** Right to privacy, data protection, breach notification (72 hours)
+- **HIPAA (USA-Healthcare):** Protecting patient health information
+- **PCI-DSS:** Protecting credit card data (Level 1-4 based on volume)
+- **FERPA (USA-Education):** Protecting student education records
+- **SOX (USA):** Financial reporting security (for public companies)
+- **GLBA (USA-Finance):** Protecting customer financial information
+- **CCPA (California):** Consumer privacy rights
+- **LGPD (Brazil):** Personal data protection
+
+#### PCI-DSS Compliance (Level 1 for high transaction volume)
+1. Maintain firewall configuration
+2. Do not rely on vendor-provided defaults
+3. Protect stored cardholder data
+4. Encrypt transmission of cardholder data
+5. Protect systems against malware
+6. Develop and maintain secure systems
+7. Restrict access to cardholder data
+8. Identify and authenticate access
+9. Restrict physical access
+10. Track and monitor network access
+11. Test security systems regularly
+12. Maintain information security policy
+
+#### SOC 2 (Service Organization Controls)
+- **Type I:** Audit of management's description of controls
+- **Type II:** Testing controls over a period of time
+- **Trust Service Principles:** Security, availability, processing integrity, confidentiality, privacy
+
+#### Audit Process
+- Internal audit (annual at minimum)
+- External audit by independent auditors
+- Remediation of findings
+- Documentation of controls
+- Continuous compliance monitoring
+
+#### Breach Notification
+- Timeline varies by law (GDPR 72 hours, others within 30 days)
+- Type of notification (individuals, regulators, press)
+- Information to include (what happened, data affected, mitigation)
+- Legal implications and fines` },
+            { id: 'go3', icon: '🎯', title: 'Risk Management', desc: 'Identifying, assessing, and managing security risks.', summary: '• Risk Analysis\n• Qualitative vs Quantitative\n• Risk Appetite', dive: `### Risk Management
+Systematic process of identifying threats and vulnerabilities, assessing impact, and implementing controls.
+
+#### Risk Management Process
+1. **Asset Identification:** What do we need to protect?
+2. **Threat Identification:** What can harm our assets?
+3. **Vulnerability Identification:** What weaknesses exist?
+4. **Risk Assessment:** Likelihood × Impact = Risk
+5. **Risk Response:** Accept, mitigate, avoid, transfer
+6. **Risk Monitoring:** Continuous review and updates
+
+#### Risk Analysis Approaches
+- **Qualitative:** High/Medium/Low ratings (faster, subjective)
+- **Quantitative:** Numerical values and calculations (objective, requires data)
+- **ALE (Annualized Loss Expectancy):** (Asset Value) × (Exposure Factor) × (Annualized Rate of Occurrence)
+
+#### Risk Metrics
+- **Likelihood:** Probability of event (rare, unlikely, possible, likely, certain)
+- **Impact:** Consequence of event (minimal, low, medium, high, critical)
+- **Risk Level:** Combination of likelihood and impact
+- **Residual Risk:** Risk remaining after controls are applied
+
+#### Risk Response Strategies
+1. **Mitigate:** Reduce likelihood or impact (most common)
+2. **Avoid:** Stop the risky activity (may not be feasible)
+3. **Accept:** Acknowledge and accept the risk (documented)
+4. **Transfer:** Move risk to third party (insurance, outsourcing)
+
+#### Risk Acceptance
+- Must be documented (liability implications)
+- Requires approval from appropriate level
+- Re-evaluated periodically
+- Business justification for residual risk
+
+#### Third-Party Risk
+- **Vendor Assessment:** Security posture before engagement
+- **Contracts:** SLAs and security requirements
+- **Monitoring:** Ongoing assessment and testing
+- **Incident Notification:** Breach reporting requirements
+- **Audit Rights:** Ability to audit vendor controls
+
+#### Risk Tolerance vs Risk Appetite
+- **Risk Tolerance:** Acceptable variance from objectives (measurement of risk)
+- **Risk Appetite:** Organization's willingness to take risks (strategic choice)` },
+            { id: 'go4', icon: '👥', title: 'Third-Party & Vendor Management', desc: 'Managing security risks from external vendors.', summary: '• Vendor Assessment\n• SLA & Contracts\n• Continuous Monitoring', dive: `### Third-Party & Vendor Management
+Managing security risks associated with vendors, partners, and service providers.
+
+#### Vendor Assessment
+- **Security Questionnaire:** Standard questions about their security practices
+- **Certifications:** SOC 2, ISO 27001, etc.
+- **Audit Rights:** Ability to audit their facilities
+- **Financial Stability:** Can they survive and maintain service?
+- **Insurance:** Appropriate liability coverage
+
+#### Contract Requirements
+- **Data Protection:** How they handle your data
+- **Breach Notification:** Immediate reporting requirement
+- **Right to Audit:** Ability to verify security controls
+- **SLAs:** Service levels and uptime guarantees
+- **Indemnification:** Liability for their security failures
+- **Termination:** Exit strategy and data return
+- **Subcontractors:** Requirements for their vendors
+
+#### Risk Stratification
+- **Critical:** Core business functions (highest scrutiny)
+- **Important:** Support important functions (medium scrutiny)
+- **Low:** Non-critical functions (basic requirements)
+
+#### Ongoing Monitoring
+- **Annual Questionnaires:** Updates on security posture
+- **Audits:** Periodic security assessments
+- **Incident Monitoring:** Awareness of any breaches
+- **Performance Metrics:** Tracking SLA compliance
+- **Industry Alerts:** News of security issues affecting vendor
+
+#### Supply Chain Attacks
+- Examples: SolarWinds, Kaseya ransomware attacks
+- Third parties are attractive targets for attackers
+- Attackers compromise vendor to access customers
+- Pre-incident response coordination critical
+
+#### Termination & Data Handling
+- **Data Return:** Getting your data back
+- **Secure Deletion:** Destroying copies
+- **Transition Period:** Overlap for data migration
+- **Disputes:** How to handle disagreements` },
+            { id: 'go5', icon: '🎓', title: 'Security Awareness Training', desc: 'Educating employees about security.', summary: '• Mandatory Training\n• Phishing Simulations\n• Culture Change', dive: `### Security Awareness Training & Culture
+Creating a security-conscious workforce through education and engagement.
+
+#### Training Topics
+- Password security and MFA
+- Social engineering and phishing
+- Data classification and handling
+- Incident reporting procedures
+- Acceptable use policies
+- Physical security awareness
+- Email security best practices
+- Mobile device security
+- Remote work security
+
+#### Training Delivery
+- **Mandatory Annual Training:** Compliance requirement
+- **Role-Specific Training:** Role-based advanced topics
+- **Onboarding:** Part of new employee process
+- **Incident-Triggered:** Training after security event
+- **Awareness Campaigns:** Posters, emails, tips
+- **Interactive Sessions:** Discussion and Q&A
+
+#### Phishing Simulations
+- **Frequency:** Monthly or quarterly campaigns
+- **Metrics:** Click rate, report rate, failure rate
+- **Training:** Those who fail get targeted training
+- **Realism:** Gradually increase difficulty
+- **Feedback:** Immediate feedback when reported
+
+#### Measuring Effectiveness
+- Pre/post-test knowledge assessments
+- Phishing simulation click rates
+- Incident report volume (increased is good)
+- Compliance with security practices
+- Survey feedback
+
+#### Security Culture
+- Recognition of security champions
+- Make security part of everyone's job (not just IT)
+- Non-punitive reporting of incidents (psychological safety)
+- Alignment with business goals
+- Executive sponsorship and modeling
+
+#### Common Mistakes
+- One-time training (needs reinforcement)
+- Too technical for non-technical staff
+- Generic training not tailored to role
+- Blame for security incidents (kills reporting)` },
+            { id: 'go6', icon: '📊', title: 'Security Metrics & Reporting', desc: 'Measuring security effectiveness.', summary: '• KPIs & Dashboards\n• Executive Reporting\n• Trend Analysis', dive: `### Security Metrics & Reporting
+Measuring and communicating security effectiveness to stakeholders.
+
+#### Key Security Metrics
+- **Mean Time to Detect (MTTD):** Average time to discover incident
+- **Mean Time to Respond (MTTR):** Average time to respond to incident
+- **Vulnerability Scanner Coverage:** % of systems scanned
+- **Patch Compliance Rate:** % of systems current on patches
+- **Incident Response SLA Compliance:** % of incidents met SLA
+- **Employee Training Completion:** % of staff completed training
+- **Phishing Click Rate:** % of users clicking malicious links
+- **Access Entitlement Audits:** Reviews for proper access levels
+
+#### Reporting Audiences
+- **Executive/Board:** High-level risk, financial impact, strategic initiatives
+- **Management:** Department-specific metrics, trends, challenges
+- **Technical Teams:** Detailed metrics, logs, investigation findings
+- **Customers/Partners:** Compliance status, breach notification
+
+#### Dashboard Components
+- **Risk Posture:** Overall security rating
+- **Incident Metrics:** Volume, severity, response time
+- **Vulnerability Metrics:** Open vulnerabilities by severity
+- **Compliance Status:** % compliance with policies/regulations
+- **Trends:** Improving or degrading metrics over time
+
+#### Executive Summary
+- Key findings (1-2 pages max)
+- Critical risks requiring attention
+- Recommended actions
+- Resource needs/budget
+- Progress on prior recommendations
+
+#### Metrics Challenges
+- Can be misleading (more alerts ≠ more secure)
+- Gaming the metrics (focusing on metrics vs actual security)
+- Difficulty comparing organizations
+- Need context for interpretation
+- Balance leading and lagging indicators` }
+        ];
+
+        const cryptographyData = [
+            { id: 'cr1', icon: '🔐', title: 'Encryption Fundamentals', desc: 'Core concepts of encryption and confidentiality.', summary: '• Symmetric vs Asymmetric\n• Encryption Algorithms\n• Key Management', dive: `### Encryption Fundamentals
+Using mathematical algorithms to convert plaintext to ciphertext to ensure confidentiality.
+
+#### Encryption Goals
+- **Confidentiality:** Only authorized parties can read data
+- **Integrity:** Detect unauthorized modifications
+- **Authentication:** Verify identity of sender
+- **Non-repudiation:** Cannot deny creating/sending data
+
+#### Symmetric Encryption
+Uses same key for encryption and decryption.
+
+**Algorithms:**
+- **AES (Advanced Encryption Standard):** 128, 192, 256-bit keys (NIST standard)
+- **3DES:** Triple DES, legacy but still used (112-bit effective strength)
+- **Blowfish:** 64-bit blocks, fast but smaller block size
+- **RC4:** Stream cipher, deprecated due to vulnerabilities
+
+**Strengths:**
+- Fast encryption/decryption
+- Suitable for large data volumes
+- Lower computational overhead
+
+**Weaknesses:**
+- Key distribution challenge
+- Scalability (n² keys for n people)
+- No non-repudiation
+
+#### Asymmetric Encryption
+Uses public key (encrypt) and private key (decrypt).
+
+**Algorithms:**
+- **RSA:** Based on difficulty of factoring large numbers (1024, 2048, 4096-bit keys)
+- **ECC (Elliptic Curve Cryptography):** Smaller keys for equivalent security
+- **Diffie-Hellman:** Key exchange algorithm
+- **ElGamal:** Similar to DSA
+
+**Strengths:**
+- Solves key distribution problem
+- Enables digital signatures
+- Non-repudiation possible
+
+**Weaknesses:**
+- Slower than symmetric
+- Larger key sizes
+- Resource intensive
+
+#### Hybrid Approach
+- Use asymmetric to exchange symmetric key
+- Use symmetric for bulk data encryption
+- Combines advantages of both
+
+#### Key Sizes
+- 2048-bit RSA ≈ 112-bit symmetric strength
+- 3072-bit RSA ≈ 128-bit symmetric strength
+- 256-bit ECC ≈ 128-bit symmetric strength` },
+            { id: 'cr2', icon: '🔏', title: 'Hashing & Integrity', desc: 'Ensuring data integrity with hash functions.', summary: '• Hash Functions\n• Digital Signatures\n• HMAC', dive: `### Hashing & Data Integrity
+One-way functions creating fixed-size fingerprints of data.
+
+#### Hash Functions Characteristics
+- **One-way:** Cannot reverse hash to get original data
+- **Deterministic:** Same input always produces same hash
+- **Fixed output:** Hash size consistent regardless of input size
+- **Avalanche Effect:** Small input change produces completely different hash
+
+#### Common Hash Algorithms
+- **MD5:** 128-bit hash (DEPRECATED - collision vulnerabilities)
+- **SHA-1:** 160-bit hash (DEPRECATED - collision vulnerabilities)
+- **SHA-256:** 256-bit hash (NIST standard, currently secure)
+- **SHA-3:** Latest standard, resistant to all known attacks
+- **BLAKE2:** Faster than MD5, secure
+
+#### Hash Uses
+- **Password Storage:** Never store plaintext passwords
+- **File Integrity:** Verify files haven't been modified
+- **Digital Fingerprint:** Identify files uniquely
+- **CAPTCHA:** Verify human interaction
+
+#### Password Hashing
+- **Salting:** Adding random data before hashing (prevents rainbow tables)
+- **Slow hashing:** bcrypt, Argon2, scrypt (computational cost)
+- **Pepper:** Secret added to password (server-side salt)
+- **Stretching:** Running hash multiple times
+
+#### Digital Signatures
+Using asymmetric cryptography to verify authenticity and non-repudiation.
+
+1. Sender hashes message
+2. Sender encrypts hash with private key (creates signature)
+3. Recipient decrypts signature with sender's public key
+4. Recipient hashes message and compares
+
+#### HMAC (Hash-Based Message Authentication Code)
+- Uses symmetric key with hash function
+- Verifies both authenticity and integrity
+- Faster than digital signatures
+- Used in TLS, IPsec, APIs
+
+#### Collision Attacks
+- Finding two inputs with same hash
+- MD5 collisions practically possible
+- SHA-1 collisions now feasible
+- Reason for transition to SHA-256/SHA-3` },
+            { id: 'cr3', icon: '📜', title: 'Public Key Infrastructure (PKI)', desc: 'System for managing public key encryption.', summary: '• X.509 Certificates\n• Certificate Authority\n• Certificate Lifecycle', dive: `### Public Key Infrastructure (PKI)
+Framework for managing digital certificates and public key cryptography.
+
+#### X.509 Certificates
+Standard format for digital certificates containing:
+- **Subject:** Entity being certified (person, server, organization)
+- **Issuer:** Certificate Authority issuing cert
+- **Public Key:** Subject's public key
+- **Serial Number:** Unique identifier
+- **Validity Period:** Not Before and Not After dates
+- **Signature:** CA's digital signature (proof of authenticity)
+- **Extensions:** Additional fields (key usage, subject alt names)
+
+#### Certificate Authority (CA)
+- Trusted third party issuing certificates
+- Maintains Root CA (self-signed, highest level of trust)
+- Issues Intermediate CAs (issue end-entity certificates)
+- End-entity CAs (issue user/server certificates)
+
+#### Certificate Chain
+Browser verifies certificate chain up to trusted Root CA
+
+Example: Google.com Cert → Intermediate CA → Root CA (Google)
+
+#### Certificate Types
+- **Self-Signed:** Created and signed by the entity (no third-party validation)
+- **Publicly Trusted:** Signed by well-known CA (browsers trust automatically)
+- **Code Signing:** Verify software authenticity and integrity
+- **Extended Validation (EV):** Higher validation requirements, green bar in browser
+- **Wildcard (*.domain.com):** Covers all subdomains
+- **Multi-domain:** Covers multiple domains (SAN - Subject Alt Name)
+
+#### Certificate Lifecycle
+1. **Generation:** Create public/private key pair
+2. **Request:** CSR (Certificate Signing Request) to CA
+3. **Issuance:** CA validates and issues certificate
+4. **Distribution:** Obtaining issued certificate
+5. **Validation:** Ensuring certificate is valid
+6. **Revocation:** Removing certificate before expiration (CRL, OCSP)
+
+#### Certificate Revocation
+- **CRL (Certificate Revocation List):** Periodically updated list of revoked certs
+- **OCSP (Online Certificate Status Protocol):** Real-time revocation checking
+- **Reasons for Revocation:** Compromised key, incorrect info, superseded
+
+#### PKI Trust Models
+- **Hierarchical:** Single root CA (X.500, X.509)
+- **Mesh:** Multiple CAs trust each other (PGP model)
+- **Web of Trust:** Users sign each other's keys (PGP)` },
+            { id: 'cr4', icon: '🔑', title: 'Key Management', desc: 'Generating, storing, and protecting cryptographic keys.', summary: '• Key Generation\n• Key Storage & Protection\n• Key Rotation', dive: `### Key Management
+Entire lifecycle of cryptographic keys from generation to destruction.
+
+#### Key Generation
+- **Randomness:** Keys must be generated from strong random sources
+- **Key Length:** Longer keys = stronger but slower
+- **Algorithm:** Depends on intended use (encryption, signing, key exchange)
+- **Entropy:** Sufficient randomness to prevent guessing
+
+#### Key Storage
+- **Hardware Security Module (HSM):** Dedicated appliance for key storage
+  - FIPS 140-2 certified
+  - Tamper-resistant
+  - Prevents key extraction
+- **Key Management System (KMS):** Software solution for key management
+- **Encrypted Storage:** Keys encrypted when at rest
+- **Secure Deletion:** Overwriting memory/storage to prevent recovery
+
+#### Key Protection
+- **Access Control:** Only authorized people/systems access keys
+- **Separation of Duties:** No single person has all keys
+- **Escrow:** Backup copies stored securely for recovery
+- **Audit Logging:** Track all key access
+
+#### Key Rotation
+- **Frequency:** Time-based (annually) or event-based (compromise)
+- **Process:** Generate new key, re-encrypt data, retire old key
+- **Challenges:** Large data volumes, coordinating multiple systems
+- **Retention:** How long to keep old keys (for decryption of old data)
+
+#### Key Destruction
+- Physical destruction of media containing keys
+- Cryptographic overwriting of key material
+- Verification of destruction
+- Documentation of destruction process
+
+#### Shared Secrets
+- Pre-shared keys (PSK) distributed to parties
+- Symmetric key for VPNs, wireless encryption
+- Distribution challenge - secure initial distribution
+- Often combined with certificates for authentication
+
+#### Key Agreement Protocols
+- **Diffie-Hellman:** Two parties derive shared secret without prior shared key
+- **Elliptic Curve Diffie-Hellman (ECDH):** More efficient variant
+- **Forward Secrecy:** Using temporary keys for each session
+- **Perfect Forward Secrecy (PFS):** Session keys unrecoverable even if long-term key compromised
+
+#### Master Key vs Session Keys
+- **Master Key:** Long-term, high security, rarely used directly
+- **Session Keys:** Temporary, derived from master key, used for encryption
+- **Key Derivation:** Process of creating session keys from master key` },
+            { id: 'cr5', icon: '📡', title: 'Secure Protocols', desc: 'Cryptographic protocols for secure communication.', summary: '• TLS/SSL Handshake\n• IPsec\n• SSH & Secure Shell', dive: `### Secure Cryptographic Protocols
+Protocols combining encryption, hashing, and authentication for secure communication.
+
+#### TLS (Transport Layer Security)
+Modern evolution of SSL, provides encrypted communication over networks.
+
+**TLS Handshake:**
+1. **ClientHello:** Client offers TLS versions and cipher suites
+2. **ServerHello:** Server selects version and cipher suite
+3. **Server Authentication:** Server sends certificate
+4. **Key Exchange:** Parties negotiate session key
+5. **Cipher Spec:** Both parties start using negotiated security
+6. **Finished:** Both parties verify handshake completed successfully
+
+**TLS Record Protocol:**
+- Fragment application data into 16KB chunks
+- Compress (optional)
+- Encrypt with session key
+- Add message authentication code
+- Transmit
+
+#### TLS Cipher Suites
+Format: KeyExchange_Authentication_SymmetricEncryption_IntegrityAlgorithm
+
+Example: ECDHE_RSA_AES_256_GCM_SHA384
+- ECDHE: Elliptic Curve Diffie-Hellman Ephemeral (key exchange)
+- RSA: RSA authentication
+- AES_256_GCM: AES 256-bit in GCM mode (encryption)
+- SHA384: SHA-384 for integrity
+
+#### TLS Versions
+- **SSL 3.0:** Deprecated (POODLE attack)
+- **TLS 1.0:** Deprecated (BEAST, Lucky13 attacks)
+- **TLS 1.1:** Deprecated (BEAST vulnerable)
+- **TLS 1.2:** Secure, widely used
+- **TLS 1.3:** Latest, removed weak algorithms, 0-RTT
+
+#### IPsec (IP Security)
+Secures IP communications with encryption and authentication.
+
+**Modes:**
+- **Transport Mode:** Encrypts payload only (host to host)
+- **Tunnel Mode:** Encrypts entire IP packet (gateway to gateway, VPNs)
+
+**Components:**
+- **IKE (Internet Key Exchange):** Negotiates security parameters
+- **AH (Authentication Header):** Data integrity and authentication
+- **ESP (Encapsulating Security Payload):** Encryption and optional authentication
+
+#### SSH (Secure Shell)
+Remote access protocol using public-key cryptography.
+
+**Features:**
+- Public-key authentication (certificates or keypairs)
+- Symmetric encryption for session
+- Secure tunneling capabilities
+- Port forwarding for security
+
+#### DNSSEC
+Digital signatures for DNS responses preventing DNS spoofing.
+
+**Components:**
+- **DNSKEY:** Public keys for validating DNS records
+- **RRSIG:** Digital signatures on DNS record sets
+- **DS:** Delegation Signer (trust anchor)
+- **Chain of Trust:** Root → TLD → Authoritative nameservers` },
+            { id: 'cr6', icon: '🧮', title: 'Cryptanalysis & Attacks', desc: 'Breaking cryptography and defending against attacks.', summary: '• Cryptanalysis Methods\n• Side-Channel Attacks\n• Quantum Cryptography', dive: `### Cryptanalysis & Cryptographic Attacks
+Methods for breaking encryption and protecting against such attacks.
+
+#### Brute Force Attacks
+- Trying all possible keys until correct one found
+- **Complexity:** 2^(key length) attempts average
+- **256-bit AES:** Computationally infeasible with current technology
+- **Defense:** Use strong key lengths (AES-256, RSA-2048+)
+
+#### Frequency Analysis
+- Analyzing frequency of characters/patterns in ciphertext
+- Works against simple substitution ciphers
+- Defeated by modern encryption (appears random)
+
+#### Differential Cryptanalysis
+- Comparing encryption results with small input differences
+- Requires many plaintexts/ciphertexts
+- Led to design improvements in block ciphers
+
+#### Linear Cryptanalysis
+- Finding linear approximations to encryption functions
+- Weaknesses in stream ciphers
+- Requires massive amount of known plaintexts
+
+#### Side-Channel Attacks
+- Exploiting physical characteristics of encryption implementation
+- **Timing Attack:** Encryption time varies with key
+- **Power Analysis:** Power consumption varies with computations
+- **Electromagnetic Emissions:** RF radiation from processors
+- **Acoustic:** Sound patterns from CPU operations
+
+#### Man-in-the-Middle (MITM)
+- Attacker intercepts and modifies communications
+- **Defense:** Strong authentication, digital signatures, certificates
+
+#### Replay Attacks
+- Recording and retransmitting valid message
+- **Defense:** Timestamps, sequence numbers, nonces, TLS includes protection
+
+#### Downgrade Attacks
+- Forcing use of weaker encryption (SSLv3 vs TLS)
+- **Defense:** Disable weak protocols, use TLS 1.2+
+
+#### Quantum Computing Implications
+- **Threat to RSA:** Shor's algorithm can factor large numbers efficiently
+- **Threat to ECC:** Can solve discrete log problem
+- **Safe Algorithms:** AES, SHA still secure against quantum computers
+- **Post-Quantum Cryptography:** Lattice-based, code-based alternatives being researched
+
+#### Cryptographic Agility
+- Ability to quickly switch algorithms if one compromised
+- Important in face of quantum threat
+- Requires protocol flexibility and regular updates` }
+        ];
+
+        const allServices = [...threatsData, ...architectureData, ...implementationData, ...operationsData, ...governanceData, ...cryptographyData];
+
+        function handleSearch(query) {
+            const resultsBox = document.getElementById('search-results');
+            if (!query.trim()) {
+                resultsBox.classList.add('hidden');
+                return;
+            }
+
+            const filtered = allServices.filter(s => 
+                s.title.toLowerCase().includes(query.toLowerCase()) || 
+                s.desc.toLowerCase().includes(query.toLowerCase())
+            ).slice(0, 5);
+
+            if (filtered.length > 0) {
+                resultsBox.innerHTML = filtered.map(s => `
+                    <div onclick="showDive('${s.id}'); document.getElementById('global-search').value=''" class="p-4 hover:bg-slate-50 dark:hover:bg-slate-700 cursor-pointer border-b border-slate-100 dark:border-slate-700 last:border-0 flex items-center gap-3">
+                        <span class="text-xl">${s.icon}</span>
+                        <div>
+                            <div class="font-bold text-sm text-slate-800 dark:text-white">${s.title}</div>
+                            <div class="text-xs text-slate-500">${s.desc}</div>
+                        </div>
+                    </div>
+                `).join('');
+                resultsBox.classList.remove('hidden');
+            } else {
+                resultsBox.innerHTML = `<div class="p-4 text-xs text-slate-400">No results found.</div>`;
+                resultsBox.classList.remove('hidden');
+            }
+        }
+
+        // Logic for closing search when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!e.target.closest('#global-search')) {
+                document.getElementById('search-results').classList.add('hidden');
+            }
+        });
+
+        function toggleTheme() {
+            const html = document.documentElement;
+            const icon = document.getElementById('theme-icon');
+            if (html.classList.contains('dark')) {
+                html.classList.remove('dark');
+                icon.innerText = '☀️';
+            } else {
+                html.classList.add('dark');
+                icon.innerText = '🌙';
+            }
+        }
+
+        function createCard(c, borderColorClass, gradientFromClass) {
+            const textColorClass = borderColorClass.replace('border-', 'text-');
+            const bgColorClass = borderColorClass.replace('border-', 'bg-');
+            const hoverBgColorClass = `hover:${bgColorClass.replace('500', '700')}`;
+            return `
+            <div class="flip-card h-[320px] cursor-pointer group" onclick="this.classList.toggle('flipped')">
+                <div class="flip-card-inner h-full w-full relative transform-style-3d shadow-xl rounded-[1.5rem]">
+                    <div class="absolute inset-0 backface-hidden bg-white dark:bg-slate-800/60 backdrop-blur-xl rounded-[1.5rem] flex flex-col items-center justify-center p-6 border-2 border-slate-200 dark:border-slate-700/50 group-hover:border-brand-accent/50 transition-all">
+                        <div class="w-16 h-16 bg-gradient-to-br ${gradientFromClass} to-transparent rounded-2xl flex items-center justify-center text-3xl mb-4">${c.icon}</div>
+                        <h4 class="font-black text-lg text-slate-800 dark:text-white tracking-tight text-center">${c.title}</h4>
+                        <p class="text-slate-400 text-[10px] mt-2 uppercase tracking-[0.2em] font-black">Flip for Details</p>
+                    </div>
+                    <div class="absolute inset-0 backface-hidden rotate-y-180 bg-slate-900 dark:bg-slate-900 rounded-[1.5rem] flex flex-col p-6 border-2 ${borderColorClass}">
+                        <p class="text-xs font-black ${textColorClass} uppercase tracking-widest mb-2">${c.title}</p>
+                        <p class="text-slate-300 text-s mb-4 leading-relaxed line-clamp-2">${c.desc}</p>
+                        <div class="space-y-1.5 mb-4">
+                            ${c.summary.split('\n').map(line => `<div class="text-[12px] text-slate-400 font-medium">${line}</div>`).join('')}
+                        </div>
+                        <button onclick="event.stopPropagation(); showDive('${c.id}')" class="mt-auto w-full ${bgColorClass} text-white py-3 rounded-xl text-xs font-black transition-all ${hoverBgColorClass}">DEEP DIVE →</button>
+                    </div>
+                </div>
+            </div>`;
+        }
+
+        function renderAll() {
+            const grids = [
+                { id: 'threats-grid', data: threatsData, border: 'border-red-500', grad: 'from-red-500/20' },
+                { id: 'architecture-grid', data: architectureData, border: 'border-purple-500', grad: 'from-purple-500/20' },
+                { id: 'implementation-grid', data: implementationData, border: 'border-green-500', grad: 'from-green-500/20' },
+                { id: 'operations-grid', data: operationsData, border: 'border-orange-500', grad: 'from-orange-500/20' },
+                { id: 'governance-grid', data: governanceData, border: 'border-red-500', grad: 'from-red-500/20' },
+                { id: 'cryptography-grid', data: cryptographyData, border: 'border-blue-500', grad: 'from-blue-500/20' }
+            ];
+
+            grids.forEach(g => {
+                const el = document.getElementById(g.id);
+                if (el) el.innerHTML = g.data.map(d => createCard(d, g.border, g.grad)).join('');
+            });
+        }
+
+        function showDive(id) {
+            const c = allServices.find(x => x.id === id);
+            if(!c) return;
+
+            const grids = [
+                { data: threatsData, color: 'red-500' },
+                { data: architectureData, color: 'purple-500' },
+                { data: implementationData, color: 'green-500' },
+                { data: operationsData, color: 'orange-500' },
+                { data: governanceData, color: 'red-500' },
+                { data: cryptographyData, color: 'blue-500' }
+            ];
+
+            let domainColor = 'red-500'; // default to brand accent
+            for (const grid of grids) {
+                if (grid.data.some(item => item.id === id)) {
+                    domainColor = grid.color;
+                    break;
+                }
+            }
+
+            const textColorClass = `text-${domainColor}`;
+            const iconBgColorClass = `bg-${domainColor}/20`;
+
+            document.getElementById('m-title').innerText = c.title;
+            document.getElementById('m-icon').innerText = c.icon;
+            
+            const mIconBg = document.getElementById('m-icon-bg');
+            const mSubtitle = document.querySelector('#deep-dive-modal p.uppercase');
+
+            // Reset classes by removing all possible color classes
+            const colors = ['red-500', 'purple-500', 'green-500', 'orange-500', 'blue-500'];
+            const textColors = colors.map(c => `text-${c}`);
+            const bgColors = colors.map(c => `bg-${c}/20`);
+            
+            mIconBg.classList.remove(...bgColors, 'bg-brand-accent/20');
+            mIconBg.classList.add(iconBgColorClass);
+            
+            mSubtitle.classList.remove(...textColors, 'text-brand-accent');
+            mSubtitle.classList.add(textColorClass);
+
+            document.getElementById('m-content').innerHTML = marked.parse(c.dive);
+            const m = document.getElementById('deep-dive-modal');
+            m.classList.add('active');
+            setTimeout(() => { m.classList.add('opacity-100'); m.querySelector('div').classList.add('scale-100'); }, 10);
+        }
+
+        function closeModal(e) { if(e) e.stopPropagation(); const m = document.getElementById('deep-dive-modal'); m.classList.remove('opacity-100'); m.querySelector('div').classList.remove('scale-100'); setTimeout(() => m.classList.remove('active'), 300); }
+
+        function goHome() {
+            const isOnDashboard = !document.getElementById('section-home').classList.contains('hidden');
+            if (isOnDashboard) {
+                window.location.href = 'index.html';
+            } else {
+                navigateTo('section-home');
+            }
+        }
+        
+        function openSidebar() { document.getElementById('sidebar-overlay').classList.remove('hidden'); setTimeout(() => { document.getElementById('sidebar-overlay').classList.remove('opacity-0'); document.getElementById('left-sidebar').classList.remove('-translate-x-full'); }, 10); }
+        function closeSidebar() { document.getElementById('sidebar-overlay').classList.add('opacity-0'); document.getElementById('left-sidebar').classList.add('-translate-x-full'); setTimeout(() => { document.getElementById('sidebar-overlay').classList.add('hidden'); }, 300); }
+
+        function navigateTo(targetId) {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            document.querySelectorAll('.content-section').forEach(s => s.classList.add('hidden'));
+            document.getElementById(targetId).classList.remove('hidden');
+            document.querySelectorAll('.nav-btn').forEach(x => { x.classList.remove('bg-brand-accent', 'text-white'); x.classList.add('text-slate-500'); });
+            const btn = document.querySelector(`.nav-btn[data-target="${targetId}"]`);
+            if (btn) { btn.classList.add('bg-brand-accent', 'text-white'); btn.classList.remove('text-slate-500'); }
+            closeSidebar();
+        }
+
+        window.onload = renderAll;
+    </script>
+
+
+</body></html>
