@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Azure AZ-900 - Master Study Guide</title>
+    <link rel="icon" type="image/x-icon" href="images/azure.ico">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            accent: '#0078D4',
+                            accentHover: '#005A9E',
+                            dark: '#0f172a'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap');
+        body { font-family: 'Inter', sans-serif; transition: background-color 0.3s ease; }
+        
+        .perspective-1000 { perspective: 1000px; }
+        .transform-style-3d { transform-style: preserve-3d; }
+        .backface-hidden { backface-visibility: hidden; -webkit-backface-visibility: hidden; }
+        .rotate-y-180 { transform: rotateY(180deg); }
+        .flip-card-inner { transition: transform 0.8s cubic-bezier(0.34, 1.56, 0.64, 1); transform-style: preserve-3d; }
+        .flip-card.flipped .flip-card-inner { transform: rotateY(180deg); }
+        
+        .fade-in { animation: fadeIn 0.4s ease-out forwards; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        
+        .md-content h3 { font-weight: 800; font-size: 1.5rem; margin-top: 1rem; margin-bottom: 1rem; color: #0078D4; border-left: 5px solid #0078D4; padding-left: 1rem; }
+        .md-content h4 { font-weight: 700; font-size: 1.1rem; margin-top: 1.5rem; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.05em; }
+        .md-content p { margin-bottom: 1rem; line-height: 1.8; font-size: 1.05rem; }
+        .md-content ul { list-style-type: none; margin-bottom: 1.5rem; }
+        .md-content li { margin-bottom: 0.75rem; position: relative; padding-left: 1.75rem; line-height: 1.6; }
+        .md-content li::before { content: "✦"; position: absolute; left: 0; color: #0078D4; font-weight: bold; }
+        
+        .custom-scrollbar::-webkit-scrollbar { width: 8px; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: rgba(0,0,0,0.05); }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: #475569; border-radius: 10px; }
+        
+        #deep-dive-modal.active { display: flex !important; }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+
+        .highlight { background-color: rgba(0, 120, 212, 0.3); border-radius: 4px; padding: 0 2px; }
+    </style>
+</head>
+<body class="min-h-screen bg-slate-50 dark:bg-[#0f172a] text-slate-900 dark:text-slate-200 antialiased overflow-x-hidden">
+
+    <header class="sticky top-0 z-40 bg-white/80 dark:bg-[#0f172a]/80 backdrop-blur-xl border-b border-slate-200 dark:border-slate-800 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 h-20 grid grid-cols-3 items-center gap-4">
+            <div class="flex items-center justify-start gap-4">
+                <a href="index.html" class="hidden sm:flex p-2.5 bg-slate-100 dark:bg-slate-800 rounded-xl hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors shrink-0 text-slate-500 dark:text-slate-400 hover:text-brand-accent dark:hover:text-brand-accent items-center justify-center" title="Home">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1m-6 0h6"></path></svg>
+                </a>
+                <button onclick="openSidebar()" class="p-2.5 px-4 bg-slate-100 dark:bg-slate-800 rounded-xl hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors shrink-0 flex items-center gap-2 text-slate-700 dark:text-slate-300">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+                    <span class="font-bold text-sm hidden sm:block">Menu</span>
+                </button>
+            </div>
+
+            <div onclick="navigateTo('section-home')" class="flex items-center justify-center gap-3 cursor-pointer group">
+                <div class="hidden lg:block">
+                    <h1 class="text-xl font-extrabold tracking-tighter text-slate-900 dark:text-white group-hover:text-brand-accent transition-colors">Master Azure</h1>
+                </div>
+            </div>
+
+            <div class="flex items-center justify-end gap-3">
+                <div class="relative hidden md:block w-full max-w-[160px] lg:max-w-[200px]">
+                    <input type="text" id="global-search" oninput="handleSearch(this.value)" placeholder="Search..." class="w-full bg-slate-100 dark:bg-slate-800 border-none rounded-2xl px-4 py-2 text-sm focus:ring-2 focus:ring-brand-accent outline-none transition-all">
+                    <div id="search-results" class="absolute top-full right-0 w-[300px] mt-2 bg-white dark:bg-slate-800 rounded-2xl shadow-2xl border border-slate-200 dark:border-slate-700 hidden overflow-hidden z-50 text-left">
+                    </div>
+                </div>
+                <button onclick="toggleTheme()" class="p-2.5 bg-slate-100 dark:bg-slate-800 rounded-xl hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors shrink-0">
+                    <span id="theme-icon">🌙</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <div id="sidebar-overlay" class="fixed inset-0 bg-slate-900/40 backdrop-blur-sm z-[55] hidden opacity-0 transition-opacity duration-300" onclick="closeSidebar()"></div>
+    
+    <aside id="left-sidebar" class="fixed top-0 left-0 h-full w-72 bg-white dark:bg-[#0f172a] border-r border-slate-200 dark:border-slate-800 shadow-[0_0_50px_rgba(0,0,0,0.3)] z-[60] transform -translate-x-full transition-transform duration-300 flex flex-col">
+        <div class="p-6 flex justify-between items-center border-b border-slate-200 dark:border-slate-800">
+            <span class="font-black text-sm text-slate-400 uppercase tracking-widest">Navigation</span>
+            <button onclick="closeSidebar()" class="text-slate-400 hover:text-brand-accent transition-colors text-3xl">&times;</button>
+        </div>
+        
+        <nav class="flex flex-col gap-1 p-4 overflow-y-auto custom-scrollbar flex-grow">
+            <button data-target="section-home" onclick="navigateTo('section-home')" class="nav-btn text-left px-4 py-2 rounded-xl text-base font-bold transition-all text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800">Dashboard</button>
+            
+            <span class="px-4 text-base font-black text-slate-800 dark:text-slate-200 tracking-wide mt-4 mb-1">Foundations</span>
+            <button data-target="section-concepts" onclick="navigateTo('section-concepts')" class="nav-btn text-left pl-8 pr-4 py-2 rounded-xl text-sm font-semibold transition-all text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800">Cloud Concepts</button>
+            
+            <span class="px-4 text-base font-black text-slate-800 dark:text-slate-200 tracking-wide mt-6 mb-1">Technical Domains</span>
+            <button data-target="section-compute" onclick="navigateTo('section-compute')" class="nav-btn text-left pl-8 pr-4 py-2 rounded-xl text-sm font-semibold transition-all text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800">Compute & Containers</button>
+            <button data-target="section-storage" onclick="navigateTo('section-storage')" class="nav-btn text-left pl-8 pr-4 py-2 rounded-xl text-sm font-semibold transition-all text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800">Storage Services</button>
+            <button data-target="section-database" onclick="navigateTo('section-database')" class="nav-btn text-left pl-8 pr-4 py-2 rounded-xl text-sm font-semibold transition-all text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800">Databases & Analytics</button>
+            <button data-target="section-network" onclick="navigateTo('section-network')" class="nav-btn text-left pl-8 pr-4 py-2 rounded-xl text-sm font-semibold transition-all text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800">Networking</button>
+            
+            <span class="px-4 text-base font-black text-slate-800 dark:text-slate-200 tracking-wide mt-6 mb-1">Management & Security</span>
+            <button data-target="section-security" onclick="navigateTo('section-security')" class="nav-btn text-left pl-8 pr-4 py-2 rounded-xl text-sm font-semibold transition-all text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800">Identity & Security</button>
+            <button data-target="section-mgmt" onclick="navigateTo('section-mgmt')" class="nav-btn text-left pl-8 pr-4 py-2 rounded-xl text-sm font-semibold transition-all text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800">Management & Governance</button>
+            
+            <a href="index.html" class="text-left px-4 py-2 rounded-xl text-sm font-bold transition-all text-brand-accent hover:bg-slate-100 dark:hover:bg-slate-800 mb-2">← Back to Main Menu</a>
+        </nav>
+    </aside>
+
+    <main class="max-w-7xl mx-auto px-4 py-12">
+        
+        <section id="section-home" class="content-section fade-in">
+            <div class="text-center mb-16 mt-8">
+                <div class="inline-block px-4 py-1.5 rounded-full bg-brand-accent/10 border border-brand-accent/20 text-brand-accent font-bold text-xs tracking-widest uppercase mb-6">Microsoft Azure Fundamentals</div>
+                <h2 class="text-5xl md:text-7xl font-black mb-6 tracking-tight text-slate-900 dark:text-white">Master Azure.</h2>
+                <p class="text-slate-500 dark:text-slate-400 text-lg md:text-xl max-w-3xl mx-auto leading-relaxed">The definitive interactive guide for the AZ-900 exam. Select a domain below to explore core services and architectural principles.</p>
+            </div>
+
+            <div class="mb-12">
+                <h3 class="text-sm font-black text-slate-400 uppercase tracking-widest mb-6 pl-2 border-l-4 border-teal-500">Foundations</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <div onclick="navigateTo('section-concepts')" class="bg-white dark:bg-slate-800/40 p-8 rounded-[2rem] border border-slate-200 dark:border-slate-700/50 shadow-xl cursor-pointer hover:-translate-y-2 hover:border-teal-500/50 transition-all group">
+                        <div class="w-14 h-14 bg-teal-500/10 rounded-2xl flex items-center justify-center text-3xl mb-6 group-hover:scale-110 transition-transform">🧠</div>
+                        <h3 class="text-xl font-black mb-2 text-slate-800 dark:text-white">Cloud Concepts</h3>
+                        <p class="text-slate-500 dark:text-slate-400 text-sm leading-relaxed">CapEx vs OpEx, IaaS/PaaS/SaaS, Public/Private/Hybrid Cloud.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mb-12">
+                <h3 class="text-sm font-black text-slate-400 uppercase tracking-widest mb-6 pl-2 border-l-4 border-blue-500">Technical Domains</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <div onclick="navigateTo('section-compute')" class="bg-white dark:bg-slate-800/40 p-8 rounded-[2rem] border border-slate-200 dark:border-slate-700/50 shadow-xl cursor-pointer hover:-translate-y-2 hover:border-blue-500/50 transition-all group">
+                        <div class="w-14 h-14 bg-blue-500/10 rounded-2xl flex items-center justify-center text-3xl mb-6 group-hover:scale-110 transition-transform">💻</div>
+                        <h3 class="text-xl font-black mb-2 text-slate-800 dark:text-white">Compute & Containers</h3>
+                        <p class="text-slate-500 dark:text-slate-400 text-sm leading-relaxed">VMs, App Services, ACI, AKS, and Azure Functions.</p>
+                    </div>
+                    
+                    <div onclick="navigateTo('section-storage')" class="bg-white dark:bg-slate-800/40 p-8 rounded-[2rem] border border-slate-200 dark:border-slate-700/50 shadow-xl cursor-pointer hover:-translate-y-2 hover:border-green-500/50 transition-all group">
+                        <div class="w-14 h-14 bg-green-500/10 rounded-2xl flex items-center justify-center text-3xl mb-6 group-hover:scale-110 transition-transform">🗄️</div>
+                        <h3 class="text-xl font-black mb-2 text-slate-800 dark:text-white">Storage Services</h3>
+                        <p class="text-slate-500 dark:text-slate-400 text-sm leading-relaxed">Blob, Disk, File, Archive, and Data Box solutions.</p>
+                    </div>
+                    
+                    <div onclick="navigateTo('section-database')" class="bg-white dark:bg-slate-800/40 p-8 rounded-[2rem] border border-slate-200 dark:border-slate-700/50 shadow-xl cursor-pointer hover:-translate-y-2 hover:border-cyan-500/50 transition-all group">
+                        <div class="w-14 h-14 bg-cyan-500/10 rounded-2xl flex items-center justify-center text-3xl mb-6 group-hover:scale-110 transition-transform">🗃️</div>
+                        <h3 class="text-xl font-black mb-2 text-slate-800 dark:text-white">Databases</h3>
+                        <p class="text-slate-500 dark:text-slate-400 text-sm leading-relaxed">Cosmos DB, Azure SQL, and Open Source DBs.</p>
+                    </div>
+
+                    <div onclick="navigateTo('section-network')" class="bg-white dark:bg-slate-800/40 p-8 rounded-[2rem] border border-slate-200 dark:border-slate-700/50 shadow-xl cursor-pointer hover:-translate-y-2 hover:border-purple-500/50 transition-all group">
+                        <div class="w-14 h-14 bg-purple-500/10 rounded-2xl flex items-center justify-center text-3xl mb-6 group-hover:scale-110 transition-transform">🌐</div>
+                        <h3 class="text-xl font-black mb-2 text-slate-800 dark:text-white">Networking</h3>
+                        <p class="text-slate-500 dark:text-slate-400 text-sm leading-relaxed">VNets, VPNs, ExpressRoute, and Load Balancing.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mb-12">
+                <h3 class="text-sm font-black text-slate-400 uppercase tracking-widest mb-6 pl-2 border-l-4 border-pink-500">Management & Security</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <div onclick="navigateTo('section-security')" class="bg-white dark:bg-slate-800/40 p-8 rounded-[2rem] border border-slate-200 dark:border-slate-700/50 shadow-xl cursor-pointer hover:-translate-y-2 hover:border-red-500/50 transition-all group">
+                        <div class="w-14 h-14 bg-red-500/10 rounded-2xl flex items-center justify-center text-3xl mb-6 group-hover:scale-110 transition-transform">🛡️</div>
+                        <h3 class="text-xl font-black mb-2 text-slate-800 dark:text-white">Identity & Security</h3>
+                        <p class="text-slate-500 dark:text-slate-400 text-sm leading-relaxed">Entra ID, RBAC, Zero Trust, Defender for Cloud.</p>
+                    </div>
+
+                    <div onclick="navigateTo('section-mgmt')" class="bg-white dark:bg-slate-800/40 p-8 rounded-[2rem] border border-slate-200 dark:border-slate-700/50 shadow-xl cursor-pointer hover:-translate-y-2 hover:border-pink-500/50 transition-all group">
+                        <div class="w-14 h-14 bg-pink-500/10 rounded-2xl flex items-center justify-center text-3xl mb-6 group-hover:scale-110 transition-transform">⚙️</div>
+                        <h3 class="text-xl font-black mb-2 text-slate-800 dark:text-white">Management & Gov</h3>
+                        <p class="text-slate-500 dark:text-slate-400 text-sm leading-relaxed">Azure Monitor, Policy, Cost Management.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Dynamic Sections -->
+        <section id="section-concepts" class="content-section hidden fade-in">
+            <div class="mb-12 text-center md:text-left"><h2 class="text-4xl font-black mb-2 text-teal-500">Cloud Concepts</h2></div>
+            <div id="concepts-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+        </section>
+
+        <section id="section-compute" class="content-section hidden fade-in">
+            <div class="mb-12 text-center md:text-left"><h2 class="text-4xl font-black mb-2 text-blue-500">Compute Services</h2></div>
+            <div id="compute-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+        </section>
+        
+        <section id="section-storage" class="content-section hidden fade-in">
+            <div class="mb-12 text-center md:text-left"><h2 class="text-4xl font-black mb-2 text-green-500">Storage Services</h2></div>
+            <div id="storage-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+        </section>
+
+        <section id="section-database" class="content-section hidden fade-in">
+            <div class="mb-12 text-center md:text-left"><h2 class="text-4xl font-black mb-2 text-cyan-500">Database Services</h2></div>
+            <div id="database-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+        </section>
+
+        <section id="section-network" class="content-section hidden fade-in">
+            <div class="mb-12 text-center md:text-left"><h2 class="text-4xl font-black mb-2 text-purple-500">Networking</h2></div>
+            <div id="network-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+        </section>
+
+        <section id="section-security" class="content-section hidden fade-in">
+            <div class="mb-12 text-center md:text-left"><h2 class="text-4xl font-black mb-2 text-red-500">Identity & Security</h2></div>
+            <div id="security-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+        </section>
+
+        <section id="section-mgmt" class="content-section hidden fade-in">
+            <div class="mb-12 text-center md:text-left"><h2 class="text-4xl font-black mb-2 text-pink-500">Management & Governance</h2></div>
+            <div id="mgmt-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+        </section>
+
+    </main>
+
+    <!-- Deep Dive Modal -->
+    <div id="deep-dive-modal" class="fixed inset-0 z-[100] hidden items-center justify-center bg-slate-950/80 backdrop-blur-md p-4 opacity-0 transition-all duration-300" onclick="closeModal(event)">
+        <div class="bg-white dark:bg-slate-900 w-full max-w-3xl rounded-[2.5rem] shadow-2xl overflow-hidden transform scale-90 transition-all duration-300 border border-slate-200 dark:border-slate-800 flex flex-col max-h-[90vh]" onclick="event.stopPropagation()">
+            <div class="p-8 md:p-10 border-b border-slate-100 dark:border-slate-800 flex justify-between items-center bg-slate-50/50 dark:bg-slate-800/30 shrink-0">
+                <div class="flex items-center gap-6">
+                    <div id="m-icon-bg" class="p-5 bg-brand-accent/20 rounded-3xl text-4xl md:text-5xl"><span id="m-icon"></span></div>
+                    <div>
+                        <h3 id="m-title" class="text-3xl md:text-4xl font-black text-slate-900 dark:text-white"></h3>
+                        <p class="text-brand-accent text-sm font-bold uppercase tracking-widest mt-1">Technical Reference</p>
+                    </div>
+                </div>
+                <button onclick="closeModal()" class="w-12 h-12 flex items-center justify-center rounded-full bg-slate-100 dark:bg-slate-800 text-slate-500 hover:text-brand-accent transition-all text-3xl shrink-0">&times;</button>
+            </div>
+            <div id="m-content" class="p-8 md:p-12 overflow-y-auto md-content custom-scrollbar bg-white dark:bg-slate-900 flex-grow"></div>
+        </div>
+    </div>
+
+    <script>
+        // AZURE DATA OBJECTS
+        const conceptsData = [
+            { id: 'c1', icon: '☁️', title: 'Cloud Models', desc: 'Public, Private, and Hybrid Cloud.', summary: '• Public (Multi-tenant)\n• Private (Single-tenant)\n• Hybrid (Best of both)', dive: `### Cloud Computing Models\n\n#### Public Cloud\nOwned by cloud services providers (like Microsoft). Resources are delivered over the internet. You share the same hardware/network with other organizations (multi-tenant).\n\n#### Private Cloud\nOwned and used by a single organization. It can be physically located at your organization's on-site datacenter or hosted by a third-party service provider.\n\n#### Hybrid Cloud\nCombines public and private clouds, allowing data and applications to be shared between them. It gives you greater flexibility and more deployment options.` },
+            { id: 'c2', icon: '💼', title: 'Service Models', desc: 'IaaS, PaaS, SaaS.', summary: '• IaaS (Infrastructure)\n• PaaS (Platform)\n• SaaS (Software)', dive: `### Cloud Service Models\n\n#### IaaS (Infrastructure as a Service)\nProvides basic computing infrastructure: servers, storage, and networking. You manage the OS and everything above it. Example: **Azure Virtual Machines**.\n\n#### PaaS (Platform as a Service)\nProvides a complete development and deployment environment. You just bring your code and data. Example: **Azure App Service**.\n\n#### SaaS (Software as a Service)\nA complete product that is run and managed by the service provider. Example: **Microsoft 365**.` },
+            { id: 'c3', icon: '📈', title: 'High Availability', desc: 'Keep your apps running.', summary: '• Avoid downtime\n• Redundancy\n• SLAs', dive: `### High Availability (HA)\n\nEnsuring that your application remains accessible and operational, even if certain components fail.\n\n- Uses redundancy across hardware, power, and networking.\n- Measured in "Nines" (e.g., 99.9% uptime implies about 43 minutes of allowed downtime per month).` },
+            { id: 'c4', icon: '⚙️', title: 'Scalability vs Elasticity', desc: 'Handling load effectively.', summary: '• Vertical (Scale up)\n• Horizontal (Scale out)\n• Elasticity (Auto)', dive: `### Scalability & Elasticity\n\n#### Scalability\nThe ability to increase or decrease resources to meet demand.\n- **Vertical Scaling (Scale Up):** Adding more power (CPU, RAM) to an existing machine.\n- **Horizontal Scaling (Scale Out):** Adding more machines to distribute the load.\n\n#### Elasticity\nThe ability of a system to *automatically* or dynamically scale resources up or down as needed (e.g., VM Scale Sets).` },
+            { id: 'c5', icon: '💰', title: 'CapEx vs OpEx', desc: 'Cloud financial models.', summary: '• CapEx (Upfront cost)\n• OpEx (Pay-as-you-go)\n• Consumption based', dive: `### Capital Expenditure (CapEx) vs Operational Expenditure (OpEx)\n\n#### CapEx\nThe upfront spending of money on physical infrastructure (buying servers). The cost is deducted over time. High initial investment.\n\n#### OpEx\nSpending money on services or products as you use them. You are billed based on consumption. This is the model the cloud uses.` }
+        ];
+
+        const computeData = [
+            { id: 'cm1', icon: '💻', title: 'Azure VMs', desc: 'Virtual Machines (IaaS).', summary: '• IaaS\n• Full OS control\n• Windows or Linux', dive: `### Azure Virtual Machines\nSoftware emulations of physical computers. They provide Infrastructure as a Service (IaaS) and can run Windows or Linux.\n\nYou have total control over the OS, but you are responsible for patching, updates, and maintenance.\n\nUse when you need custom software, specific OS configurations, or are lifting-and-shifting legacy apps.` },
+            { id: 'cm2', icon: '🖥️', title: 'VM Scale Sets', desc: 'Auto-scaling identical VMs.', summary: '• High Availability\n• Auto-scaling\n• Load balanced', dive: `### Azure Virtual Machine Scale Sets\nLet you create and manage a group of identical, load-balanced VMs.\n\n- Scale sets allow you to centrally manage, configure, and update a large number of VMs.\n- Provide true elasticity: automatically increase the number of VM instances as demand goes up, and decrease as demand goes down.` },
+            { id: 'cm3', icon: '🌐', title: 'Azure App Service', desc: 'PaaS for web apps.', summary: '• PaaS\n• Build web apps/APIs\n• Auto-scaling', dive: `### Azure App Service\nA fully managed Platform as a Service (PaaS) for building, deploying, and scaling web apps, REST APIs, and mobile back ends.\n\n- You focus on your code (supports .NET, .NET Core, Java, Ruby, Node.js, PHP, or Python).\n- Azure manages the underlying infrastructure (servers, OS patching, load balancing).` },
+            { id: 'cm4', icon: '⚡', title: 'Azure Functions', desc: 'Serverless compute.', summary: '• Serverless\n• Event-driven\n• Pay-per-execution', dive: `### Azure Functions\nA serverless compute service that lets you run event-triggered code without having to explicitly provision or manage infrastructure.\n\n- **Event-Driven:** Runs only when triggered by events (e.g., HTTP request, message in a queue, timer).\n- **Micro-billing:** You only pay for the exact time your code runs.` },
+            { id: 'cm5', icon: '🐳', title: 'ACI & AKS', desc: 'Containers in Azure.', summary: '• ACI (Simple containers)\n• AKS (Kubernetes)\n• Microservices', dive: `### Azure Container Instances (ACI) & Azure Kubernetes Service (AKS)\n\n#### Azure Container Instances (ACI)\nThe fastest and simplest way to run a container in Azure, without having to manage any virtual machines or adopt a higher-level service.\n\n#### Azure Kubernetes Service (AKS)\nA managed container orchestration service based on Kubernetes. Use it for complex, multi-container applications (microservices) requiring scaling and management.` }
+        ];
+
+        const storageData = [
+            { id: 's1', icon: '🪣', title: 'Blob Storage', desc: 'Object storage for unstructured data.', summary: '• Unstructured data\n• Images, Videos, Logs\n• Access Tiers', dive: `### Azure Blob Storage\nMicrosoft's object storage solution for the cloud. Optimized for storing massive amounts of unstructured data (data that doesn't adhere to a particular data model or definition, such as text or binary data).\n\n**Access Tiers:**\n- **Hot:** Optimized for storing data that is accessed frequently.\n- **Cool:** Optimized for data that is infrequently accessed and stored for at least 30 days.\n- **Archive:** Optimized for data that is rarely accessed and stored for at least 180 days (cheapest storage, highest retrieval cost).` },
+            { id: 's2', icon: '💿', title: 'Disk Storage', desc: 'Block storage for Azure VMs.', summary: '• Attached to VMs\n• Persistent storage\n• SSDs and HDDs', dive: `### Azure Disk Storage\nProvides disks for Azure Virtual Machines. These act like physical hard drives in an on-premises server.\n\n- **Managed Disks:** Azure manages the physical storage infrastructure behind the scenes.\n- Used for storing OS files and applications requiring persistent block storage.` },
+            { id: 's3', icon: '📁', title: 'Azure Files', desc: 'Managed file shares.', summary: '• SMB/NFS protocols\n• Shared across VMs\n• On-prem mounting', dive: `### Azure Files\nOffers fully managed file shares in the cloud that are accessible via the industry standard Server Message Block (SMB) protocol or Network File System (NFS) protocol.\n\n- Can be mounted concurrently by cloud or on-premises deployments of Windows, Linux, and macOS.` }
+        ];
+
+        const databaseData = [
+            { id: 'd1', icon: '🗄️', title: 'Azure SQL Database', desc: 'Managed relational SQL DB.', summary: '• Relational Database\n• PaaS\n• Auto-patching', dive: `### Azure SQL Database\nA fully managed Platform as a Service (PaaS) database engine that handles most of the database management functions such as upgrading, patching, backups, and monitoring without user involvement.\n\n- Built on the latest stable version of the Microsoft SQL Server database engine.\n- Provides built-in high availability, intelligent performance tuning, and advanced security.` },
+            { id: 'd2', icon: '🪐', title: 'Azure Cosmos DB', desc: 'Fast NoSQL database.', summary: '• NoSQL\n• Globally distributed\n• Low latency', dive: `### Azure Cosmos DB\nA fully managed NoSQL database service for modern app development.\n\n- **Global Distribution:** You can replicate your data across multiple Azure regions with a click of a button.\n- Extremely low latency (single-digit millisecond response times).\n- Supports multiple APIs including SQL, MongoDB, Cassandra, Tables, and Gremlin.` }
+        ];
+
+        const networkData = [
+            { id: 'n1', icon: '🌐', title: 'Azure VNet', desc: 'Virtual Networks in Azure.', summary: '• Private networks\n• Subnets\n• Peering', dive: `### Azure Virtual Network (VNet)\nThe fundamental building block for your private network in Azure. VNet enables many types of Azure resources (like VMs) to securely communicate with each other, the internet, and on-premises networks.\n\n- **Subnets:** Divide VNets into segments.\n- **VNet Peering:** Connect two VNets together so resources can communicate using Microsoft's private backbone network.` },
+            { id: 'n2', icon: '🔌', title: 'VPN & ExpressRoute', desc: 'Connecting on-prem to Azure.', summary: '• VPN (Over Internet)\n• ExpressRoute (Private)\n• Hybrid networking', dive: `### VPN Gateway & Azure ExpressRoute\n\n#### Azure VPN Gateway\nSends encrypted traffic between an Azure virtual network and an on-premises location over the public internet.\n\n#### Azure ExpressRoute\nLets you extend your on-premises networks into the Microsoft cloud over a **private connection** facilitated by a connectivity provider. It does not go over the public internet, offering more reliability, faster speeds, and lower latencies.` }
+        ];
+
+        const securityData = [
+            { id: 'sec1', icon: '🛡️', title: 'Microsoft Entra ID', desc: 'Identity and Access Management.', summary: '• Formerly Azure AD\n• SSO & MFA\n• Conditional Access', dive: `### Microsoft Entra ID (formerly Azure Active Directory)\nMicrosoft's cloud-based identity and access management service.\n\n- Helps your employees sign in and access internal and external resources.\n- Core features include **Single Sign-On (SSO)**, **Multi-Factor Authentication (MFA)**, and **Conditional Access** (applying smart rules before granting access, like enforcing MFA if the user logs in from an unknown location).` },
+            { id: 'sec2', icon: '🔒', title: 'RBAC', desc: 'Role-Based Access Control.', summary: '• Authorization system\n• Principle of Least Privilege\n• Built-in roles', dive: `### Azure Role-Based Access Control (RBAC)\nA system that provides fine-grained access management to Azure resources.\n\n- You use RBAC to segregate duties within your team and grant only the amount of access to users that they need to perform their jobs (Principle of Least Privilege).\n- For example: Allow one employee to manage VMs, and another to manage SQL databases.` },
+            { id: 'sec3', icon: '🏰', title: 'Defender for Cloud', desc: 'Cloud Security Posture Management.', summary: '• Security Posture\n• Threat protection\n• Secure Score', dive: `### Microsoft Defender for Cloud\nA tool for security posture management and threat protection.\n\n- It strengthens the security posture of your cloud resources.\n- Provides a **Secure Score** that evaluates your security situation and provides recommendations for improvement.\n- Uses advanced threat protection to detect and resolve threats.` }
+        ];
+
+        const mgmtData = [
+            { id: 'mg1', icon: '👁️', title: 'Azure Monitor', desc: 'Full-stack monitoring.', summary: '• Metrics & Logs\n• Application Insights\n• Alerts', dive: `### Azure Monitor\nA comprehensive solution for collecting, analyzing, and acting on telemetry from your cloud and on-premises environments.\n\n- Collects both **Metrics** (numerical values at a point in time) and **Logs** (events and records).\n- Allows you to set up automated alerts.\n- Includes **Application Insights** for monitoring live web applications.` },
+            { id: 'mg2', icon: '📜', title: 'Azure Policy', desc: 'Enforce corporate rules.', summary: '• Compliance\n• Prevent unauthorized resources\n• Automated remediation', dive: `### Azure Policy\nA service in Azure that you use to create, assign, and manage policies. These policies enforce different rules and effects over your resources, so those resources stay compliant with your corporate standards and service level agreements.\n\n- Example: A policy that prevents anyone from creating a VM that doesn't have an "Environment" tag, or restricting VM creation to specific regions.` },
+            { id: 'mg3', icon: '💵', title: 'Cost Management', desc: 'Monitor and control Azure spending.', summary: '• Track costs\n• Set budgets\n• Cost alerts', dive: `### Azure Cost Management and Billing\nA suite of tools provided by Microsoft that help you analyze, manage, and optimize the costs of your Azure workloads.\n\n- Perform cost analysis to visualize spending.\n- Create **Budgets** to set spending limits.\n- Set up alerts when spending exceeds thresholds.\n- Provides recommendations via Azure Advisor to reduce costs.` }
+        ];
+
+        const allServices = [...conceptsData, ...computeData, ...storageData, ...databaseData, ...networkData, ...securityData, ...mgmtData];
+
+        function handleSearch(query) {
+            const resultsBox = document.getElementById('search-results');
+            if (!query.trim()) {
+                resultsBox.classList.add('hidden');
+                return;
+            }
+
+            const filtered = allServices.filter(s => 
+                s.title.toLowerCase().includes(query.toLowerCase()) || 
+                s.desc.toLowerCase().includes(query.toLowerCase())
+            ).slice(0, 5);
+
+            if (filtered.length > 0) {
+                resultsBox.innerHTML = filtered.map(s => `
+                    <div onclick="showDive('${s.id}'); document.getElementById('global-search').value=''" class="p-4 hover:bg-slate-50 dark:hover:bg-slate-700 cursor-pointer border-b border-slate-100 dark:border-slate-700 last:border-0 flex items-center gap-3">
+                        <span class="text-xl">${s.icon}</span>
+                        <div>
+                            <div class="font-bold text-sm text-slate-800 dark:text-white">${s.title}</div>
+                            <div class="text-xs text-slate-500">${s.desc}</div>
+                        </div>
+                    </div>
+                `).join('');
+                resultsBox.classList.remove('hidden');
+            } else {
+                resultsBox.innerHTML = `<div class="p-4 text-xs text-slate-400">No results found.</div>`;
+                resultsBox.classList.remove('hidden');
+            }
+        }
+
+        document.addEventListener('click', (e) => {
+            if (!e.target.closest('#global-search')) {
+                document.getElementById('search-results').classList.add('hidden');
+            }
+        });
+
+        function toggleTheme() {
+            const html = document.documentElement;
+            const icon = document.getElementById('theme-icon');
+            if (html.classList.contains('dark')) {
+                html.classList.remove('dark');
+                icon.innerText = '☀️';
+            } else {
+                html.classList.add('dark');
+                icon.innerText = '🌙';
+            }
+        }
+
+        function createCard(c, borderColorClass, gradientFromClass) {
+            return `
+            <div class="flip-card h-[320px] cursor-pointer group" onclick="this.classList.toggle('flipped')">
+                <div class="flip-card-inner h-full w-full relative transform-style-3d shadow-xl rounded-[1.5rem]">
+                    <div class="absolute inset-0 backface-hidden bg-white dark:bg-slate-800/60 backdrop-blur-xl rounded-[1.5rem] flex flex-col items-center justify-center p-6 border-2 border-slate-200 dark:border-slate-700/50 group-hover:border-brand-accent/50 transition-all">
+                        <div class="w-16 h-16 bg-gradient-to-br ${gradientFromClass} to-transparent rounded-2xl flex items-center justify-center text-3xl mb-4">${c.icon}</div>
+                        <h4 class="font-black text-lg text-slate-800 dark:text-white tracking-tight text-center">${c.title}</h4>
+                        <p class="text-slate-400 text-[10px] mt-2 uppercase tracking-[0.2em] font-black">Flip for Details</p>
+                    </div>
+                    <div class="absolute inset-0 backface-hidden rotate-y-180 bg-slate-900 dark:bg-slate-900 rounded-[1.5rem] flex flex-col p-6 border-2 ${borderColorClass}">
+                        <p class="text-xs font-black text-brand-accent uppercase tracking-widest mb-2">${c.title}</p>
+                        <p class="text-slate-300 text-s mb-4 leading-relaxed line-clamp-2">${c.desc}</p>
+                        <div class="space-y-1.5 mb-4">
+                            ${c.summary.split('\n').map(line => `<div class="text-[12px] text-slate-400 font-medium">${line}</div>`).join('')}
+                        </div>
+                        <button onclick="event.stopPropagation(); showDive('${c.id}')" class="mt-auto w-full bg-brand-accent text-white py-3 rounded-xl text-xs font-black transition-all hover:bg-opacity-80">DEEP DIVE →</button>
+                    </div>
+                </div>
+            </div>`;
+        }
+
+        function renderAll() {
+            const grids = [
+                { id: 'concepts-grid', data: conceptsData, border: 'border-teal-500', grad: 'from-teal-500/20' },
+                { id: 'compute-grid', data: computeData, border: 'border-blue-500', grad: 'from-blue-500/20' },
+                { id: 'storage-grid', data: storageData, border: 'border-green-500', grad: 'from-green-500/20' },
+                { id: 'database-grid', data: databaseData, border: 'border-cyan-500', grad: 'from-cyan-500/20' },
+                { id: 'network-grid', data: networkData, border: 'border-purple-500', grad: 'from-purple-500/20' },
+                { id: 'security-grid', data: securityData, border: 'border-red-500', grad: 'from-red-500/20' },
+                { id: 'mgmt-grid', data: mgmtData, border: 'border-pink-500', grad: 'from-pink-500/20' }
+            ];
+
+            grids.forEach(g => {
+                const el = document.getElementById(g.id);
+                if (el) el.innerHTML = g.data.map(d => createCard(d, g.border, g.grad)).join('');
+            });
+        }
+
+        function showDive(id) {
+            const c = allServices.find(x => x.id === id);
+            if(!c) return;
+            document.getElementById('m-title').innerText = c.title;
+            document.getElementById('m-icon').innerText = c.icon;
+            document.getElementById('m-content').innerHTML = marked.parse(c.dive);
+            const m = document.getElementById('deep-dive-modal');
+            m.classList.add('active');
+            setTimeout(() => { m.classList.add('opacity-100'); m.querySelector('div').classList.add('scale-100'); }, 10);
+        }
+
+        function closeModal(e) { if(e) e.stopPropagation(); const m = document.getElementById('deep-dive-modal'); m.classList.remove('opacity-100'); m.querySelector('div').classList.remove('scale-100'); setTimeout(() => m.classList.remove('active'), 300); }
+        function openSidebar() { document.getElementById('sidebar-overlay').classList.remove('hidden'); setTimeout(() => { document.getElementById('sidebar-overlay').classList.remove('opacity-0'); document.getElementById('left-sidebar').classList.remove('-translate-x-full'); }, 10); }
+        function closeSidebar() { document.getElementById('sidebar-overlay').classList.add('opacity-0'); document.getElementById('left-sidebar').classList.add('-translate-x-full'); setTimeout(() => { document.getElementById('sidebar-overlay').classList.add('hidden'); }, 300); }
+
+        function navigateTo(targetId) {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            document.querySelectorAll('.content-section').forEach(s => s.classList.add('hidden'));
+            document.getElementById(targetId).classList.remove('hidden');
+            document.querySelectorAll('.nav-btn').forEach(x => { x.classList.remove('bg-brand-accent', 'text-white'); x.classList.add('text-slate-500'); });
+            const btn = document.querySelector(`.nav-btn[data-target="${targetId}"]`);
+            if (btn) { btn.classList.add('bg-brand-accent', 'text-white'); btn.classList.remove('text-slate-500'); }
+            closeSidebar();
+        }
+
+        window.onload = renderAll;
+    </script>
+</body>
+</html>
