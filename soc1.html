@@ -8,6 +8,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
     <script src="js/app.js"></script>
+    <link rel="stylesheet" href="assets/css/site.css">
     <script>
         tailwind.config = {
             darkMode: 'class',
@@ -53,7 +54,7 @@
         .no-scrollbar::-webkit-scrollbar { display: none; }
     </style>
 </head>
-<body class="min-h-screen bg-slate-50 dark:bg-[#0f172a] text-slate-900 dark:text-slate-200 antialiased overflow-x-hidden">
+<body class="min-h-screen bg-slate-50 dark:bg-[#0f172a] text-slate-900 dark:text-slate-200 antialiased overflow-x-hidden" style="--brand-accent:#14b8a6;">
 
     <header class="sticky top-0 z-40 bg-white/80 dark:bg-[#0f172a]/80 backdrop-blur-xl border-b border-slate-200 dark:border-slate-800 shadow-sm">
         <div class="max-w-7xl mx-auto px-4 h-20 grid grid-cols-3 items-center gap-4">
@@ -266,6 +267,23 @@
                 <h4 class="font-bold text-cyan-600 dark:text-cyan-400 mb-2">The Sampling Golden Rule</h4>
                 <p class="text-sm text-slate-600 dark:text-slate-300">Auditors do not test every single event that occurred over the year. Instead, they request a complete <strong>Population</strong> (e.g., a list of all 1,000 code deployments), and randomly select a <strong>Sample</strong> (usually 25 to 40 items) to test comprehensively via Inspection.</p>
             </div>
+            <div class="mb-10 bg-slate-100 dark:bg-slate-800/50 rounded-3xl p-8 border border-slate-200 dark:border-slate-700">
+                <h3 class="text-xl font-bold mb-6 text-cyan-500">Materiality Lens</h3>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <div class="p-4 bg-white dark:bg-slate-700 rounded-xl shadow-sm border-t-4 border-cyan-500">
+                        <div class="font-bold text-slate-800 dark:text-white">Low Impact</div>
+                        <div class="text-xs text-slate-500 mt-1">Minor control deviation with limited user impact.</div>
+                    </div>
+                    <div class="p-4 bg-white dark:bg-slate-700 rounded-xl shadow-sm border-t-4 border-cyan-500">
+                        <div class="font-bold text-slate-800 dark:text-white">Material Exception</div>
+                        <div class="text-xs text-slate-500 mt-1">Could affect financial reporting or trust in the report.</div>
+                    </div>
+                    <div class="p-4 bg-white dark:bg-slate-700 rounded-xl shadow-sm border-t-4 border-cyan-500">
+                        <div class="font-bold text-slate-800 dark:text-white">Control Deficiency</div>
+                        <div class="text-xs text-slate-500 mt-1">Repeated failures can drive a qualified opinion.</div>
+                    </div>
+                </div>
+            </div>
             <div id="audit-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
         </section>
     </main>
@@ -277,7 +295,7 @@
                     <div id="m-icon-bg" class="p-5 rounded-3xl text-4xl md:text-5xl"><span id="m-icon"></span></div>
                     <div>
                         <h3 id="m-title" class="text-3xl md:text-4xl font-black text-slate-900 dark:text-white"></h3>
-                        <p class="text-sm font-bold uppercase tracking-widest mt-1">Technical Reference</p>
+                        <p id="m-subtitle" class="text-sm font-bold uppercase tracking-widest mt-1">Technical Reference</p>
                     </div>
                 </div>
                 <button onclick="closeModal()" class="w-12 h-12 flex items-center justify-center rounded-full bg-slate-100 dark:bg-slate-800 text-slate-500 hover:text-brand-accent transition-all text-3xl shrink-0">&times;</button>
@@ -287,14 +305,6 @@
     </div>
 
     <script>
-        /*
-            For Tailwind JIT:
-            text-teal-500 text-emerald-500 text-cyan-500 text-blue-500 text-indigo-500
-            bg-teal-500 bg-emerald-500 bg-cyan-500 bg-blue-500 bg-indigo-500
-            hover:bg-teal-700 hover:bg-emerald-700 hover:bg-cyan-700 hover:bg-blue-700 hover:bg-indigo-700
-            bg-teal-500/20 bg-emerald-500/20 bg-cyan-500/20 bg-blue-500/20 bg-indigo-500/20
-        */
-
         const frameworkData = [
             { id: 'f1', icon: '📋', title: 'SOC 1 vs SOC 2', desc: 'Understanding the difference.', summary: '• SOC 1 (Financial ICFR)\n• SOC 2 (Security/Trust)\n• Audience restrictions', dive: `### SOC 1 vs SOC 2\nUnderstanding *why* a company requests a specific SOC report is the foundation of the framework.\n\n#### SOC 1 (Service Organization Control 1)\nFocuses **exclusively on Internal Controls over Financial Reporting (ICFR)**. \nIf your company provides a service that impacts your client's financial statements, their financial auditors will demand a SOC 1 report to ensure your math and systems are accurate. \n*Examples: Payroll processors, medical claims processors, loan servicers, billing systems.*\n\n#### SOC 2\nFocuses on the AICPA Trust Services Criteria (TSC): Security, Availability, Processing Integrity, Confidentiality, and Privacy. \nIt applies to technology companies handling sensitive customer data, where a data breach is the main concern, not financial misstatement. \n*Examples: AWS, Salesforce, Slack, Data Centers.*\n\n#### 💡 Exam Tip\nIf the scenario involves "impacting a user organization's balance sheet or financial statement," the answer is unequivocally SOC 1. Furthermore, SOC 1 reports are highly restricted documents intended *only* for the user entities and their auditors.` },
             { id: 'f2', icon: '📜', title: 'SSAE 18 & ISAE 3402', desc: 'The authoritative standards.', summary: '• SSAE 18 (US Standard)\n• ISAE 3402 (International)\n• Management Assertion', dive: `### SSAE 18 and ISAE 3402\nThese are the professional standards issued by governing bodies that dictate exactly how a SOC 1 audit must be conducted by the CPA firm.\n\n#### The Standards\n- **SSAE 18:** The Statement on Standards for Attestation Engagements No. 18. Issued by the AICPA (US-centric). Replaced the older SSAE 16 and SAS 70 standards.\n- **ISAE 3402:** The International Standard on Assurance Engagements. The global equivalent to SSAE 18. Many modern SOC 1 reports are issued as "Dual-Standard" (complying with both SSAE 18 and ISAE 3402).\n\n#### Key Requirements of SSAE 18:\n1. **Management Assertion:** Management must sign a written assertion taking formal responsibility for designing, implementing, and operating the controls.\n2. **Subservice Organizations:** Places a heavy emphasis on how the service organization actively monitors its subservice organizations (critical vendors).\n3. **Risk Assessment:** Requires organizations to perform and provide a formal, documented risk assessment linking risks to their control objectives.` }

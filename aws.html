@@ -8,6 +8,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
     <script src="js/app.js"></script>
+    <link rel="stylesheet" href="assets/css/site.css">
     <script>
         tailwind.config = {
             darkMode: 'class',
@@ -53,7 +54,7 @@
         .no-scrollbar::-webkit-scrollbar { display: none; }
     </style>
 </head>
-<body class="min-h-screen bg-slate-50 dark:bg-[#0f172a] text-slate-900 dark:text-slate-200 antialiased overflow-x-hidden">
+<body class="min-h-screen bg-slate-50 dark:bg-[#0f172a] text-slate-900 dark:text-slate-200 antialiased overflow-x-hidden" style="--brand-accent:#F59E0B;">
 
     <header class="sticky top-0 z-40 bg-white/80 dark:bg-[#0f172a]/80 backdrop-blur-xl border-b border-slate-200 dark:border-slate-800 shadow-sm">
         <div class="max-w-7xl mx-auto px-4 h-20 grid grid-cols-3 items-center gap-4">
@@ -320,7 +321,7 @@
             </div>
             
             <div class="mt-8 p-8 bg-emerald-500/10 rounded-[2rem] border border-emerald-500/20 text-center">
-                <p class="text-emerald-600 dark:text-emerald-400 font-bold text-lg">💡 Exam Tip: As you move to managed services (like Lambda or S3), the customer responsibility shifts upward, but you are ALWAYS responsible for your Data and IAM.</p>
+                <p class="text-emerald-600 dark:text-emerald-400 font-bold text-lg">💡 Exam Tip: As you move to managed services (like Lambda or S3), the customer responsibility shifts upward. You remain responsible for your data, IAM, and configuration, while AWS also manages more of the underlying platform for services like RDS.</p>
             </div>
         </section>
 
@@ -331,6 +332,23 @@
 
         <section id="section-billing" class="content-section hidden fade-in">
             <div class="mb-12 text-center md:text-left"><h2 class="text-4xl font-black mb-2 text-emerald-500">Billing & Pricing</h2></div>
+            <div class="mb-10 bg-slate-100 dark:bg-slate-800/50 rounded-3xl p-8 border border-slate-200 dark:border-slate-700">
+                <h3 class="text-xl font-bold mb-6 text-emerald-500">Cost Allocation Workflow</h3>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <div class="p-4 bg-white dark:bg-slate-700 rounded-xl shadow-sm border-t-4 border-emerald-500">
+                        <div class="font-bold text-slate-800 dark:text-white">1. Consolidated Billing</div>
+                        <div class="text-xs text-slate-500 mt-1">One bill for all linked accounts.</div>
+                    </div>
+                    <div class="p-4 bg-white dark:bg-slate-700 rounded-xl shadow-sm border-t-4 border-emerald-500">
+                        <div class="font-bold text-slate-800 dark:text-white">2. Cost Allocation Tags</div>
+                        <div class="text-xs text-slate-500 mt-1">Tag spend by team, app, or environment.</div>
+                    </div>
+                    <div class="p-4 bg-white dark:bg-slate-700 rounded-xl shadow-sm border-t-4 border-emerald-500">
+                        <div class="font-bold text-slate-800 dark:text-white">3. Budgets & Alerts</div>
+                        <div class="text-xs text-slate-500 mt-1">Track spend and prevent bill shock.</div>
+                    </div>
+                </div>
+            </div>
             <div id="billing-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
         </section>
 
@@ -343,7 +361,7 @@
                     <div id="m-icon-bg" class="p-5 bg-brand-accent/20 rounded-3xl text-4xl md:text-5xl"><span id="m-icon"></span></div>
                     <div>
                         <h3 id="m-title" class="text-3xl md:text-4xl font-black text-slate-900 dark:text-white"></h3>
-                        <p class="text-brand-accent text-sm font-bold uppercase tracking-widest mt-1">Technical Reference</p>
+                        <p id="m-subtitle" class="text-brand-accent text-sm font-bold uppercase tracking-widest mt-1">Technical Reference</p>
                     </div>
                 </div>
                 <button onclick="closeModal()" class="w-12 h-12 flex items-center justify-center rounded-full bg-slate-100 dark:bg-slate-800 text-slate-500 hover:text-brand-accent transition-all text-3xl shrink-0">&times;</button>
@@ -1184,6 +1202,19 @@ AWS offers four tiers of support. You must memorize the differences for the CLF-
 
 #### 💡 CLF-C02 Exam Tip
 If a question asks how to get a **Technical Account Manager (TAM)**, **Concierge Support**, or a **15-minute response time**, the answer is always the **Enterprise** support plan.` }
+        ,{ id: 'b7', icon: '🏷️', title: 'Cost Allocation Tags', desc: 'Categorize spend by team, app, or environment.', summary: '• Tag resources\n• Break down spend\n• Chargeback reports', dive: `### AWS Cost Allocation Tags
+Tags let you attach metadata to resources so you can group and report on costs by team, application, environment, or owner.
+
+#### Why they matter
+- Cost Explorer and CUR reports can filter by activated cost allocation tags.
+- They are the foundation for chargeback and showback reporting.
+- They help teams understand who is consuming which resources.
+
+#### Best practice
+Use a small, consistent tagging standard such as \\`Environment\\`, \\`Owner\\`, \\`Application\\`, and \\`CostCenter\\`.
+
+#### 💡 CLF-C02 Exam Tip
+If the question is about splitting AWS spend by department or app, the answer is **cost allocation tags**.` }
         ];
 
         const rsData = [

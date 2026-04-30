@@ -21,15 +21,25 @@
             }
         }
     </script>
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap');
-        body { font-family: 'Inter', sans-serif; transition: background-color 0.3s ease; }
-    </style>
+    <link rel="stylesheet" href="assets/css/site.css">
 </head>
-<body class="min-h-screen bg-slate-50 dark:bg-[#0f172a] text-slate-900 dark:text-slate-200 antialiased flex flex-col items-center justify-center p-4">
+<body class="landing-bg min-h-screen text-slate-900 dark:text-slate-200 antialiased flex flex-col items-center justify-center p-4" style="--brand-accent:#0078D4;">
 
     <div class="text-center mb-16">
-        <div class="inline-block px-4 py-1.5 rounded-full bg-black-500/10 border border-black-500/20 text-black-500 font-bold text-xs tracking-widest uppercase mb-6">Study Guides</div>
+        <div class="study-guides-badge inline-block px-4 py-1.5 rounded-full bg-slate-900/10 dark:bg-white/10 border border-slate-700/20 dark:border-white/20 font-bold text-xs tracking-widest uppercase mb-6">
+            <span class="rainbow-letter" style="animation-delay: 0s;">S</span>
+            <span class="rainbow-letter" style="animation-delay: 0.1s;">t</span>
+            <span class="rainbow-letter" style="animation-delay: 0.2s;">u</span>
+            <span class="rainbow-letter" style="animation-delay: 0.3s;">d</span>
+            <span class="rainbow-letter" style="animation-delay: 0.4s;">y</span>
+            <span class="rainbow-letter" style="animation-delay: 0.5s;"> </span>
+            <span class="rainbow-letter" style="animation-delay: 0.6s;">G</span>
+            <span class="rainbow-letter" style="animation-delay: 0.7s;">u</span>
+            <span class="rainbow-letter" style="animation-delay: 0.8s;">i</span>
+            <span class="rainbow-letter" style="animation-delay: 0.9s;">d</span>
+            <span class="rainbow-letter" style="animation-delay: 1s;">e</span>
+            <span class="rainbow-letter" style="animation-delay: 1.1s;">s</span>
+        </div>
         <h1 class="text-5xl md:text-7xl font-black mb-6 tracking-tight text-slate-900 dark:text-white">Cloud Master.</h1>
         <p class="text-slate-500 dark:text-slate-400 text-lg md:text-xl max-w-2xl mx-auto leading-relaxed">Select your certification path below to explore the definitive interactive study guides.</p>
     </div>
@@ -38,7 +48,7 @@
         <h2 class="text-3xl font-black mb-8 text-slate-900 dark:text-white flex items-center gap-3">
             <span class="text-4xl">☁️</span> Cloud Certifications
         </h2>
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
             <a href="aws.html" class="bg-white dark:bg-slate-800/40 p-10 rounded-[2.5rem] border border-slate-200 dark:border-slate-700/50 shadow-xl cursor-pointer hover:-translate-y-2 hover:border-orange-500/50 transition-all group flex flex-col items-center text-center">
                 <div class="w-20 h-20 bg-orange-500/10 rounded-3xl flex items-center justify-center text-5xl mb-6 group-hover:scale-110 transition-transform">☁️</div>
                 <h3 class="text-3xl font-black mb-4 text-slate-800 dark:text-white">AWS CLF-C02</h3>
@@ -96,6 +106,15 @@
             </a>
         </div>
     </div>
+
+    <footer class="w-full max-w-7xl px-4 pb-4 text-center">
+        <p class="text-xs md:text-sm text-slate-600 dark:text-slate-400 font-semibold tracking-wide">
+            Version v0.7.0 •
+            <a href="https://github.com/Kaiwawa/masterthecloud" target="_blank" rel="noopener noreferrer" class="text-brand-accent hover:underline">
+                Main GitHub Repository
+            </a>
+        </p>
+    </footer>
 
 </body>
 </html>

@@ -1,0 +1,264 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap');
+
+body {
+    font-family: 'Inter', sans-serif;
+    transition: background-color 0.3s ease;
+}
+
+.perspective-1000 { perspective: 1000px; }
+.transform-style-3d { transform-style: preserve-3d; }
+.backface-hidden { backface-visibility: hidden; -webkit-backface-visibility: hidden; }
+.rotate-y-180 { transform: rotateY(180deg); }
+
+.fade-in { animation: fadeIn 0.4s ease-out forwards; }
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.study-guide-card {
+    height: 320px;
+    cursor: pointer;
+    perspective: 1000px;
+}
+
+.study-guide-card .flip-card-inner {
+    height: 100%;
+    width: 100%;
+    position: relative;
+    transition: transform 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+    transform-style: preserve-3d;
+}
+
+.study-guide-card.flipped .flip-card-inner {
+    transform: rotateY(180deg);
+}
+
+.study-guide-card .card-face {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    border-radius: 1.5rem;
+    border: 2px solid var(--card-border);
+    padding: 1.5rem;
+}
+
+.study-guide-card .card-front {
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.92);
+    backdrop-filter: blur(18px);
+    box-shadow: 0 20px 40px rgba(15, 23, 42, 0.12);
+}
+
+html.dark .study-guide-card .card-front {
+    background: rgba(30, 41, 59, 0.62);
+}
+
+.study-guide-card .card-back {
+    transform: rotateY(180deg);
+    background: #0f172a;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.25);
+}
+
+.study-guide-card .card-icon {
+    width: 4rem;
+    height: 4rem;
+    border-radius: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.875rem;
+    margin-bottom: 1rem;
+    background: linear-gradient(135deg, var(--card-accent-soft), transparent);
+}
+
+.study-guide-card .card-title {
+    font-weight: 900;
+    font-size: 1.125rem;
+    line-height: 1.2;
+    letter-spacing: -0.03em;
+    text-align: center;
+    color: #1e293b;
+}
+
+html.dark .study-guide-card .card-title {
+    color: #f8fafc;
+}
+
+.study-guide-card .card-kicker {
+    font-size: 0.75rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    margin-bottom: 0.5rem;
+    color: var(--card-accent);
+}
+
+.study-guide-card .card-desc {
+    color: #cbd5e1;
+    font-size: 0.875rem;
+    line-height: 1.6;
+    margin-bottom: 1rem;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.study-guide-card .card-summary {
+    margin-bottom: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.375rem;
+}
+
+.study-guide-card .card-summary-item {
+    color: #94a3b8;
+    font-size: 12px;
+    line-height: 1.45;
+    font-weight: 500;
+}
+
+.study-guide-card .card-cta {
+    margin-top: auto;
+    width: 100%;
+    border: none;
+    border-radius: 0.75rem;
+    padding: 0.75rem 1rem;
+    color: white;
+    font-weight: 900;
+    letter-spacing: 0.14em;
+    font-size: 0.75rem;
+    background: var(--card-accent);
+    transition: filter 0.2s ease, transform 0.2s ease;
+}
+
+.study-guide-card .card-cta:hover {
+    filter: brightness(0.92);
+    transform: translateY(-1px);
+}
+
+.md-content h3 {
+    font-weight: 800;
+    font-size: 1.5rem;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    color: var(--brand-accent, #64748b);
+    border-left: 5px solid var(--brand-accent, #64748b);
+    padding-left: 1rem;
+}
+
+.md-content h4 {
+    font-weight: 700;
+    font-size: 1.1rem;
+    margin-top: 1.5rem;
+    color: #94a3b8;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.md-content p {
+    margin-bottom: 1rem;
+    line-height: 1.8;
+    font-size: 1.05rem;
+}
+
+.md-content ul {
+    list-style-type: none;
+    margin-bottom: 1.5rem;
+}
+
+.md-content li {
+    margin-bottom: 0.75rem;
+    position: relative;
+    padding-left: 1.75rem;
+    line-height: 1.6;
+}
+
+.md-content li::before {
+    content: "✦";
+    position: absolute;
+    left: 0;
+    color: var(--brand-accent, #64748b);
+    font-weight: bold;
+}
+
+.custom-scrollbar::-webkit-scrollbar { width: 8px; }
+.custom-scrollbar::-webkit-scrollbar-track { background: rgba(0, 0, 0, 0.05); }
+.custom-scrollbar::-webkit-scrollbar-thumb { background: #475569; border-radius: 10px; }
+
+#deep-dive-modal.active { display: flex !important; }
+.no-scrollbar::-webkit-scrollbar { display: none; }
+
+body.landing-bg {
+    background:
+        radial-gradient(1200px 620px at 8% -10%, rgba(14, 165, 233, 0.22), transparent 60%),
+        radial-gradient(920px 520px at 100% 0%, rgba(249, 115, 22, 0.20), transparent 58%),
+        linear-gradient(160deg, #f8fafc 0%, #e2e8f0 45%, #dbeafe 100%);
+}
+
+html.dark body.landing-bg {
+    background:
+        radial-gradient(980px 560px at 0% 0%, rgba(14, 165, 233, 0.20), transparent 55%),
+        radial-gradient(1080px 620px at 100% 0%, rgba(236, 72, 153, 0.18), transparent 60%),
+        linear-gradient(160deg, #020617 0%, #0f172a 45%, #1e293b 100%);
+}
+
+@keyframes rainbowShift {
+    0% { color: #ef4444; }
+    16% { color: #f97316; }
+    32% { color: #eab308; }
+    48% { color: #22c55e; }
+    64% { color: #3b82f6; }
+    80% { color: #8b5cf6; }
+    100% { color: #ec4899; }
+}
+
+@keyframes badgeRainbowFlow {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+.rainbow-letter {
+    display: inline-block;
+    animation: rainbowShift 2.4s linear infinite;
+}
+
+.study-guides-badge {
+    position: relative;
+    overflow: hidden;
+    isolation: isolate;
+}
+
+.study-guides-badge::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    background: linear-gradient(120deg, rgba(239, 68, 68, 0.18), rgba(249, 115, 22, 0.18), rgba(234, 179, 8, 0.18), rgba(34, 197, 94, 0.18), rgba(59, 130, 246, 0.18), rgba(139, 92, 246, 0.18), rgba(236, 72, 153, 0.18));
+    background-size: 300% 300%;
+    animation: badgeRainbowFlow 8s ease infinite;
+}
+
+.study-guides-badge::after {
+    content: "";
+    position: absolute;
+    inset: 1px;
+    z-index: 0;
+    border-radius: inherit;
+    background: rgba(255, 255, 255, 0.75);
+}
+
+html.dark .study-guides-badge::after {
+    background: rgba(15, 23, 42, 0.78);
+}
+
+.study-guides-badge > span {
+    position: relative;
+    z-index: 1;
+}

@@ -8,6 +8,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
     <script src="js/app.js"></script>
+    <link rel="stylesheet" href="assets/css/site.css">
     <script>
         tailwind.config = {
             darkMode: 'class',
@@ -53,7 +54,7 @@
         .no-scrollbar::-webkit-scrollbar { display: none; }
     </style>
 </head>
-<body class="min-h-screen bg-slate-50 dark:bg-[#0f172a] text-slate-900 dark:text-slate-200 antialiased overflow-x-hidden">
+<body class="min-h-screen bg-slate-50 dark:bg-[#0f172a] text-slate-900 dark:text-slate-200 antialiased overflow-x-hidden" style="--brand-accent:#6366f1;">
 
     <header class="sticky top-0 z-40 bg-white/80 dark:bg-[#0f172a]/80 backdrop-blur-xl border-b border-slate-200 dark:border-slate-800 shadow-sm">
         <div class="max-w-7xl mx-auto px-4 h-20 grid grid-cols-3 items-center gap-4">
@@ -214,7 +215,7 @@
                         </div>
                         <div class="p-6 bg-white/80 dark:bg-slate-800/40 rounded-2xl border-l-4 border-blue-500 shadow-sm transition-transform hover:scale-[1.02]">
                             <h4 class="font-bold text-lg mb-2 text-slate-800 dark:text-white">Container Runtime</h4>
-                            <p class="text-sm text-slate-500 dark:text-slate-400 leading-relaxed">The software that actually runs the containers (e.g., containerd, CRI-O). Docker is no longer supported directly as a runtime starting in K8s v1.24.</p>
+                            <p class="text-sm text-slate-500 dark:text-slate-400 leading-relaxed">The software that actually runs the containers (e.g., containerd, CRI-O). Kubernetes removed the Docker Engine as a built-in node runtime in v1.24, but the Docker CLI and images still exist.</p>
                         </div>
                     </div>
                 </div>
@@ -248,12 +249,39 @@
                     </div>
                 </div>
             </div>
+            <div class="mb-10 bg-slate-100 dark:bg-slate-800/50 rounded-3xl p-8 border border-slate-200 dark:border-slate-700">
+                <h3 class="text-xl font-bold mb-6 text-blue-500">Security & Access Cheat Sheet</h3>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <div class="p-4 bg-white dark:bg-slate-700 rounded-xl shadow-sm border-t-4 border-blue-500">
+                        <div class="font-bold text-slate-800 dark:text-white">RBAC</div>
+                        <div class="text-xs text-slate-500 mt-1">Roles, RoleBindings, ClusterRoles.</div>
+                    </div>
+                    <div class="p-4 bg-white dark:bg-slate-700 rounded-xl shadow-sm border-t-4 border-blue-500">
+                        <div class="font-bold text-slate-800 dark:text-white">SecurityContext</div>
+                        <div class="text-xs text-slate-500 mt-1">RunAsUser, capabilities, readOnlyRootFilesystem.</div>
+                    </div>
+                    <div class="p-4 bg-white dark:bg-slate-700 rounded-xl shadow-sm border-t-4 border-blue-500">
+                        <div class="font-bold text-slate-800 dark:text-white">NetworkPolicy</div>
+                        <div class="text-xs text-slate-500 mt-1">podSelector, ingress, egress, ipBlock.</div>
+                    </div>
+                </div>
+            </div>
             <div id="workloads-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
         </section>
 
         <section id="section-networking" class="content-section hidden fade-in">
             <div class="mb-12 text-center md:text-left"><h2 class="text-4xl font-black mb-2 text-cyan-500">Networking</h2></div>
             <div id="networking-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+        </section>
+
+        <section id="section-storage" class="content-section hidden fade-in">
+            <div class="mb-12 text-center md:text-left"><h2 class="text-4xl font-black mb-2 text-purple-500">Storage</h2></div>
+            <div id="storage-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+        </section>
+
+        <section id="section-troubleshooting" class="content-section hidden fade-in">
+            <div class="mb-12 text-center md:text-left"><h2 class="text-4xl font-black mb-2 text-pink-500">Troubleshooting</h2></div>
+            <div id="troubleshooting-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
         </section>
     </main>
 
@@ -264,7 +292,7 @@
                     <div id="m-icon-bg" class="p-5 rounded-3xl text-4xl md:text-5xl"><span id="m-icon"></span></div>
                     <div>
                         <h3 id="m-title" class="text-3xl md:text-4xl font-black text-slate-900 dark:text-white"></h3>
-                        <p class="text-sm font-bold uppercase tracking-widest mt-1">Technical Reference</p>
+                        <p id="m-subtitle" class="text-sm font-bold uppercase tracking-widest mt-1">Technical Reference</p>
                     </div>
                 </div>
                 <button onclick="closeModal()" class="w-12 h-12 flex items-center justify-center rounded-full bg-slate-100 dark:bg-slate-800 text-slate-500 hover:text-brand-accent transition-all text-3xl shrink-0">&times;</button>
@@ -274,14 +302,6 @@
     </div>
 
     <script>
-        /*
-            For Tailwind JIT:
-            text-indigo-500 text-blue-500 text-cyan-500 text-purple-500 text-pink-500
-            bg-indigo-500 bg-blue-500 bg-cyan-500 bg-purple-500 bg-pink-500
-            hover:bg-indigo-700 hover:bg-blue-700 hover:bg-cyan-700 hover:bg-purple-700 hover:bg-pink-700
-            bg-indigo-500/20 bg-blue-500/20 bg-cyan-500/20 bg-purple-500/20 bg-pink-500/20
-        */
-
         const archData = [
             { id: 'ar1', icon: '🧠', title: 'Control Plane Ports', desc: 'Critical cluster communications.', summary: '• API Server: 6443\n• ETCD: 2379-2380\n• Kubelet: 10250', dive: `### Kubernetes Default Port Requirements\nFor a cluster to function properly, specific ports must be open on the Control Plane and Worker Nodes. The CKA tests your ability to fix broken clusters where these ports might be misconfigured.\n\n#### Control Plane Nodes\n| Port | Protocol | Purpose | User |\n|---|---|---|---|\n| **6443** | TCP | Kubernetes API server | All components |\n| **2379-2380** | TCP | etcd server client API | kube-apiserver, etcd peers |\n| **10250** | TCP | Kubelet API | Control Plane, kubelet |\n| **10259** | TCP | kube-scheduler | Self |\n| **10257** | TCP | kube-controller-manager | Self |\n\n#### Worker Nodes\n| Port | Protocol | Purpose | User |\n|---|---|---|---|\n| **10250** | TCP | Kubelet API | Control Plane |\n| **30000-32767** | TCP | NodePort Services | All external traffic |\n\n#### 💡 Exam Tip\nIf a worker node is marked \`NotReady\`, or \`kubectl logs\` fails with a timeout, SSH into the node and verify that a firewall rule isn't blocking port **10250**. Similarly, if your control plane fails to start, verify etcd is accessible on **2379**.` },
             { id: 'ar2', icon: '💾', title: 'ETCD Backup & Restore', desc: 'Backing up the cluster state.', summary: '• ETCDCTL tool\n• Snapshot save\n• Snapshot restore', dive: `### ETCD Backup & Restore\nETCD is the central key-value datastore for K8s. If it dies, the cluster dies. The CKA exam *will* test your ability to back it up and restore it.\n\n#### Backup Command:\nYou must pass the authentication certificates to \`etcdctl\`. Find these paths by inspecting \`cat /etc/kubernetes/manifests/etcd.yaml\`.\n\n\`\`\`bash\nETCDCTL_API=3 etcdctl --endpoints=https://127.0.0.1:2379 \\\n  --cacert=/etc/kubernetes/pki/etcd/ca.crt \\\n  --cert=/etc/kubernetes/pki/etcd/server.crt \\\n  --key=/etc/kubernetes/pki/etcd/server.key \\\n  snapshot save /opt/snapshot-pre-boot.db\n\`\`\`\n\n#### Restore Procedure:\n1. **Stop API Server:** \`mv /etc/kubernetes/manifests/kube-apiserver.yaml /tmp/\`\n2. **Restore to NEW directory:** \n   \`\`\`bash\n   ETCDCTL_API=3 etcdctl snapshot restore /opt/snapshot-pre-boot.db \\\n   --data-dir=/var/lib/etcd-backup\n   \`\`\`\n3. **Edit ETCD Manifest:** \`vi /etc/kubernetes/manifests/etcd.yaml\` and change the \`hostPath\` volume from \`/var/lib/etcd\` to \`/var/lib/etcd-backup\`.\n4. **Restart:** Kubelet will auto-restart ETCD with the new data directory. Move the API server manifest back to start it.` },

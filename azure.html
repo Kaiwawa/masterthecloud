@@ -8,6 +8,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
     <script src="js/app.js"></script>
+    <link rel="stylesheet" href="assets/css/site.css">
     <script>
         tailwind.config = {
             darkMode: 'class',
@@ -53,7 +54,7 @@
         .no-scrollbar::-webkit-scrollbar { display: none; }
     </style>
 </head>
-<body class="min-h-screen bg-slate-50 dark:bg-[#0f172a] text-slate-900 dark:text-slate-200 antialiased overflow-x-hidden">
+<body class="min-h-screen bg-slate-50 dark:bg-[#0f172a] text-slate-900 dark:text-slate-200 antialiased overflow-x-hidden" style="--brand-accent:#0078D4;">
 
     <header class="sticky top-0 z-40 bg-white/80 dark:bg-[#0f172a]/80 backdrop-blur-xl border-b border-slate-200 dark:border-slate-800 shadow-sm">
         <div class="max-w-7xl mx-auto px-4 h-20 grid grid-cols-3 items-center gap-4">
@@ -232,7 +233,7 @@
                     <div id="m-icon-bg" class="p-5 bg-brand-accent/20 rounded-3xl text-4xl md:text-5xl"><span id="m-icon"></span></div>
                     <div>
                         <h3 id="m-title" class="text-3xl md:text-4xl font-black text-slate-900 dark:text-white"></h3>
-                        <p class="text-brand-accent text-sm font-bold uppercase tracking-widest mt-1">Technical Reference</p>
+                        <p id="m-subtitle" class="text-brand-accent text-sm font-bold uppercase tracking-widest mt-1">Technical Reference</p>
                     </div>
                 </div>
                 <button onclick="closeModal()" class="w-12 h-12 flex items-center justify-center rounded-full bg-slate-100 dark:bg-slate-800 text-slate-500 hover:text-brand-accent transition-all text-3xl shrink-0">&times;</button>
@@ -279,6 +280,17 @@
             { id: 'sec2', icon: '🔒', title: 'RBAC', desc: 'Role-Based Access Control.', summary: '• Authorization system\n• Principle of Least Privilege\n• Built-in roles', dive: `### Azure Role-Based Access Control (RBAC)\nA system that provides fine-grained access management to Azure resources.\n\n- You use RBAC to segregate duties within your team and grant only the amount of access to users that they need to perform their jobs (Principle of Least Privilege).\n- For example: Allow one employee to manage VMs, and another to manage SQL databases.` },
             { id: 'sec3', icon: '🏰', title: 'Defender for Cloud', desc: 'Cloud Security Posture Management.', summary: '• Security Posture\n• Threat protection\n• Secure Score', dive: `### Microsoft Defender for Cloud\nA tool for security posture management and threat protection.\n\n- It strengthens the security posture of your cloud resources.\n- Provides a **Secure Score** that evaluates your security situation and provides recommendations for improvement.\n- Uses advanced threat protection to detect and resolve threats.` }
         ];
+
+            { id: 'sec4', icon: '🪪', title: 'Hybrid Identity', desc: 'Connect on-prem AD to Entra ID.', summary: '• Password Hash Sync\n• Pass-through Auth\n• Federation', dive: `### Hybrid Identity in Azure
+Hybrid identity lets users access cloud and on-prem resources with a single identity plane.
+
+#### Common patterns
+- **Password Hash Synchronization (PHS):** Hashes from on-prem AD are synchronized to Entra ID for cloud sign-in.
+- **Pass-through Authentication (PTA):** Authentication is validated against on-prem AD at sign-in time.
+- **Federation:** Redirects authentication to an external identity provider for stricter on-prem control.
+
+#### 💡 Exam Tip
+If a scenario asks for one identity across Microsoft 365 and on-prem Active Directory, the answer is **Microsoft Entra ID with hybrid identity**.` },
 
         const mgmtData = [
             { id: 'mg1', icon: '👁️', title: 'Azure Monitor', desc: 'Full-stack monitoring.', summary: '• Metrics & Logs\n• Application Insights\n• Alerts', dive: `### Azure Monitor\nA comprehensive solution for collecting, analyzing, and acting on telemetry from your cloud and on-premises environments.\n\n- Collects both **Metrics** (numerical values at a point in time) and **Logs** (events and records).\n- Allows you to set up automated alerts.\n- Includes **Application Insights** for monitoring live web applications.` },

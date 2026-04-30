@@ -7,6 +7,7 @@
     <title>GCP Foundational - Master Study Guide</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <link rel="stylesheet" href="assets/css/site.css">
     <script>
         tailwind.config = {
             darkMode: 'class',
@@ -52,7 +53,7 @@
         .no-scrollbar::-webkit-scrollbar { display: none; }
     </style>
 </head>
-<body class="min-h-screen bg-slate-50 dark:bg-[#0f172a] text-slate-900 dark:text-slate-200 antialiased overflow-x-hidden">
+<body class="min-h-screen bg-slate-50 dark:bg-[#0f172a] text-slate-900 dark:text-slate-200 antialiased overflow-x-hidden" style="--brand-accent:#f59e0b;">
 
     <header class="sticky top-0 z-40 bg-white/80 dark:bg-[#0f172a]/80 backdrop-blur-xl border-b border-slate-200 dark:border-slate-800 shadow-sm">
         <div class="max-w-7xl mx-auto px-4 h-20 grid grid-cols-3 items-center gap-4">
@@ -213,6 +214,31 @@
 
         <section id="section-compute" class="content-section hidden fade-in">
             <div class="mb-8 text-center md:text-left">
+                <h2 class="text-4xl font-black mb-2 text-orange-500">Compute & Services</h2>
+                <p class="text-slate-500 dark:text-slate-400 italic">Virtual machines, serverless, and orchestration.</p>
+            </div>
+            <div class="mb-10 bg-slate-100 dark:bg-slate-800/50 rounded-3xl p-8 border border-slate-200 dark:border-slate-700">
+                <h3 class="text-xl font-bold mb-6 text-orange-500">Compute Service Decision Tree</h3>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <div class="p-4 bg-white dark:bg-slate-700 rounded-xl shadow-sm border-t-4 border-orange-500">
+                        <div class="font-bold text-slate-800 dark:text-white">Need full OS control?</div>
+                        <div class="text-xs text-slate-500 mt-1">Use Compute Engine.</div>
+                    </div>
+                    <div class="p-4 bg-white dark:bg-slate-700 rounded-xl shadow-sm border-t-4 border-orange-500">
+                        <div class="font-bold text-slate-800 dark:text-white">Need raw code or containers?</div>
+                        <div class="text-xs text-slate-500 mt-1">Use App Engine or Cloud Run.</div>
+                    </div>
+                    <div class="p-4 bg-white dark:bg-slate-700 rounded-xl shadow-sm border-t-4 border-orange-500">
+                        <div class="font-bold text-slate-800 dark:text-white">Need orchestration at scale?</div>
+                        <div class="text-xs text-slate-500 mt-1">Use GKE or Autopilot.</div>
+                    </div>
+                </div>
+            </div>
+            <div id="compute-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+        </section>
+
+        <section id="section-storage" class="content-section hidden fade-in">
+            <div class="mb-8 text-center md:text-left">
                 <h2 class="text-4xl font-black mb-2 text-yellow-500">Data & Storage</h2>
                 <p class="text-slate-500 dark:text-slate-400 italic">Database decision trees and Cloud Storage classes.</p>
             </div>
@@ -238,10 +264,10 @@
                     </div>
                 </div>
             </div>
-            <div id="compute-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+            <div id="storage-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
         </section>
 
-        <section id="section-storage" class="content-section hidden fade-in">
+        <section id="section-network" class="content-section hidden fade-in">
             <div class="mb-8 text-center md:text-left">
                 <h2 class="text-4xl font-black mb-2 text-red-500">Network & Security</h2>
                 <p class="text-slate-500 dark:text-slate-400 italic">VPC architecture, load balancing, and identity frameworks.</p>
@@ -262,7 +288,7 @@
                     </table>
                 </div>
             </div>
-            <div id="storage-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+            <div id="network-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
         </section>
     </main>
 
@@ -273,7 +299,7 @@
                     <div id="m-icon-bg" class="p-5 rounded-3xl text-4xl md:text-5xl"><span id="m-icon"></span></div>
                     <div>
                         <h3 id="m-title" class="text-3xl md:text-4xl font-black text-slate-900 dark:text-white"></h3>
-                        <p class="text-sm font-bold uppercase tracking-widest mt-1">Technical Reference</p>
+                        <p id="m-subtitle" class="text-sm font-bold uppercase tracking-widest mt-1">Technical Reference</p>
                     </div>
                 </div>
                 <button onclick="closeModal()" class="w-12 h-12 flex items-center justify-center rounded-full bg-slate-100 dark:bg-slate-800 text-slate-500 hover:text-brand-accent transition-all text-3xl shrink-0">&times;</button>
@@ -283,14 +309,6 @@
     </div>
 
     <script>
-        /*
-            For Tailwind JIT:
-            text-amber-500 text-orange-500 text-yellow-500 text-red-500 text-green-500
-            bg-amber-500 bg-orange-500 bg-yellow-500 bg-red-500 bg-green-500
-            hover:bg-amber-700 hover:bg-orange-700 hover:bg-yellow-700 hover:bg-red-700 hover:bg-green-700
-            bg-amber-500/20 bg-orange-500/20 bg-yellow-500/20 bg-red-500/20 bg-green-500/20
-        */
-
         const conceptsData = [
             { id: 'c1', icon: '☁️', title: 'Cloud Service Models', desc: 'IaaS, PaaS, and SaaS explained.', summary: '• IaaS (You manage OS)\n• PaaS (Focus on Code)\n• SaaS (Fully Managed)', dive: `### Cloud Service Models\n\n| Model | User Manages | Google Manages | Examples |\n|---|---|---|---|\n| **IaaS** | OS, Runtime, App, Data | Hardware, Virtualization | Compute Engine |\n| **PaaS** | App, Data | OS, Hardware, Network | App Engine, Cloud Run |\n| **SaaS** | Just User Data | Everything | Google Workspace |\n\n#### 💡 Exam Tip\nIf a question asks how to let developers focus *only* on writing code without worrying about server updates or scaling, choose a **PaaS** solution.` },
             { id: 'c2', icon: '💰', title: 'CapEx vs OpEx', desc: 'Financial transformation in the cloud.', summary: '• CapEx (Upfront/Sunk)\n• OpEx (Pay-as-you-go)\n• TCO (Total Cost)', dive: `### Financial Models in Cloud\n\nMoving to GCP shifts your financial model dramatically, which is a core concept on the Digital Leader exam.\n\n#### CapEx (Capital Expenditure)\nBuying physical servers, switches, and data center space upfront. This is a sunk cost. You have to guess your peak capacity. If you guess too low, your app crashes during traffic spikes. If you guess too high, you waste money on idle resources.\n\n#### OpEx (Operational Expenditure)\nPaying only for what you consume (Pay-as-you-go). You don't pay upfront. You treat infrastructure as a utility bill, scaling up and down dynamically.\n\n#### Total Cost of Ownership (TCO)\nA comprehensive financial estimate intended to help buyers determine the direct and indirect costs of a system. Cloud reduces TCO by eliminating hardware refresh cycles, facility power/cooling costs, and physical security staffing.\n\n#### 💡 Exam Tip\nIf a scenario mentions a company wanting to "avoid large upfront hardware purchases" or "pay only for what they use," they are looking to transition from **CapEx to OpEx**.` },
@@ -298,7 +316,7 @@
         ];
 
         const computeData = [
-            { id: 'cm1', icon: '💻', title: 'Compute Engine', desc: 'Virtual Machines on GCP (IaaS).', summary: '• IaaS / Total Control\n• Custom Machine Types\n• Preemptible/Spot VMs', dive: `### Compute Engine (GCE)\nProvides highly customizable Virtual Machines (VMs). It is a pure **IaaS** offering where you have root/admin access to the OS.\n\n#### Key Features:\n- **Custom Machine Types:** GCP lets you specify the exact amount of vCPU and memory you need, saving costs compared to rigid t-shirt sizes.\n- **Spot VMs (formerly Preemptible):** Short-lived compute instances offered at up to a 91% discount. Google can terminate them at any time with a 30-second warning. *Perfect for: Batch jobs, media rendering, fault-tolerant workloads.* NEVER use for databases.\n- **Live Migration:** Google can move your running VM to a different physical host without downtime during hardware maintenance.\n- **MIGs (Managed Instance Groups):** Allows you to scale identical VMs automatically based on CPU/load, ensuring high availability.\n\n#### 💡 Exam Tip\nIf a question requires "full control over the OS", "legacy application support", or "custom software licensing", the answer is **Compute Engine**.` },
+            { id: 'cm1', icon: '💻', title: 'Compute Engine', desc: 'Virtual Machines on GCP (IaaS).', summary: '• IaaS / Total Control\n• Custom Machine Types\n• Preemptible/Spot VMs', dive: `### Compute Engine (GCE)\nProvides highly customizable Virtual Machines (VMs). It is a pure **IaaS** offering where you have root/admin access to the OS.\n\n#### Key Features:\n- **Custom Machine Types:** GCP lets you specify the exact amount of vCPU and memory you need, which can improve right-sizing. Depending on your workload, predefined machine families or committed use discounts may still be cheaper.\n- **Spot VMs (formerly Preemptible):** Short-lived compute instances offered at up to a 91% discount. Google can terminate them at any time with a 30-second warning. *Perfect for: Batch jobs, media rendering, fault-tolerant workloads.* NEVER use for databases.\n- **Live Migration:** Google can move your running VM to a different physical host without downtime during hardware maintenance.\n- **MIGs (Managed Instance Groups):** Allows you to scale identical VMs automatically based on CPU/load, ensuring high availability.\n\n#### 💡 Exam Tip\nIf a question requires "full control over the OS", "legacy application support", or "custom software licensing", the answer is **Compute Engine**.` },
             { id: 'cm2', icon: '🚀', title: 'Cloud Run & App Engine', desc: 'Serverless application environments.', summary: '• App Engine (Code-based PaaS)\n• Cloud Run (Container PaaS)\n• Scale to zero capability', dive: `### Serverless Compute Options\nServerless means you do not provision or manage any servers. You only pay for the exact compute time your code is running.\n\n#### App Engine\nA fully managed **PaaS** for web applications. You upload your raw code (Python, Java, Node.js, Go) and Google handles everything else (provisioning, scaling, load balancing). \n- *Standard Environment:* Scales to zero instantly, runs in a secure sandbox.\n- *Flexible Environment:* Runs in Docker containers on Compute Engine, slower scaling but allows background processes.\n\n#### Cloud Run\nA fully managed serverless platform for running **stateless Docker containers**. You give it a container image, and it handles the scaling and HTTP routing. It can automatically scale from zero to thousands of instances in seconds.\n\n#### 💡 Exam Tip\nIf you have existing raw code and want zero infrastructure management, use **App Engine**. If you have a *stateless Docker container* and want it to run serverlessly, use **Cloud Run**.` },
             { id: 'cm3', icon: '🚢', title: 'Google Kubernetes Engine', desc: 'Managed container orchestration.', summary: '• K8s Orchestration\n• Microservices\n• AutoPilot vs Standard', dive: `### GKE (Google Kubernetes Engine)\nProvides a managed environment for deploying, managing, and scaling containerized applications using Kubernetes. Kubernetes was originally created by Google (project Borg).\n\n#### Key Features:\n- **Orchestration:** Automates the deployment, scaling, and self-healing of hundreds or thousands of containers (ideal for massive microservices architectures).\n- **GKE Autopilot:** A hands-off mode where Google fully manages the cluster infrastructure, nodes, and scaling for you. You only pay for the pods you run, dramatically reducing operational overhead.\n- **GKE Standard:** You manage the underlying Compute Engine nodes yourself for maximum control over the OS and hardware.\n\n#### 💡 Exam Tip\nIf the scenario mentions "microservices architecture at scale", "container orchestration", or "hybrid cloud fleet management", the answer is **GKE**. For hybrid/multi-cloud Kubernetes management across AWS/Azure, the specific tool is **Anthos**.` }
         ];
