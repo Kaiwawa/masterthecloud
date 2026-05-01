@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CISSP - Master Study Guide</title>
+    <link rel="icon" type="image/x-icon" href="assets/images/ics2.ico">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+    <script src="assets/js/app.js"></script>
+    <script src="assets/js/version.js"></script>
+    <link rel="stylesheet" href="assets/css/site.css">
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            accent: '#ef4444',
+                            accentHover: '#dc2626',
+                            dark: '#0f172a'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+
+<body
+    class="min-h-screen bg-slate-50 dark:bg-[#0f172a] text-slate-900 dark:text-slate-200 antialiased overflow-x-hidden"
+    style="--brand-accent:#ef4444;">
+
+    <header
+        class="sticky top-0 z-40 bg-white/80 dark:bg-[#0f172a]/80 backdrop-blur-xl border-b border-slate-200 dark:border-slate-800 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 h-20 grid grid-cols-3 items-center gap-4">
+            <div class="flex items-center justify-start gap-4">
+                <button onclick="goHome()"
+                    class="hidden sm:flex p-2.5 bg-slate-100 dark:bg-slate-800 rounded-xl hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors shrink-0 text-slate-500 dark:text-slate-400 hover:text-brand-accent dark:hover:text-brand-accent items-center justify-center"
+                    title="Home">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1m-6 0h6">
+                        </path>
+                    </svg>
+                </button>
+                <button onclick="openSidebar()"
+                    class="p-2.5 px-4 bg-slate-100 dark:bg-slate-800 rounded-xl hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors shrink-0 flex items-center gap-2 text-slate-700 dark:text-slate-300">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                    <span class="font-bold text-sm hidden sm:block">Menu</span>
+                </button>
+            </div>
+
+            <div onclick="navigateTo('section-home')"
+                class="flex items-center justify-center gap-3 cursor-pointer group">
+                <div class="hidden lg:block">
+                    <h1
+                        class="text-xl font-extrabold tracking-tighter text-slate-900 dark:text-white group-hover:text-brand-accent transition-colors">
+                        Master CISSP</h1>
+                </div>
+            </div>
+
+            <div class="flex items-center justify-end gap-3">
+                <div class="relative hidden md:block w-full max-w-[160px] lg:max-w-[200px]">
+                    <input type="text" id="global-search" oninput="handleSearch(this.value)" placeholder="Search..."
+                        class="w-full bg-slate-100 dark:bg-slate-800 border-none rounded-2xl px-4 py-2 text-sm focus:ring-2 focus:ring-brand-accent outline-none transition-all">
+                    <div id="search-results"
+                        class="absolute top-full right-0 w-[300px] mt-2 bg-white dark:bg-slate-800 rounded-2xl shadow-2xl border border-slate-200 dark:border-slate-700 hidden overflow-hidden z-50 text-left">
+                    </div>
+                </div>
+                <button onclick="toggleTheme()"
+                    class="p-2.5 bg-slate-100 dark:bg-slate-800 rounded-xl hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors shrink-0">
+                    <span id="theme-icon">🌙</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <div id="sidebar-overlay"
+        class="fixed inset-0 bg-slate-900/40 backdrop-blur-sm z-[55] hidden opacity-0 transition-opacity duration-300"
+        onclick="closeSidebar()"></div>
+
+    <aside id="left-sidebar"
+        class="fixed top-0 left-0 h-full w-72 bg-white dark:bg-[#0f172a] border-r border-slate-200 dark:border-slate-800 shadow-[0_0_50px_rgba(0,0,0,0.3)] z-[60] transform -translate-x-full transition-transform duration-300 flex flex-col">
+        <div class="p-6 flex justify-between items-center border-b border-slate-200 dark:border-slate-800">
+            <span class="font-black text-sm text-slate-400 uppercase tracking-widest">Navigation</span>
+            <button onclick="closeSidebar()"
+                class="text-slate-400 hover:text-brand-accent transition-colors text-3xl">&times;</button>
+        </div>
+
+        <nav class="flex flex-col gap-1 p-4 overflow-y-auto custom-scrollbar flex-grow">
+            <button data-target="section-home" onclick="navigateTo('section-home')"
+                class="nav-btn text-left px-4 py-2 rounded-xl text-base font-bold transition-all text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800">Dashboard</button>
+            <span
+                class="px-4 text-base font-black text-slate-800 dark:text-slate-200 tracking-wide mt-4 mb-1 uppercase">Governance
+                & Risk</span>
+            <button data-target="section-risk" onclick="navigateTo('section-risk')"
+                class="nav-btn text-left pl-8 pr-4 py-2 rounded-xl text-sm font-semibold transition-all text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800">Risk
+                Mgmt & Assets</button>
+            <span
+                class="px-4 text-base font-black text-slate-800 dark:text-slate-200 tracking-wide mt-6 mb-1 uppercase">Technical
+                Domains</span>
+            <button data-target="section-arch" onclick="navigateTo('section-arch')"
+                class="nav-btn text-left pl-8 pr-4 py-2 rounded-xl text-sm font-semibold transition-all text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800">Architecture
+                & Eng</button>
+            <button data-target="section-network" onclick="navigateTo('section-network')"
+                class="nav-btn text-left pl-8 pr-4 py-2 rounded-xl text-sm font-semibold transition-all text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800">Comm
+                & Network</button>
+            <button data-target="section-iam" onclick="navigateTo('section-iam')"
+                class="nav-btn text-left pl-8 pr-4 py-2 rounded-xl text-sm font-semibold transition-all text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800">Identity
+                & Access</button>
+            <span
+                class="px-4 text-base font-black text-slate-800 dark:text-slate-200 tracking-wide mt-6 mb-1 uppercase">Security
+                Ops</span>
+            <button data-target="section-ops" onclick="navigateTo('section-ops')"
+                class="nav-btn text-left pl-8 pr-4 py-2 rounded-xl text-sm font-semibold transition-all text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800">Security
+                Operations</button>
+            <button data-target="section-software" onclick="navigateTo('section-software')"
+                class="nav-btn text-left pl-8 pr-4 py-2 rounded-xl text-sm font-semibold transition-all text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800">Software
+                Security</button>
+            <a href="index.html"
+                class="text-left px-4 py-2 rounded-xl text-sm font-bold transition-all text-brand-accent hover:bg-slate-100 dark:hover:bg-slate-800 mb-2 mt-4">←
+                Back to Main Menu</a>
+        </nav>
+    </aside>
+
+    <main class="max-w-7xl mx-auto px-4 py-12">
+
+        <section id="section-home" class="content-section fade-in pt-12">
+            <div class="text-center mb-16 mt-8">
+                <div
+                    class="inline-block px-4 py-1.5 rounded-full bg-red-500/10 border border-red-500/20 font-bold text-xs text-red-500 tracking-widest uppercase mb-6">
+                    ISC² Professional</div>
+                <h2 class="text-5xl md:text-7xl font-black mb-6 tracking-tight text-slate-900 dark:text-white">Master
+                    CISSP.</h2>
+                <p class="text-slate-500 dark:text-slate-400 text-lg max-w-2xl mx-auto leading-relaxed">Comprehensive
+                    coverage of the 8 CISSP domains for cybersecurity leaders.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div onclick="navigateTo('section-risk')"
+                    class="bg-white dark:bg-slate-800/40 p-8 rounded-[2rem] border border-slate-200 dark:border-slate-700/50 shadow-xl cursor-pointer hover:-translate-y-2 hover:border-red-500/50 transition-all group">
+                    <div
+                        class="w-14 h-14 mx-auto bg-red-500/10 rounded-2xl flex items-center justify-center text-3xl mb-6 group-hover:scale-110 transition-transform">
+                        ⚖️</div>
+                    <h3 class="text-xl font-black mb-2 text-slate-800 dark:text-white">Governance & Risk</h3>
+                    <p class="text-slate-500 dark:text-slate-400 text-sm leading-relaxed">CIA Triad, Ethics, and Risk
+                        Management frameworks.</p>
+                </div>
+                <div onclick="navigateTo('section-arch')"
+                    class="bg-white dark:bg-slate-800/40 p-8 rounded-[2rem] border border-slate-200 dark:border-slate-700/50 shadow-xl cursor-pointer hover:-translate-y-2 hover:border-red-500/50 transition-all group">
+                    <div
+                        class="w-14 h-14 mx-auto bg-red-500/10 rounded-2xl flex items-center justify-center text-3xl mb-6 group-hover:scale-110 transition-transform">
+                        🏛️</div>
+                    <h3 class="text-xl font-black mb-2 text-slate-800 dark:text-white">Security Architecture</h3>
+                    <p class="text-slate-500 dark:text-slate-400 text-sm leading-relaxed">Secure design principles and
+                        engineering processes.</p>
+                </div>
+                <div onclick="navigateTo('section-network')"
+                    class="bg-white dark:bg-slate-800/40 p-8 rounded-[2rem] border border-slate-200 dark:border-slate-700/50 shadow-xl cursor-pointer hover:-translate-y-2 hover:border-red-500/50 transition-all group">
+                    <div
+                        class="w-14 h-14 mx-auto bg-red-500/10 rounded-2xl flex items-center justify-center text-3xl mb-6 group-hover:scale-110 transition-transform">
+                        🌐</div>
+                    <h3 class="text-xl font-black mb-2 text-slate-800 dark:text-white">Network Security</h3>
+                    <p class="text-slate-500 dark:text-slate-400 text-sm leading-relaxed">IP protocols, secure
+                        communication, and network design.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="section-risk" class="content-section hidden fade-in pt-12">
+            <div id="risk-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+        </section>
+
+        <section id="section-arch" class="content-section hidden fade-in pt-12">
+            <div id="arch-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+        </section>
+
+        <section id="section-network" class="content-section hidden fade-in pt-12">
+            <div id="network-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+        </section>
+
+        <section id="section-iam" class="content-section hidden fade-in pt-12">
+            <div id="iam-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+        </section>
+
+        <section id="section-ops" class="content-section hidden fade-in pt-12">
+            <div id="ops-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+        </section>
+
+        <section id="section-software" class="content-section hidden fade-in pt-12">
+            <div id="software-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+        </section>
+
+    </main>
+
+    <footer class="w-full max-w-7xl mx-auto px-4 pb-12 mt-12 text-center fade-in">
+        <p class="text-xs md:text-sm text-slate-600 dark:text-slate-400 font-semibold tracking-wide">
+            Version <span class="app-version">v0.8.5</span> •
+            <a href="https://github.com/Kaiwawa/masterthecloud" target="_blank" rel="noopener noreferrer"
+                class="text-brand-accent hover:underline">Main GitHub Repository</a>
+        </p>
+    </footer>
+
+    <div id="deep-dive-modal"
+        class="fixed inset-0 z-[100] hidden items-center justify-center bg-slate-950/80 backdrop-blur-md p-4 opacity-0 transition-all duration-300"
+        onclick="closeModal(event)">
+        <div class="bg-white dark:bg-slate-900 w-full max-w-3xl rounded-[2.5rem] shadow-2xl overflow-hidden transform scale-90 transition-all duration-300 border border-slate-200 dark:border-slate-800 flex flex-col max-h-[90vh]"
+            onclick="event.stopPropagation()">
+            <div
+                class="p-8 md:p-10 border-b border-slate-100 dark:border-slate-800 flex justify-between items-center bg-slate-50/50 dark:bg-slate-800/30 shrink-0">
+                <div class="flex items-center gap-6">
+                    <div id="m-icon-bg" class="p-5 rounded-3xl text-4xl md:text-5xl"><span id="m-icon"></span></div>
+                    <div>
+                        <h3 id="m-title" class="text-3xl md:text-4xl font-black text-slate-900 dark:text-white"></h3>
+                        <p id="m-subtitle" class="text-sm font-bold uppercase tracking-widest mt-1">Exam Reference</p>
+                    </div>
+                </div>
+                <button onclick="closeModal()"
+                    class="w-12 h-12 flex items-center justify-center rounded-full bg-slate-100 dark:bg-slate-800 text-slate-500 hover:text-brand-accent transition-all text-3xl shrink-0">&times;</button>
+            </div>
+            <div id="m-content"
+                class="p-8 md:p-12 overflow-y-auto md-content custom-scrollbar bg-white dark:bg-slate-900 flex-grow">
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const riskData = [
+            {
+                id: 'r1', icon: '⚖️', title: 'Security Governance', desc: 'Alignment with business goals.', summary: '• CIA Triad\n• ISC² Ethics\n• Risk Assessment', dive: `### Security and Risk Management
+The largest domain in CISSP, covering the foundational principles.
+
+- **CIA Triad**: Confidentiality, Integrity, Availability.
+- **ISC² Code of Ethics**: Protect society, act honorably, provide competent service, protect the profession.
+- **Risk Assessment**: Qualitative vs Quantitative risk analysis.
+- **SLE, ARO, ALE**: Single Loss Expectancy, Annualized Rate of Occurrence, Annualized Loss Expectancy (\`ALE = SLE * ARO\`).`
+            },
+            {
+                id: 'r2', icon: '📂', title: 'Asset Security', desc: 'Protecting the lifecycle of data.', summary: '• Data Classification\n• Ownership\n• Retention', dive: `### Asset Security
+Focuses on the collection, handling, and protection of information.
+
+- **Classification**: Public, Internal, Confidential, Restricted.
+- **Ownership**: Data Owner, System Owner, Data Custodian.
+- **Data at Rest**: Encryption, physical security.
+- **Data in Motion**: TLS, IPsec.`
+            }
+        ];
+
+        const archData = [
+            {
+                id: 'a1', icon: '🏛️', title: 'Security Models', desc: 'Mathematical models for security.', summary: '• Bell-LaPadula\n• Biba\n• Clark-Wilson', dive: `### Security Architecture and Engineering
+Mathematical and conceptual models that enforce security policies.
+
+- **Bell-LaPadula**: Confidentiality (No read up, no write down).
+- **Biba**: Integrity (No read down, no write up).
+- **Clark-Wilson**: Prevents unauthorized modification and ensures internal/external consistency.`
+            }
+        ];
+
+        const networkData = [
+            {
+                id: 'n1', icon: '🌐', title: 'OSI Model', desc: 'Layered communication framework.', summary: '• Physical to Application\n• Protocols per layer\n• Attacks per layer', dive: `### Communication and Network Security
+Designing and protecting networks.
+
+- **Layer 7 (Application)**: HTTP, FTP, SMTP.
+- **Layer 4 (Transport)**: TCP, UDP.
+- **Layer 3 (Network)**: IP, ICMP, Routing.
+- **Layer 2 (Data Link)**: MAC, ARP, Switches.`
+            }
+        ];
+
+        const iamData = [
+            {
+                id: 'i1', icon: '🔑', title: 'Access Control', desc: 'Managing identification and auth.', summary: '• Identification\n• Authentication\n• Authorization', dive: `### Identity and Access Management (IAM)
+The systems and processes for managing users and access.
+
+- **Auth Factors**: Something you know, have, are, do, or where you are.
+- **SAML**: XML-based for SSO.
+- **OAuth / OpenID Connect**: Modern web-based auth.
+- **RBAC vs ABAC**: Role-based vs Attribute-based access control.`
+            }
+        ];
+
+        const opsData = [
+            {
+                id: 'o1', icon: '🚨', title: 'Incident Response', desc: 'Handling security events.', summary: '• Detect & Response\n• Recovery\n• Lessons Learned', dive: `### Security Operations
+The daily management of security and incident handling.
+
+- **Incident Lifecycle**: Preparation, Detection, Analysis, Containment, Eradication, Recovery, Post-Incident Activity.
+- **Forensics**: Order of volatility, chain of custody.`
+            }
+        ];
+
+        const softwareData = [
+            {
+                id: 's1', icon: '💻', title: 'Secure Development', desc: 'Building security into code.', summary: '• SDLC Models\n• Database Security\n• Web Vulnerabilities', dive: `### Software Development Security
+Applying security to the software lifecycle.
+
+- **Waterfall vs Agile**: Differences in security implementation.
+- **DevSecOps**: Integrating security into the CI/CD pipeline.
+- **Vulnerabilities**: XSS, SQL Injection, Buffer Overflow.`
+            }
+        ];
+
+        document.addEventListener('DOMContentLoaded', () => {
+            new StudyGuideApp({
+                grids: [
+                    { id: 'risk-grid', data: riskData, border: 'border-red-500', grad: 'from-red-500/20', color: 'red-500' },
+                    { id: 'arch-grid', data: archData, border: 'border-red-500', grad: 'from-red-500/20', color: 'red-500' },
+                    { id: 'network-grid', data: networkData, border: 'border-red-500', grad: 'from-red-500/20', color: 'red-500' },
+                    { id: 'iam-grid', data: iamData, border: 'border-red-500', grad: 'from-red-500/20', color: 'red-500' },
+                    { id: 'ops-grid', data: opsData, border: 'border-red-500', grad: 'from-red-500/20', color: 'red-500' },
+                    { id: 'software-grid', data: softwareData, border: 'border-red-500', grad: 'from-red-500/20', color: 'red-500' }
+                ]
+            });
+        });
+    </script>
+
+</body>
+
+</html>

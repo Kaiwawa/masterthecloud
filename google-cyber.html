@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Google Cybersecurity - Master Study Guide</title>
+    <link rel="icon" type="image/x-icon" href="assets/images/gcp.ico">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+    <script src="assets/js/app.js"></script>
+    <script src="assets/js/version.js"></script>
+    <link rel="stylesheet" href="assets/css/site.css">
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            accent: '#4285F4',
+                            accentHover: '#357ae8',
+                            dark: '#0f172a'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+
+<body
+    class="min-h-screen bg-slate-50 dark:bg-[#0f172a] text-slate-900 dark:text-slate-200 antialiased overflow-x-hidden"
+    style="--brand-accent:#4285F4;">
+
+    <header
+        class="sticky top-0 z-40 bg-white/80 dark:bg-[#0f172a]/80 backdrop-blur-xl border-b border-slate-200 dark:border-slate-800 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 h-20 grid grid-cols-3 items-center gap-4">
+            <div class="flex items-center justify-start gap-4">
+                <button onclick="goHome()"
+                    class="hidden sm:flex p-2.5 bg-slate-100 dark:bg-slate-800 rounded-xl hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors shrink-0 text-slate-500 dark:text-slate-400 hover:text-brand-accent dark:hover:text-brand-accent items-center justify-center"
+                    title="Home">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1m-6 0h6">
+                        </path>
+                    </svg>
+                </button>
+                <button onclick="openSidebar()"
+                    class="p-2.5 px-4 bg-slate-100 dark:bg-slate-800 rounded-xl hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors shrink-0 flex items-center gap-2 text-slate-700 dark:text-slate-300">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                    <span class="font-bold text-sm hidden sm:block">Menu</span>
+                </button>
+            </div>
+
+            <div onclick="navigateTo('section-home')"
+                class="flex items-center justify-center gap-3 cursor-pointer group">
+                <div class="hidden lg:block">
+                    <h1
+                        class="text-xl font-extrabold tracking-tighter text-slate-900 dark:text-white group-hover:text-brand-accent transition-colors">
+                        Master Google Cybersecurity</h1>
+                </div>
+            </div>
+
+            <div class="flex items-center justify-end gap-3">
+                <div class="relative hidden md:block w-full max-w-[160px] lg:max-w-[200px]">
+                    <input type="text" id="global-search" oninput="handleSearch(this.value)" placeholder="Search..."
+                        class="w-full bg-slate-100 dark:bg-slate-800 border-none rounded-2xl px-4 py-2 text-sm focus:ring-2 focus:ring-brand-accent outline-none transition-all">
+                    <div id="search-results"
+                        class="absolute top-full right-0 w-[300px] mt-2 bg-white dark:bg-slate-800 rounded-2xl shadow-2xl border border-slate-200 dark:border-slate-700 hidden overflow-hidden z-50 text-left">
+                    </div>
+                </div>
+                <button onclick="toggleTheme()"
+                    class="p-2.5 bg-slate-100 dark:bg-slate-800 rounded-xl hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors shrink-0">
+                    <span id="theme-icon">🌙</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <div id="sidebar-overlay"
+        class="fixed inset-0 bg-slate-900/40 backdrop-blur-sm z-[55] hidden opacity-0 transition-opacity duration-300"
+        onclick="closeSidebar()"></div>
+
+    <aside id="left-sidebar"
+        class="fixed top-0 left-0 h-full w-72 bg-white dark:bg-[#0f172a] border-r border-slate-200 dark:border-slate-800 shadow-[0_0_50px_rgba(0,0,0,0.3)] z-[60] transform -translate-x-full transition-transform duration-300 flex flex-col">
+        <div class="p-6 flex justify-between items-center border-b border-slate-200 dark:border-slate-800">
+            <span class="font-black text-sm text-slate-400 uppercase tracking-widest">Navigation</span>
+            <button onclick="closeSidebar()"
+                class="text-slate-400 hover:text-brand-accent transition-colors text-3xl">&times;</button>
+        </div>
+
+        <nav class="flex flex-col gap-1 p-4 overflow-y-auto custom-scrollbar flex-grow">
+            <button data-target="section-home" onclick="navigateTo('section-home')"
+                class="nav-btn text-left px-4 py-2 rounded-xl text-base font-bold transition-all text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800">Dashboard</button>
+            <span
+                class="px-4 text-base font-black text-slate-800 dark:text-slate-200 tracking-wide mt-4 mb-1">Foundations</span>
+            <button data-target="section-foundations" onclick="navigateTo('section-foundations')"
+                class="nav-btn text-left pl-8 pr-4 py-2 rounded-xl text-sm font-semibold transition-all text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800">Foundations
+                & Risk</button>
+            <span class="px-4 text-base font-black text-slate-800 dark:text-slate-200 tracking-wide mt-6 mb-1">Technical
+                Skills</span>
+            <button data-target="section-networks" onclick="navigateTo('section-networks')"
+                class="nav-btn text-left pl-8 pr-4 py-2 rounded-xl text-sm font-semibold transition-all text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800">Networks
+                & Tools</button>
+            <button data-target="section-threats" onclick="navigateTo('section-threats')"
+                class="nav-btn text-left pl-8 pr-4 py-2 rounded-xl text-sm font-semibold transition-all text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800">Threats
+                & Assets</button>
+            <span
+                class="px-4 text-base font-black text-slate-800 dark:text-slate-200 tracking-wide mt-6 mb-1">Operations</span>
+            <button data-target="section-ops" onclick="navigateTo('section-ops')"
+                class="nav-btn text-left pl-8 pr-4 py-2 rounded-xl text-sm font-semibold transition-all text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800">Detection
+                & Response</button>
+            <button data-target="section-python" onclick="navigateTo('section-python')"
+                class="nav-btn text-left pl-8 pr-4 py-2 rounded-xl text-sm font-semibold transition-all text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800">Python
+                Automation</button>
+            <a href="index.html"
+                class="text-left px-4 py-2 rounded-xl text-sm font-bold transition-all text-brand-accent hover:bg-slate-100 dark:hover:bg-slate-800 mb-2 mt-4">←
+                Back to Main Menu</a>
+        </nav>
+    </aside>
+
+    <main class="max-w-7xl mx-auto px-4 py-12">
+
+        <section id="section-home" class="content-section fade-in pt-12">
+            <div class="text-center mb-16 mt-8">
+                <div
+                    class="inline-block px-4 py-1.5 rounded-full bg-blue-500/10 border border-blue-500/20 font-bold text-xs text-blue-500 tracking-widest uppercase mb-6">
+                    Google Career Certificate</div>
+                <h2 class="text-5xl md:text-7xl font-black mb-6 tracking-tight text-slate-900 dark:text-white">Master
+                    Google Cyber.</h2>
+                <p class="text-slate-500 dark:text-slate-400 text-lg max-w-2xl mx-auto leading-relaxed">Master the
+                    technical skills and frameworks required for an entry-level Cybersecurity Analyst role.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div onclick="navigateTo('section-foundations')"
+                    class="bg-white dark:bg-slate-800/40 p-8 rounded-[2rem] border border-slate-200 dark:border-slate-700/50 shadow-xl cursor-pointer hover:-translate-y-2 hover:border-blue-500/50 transition-all group">
+                    <div
+                        class="w-14 h-14 mx-auto bg-blue-500/10 rounded-2xl flex items-center justify-center text-3xl mb-6 group-hover:scale-110 transition-transform">
+                        🏛️</div>
+                    <h3 class="text-xl font-black mb-2 text-slate-800 dark:text-white">Foundations & Risk</h3>
+                    <p class="text-slate-500 dark:text-slate-400 text-sm leading-relaxed">CIA Triad, Security
+                        Frameworks, and Risk Management.</p>
+                </div>
+                <div onclick="navigateTo('section-networks')"
+                    class="bg-white dark:bg-slate-800/40 p-8 rounded-[2rem] border border-slate-200 dark:border-slate-700/50 shadow-xl cursor-pointer hover:-translate-y-2 hover:border-blue-500/50 transition-all group">
+                    <div
+                        class="w-14 h-14 mx-auto bg-blue-500/10 rounded-2xl flex items-center justify-center text-3xl mb-6 group-hover:scale-110 transition-transform">
+                        🌐</div>
+                    <h3 class="text-xl font-black mb-2 text-slate-800 dark:text-white">Networks & Tools</h3>
+                    <p class="text-slate-500 dark:text-slate-400 text-sm leading-relaxed">TCP/IP, OSI, Linux command
+                        line, and SQL.</p>
+                </div>
+                <div onclick="navigateTo('section-threats')"
+                    class="bg-white dark:bg-slate-800/40 p-8 rounded-[2rem] border border-slate-200 dark:border-slate-700/50 shadow-xl cursor-pointer hover:-translate-y-2 hover:border-blue-500/50 transition-all group">
+                    <div
+                        class="w-14 h-14 mx-auto bg-blue-500/10 rounded-2xl flex items-center justify-center text-3xl mb-6 group-hover:scale-110 transition-transform">
+                        🛡️</div>
+                    <h3 class="text-xl font-black mb-2 text-slate-800 dark:text-white">Threats & Assets</h3>
+                    <p class="text-slate-500 dark:text-slate-400 text-sm leading-relaxed">OWASP Top 10, Encryption, and
+                        Asset Security.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="section-foundations" class="content-section hidden fade-in pt-12">
+            <div class="mb-12 text-center md:text-left">
+                <h2 class="text-4xl font-black mb-2 text-blue-500">Foundations & Risk</h2>
+                <p class="text-slate-500 dark:text-slate-400 italic">Security principles and risk assessment frameworks.
+                </p>
+            </div>
+            <div id="foundations-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+        </section>
+
+        <section id="section-networks" class="content-section hidden fade-in pt-12">
+            <div class="mb-12 text-center md:text-left">
+                <h2 class="text-4xl font-black mb-2 text-blue-500">Networks & Tools</h2>
+                <p class="text-slate-500 dark:text-slate-400 italic">Network architecture and fundamental technical
+                    tools.</p>
+            </div>
+            <div id="networks-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+        </section>
+
+        <section id="section-threats" class="content-section hidden fade-in pt-12">
+            <div class="mb-12 text-center md:text-left">
+                <h2 class="text-4xl font-black mb-2 text-blue-500">Threats & Assets</h2>
+                <p class="text-slate-500 dark:text-slate-400 italic">Identifying vulnerabilities and protecting critical
+                    assets.</p>
+            </div>
+            <div id="threats-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+        </section>
+
+        <section id="section-ops" class="content-section hidden fade-in pt-12">
+            <div class="mb-12 text-center md:text-left">
+                <h2 class="text-4xl font-black mb-2 text-blue-500">Detection & Response</h2>
+                <p class="text-slate-500 dark:text-slate-400 italic">Monitoring, alerts, and responding to security
+                    incidents.</p>
+            </div>
+            <div id="ops-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+        </section>
+
+        <section id="section-python" class="content-section hidden fade-in pt-12">
+            <div class="mb-12 text-center md:text-left">
+                <h2 class="text-4xl font-black mb-2 text-blue-500">Python Automation</h2>
+                <p class="text-slate-500 dark:text-slate-400 italic">Automating cybersecurity tasks with Python scripts.
+                </p>
+            </div>
+            <div id="python-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+        </section>
+
+    </main>
+
+    <footer class="w-full max-w-7xl mx-auto px-4 pb-12 mt-12 text-center fade-in">
+        <p class="text-xs md:text-sm text-slate-600 dark:text-slate-400 font-semibold tracking-wide">
+            Version <span class="app-version">v0.8.5</span> •
+            <a href="https://github.com/Kaiwawa/masterthecloud" target="_blank" rel="noopener noreferrer"
+                class="text-brand-accent hover:underline">Main GitHub Repository</a>
+        </p>
+    </footer>
+
+    <div id="deep-dive-modal"
+        class="fixed inset-0 z-[100] hidden items-center justify-center bg-slate-950/80 backdrop-blur-md p-4 opacity-0 transition-all duration-300"
+        onclick="closeModal(event)">
+        <div class="bg-white dark:bg-slate-900 w-full max-w-3xl rounded-[2.5rem] shadow-2xl overflow-hidden transform scale-90 transition-all duration-300 border border-slate-200 dark:border-slate-800 flex flex-col max-h-[90vh]"
+            onclick="event.stopPropagation()">
+            <div
+                class="p-8 md:p-10 border-b border-slate-100 dark:border-slate-800 flex justify-between items-center bg-slate-50/50 dark:bg-slate-800/30 shrink-0">
+                <div class="flex items-center gap-6">
+                    <div id="m-icon-bg" class="p-5 rounded-3xl text-4xl md:text-5xl"><span id="m-icon"></span></div>
+                    <div>
+                        <h3 id="m-title" class="text-3xl md:text-4xl font-black text-slate-900 dark:text-white"></h3>
+                        <p id="m-subtitle" class="text-sm font-bold uppercase tracking-widest mt-1">Exam Reference</p>
+                    </div>
+                </div>
+                <button onclick="closeModal()"
+                    class="w-12 h-12 flex items-center justify-center rounded-full bg-slate-100 dark:bg-slate-800 text-slate-500 hover:text-brand-accent transition-all text-3xl shrink-0">&times;</button>
+            </div>
+            <div id="m-content"
+                class="p-8 md:p-12 overflow-y-auto md-content custom-scrollbar bg-white dark:bg-slate-900 flex-grow">
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const foundationsData = [
+            {
+                id: 'f1', icon: '📐', title: 'CIA Triad', desc: 'The core pillars of cybersecurity.', summary: '• Confidentiality\n• Integrity\n• Availability', dive: `### CIA Triad
+The fundamental model for information security.
+
+- **Confidentiality**: Ensuring data is accessible only to those authorized to have access.
+- **Integrity**: Ensuring the data is accurate, complete, and hasn't been tampered with.
+- **Availability**: Ensuring systems and data are available when needed.
+
+#### ⚡ Exam Concept
+If a system is hacked and data is leaked, it's a **Confidentiality** breach. If a website is defaced, it's an **Integrity** breach. If a DDoS attack happens, it's an **Availability** breach.`
+            },
+            {
+                id: 'f2', icon: '🏛️', title: 'NIST CSF', desc: 'Cybersecurity Framework.', summary: '• Identify & Protect\n• Detect & Respond\n• Recover', dive: `### NIST Cybersecurity Framework (CSF)
+A set of guidelines for mitigating organizational cybersecurity risk.
+
+1. **Identify**: Develop organizational understanding to manage risk.
+2. **Protect**: Implement safeguards to ensure delivery of services.
+3. **Detect**: Identify the occurrence of a cybersecurity event.
+4. **Respond**: Take action regarding a detected security event.
+5. **Recover**: Maintain plans for resilience and restore capabilities.`
+            }
+        ];
+
+        const networksData = [
+            {
+                id: 'n1', icon: '📡', title: 'TCP/IP Model', desc: 'The protocol suite of the internet.', summary: '• Network Access\n• Internet\n• Transport\n• Application', dive: `### TCP/IP Model
+The conceptual model and set of communications protocols used on the Internet.
+
+- **Network Access**: Physical hardware and data link.
+- **Internet**: IP addressing and routing (IP, ICMP).
+- **Transport**: Host-to-host communication (TCP, UDP).
+- **Application**: User-level protocols (HTTP, FTP, SSH).`
+            },
+            {
+                id: 'n2', icon: '🐧', title: 'Linux CLI', desc: 'Essential Linux commands for analysts.', summary: '• ls, cd, pwd\n• cat, grep, tail\n• chmod, chown', dive: `### Linux Command Line
+Crucial for investigating systems and logs.
+
+- \`ls\`: List directory contents.
+- \`cd\`: Change directory.
+- \`grep\`: Search for patterns in text (e.g., searching logs for an IP).
+- \`tail -f\`: Monitor a file in real-time (often used for log files).
+- \`chmod\`: Change file permissions.`
+            }
+        ];
+
+        const threatsData = [
+            {
+                id: 't1', icon: '🕷️', title: 'OWASP Top 10', desc: 'Critical web application security risks.', summary: '• Broken Access Control\n• Cryptographic Failures\n• Injection', dive: `### OWASP Top 10
+Standard awareness document for developers and web application security.
+
+1. **Broken Access Control**: Users can act outside of intended permissions.
+2. **Cryptographic Failures**: Protecting data at rest and in transit.
+3. **Injection**: SQL injection, Cross-site Scripting (XSS).
+4. **Insecure Design**: Risks related to design and architectural flaws.`
+            }
+        ];
+
+        const opsData = [
+            {
+                id: 'o1', icon: '🚨', title: 'SIEM Tools', desc: 'Security Information and Event Management.', summary: '• Log Aggregation\n• Alerting\n• Google Chronicle', dive: `### SIEM Tools
+Tools that provide real-time analysis of security alerts generated by applications and network hardware.
+
+- **Log Aggregation**: Collecting data from various sources (servers, firewalls, apps).
+- **Correlation**: Linking different events to identify a security incident.
+- **Tools**: Google Chronicle, Splunk, IBM QRadar.`
+            }
+        ];
+
+        const pythonData = [
+            {
+                id: 'p1', icon: '🐍', title: 'Log Parsing', desc: 'Using Python to read and filter logs.', summary: '• string.split()\n• regular expressions\n• file.open()', dive: `### Python for Log Parsing
+Automating the analysis of large log files to find suspicious activity.
+
+\`\`\`python
+import re
+
+with open("access.log", "r") as f:
+    for line in f:
+        if re.search(r"404", line):
+            print(f"Error found: {line.strip()}")
+\`\`\`
+
+#### ⚡ Key Functions
+- \`split()\`: Breaking strings into parts.
+- \`re.search()\`: Using regex to find patterns (like IP addresses).
+- \`open()\`: Opening and reading log files.`
+            }
+        ];
+
+        document.addEventListener('DOMContentLoaded', () => {
+            new StudyGuideApp({
+                grids: [
+                    { id: 'foundations-grid', data: foundationsData, border: 'border-blue-500', grad: 'from-blue-500/20', color: 'blue-500' },
+                    { id: 'networks-grid', data: networksData, border: 'border-blue-500', grad: 'from-blue-500/20', color: 'blue-500' },
+                    { id: 'threats-grid', data: threatsData, border: 'border-blue-500', grad: 'from-blue-500/20', color: 'blue-500' },
+                    { id: 'ops-grid', data: opsData, border: 'border-blue-500', grad: 'from-blue-500/20', color: 'blue-500' },
+                    { id: 'python-grid', data: pythonData, border: 'border-blue-500', grad: 'from-blue-500/20', color: 'blue-500' }
+                ]
+            });
+        });
+    </script>
+
+</body>
+
+</html>
