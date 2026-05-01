@@ -151,7 +151,7 @@
         class="sticky top-0 z-40 bg-white/80 dark:bg-[#0f172a]/80 backdrop-blur-xl border-b border-slate-200 dark:border-slate-800 shadow-sm">
         <div class="max-w-7xl mx-auto px-4 h-20 grid grid-cols-3 items-center gap-4">
             <div class="flex items-center justify-start gap-4">
-                <button onclick="goHome()"
+                <button data-action="go-home"
                     class="hidden sm:flex p-2.5 bg-slate-100 dark:bg-slate-800 rounded-xl hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors shrink-0 text-slate-500 dark:text-slate-200 hover:text-brand-accent dark:hover:text-brand-accent items-center justify-center"
                     title="Home">
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5">
@@ -160,7 +160,7 @@
                         </path>
                     </svg>
                 </button>
-                <button onclick="openSidebar()"
+                <button data-action="open-sidebar"
                     class="p-2.5 px-4 bg-slate-100 dark:bg-slate-800 rounded-xl hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors shrink-0 flex items-center gap-2 text-slate-700 dark:text-slate-200">
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"></path>
@@ -169,8 +169,8 @@
                 </button>
             </div>
 
-            <div onclick="navigateTo('section-home')"
-                class="flex items-center justify-center gap-3 cursor-pointer group">
+            <div data-action="navigate" data-target="section-home"
+                class="flex items-center justify-center gap-3 cursor-pointer group" role="button" tabindex="0">
                 <div class="hidden lg:block">
                     <h1
                         class="text-xl font-extrabold tracking-tighter text-slate-900 dark:text-white group-hover:text-brand-accent transition-colors">
@@ -186,7 +186,7 @@
                         class="absolute top-full right-0 w-[300px] mt-2 bg-white dark:bg-slate-800 rounded-2xl shadow-2xl border border-slate-200 dark:border-slate-700 hidden overflow-hidden z-50 text-left">
                     </div>
                 </div>
-                <button onclick="toggleTheme()"
+                <button data-action="toggle-theme"
                     class="p-2.5 bg-slate-100 dark:bg-slate-800 rounded-xl hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors shrink-0">
                     <span id="theme-icon">🌙</span>
                 </button>
@@ -196,47 +196,47 @@
 
     <div id="sidebar-overlay"
         class="fixed inset-0 bg-slate-900/40 backdrop-blur-sm z-[55] hidden opacity-0 transition-opacity duration-300"
-        onclick="closeSidebar()"></div>
+        data-action="close-sidebar"></div>
 
     <aside id="left-sidebar"
         class="fixed top-0 left-0 h-full w-72 bg-white dark:bg-[#0f172a] border-r border-slate-200 dark:border-slate-800 shadow-[0_0_50px_rgba(0,0,0,0.3)] z-[60] transform -translate-x-full transition-transform duration-300 flex flex-col">
         <div class="p-6 flex justify-between items-center border-b border-slate-200 dark:border-slate-800">
             <span class="font-black text-sm text-slate-200 uppercase tracking-widest">Navigation</span>
-            <button onclick="closeSidebar()"
+            <button data-action="close-sidebar"
                 class="text-slate-200 hover:text-brand-accent transition-colors text-3xl">&times;</button>
         </div>
 
         <nav class="flex flex-col gap-1 p-4 overflow-y-auto custom-scrollbar flex-grow">
-            <button data-target="section-home" onclick="navigateTo('section-home')"
+            <button data-action="navigate" data-target="section-home"
                 class="nav-btn text-left px-4 py-2 rounded-xl text-base font-bold transition-all text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800">Dashboard</button>
             
             <span
                 class="px-4 text-xs font-black text-slate-200 tracking-widest mt-6 mb-2 uppercase">Governance & Strategy</span>
-            <button data-target="section-risk" onclick="navigateTo('section-risk')"
+            <button data-action="navigate" data-target="section-risk"
                 class="nav-btn text-left pl-8 pr-4 py-2 rounded-xl text-sm font-semibold transition-all text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800">Risk
                 Mgmt & Assets</button>
             
             <span
                 class="px-4 text-xs font-black text-slate-200 tracking-widest mt-6 mb-2 uppercase">Engineering & Architecture</span>
-            <button data-target="section-arch" onclick="navigateTo('section-arch')"
+            <button data-action="navigate" data-target="section-arch"
                 class="nav-btn text-left pl-8 pr-4 py-2 rounded-xl text-sm font-semibold transition-all text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800">Architecture
                 & Eng</button>
-            <button data-target="section-network" onclick="navigateTo('section-network')"
+            <button data-action="navigate" data-target="section-network"
                 class="nav-btn text-left pl-8 pr-4 py-2 rounded-xl text-sm font-semibold transition-all text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800">Comm
                 & Network</button>
-            <button data-target="section-iam" onclick="navigateTo('section-iam')"
+            <button data-action="navigate" data-target="section-iam"
                 class="nav-btn text-left pl-8 pr-4 py-2 rounded-xl text-sm font-semibold transition-all text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800">Identity
                 & Access</button>
             
             <span
                 class="px-4 text-xs font-black text-slate-200 tracking-widest mt-6 mb-2 uppercase">Operations & Lifecycle</span>
-            <button data-target="section-test" onclick="navigateTo('section-test')"
+            <button data-action="navigate" data-target="section-test"
                 class="nav-btn text-left pl-8 pr-4 py-2 rounded-xl text-sm font-semibold transition-all text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800">Assessment
                 & Testing</button>
-            <button data-target="section-ops" onclick="navigateTo('section-ops')"
+            <button data-action="navigate" data-target="section-ops"
                 class="nav-btn text-left pl-8 pr-4 py-2 rounded-xl text-sm font-semibold transition-all text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800">Security
                 Operations</button>
-            <button data-target="section-software" onclick="navigateTo('section-software')"
+            <button data-action="navigate" data-target="section-software"
                 class="nav-btn text-left pl-8 pr-4 py-2 rounded-xl text-sm font-semibold transition-all text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800">Software
                 Security</button>
             
@@ -264,8 +264,8 @@
                     class="text-sm font-black text-slate-200 uppercase tracking-widest mb-6 pl-2 border-l-4 border-red-500">
                     Governance & Strategy</h3>
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    <div onclick="navigateTo('section-risk')"
-                        class="bg-white dark:bg-slate-800/40 p-8 rounded-[2rem] border border-slate-200 dark:border-slate-700/50 shadow-xl cursor-pointer hover:-translate-y-2 hover:border-red-500/50 transition-all group">
+                    <div data-action="navigate" data-target="section-risk"
+                        class="bg-white dark:bg-slate-800/40 p-8 rounded-[2rem] border border-slate-200 dark:border-slate-700/50 shadow-xl cursor-pointer hover:-translate-y-2 hover:border-red-500/50 transition-all group" role="button" tabindex="0">
                         <div
                             class="w-14 h-14 mx-auto bg-red-500/10 rounded-2xl flex items-center justify-center text-3xl mb-6 group-hover:scale-110 transition-transform">
                             ⚖️</div>
@@ -274,8 +274,8 @@
                             Risk
                             Management frameworks.</p>
                     </div>
-                    <div onclick="navigateTo('section-asset')"
-                        class="bg-white dark:bg-slate-800/40 p-8 rounded-[2rem] border border-slate-200 dark:border-slate-700/50 shadow-xl cursor-pointer hover:-translate-y-2 hover:border-red-500/50 transition-all group">
+                    <div data-action="navigate" data-target="section-asset"
+                        class="bg-white dark:bg-slate-800/40 p-8 rounded-[2rem] border border-slate-200 dark:border-slate-700/50 shadow-xl cursor-pointer hover:-translate-y-2 hover:border-red-500/50 transition-all group" role="button" tabindex="0">
                         <div
                             class="w-14 h-14 mx-auto bg-red-500/10 rounded-2xl flex items-center justify-center text-3xl mb-6 group-hover:scale-110 transition-transform">
                             📂</div>
@@ -291,8 +291,8 @@
                     class="text-sm font-black text-slate-200 uppercase tracking-widest mb-6 pl-2 border-l-4 border-red-500">
                     Engineering & Architecture</h3>
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    <div onclick="navigateTo('section-arch')"
-                        class="bg-white dark:bg-slate-800/40 p-8 rounded-[2rem] border border-slate-200 dark:border-slate-700/50 shadow-xl cursor-pointer hover:-translate-y-2 hover:border-red-500/50 transition-all group">
+                    <div data-action="navigate" data-target="section-arch"
+                        class="bg-white dark:bg-slate-800/40 p-8 rounded-[2rem] border border-slate-200 dark:border-slate-700/50 shadow-xl cursor-pointer hover:-translate-y-2 hover:border-red-500/50 transition-all group" role="button" tabindex="0">
                         <div
                             class="w-14 h-14 mx-auto bg-red-500/10 rounded-2xl flex items-center justify-center text-3xl mb-6 group-hover:scale-110 transition-transform">
                             🏛️</div>
@@ -301,8 +301,8 @@
                             and
                             engineering processes.</p>
                     </div>
-                    <div onclick="navigateTo('section-network')"
-                        class="bg-white dark:bg-slate-800/40 p-8 rounded-[2rem] border border-slate-200 dark:border-slate-700/50 shadow-xl cursor-pointer hover:-translate-y-2 hover:border-red-500/50 transition-all group">
+                    <div data-action="navigate" data-target="section-network"
+                        class="bg-white dark:bg-slate-800/40 p-8 rounded-[2rem] border border-slate-200 dark:border-slate-700/50 shadow-xl cursor-pointer hover:-translate-y-2 hover:border-red-500/50 transition-all group" role="button" tabindex="0">
                         <div
                             class="w-14 h-14 mx-auto bg-red-500/10 rounded-2xl flex items-center justify-center text-3xl mb-6 group-hover:scale-110 transition-transform">
                             🌐</div>
@@ -310,8 +310,8 @@
                         <p class="text-slate-500 dark:text-slate-200 text-sm leading-relaxed">IP protocols, secure
                             communication, and network design.</p>
                     </div>
-                    <div onclick="navigateTo('section-iam')"
-                        class="bg-white dark:bg-slate-800/40 p-8 rounded-[2rem] border border-slate-200 dark:border-slate-700/50 shadow-xl cursor-pointer hover:-translate-y-2 hover:border-red-500/50 transition-all group">
+                    <div data-action="navigate" data-target="section-iam"
+                        class="bg-white dark:bg-slate-800/40 p-8 rounded-[2rem] border border-slate-200 dark:border-slate-700/50 shadow-xl cursor-pointer hover:-translate-y-2 hover:border-red-500/50 transition-all group" role="button" tabindex="0">
                         <div
                             class="w-14 h-14 mx-auto bg-red-500/10 rounded-2xl flex items-center justify-center text-3xl mb-6 group-hover:scale-110 transition-transform">
                             🔑</div>
@@ -327,8 +327,8 @@
                     class="text-sm font-black text-slate-200 uppercase tracking-widest mb-6 pl-2 border-l-4 border-red-500">
                     Operations & Lifecycle</h3>
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    <div onclick="navigateTo('section-test')"
-                        class="bg-white dark:bg-slate-800/40 p-8 rounded-[2rem] border border-slate-200 dark:border-slate-700/50 shadow-xl cursor-pointer hover:-translate-y-2 hover:border-red-500/50 transition-all group">
+                    <div data-action="navigate" data-target="section-test"
+                        class="bg-white dark:bg-slate-800/40 p-8 rounded-[2rem] border border-slate-200 dark:border-slate-700/50 shadow-xl cursor-pointer hover:-translate-y-2 hover:border-red-500/50 transition-all group" role="button" tabindex="0">
                         <div
                             class="w-14 h-14 mx-auto bg-red-500/10 rounded-2xl flex items-center justify-center text-3xl mb-6 group-hover:scale-110 transition-transform">
                             🚨</div>
@@ -337,8 +337,8 @@
                             audits,
                             and security testing.</p>
                     </div>
-                    <div onclick="navigateTo('section-ops')"
-                        class="bg-white dark:bg-slate-800/40 p-8 rounded-[2rem] border border-slate-200 dark:border-slate-700/50 shadow-xl cursor-pointer hover:-translate-y-2 hover:border-red-500/50 transition-all group">
+                    <div data-action="navigate" data-target="section-ops"
+                        class="bg-white dark:bg-slate-800/40 p-8 rounded-[2rem] border border-slate-200 dark:border-slate-700/50 shadow-xl cursor-pointer hover:-translate-y-2 hover:border-red-500/50 transition-all group" role="button" tabindex="0">
                         <div
                             class="w-14 h-14 mx-auto bg-red-500/10 rounded-2xl flex items-center justify-center text-3xl mb-6 group-hover:scale-110 transition-transform">
                             🛠️</div>
@@ -347,8 +347,8 @@
                             disaster
                             recovery, and investigations.</p>
                     </div>
-                    <div onclick="navigateTo('section-software')"
-                        class="bg-white dark:bg-slate-800/40 p-8 rounded-[2rem] border border-slate-200 dark:border-slate-700/50 shadow-xl cursor-pointer hover:-translate-y-2 hover:border-red-500/50 transition-all group">
+                    <div data-action="navigate" data-target="section-software"
+                        class="bg-white dark:bg-slate-800/40 p-8 rounded-[2rem] border border-slate-200 dark:border-slate-700/50 shadow-xl cursor-pointer hover:-translate-y-2 hover:border-red-500/50 transition-all group" role="button" tabindex="0">
                         <div
                             class="w-14 h-14 mx-auto bg-red-500/10 rounded-2xl flex items-center justify-center text-3xl mb-6 group-hover:scale-110 transition-transform">
                             🚀</div>
@@ -401,19 +401,19 @@
 
     <div id="deep-dive-modal"
         class="fixed inset-0 z-[100] hidden items-center justify-center bg-slate-950/80 backdrop-blur-md p-4 opacity-0 transition-all duration-300"
-        onclick="closeModal(event)">
+        data-action="close-modal">
         <div class="bg-white dark:bg-slate-900 w-full max-w-3xl rounded-[2.5rem] shadow-2xl overflow-hidden transform scale-90 transition-all duration-300 border border-slate-200 dark:border-slate-800 flex flex-col max-h-[90vh]"
-            onclick="event.stopPropagation()">
+            data-action="stop-propagation">
             <div
                 class="p-8 md:p-10 border-b border-slate-100 dark:border-slate-800 flex justify-between items-center bg-slate-50/50 dark:bg-slate-800/30 shrink-0">
                 <div class="flex items-center gap-6">
-                    <div id="m-icon-bg" class="p-5 rounded-3xl text-4xl md:text-5xl"><span id="m-icon"></span></div>
+                    <div id="m-icon-bg" class="modal-icon-bg p-5 rounded-3xl text-4xl md:text-5xl"><span id="m-icon"></span></div>
                     <div>
                         <h3 id="m-title" class="text-3xl md:text-4xl font-black text-slate-900 dark:text-white"></h3>
-                        <p id="m-subtitle" class="text-sm font-bold uppercase tracking-widest mt-1">Exam Reference</p>
+                        <p id="m-subtitle" class="modal-subtitle text-sm font-bold uppercase tracking-widest mt-1">Exam Reference</p>
                     </div>
                 </div>
-                <button onclick="closeModal()"
+                <button data-action="close-modal"
                     class="w-12 h-12 flex items-center justify-center rounded-full bg-slate-100 dark:bg-slate-800 text-slate-500 hover:text-brand-accent transition-all text-3xl shrink-0">&times;</button>
             </div>
             <div id="m-content"

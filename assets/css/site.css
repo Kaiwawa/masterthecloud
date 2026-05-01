@@ -326,3 +326,49 @@ html.dark .study-guides-badge::after {
     position: relative;
     z-index: 1;
 }
+
+/* Utilities for Modal and Dynamic Theme Logic without JS direct injection */
+.modal-icon-bg {
+    background-color: rgba(var(--theme-accent-rgb), 0.2);
+}
+
+.modal-subtitle {
+    color: rgb(var(--theme-accent-rgb));
+}
+
+.md-content {
+    --brand-accent: rgb(var(--theme-accent-rgb));
+}
+
+/* Base Theme Variables */
+:root {
+    --theme-accent-rgb: 239, 68, 68; /* Default to brand-accent / red-500 */
+}
+
+/* Theme Utilities for Grids */
+.theme-red-500 { --theme-accent-rgb: 239, 68, 68; }
+.theme-orange-500 { --theme-accent-rgb: 249, 115, 22; }
+.theme-amber-500 { --theme-accent-rgb: 245, 158, 11; }
+.theme-yellow-500 { --theme-accent-rgb: 234, 179, 8; }
+.theme-green-500 { --theme-accent-rgb: 34, 197, 94; }
+.theme-emerald-500 { --theme-accent-rgb: 16, 185, 129; }
+.theme-teal-500 { --theme-accent-rgb: 20, 184, 166; }
+.theme-cyan-500 { --theme-accent-rgb: 6, 182, 212; }
+.theme-blue-500 { --theme-accent-rgb: 59, 130, 246; }
+.theme-indigo-500 { --theme-accent-rgb: 99, 102, 241; }
+.theme-purple-500 { --theme-accent-rgb: 139, 92, 246; }
+.theme-pink-500 { --theme-accent-rgb: 236, 72, 153; }
+.theme-brand-accent { --theme-accent-rgb: 239, 68, 68; }
+
+/* Progress Bar Utilities */
+.progress-red-500 .progress-bar { background-color: #ef4444; }
+.progress-red-500 .progress-text { color: #ef4444; }
+
+.progress-amber-500 .progress-bar { background-color: #f59e0b; }
+.progress-amber-500 .progress-text { color: #f59e0b; }
+
+.progress-blue-500 .progress-bar { background-color: #fdf53dff; } /* Keeping specific hex from version.js for "blue-500" logic if that was intentional */
+.progress-blue-500 .progress-text { color: #fdf53dff; }
+
+.progress-emerald-500 .progress-bar { background-color: #10b981; }
+.progress-emerald-500 .progress-text { color: #10b981; }
