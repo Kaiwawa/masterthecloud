@@ -28,6 +28,36 @@
             }
         }
     </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap');
+
+        body {
+            font-family: 'Inter', sans-serif;
+            transition: background-color 0.3s ease;
+        }
+
+        .perspective-1000 { perspective: 1000px; }
+        .transform-style-3d { transform-style: preserve-3d; }
+        .backface-hidden { backface-visibility: hidden; -webkit-backface-visibility: hidden; }
+        .rotate-y-180 { transform: rotateY(180deg); }
+        .flip-card-inner { transition: transform 0.8s cubic-bezier(0.34, 1.56, 0.64, 1); transform-style: preserve-3d; }
+        .flip-card.flipped .flip-card-inner { transform: rotateY(180deg); }
+        .fade-in { animation: fadeIn 0.4s ease-out forwards; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+        .md-content h3 { font-weight: 800; font-size: 1.5rem; margin-top: 1rem; margin-bottom: 1rem; color: #0078D4; border-left: 5px solid #0078D4; padding-left: 1rem; }
+        .md-content h4 { font-weight: 700; font-size: 1.1rem; margin-top: 1.5rem; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.05em; }
+        .md-content p { margin-bottom: 1rem; line-height: 1.8; font-size: 1.05rem; }
+        .md-content ul { list-style-type: none; margin-bottom: 1.5rem; }
+        .md-content li { margin-bottom: 0.75rem; position: relative; padding-left: 1.75rem; line-height: 1.6; }
+        .md-content li::before { content: "✦"; position: absolute; left: 0; color: #0078D4; font-weight: bold; }
+
+        .custom-scrollbar::-webkit-scrollbar { width: 8px; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: rgba(0, 0, 0, 0.05); }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: #475569; border-radius: 10px; }
+        #deep-dive-modal.active { display: flex !important; }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+    </style>
 </head>
 
 <body class="min-h-screen bg-slate-50 dark:bg-[#0f172a] text-slate-900 dark:text-slate-200 antialiased overflow-x-hidden" style="--brand-accent:#0078D4;">
@@ -178,61 +208,484 @@
     <script>
         const planningData = [
             {
-                id: 'p1', icon: '🔑', title: 'Security & Auth', desc: 'Managing access to AI services.', summary: '• API Keys\n• Entra ID Auth\n• Managed Identities', dive: `### Planning AI Solutions
-Security is paramount when deploying AI services.
+                id: 'p1', icon: '🎯', title: 'AI Solution Planning', desc: 'Strategic assessment and capability mapping.', summary: '• Business Objectives\n• Capability Mapping\n• Success Metrics\n• Service Selection', dive: `### Strategic AI Solution Planning
 
-- **API Keys**: Simplest method, but less secure for long-term production.
-- **Entra ID (Azure AD)**: Using RBAC to control who can call your AI endpoints.
-- **VNet Integration**: Restricting access to AI services via private networking.`
+#### 2026 Capability Mapping
+Selecting the right service is critical for both performance and cost-efficiency. Use the logic below for 2026 exam scenarios:
+
+<div class="mermaid">
+graph TD
+    START["AI Requirement"] --> PRE["Prebuilt Model needed?"]
+    PRE -- Yes --> COG["Azure AI Services<br/>(Vision, Language, Speech)"]
+    PRE -- No --> LLM["Generative AI needed?"]
+    LLM -- Yes --> AOAI["Azure OpenAI<br/>(GPT-4o, o1)"]
+    LLM -- No --> AML["Azure Machine Learning<br/>(Custom Models)"]
+    style COG fill:#0078D4,color:#fff
+    style AOAI fill:#0078D4,color:#fff
+    style AML fill:#0078D4,color:#fff
+</div>
+
+#### Side-by-Side: Azure AI Services vs. Azure Machine Learning
+| Feature | Azure AI Services (Prebuilt) | Azure Machine Learning (Custom) |
+|---------|----------------------------|---------------------------------|
+| **Expertise** | Low (API-driven) | High (Data Science focus) |
+| **Data Needed** | Minimal to None | Large Labeled Datasets |
+| **Speed** | Instant Deployment | Weeks/Months (Training) |
+| **Control** | Standardized | Full control over architecture |
+
+#### Success Metrics (KPIs)
+- **Precision:** Of all predicted positives, how many were correct? (Minimize False Positives).
+- **Recall:** Of all actual positives, how many did we find? (Minimize False Negatives).
+- **F1-Score:** The harmonic mean of Precision and Recall.
+- **Latency:** Inference time (ms). 2026 standard for real-time is < 200ms.
+
+> [!TIP]
+> **Exam Tip:** If a scenario mentions "minimal development effort" or "rapid prototyping", always favor **Azure AI Services** over custom Azure ML models.`
+            },
+            {
+                id: 'p2', icon: '🔐', title: 'Security & Auth', desc: 'Securing AI endpoints and data.', summary: '• Entra ID (Azure AD)\n• Managed Identities\n• Private Endpoints\n• Key Rotation', dive: `### Securing Azure AI Solutions
+
+#### Modern Authentication Flow
+2026 best practices dictate the move away from static API keys toward identity-based security.
+
+<div class="mermaid">
+sequenceDiagram
+    participant App as Web Application
+    participant MI as Managed Identity
+    participant Entra as Entra ID
+    participant AI as Azure AI Service
+    App->>MI: Request Token
+    MI->>Entra: Exchange Credentials
+    Entra-->>MI: JWT Access Token
+    MI-->>App: Token Provided
+    App->>AI: API Call + Bearer Token
+    AI->>Entra: Validate Token
+    Entra-->>AI: Token Valid (RBAC OK)
+    AI-->>App: AI Response
+</div>
+
+#### Key Security Tiers
+1. **Network Layer:** Use **Private Endpoints (Private Link)** to ensure traffic never leaves the Azure backbone.
+2. **Identity Layer:** Use **Entra ID (Azure AD)** with Role-Based Access Control (RBAC). The "Cognitive Services User" role is standard.
+3. **Application Layer:** Use **Customer-Managed Keys (CMK)** for encryption at rest in sensitive industries (Healthcare/Finance).
+
+#### Comparison: API Keys vs. Managed Identity
+| Metric | API Keys | Managed Identity (Recommended) |
+|--------|----------|-------------------------------|
+| **Security** | Low (Risk of leak) | High (No secrets to leak) |
+| **Rotation** | Manual | Automatic |
+| **Audit** | Poor | Full (via Entra ID logs) |
+
+> [!IMPORTANT]
+> **Exam Tip:** If the exam asks for the "most secure" way to authenticate, the answer is always **Managed Identity**. If it asks for the "easiest/fastest", it might be API Keys.`
+            },
+            {
+                id: 'p3', icon: '⚖️', title: 'Responsible AI', desc: 'Ethics, Fairness, and Content Safety.', summary: '• Fairness & Bias\n• Content Filtering\n• Accountability\n• Transparency', dive: `### Responsible AI & Content Safety
+
+#### The 6 Pillars of Microsoft Responsible AI
+1. **Fairness:** AI systems should treat all people fairly.
+2. **Reliability & Safety:** AI systems should perform reliably and safely.
+3. **Privacy & Security:** AI systems should be secure and respect privacy.
+4. **Inclusiveness:** AI systems should empower everyone and engage people.
+5. **Transparency:** AI systems should be understandable.
+6. **Accountability:** People should be accountable for AI systems.
+
+#### Azure AI Content Safety
+A specialized service that detects and filters harmful content across:
+- **Hate Speech**
+- **Violence**
+- **Self-Harm**
+- **Sexual Content**
+
+#### Mitigation Pipeline
+<div class="mermaid">
+graph LR
+    INPUT["User Input"] --> DETECT["Content Safety API"]
+    DETECT --> |Safe| LLM["OpenAI Model"]
+    DETECT --> |Harmful| BLOCK["Block / Redact"]
+    LLM --> OUTPUT["Model Response"]
+    OUTPUT --> VERIFY["Output Safety Check"]
+    VERIFY --> |Safe| USER["End User"]
+    VERIFY --> |Harmful| FILTER["Filter/Refuse"]
+</div>
+
+> [!TIP]
+> **Exam Tip:** For "Scenario-based Logic", always adopt "The Manager's Perspective"—prioritize safety and compliance over raw model performance if there's a conflict.`
             }
         ];
 
         const visionData = [
             {
-                id: 'v1', icon: '📸', title: 'Azure AI Vision', desc: 'Analyzing images and videos.', summary: '• Image Analysis\n• OCR / Read API\n• Object Detection', dive: `### Computer Vision Solutions
-Extracting information from visual data.
+                id: 'v1', icon: '👁️', title: 'Azure AI Vision', desc: 'Image analysis and Florence models.', summary: '• Image Captioning\n• Object Detection\n• OCR (Read API)\n• Background Removal', dive: `### Azure AI Vision (4.0+)
 
-- **Image Analysis**: Detecting objects, faces, and adult content.
-- **OCR (Optical Character Recognition)**: Extracting text from images and documents using the Read API.
-- **Custom Vision**: Training custom models for specific object detection or classification.`
+#### The Florence Foundation Model
+Azure AI Vision now uses the Florence foundation model, enabling better zero-shot learning and more descriptive captions.
+
+#### Key Capabilities (2026 Standards)
+1. **Image Analysis:** Generates natural language descriptions of images.
+2. **OCR (Read API):** High-accuracy text extraction from documents, receipts, and signs.
+3. **Spatial Analysis:** Analyzes the movement of people in a physical space (retail/safety).
+4. **Product Recognition:** Specialized for retail shelf analysis.
+
+#### OCR Comparison: Read API vs. Form Recognizer
+| Feature | Read API (Vision) | Document Intelligence (Form Recognizer) |
+|---------|-------------------|-----------------------------------------|
+| **Structure** | Unstructured Text | Structured (Tables, Key-Value) |
+| **Complexity** | Low | High (Complex forms/invoices) |
+| **Customization** | Standard | High (Custom model training) |
+
+#### Image Analysis Workflow
+<div class="mermaid">
+graph LR
+    IMG["Image Input"] --> FLORENCE["Florence Model"]
+    FLORENCE --> CAPTION["Captioning"]
+    FLORENCE --> TAGS["Tagging"]
+    FLORENCE --> OBJ["Object Detection"]
+    FLORENCE --> CROP["Smart Cropping"]
+</div>
+
+> [!TIP]
+> **Exam Tip:** For reading text from a simple photo, use **Azure AI Vision Read API**. For extracting data from an invoice or ID card, use **Azure AI Document Intelligence**.`
+            },
+            {
+                id: 'v2', icon: '🎯', title: 'Custom Vision', desc: 'Tailored classification and detection.', summary: '• Classification Models\n• Object Detection\n• Small Data Training\n• Model Export', dive: `### Custom Vision Service
+
+#### Training Custom Models
+When prebuilt models aren't specific enough (e.g., identifying a specific engine part or a rare plant disease), use Custom Vision.
+
+#### Classification vs. Object Detection
+- **Classification:** "What is in this image?" (Returns a tag for the whole image).
+- **Object Detection:** "Where is it?" (Returns bounding boxes and tags for specific objects).
+
+#### Custom Vision Life Cycle
+<div class="mermaid">
+graph TD
+    UPLOAD["Upload Images"] --> TAG["Tag Images"]
+    TAG --> TRAIN["Train Model"]
+    TRAIN --> EVAL["Evaluate (Precision/Recall)"]
+    EVAL --> PRED["Prediction API"]
+    PRED --> REFINE["Refine (Active Learning)"]
+    REFINE --> UPLOAD
+</div>
+
+#### Precision vs. Recall Trade-off
+| Metric | Focus | High Value Means... |
+|--------|-------|---------------------|
+| **Precision** | Accuracy of Positive Hits | Fewer "False Alarms" |
+| **Recall** | Coverage of Positives | Fewer "Missed Objects" |
+
+> [!IMPORTANT]
+> **Exam Tip:** Remember the minimum requirements: **15 images** per tag for classification, **15 images** per tag for object detection. However, 50+ is recommended for production.`
+            },
+            {
+                id: 'v3', icon: '📹', title: 'Video Indexer', desc: 'Deep insights from video content.', summary: '• Face Identification\n• Emotion Detection\n• Topic Extraction\n• OCR in Video', dive: `### Azure AI Video Indexer
+
+#### Comprehensive Video Analysis
+Video Indexer is an orchestration service that combines multiple AI models to extract deep insights from video.
+
+#### Insights Extracted
+- **Face Identification:** Detects and identifies celebrities or specific people (via custom face books).
+- **OCR:** Extracts text appearing on screen (signs, shirts, overlays).
+- **Topic Extraction:** High-level themes discussed in the video.
+- **Sentiment Analysis:** Based on both audio transcript and facial expressions.
+
+#### Video Indexer Architecture
+<div class="mermaid">
+graph LR
+    VID["Video File"] --> UPLOAD["Upload & Index"]
+    UPLOAD --> PROC["Processing (AI Models)"]
+    PROC --> INSIGHTS["JSON Insights"]
+    PROC --> WIDGETS["Embeddable Player/Insights"]
+</div>
+
+#### Comparison: Video Indexer vs. Computer Vision (Video)
+| Service | Use Case |
+|---------|----------|
+| **Video Indexer** | Searchable archives, content creation, high-level insights. |
+| **Vision (Spatial)** | Real-time motion, people counting, retail traffic. |
+
+> [!TIP]
+> **Exam Tip:** If the scenario asks for "summarizing long meetings" or "creating a searchable library of training videos", **Video Indexer** is the correct answer.`
             }
         ];
 
         const nlpData = [
             {
-                id: 'n1', icon: '🗣️', title: 'Language Service', desc: 'Processing natural language.', summary: '• Sentiment Analysis\n• Entity Recognition\n• Language Detection', dive: `### Natural Language Processing
-Understanding and generating human language.
+                id: 'n1', icon: '💬', title: 'Azure AI Language', desc: 'Understanding and processing text.', summary: '• Sentiment Analysis\n• NER (Named Entity)\n• PII Detection\n• Summarization', dive: `### Azure AI Language
 
-- **Sentiment Analysis**: Determining if text is positive, negative, or neutral.
-- **PII Detection**: Identifying and redacting sensitive information (SSNs, emails).
-- **Translator Service**: Real-time text translation between dozens of languages.`
+#### The Unified Language Service
+Microsoft combined multiple text-based services (Text Analytics, QnA Maker, LUIS) into the unified **Azure AI Language** service.
+
+#### Key Features (2026 Focus)
+1. **Sentiment Analysis:** Returns positive, negative, neutral, and mixed scores.
+2. **NER (Named Entity Recognition):** Identifies people, places, organizations, and dates.
+3. **PII Detection:** Detects and redacts sensitive info (SSNs, Emails, Phones).
+4. **Text Summarization:** Generates concise summaries of long documents.
+
+#### Side-by-Side: LUIS (Legacy) vs. CLU (Modern)
+| Feature | LUIS (Language Understanding) | CLU (Conversational Language Understanding) |
+|---------|-----------------------------|--------------------------------------------|
+| **Architecture** | Older Transformer models | State-of-the-art Large Language Models |
+| **Language Support** | Limited per model | Multilingual by default |
+| **Integration** | Standalone | Part of Azure AI Language Service |
+
+#### Language Processing Flow
+<div class="mermaid">
+graph LR
+    TEXT["Unstructured Text"] --> LANG["Language Detection"]
+    LANG --> ANALYZE["Analysis (Sentiment/NER/PII)"]
+    ANALYZE --> OUTPUT["Structured JSON"]
+    OUTPUT --> APP["Actionable Data"]
+</div>
+
+> [!IMPORTANT]
+> **Exam Tip:** For 2026 exams, focus on **CLU (Conversational Language Understanding)** for building bots. LUIS is considered legacy.`
+            },
+            {
+                id: 'n2', icon: '🌍', title: 'Azure AI Translator', desc: 'Multilingual support and translation.', summary: '• Text Translation\n• Document Translation\n• Custom Translator\n• Transliteration', dive: `### Azure AI Translator
+
+#### Neural Machine Translation (NMT)
+Uses deep learning to provide context-aware translations rather than simple word-for-word swapping.
+
+#### Core Capabilities
+- **Text Translation:** Real-time translation between 100+ languages.
+- **Document Translation:** Translates complex documents (PDF, Word) while preserving layout.
+- **Transliteration:** Converts text from one script to another (e.g., Arabic to Latin script).
+- **Custom Translator:** Fine-tune models with your specific industry terminology (Medical/Legal).
+
+#### Translation Workflow
+<div class="mermaid">
+sequenceDiagram
+    participant App as Application
+    participant Trans as Translator API
+    participant Hub as Translation Hub
+    App->>Trans: Text + Target Language
+    Trans->>Hub: Contextual Analysis
+    Hub-->>Trans: NMT Result
+    Trans-->>App: Translated Text
+</div>
+
+#### Metrics: BLEU Score
+The **BLEU (Bilingual Evaluation Understudy)** score is the standard for measuring translation quality (0 to 1). Higher is better.
+
+> [!TIP]
+> **Exam Tip:** Use **Custom Translator** if the standard model fails to translate specific technical terms or brand names correctly.`
+            },
+            {
+                id: 'n3', icon: '🎙️', title: 'Azure AI Speech', desc: 'Voice-to-text and text-to-voice.', summary: '• STT (Speech-to-Text)\n• TTS (Text-to-Speech)\n• Speaker Recognition\n• Speech Translation', dive: `### Azure AI Speech
+
+#### Voice Capabilities in 2026
+Azure AI Speech provides human-like interaction through advanced neural voices and high-accuracy transcription.
+
+#### Key Components
+1. **STT (Speech-to-Text):** Converts audio to text in real-time or batch.
+2. **TTS (Text-to-Speech):** Converts text to lifelike speech (Neural TTS).
+3. **Speech Translation:** Translates audio from language A to text/audio in language B.
+4. **Speaker Recognition:** Identifies or verifies the person speaking.
+
+#### Neural TTS vs. Standard TTS
+| Feature | Standard TTS | Neural TTS (Current Standard) |
+|---------|--------------|-------------------------------|
+| **Sound** | Robotic, choppy | Human-like, natural prosody |
+| **Customization** | Limited | Custom Neural Voice (Clone) |
+| **Emotion** | None | Multi-style (Cheerful, Sad, Whispering) |
+
+#### Speech Transcription Flow
+<div class="mermaid">
+graph LR
+    VOICE["Audio Input"] --> NOISE["Noise Suppression"]
+    NOISE --> TRANS["Transcription Engine"]
+    TRANS --> DIAR["Diarization (Who spoke when?)"]
+    DIAR --> TEXT["Final Transcript"]
+</div>
+
+> [!IMPORTANT]
+> **Exam Tip:** **Diarization** is the specific term for identifying multiple speakers in a single audio stream. This is a common exam keyword.`
             }
         ];
 
         const miningData = [
             {
-                id: 'km1', icon: '🔍', title: 'AI Search', desc: 'Knowledge mining with cognitive search.', summary: '• Indexers\n• Skillsets\n• Semantic Search', dive: `### Knowledge Mining
-Indexing large volumes of unstructured data.
+                id: 'km1', icon: '🔍', title: 'Azure AI Search', desc: 'Enterprise search and knowledge mining.', summary: '• Indexing & Indexers\n• Cognitive Skillsets\n• Vector Search\n• Knowledge Store', dive: `### Azure AI Search
 
-- **Azure AI Search**: The core service for knowledge mining.
-- **Skillsets**: A collection of cognitive skills (OCR, NLP) that enrich the data during indexing.
-- **Semantic Search**: Understanding the intent behind a search query, not just keywords.`
+#### Knowledge Mining Infrastructure
+Azure AI Search is the backbone of "Knowledge Mining," allowing you to extract insights from massive amounts of unstructured data.
+
+#### The Search Pipeline
+<div class="mermaid">
+graph TD
+    DATA["Data Source (Blob/SQL)"] --> INDEXER["Indexer"]
+    INDEXER --> SKILLS["Skillset (AI Enrichment)"]
+    SKILLS --> CRACK["Document Cracking"]
+    CRACK --> INDEX["Search Index"]
+    INDEX --> QUERY["Search Query"]
+</div>
+
+#### Vector Search & Hybrid Search (2026 Standard)
+- **Vector Search:** Searches based on meaning (mathematical vectors) rather than keywords.
+- **Keyword Search:** Traditional BM25 ranking.
+- **Hybrid Search:** Combines both Vector and Keyword for the highest accuracy.
+
+#### Index vs. Indexer
+| Component | Definition |
+|-----------|------------|
+| **Index** | The "database" where searchable data is stored. |
+| **Indexer** | The "crawler" that moves data from source to index. |
+| **Data Source** | Where the raw files live (e.g., Azure Blob Storage). |
+
+> [!TIP]
+> **Exam Tip:** If you need to search for images by "content" (e.g., "show me photos of dogs"), you must use **Vector Search** with embeddings.`
+            },
+            {
+                id: 'km2', icon: '⚙️', title: 'Cognitive Skillsets', desc: 'AI-driven indexing enrichment.', summary: '• Built-in Skills\n• Custom Skills\n• Knowledge Store\n• Shapers', dive: `### Cognitive Skillsets
+
+#### AI Enrichment
+Skillsets allow you to apply Azure AI services (Vision, Language) *during* the indexing process.
+
+#### Common Built-in Skills
+- **Entity Recognition:** Extract names of companies/people from PDFs.
+- **Key Phrase Extraction:** Summarize the main topics of a document.
+- **OCR:** Extract text from scanned images inside documents.
+- **Image Analysis:** Describe what is happening in photos attached to files.
+
+#### Custom Skills
+If a built-in skill doesn't exist (e.g., a custom regex or a specialized AI model), you can create a **Custom Skill** using an **Azure Function**.
+
+#### Knowledge Store
+A feature of AI Search that allows you to save the AI-enriched data (output of skills) into Azure Tables or Blobs for non-search analysis (e.g., Power BI).
+
+<div class="mermaid">
+graph LR
+    SKILLS["Skillset Output"] --> INDEX["Search Index"]
+    SKILLS --> KSTORE["Knowledge Store (Tables/Blobs)"]
+    KSTORE --> PBI["Power BI Analysis"]
+</div>
+
+> [!IMPORTANT]
+> **Exam Tip:** To use AI Search to power a dashboard in Power BI, you **must** configure a **Knowledge Store**.`
+            },
+            {
+                id: 'km3', icon: '🧠', title: 'Semantic Search', desc: 'Understanding user intent.', summary: '• Semantic Ranking\n• Captions & Answers\n• Hybrid Ranking\n• LLM Grounding', dive: `### Semantic Search & Grounding
+
+#### Beyond Keywords
+Semantic search uses Large Language Models to re-rank search results based on their relevance to the *intent* of the user's question.
+
+#### Features
+- **Semantic Ranking:** Moves the most "meaningful" result to position #1, even if it has fewer keyword matches.
+- **Semantic Captions:** Highlights the specific paragraph that answers the query.
+- **Semantic Answers:** Provides a direct answer at the top of the search results (like Google's Featured Snippets).
+
+#### Grounding for RAG
+Semantic Search is a critical component of **Retrieval Augmented Generation (RAG)**. It "grounds" the LLM by providing it with real, verified data from your own documents.
+
+<div class="mermaid">
+graph TD
+    USER["User Question"] --> SEARCH["Semantic Search"]
+    SEARCH --> DOCS["Relevant Document Chunks"]
+    DOCS --> LLM["Azure OpenAI"]
+    LLM --> FINAL["Accurate, Grounded Answer"]
+</div>
+
+> [!TIP]
+> **Exam Tip:** **RAG** is the most common architecture for enterprise AI in 2026. Know how Search and OpenAI work together.`
             }
         ];
 
         const openaiData = [
             {
-                id: 'oa1', icon: '🧠', title: 'Azure OpenAI', desc: 'Enterprise-grade generative AI.', summary: '• GPT-4 / GPT-3.5\n• DALL-E\n• Content Safety', dive: `### Azure OpenAI Service
-Deploying state-of-the-art generative models.
+                id: 'oa1', icon: '🤖', title: 'Azure OpenAI Models', desc: 'Enterprise-grade Generative AI.', summary: '• GPT-4o & o1-preview\n• DALL-E 3\n• Embeddings\n• Fine-Tuning', dive: `### Azure OpenAI Service
 
-- **Models**: Access to OpenAI's GPT models, Embeddings, and DALL-E.
-- **Fine-tuning**: Customizing models on your own datasets.
-- **Content Safety**: Built-in filters to prevent harmful outputs.`
+#### Enterprise Generative AI
+Azure OpenAI provides private, secure access to OpenAI's most powerful models with Azure's enterprise features (RBAC, VNet, Content Safety).
+
+#### 2026 Model Lineup
+- **GPT-4o:** The flagship multimodal model (Text, Audio, Vision). Fast and efficient.
+- **o1-preview:** Optimized for complex reasoning, math, and coding.
+- **DALL-E 3:** High-fidelity image generation.
+- **Embeddings (text-embedding-3):** Converts text to vectors for search and RAG.
+
+#### Zero-Shot vs. Few-Shot vs. Fine-Tuning
+| Technique | Effort | Data Needed | Best For |
+|-----------|--------|-------------|----------|
+| **Zero-Shot** | Minimal | None | General tasks |
+| **Few-Shot** | Low | 2-5 Examples | Formatting, style |
+| **Fine-Tuning** | High | 100s-1000s | Niche domain terminology |
+
+#### Deployment Architecture
+<div class="mermaid">
+graph LR
+    APP["Your App"] --> GATE["API Management"]
+    GATE --> AOAI["Azure OpenAI Service"]
+    AOAI --> SAFE["Content Safety Filter"]
+    SAFE --> MODEL["Deployed Model (GPT-4o)"]
+</div>
+
+> [!IMPORTANT]
+> **Exam Tip:** Microsoft's official guidance: **Always try Prompt Engineering (Few-Shot) before Fine-Tuning.** Fine-Tuning is rare and expensive.`
+            },
+            {
+                id: 'oa2', icon: '✍️', title: 'Prompt Engineering', desc: 'Optimizing LLM performance.', summary: '• COT (Chain of Thought)\n• System Messages\n• Few-Shot Learning\n• Parameters', dive: `### Advanced Prompt Engineering
+
+#### Mastering the LLM
+Prompt engineering is the art of crafting inputs to get the most reliable and accurate outputs from an LLM.
+
+#### Key Techniques
+1. **System Messages:** Defines the "persona" and "rules" for the AI (e.g., "You are a helpful support agent. Only answer based on the provided text.").
+2. **Chain of Thought (COT):** Asking the model to "think step-by-step." This dramatically improves performance on logic and math.
+3. **Few-Shot Learning:** Providing examples of Input → Output in the prompt.
+4. **Output Shaping:** Telling the model to "Respond only in JSON format."
+
+#### LLM Parameters
+- **Temperature:** Controls "creativity." 0 is deterministic (good for facts), 1 is creative (good for poems).
+- **Top_P:** Similar to temperature, controls the nucleus of words the model considers.
+- **Max Tokens:** Limits the length of the response.
+
+#### Side-by-Side: Temperature Settings
+| Scenario | Temperature | Rationale |
+|----------|-------------|-----------|
+| **Code Generation** | 0.0 - 0.2 | Precision is critical. |
+| **Summarization** | 0.3 - 0.5 | Balanced accuracy. |
+| **Creative Writing** | 0.7 - 1.0 | Variety and "flavor" needed. |
+
+> [!TIP]
+> **Exam Tip:** If a model is hallucinating or providing inconsistent formats, the first step is to **lower the temperature** to 0.`
+            },
+            {
+                id: 'oa3', icon: '🏗️', title: 'RAG Architecture', desc: 'Building grounded AI apps.', summary: '• Retrieval Augmented Gen\n• Vector Stores\n• Chunking\n• Orchestration', dive: `### RAG (Retrieval Augmented Generation)
+
+#### The Gold Standard for Enterprise AI
+RAG solves the "hallucination" problem by giving the LLM a "textbook" (your data) to look at before it answers.
+
+#### The RAG Workflow
+1. **User Query:** "What is our company's travel policy for London?"
+2. **Retrieval:** Search the **Vector Store** (Azure AI Search) for "travel policy London".
+3. **Augmentation:** Take the top 3 paragraphs found and add them to the prompt.
+4. **Generation:** Send to **Azure OpenAI**: "Using only the provided text below, answer the user's question."
+
+#### RAG vs. Fine-Tuning
+| Aspect | RAG (Recommended) | Fine-Tuning |
+|--------|-------------------|-------------|
+| **Data Freshness** | Real-time (Search the latest docs) | Static (Model is frozen in time) |
+| **Accuracy** | High (Cites sources) | Lower (May hallucinate) |
+| **Cost** | Lower | Much Higher |
+
+#### RAG Component Diagram
+<div class="mermaid">
+graph TD
+    QUERY["User Query"] --> EMBED["Embed Query (Vector)"]
+    EMBED --> SEARCH["Search Vector Store"]
+    SEARCH --> CONTEXT["Combine Context + Query"]
+    CONTEXT --> LLM["GPT-4o Generation"]
+    LLM --> ANSWER["Final Answer with Citations"]
+</div>
+
+> [!IMPORTANT]
+> **Exam Tip:** **Grounding** is the act of providing the model with relevant, real-world context to prevent it from making things up.`
             }
         ];
 
         document.addEventListener('DOMContentLoaded', () => {
-            new StudyGuideApp({
+            const app = new StudyGuideApp({
                 grids: [
                     { id: 'planning-grid', data: planningData, border: 'border-blue-500', grad: 'from-blue-500/20', color: 'blue-500' },
                     { id: 'vision-grid', data: visionData, border: 'border-blue-500', grad: 'from-blue-500/20', color: 'blue-500' },
@@ -245,4 +698,5 @@ Deploying state-of-the-art generative models.
     </script>
 
 </body>
+
 </html>

@@ -114,6 +114,9 @@
             <button data-target="section-iam" onclick="navigateTo('section-iam')"
                 class="nav-btn text-left pl-8 pr-4 py-2 rounded-xl text-sm font-semibold transition-all text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800">Identity
                 & Access</button>
+            <button data-target="section-test" onclick="navigateTo('section-test')"
+                class="nav-btn text-left pl-8 pr-4 py-2 rounded-xl text-sm font-semibold transition-all text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800">Assessment
+                & Testing</button>
             <span
                 class="px-4 text-base font-black text-slate-800 dark:text-slate-200 tracking-wide mt-6 mb-1 uppercase">Security
                 Ops</span>
@@ -189,6 +192,10 @@
             <div id="iam-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
         </section>
 
+        <section id="section-test" class="content-section hidden fade-in pt-12">
+            <div id="test-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+        </section>
+
         <section id="section-ops" class="content-section hidden fade-in pt-12">
             <div id="ops-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
         </section>
@@ -231,80 +238,1055 @@
     </div>
 
     <script>
+        // Domain 1: Security and Risk Management
         const riskData = [
             {
-                id: 'r1', icon: '⚖️', title: 'Security Governance', desc: 'Alignment with business goals.', summary: '• CIA Triad\n• ISC² Ethics\n• Risk Assessment', dive: `### Security and Risk Management
-The largest domain in CISSP, covering the foundational principles.
+                id: 'r1', icon: '⚖️', title: 'Security Governance', desc: 'Strategic frameworks and ethics.', summary: '• CIA Triad\n• ISC² Code of Ethics\n• Risk Framework\n• Business Alignment', dive: `### Security and Risk Management - Domain 1
+Foundation of cybersecurity. Covers governance, risk assessment, and ethical frameworks.
 
-- **CIA Triad**: Confidentiality, Integrity, Availability.
-- **ISC² Code of Ethics**: Protect society, act honorably, provide competent service, protect the profession.
-- **Risk Assessment**: Qualitative vs Quantitative risk analysis.
-- **SLE, ARO, ALE**: Single Loss Expectancy, Annualized Rate of Occurrence, Annualized Loss Expectancy (\`ALE = SLE * ARO\`).`
+#### Core Concepts
+- **CIA Triad**: Confidentiality (no unauthorized access), Integrity (no unauthorized modification), Availability (accessible when needed)
+- **AAA**: Authentication (who are you), Authorization (what can you do), Accounting (log activities)
+- **ISC² Code of Ethics**: (1) Protect society, (2) Act honorably, (3) Provide competent service, (4) Advance the profession
+
+#### Risk Management
+- **Qualitative**: Scenarios, workshops, expert judgment (High/Medium/Low)
+- **Quantitative**: Statistical analysis with SLE, ARO, ALE
+- **Risk Metrics**: 
+  - SLE (Single Loss Expectancy) = Asset Value × Exposure Factor
+  - ARO (Annualized Rate of Occurrence) = frequency per year
+  - ALE (Annualized Loss Expectancy) = SLE × ARO
+- **Risk Response**: Accept, Mitigate, Avoid, Transfer
+
+#### 💡 CISSP Exam Tip
+Understand the difference between **qualitative risk assessment** (faster, less precise) and **quantitative** (slower, more precise). Know when to use each.`
             },
             {
-                id: 'r2', icon: '📂', title: 'Asset Security', desc: 'Protecting the lifecycle of data.', summary: '• Data Classification\n• Ownership\n• Retention', dive: `### Asset Security
-Focuses on the collection, handling, and protection of information.
+                id: 'r2', icon: '📋', title: 'Compliance & Regulation', desc: 'Legal and regulatory requirements.', summary: '• Industry Standards\n• Privacy Laws\n• Audit & Compliance\n• Contract Management', dive: `### Compliance & Regulation
 
-- **Classification**: Public, Internal, Confidential, Restricted.
-- **Ownership**: Data Owner, System Owner, Data Custodian.
-- **Data at Rest**: Encryption, physical security.
-- **Data in Motion**: TLS, IPsec.`
+#### Key Frameworks
+- **ISO 27001**: Information Security Management System (ISMS)
+- **ISO 27002**: Controls and techniques for ISMS
+- **NIST Cybersecurity Framework**: Identify, Protect, Detect, Respond, Recover
+- **COBIT**: IT governance framework
+- **CIS Controls**: 20 most critical security controls
+
+#### Regulations
+- **GDPR**: Personal data protection (EU); Right to be forgotten, Data Protection Officer
+- **HIPAA**: Healthcare data protection (US); Covered entities and business associates
+- **PCI-DSS**: Payment Card Industry data security (6 levels of compliance)
+- **SOC 2**: Service organization controls (Type I/II)
+
+#### Audit & Assessment
+- **Internal Audit**: Regular compliance checks by internal team
+- **External Audit**: Third-party verification
+- **Penetration Testing**: Authorized security testing
+- **Vulnerability Assessment**: Identifies weaknesses without exploitation
+
+#### 💡 CISSP Exam Tip
+GDPR requires explicit consent before processing, while HIPAA focuses on security safeguards. PCI-DSS is mandatory for any organization handling payment cards.`
+            },
+            {
+                id: 'r3', icon: '🎯', title: 'Business Continuity', desc: 'Recovery planning and disaster preparedness.', summary: '• BCP vs DRP\n• RTO/RPO\n• Testing & Maintenance\n• Alternate Sites', dive: `### Business Continuity & Disaster Recovery
+
+#### Key Definitions
+- **BCP (Business Continuity Plan)**: Prevents disruption of critical functions
+- **DRP (Disaster Recovery Plan)**: Responds to and recovers from disasters
+- **RTO (Recovery Time Objective)**: Max acceptable downtime (hours/minutes)
+- **RPO (Recovery Point Objective)**: Max acceptable data loss (hours/minutes)
+- **MTBF (Mean Time Between Failures)**: Average uptime before failure
+- **MTTR (Mean Time To Repair)**: Average time to restore service
+
+#### Backup Strategies
+- **Full Backup**: Complete copy (slower, more space)
+- **Incremental**: Only changes since last backup (faster, less space)
+- **Differential**: Changes since last full backup (medium)
+- **GFS (Grandfather-Father-Son)**: Rotating backup retention
+
+#### Alternate Sites
+- **Hot Site**: Fully operational, immediate failover (most expensive)
+- **Warm Site**: Partially operational, 4-24 hour activation
+- **Cold Site**: Building only, weeks to activate (least expensive)
+
+#### 💡 CISSP Exam Tip
+Higher RTO/RPO = lower cost but more business risk. Lower RTO/RPO = higher cost but faster recovery. Balance based on criticality.`
+            },
+            {
+                id: 'r4', icon: '🔐', title: 'Incident Management', desc: 'Responding to security events.', summary: '• Incident Lifecycle\n• Classification\n• Forensics\n• Lessons Learned', dive: `### Incident Management
+
+#### Incident Lifecycle (NIST)
+1. **Preparation**: Build incident response team, tools, playbooks
+2. **Detection & Analysis**: Identify and analyze the incident
+3. **Containment**: Short-term (isolate), Long-term (patch)
+4. **Eradication**: Remove attacker access and malware
+5. **Recovery**: Restore systems to normal operation
+6. **Post-Incident**: Conduct reviews and improve processes
+
+#### Incident Classification
+- **Severity**: Critical, High, Medium, Low (based on impact)
+- **Type**: Data Breach, Malware, Unauthorized Access, Denial of Service, etc.
+- **Scope**: Single system, department-wide, enterprise-wide, third-party
+
+#### Digital Forensics
+- **Order of Volatility**: CPU cache → RAM → Disk → Optical media → Backups
+- **Chain of Custody**: Document every person handling evidence
+- **Evidence Preservation**: Hash values (MD5, SHA-256) for integrity
+- **Admissibility**: Follow legal procedures for court use
+
+#### 💡 CISSP Exam Tip
+The "Eradication" phase is often missed. You must remove ALL attacker access, not just patch the initial vulnerability.`
+            },
+            {
+                id: 'r5', icon: '💼', title: 'Vendor Management', desc: 'Third-party security risks.', summary: '• Contracts & SLAs\n• Due Diligence\n• Risk Transfer\n• Monitoring', dive: `### Vendor Management & Third-Party Risk
+
+#### Vendor Selection
+- **Due Diligence**: Assess vendor security practices before engagement
+- **Security Assessment**: Review certifications (ISO 27001, SOC 2), audit reports
+- **Reference Checks**: Talk to other customers about their experience
+- **Cost vs Quality**: Don't select solely on lowest price
+
+#### Contracts & Agreements
+- **SLA (Service Level Agreement)**: Uptime guarantees (e.g., 99.99%), response times
+- **NDA (Non-Disclosure Agreement)**: Protects proprietary information
+- **Liability Clauses**: Who bears financial loss in a breach?
+- **Data Processing Agreement (DPA)**: Required for GDPR compliance
+- **Exit Strategy**: How to retrieve data if vendor relationship ends?
+
+#### Ongoing Monitoring
+- **Vendor Audits**: Periodic security reviews
+- **Performance Metrics**: Track against SLA commitments
+- **Incident Reporting**: Vendor must notify us of security events
+- **Compliance Verification**: Continuous compliance with agreed standards
+
+#### Risk Transfer
+- **Insurance**: Cyber liability insurance to cover financial losses
+- **Hold-backs**: Retain portion of payment until contract completion
+- **Indemnification**: Vendor covers damages from their negligence
+
+#### 💡 CISSP Exam Tip
+You are ultimately responsible for data security, even if it's with a vendor. Contracts transfer some risk but not all responsibility.`
             }
         ];
 
+        // Domain 2: Asset Security
+        const assetData = [
+            {
+                id: 'a1', icon: '📂', title: 'Data Classification', desc: 'Categorizing information assets.', summary: '• Classification Levels\n• Labeling & Handling\n• Retention\n• Ownership', dive: `### Asset Security - Domain 2
+Focuses on protecting information assets throughout their lifecycle.
+
+#### Classification Levels
+| Level | Examples | Handling |
+|-------|----------|----------|
+| **Public** | Marketing materials, press releases | No restrictions |
+| **Internal** | Employee directories, policies | Limited to employees |
+| **Confidential** | Financial data, contracts | Restricted access |
+| **Restricted** | Trade secrets, customer PII | Maximum security |
+
+#### Data Ownership Roles
+- **Data Owner**: Senior manager responsible for classification and compliance
+- **Data Custodian**: IT team implementing protection mechanisms
+- **Data User/Subject**: Employee using the data in their job
+- **Data Steward**: Ensures data quality and governance
+
+#### Sensitive Data Types
+- **PII (Personally Identifiable Information)**: Name, SSN, date of birth, address
+- **PHI (Protected Health Information)**: Medical records, diagnoses, treatment plans
+- **Trade Secrets**: Proprietary algorithms, customer lists, manufacturing processes
+- **Financial Data**: Bank accounts, credit cards, salary information
+
+#### Data Retention
+- **Retention Policy**: How long to keep data (legal, business requirements)
+- **Secure Disposal**: Shredding, incineration, secure deletion (overwriting, degaussing)
+- **Legal Hold**: Cannot delete if litigation is anticipated
+
+#### 💡 CISSP Exam Tip
+The **Data Owner** makes classification decisions; the **Data Custodian** implements them. Know the difference!`
+            },
+            {
+                id: 'a2', icon: '🔒', title: 'Encryption & Cryptography', desc: 'Protecting data confidentiality.', summary: '• Symmetric Encryption\n• Asymmetric Encryption\n• Hashing\n• Digital Signatures', dive: `### Encryption & Cryptography
+
+#### Symmetric Encryption (Same Key)
+- **AES (Advanced Encryption Standard)**: 128, 192, 256-bit keys; Government standard
+- **DES/3DES**: Legacy (DES broken, 3DES still acceptable short-term)
+- **Cipher Modes**: ECB, CBC, CTR, GCM
+- **Speed**: Fast, good for bulk data
+
+#### Asymmetric Encryption (Public-Private Key)
+- **RSA**: Most common; 2048-bit minimum recommended
+- **ECC (Elliptic Curve Cryptography)**: Smaller keys, same strength (256-bit ≈ 2048-bit RSA)
+- **Use Case**: Key exchange, digital signatures, email encryption
+- **Speed**: Slow, used for small amounts (like symmetric keys)
+
+#### Hashing
+- **MD5**: 128-bit; BROKEN, do not use
+- **SHA-1**: 160-bit; Deprecated, avoid for new implementations
+- **SHA-256**: 256-bit; Current standard
+- **Property**: One-way (cannot reverse), deterministic (same input = same output)
+
+#### Digital Signatures
+- **Ensures**: Authentication (who sent it) & Non-repudiation (they can't deny it)
+- **Process**: Hash the document, encrypt hash with private key
+- **Verification**: Decrypt with public key, compare hashes
+
+#### 💡 CISSP Exam Tip
+Symmetric = fast, perfect for encrypting large files. Asymmetric = slow, used for key exchange and signatures. Use both together for hybrid encryption!`
+            },
+            {
+                id: 'a3', icon: '💾', title: 'Database Security', desc: 'Protecting structured data.', summary: '• Access Control\n• Encryption\n• Auditing\n• Backup & Recovery', dive: `### Database Security
+
+#### Layers of Protection
+1. **Network Level**: Firewalls, VPN, network segmentation
+2. **Application Level**: SQL injection prevention, parameterized queries
+3. **Database Level**: User accounts, roles, views, encryption
+4. **File Level**: Disk encryption, secure backup media
+
+#### Access Control
+- **Role-Based Access**: Read, Write, Execute, Delete on tables/columns
+- **Row-Level Security**: Users see only data relevant to them
+- **View-Based Security**: Simplified access through database views
+- **Stored Procedures**: Controlled interfaces vs direct table access
+
+#### Threats
+- **SQL Injection**: Unvalidated input executed as SQL code
+- **Privilege Escalation**: Low-privilege user gains higher permissions
+- **Data Exfiltration**: Massive data extraction over time
+- **Ransomware**: Database encryption for extortion
+
+#### Protection
+- **Parameterized Queries**: Separate SQL code from data
+- **Input Validation**: Reject suspicious characters/formats
+- **Encryption**: Transparent Data Encryption (TDE) for at-rest data
+- **Masking**: Hide sensitive data in non-prod environments
+- **Auditing**: Log all access and modifications
+
+#### 💡 CISSP Exam Tip
+SQL injection is still the #1 web vulnerability. Always use parameterized queries, never string concatenation!`
+            },
+            {
+                id: 'a4', icon: '🖥️', title: 'Media & Device Security', desc: 'Physical protection of storage.', summary: '• Secure Disposal\n• Device Management\n• Labeling\n• Tracking', dive: `### Media & Device Security
+
+#### Secure Disposal Methods
+- **Shredding**: Physical destruction (most secure)
+- **Incineration**: Burning media until unrecoverable
+- **Degaussing**: Erasing magnetic fields (HDDs, tapes)
+- **Overwriting**: Software-based deletion (NIST guidelines: 1 pass minimum)
+- **Certificates**: Document destruction for compliance
+
+#### Device Classification
+- **Removable Media**: USB drives, external drives (HIGH RISK)
+- **Portable Devices**: Laptops, tablets, phones (MEDIUM RISK)
+- **Stationary**: Desktops, servers (LOWER RISK)
+
+#### Control Measures
+- **Device Control**: Disable USB ports, limit mobile device access
+- **Encryption**: Full-disk encryption (BitLocker, FileVault, LUKS)
+- **Asset Tracking**: Serial numbers, barcode labels
+- **Labeling**: Classification labels on devices and media
+- **Logging**: Track who uses what device and when
+
+#### Insider Threat Prevention
+- **Data Loss Prevention (DLP)**: Monitor and block unauthorized data transfers
+- **USB Restrictions**: No personal USB devices on network
+- **Email Controls**: Scan attachments, block external recipients
+- **Logging**: Comprehensive audit trails
+
+#### 💡 CISSP Exam Tip
+Don't assume **overwriting once** is enough for classified data. For Top Secret, use multiple passes (3-7) or physical destruction.`
+            }
+        ];
+
+        // Domain 3: Architecture & Engineering
         const archData = [
             {
-                id: 'a1', icon: '🏛️', title: 'Security Models', desc: 'Mathematical models for security.', summary: '• Bell-LaPadula\n• Biba\n• Clark-Wilson', dive: `### Security Architecture and Engineering
-Mathematical and conceptual models that enforce security policies.
+                id: 'a1', icon: '🏛️', title: 'Security Models', desc: 'Formal frameworks for enforcement.', summary: '• Bell-LaPadula\n• Biba\n• Clark-Wilson\n• Confidentiality Focus', dive: `### Architecture and Engineering - Domain 3
+Design principles and mathematical models that enforce security policies.
 
-- **Bell-LaPadula**: Confidentiality (No read up, no write down).
-- **Biba**: Integrity (No read down, no write up).
-- **Clark-Wilson**: Prevents unauthorized modification and ensures internal/external consistency.`
+#### Bell-LaPadula Model (Confidentiality)
+- **Level**: Public < Sensitive < Secret < Top Secret
+- **Simple Security Property**: "No read up" - Cannot read higher levels
+- **Star Property**: "No write down" - Cannot write to lower levels
+- **Use Case**: Military, classified systems
+- **Strength**: Prevents information leakage
+- **Weakness**: Doesn't address integrity
+
+#### Biba Model (Integrity)
+- **Opposite of Bell-LaPadula**: Focuses on integrity, not confidentiality
+- **Simple Integrity Property**: "No read down" - Cannot read lower integrity data
+- **Star Property**: "No write up" - Cannot write to higher integrity data
+- **Use Case**: Commercial systems where integrity matters more
+- **Example**: Low-privilege process cannot modify high-integrity files
+
+#### Clark-Wilson Model
+- **Focus**: Prevents unauthorized modification AND ensures consistency
+- **Separation of Duty**: Different people for different tasks
+- **Transactions**: Atomic, all-or-nothing changes
+- **Use Case**: Banking, financial systems
+- **Key Concept**: Internal and external consistency
+
+#### 💡 CISSP Exam Tip
+**Bell-LaPadula** = Confidentiality. **Biba** = Integrity. **Clark-Wilson** = Integrity + Transactions. Don't mix them up!`
+            },
+            {
+                id: 'a2', icon: '🔐', title: 'Access Control Models', desc: 'Managing who can do what.', summary: '• Discretionary\n• Mandatory\n• Role-Based\n• Attribute-Based', dive: `### Access Control Models
+
+#### DAC (Discretionary Access Control)
+- **Owner's Choice**: Data owner decides who can access
+- **Flexibility**: Easy to implement and modify
+- **Weakness**: No central control, vulnerable to Trojan horses
+- **Example**: UNIX file permissions (rwx)
+
+#### MAC (Mandatory Access Control)
+- **System Decision**: Centralized security policy, users cannot override
+- **Labels**: Data classified, users cleared for levels
+- **Strength**: Strong enforcement, secure for classified environments
+- **Weakness**: Inflexible, complex to implement
+- **Example**: Military systems, SELinux
+
+#### RBAC (Role-Based Access Control)
+- **Roles**: Grouping of users (Admin, User, Guest)
+- **Permissions**: Assigned to roles, not individuals
+- **Scalability**: Easy to manage 1000s of users
+- **Example**: Windows Active Directory, RBAC in cloud platforms
+- **Benefit**: User gets access based on job function, not individual assignment
+
+#### ABAC (Attribute-Based Access Control)
+- **Attributes**: User attributes (department, location, clearance), resource attributes (classification, owner)
+- **Rules**: Grant access based on attribute combinations
+- **Flexibility**: Most powerful and flexible model
+- **Complexity**: Requires sophisticated policy engine
+- **Example**: Cloud IAM policies, modern enterprise systems
+
+#### 💡 CISSP Exam Tip
+RBAC is most practical for medium orgs. ABAC is for complex, large-scale environments.`
+            },
+            {
+                id: 'a3', icon: '🌐', title: 'Defense in Depth', desc: 'Multiple security layers.', summary: '• Perimeter\n• Network\n• Host\n• Application\n• Data', dive: `### Defense in Depth Strategy
+
+#### Security Layers
+1. **Perimeter**: Firewall, proxy, intrusion detection
+2. **Network**: VLANs, network segmentation, routing controls
+3. **Host**: Antivirus, endpoint protection, patching
+4. **Application**: Input validation, secure code, secure frameworks
+5. **Data**: Encryption, access controls, data masking
+6. **Physical**: Locks, badges, video surveillance
+
+#### Example Multi-Layer Approach
+For protecting a web server:
+- **Layer 1**: Firewall only allows port 443 (HTTPS)
+- **Layer 2**: Network segmentation in DMZ
+- **Layer 3**: Host firewall, antivirus, intrusion detection
+- **Layer 4**: Application uses HTTPS, input validation, WAF
+- **Layer 5**: Database encryption, row-level security
+- **Layer 6**: Server room access control
+
+#### Benefit
+If one layer is breached, others still protect. No single point of failure.
+
+#### 💡 CISSP Exam Tip
+Never rely on a single security control. Always implement multiple layers for critical assets.`
+            },
+            {
+                id: 'a4', icon: '🛡️', title: 'Cryptographic Systems', desc: 'Key management and secure protocols.', summary: '• Key Management\n• PKI\n• Certificate Authority\n• SSL/TLS', dive: `### Cryptographic Systems & PKI
+
+#### Key Management Lifecycle
+1. **Generation**: Create keys securely, random, unpredictable
+2. **Distribution**: Securely transmit to authorized parties
+3. **Storage**: Hardware Security Modules (HSM), encrypted
+4. **Rotation**: Periodically replace old keys (1-2 years)
+5. **Retirement**: Securely destroy old keys
+
+#### PKI (Public Key Infrastructure)
+- **Components**: CA (Certificate Authority), RA (Registration Authority), CRL (Certificate Revocation List)
+- **Certificate**: Binds public key to identity
+- **Verification**: Trusted third party (CA) signs certificate
+- **Chain of Trust**: End-entity cert → Intermediate → Root CA
+
+#### SSL/TLS
+- **Handshake**: Client and server negotiate encryption
+- **Cipher Suite**: Asymmetric key exchange, symmetric encryption, hash function
+- **Versions**: SSL 3.0 (broken), TLS 1.0-1.2 (acceptable), TLS 1.3 (current best)
+- **Certificate**: Server must have valid certificate
+
+#### Certificate Revocation
+- **CRL (Certificate Revocation List)**: List of revoked serial numbers (large, slow)
+- **OCSP (Online Certificate Status Protocol)**: Real-time revocation check (preferred)
+- **Must Check**: Browser should verify CRL/OCSP before trusting certificate
+
+#### 💡 CISSP Exam Tip
+Never put private keys in certificates. Never embed private keys in code. Use HSMs for critical keys.`
             }
         ];
 
+        // Domain 4: Communication & Network Security  
         const networkData = [
             {
-                id: 'n1', icon: '🌐', title: 'OSI Model', desc: 'Layered communication framework.', summary: '• Physical to Application\n• Protocols per layer\n• Attacks per layer', dive: `### Communication and Network Security
-Designing and protecting networks.
+                id: 'n1', icon: '🌐', title: 'OSI & TCP/IP Models', desc: 'Network architecture and protocols.', summary: '• 7 OSI Layers\n• Protocols per layer\n• TCP/IP stack\n• Protocol Analysis', dive: `### Communication & Network Security - Domain 4
 
-- **Layer 7 (Application)**: HTTP, FTP, SMTP.
-- **Layer 4 (Transport)**: TCP, UDP.
-- **Layer 3 (Network)**: IP, ICMP, Routing.
-- **Layer 2 (Data Link)**: MAC, ARP, Switches.`
+#### OSI Model (7 Layers)
+| Layer | Name | Protocols | Devices |
+|-------|------|-----------|---------|
+| 7 | Application | HTTP, HTTPS, FTP, SMTP, DNS | Firewalls, Proxies |
+| 6 | Presentation | TLS, SSL | Gateways |
+| 5 | Session | NetBIOS, PPTP | Session controllers |
+| 4 | Transport | TCP, UDP | Load balancers, Firewalls |
+| 3 | Network | IP (v4/v6), ICMP, IGMPRouters, Firewalls |
+| 2 | Data Link | Ethernet, PPP, HDLC | Switches, Bridges |
+| 1 | Physical | Cables, Wireless, Fiber | Repeaters, Hubs |
+
+#### TCP vs UDP
+| Feature | TCP | UDP |
+|---------|-----|-----|
+| **Connection** | Established | Connectionless |
+| **Reliability** | Guaranteed delivery | Best effort |
+| **Speed** | Slower | Faster |
+| **Use** | HTTP, FTP, SMTP | DNS, VoIP, Gaming |
+
+#### IP Addressing
+- **IPv4**: 32-bit, 4 octets (192.168.1.1), ~4.3 billion addresses
+- **IPv6**: 128-bit, hexadecimal (2001:db8::1), ~340 undecillion addresses
+- **CIDR**: Class In Domain Routing (192.168.0.0/24 = 256 addresses)
+- **NAT**: Network Address Translation (hide internal IPs)
+
+#### 💡 CISSP Exam Tip
+Understand which protocols operate at which layers. HTTP = Layer 7, TCP = Layer 4, IP = Layer 3, Ethernet = Layer 2.`
+            },
+            {
+                id: 'n2', icon: '🔒', title: 'Network Segmentation', desc: 'Dividing networks for security.', summary: '• VLANs\n• DMZ\n• Subnetting\n• Network Isolation', dive: `### Network Segmentation & Design
+
+#### VLANs (Virtual Local Area Networks)
+- **Purpose**: Logically separate network segments without physical separation
+- **Isolation**: Traffic between VLANs blocked unless explicitly allowed
+- **Benefits**: Reduce broadcast traffic, contain lateral movement, improve efficiency
+- **VLAN Hopping**: Attacker tricks switch to access different VLAN (mitigate with trunk protection)
+
+#### DMZ (Demilitarized Zone)
+- **Purpose**: Buffer zone between internal network and internet
+- **Contains**: Web servers, mail servers, DNS servers
+- **Access**: Heavily filtered, monitored, logged
+- **Risk**: Compromise doesn't directly access internal network
+
+#### Subnetting
+- **Goal**: Divide large networks into manageable pieces
+- **Example**: 192.168.0.0/24 divided into /25 subnets (192.168.0.0/25 and 192.168.0.128/25)
+- **Benefit**: Contain broadcast, improve security
+
+#### Zone-Based Firewall
+- **Trust Zone**: Internal network
+- **DMZ Zone**: Web servers
+- **Untrust Zone**: Internet
+- **Rules**: Define traffic between zones explicitly
+
+#### 💡 CISSP Exam Tip
+The more segmentation, the harder for attacker to move laterally. Always segment by trust level.`
+            },
+            {
+                id: 'n3', icon: '🚨', title: 'Network Security Controls', desc: 'Firewalls, IDS, IPS, proxies.', summary: '• Firewalls\n• IDS/IPS\n• Proxies\n• DNS Security', dive: `### Network Security Controls
+
+#### Firewalls
+- **Stateless**: Examine each packet individually
+- **Stateful**: Track connection state, more sophisticated
+- **Host-Based**: Software on individual computers
+- **Network-Based**: Physical appliance protecting entire network
+- **Next-Gen (NGFW)**: Application-aware, SSL inspection, threat prevention
+
+#### IDS vs IPS
+- **IDS (Intrusion Detection System)**: Detect and alert (passive)
+- **IPS (Intrusion Prevention System)**: Detect and block (active)
+- **NIDS (Network IDS)**: Monitor network traffic
+- **HIDS (Host IDS)**: Monitor individual systems
+- **Signature-Based**: Known attack patterns
+- **Anomaly-Based**: Deviation from normal behavior
+
+#### Proxies
+- **Forward Proxy**: Sits between users and internet (filtering, caching)
+- **Reverse Proxy**: Sits between internet and web servers (load balancing, WAF)
+- **Application Proxy**: Understands application protocols (more secure)
+
+#### DNS Security
+- **DNS Filtering**: Block malicious domains
+- **DNSSEC**: Digitally sign DNS records to prevent spoofing
+- **DNS Over TLS/HTTPS**: Encrypt DNS queries
+
+#### 💡 CISSP Exam Tip
+IDS = alert, IPS = block. Choose IPS if you're confident in rules, IDS if you want to monitor first.`
+            },
+            {
+                id: 'n4', icon: '🔐', title: 'VPN & Remote Access', desc: 'Secure communication channels.', summary: '• VPN Types\n• Tunneling Protocols\n• Authentication\n• Encryption', dive: `### VPN & Remote Access Security
+
+#### VPN Types
+- **Site-to-Site**: Connect entire offices securely over internet
+- **Remote Access**: Individual user connects to corporate network
+- **Client-to-Site**: Same as remote access
+- **Host-to-Host**: Direct connection between two computers
+
+#### Tunneling Protocols
+- **IPsec**: Operating system level, encrypts IP traffic
+  - **AH (Authentication Header)**: Ensures authenticity
+  - **ESP (Encapsulating Security Payload)**: Encrypts and authenticates
+  - **Tunnel vs Transport Mode**: Tunnel = whole packet encrypted, Transport = payload only
+- **SSL/TLS**: Application level, used for HTTPS
+- **PPTP**: Deprecated, weak security
+- **L2TP**: Layer 2, often paired with IPsec
+- **OpenVPN**: Open-source, software-based
+
+#### Authentication
+- **Pre-Shared Key (PSK)**: Simple but less secure, shared password
+- **Certificates**: More secure, easier to revoke
+- **Two-Factor**: Stronger, especially for remote users
+
+#### User Authentication
+- **Username/Password**: Single factor, weak
+- **Token/OTP**: Second factor (hardware token, Google Authenticator)
+- **Biometric**: Fingerprint, face recognition
+- **Multi-Factor**: Combination of above
+
+#### 💡 CISSP Exam Tip
+IPsec tunnel mode is default for site-to-site. Transport mode for host-to-host. Always use modern ciphers (AES, ChaCha20), avoid legacy (DES).`
             }
         ];
 
+        // Domain 5: Identity & Access Management
         const iamData = [
             {
-                id: 'i1', icon: '🔑', title: 'Access Control', desc: 'Managing identification and auth.', summary: '• Identification\n• Authentication\n• Authorization', dive: `### Identity and Access Management (IAM)
-The systems and processes for managing users and access.
+                id: 'i1', icon: '🔑', title: 'Authentication Mechanisms', desc: 'Verifying user identity.', summary: '• Passwords & MFA\n• Biometrics\n• Certificates\n• Tokens', dive: `### Identity and Access Management (IAM) - Domain 5
 
-- **Auth Factors**: Something you know, have, are, do, or where you are.
-- **SAML**: XML-based for SSO.
-- **OAuth / OpenID Connect**: Modern web-based auth.
-- **RBAC vs ABAC**: Role-based vs Attribute-based access control.`
+#### Authentication Factors
+- **Type 1 (Know)**: Password, PIN, passphrase
+- **Type 2 (Have)**: Token, hardware key, phone
+- **Type 3 (Are)**: Biometrics (fingerprint, iris, face)
+- **Type 4 (Do)**: Behavioral (typing pattern, mouse movement)
+- **Type 5 (Where)**: Location-based (geographic, IP address)
+
+#### Password Security
+- **Requirements**: Minimum 12 characters, complexity, no dictionary words
+- **Expiration**: Force change every 90 days (controversial, NIST suggests no)
+- **History**: Prevent reuse of last 5 passwords
+- **Lockout**: Disable account after 5 failed attempts
+- **Storage**: Hash with salt (PBKDF2, bcrypt, Argon2), never plain-text
+
+#### Multi-Factor Authentication (MFA)
+- **Strongest**: Something you know + something you have + something you are
+- **Common**: Password + OTP (Time-based One-Time Password)
+- **OTP Implementations**: TOTP (Google Authenticator), HOTP (RSA token)
+- **Push Notification**: Approve login on trusted device
+- **Biometric**: Fingerprint + password
+
+#### Certificate-Based Authentication
+- **Client Certificate**: Each user has unique certificate
+- **Smart Card**: Certificate stored on card, requires PIN
+- **Security**: Public key in certificate, private key on card
+- **Challenge**: Deployment complexity, infrastructure cost
+
+#### 💡 CISSP Exam Tip
+Passwords alone are obsolete. Require MFA for privileged accounts (admins, database users). Biometrics are convenient but not foolproof.`
+            },
+            {
+                id: 'i2', icon: '👥', title: 'Access Control Models', desc: 'Authorization frameworks.', summary: '• RBAC\n• ABAC\n• DAC & MAC\n• Principle of Least Privilege', dive: `### Authorization & Access Control
+
+#### RBAC (Role-Based Access Control)
+- **Definition**: Users assigned to roles, roles have permissions
+- **Example**: Admin role has full access, User role has limited access
+- **Benefit**: Scalable, easy to manage
+- **Implementation**: Windows AD, LDAP, cloud IAM
+
+#### ABAC (Attribute-Based Access Control)
+- **User Attributes**: Department, title, clearance level
+- **Resource Attributes**: Classification, owner, data type
+- **Environmental**: Time, location, device type
+- **Policy Engine**: Grant access if attributes match policy
+- **Benefit**: Extremely flexible, handles complex scenarios
+
+#### DAC (Discretionary Access Control)
+- **Owner Control**: Data owner decides who can access
+- **Flexibility**: Easy to share resources
+- **Risk**: Vulnerable to insider threats (owner grants access to attacker)
+
+#### MAC (Mandatory Access Control)
+- **System Control**: Central policy, cannot be overridden
+- **Strength**: Strong enforcement
+- **Complexity**: Difficult to implement, inflexible
+
+#### Principle of Least Privilege
+- **Concept**: User has minimum permissions needed for job
+- **Example**: Database user for reports = SELECT only, not INSERT/UPDATE/DELETE
+- **Benefit**: Limits damage if account compromised
+- **Challenge**: Requires careful planning and documentation
+
+#### 💡 CISSP Exam Tip
+RBAC is industry standard. ABAC is the future. Always apply Principle of Least Privilege. No one needs full admin for their job.`
+            },
+            {
+                id: 'i3', icon: '📋', title: 'Account Management', desc: 'User lifecycle and governance.', summary: '• Provisioning\n• Deprovisioning\n• Recertification\n• Segregation of Duties', dive: `### Account Management & User Lifecycle
+
+#### Provisioning (Onboarding)
+- **Process**: New employee hired, IT creates accounts
+- **Manager Approval**: Manager approves access level
+- **Automation**: Use identity management system for consistency
+- **Timeline**: Should be immediate, not weeks
+
+#### Deprovisioning (Offboarding)
+- **Process**: Employee terminates, accounts disabled
+- **Timeline**: Within 24 hours, preferably immediately
+- **Verification**: Check all systems (email, VPN, databases, facilities)
+- **Data Handling**: Archive files before deletion
+- **Risk**: Terminated employees with active accounts = security breach
+
+#### Access Recertification
+- **Frequency**: Quarterly or semi-annual
+- **Process**: Manager reviews direct reports' access, approves/removes
+- **Challenge**: Time-consuming, often neglected
+- **Importance**: Detects excessive access, accounts no longer needed
+- **Compliance**: Required by SOX, HIPAA, PCI-DSS
+
+#### Segregation of Duties (SoD)
+- **Definition**: No single person should handle entire transaction
+- **Example (Banking)**: Someone requests transfer, someone else approves
+- **Example (IT)**: Developer cannot deploy to production, operations does
+- **Benefit**: Prevents fraud, detects errors
+- **Tool**: Identity governance platform enforces conflicting roles
+
+#### 💡 CISSP Exam Tip
+Offboarding is as important as onboarding. Regularly recertify access—it's the #1 way admins find excessive permissions.`
+            },
+            {
+                id: 'i4', icon: '🔐', title: 'Identity Services', desc: 'Centralized identity management.', summary: '• LDAP / Active Directory\n• SSO / Federation\n• OAuth / OpenID\n• Kerberos', dive: `### Identity Management & Directory Services
+
+#### LDAP (Lightweight Directory Access Protocol)
+- **Purpose**: Centralized directory for users and resources
+- **Hierarchy**: Tree structure (O=Company, OU=IT, CN=John)
+- **Attributes**: Mail, phone, department, group memberships
+- **Use**: Authentication, authorization, user lookup
+- **Binding**: Simple (password) or SASL (more secure)
+
+#### Active Directory (Microsoft's LDAP)
+- **Features**: LDAP directory + group policies + authentication
+- **Domain Trusts**: Forests and domains for large organizations
+- **Group Policy**: Enforce password policies, software restrictions, security settings
+- **GPO (Group Policy Object)**: Settings applied to users/computers
+- **Kerberos**: Authentication protocol used by AD
+
+#### Kerberos
+- **Purpose**: Single sign-on (SSO) in Windows networks
+- **Components**: KDC (Key Distribution Center), TGT (Ticket Granting Ticket)
+- **Mutual Authentication**: Both sides verify each other
+- **Tickets**: Time-limited, encrypted credentials
+- **No Passwords Sent**: Uses cryptographic tickets instead
+
+#### SSO (Single Sign-On)
+- **Benefit**: User logs in once, accesses all applications
+- **Methods**: Kerberos, SAML, OAuth 2.0, OpenID Connect
+- **Weakness**: Compromise of SSO = access to all systems
+
+#### OAuth 2.0 & OpenID Connect
+- **OAuth**: Delegation (grant access without sharing password)
+- **OpenID Connect**: Authentication layer on top of OAuth 2.0
+- **Use**: Third-party apps accessing user data (login with Google, Facebook)
+- **Tokens**: Access token (short-lived), refresh token (long-lived)
+
+#### 💡 CISSP Exam Tip
+Kerberos = Windows networks. SAML = Enterprise federation. OAuth = Web/mobile apps. Know which is which!`
             }
         ];
 
+        // Domain 6: Security Assessment & Testing
+        const testData = [
+            {
+                id: 't1', icon: '🔍', title: 'Vulnerability Assessment', desc: 'Finding weaknesses systematically.', summary: '• Vulnerability Scanning\n• Classification\n• Risk Scoring\n• Remediation', dive: `### Security Assessment & Testing - Domain 6
+
+#### Vulnerability Assessment Types
+- **Passive**: Observation without active testing
+- **Active**: Scanning and probing for vulnerabilities
+- **Credentialed**: Access with admin credentials, sees more
+- **Non-Credentialed**: Unauthenticated scanning, external attacker perspective
+
+#### Vulnerability Scanning Tools
+- **Nessus**: Industry standard, identifies CVEs
+- **OpenVAS**: Open-source alternative
+- **Qualys**: Cloud-based continuous scanning
+- **Rapid7 Nexpose**: Real-time asset discovery
+- **Nmap**: Port scanning and service detection
+
+#### CVSS (Common Vulnerability Scoring System)
+- **Base Score**: 0-10 (lower = less serious, higher = more serious)
+- **Temporal**: Changes over time as exploits are released
+- **Environmental**: Organization-specific severity
+
+#### Remediation Prioritization
+1. **CVSS Score**: Higher scores first
+2. **Exploitability**: Easy-to-exploit vulnerabilities first
+3. **Asset Criticality**: Critical systems first
+4. **Threat Intelligence**: Known active exploitation
+5. **Business Impact**: Customer-facing systems, revenue impact
+
+#### 💡 CISSP Exam Tip
+Scanning finds vulnerabilities. Assessment analyzes impact. Penetration testing exploits them. Know the difference!`
+            },
+            {
+                id: 't2', icon: '🎯', title: 'Penetration Testing', desc: 'Authorized security testing.', summary: '• Authorization & Scope\n• Methodology\n• Black/White Box\n• Reporting', dive: `### Penetration Testing (Pen Testing)
+
+#### Engagement Phases
+1. **Scope & Rules**: Define what can be tested, attack methods allowed
+2. **Reconnaissance**: Gather information about target
+3. **Scanning**: Identify open ports and services
+4. **Exploitation**: Attempt to exploit vulnerabilities
+5. **Privilege Escalation**: Obtain higher-level access
+6. **Lateral Movement**: Move to other systems
+7. **Documentation**: Collect evidence (screenshots, logs)
+8. **Cleanup**: Remove attacker tools and traces
+
+#### Box Types
+- **White Box**: Tester has full knowledge of systems (code access, architecture docs)
+- **Gray Box**: Partial knowledge (employee-level access)
+- **Black Box**: No prior knowledge (external attacker perspective)
+
+#### Methodologies
+- **OWASP**: Web application testing
+- **NIST**: Guidelines for federal systems
+- **PTES (Penetration Testing Execution Standard)**: 7-phase framework
+- **SANS**: Practical testing approach
+
+#### Rules of Engagement
+- **Written Authorization**: Signed agreement with scope
+- **Timeline**: Specific dates/times testing is allowed
+- **Systems In-Scope**: List of IP addresses, hostnames, applications
+- **Restrictions**: Don't block data centers, avoid specific systems
+- **Contact**: Who to reach if issues arise
+
+#### 💡 CISSP Exam Tip
+ALWAYS get written authorization before any penetration testing. Unauthorized testing = illegal hacking.`
+            },
+            {
+                id: 't3', icon: '📊', title: 'Security Testing Methods', desc: 'Code and design review techniques.', summary: '• Static Analysis\n• Dynamic Testing\n• Fuzzing\n• Threat Modeling', dive: `### Security Testing & Analysis
+
+#### Static Analysis (SAST)
+- **Definition**: Analyze code without executing it
+- **Tools**: SonarQube, Fortify, Checkmarx
+- **Finds**: SQL injection, XSS, hardcoded credentials
+- **Weakness**: High false positives, doesn't find logic flaws
+- **When**: During development (shift-left)
+
+#### Dynamic Analysis (DAST)
+- **Definition**: Test running application
+- **Tools**: Burp Suite, OWASP ZAP, Acunetix
+- **Finds**: Authentication bypass, server misconfigurations, API flaws
+- **Weakness**: Limited by test coverage
+- **When**: Pre-production, production monitoring
+
+#### Fuzzing
+- **Definition**: Send random/malformed input to find crashes
+- **Tools**: AFL, libFuzzer
+- **Finds**: Buffer overflows, parsing errors
+- **Time-Consuming**: May take hours/days
+- **Effective**: Uncovers exotic edge cases
+
+#### Threat Modeling
+- **STRIDE**: Spoofing, Tampering, Repudiation, Information Disclosure, Denial of Service, Elevation of Privilege
+- **PASTA**: Process for Attack Simulation and Threat Analysis
+- **Output**: Threat list prioritized by risk
+- **Timing**: Early in design phase
+
+#### 💡 CISSP Exam Tip
+Combine SAST + DAST for complete coverage. Static finds what's wrong in code. Dynamic finds what actually happens at runtime.`
+            },
+            {
+                id: 't4', icon: '📋', title: 'Auditing & Compliance', desc: 'Verification against standards.', summary: '• Audit Procedures\n• Compliance Testing\n• Evidence Collection\n• Reporting', dive: `### Auditing & Compliance Verification
+
+#### Internal Audits
+- **Frequency**: Annual minimum
+- **Scope**: Review compliance with own policies
+- **Team**: Internal audit department or external consultant
+- **Finding**: Document gaps, assign remediation owners
+- **Follow-up**: Verify remediation after deadline
+
+#### External Audits
+- **Auditor**: Third-party firm (Big 4 accounting firms, specialized auditors)
+- **Standard**: ISO 27001, SOC 2, PCI-DSS, HIPAA
+- **Transparency**: Limited scope vs full scope
+- **Cost**: $$$ but required for compliance
+- **Report**: Shared with clients, regulators, public
+
+#### Compliance Testing
+- **Control Testing**: Verify controls exist and operate effectively
+- **Substantive Testing**: Verify data (sample of transactions)
+- **Attribute Sampling**: Statistical approach
+- **Evidence**: Screenshots, logs, policy documents
+
+#### Common Findings
+- **Observation**: Minor issue, no immediate risk
+- **Finding**: Violates policy/standard
+- **Exception**: Approved deviation from standard
+- **Non-Conformance**: Fails to meet regulatory requirement
+
+#### 💡 CISSP Exam Tip
+Audits find issues. Management responsible for remediation. Evidence (logs, change records) is critical for audit trails.`
+            }
+        ];
+
+        // Domain 7: Security Operations
         const opsData = [
             {
-                id: 'o1', icon: '🚨', title: 'Incident Response', desc: 'Handling security events.', summary: '• Detect & Response\n• Recovery\n• Lessons Learned', dive: `### Security Operations
-The daily management of security and incident handling.
+                id: 'o1', icon: '🚨', title: 'Incident Management', desc: 'Detecting and responding to incidents.', summary: '• Incident Lifecycle\n• Classification\n• Response Team\n• Post-Incident', dive: `### Security Operations - Domain 7
 
-- **Incident Lifecycle**: Preparation, Detection, Analysis, Containment, Eradication, Recovery, Post-Incident Activity.
-- **Forensics**: Order of volatility, chain of custody.`
+#### Incident Response Lifecycle
+1. **Preparation**: Build team, tools, playbooks (preventive controls, monitoring, testing)
+2. **Detection & Analysis**: 
+   - How we learned about incident (IDS alert, user report, etc.)
+   - Initial assessment (severity, scope, affected systems)
+   - Notification to stakeholders
+3. **Containment**:
+   - Short-term: Isolate affected systems
+   - Long-term: Patch vulnerability, strengthen defenses
+4. **Eradication**: Remove attacker access, malware, backdoors
+5. **Recovery**: Restore systems from clean backups, verify no intrusion
+6. **Post-Incident**:
+   - Root cause analysis
+   - Lessons learned meeting
+   - Improve processes to prevent recurrence
+   - Update incident response plan
+
+#### Incident Severity Levels
+- **Critical**: Direct revenue impact, regulatory violation, major data breach
+- **High**: Multiple departments affected, significant downtime
+- **Medium**: Single department, workaround available
+- **Low**: Informational only, no business impact
+
+#### 💡 CISSP Exam Tip
+Never skip the post-incident review. That's how you improve. Also, eradication is critical—just patching isn't enough if attacker still has backdoor access.`
+            },
+            {
+                id: 'o2', icon: '📊', title: 'Security Monitoring & SIEM', desc: 'Continuous detection and analysis.', summary: '• Log Collection\n• Alerting\n• Correlation\n• Threat Hunting', dive: `### Security Monitoring & SIEM
+
+#### SIEM (Security Information and Event Management)
+- **Functions**: Collect logs from all systems, normalize, correlate, alert
+- **Data Sources**: Firewalls, IDS, web servers, database, proxy, endpoints
+- **Correlation**: Combine events to identify patterns (e.g., 10 failed logins + privilege escalation = breach)
+- **Retention**: 30 days hot, 1 year archive minimum
+- **Tools**: Splunk, ELK Stack, IBM QRadar, ArcSight
+
+#### Log Management Best Practices
+- **Centralization**: Send all logs to central repository
+- **Immutability**: Cannot be modified or deleted (write-once media, blockchain)
+- **Integrity**: Hash values to detect tampering
+- **Retention**: Based on compliance requirements
+- **Privacy**: Anonymize PII in logs
+
+#### Alerting
+- **Tuning**: High sensitivity = false positives; Low sensitivity = misses attacks
+- **Alert Fatigue**: Too many alerts = analyst ignores them
+- **Correlation Rules**: Multi-step logic (login from different countries within 1 minute)
+- **Escalation**: If not handled in timeframe, escalate to manager
+
+#### Threat Hunting
+- **Proactive**: Hunt for compromise even without alert
+- **Hypothesis**: "Attackers likely accessed database between 2-4am"
+- **Investigation**: Search logs for matching activity
+- **Value**: Find breaches earlier, before damage
+
+#### 💡 CISSP Exam Tip
+SIEM alone doesn't prevent breaches. You need security operations center (SOC) with skilled analysts to interpret alerts.`
+            },
+            {
+                id: 'o3', icon: '🔧', title: 'Configuration & Patch Management', desc: 'Maintaining secure systems.', summary: '• Patch Deployment\n• Change Control\n• Baseline Config\n• Vulnerability Mgmt', dive: `### Configuration & Patch Management
+
+#### Patch Management Process
+1. **Release**: Vendor announces security patch
+2. **Evaluation**: Test in lab before production
+3. **Prioritization**: Critical patches first, others scheduled
+4. **Deployment**: Use patch management tool for consistency
+5. **Verification**: Confirm patch applied and no issues
+6. **Documentation**: Record what was patched and when
+
+#### Patch Prioritization
+- **Critical**: Active exploitation, remote code execution, immediate threat
+- **High**: Likely to be exploited, significant impact
+- **Medium**: Possible impact, no active exploitation
+- **Low**: Minimal impact, can wait
+
+#### Change Control Process
+- **Request**: IT staff submits change for approval
+- **CAB (Change Advisory Board)**: Reviews impact and risk
+- **Schedule**: Determine when change occurs (maintenance window)
+- **Implementation**: Execute change with rollback plan
+- **Verification**: Test that change works as intended
+- **Communication**: Notify stakeholders
+
+#### Baseline Configuration
+- **Hardening Guide**: Security settings for OS (disable unnecessary services, strong passwords)
+- **Version Control**: Track changes to standard configuration
+- **Template**: Use standard image for new systems
+- **Drift Detection**: Alert if system deviates from baseline
+
+#### 💡 CISSP Exam Tip
+Apply patches in order: Critical > High > Medium > Low. Never patch everything at once. Always test first. Have a rollback plan.`
+            },
+            {
+                id: 'o4', icon: '⚙️', title: 'Disaster Recovery Operations', desc: 'Restoring from major incidents.', summary: '• Recovery Plans\n• Backups & Testing\n• Alternate Sites\n• RTO/RPO', dive: `### Disaster Recovery Operations
+
+#### Recovery Plan Components
+- **Executive Summary**: High-level overview, contact list
+- **Detailed Procedures**: Step-by-step to recover each system
+- **Contact Information**: Home phone, cell phone for key personnel
+- **Software Licenses**: Keys and download locations
+- **Vendor Contacts**: Technical support phone numbers
+- **Data Center Information**: Locations of alternate sites
+
+#### Backup Strategy
+- **Full Backup**: Complete copy every Friday (large, slow)
+- **Incremental**: Only changes since last backup, faster but requires all backups to restore
+- **Differential**: Changes since last full backup, middle ground
+- **Rotation**: GFS (Grandfather-Father-Son) = 4 weekly, 4 monthly, 1 yearly backups
+
+#### Backup Testing
+- **Regular**: Test restore monthly
+- **Document**: Time to restore, any issues
+- **Improvement**: Fix issues before you need to actually restore
+- **Frequency**: At least quarterly full test
+
+#### Alternate Sites
+| Type | Setup | Cost | Recovery Time |
+|------|-------|------|---|
+| **Cold** | Building only | $ | Days to weeks |
+| **Warm** | Partial setup | $$ | 4-24 hours |
+| **Hot** | Full duplicate | $$$ | Minutes |
+
+#### 💡 CISSP Exam Tip
+Backup frequency depends on RTO/RPO. If can't afford 1 hour downtime, need hot site or real-time replication.`
             }
         ];
 
+        // Domain 8: Software Development Security
         const softwareData = [
             {
-                id: 's1', icon: '💻', title: 'Secure Development', desc: 'Building security into code.', summary: '• SDLC Models\n• Database Security\n• Web Vulnerabilities', dive: `### Software Development Security
-Applying security to the software lifecycle.
+                id: 's1', icon: '💻', title: 'Secure SDLC', desc: 'Building security into software.', summary: '• SDLC Models\n• Security in Design\n• Code Review\n• DevSecOps', dive: `### Software Development Security - Domain 8
 
-- **Waterfall vs Agile**: Differences in security implementation.
-- **DevSecOps**: Integrating security into the CI/CD pipeline.
-- **Vulnerabilities**: XSS, SQL Injection, Buffer Overflow.`
+#### SDLC Models
+- **Waterfall**: Linear phases (Design → Develop → Test → Deploy)
+  - Strength: Clear requirements, full documentation
+  - Weakness: Security fixes late, changes difficult
+- **Agile**: Short sprints, iterative development
+  - Strength: Faster feedback, early security testing
+  - Weakness: Less documentation, security can be neglected
+- **DevSecOps**: Integrate security throughout CI/CD pipeline
+  - Strength: Catch vulnerabilities early (shift-left)
+  - Weakness: Requires cultural change, tool investment
+
+#### Secure Development Practices
+- **Threat Modeling**: Identify risks early in design
+- **Secure Design Principles**: Defense in depth, fail securely, principle of least privilege
+- **Input Validation**: Never trust user input
+- **Error Handling**: Don't leak sensitive info in error messages
+- **Logging**: Log security-relevant events, not sensitive data
+- **Testing**: Unit tests, integration tests, security tests
+
+#### Code Review
+- **Peer Review**: At least 2 developers review each code change
+- **Security Review**: Security expert reviews high-risk code
+- **Static Analysis**: Automated scanning for known patterns
+- **Documentation**: Code should be understandable and testable
+
+#### 💡 CISSP Exam Tip
+Fixing vulnerabilities in code is 100x cheaper than in production. Do security early!`
+            },
+            {
+                id: 's2', icon: '🛡️', title: 'Common Vulnerabilities', desc: 'OWASP Top 10 and beyond.', summary: '• Injection Attacks\n• XSS, CSRF\n• Broken Auth\n• Sensitive Data Exposure', dive: `### Common Vulnerabilities & Attacks
+
+#### OWASP Top 10 (2021)
+1. **Broken Access Control**: Users get access they shouldn't
+2. **Cryptographic Failures**: Sensitive data exposed
+3. **Injection**: SQL, command, LDAP injection
+4. **Insecure Design**: Missing security controls
+5. **Security Misconfiguration**: Default credentials, unnecessary services
+6. **Vulnerable Outdated Components**: Unpatched libraries
+7. **Authentication Failures**: Weak passwords, session mismanagement
+8. **Data Integrity Failures**: Unsafe deserialization
+9. **Logging & Monitoring Failures**: No visibility into attacks
+10. **SSRF (Server-Side Request Forgery)**: Server makes unintended requests
+
+#### Injection Attacks
+- **SQL Injection**: 
+  - **Attack**: Pass SQL code in input (username: ' OR '1'='1)
+  - **Prevention**: Parameterized queries, input validation
+- **Command Injection**:
+  - **Attack**: Pass shell commands in input (filename; rm -rf /)
+  - **Prevention**: Avoid system() calls, use API instead
+- **LDAP Injection**: Similar to SQL but targets LDAP directories
+
+#### XSS (Cross-Site Scripting)
+- **Attack**: Inject JavaScript that runs in other users' browsers
+- **Types**: Stored (in database), Reflected (in URL), DOM-based
+- **Prevention**: Output encoding, Content Security Policy, input validation
+
+#### CSRF (Cross-Site Request Forgery)
+- **Attack**: Trick user into making unintended request (transfer money, change password)
+- **Prevention**: CSRF tokens, SameSite cookies, origin validation
+
+#### 💡 CISSP Exam Tip
+SQL injection and XSS are still the most common vulnerabilities. Learn to prevent them inside and out!`
+            },
+            {
+                id: 's3', icon: '🔐', title: 'Database Security', desc: 'Protecting data in SQL databases.', summary: '• Access Control\n• Encryption\n• Stored Procedures\n• Query Monitoring', dive: `### Database Security
+
+#### Access Control
+- **Principle of Least Privilege**: DBA has more access than analyst
+- **Role-Based**: Create roles (Analyst, Auditor, Admin)
+- **Granular**: Row-level security, column-level encryption
+- **View-Based**: Users see limited data through restricted views
+
+#### Threats & Protection
+| Threat | Prevention |
+|--------|-----------|
+| **SQL Injection** | Parameterized queries, input validation |
+| **Privilege Escalation** | Regular audits, principle of least privilege |
+| **Data Exfiltration** | Encryption, DLP, row-level security |
+| **Denial of Service** | Query limits, resource quotas |
+| **Unauthorized Access** | Strong authentication, network segmentation |
+
+#### Database Encryption
+- **Transparent Data Encryption (TDE)**: Automatic encryption at rest
+- **Column Encryption**: Sensitive columns encrypted, queryable with key
+- **Communication**: Always use TLS for connections
+
+#### Auditing & Monitoring
+- **Query Logging**: Log all queries, detect suspicious patterns
+- **Anomaly Detection**: Unexpected volume, unusual query types
+- **User Tracking**: Know who accessed what data and when
+- **Retention**: Keep logs for 1+ years
+
+#### 💡 CISSP Exam Tip
+Database is critical. Use multiple layers: network isolation + authentication + encryption + auditing.`
+            },
+            {
+                id: 's4', icon: '🚀', title: 'Application Deployment', desc: 'Secure release and operations.', summary: '• CI/CD Pipeline\n• Container Security\n• Secrets Management\n• Deployment Validation', dive: `### Application Deployment & Operations
+
+#### CI/CD Pipeline
+- **Continuous Integration**: Code committed frequently (daily), automatically tested
+- **Continuous Deployment**: Passing code automatically released to production
+- **Security Integration**:
+  - Automated SAST/DAST
+  - Dependency scanning (vulnerable libraries)
+  - Container scanning
+  - Infrastructure-as-code scanning
+
+#### Container Security
+- **Image Scanning**: Scan Docker images for vulnerabilities before deployment
+- **Registry Security**: Private container registry, not Docker Hub
+- **Runtime Monitoring**: Detect suspicious behavior in running containers
+- **Secrets**: Don't embed API keys in images, use secret management
+
+#### Secrets Management
+- **Challenge**: Apps need passwords (database, API keys, certificates)
+- **Bad Practice**: Store in code, environment variables, config files
+- **Good Practice**: Secrets vault (HashiCorp Vault, AWS Secrets Manager)
+- **Access**: Apps retrieve secrets at runtime, audit access
+
+#### Deployment Validation
+- **Smoke Tests**: Basic functionality works
+- **Security Tests**: No hardcoded credentials, secure configurations
+- **Performance Tests**: Application meets latency requirements
+- **Rollback Plan**: If something goes wrong, quickly revert
+
+#### 💡 CISSP Exam Tip
+Shift-left: Security should be in development, not bolted on after. Automate security tests in your pipeline!`
             }
         ];
 
@@ -312,9 +1294,11 @@ Applying security to the software lifecycle.
             new StudyGuideApp({
                 grids: [
                     { id: 'risk-grid', data: riskData, border: 'border-red-500', grad: 'from-red-500/20', color: 'red-500' },
+                    { id: 'asset-grid', data: assetData, border: 'border-red-500', grad: 'from-red-500/20', color: 'red-500' },
                     { id: 'arch-grid', data: archData, border: 'border-red-500', grad: 'from-red-500/20', color: 'red-500' },
                     { id: 'network-grid', data: networkData, border: 'border-red-500', grad: 'from-red-500/20', color: 'red-500' },
                     { id: 'iam-grid', data: iamData, border: 'border-red-500', grad: 'from-red-500/20', color: 'red-500' },
+                    { id: 'test-grid', data: testData, border: 'border-red-500', grad: 'from-red-500/20', color: 'red-500' },
                     { id: 'ops-grid', data: opsData, border: 'border-red-500', grad: 'from-red-500/20', color: 'red-500' },
                     { id: 'software-grid', data: softwareData, border: 'border-red-500', grad: 'from-red-500/20', color: 'red-500' }
                 ]

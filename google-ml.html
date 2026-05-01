@@ -222,64 +222,631 @@
     </div>
 
     <script>
-        const framingData = [
-            {
-                id: 'f1', icon: '🎯', title: 'ML Problem Types', desc: 'Classification vs Regression vs Clustering.', summary: '• Supervised Learning\n• Unsupervised Learning\n• Success Metrics', dive: `### ML Problem Framing
-Choosing the right approach for a business problem.
-
-- **Classification**: Predicting a label (e.g., Spam vs Not Spam).
-- **Regression**: Predicting a continuous value (e.g., Price of a house).
-- **Clustering**: Grouping similar items (e.g., Customer segmentation).
-
-#### ⚡ Key Metrics
-- **RMSE**: Root Mean Square Error (Regression).
-- **AUC-ROC**: Area Under the Curve (Classification).
-- **Precision/Recall**: Trade-offs in model sensitivity.`
-            }
-        ];
-
+        // GCP Solution Architecture
         const archData = [
             {
-                id: 'a1', icon: '🏛️', title: 'Vertex AI', desc: 'Google Unified AI platform.', summary: '• Vertex AI Pipelines\n• Feature Store\n• Model Registry', dive: `### Vertex AI Architecture
-The central hub for ML workflows on GCP.
+                id: 'a1', icon: '🏛️', title: 'Vertex AI Platform', desc: 'Google unified ML platform on GCP.', summary: '• Vertex AI Training\n• Vertex AI Pipelines\n• Feature Store\n• Model Registry', dive: `### Vertex AI Architecture
 
-- **Vertex AI Pipelines**: Orchestrating ML workflows using Kubeflow or TFX.
-- **Vertex AI Training**: Scalable model training with custom or pre-built containers.
-- **Vertex AI Prediction**: Online and batch serving capabilities.
-- **Feature Store**: Centralized sharing and management of ML features.`
+#### Vertex AI Components
+- **Vertex AI Training**: Managed training service
+  - Pre-built containers for TensorFlow, scikit-learn, PyTorch
+  - Custom training with your own containers
+  - Hyperparameter tuning (Vizier)
+  - Distributed training across TPUs/GPUs
+- **Vertex AI Pipelines**: Orchestrating ML workflows
+  - Define pipelines using Kubeflow or TFX
+  - Automated execution and monitoring
+  - Version control for reproducibility
+- **Vertex AI Predictions**: Model serving (online and batch)
+- **Feature Store**: Centralized feature management
+  - Share features across teams
+  - Avoid training-serving skew
+
+#### End-to-End Workflow
+1. **Data**: Use BigQuery for data preparation
+2. **Training**: Vertex AI Training
+3. **Evaluation**: Monitor training metrics
+4. **Deployment**: Vertex AI Endpoints
+5. **Monitoring**: Automated alerting for model drift
+
+#### Advantages
+- Managed service (less infrastructure)
+- Integrated with GCP ecosystem
+- Automatic scaling
+- Built-in monitoring
+
+#### 💡 Entry-Level Tip
+Vertex AI handles infrastructure so you focus on ML. Great for teams without DevOps expertise.`
+            },
+            {
+                id: 'a2', icon: '☁️', title: 'BigQuery ML', desc: 'Train ML models using SQL.', summary: '• SQL-based Training\n• Model Types\n• Predictions\n• Cost-effective', dive: `### BigQuery ML Fundamentals
+
+#### SQL-Based ML
+- **Advantage**: Write SQL, not Python
+- **Use case**: Data analysts can build models
+- **Cost**: Pay only for data scanned, not ML resources
+
+#### Supported Models
+- Linear/Logistic Regression
+- Time series forecasting (ARIMA+)
+- Clustering (K-means)
+- Classification/Regression trees
+- Deep Neural Networks
+- Boosted trees (XGBoost)
+
+#### Workflow
+\`\`\`sql
+-- 1. Train model
+CREATE OR REPLACE MODEL \`project.dataset.model_name\`
+OPTIONS(model_type='linear_reg') AS
+SELECT price, square_feet, bedrooms
+FROM \`project.dataset.houses\`
+WHERE price IS NOT NULL;
+
+-- 2. Evaluate model
+SELECT * FROM ML.EVALUATE(MODEL \`project.dataset.model_name\`);
+
+-- 3. Make predictions
+SELECT * FROM ML.PREDICT(MODEL \`project.dataset.model_name\`,
+  (SELECT square_feet, bedrooms FROM new_houses));
+\`\`\`
+
+#### Comparison to Traditional ML
+| Aspect | BigQuery ML | Custom ML |
+|--------|------------|-----------|
+| **Speed** | Very fast | Slower setup |
+| **Complexity** | Low | High |
+| **Customization** | Limited | Unlimited |
+| **Cost** | Pay-per-query | Pay-per-compute |
+
+#### 💡 Entry-Level Tip
+Perfect for quick ML experiments. Use custom ML for production complexity.`
+            },
+            {
+                id: 'a3', icon: '📦', title: 'Model Deployment & Serving', desc: 'Online and batch prediction endpoints.', summary: '• Model Registry\n• Online Endpoints\n• Batch Prediction\n• Versioning', dive: `### Deploying Models on GCP
+
+#### Model Registry
+- **Centralized repository**: Track all models and versions
+- **Versioning**: Model v1, v2, v3 with rollback capability
+- **Metadata**: Track training date, metrics, data sources
+- **Integration**: Connect to CI/CD pipelines
+
+#### Online Endpoints (Real-time)
+- **Purpose**: Single request needs quick response
+- **Latency**: < 1 second typical
+- **Cost**: Higher (keep server warm)
+- **Use**: Product recommendations, fraud detection
+- **Deployment**: REST or gRPC API
+
+#### Batch Prediction
+- **Purpose**: Process many records at once
+- **Latency**: Minutes to hours (acceptable)
+- **Cost**: Lower (process in bulk)
+- **Use**: Scoring entire customer database
+- **Input**: BigQuery table or Cloud Storage
+
+#### A/B Testing
+- **Old model**: 50% traffic
+- **New model**: 50% traffic
+- **Monitoring**: Compare metrics
+- **Gradual rollout**: If good, increase to 100%
+
+#### Traffic Management
+\`\`\`
+Endpoint v1 (current): 95% traffic
+Endpoint v2 (new): 5% traffic  (monitoring)
+↓ (if metrics improve)
+Endpoint v1: 0% traffic
+Endpoint v2: 100% traffic
+\`\`\`
+
+#### 💡 Entry-Level Tip
+Start with canary deployment (small % of traffic). Monitor before full rollout.`
             }
         ];
 
+        // ML Problem Framing
+        const framingData = [
+            {
+                id: 'f1', icon: '🎯', title: 'ML Problem Types', desc: 'Supervised, unsupervised, and reinforcement.', summary: '• Supervised Learning\n• Unsupervised Learning\n• Reinforcement Learning', dive: `### Types of ML Problems
+
+#### Supervised Learning
+- **Definition**: Learn from labeled data (we know the right answer)
+- **Use cases**:
+  - **Classification**: Predict category (spam/not spam, cat/dog, fraudulent/legitimate)
+  - **Regression**: Predict number (house price, temperature, stock price)
+- **Examples**:
+  - Email spam filter (labeled emails = spam/not spam)
+  - Housing price prediction (labeled houses with prices)
+- **Metrics**: Accuracy, Precision/Recall, RMSE, F1-Score
+
+#### Unsupervised Learning
+- **Definition**: Find patterns in unlabeled data (no right answer given)
+- **Main technique**: **Clustering** - Group similar items
+  - K-Means: Group customers by spending habits
+  - Hierarchical: Build tree of related items
+- **Applications**: Customer segmentation, anomaly detection, recommendation systems
+- **Challenge**: How do you know if grouping is good without labels?
+
+#### Reinforcement Learning
+- **Definition**: Agent learns by trial and error with rewards
+- **Example**: Chess AI learns by playing thousands of games
+- **Key concept**: Reward signal guides learning
+- **Applications**: Game AI, robotics, autonomous vehicles
+- **Note**: Not primary focus for ML Engineer cert (mostly supervised/unsupervised)
+
+#### 💡 Entry-Level Tip
+Start with supervised learning. It's easiest (you have labeled data). Most real-world problems use it.`
+            },
+            {
+                id: 'f2', icon: '📊', title: 'Defining Success Metrics', desc: 'Accuracy, Precision, Recall, F1 Score.', summary: '• Classification Metrics\n• Regression Metrics\n• Business Metrics\n• Metric Trade-offs', dive: `### Measuring ML Model Performance
+
+#### Classification Metrics
+
+**Accuracy**: How many predictions are correct?
+- Formula: (TP + TN) / (TP + TN + FP + FN)
+- Use when: Classes balanced (50/50 split)
+- Problem: Bad with imbalanced data
+
+**Precision**: Of positive predictions, how many are correct?
+- Formula: TP / (TP + FP)
+- Use when: False positives costly (don't want innocent people accused)
+- Example: Fraud detection (want to be sure before blocking card)
+
+**Recall**: Of actual positives, how many did we find?
+- Formula: TP / (TP + FN)
+- Use when: False negatives costly (can't miss cases)
+- Example: Disease detection (can't miss sick patients)
+
+**F1 Score**: Harmonic mean of Precision and Recall
+- Balance between precision and recall
+- Use when: Both matter equally
+
+#### Regression Metrics
+
+| Metric | Formula | When to Use |
+|--------|---------|-------------|
+| **MAE** | Average of absolute errors | Easy to interpret (dollars) |
+| **RMSE** | Square root of mean squared error | Penalizes large errors more |
+| **R²** | Percentage of variance explained | Between 0 (bad) to 1 (perfect) |
+
+#### Business Metrics
+- Cost of false positives vs false negatives
+- Revenue impact
+- User satisfaction
+- Response time
+
+#### 💡 Entry-Level Tip
+Choose metrics that match business goals, not just technical accuracy!`
+            },
+            {
+                id: 'f3', icon: '🔄', title: 'Train/Test/Validation Split', desc: 'Preventing overfitting and bias.', summary: '• Training Set (70%)\n• Validation Set (15%)\n• Test Set (15%)\n• Cross-validation', dive: `### Data Splits for Model Evaluation
+
+#### Standard Split (70/15/15)
+- **Training Set (70%)**: Used to train the model
+- **Validation Set (15%)**: Used to tune hyperparameters
+- **Test Set (15%)**: Final evaluation (model never sees this data)
+
+#### Why Three Sets?
+- **Training alone**: Model would overfit (memorize answers)
+- **Validation**: Choose best hyperparameters without touching test set
+- **Test**: True measure of how model performs on new data
+
+#### Overfitting vs Underfitting
+
+| Issue | Cause | Sign |
+|-------|-------|------|
+| **Overfitting** | Model too complex, memorizes training data | Train accuracy 95%, validation 60% |
+| **Underfitting** | Model too simple, misses patterns | Train accuracy 50%, validation 48% |
+| **Just Right** | Good generalization | Train accuracy 85%, validation 83% |
+
+#### Cross-Validation
+- Instead of single train/val/test split, use K-Fold
+- Example: 5-Fold = split data 5 ways, train 5 times
+- Each fold: 4 parts train, 1 part validate
+- Gives more reliable estimate of model performance
+
+#### 💡 Entry-Level Tip
+Always reserve a test set ONLY for final evaluation. Never peek at test results during development!`
+            },
+            {
+                id: 'f4', icon: '⚖️', title: 'Imbalanced Classes Problem', desc: 'When one class dominates (99% vs 1%).', summary: '• Imbalance Definition\n• Metrics (Precision/Recall)\n• Resampling Techniques\n• Weighted Loss', dive: `### Handling Imbalanced Classes
+
+#### The Problem
+- **Fraud detection**: 99.9% legitimate, 0.1% fraudulent
+- **Disease diagnosis**: 98% healthy, 2% sick
+- **If model predicts all "no fraud"**: 99.9% accuracy! But catches ZERO real fraud.
+
+#### Choosing Right Metrics
+- **Don't use Accuracy**: Misleading with imbalanced data
+- **Use Precision/Recall**: Tell true story
+  - Precision: Of fraud alerts, how many real? (minimize false alarms)
+  - Recall: Of real fraud, how many caught? (minimize missed fraud)
+- **Use F1-Score**: Harmonic mean of both
+- **Use ROC-AUC**: Area under receiver operating characteristic curve
+
+#### Solution 1: Resampling
+- **Oversampling**: Duplicate minority class examples
+- **Undersampling**: Remove majority class examples
+- **SMOTE**: Synthetic Minority Oversampling (create synthetic examples)
+
+#### Solution 2: Weighted Loss
+- Give minority class higher weight in loss function
+- Model penalized more for missing fraud examples
+- Example: Fraud weight 100x vs Legitimate weight 1x
+
+#### 💡 Entry-Level Tip
+Always check class distribution! Accuracy is lie with imbalanced data.`
+            },
+            {
+                id: 'f5', icon: '📈', title: 'ML Lifecycle Phases', desc: 'From problem to production.', summary: '• Problem Definition\n• Data Collection\n• Model Building\n• Evaluation & Deployment', dive: `### ML Project Workflow
+
+#### Phase 1: Problem Definition
+- Understand business goal
+- Define success metrics
+- Gather requirements
+- Get stakeholder buy-in
+
+#### Phase 2: Data Collection & Prep
+- Gather relevant data
+- Check data quality
+- Handle missing values
+- Exploratory data analysis (EDA)
+
+#### Phase 3: Feature Engineering
+- Create new features from raw data
+- Scale/normalize data
+- Encode categorical variables
+- Feature selection (which features matter?)
+
+#### Phase 4: Model Building
+- Choose algorithm (linear regression, decision tree, neural network)
+- Train model on training data
+- Tune hyperparameters on validation data
+
+#### Phase 5: Evaluation
+- Test on held-out test set
+- Compare to baseline
+- Analyze errors and failures
+- Check for bias/fairness
+
+#### Phase 6: Deployment
+- Deploy model to production
+- Monitor performance
+- Set up alerts for model drift
+- Plan retraining schedule
+
+#### Real-World Truth
+- 80% of time: Data collection + cleaning + preparation
+- 15% of time: Model building and tuning
+- 5% of time: Deployment and monitoring
+
+#### 💡 Entry-Level Tip
+Getting data right is harder than getting model right. Invest time in data quality!`
+            }
+        ];
+
+        // Data Preparation & Feature Engineering
         const dataData = [
             {
-                id: 'd1', icon: '🧹', title: 'Data Prep', desc: 'Cleaning and engineering features.', summary: '• Dataflow (Beam)\n• BigQuery ML\n• Feature Engineering', dive: `### Data Engineering for ML
-Preparing high-quality data for training.
+                id: 'd1', icon: '🧹', title: 'Data Cleaning & Exploration', desc: 'Handling missing values, outliers, quality.', summary: '• Missing Data\n• Outlier Detection\n• Data Quality\n• EDA Techniques', dive: `### Data Preparation Fundamentals
 
-- **Dataflow**: Stream and batch data processing using Apache Beam.
-- **BigQuery ML**: Training models directly inside the data warehouse using SQL.
-- **Feature Engineering**: Creating new features from raw data (e.g., one-hot encoding, normalization).`
+#### Missing Data Handling
+- **Option 1: Delete**: Remove rows with missing values
+  - Pro: Simple
+  - Con: Lose data
+- **Option 2: Imputation**: Fill with value
+  - Mean/median: Simple but loses variance
+  - Forward fill: Use previous value (time series)
+  - Model-based: Predict missing value
+  - Default: Use placeholder (like 0 or -1)
+
+#### Outlier Detection
+- **What**: Data points far from normal pattern
+- **Examples**: House valued at $1B in $300K neighborhood, person age 150
+- **Detection methods**:
+  - Z-score: Points more than 3 std deviations away
+  - IQR: Points outside 1.5×IQR bounds
+  - Visual: Box plots and scatter plots
+- **Treatment**: Delete, transform, or keep (if real)
+
+#### Data Quality Issues
+- **Duplicates**: Same record twice
+- **Type errors**: Age stored as "twenty-three" instead of 23
+- **Range errors**: Temperature of 500°C (clearly wrong)
+- **Inconsistency**: City names spelled differently ("NYC" vs "New York City")
+
+#### Exploratory Data Analysis (EDA)
+- **Mean/Median/Mode**: Central tendency
+- **Std Dev/Variance**: Spread of data
+- **Histograms**: Distribution of values
+- **Correlation**: Relationships between features
+- **Box plots**: Outlier detection
+
+#### 💡 Entry-Level Tip
+Spend time on EDA. Patterns you find guide your approach to data cleaning and feature engineering.`
+            },
+            {
+                id: 'd2', icon: '⚙️', title: 'Feature Engineering', desc: 'Creating better features for models.', summary: '• Feature Creation\n• Feature Scaling\n• Encoding Categories\n• Feature Selection', dive: `### Feature Engineering Techniques
+
+#### Feature Creation (Making Better Features)
+- **Combination**: Age * Income (purchasing power)
+- **Extraction**: From date "2024-01-15", extract month=1, day=15
+- **Domain knowledge**: Convert price in "expensive" or "cheap"
+- **Interaction**: Height × Weight for body mass index
+
+#### Normalization (Scaling)
+- **Why**: Some algorithms sensitive to feature scale
+  - Model: Linear regression, neural networks
+  - Not needed: Tree-based (decision trees, random forest)
+
+| Method | Formula | Use When |
+|--------|---------|----------|
+| **Min-Max** | (x - min) / (max - min) | Need 0-1 range |
+| **Z-Score** | (x - mean) / std dev | Want mean=0, std=1 |
+| **Log** | log(x) | Data very skewed |
+
+#### Categorical Encoding
+- **Problem**: Models need numbers, not text ("Red", "Blue")
+- **One-Hot Encoding**: Color → [color_red, color_blue, color_green]
+  - Red: [1, 0, 0]
+  - Blue: [0, 1, 0]
+- **Label Encoding**: Color → 1=Red, 2=Blue (causes false ordering)
+- **Target Encoding**: Use target variable to encode
+
+#### Feature Selection
+- **Why**: Too many features = overfitting, slow training, hard to interpret
+- **Methods**:
+  - Correlation: Drop features correlated with each other
+  - Importance: Use model's feature importance scores
+  - Statistical tests: Chi-square for categorical, correlation for numeric
+  - Domain knowledge: Drop irrelevant features
+
+#### 💡 Entry-Level Tip
+Good features > complex models. Spend time creating meaningful features.`
+            },
+            {
+                id: 'd3', icon: '📦', title: 'BigQuery & Dataflow', desc: 'GCP data processing at scale.', summary: '• BigQuery ML\n• Dataflow Pipeline\n• Batch Processing\n• Stream Processing', dive: `### GCP Data Processing
+
+#### BigQuery ML (BQML)
+- **Key advantage**: Train ML models using SQL (no Python needed)
+- **Supported model types**:
+  - Linear/Logistic Regression
+  - Time series forecasting
+  - Clustering (K-means)
+  - Classification and regression trees
+  - Neural networks
+
+\`\`\`sql
+-- Train a linear regression model
+CREATE OR REPLACE MODEL \`project.dataset.house_price_model\`
+OPTIONS(model_type='linear_reg') AS
+SELECT price, square_feet, bedrooms
+FROM \`project.dataset.houses\`
+WHERE price IS NOT NULL;
+
+-- Make predictions
+SELECT * FROM ML.PREDICT(MODEL \`project.dataset.house_price_model\`,
+  (SELECT square_feet, bedrooms FROM \`project.dataset.new_houses\`))
+\`\`\`
+
+#### Dataflow (Apache Beam)
+- **Purpose**: Process large volumes of data (batch or streaming)
+- **Use cases**:
+  - Extract, transform, load (ETL) pipelines
+  - Real-time stream processing
+  - Feature engineering at scale
+- **Flexibility**: Write in Python, Java, or Go
+
+#### Batch vs Stream
+- **Batch**: Process all data at once (daily overnight job)
+  - Pros: Simpler, cheaper
+  - Cons: Higher latency
+- **Stream**: Process data as it arrives (real-time)
+  - Pros: Lower latency, immediate insights
+  - Cons: More complex, expensive
+
+#### 💡 Entry-Level Tip
+BigQuery ML lets you build models with SQL. Dataflow handles the heavy ETL lifting at scale.`
             }
         ];
 
+        // Model Development
         const modelData = [
             {
-                id: 'm1', icon: '🏗️', title: 'Model Training', desc: 'Techniques for building models.', summary: '• Hyperparameter Tuning\n• Transfer Learning\n• Custom Training', dive: `### Model Development
-Building and optimizing ML models.
+                id: 'm1', icon: '🧠', title: 'Supervised Learning Algorithms', desc: 'Regression, classification, decision trees.', summary: '• Linear Regression\n• Decision Trees\n• Random Forests\n• Gradient Boosting', dive: `### Key Supervised Learning Algorithms
 
-- **Hyperparameter Tuning**: Automated search for the best model parameters (Vizier).
-- **Transfer Learning**: Using pre-trained models and fine-tuning for specific tasks.
-- **AutoML**: Automated model building for common tasks (Vision, Natural Language).`
+#### Linear Regression
+- **Use for**: Predicting continuous numbers (price, temperature)
+- **How**: Fit a line through data points
+- **Pros**: Fast, interpretable, works with small datasets
+- **Cons**: Only fits linear relationships
+
+**Equation**: y = mx + b (extended to multiple features)
+
+#### Decision Trees
+- **How**: Series of yes/no questions to reach answer
+- **Example**:
+  - Is age > 30? → Yes → Is income > $50K? → Yes → Approve loan
+- **Pros**: Interpretable, handles non-linear data
+- **Cons**: Tends to overfit
+
+#### Random Forests
+- **Idea**: Build multiple decision trees, take majority vote
+- **Why better**: Averaging many imperfect models gives better result
+- **Pros**: Accurate, handles non-linear relationships, less overfitting
+- **Cons**: Less interpretable, slower prediction
+
+#### Gradient Boosting (XGBoost)
+- **Idea**: Build trees one at a time, each corrects previous mistakes
+- **Performance**: Often best in competitions
+- **Trade-off**: More complex, slower training
+
+#### Comparison Table
+| Algorithm | Speed | Accuracy | Interpretable | Data Amount |
+|-----------|-------|----------|---------------|------------|
+| **Linear Regression** | ⚡ Fast | ⭐ Low | ✅ Yes | Small OK |
+| **Decision Tree** | ⚡ Fast | ⭐⭐ Medium | ✅ Yes | Medium |
+| **Random Forest** | ⏱️ Medium | ⭐⭐⭐ High | ❌ No | Large |
+| **XGBoost** | ⏱️ Medium | ⭐⭐⭐ High | ❌ No | Large |
+
+#### 💡 Entry-Level Tip
+Start simple (linear regression). Add complexity only if needed.`
+            },
+            {
+                id: 'm2', icon: '🧠', title: 'Neural Networks & Deep Learning', desc: 'Hidden layers, activation, backpropagation.', summary: '• Network Architecture\n• Activation Functions\n• Training Process\n• When to Use', dive: `### Neural Networks Fundamentals
+
+#### Basic Structure
+- **Input Layer**: Features (e.g., pixel values from image)
+- **Hidden Layers**: Learn patterns (neurons connected by weights)
+- **Output Layer**: Prediction
+
+#### Activation Functions
+- **ReLU** (Rectified Linear Unit): Most common, f(x) = max(0, x)
+- **Sigmoid**: For binary classification, outputs 0-1
+- **Softmax**: For multi-class, ensures probabilities sum to 1
+
+#### Training Process (Backpropagation)
+1. Forward pass: Data flows through network, produces prediction
+2. Calculate loss: How wrong is prediction?
+3. Backward pass: Calculate how much each weight contributes to error
+4. Update weights: Small adjustment to reduce error
+5. Repeat until converged
+
+#### When to Use Neural Networks
+- **Good for**: Images, text, sequences (RNNs), complex patterns
+- **Bad for**: Small datasets (overfits), when interpretability critical
+
+#### Types of Neural Networks
+| Type | Use Case | Example |
+|------|----------|---------|
+| **CNN** | Image classification | Recognize cats in photos |
+| **RNN/LSTM** | Sequences, time series | Next word prediction, stock prices |
+| **Transformer** | NLP, translation | GPT, BERT |
+
+#### Transfer Learning
+- Use pre-trained model (trained on millions of images)
+- Fine-tune last few layers for your task
+- Saves time and computation
+
+#### 💡 Entry-Level Tip
+Neural networks powerful but need lots of data. Use transfer learning for smaller datasets.`
+            },
+            {
+                id: 'm3', icon: '⚙️', title: 'Hyperparameter Tuning', desc: 'Finding the best model parameters.', summary: '• Learning Rate\n• Model Complexity\n• Grid Search\n• Bayesian Optimization', dive: `### Hyperparameter Optimization
+
+#### Common Hyperparameters
+- **Learning Rate**: How much to adjust weights per step
+  - Too high: Overshoot good solution
+  - Too low: Takes forever to train
+  - Typical: 0.001 to 0.1
+- **Batch Size**: How many examples per training step
+- **Epochs**: How many times through entire dataset
+- **Tree Depth**: How deep decision tree grows
+- **Number of Trees**: In random forest
+
+#### Grid Search
+- **Approach**: Try all combinations of hyperparameters
+- **Example**: Try learning_rate in [0.001, 0.01, 0.1] × batch_size in [32, 64, 128]
+- **Pros**: Guaranteed to find best in grid
+- **Cons**: Exponential with number of hyperparameters (slow)
+
+#### Random Search
+- **Approach**: Random sample hyperparameter combinations
+- **Pros**: Faster than grid search, often finds good values
+- **Cons**: Might miss optimal
+
+#### Bayesian Optimization
+- **Approach**: Use previous results to guide next guess (smart sampling)
+- **Tool**: Google Vertex AI Hyperparameter Tuning (Vizier)
+- **Advantage**: Find good hyperparameters with fewer trials
+
+#### Validation Strategy
+- Use validation set to compare hyperparameters
+- Choose set with lowest validation error
+- Final test on test set (never use for tuning)
+
+#### 💡 Entry-Level Tip
+Hyperparameter tuning = finding "knobs" that make model work best. Start with defaults, tune if needed.`
             }
         ];
 
+        // MLOps & Deployment
         const mlopsData = [
             {
-                id: 'ml1', icon: '🔄', title: 'MLOps Lifecycle', desc: 'CI/CD for Machine Learning.', summary: '• Training-Serving Skew\n• Model Drift\n• CI/CD Pipelines', dive: `### MLOps and CI/CD
-Continuous delivery and automation for ML systems.
+                id: 'ml1', icon: '🚀', title: 'Model Serving & Inference', desc: 'Deploying models for predictions.', summary: '• Batch Prediction\n• Online Serving\n• Model Optimization\n• Response Time', dive: `### Deploying Models to Production
 
-- **Training-Serving Skew**: Difference between model performance during training and in production.
-- **Model Drift**: Decay of model performance over time due to changing data.
-- **Pipelines**: Automating the entire process from data ingestion to model deployment.`
+#### Batch Prediction
+- **Use case**: Process large volume of data once (overnight)
+- **Example**: Score all customers for credit risk
+- **Tool**: Vertex AI Batch Prediction
+- **Trade-off**: Low cost, high latency (not real-time)
+
+#### Online Serving
+- **Use case**: Single request, need quick answer
+- **Example**: Recommend product when customer visits website
+- **Latency requirement**: Must answer in < 100ms
+- **Tool**: Vertex AI Online Prediction (REST/gRPC endpoints)
+
+#### Model Optimization
+- **Quantization**: Reduce model size (smaller weights, faster)
+- **Pruning**: Remove unimportant weights
+- **Caching**: Store common predictions
+- **Purpose**: Reduce latency and cost
+
+#### A/B Testing
+- **Old model**: 50% of requests
+- **New model**: 50% of requests
+- **Monitor**: Which performs better?
+- **Gradual rollout**: Start 1%, then 10%, then 100%
+
+#### Containerization
+- **Docker**: Package model with dependencies
+- **Benefit**: Same environment locally and in production
+- **Vertex AI**: Deploy Docker container automatically
+
+#### 💡 Entry-Level Tip
+Batch = cheaper, slower. Online = more expensive, must be fast. Choose based on requirements.`
+            },
+            {
+                id: 'ml2', icon: '📊', title: 'Model Monitoring & Drift', desc: 'Detecting when models stop working.', summary: '• Data Drift\n• Model Drift\n• Performance Monitoring\n• Retraining Triggers', dive: `### Maintaining Model Performance
+
+#### Data Drift
+- **Definition**: Input data distribution changes
+- **Example**: Model trained on 2020 data, now 2024 customer behavior different
+- **Detection**: Compare current data distribution to training data
+- **Solution**: Retrain model with recent data
+
+#### Model Drift (Concept Drift)
+- **Definition**: Relationship between input and output changes
+- **Example**: What made email "spam" in 2010 vs 2024 is different
+- **Detection**: Model accuracy decreases over time
+- **Solution**: Retrain or update model
+
+#### Monitoring Metrics
+| Metric | What to Watch |
+|--------|---------------|
+| **Prediction Latency** | Is it still fast enough? |
+| **Model Accuracy** | Are predictions still correct? |
+| **Prediction Volume** | Are requests increasing/decreasing? |
+| **Error Rate** | Spike in errors? |
+| **Feature Statistics** | Data distribution changes? |
+
+#### Retraining Strategy
+1. **Monitor**: Track key metrics continuously
+2. **Detect**: Alert when metrics deviate
+3. **Prepare**: Collect recent data, prepare pipeline
+4. **Retrain**: Train new model on recent data
+5. **Validate**: Test on recent data
+6. **Deploy**: Roll out new model
+
+#### Automated Retraining
+- **Scheduled**: Retrain every week/month
+- **Triggered**: Retrain when accuracy drops below threshold
+- **Vertex AI Pipelines**: Orchestrate entire retraining workflow
+
+#### 💡 Entry-Level Tip
+Models degrade over time. Set up monitoring and automated retraining to keep performance high!`
             }
         ];
 

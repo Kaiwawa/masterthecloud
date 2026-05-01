@@ -246,93 +246,702 @@
     </div>
 
     <script>
+        // Foundations & Risk Management
         const foundationsData = [
             {
-                id: 'f1', icon: '📐', title: 'CIA Triad', desc: 'The core pillars of cybersecurity.', summary: '• Confidentiality\n• Integrity\n• Availability', dive: `### CIA Triad
-The fundamental model for information security.
+                id: 'f1', icon: '📐', title: 'CIA Triad', desc: 'The core pillars of cybersecurity.', summary: '• Confidentiality\n• Integrity\n• Availability\n• Trade-offs', dive: `### CIA Triad
+The fundamental model for information security. Every control aligns with one or more of these pillars.
 
-- **Confidentiality**: Ensuring data is accessible only to those authorized to have access.
-- **Integrity**: Ensuring the data is accurate, complete, and hasn't been tampered with.
-- **Availability**: Ensuring systems and data are available when needed.
+#### Confidentiality
+- **Definition**: Ensuring data is accessible only to authorized individuals
+- **Threats**: Unauthorized access, data breaches, eavesdropping
+- **Controls**: Encryption, access controls, VPNs, authentication
+- **Example**: Password-protecting a file ensures only authorized users read it
 
-#### ⚡ Exam Concept
-If a system is hacked and data is leaked, it's a **Confidentiality** breach. If a website is defaced, it's an **Integrity** breach. If a DDoS attack happens, it's an **Availability** breach.`
+#### Integrity
+- **Definition**: Ensuring data is accurate, complete, and unmodified
+- **Threats**: Unauthorized modification, data corruption, tampering
+- **Controls**: Digital signatures, hashing, version control, checksums
+- **Example**: A database checksum verifies data hasn't been altered
+
+#### Availability
+- **Definition**: Ensuring systems and data are accessible when needed
+- **Threats**: Denial of Service (DoS), system failures, ransomware
+- **Controls**: Redundancy, backup systems, DDoS protection, load balancing
+- **Example**: A backup server ensures service continues if primary fails
+
+#### Trade-offs
+- **Confidentiality vs Availability**: Encrypting everything (confidential) may slow access (less available)
+- **Integrity vs Speed**: Verifying every transaction (integrity) takes time
+- **Example**: Banking balances strong security (confidentiality/integrity) over speed
+
+#### 💡 Entry-Level Tip
+Remember: Confidentiality = Secrecy, Integrity = Accuracy, Availability = Uptime.`
             },
             {
-                id: 'f2', icon: '🏛️', title: 'NIST CSF', desc: 'Cybersecurity Framework.', summary: '• Identify & Protect\n• Detect & Respond\n• Recover', dive: `### NIST Cybersecurity Framework (CSF)
-A set of guidelines for mitigating organizational cybersecurity risk.
+                id: 'f2', icon: '🏛️', title: 'NIST Cybersecurity Framework', desc: '5-function framework for risk management.', summary: '• Identify\n• Protect\n• Detect\n• Respond\n• Recover', dive: `### NIST Cybersecurity Framework (CSF)
+Voluntary framework providing guidelines for protecting critical infrastructure.
 
-1. **Identify**: Develop organizational understanding to manage risk.
-2. **Protect**: Implement safeguards to ensure delivery of services.
-3. **Detect**: Identify the occurrence of a cybersecurity event.
-4. **Respond**: Take action regarding a detected security event.
-5. **Recover**: Maintain plans for resilience and restore capabilities.`
+#### Five Functions (Core)
+1. **Identify**: Understand what assets exist and what risks they face
+   - Inventory systems, networks, data
+   - Identify critical assets
+   - Assess risks
+2. **Protect**: Implement safeguards to ensure delivery of services
+   - Access control
+   - Encryption
+   - Awareness training
+   - Network hardening
+3. **Detect**: Identify security incidents when they occur
+   - Monitoring and logging
+   - Intrusion detection
+   - Anomaly detection
+4. **Respond**: Take action when incident is detected
+   - Incident response plan
+   - Contain the incident
+   - Communication
+5. **Recover**: Restore systems to normal operation
+   - Restore from backups
+   - Verify systems are clean
+   - Post-incident analysis
+
+#### Why Use NIST?
+- **Flexible**: Can be adapted to any organization
+- **Comprehensive**: Covers the entire lifecycle of security
+- **Aligned with Standards**: Harmonizes with ISO, IEC, other frameworks
+
+#### 💡 Entry-Level Tip
+These aren't sequential; they're continuous. Even while recovering from one incident, you're detecting others.`
+            },
+            {
+                id: 'f3', icon: '⚖️', title: 'Risk Assessment Basics', desc: 'Identifying and evaluating threats.', summary: '• Threat Identification\n• Likelihood & Impact\n• Risk Scoring\n• Mitigation', dive: `### Risk Assessment Fundamentals
+
+#### Risk Formula
+**Risk = Threat × Vulnerability × Asset Value**
+
+- **Threat**: What could go wrong? (hacker, malware, insider, natural disaster)
+- **Vulnerability**: What weakness could be exploited? (unpatched software, weak password, no firewall)
+- **Asset Value**: What's the value of what we're protecting? (financial data, customer database, reputation)
+
+#### Examples
+1. **Threat**: Ransomware
+   - **Vulnerability**: Not patched, no backup
+   - **Asset Value**: Database worth $1M
+   - **Risk**: High
+2. **Threat**: Hacker tries default password
+   - **Vulnerability**: Default password not changed
+   - **Asset Value**: Admin account
+   - **Risk**: Critical
+
+#### Risk Levels
+- **Critical**: Must fix immediately (could shutdown business)
+- **High**: Fix within days (significant impact)
+- **Medium**: Fix within weeks (manageable impact)
+- **Low**: Fix eventually (minimal impact)
+
+#### Risk Response Options
+- **Mitigate**: Reduce risk (patch, add firewall)
+- **Accept**: Live with it (low-value asset, expensive to fix)
+- **Avoid**: Stop the activity (don't handle credit cards = avoid PCI-DSS risk)
+- **Transfer**: Shift to vendor/insurance (cyber insurance)
+
+#### 💡 Entry-Level Tip
+You can never eliminate all risk. Management decides what level is acceptable.`
             }
         ];
 
+        // Networks & Tools
         const networksData = [
             {
-                id: 'n1', icon: '📡', title: 'TCP/IP Model', desc: 'The protocol suite of the internet.', summary: '• Network Access\n• Internet\n• Transport\n• Application', dive: `### TCP/IP Model
-The conceptual model and set of communications protocols used on the Internet.
+                id: 'n1', icon: '📡', title: 'TCP/IP Model', desc: '4-layer protocol stack architecture.', summary: '• Application Layer\n• Transport Layer\n• Internet Layer\n• Network Access Layer', dive: `### TCP/IP Model
+The foundational architecture of modern internet communication.
 
-- **Network Access**: Physical hardware and data link.
-- **Internet**: IP addressing and routing (IP, ICMP).
-- **Transport**: Host-to-host communication (TCP, UDP).
-- **Application**: User-level protocols (HTTP, FTP, SSH).`
+#### Four Layers (Bottom to Top)
+1. **Network Access (Link)**: Physical transmission of data
+   - Hardware: Ethernet, WiFi
+   - Protocols: PPP, Frame Relay
+   - Devices: Hubs, switches, NIC cards
+   - Example: WiFi radio waves carrying data
+
+2. **Internet**: Routing and logical addressing
+   - Protocols: IP (v4 and v6), ICMP, ARP
+   - Devices: Routers
+   - Function: Getting data from source to destination across networks
+   - Example: Your computer's IP (192.168.1.5) uniquely identifies it
+
+3. **Transport**: End-to-end communication between applications
+   - Protocols: TCP (reliable, ordered), UDP (fast, best-effort)
+   - Ports: Numbered endpoints (port 80 = HTTP, port 443 = HTTPS)
+   - TCP Example: Email (needs reliability, can be slow)
+   - UDP Example: Video streaming (can lose packets, needs speed)
+
+4. **Application**: User-level services and applications
+   - Protocols: HTTP/HTTPS, FTP, SSH, SMTP, DNS
+   - Software: Web browsers, email clients, file managers
+   - Example: When you visit google.com, your browser uses HTTP protocol
+
+#### Comparison Table
+| Layer | Protocols | Purpose | Attacks |
+|-------|-----------|---------|---------|
+| **Application** | HTTP, HTTPS, FTP, SSH | User services | SQL injection, XSS |
+| **Transport** | TCP, UDP | End-to-end delivery | Port scanning, DoS |
+| **Internet** | IP, ICMP | Routing, addressing | IP spoofing, DDoS |
+| **Network Access** | Ethernet, WiFi | Physical transmission | ARP spoofing |
+
+#### 💡 Entry-Level Tip
+Think of layers like mail: Address (Internet) + Route (Internet) + Package (Transport) + Envelope (Network Access) + Letter (Application).`
             },
             {
-                id: 'n2', icon: '🐧', title: 'Linux CLI', desc: 'Essential Linux commands for analysts.', summary: '• ls, cd, pwd\n• cat, grep, tail\n• chmod, chown', dive: `### Linux Command Line
-Crucial for investigating systems and logs.
+                id: 'n2', icon: '🐧', title: 'Linux Command Line', desc: 'Essential commands for security analysts.', summary: '• File & Directory Navigation\n• File Viewing & Searching\n• Permissions Management\n• Network Commands', dive: `### Linux CLI Essentials for Security
 
-- \`ls\`: List directory contents.
-- \`cd\`: Change directory.
-- \`grep\`: Search for patterns in text (e.g., searching logs for an IP).
-- \`tail -f\`: Monitor a file in real-time (often used for log files).
-- \`chmod\`: Change file permissions.`
+#### File Navigation
+\`\`\`bash
+pwd              # Print Working Directory - where am I?
+ls               # List files in directory
+ls -la           # List with details (hidden files, permissions)
+cd /path/to/dir  # Change directory
+cd ..            # Go to parent directory
+cd ~             # Go to home directory
+\`\`\`
+
+#### File Viewing & Searching
+\`\`\`bash
+cat access.log           # Display entire file
+head -20 access.log      # First 20 lines
+tail -50 access.log      # Last 50 lines
+tail -f access.log       # Follow file (real-time monitoring)
+grep "ERROR" app.log     # Search for pattern
+grep -i "error" app.log  # Case-insensitive search
+wc -l access.log         # Count lines (useful for log size)
+\`\`\`
+
+#### Permissions (Owner, Group, Others)
+\`\`\`bash
+ls -l                   # Shows permissions: -rwxrwxrwx
+chmod 755 script.sh     # Read/write/execute for owner, read/execute for others
+chmod 600 secret.txt    # Read/write for owner only
+chown user:group file   # Change owner
+\`\`\`
+
+#### Network & System Info
+\`\`\`bash
+ifconfig                # Show network interfaces (IP addresses)
+netstat -an             # Show network connections and ports
+ps aux                  # List running processes
+whoami                  # Current user
+sudo                    # Execute as administrator
+\`\`\`
+
+#### Pipes (Combining Commands)
+\`\`\`bash
+cat access.log | grep "404"         # Show only lines with 404 errors
+cat access.log | grep "401" | wc -l # Count 401 errors
+cat error.log | grep "ERROR" | tail -20  # Last 20 errors
+\`\`\`
+
+#### 💡 Entry-Level Tip
+`tail -f` is your friend for watching logs in real-time during incident investigation. `grep` for searching. `|` (pipe) for combining commands.`
+            },
+            {
+                id: 'n3', icon: '🔧', title: 'Core Network Tools', desc: 'tcpdump, Wireshark, and basic utilities.', summary: '• ping & traceroute\n• nslookup & dig\n• netstat & ss\n• Packet Capture', dive: `### Essential Network Troubleshooting Tools
+
+#### Connectivity Testing
+\`\`\`bash
+ping 8.8.8.8              # Check if host is reachable (ICMP packets)
+traceroute example.com    # Show route to destination (hops)
+tracert example.com       # Windows version of traceroute
+\`\`\`
+
+#### DNS Resolution
+\`\`\`bash
+nslookup google.com       # Lookup IP address for domain
+dig google.com            # Detailed DNS query
+host example.com          # Quick host lookup
+\`\`\`
+
+#### Port & Connection Status
+\`\`\`bash
+netstat -an               # Show all ports and connections
+ss -an                    # Modern replacement for netstat
+netstat -ltp              # Listening ports with PID
+lsof -i :8080             # Show processes using port 8080
+\`\`\`
+
+#### Packet Capture & Analysis
+- **tcpdump**: Command-line tool for packet capture
+  - \`tcpdump -i eth0\` - Capture on interface eth0
+  - \`tcpdump port 443\` - Capture HTTPS traffic
+  - \`tcpdump -w capture.pcap\` - Save to file for later analysis
+- **Wireshark**: GUI for packet analysis
+  - Load .pcap files
+  - Filter by protocol (HTTP, DNS, etc.)
+  - Follow conversation streams
+
+#### 💡 Entry-Level Tip
+During an incident, tcpdump captures evidence. Wireshark helps you analyze it offline. Both are essential analyst skills.`
             }
         ];
 
+        // Threats & Assets
         const threatsData = [
             {
-                id: 't1', icon: '🕷️', title: 'OWASP Top 10', desc: 'Critical web application security risks.', summary: '• Broken Access Control\n• Cryptographic Failures\n• Injection', dive: `### OWASP Top 10
-Standard awareness document for developers and web application security.
+                id: 't1', icon: '🕷️', title: 'Attack Types & Vectors', desc: 'Common threats and exploitation methods.', summary: '• Social Engineering\n• Malware & Ransomware\n• DDoS & Password Attacks\n• Web Vulnerabilities', dive: `### Common Attack Types
 
-1. **Broken Access Control**: Users can act outside of intended permissions.
-2. **Cryptographic Failures**: Protecting data at rest and in transit.
-3. **Injection**: SQL injection, Cross-site Scripting (XSS).
-4. **Insecure Design**: Risks related to design and architectural flaws.`
+#### Social Engineering (Human Exploitation)
+- **Phishing**: Deceptive email/link to steal credentials
+  - Example: Fake bank email asking to "verify account"
+- **Pretexting**: Creating false scenario to gain trust
+  - Example: "I'm from IT, I need your password to fix your computer"
+- **Baiting**: Leaving USB drives with malware
+  - Example: "Free salary database" USB in parking lot
+- **Tailgating**: Following authorized person through door
+  - Example: Pretending to be food delivery to enter secure office
+
+#### Malware & Ransomware
+- **Malware**: Malicious software (viruses, worms, trojans)
+- **Ransomware**: Encrypts files, demands payment for decryption
+  - Prevention: Regular backups, user training, email filtering
+  - Response: Isolate infected computer, don't pay
+- **Cryptolocker**: Famous ransomware that cost businesses $27M+
+
+#### Denial of Service (DoS)
+- **Flooding**: Overwhelming server with requests
+  - Syn Flood: Flood server with SYN packets
+  - Ping Flood: Flood with ICMP ping requests
+  - UDP Flood: Overwhelming with UDP packets
+- **DDoS**: Distributed DoS from many sources
+  - Harder to defend (can't block one IP)
+  - Botnets used to amplify attack
+
+#### Password Attacks
+- **Brute Force**: Try every possible password
+- **Dictionary Attack**: Try common passwords
+- **Rainbow Tables**: Pre-computed hashes for quick lookup
+- **Credential Stuffing**: Use leaked credentials elsewhere
+
+#### Web Vulnerabilities
+- **SQL Injection**: Pass SQL code in input field
+  - Input: `' OR '1'='1` to get all users
+  - Prevention: Parameterized queries, input validation
+- **XSS (Cross-Site Scripting)**: Inject JavaScript
+  - Attacker's script runs in victim's browser
+  - Can steal cookies, redirect users
+
+#### 💡 Entry-Level Tip
+Humans are the weakest link. Most breaches start with social engineering or weak passwords.`
+            },
+            {
+                id: 't2', icon: '🛡️', title: 'Asset Protection', desc: 'Identifying and securing critical assets.', summary: '• Asset Classification\n• Data Types & Sensitivity\n• Protecting Data\n• Incident Impact', dive: `### Asset Identification & Protection
+
+#### What Are Assets?
+- **Hardware**: Servers, workstations, routers, firewalls
+- **Software**: Applications, operating systems, libraries
+- **Data**: Customer information, financial records, trade secrets
+- **Services**: Email, websites, databases
+- **People**: Employees with access to sensitive information
+
+#### Data Classification
+| Level | Examples | Protection Level |
+|-------|----------|------------------|
+| **Public** | Marketing materials, press releases | No restrictions |
+| **Internal** | Employee directory, policies | Limited to employees |
+| **Confidential** | Financial data, customer data | Management approval |
+| **Restricted** | Trade secrets, credit cards | Executive approval |
+
+#### Protection Based on Type
+- **Financial Data**: Encryption + PCI-DSS compliance
+- **Personal Information (PII)**: GDPR/privacy laws
+- **Health Information (PHI)**: HIPAA compliance  
+- **Trade Secrets**: Access control + DLP (Data Loss Prevention)
+
+#### Impact Assessment
+- **Confidentiality Impact**: If data stolen/leaked, what's the harm?
+- **Integrity Impact**: If data modified, what breaks?
+- **Availability Impact**: If system goes down, what suffers?
+
+#### 💡 Entry-Level Tip
+Not all assets are equally important. Identify your crown jewels (most critical data) and protect them hardest.`
+            },
+            {
+                id: 't3', icon: '🔍', title: 'Vulnerability Concepts', desc: 'Understanding weaknesses in systems.', summary: '• Common Vulnerabilities\n• CVE Database\n• CVSS Scoring\n• Patch Management', dive: `### Vulnerabilities & Weakness Management
+
+#### What is a Vulnerability?
+A weakness that could be exploited by a threat to cause damage.
+
+**Vulnerability ≠ Risk**
+- Vulnerability: Software is outdated
+- Threat: Hackers scanning internet for outdated software
+- Risk: = Vulnerability + Threat (both must exist)
+
+#### Common Vulnerability Examples
+- **Unpatched Software**: Known bug but not fixed
+- **Default Credentials**: Using manufacturer default passwords
+- **Weak Encryption**: Old encryption standards (MD5, SHA-1)
+- **Missing Input Validation**: Accepting any user input
+- **Buffer Overflow**: Writing beyond memory boundary
+
+#### CVE (Common Vulnerabilities & Exposures)
+- **CVE Database**: Searchable list of known vulnerabilities
+- **Format**: CVE-YYYY-NNNNN (e.g., CVE-2021-44228 = Log4Shell)
+- **CVSS Score**: 0-10 rating (0=none, 10=critical)
+  - 0-3: Low
+  - 4-6: Medium
+  - 7-9: High
+  - 10: Critical
+
+#### Patching Strategy
+1. **Inventory**: Know what software you have
+2. **Monitor**: Track new CVEs affecting your software
+3. **Test**: Patch in test environment first
+4. **Deploy**: Roll out patches in phases (avoid outages)
+5. **Verify**: Confirm patches applied successfully
+
+#### 💡 Entry-Level Tip
+A vulnerability without a threat isn't a risk. A threat without a vulnerability can't exploit anything. Both needed for risk.`
             }
         ];
 
+        // Detection & Response
         const opsData = [
             {
-                id: 'o1', icon: '🚨', title: 'SIEM Tools', desc: 'Security Information and Event Management.', summary: '• Log Aggregation\n• Alerting\n• Google Chronicle', dive: `### SIEM Tools
-Tools that provide real-time analysis of security alerts generated by applications and network hardware.
+                id: 'o1', icon: '🚨', title: 'Incident Response Basics', desc: 'Six-step response framework.', summary: '• Preparation\n• Detection & Analysis\n• Containment\n• Eradication\n• Recovery\n• Lessons Learned', dive: `### Incident Response Lifecycle
 
-- **Log Aggregation**: Collecting data from various sources (servers, firewalls, apps).
-- **Correlation**: Linking different events to identify a security incident.
-- **Tools**: Google Chronicle, Splunk, IBM QRadar.`
+#### Phase 1: Preparation
+- **Before** anything bad happens
+- Build incident response team
+- Create playbooks and procedures
+- Implement logging and monitoring
+- Conduct tabletop exercises and drills
+
+#### Phase 2: Detection & Analysis
+- **How** we learned about the incident
+  - Security alert from monitoring system
+  - User noticed strange behavior
+  - Law enforcement reported
+  - Third-party discovered and notified
+- **Determine**:
+  - What happened? (malware, unauthorized access, data exfiltration)
+  - When did it start?
+  - Which systems affected?
+  - How many users impacted?
+
+#### Phase 3: Containment
+- **Short-term**: Stop the bleeding
+  - Isolate infected computer (unplug network)
+  - Disable compromised account
+  - Block malicious IP/domain
+- **Long-term**: Permanent fix
+  - Patch the vulnerability
+  - Remove malware
+  - Reset compromised passwords
+
+#### Phase 4: Eradication
+- Remove attacker's access
+  - Delete backdoors
+  - Remove malware
+  - Close security gaps
+  - Change passwords
+
+#### Phase 5: Recovery
+- Restore systems to normal
+  - Restore from clean backups
+  - Rebuild systems
+  - Verify no intrusion remains
+
+#### Phase 6: Post-Incident
+- **Lessons Learned**: Why did this happen?
+  - Root cause analysis
+  - Improve processes
+  - Update playbooks
+  - Share knowledge with team
+
+#### 💡 Entry-Level Tip
+Eradication is critical. Just patching isn't enough if attacker still has backdoor access!`
+            },
+            {
+                id: 'o2', icon: '📊', title: 'Logs & Monitoring', desc: 'Understanding what logs tell us.', summary: '• Log Sources\n• Log Analysis\n• Anomaly Detection\n• SIEM Basics', dive: `### Logging & Monitoring Essentials
+
+#### Common Log Sources
+- **Application Logs**: Errors, warnings, user actions
+  - Web server: HTTP requests, errors, access attempts
+  - Database: Queries, login attempts, errors
+- **System Logs**: OS events, services starting/stopping
+  - Windows: Event Viewer
+  - Linux: /var/log/ directory
+- **Security Logs**: Authentication attempts, permission changes
+- **Network Logs**: Firewall, proxy, DNS, VPN connections
+
+#### What Logs Show
+- **Authentication**: Who logged in, when, from where, success/failure
+- **Access**: Who accessed what data/systems
+- **Changes**: What was modified, by whom, when
+- **Errors**: What went wrong, when, which system
+- **Suspicious Activity**: Repeated failed attempts, unusual patterns
+
+#### Log Analysis Techniques
+\`\`\`bash
+# Count failed logins
+grep "Failed" /var/log/auth.log | wc -l
+
+# Find specific IP
+grep "192.168.1.100" /var/log/access.log
+
+# See failed login attempts
+grep "Failed password" /var/log/auth.log | head -20
+\`\`\`
+
+#### Anomaly Detection (What's Normal?)
+- **Normal**: 10 failed logins per day (users forget passwords)
+- **Suspicious**: 1000 failed logins in 5 minutes (brute force)
+- **Normal**: User accesses their department's files
+- **Suspicious**: User accessed CEO's financial files at 3AM
+
+#### SIEM (Security Information & Event Management)
+- Aggregates logs from many sources
+- Correlates events (10 failed logins + successful access = breach?)
+- Generates alerts for suspicious patterns
+- Tools: Google Chronicle, Splunk, IBM QRadar
+
+#### 💡 Entry-Level Tip
+Logs are only useful if monitored. Petabytes of unused logs won't catch breaches. Set up alerts for anomalies!`
+            },
+            {
+                id: 'o3', icon: '⚙️', title: 'Configuration & Compliance', desc: 'Hardening systems and audit basics.', summary: '• Hardening Basics\n• Configuration Baselines\n• Compliance Standards\n• Auditing', dive: `### System Hardening & Compliance
+
+#### Hardening (Reducing Attack Surface)
+- **Principle**: Disable everything not needed
+- **Examples**:
+  - Disable unused services (more services = more vulnerabilities)
+  - Remove unnecessary accounts
+  - Restrict file permissions
+  - Disable old protocols (SSL 3.0, TLS 1.0)
+  - Enable firewall
+
+#### Configuration Baseline
+- **Standard configuration** for each system type
+- **Template**: Use for deploying new systems consistently
+- **Versioning**: Track changes to configuration
+- **Compliance**: Verify systems match baseline
+
+#### Common Compliance Standards
+- **PCI-DSS**: If you process credit cards (required)
+- **HIPAA**: If you handle health information (required)
+- **GDPR**: If you have EU users' data (required)
+- **SOC 2**: For service providers (often required by customers)
+- **ISO 27001**: Information security management (good practice)
+
+#### Audit Process
+1. **Planning**: What are we auditing and why?
+2. **Assessment**: Check against standard
+3. **Gap Analysis**: What's missing?
+4. **Reporting**: Document findings
+5. **Remediation**: Fix gaps
+6. **Verification**: Confirm fixes work
+
+#### Types of Audits
+- **Compliance Audit**: Do we meet standard requirements?
+- **Internal Audit**: Did we do what we said we'd do?
+- **External Audit**: Third-party verification
+- **Penetration Test**: Authorized security testing
+
+#### 💡 Entry-Level Tip
+Audits find problems. Management is responsible for fixing them. Your job is to report honestly, not hide issues!`
             }
         ];
 
+        // Python Automation
         const pythonData = [
             {
-                id: 'p1', icon: '🐍', title: 'Log Parsing', desc: 'Using Python to read and filter logs.', summary: '• string.split()\n• regular expressions\n• file.open()', dive: `### Python for Log Parsing
-Automating the analysis of large log files to find suspicious activity.
+                id: 'p1', icon: '🐍', title: 'Python Basics for Security', desc: 'Reading logs, parsing data, automation.', summary: '• Variables & Data Types\n• Strings & Lists\n• Functions\n• File Handling', dive: `### Python Fundamentals for Security
+
+#### Python Basics
+\`\`\`python
+# Variables and printing
+name = "Alex"
+ip_address = "192.168.1.100"
+port = 443
+print(f"Connecting to {ip_address}:{port}")
+
+# Lists (arrays)
+failed_ips = ["192.168.1.50", "10.0.0.99", "172.16.0.1"]
+print(failed_ips[0])  # First IP
+print(len(failed_ips)) # Number of IPs
+
+# Loops
+for ip in failed_ips:
+    print(f"Blocking {ip}")
+\`\`\`
+
+#### String Operations
+\`\`\`python
+log_line = "192.168.1.100 - - [01/Jan/2024:10:00:00] GET /admin"
+
+# Split by spaces
+parts = log_line.split()
+ip = parts[0]        # 192.168.1.100
+method = parts[5]    # GET
+path = parts[6]      # /admin
+
+# Check if substring exists
+if "/admin" in log_line:
+    print("Admin access detected!")
+
+# Replace
+clean_log = log_line.replace("192.168.1.", "X.X.X.")
+\`\`\`
+
+#### Working with Files
+\`\`\`python
+# Read all lines
+with open("access.log", "r") as f:
+    lines = f.readlines()
+    print(f"Log has {len(lines)} lines")
+
+# Process each line
+with open("access.log", "r") as f:
+    for line in f:
+        if "ERROR" in line:
+            print(line.strip())
+
+# Write to file
+with open("suspicious.log", "w") as f:
+    f.write("192.168.1.50: 100 failed attempts\\n")
+\`\`\`
+
+#### Functions
+\`\`\`python
+def check_ip(ip):
+    """Check if IP is in blocklist"""
+    blocklist = ["192.168.1.50", "10.0.0.99"]
+    if ip in blocklist:
+        return "BLOCKED"
+    else:
+        return "ALLOWED"
+
+result = check_ip("192.168.1.50")
+print(result)  # BLOCKED
+\`\`\`
+
+#### 💡 Entry-Level Tip
+Python is great for analyzing logs. Even simple scripts save hours of manual work!`
+            },
+            {
+                id: 'p2', icon: '📋', title: 'Log Analysis Script', desc: 'Finding suspicious patterns in logs.', summary: '• Reading log files\n• Parsing data\n• Filtering results\n• Saving findings', dive: `### Practical Log Analysis
+
+#### Simple Log Parser
+\`\`\`python
+# Count failed logins by IP
+failed_logins = {}
+
+with open("auth.log", "r") as f:
+    for line in f:
+        if "Failed password" in line:
+            # Extract IP (simple parsing)
+            parts = line.split()
+            ip = parts[-3]  # IP is near end
+            
+            if ip in failed_logins:
+                failed_logins[ip] += 1
+            else:
+                failed_logins[ip] = 1
+
+# Show IPs with most failures
+for ip, count in failed_logins.items():
+    if count > 5:  # More than 5 failures
+        print(f"ALERT: {ip} had {count} failed attempts!")
+\`\`\`
+
+#### Search for Suspicious Patterns
+\`\`\`python
+# Find all 404 errors accessing admin path
+with open("access.log", "r") as f:
+    for line in f:
+        if "404" in line and "/admin" in line:
+            print(f"Suspicious: {line.strip()}")
+\`\`\`
+
+#### Create Incident Report
+\`\`\`python
+# Log analysis with output
+suspicious_ips = []
+
+with open("access.log", "r") as f:
+    for line in f:
+        if "/admin" in line:
+            parts = line.split()
+            ip = parts[0]
+            if ip not in suspicious_ips:
+                suspicious_ips.append(ip)
+
+# Save to report
+with open("incident_report.txt", "w") as out:
+    out.write(f"Found {len(suspicious_ips)} suspicious IPs\\n")
+    for ip in suspicious_ips:
+        out.write(f"- {ip}\\n")
+
+print("Report saved to incident_report.txt")
+\`\`\`
+
+#### 💡 Entry-Level Tip
+Start simple. Parsing logs to find patterns is 80% of security automation. Master this before advanced techniques!`
+            },
+            {
+                id: 'p3', icon: '🔐', title: 'String & Regex Basics', desc: 'Pattern matching for security data.', summary: '• string.split()\n• string methods\n• Regular Expressions\n• Extracting IPs/Domains', dive: `### Working with Strings & Regular Expressions
+
+#### String Methods
+\`\`\`python
+text = "ERROR: Failed to connect to 192.168.1.1"
+
+# Common string methods
+text.split()           # ['ERROR:', 'Failed', 'to', 'connect', 'to', '192.168.1.1']
+text.upper()           # All uppercase
+text.lower()           # All lowercase
+text.replace("192.168.1.1", "X.X.X.X")  # Hide IP
+text.startswith("ERROR")  # True
+"192.168.1.1" in text  # True
+\`\`\`
+
+#### Introduction to Regex
+Regular expressions find patterns in text.
 
 \`\`\`python
 import re
 
-with open("access.log", "r") as f:
-    for line in f:
-        if re.search(r"404", line):
-            print(f"Error found: {line.strip()}")
+log_line = "2024-01-15 10:30:45 User admin logged in from 192.168.1.100"
+
+# Find IP address pattern
+ip_pattern = r"\\d+\\.\\d+\\.\\d+\\.\\d+"  # Matches x.x.x.x
+result = re.search(ip_pattern, log_line)
+if result:
+    print(f"Found IP: {result.group()}")  # 192.168.1.100
+
+# Find all matches
+ips = re.findall(ip_pattern, log_line)
+print(ips)  # ['192.168.1.100']
 \`\`\`
 
-#### ⚡ Key Functions
-- \`split()\`: Breaking strings into parts.
-- \`re.search()\`: Using regex to find patterns (like IP addresses).
-- \`open()\`: Opening and reading log files.`
+#### Useful Regex Patterns
+| Pattern | Matches | Example |
+|---------|---------|---------|
+| `\\d+` | One or more digits | 404 |
+| `[a-z]+` | Letters | error |
+| `\\w+` | Word characters | Failed |
+| `.+` | Any character | anything |
+| `\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}` | IP address | 192.168.1.1 |
+| `[a-z0-9]+@[a-z]+\\.[a-z]+` | Email | user@example.com |
+
+#### Practical Example
+\`\`\`python
+import re
+
+# Find all email addresses in log
+log_text = "Emails: admin@company.com and support@company.com sent alerts"
+emails = re.findall(r"[a-z0-9.]+@[a-z]+\\.[a-z]+", log_text)
+print(emails)  # ['admin@company.com', 'support@company.com']
+\`\`\`
+
+#### 💡 Entry-Level Tip
+Regex is powerful but complex. Start with simple patterns. Google is your friend for regex patterns!`
             }
         ];
 

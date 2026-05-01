@@ -224,79 +224,193 @@
             <div id="m-content"
                 class="p-8 md:p-12 overflow-y-auto md-content custom-scrollbar bg-white dark:bg-slate-900 flex-grow">
             </div>
-        </div>
-    </div>
-
-    <script>
+           <script>
         const conceptsData = [
             {
-                id: 'c1', icon: '☁️', title: 'Cloud Definitions', desc: 'NIST SP 800-145 fundamentals.', summary: '• On-demand self-service\n• Broad network access\n• Resource pooling', dive: `### Cloud Computing Fundamentals
-NIST defines five essential characteristics of cloud computing.
+                id: 'c1', icon: '☁️', title: 'NIST Cloud Architecture', desc: 'The 5-3-4 Reference Model.', summary: '• 5 Essential Characteristics\n• 3 Service Models\n• 4 Deployment Models', dive: `### NIST SP 800-145 Fundamentals
 
-1. **On-demand self-service**: Users can provision resources without human intervention.
-2. **Broad network access**: Services available over the network via standard mechanisms.
-3. **Resource pooling**: Multi-tenant model where resources are dynamically assigned.
-4. **Rapid elasticity**: Capabilities can be elastically provisioned and released.
-5. **Measured service**: Resource usage is monitored, controlled, and reported.`
+The NIST definition is the bedrock of the CCSP exam. You must understand the "5-3-4" framework.
+
+#### 5 Essential Characteristics
+1. **On-Demand Self-Service:** No human interaction with the CSP required.
+2. **Broad Network Access:** Standard mechanisms (mobile, laptops, workstations).
+3. **Resource Pooling:** Multi-tenancy using a sense of "infinite" capacity.
+4. **Rapid Elasticity:** Scaling up and down instantly.
+5. **Measured Service:** Pay-per-use (metering).
+
+#### 3 Service Models & 4 Deployment Models
+- **Models:** IaaS, PaaS, SaaS.
+- **Deployment:** Public, Private, Hybrid, Community.
+
+<div class="mermaid">
+graph TD
+    A["NIST Definition"] --> B["5 Characteristics"]
+    A --> C["3 Service Models"]
+    A --> D["4 Deployment Models"]
+    style A fill:#ef4444,color:#fff
+</div>
+
+> [!TIP]
+> **Exam Tip:** If a feature doesn't have all 5 characteristics, it's not "True Cloud" according to NIST.`
+            },
+            {
+                id: 'c2', icon: '⚖️', title: 'Shared Responsibility', desc: 'The division of security duties.', summary: '• IaaS vs PaaS vs SaaS\n• Data Owner Responsibility\n• CSP vs Customer Roles', dive: `### The Shared Responsibility Model
+
+Security "in" the cloud vs. Security "of" the cloud.
+
+<div class="mermaid">
+graph TD
+    subgraph SaaS ["SaaS Responsibility"]
+        S1["Data & Users"]
+    end
+    subgraph PaaS ["PaaS Responsibility"]
+        P1["Data & Users"]
+        P2["Applications"]
+    end
+    subgraph IaaS ["IaaS Responsibility"]
+        I1["Data & Users"]
+        I2["Applications"]
+        I3["OS & Middleware"]
+    end
+    style SaaS fill:#ef4444,color:#fff
+    style PaaS fill:#ef4444,color:#fff
+    style IaaS fill:#ef4444,color:#fff
+</div>
+
+#### Responsibility Breakdown
+- **SaaS:** CSP manages the stack; Customer manages the **Data** and **Users**.
+- **PaaS:** CSP manages the OS/Middleware; Customer manages the **Application code**.
+- **IaaS:** CSP manages Physical/Hardware; Customer manages **OS, Apps, and Config**.
+
+> [!IMPORTANT]
+> **Exam Tip:** The **Data Owner (Customer)** is ALWAYS responsible for Data Classification and Governance, regardless of the service model.`
             }
         ];
 
         const dataData = [
             {
-                id: 'd1', icon: '🔄', title: 'Data Lifecycle', desc: 'CSCUASDP - the 6 phases.', summary: '• Create, Store, Use\n• Share, Archive, Destroy', dive: `### Cloud Data Lifecycle
-The six phases of data security.
+                id: 'd1', icon: '🔄', title: 'Cloud Data Lifecycle', desc: 'The 6 phases of data security.', summary: '• CSCUAD Lifecycle\n• Crypto-Shredding\n• Data Discovery', dive: `### Cloud Data Lifecycle (CSCUAD)
 
-1. **Create**: Generation of new digital content.
-2. **Store**: Near-term storage in a repository.
-3. **Use**: Data is viewed, processed, or used in some way.
-4. **Share**: Data is made accessible to others.
-5. **Archive**: Long-term storage for regulatory or history.
-6. **Destroy**: Permanent deletion using methods like crypto-shredding.`
+Security controls must be applied at every phase.
+
+<div class="mermaid">
+graph LR
+    Create --> Store
+    Store --> Use
+    Use --> Share
+    Share --> Archive
+    Archive --> Destroy
+    style Destroy fill:#ef4444,color:#fff
+</div>
+
+#### Key Phases & Controls
+1. **Create:** Classification happens here.
+2. **Store:** Encryption at rest (AES-256).
+3. **Use:** Data is in RAM (processed). Encryption in use is difficult.
+4. **Share:** DLP (Data Loss Prevention) and IRM (Information Rights Management).
+5. **Archive:** Offsite storage, long-term retention.
+6. **Destroy:** Permanent removal.
+
+#### Data Destruction Methods
+- **Crypto-Shredding:** Destroying the encryption keys so data can never be decrypted again. The most effective method in a multi-tenant cloud.
+- **Overwriting:** Writing random data over the storage blocks.
+
+> [!TIP]
+> **Exam Tip:** **Crypto-shredding** is the preferred method for destroying data in the cloud because you don't have physical access to the disks.`
             }
         ];
 
         const platformData = [
             {
-                id: 'p1', icon: '🖥️', title: 'Virtualization', desc: 'Securing the hypervisor and VMs.', summary: '• Hypervisor Security\n• VM Escape protection\n• Guest OS isolation', dive: `### Virtualization Security
-Core to cloud infrastructure.
+                id: 'p1', icon: '🖥️', title: 'Cloud Infrastructure', desc: 'Securing the foundation.', summary: '• Hypervisor Security\n• Software Defined (SDN)\n• Management Plane', dive: `### Securing the Cloud Platform
 
-- **Hypervisor**: The software that creates and runs VMs. Must be patched and hardened.
-- **VM Escape**: An attack where a user breaks out of a VM to access the hypervisor or other VMs.
-- **Resource Contention**: Managing how VMs share physical hardware to prevent side-channel attacks.`
+#### Hypervisor Security
+- **VM Escape:** An attacker breaks out of a VM to access the underlying host. Prevention: Patching and isolation.
+- **Type 1 (Bare Metal):** Runs directly on hardware. Most secure for cloud.
+- **Type 2 (Hosted):** Runs on top of an OS. Less secure.
+
+#### Management Plane
+The most critical part of cloud security. If an attacker gains access to your cloud console, they control everything.
+- **MFA:** Mandatory for all admin accounts.
+- **Least Privilege:** Use IAM roles, not long-term keys.
+
+#### Software Defined Networking (SDN)
+Decouples the control plane (decision making) from the data plane (packet forwarding).
+
+> [!IMPORTANT]
+> **Exam Tip:** The **Management Plane** is the "keys to the kingdom." Protect it with Zero Trust principles.`
             }
         ];
 
         const appData = [
             {
-                id: 'a1', icon: '🏗️', title: 'Secure SDLC', desc: 'Building security into development.', summary: '• Training & Design\n• Testing (SAST/DAST)\n• Deployment', dive: `### Secure SDLC
-Software Development Lifecycle with security integrated.
+                id: 'a1', icon: '🏗️', title: 'Cloud App Security', desc: 'SDLC and Supply Chain.', summary: '• Secure SDLC\n• Supply Chain Risks\n• API Security', dive: `### Cloud Application Security
 
-- **Requirements**: Security needs defined early.
-- **Design**: Threat modeling and attack surface analysis.
-- **Development**: Secure coding standards.
-- **Testing**: Static Analysis (SAST) and Dynamic Analysis (DAST).`
+#### Secure SDLC
+1. **Planning:** Training and risk assessment.
+2. **Design:** Threat modeling (STRIDE).
+3. **Development:** Static analysis (SAST).
+4. **Testing:** Dynamic analysis (DAST) and Pen-testing.
+5. **Operations:** Monitoring and WAF.
+
+#### Supply Chain Security
+Third-party libraries and APIs are major vectors.
+- **SBOM (Software Bill of Materials):** An inventory of every component in your software.
+- **OWASP Top 10:** The industry standard for web vulnerabilities.
+
+<div class="mermaid">
+graph TD
+    Code["Source Code"] --> Build["Build Pipeline"]
+    Build --> Scan["Security Scans (SAST/SBOM)"]
+    Scan --> Deploy["Cloud Deployment"]
+    Deploy --> WAF["WAF / Runtime Protection"]
+</div>
+
+> [!TIP]
+> **Exam Tip:** **SAST** (Static) happens during coding; **DAST** (Dynamic) happens while the app is running.`
             }
         ];
 
         const opsData = [
             {
-                id: 'o1', icon: '⚙️', title: 'Infrastructure Ops', desc: 'Maintaining the physical/logical stack.', summary: '• Change Management\n• Patch Management\n• Inventory Control', dive: `### Cloud Operations
-Managing the daily health of the cloud environment.
+                id: 'o1', icon: '⚙️', title: 'Operations & DC Security', desc: 'Managing the environment.', summary: '• Physical Security\n• Change Management\n• BCP/DRP', dive: `### Cloud Security Operations
 
-- **Change Management**: Controlling changes to the environment to prevent outages.
-- **Patch Management**: Regularly updating software to fix vulnerabilities.
-- **Monitoring**: Real-time visibility into system performance and security alerts.`
+#### Physical Security (Layer 1)
+- **Bollards, Fences, Guards.**
+- **Biometrics** and **Mantraps**.
+- **Environmental:** HVAC, fire suppression (FM-200), and redundant power.
+
+#### Logical Operations
+- **Change Management:** Ensuring every change is authorized, tested, and documented to prevent outages.
+- **Configuration Management:** Using "Infrastructure as Code" (IaC) to ensure consistency.
+
+#### Business Continuity (BCP)
+- **RTO (Recovery Time Objective):** Max time to restore.
+- **RPO (Recovery Point Objective):** Max data loss.
+
+> [!IMPORTANT]
+> **Exam Tip:** In a disaster, the **Safety of People** is always the #1 priority.`
             }
         ];
 
         const legalData = [
             {
-                id: 'l1', icon: '⚖️', title: 'Legal & Privacy', desc: 'Jurisdiction and data protection.', summary: '• GDPR / HIPAA\n• Jurisdiction / Location\n• E-discovery', dive: `### Legal, Risk, and Compliance
-Navigating the complex legal landscape of the cloud.
+                id: 'l1', icon: '⚖️', title: 'Legal & Compliance', desc: 'Regulations and Jurisdictions.', summary: '• GDPR / CCPA\n• eDiscovery\n• Data Sovereignty', dive: `### Legal, Risk, and Compliance
 
-- **GDPR**: European privacy regulation affecting global data.
-- **Jurisdiction**: Where the data physically resides matters for legal discovery.
-- **E-discovery**: The process of identifying and providing digital information as evidence.`
+#### Jurisdictional Issues
+Data is subject to the laws of the country where it is physically stored (**Data Sovereignty**).
+
+#### International Regulations
+- **GDPR (EU):** Extremely strict privacy rules. Right to be forgotten.
+- **CCPA (California):** Similar to GDPR but for California residents.
+- **PIPEDA (Canada):** Canadian privacy law.
+
+#### eDiscovery
+The process of identifying and producing electronic evidence for a legal case.
+- **Cloud Challenge:** Co-mingled data in a multi-tenant environment makes it hard to "seize a server."
+
+> [!TIP]
+> **Exam Tip:** **PPA (Privacy Level Agreement)** is a contract between the CSP and the customer regarding how privacy is handled.`
             }
         ];
 
