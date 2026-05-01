@@ -239,6 +239,8 @@
             <button data-target="section-security" onclick="navigateTo('section-security')"
                 class="nav-btn text-left pl-8 pr-4 py-2 rounded-xl text-sm font-semibold transition-all text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800">Identity
                 & Security</button>
+            <button data-target="section-shared" onclick="navigateTo('section-shared')"
+                class="nav-btn text-left pl-8 pr-4 py-2 rounded-xl text-sm font-semibold transition-all text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800">Shared Responsibility</button>
             <button data-target="section-mgmt" onclick="navigateTo('section-mgmt')"
                 class="nav-btn text-left pl-8 pr-4 py-2 rounded-xl text-sm font-semibold transition-all text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800">Management
                 & Governance</button>
@@ -356,6 +358,15 @@
                         <h3 class="text-xl font-black mb-2 text-slate-800 dark:text-white">Management & Gov</h3>
                         <p class="text-slate-500 dark:text-slate-400 text-sm leading-relaxed">Azure Monitor, Policy,
                             Cost Management.</p>
+                    </div>
+
+                    <div onclick="navigateTo('section-shared')"
+                        class="bg-white dark:bg-slate-800/40 p-8 rounded-[2rem] border border-slate-200 dark:border-slate-700/50 shadow-xl cursor-pointer hover:-translate-y-2 hover:border-emerald-500/50 transition-all group">
+                        <div
+                            class="w-14 h-14 mx-auto bg-emerald-500/10 rounded-2xl flex items-center justify-center text-3xl mb-6 group-hover:scale-110 transition-transform">
+                            🤝</div>
+                        <h3 class="text-xl font-black mb-2 text-slate-800 dark:text-white">Shared Responsibility</h3>
+                        <p class="text-slate-500 dark:text-slate-400 text-sm leading-relaxed">Security of the Cloud vs. Security in the Cloud breakdown.</p>
                     </div>
                 </div>
             </div>
@@ -626,6 +637,62 @@
             <div id="mgmt-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
         </section>
 
+        <section id="section-shared" class="content-section hidden fade-in">
+            <div class="mb-12 text-center md:text-left">
+                <h2 class="text-4xl font-black mb-2 text-emerald-500">Shared Responsibility Model</h2>
+                <p class="text-slate-500 dark:text-slate-400 italic">Security in the Cloud vs Security of the Cloud.</p>
+            </div>
+
+            <div
+                class="grid grid-cols-1 lg:grid-cols-2 gap-px bg-slate-200/50 dark:bg-slate-800/30 backdrop-blur-md rounded-[2.5rem] overflow-hidden border border-slate-200/50 dark:border-slate-800/50 shadow-2xl">
+                <div class="bg-white/60 dark:bg-slate-900/40 p-8 md:p-12">
+                    <div class="flex items-center gap-4 mb-8">
+                        <div
+                            class="w-16 h-16 bg-emerald-500/10 rounded-2xl flex items-center justify-center text-3xl shadow-inner">
+                            👤</div>
+                        <h3 class="text-2xl md:text-3xl font-black text-emerald-500 uppercase tracking-tight">
+                            Customer<br><span class="text-slate-400 text-sm tracking-widest">Responsibility IN the
+                                Cloud</span></h3>
+                    </div>
+                    <div class="space-y-6">
+                        <div
+                            class="p-6 bg-slate-50/80 dark:bg-slate-800/30 rounded-2xl border-l-4 border-emerald-500 shadow-sm transition-transform hover:scale-[1.02]">
+                            <h4 class="font-bold text-lg mb-2 text-slate-800 dark:text-white">Data & Access</h4>
+                            <p class="text-sm text-slate-500 dark:text-slate-400 leading-relaxed">The customer is ALWAYS responsible for data classification, encryption, and access management (Entra ID).</p>
+                        </div>
+                        <div
+                            class="p-6 bg-slate-50/80 dark:bg-slate-800/30 rounded-2xl border-l-4 border-emerald-500 shadow-sm transition-transform hover:scale-[1.02]">
+                            <h4 class="font-bold text-lg mb-2 text-slate-800 dark:text-white">Applications & OS</h4>
+                            <p class="text-sm text-slate-500 dark:text-slate-400 leading-relaxed">In IaaS, you manage the OS and apps. In PaaS, you manage the apps. In SaaS, you manage the configuration.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-slate-50/40 dark:bg-slate-950/20 p-8 md:p-12 border-t lg:border-t-0 lg:border-l border-slate-200/50 dark:border-slate-800/50">
+                    <div class="flex items-center gap-4 mb-8">
+                        <div
+                            class="w-16 h-16 bg-blue-500/10 rounded-2xl flex items-center justify-center text-3xl shadow-inner">
+                            ☁️</div>
+                        <h3 class="text-2xl md:text-3xl font-black text-blue-500 uppercase tracking-tight">
+                            Microsoft<br><span class="text-slate-400 text-sm tracking-widest">Responsibility OF the
+                                Cloud</span></h3>
+                    </div>
+                    <div class="space-y-6">
+                        <div
+                            class="p-6 bg-white/80 dark:bg-slate-800/40 rounded-2xl border-l-4 border-blue-500 shadow-sm transition-transform hover:scale-[1.02]">
+                            <h4 class="font-bold text-lg mb-2 text-slate-800 dark:text-white">Physical Infrastructure</h4>
+                            <p class="text-sm text-slate-500 dark:text-slate-400 leading-relaxed">Microsoft handles the physical security of data centers, power, cooling, and global networking.</p>
+                        </div>
+                        <div
+                            class="p-6 bg-white/80 dark:bg-slate-800/40 rounded-2xl border-l-4 border-blue-500 shadow-sm transition-transform hover:scale-[1.02]">
+                            <h4 class="font-bold text-lg mb-2 text-slate-800 dark:text-white">Managed Services</h4>
+                            <p class="text-sm text-slate-500 dark:text-slate-400 leading-relaxed">For PaaS and SaaS, Microsoft manages the underlying runtime, middleware, and operating systems.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
         <section id="section-pricing" class="content-section hidden fade-in">
             <div class="mb-12 text-center md:text-left">
                 <h2 class="text-4xl font-black mb-2 text-amber-500">Pricing & SLAs</h2>
@@ -762,7 +829,34 @@
             { id: 'c3', icon: '📈', title: 'High Availability', desc: 'Keep your apps running.', summary: '• Avoid downtime\n• Redundancy\n• SLAs', dive: `### High Availability (HA) & Disaster Recovery\n\nHigh Availability ensures your application remains accessible even if certain components fail. Azure achieves HA through redundancy at every layer.\n\n#### Azure HA Building Blocks\n- **Availability Zones:** Physically separate locations within an Azure region. Each zone has independent power, cooling, and networking.\n- **Availability Sets:** Logical groupings of VMs distributed across **Fault Domains** (racks) and **Update Domains** (patching schedules).\n- **Region Pairs:** Each Azure region is paired with another region at least 300 miles away for disaster recovery.\n\n#### Composite SLA Formula\nWhen services are chained, multiply their individual SLAs:\n- Web App (99.95%) × SQL DB (99.99%) = **99.94% composite SLA**.\n\n#### 💡 AZ-900 Exam Tip\nAvailability Zones = protect against **data center failure**. Region Pairs = protect against **region-wide disaster**. Deploy across multiple Availability Zones to maximize uptime.` },
             { id: 'c4', icon: '⚙️', title: 'Scalability vs Elasticity', desc: 'Handling load effectively.', summary: '• Vertical (Scale up)\n• Horizontal (Scale out)\n• Elasticity (Auto)', dive: `### Scalability & Elasticity\n\n#### Scalability\nThe ability to increase or decrease resources to meet demand.\n\n- **Vertical Scaling (Scale Up/Down):** Adding more power (CPU, RAM) to an existing machine. Has a ceiling.\n- **Horizontal Scaling (Scale Out/In):** Adding more identical instances to distribute load. Virtually unlimited. This is the preferred cloud pattern.\n\n#### Elasticity\nThe ability of a system to **automatically** adjust resources based on demand in real-time.\n\n- **Azure VM Scale Sets:** Automatically create and remove VMs based on demand metrics.\n- **Azure App Service Auto-Scale:** Built-in elastic scaling for web apps.\n\n#### Agility\nThe ability to **rapidly deploy and configure** cloud resources as business needs change. Cloud enables provisioning in minutes vs. weeks on-prem.\n\n#### 💡 AZ-900 Exam Tip\nScale Up = bigger machine. Scale Out = more machines. **Elasticity** = automatic scale out/in.` },
             { id: 'c5', icon: '💰', title: 'CapEx vs OpEx', desc: 'Cloud financial models.', summary: '• CapEx (Upfront cost)\n• OpEx (Pay-as-you-go)\n• Consumption based', dive: `### Capital Expenditure (CapEx) vs Operational Expenditure (OpEx)\n\n#### CapEx (Capital Expenditure)\nUpfront spending on physical infrastructure — buying servers, building data centers. Cost is deducted over time (depreciation).\n\n- **Characteristics:** High initial investment, predictable costs over time, long planning cycles.\n\n#### OpEx (Operational Expenditure)\nSpending on services or products **as you use them**. Billed based on consumption with no upfront cost.\n\n- **Characteristics:** No upfront cost, pay-as-you-go, monthly operating budgets.\n\n#### The Consumption-Based Model\nCloud computing follows a **consumption-based model** (OpEx):\n- No upfront costs. Pay for additional resources when needed.\n- Stop paying for resources you no longer need.\n- **Predict costs** using the Azure Pricing Calculator.\n- **Analyze actual costs** using Azure Cost Management.\n\n#### 💡 AZ-900 Exam Tip\nCloud = **OpEx** (consumption-based). On-premises = **CapEx**. If the exam asks about "shifting from upfront costs to pay-as-you-go," it is the cloud consumption model.` },
-            { id: 'c6', icon: '🌍', title: 'Azure Geography', desc: 'Regions, Availability Zones, Pairs.', summary: '• 60+ Regions worldwide\n• Availability Zones\n• Region Pairs for DR', dive: `### Azure Global Infrastructure\n\n<div class="mermaid">\ngraph TD\n    A["Azure Geography"] --> B["Region"]\n    B --> C["Availability Zone 1"]\n    B --> D["Availability Zone 2"]\n    B --> E["Availability Zone 3"]\n    C --> F["Data Centers"]\n    D --> G["Data Centers"]\n    E --> H["Data Centers"]\n    style A fill:#0078D4,stroke:#333,color:#fff\n    style B fill:#3b82f6,stroke:#333,color:#fff\n    style C fill:#10b981,stroke:#333,color:#fff\n    style D fill:#10b981,stroke:#333,color:#fff\n    style E fill:#10b981,stroke:#333,color:#fff\n</div>\n\n#### Regions\nAzure has **60+ regions** worldwide. When you deploy a resource, you choose which region.\n\n- Choose a region **close to your users** for low latency.\n- **Data residency:** Your data stays in the region you choose (important for compliance).\n\n#### Availability Zones\nPhysically separate data centers within a single region. Each zone has independent power, cooling, and networking.\n\n- **Zonal Services:** Pin a resource to a specific zone (e.g., a specific VM).\n- **Zone-Redundant Services:** Automatically replicate across zones (e.g., ZRS storage).\n\n#### Region Pairs\nEach region is paired with another **at least 300 miles away** for DR. During maintenance, Azure updates one region at a time.\n\n#### Sovereign Regions\n**Azure Government** (US) and **Azure China** (21Vianet) are isolated for compliance.\n\n#### 💡 AZ-900 Exam Tip\nRegion = geographic location. AZ = separate data center in a region. Region Pair = DR partner. Sovereign = government isolation.` }
+            { id: 'c6', icon: '🌍', title: 'Azure Geography', desc: 'Regions, Availability Zones, Pairs.', summary: '• 60+ Regions worldwide\n• Availability Zones\n• Region Pairs for DR', dive: `### Azure Global Infrastructure\n\n<div class="mermaid">\ngraph TD\n    A["Azure Geography"] --> B["Region"]\n    B --> C["Availability Zone 1"]\n    B --> D["Availability Zone 2"]\n    B --> E["Availability Zone 3"]\n    C --> F["Data Centers"]\n    D --> G["Data Centers"]\n    E --> H["Data Centers"]\n    style A fill:#0078D4,stroke:#333,color:#fff\n    style B fill:#3b82f6,stroke:#333,color:#fff\n    style C fill:#10b981,stroke:#333,color:#fff\n    style D fill:#10b981,stroke:#333,color:#fff\n    style E fill:#10b981,stroke:#333,color:#fff\n</div>\n\n#### Regions\nAzure has **60+ regions** worldwide. When you deploy a resource, you choose which region.\n\n- Choose a region **close to your users** for low latency.\n- **Data residency:** Your data stays in the region you choose (important for compliance).\n\n#### Availability Zones\nPhysically separate data centers within a single region. Each zone has independent power, cooling, and networking.\n\n- **Zonal Services:** Pin a resource to a specific zone (e.g., a specific VM).\n- **Zone-Redundant Services:** Automatically replicate across zones (e.g., ZRS storage).\n\n#### Region Pairs\nEach region is paired with another **at least 300 miles away** for DR. During maintenance, Azure updates one region at a time.\n\n#### Sovereign Regions\n**Azure Government** (US) and **Azure China** (21Vianet) are isolated for compliance.\n\n#### 💡 AZ-900 Exam Tip\nRegion = geographic location. AZ = separate data center in a region. Region Pair = DR partner. Sovereign = government isolation.` },
+            {
+                id: 'c7', icon: '🤝', title: 'Shared Responsibility', desc: 'Security in the Cloud vs Security of the Cloud.', summary: '• Microsoft: Infrastructure\n• You: Data & Access\n• Shared: Configuration', dive: `### Microsoft Shared Responsibility Model
+Security and compliance is a shared responsibility between you and Microsoft.
+
+#### Microsoft Responsibility (Infrastructure)
+Microsoft is responsible for the physical security of the data centers, the hardware, and the software that runs the Azure services.
+- **Physical:** Data centers, networking, and power.
+- **Hardware:** Servers and storage.
+- **Software:** Hypervisors and managed service runtimes.
+
+#### Customer Responsibility (Your Workload)
+The customer is responsible for what they put *in* the cloud.
+- **Data:** Encryption and classification.
+- **Configuration:** Network security rules (NSGs) and identity policies.
+- **Applications:** Code security and maintenance.
+
+#### Responsibility Matrix by Service Type
+| Responsibility | On-Premises | IaaS | PaaS | SaaS |
+| :--- | :---: | :---: | :---: | :---: |
+| **Data & Access** | Customer | Customer | Customer | Customer |
+| **Applications** | Customer | Customer | Customer | **Shared** |
+| **Runtime/OS** | Customer | Customer | **Shared** | Microsoft |
+| **Network/Compute** | Customer | **Shared** | Microsoft | Microsoft |
+| **Physical Infra** | Customer | Microsoft | Microsoft | Microsoft |
+
+#### 💡 AZ-900 Exam Tip
+Regardless of the service type, **you are always responsible for your data, your endpoints, your account, and your access management.** Microsoft is always responsible for physical security.` }
         ];
 
         const computeData = [
