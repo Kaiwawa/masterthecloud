@@ -1,4 +1,4 @@
-const APP_VERSION = 'v0.10.3';
+const APP_VERSION = 'v0.10.4';
 
 const deploymentProgress = {
     'aws': 80,

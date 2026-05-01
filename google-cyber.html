@@ -440,7 +440,7 @@ cat error.log | grep "ERROR" | tail -20  # Last 20 errors
 \`\`\`
 
 #### 💡 Entry-Level Tip
-`tail -f` is your friend for watching logs in real-time during incident investigation. `grep` for searching. `|` (pipe) for combining commands.`
+"tail -f" is your friend for watching logs in real-time during incident investigation. "grep" for searching. "|" (pipe) for combining commands.`
             },
             {
                 id: 'n3', icon: '🔧', title: 'Core Network Tools', desc: 'tcpdump, Wireshark, and basic utilities.', summary: '• ping & traceroute\n• nslookup & dig\n• netstat & ss\n• Packet Capture', dive: `### Essential Network Troubleshooting Tools
@@ -521,7 +521,7 @@ During an incident, tcpdump captures evidence. Wireshark helps you analyze it of
 
 #### Web Vulnerabilities
 - **SQL Injection**: Pass SQL code in input field
-  - Input: `' OR '1'='1` to get all users
+  - Input: "' OR '1'='1" to get all users
   - Prevention: Parameterized queries, input validation
 - **XSS (Cross-Site Scripting)**: Inject JavaScript
   - Attacker's script runs in victim's browser
@@ -923,12 +923,12 @@ print(ips)  # ['192.168.1.100']
 #### Useful Regex Patterns
 | Pattern | Matches | Example |
 |---------|---------|---------|
-| `\\d+` | One or more digits | 404 |
-| `[a-z]+` | Letters | error |
-| `\\w+` | Word characters | Failed |
-| `.+` | Any character | anything |
-| `\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}` | IP address | 192.168.1.1 |
-| `[a-z0-9]+@[a-z]+\\.[a-z]+` | Email | user@example.com |
+| "\\d+ " | One or more digits | 404 |
+| "[a - z] + " | Letters | error |
+| "\\w + " | Word characters | Failed |
+| ".+ " | Any character | anything |
+| "\\d{ 1, 3}\\.\\d{ 1, 3}\\.\\d{ 1, 3}\\.\\d{ 1, 3}" | IP address | 192.168.1.1 |
+| "[a - z0 - 9] + @[a - z] +\\.[a - z] + " | Email | user@example.com |
 
 #### Practical Example
 \`\`\`python
