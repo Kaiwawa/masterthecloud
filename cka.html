@@ -10,6 +10,7 @@
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
     <script src="assets/js/app.js"></script>
+    <script src="assets/js/version.js"></script>
     <link rel="stylesheet" href="assets/css/site.css">
     <script>
         tailwind.config = {
@@ -525,16 +526,15 @@
             <div id="troubleshooting-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
         </section>
     </main>
-    <footer class="w-full max-w-7xl mx-auto px-4 pb-4 mt-12 text-center fade-in">
+    <footer class="w-full max-w-7xl mx-auto px-4 pb-12 mt-12 text-center fade-in">
         <p class="text-xs md:text-sm text-slate-600 dark:text-slate-400 font-semibold tracking-wide">
-            Version v0.7.98 •
+            Version <span class="app-version">v0.7.98</span> •
             <a href="https://github.com/Kaiwawa/masterthecloud" target="_blank" rel="noopener noreferrer"
                 class="text-brand-accent hover:underline">
                 Main GitHub Repository
             </a>
         </p>
     </footer>
-
 
     <div id="deep-dive-modal"
         class="fixed inset-0 z-[100] hidden items-center justify-center bg-slate-950/80 backdrop-blur-md p-4 opacity-0 transition-all duration-300"

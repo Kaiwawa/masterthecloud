@@ -10,6 +10,7 @@
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
     <script src="assets/js/app.js"></script>
+    <script src="assets/js/version.js"></script>
     <link rel="stylesheet" href="assets/css/site.css">
     <script>
         tailwind.config = {
@@ -311,105 +312,163 @@
                 <p class="text-slate-500 dark:text-slate-400 italic">Understanding the fundamental difference in audit
                     report delivery.</p>
             </div>
-
-            <div
-                class="grid grid-cols-1 lg:grid-cols-2 gap-px bg-slate-200/50 dark:bg-slate-800/30 backdrop-blur-md rounded-[2.5rem] overflow-hidden border border-slate-200/50 dark:border-slate-800/50 shadow-2xl">
-                <div class="bg-white/60 dark:bg-slate-900/40 p-8 md:p-12">
-                    <div class="flex items-center gap-4 mb-8">
-                        <div
-                            class="w-16 h-16 bg-teal-500/10 rounded-2xl flex items-center justify-center text-3xl shadow-inner">
-                            ⏱️</div>
-                        <h3 class="text-2xl md:text-3xl font-black text-teal-500 uppercase tracking-tight">Type
-                            I<br><span class="text-slate-400 text-sm tracking-widest">Point In Time</span></h3>
-                    </div>
-                    <p class="text-slate-600 dark:text-slate-400 mb-8 leading-relaxed font-medium">A Type I report
-                        attests to the design of a service organization's controls at a specific date. It does not test
-                        if the controls were followed over time.</p>
-
-                    <div class="space-y-6">
-                        <div
-                            class="p-6 bg-slate-50/80 dark:bg-slate-800/30 rounded-2xl border-l-4 border-teal-500 shadow-sm transition-transform hover:scale-[1.02]">
-                            <h4 class="font-bold text-lg mb-2 text-slate-800 dark:text-white">Design & Implementation
-                            </h4>
-                            <p class="text-sm text-slate-500 dark:text-slate-400 leading-relaxed">The auditor evaluates
-                                Management's description of the system and verifies that the described controls are
-                                suitably designed and implemented as of a specific date (e.g., December 31).</p>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-10">
+                <div class="bg-teal-500/5 dark:bg-teal-500/10 p-8 rounded-[2rem] border border-teal-500/20 shadow-xl">
+                    <div class="flex items-center gap-4 mb-6">
+                        <div class="w-12 h-12 bg-teal-500/20 rounded-2xl flex items-center justify-center text-2xl">📋
                         </div>
-                        <div
-                            class="p-6 bg-slate-50/80 dark:bg-slate-800/30 rounded-2xl border-l-4 border-teal-500 shadow-sm transition-transform hover:scale-[1.02]">
-                            <h4 class="font-bold text-lg mb-2 text-slate-800 dark:text-white">Use Case</h4>
-                            <p class="text-sm text-slate-500 dark:text-slate-400 leading-relaxed">Often used as a
-                                "stepping stone" for companies seeking SOC 1 compliance for the first time. It
-                                establishes the baseline before moving to a Type II audit.</p>
-                        </div>
+                        <h3 class="text-2xl font-black text-teal-600 dark:text-teal-400 uppercase tracking-tight">Type
+                            I<br><span class="text-slate-400 text-xs tracking-widest font-bold">Point-in-Time</span>
+                        </h3>
                     </div>
+                    <ul class="space-y-4 text-slate-600 dark:text-slate-300">
+                        <li class="flex gap-3 text-sm leading-relaxed">
+                            <span class="text-teal-500 font-bold mt-1">✦</span>
+                            <span>Attests to the <strong>design</strong> of controls at a specific date.</span>
+                        </li>
+                        <li class="flex gap-3 text-sm leading-relaxed">
+                            <span class="text-teal-500 font-bold mt-1">✦</span>
+                            <span>Does not test operating effectiveness over time.</span>
+                        </li>
+                        <li class="flex gap-3 text-sm leading-relaxed">
+                            <span class="text-teal-500 font-bold mt-1">✦</span>
+                            <span>Often used as a first-year "stepping stone" to establish a baseline.</span>
+                        </li>
+                        <li class="flex gap-3 text-sm leading-relaxed">
+                            <span class="text-teal-500 font-bold mt-1">✦</span>
+                            <span>Does NOT include Section 4 (testing results).</span>
+                        </li>
+                    </ul>
                 </div>
 
-                <div class="bg-slate-50/60 dark:bg-slate-800/20 p-8 md:p-12">
-                    <div class="flex items-center gap-4 mb-8">
-                        <div
-                            class="w-16 h-16 bg-emerald-500/10 rounded-2xl flex items-center justify-center text-3xl shadow-inner">
-                            📅</div>
-                        <h3 class="text-2xl md:text-3xl font-black text-emerald-500 uppercase tracking-tight">Type
-                            II<br><span class="text-slate-400 text-sm tracking-widest">Period Of Time</span></h3>
-                    </div>
-                    <p class="text-slate-600 dark:text-slate-400 mb-8 leading-relaxed font-medium">A Type II report
-                        attests to both the design AND the operating effectiveness of controls over a specified period,
-                        typically 6 to 12 months.</p>
-
-                    <div class="space-y-6">
-                        <div
-                            class="p-6 bg-white/80 dark:bg-slate-800/40 rounded-2xl border-l-4 border-emerald-500 shadow-sm transition-transform hover:scale-[1.02]">
-                            <h4 class="font-bold text-lg mb-2 text-slate-800 dark:text-white">Operating Effectiveness
-                            </h4>
-                            <p class="text-sm text-slate-500 dark:text-slate-400 leading-relaxed">The auditor pulls
-                                samples throughout the audit period (e.g., Jan 1 - Dec 31) to prove the controls
-                                actually worked. Did every new hire get approved? Did every code push have a code
-                                review?</p>
+                <div
+                    class="bg-emerald-500/5 dark:bg-emerald-500/10 p-8 rounded-[2rem] border border-emerald-500/20 shadow-xl">
+                    <div class="flex items-center gap-4 mb-6">
+                        <div class="w-12 h-12 bg-emerald-500/20 rounded-2xl flex items-center justify-center text-2xl">⚡
                         </div>
-                        <div
-                            class="p-6 bg-white/80 dark:bg-slate-800/40 rounded-2xl border-l-4 border-emerald-500 shadow-sm transition-transform hover:scale-[1.02]">
-                            <h4 class="font-bold text-lg mb-2 text-slate-800 dark:text-white">The Gold Standard</h4>
-                            <p class="text-sm text-slate-500 dark:text-slate-400 leading-relaxed">User entities and
-                                their financial auditors strongly prefer (and often require) a Type II report because it
-                                proves a history of secure and reliable operations, not just a promise.</p>
+                        <h3 class="text-2xl font-black text-emerald-600 dark:text-emerald-400 uppercase tracking-tight">
+                            Type II<br><span class="text-slate-400 text-xs tracking-widest font-bold">Period of
+                                Time</span></h3>
+                    </div>
+                    <ul class="space-y-4 text-slate-600 dark:text-slate-300">
+                        <li class="flex gap-3 text-sm leading-relaxed">
+                            <span class="text-emerald-500 font-bold mt-1">✦</span>
+                            <span>Attests to both <strong>design AND operating effectiveness</strong> over 6-12
+                                months.</span>
+                        </li>
+                        <li class="flex gap-3 text-sm leading-relaxed">
+                            <span class="text-emerald-500 font-bold mt-1">✦</span>
+                            <span>Auditor pulls samples throughout the period to prove controls actually worked.</span>
+                        </li>
+                        <li class="flex gap-3 text-sm leading-relaxed">
+                            <span class="text-emerald-500 font-bold mt-1">✦</span>
+                            <span>Includes Section 4 with detailed testing matrices and results.</span>
+                        </li>
+                        <li class="flex gap-3 text-sm leading-relaxed">
+                            <span class="text-emerald-500 font-bold mt-1">✦</span>
+                            <span>The "gold standard" required by enterprise customers and financial auditors.</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div
+                    class="lg:col-span-2 bg-slate-100 dark:bg-slate-800/50 p-6 rounded-3xl border border-slate-200 dark:border-slate-700">
+                    <div class="flex gap-4 items-start">
+                        <span class="text-2xl">💡</span>
+                        <div>
+                            <h4 class="font-bold text-slate-800 dark:text-white mb-1">Key Insight</h4>
+                            <p class="text-sm text-slate-500 dark:text-slate-400">Type II is almost always what
+                                customers and their auditors actually require. Type I is a stepping stone. If someone
+                                says "we have a SOC 1," always ask: "Type I or Type II?"</p>
                         </div>
                     </div>
                 </div>
             </div>
+            </div>
+
         </section>
 
         <section id="section-concepts" class="content-section hidden fade-in">
             <div class="mb-12 text-center md:text-left">
                 <h2 class="text-4xl font-black mb-2 text-blue-500">Key Concepts</h2>
             </div>
-            <div
-                class="mb-10 bg-slate-100 dark:bg-slate-800/50 rounded-3xl p-8 border border-slate-200 dark:border-slate-700">
-                <h3 class="text-xl font-bold mb-6 text-blue-500">⚖️ SOC 1 vs SOC 2 Comparison</h3>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                    <div class="p-6 bg-white dark:bg-slate-700 rounded-xl shadow-sm border-t-4 border-blue-500">
-                        <div class="font-bold text-lg text-slate-800 dark:text-white mb-2">SOC 1</div>
-                        <ul class="list-disc list-inside text-sm text-slate-600 dark:text-slate-300 space-y-2">
-                            <li>Focuses on Internal Controls over Financial Reporting (ICFR).</li>
-                            <li>Audience: User organizations and their financial auditors.</li>
-                            <li>Purpose: Ensures the service organization isn't causing material misstatements in the
-                                user's financials.</li>
-                            <li>Standard: SSAE 18 (AT-C 320).</li>
-                        </ul>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-10">
+                <div class="bg-blue-500/5 dark:bg-blue-500/10 p-8 rounded-[2rem] border border-blue-500/20 shadow-xl">
+                    <div class="flex items-center gap-4 mb-6">
+                        <div class="w-12 h-12 bg-blue-500/20 rounded-2xl flex items-center justify-center text-2xl">💰
+                        </div>
+                        <h3 class="text-2xl font-black text-blue-600 dark:text-blue-400 uppercase tracking-tight">SOC
+                            1<br><span class="text-slate-400 text-xs tracking-widest font-bold">Financial
+                                Reporting</span></h3>
                     </div>
-                    <div class="p-6 bg-white dark:bg-slate-700 rounded-xl shadow-sm border-t-4 border-teal-500">
-                        <div class="font-bold text-lg text-slate-800 dark:text-white mb-2">SOC 2</div>
-                        <ul class="list-disc list-inside text-sm text-slate-600 dark:text-slate-300 space-y-2">
-                            <li>Focuses on the Trust Services Criteria (Security, Availability, Processing Integrity,
-                                Confidentiality, Privacy).</li>
-                            <li>Audience: Management, regulators, and stakeholders.</li>
-                            <li>Purpose: Demonstrates a strong security and compliance posture.</li>
-                            <li>Standard: SSAE 18 (AT-C 105 and 205).</li>
-                        </ul>
+                    <ul class="space-y-4 text-slate-600 dark:text-slate-300">
+                        <li class="flex gap-3 text-sm leading-relaxed">
+                            <span class="text-blue-500 font-bold mt-1">✦</span>
+                            <span><strong>Focus:</strong> Internal Controls over Financial Reporting (ICFR).</span>
+                        </li>
+                        <li class="flex gap-3 text-sm leading-relaxed">
+                            <span class="text-blue-500 font-bold mt-1">✦</span>
+                            <span><strong>Audience:</strong> User organizations and their financial auditors.</span>
+                        </li>
+                        <li class="flex gap-3 text-sm leading-relaxed">
+                            <span class="text-blue-500 font-bold mt-1">✦</span>
+                            <span><strong>Purpose:</strong> Prevents material misstatements in the user's
+                                financials.</span>
+                        </li>
+                        <li class="flex gap-3 text-sm leading-relaxed">
+                            <span class="text-blue-500 font-bold mt-1">✦</span>
+                            <span><strong>Standard:</strong> SSAE 18 (AT-C 320).</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="bg-teal-500/5 dark:bg-teal-500/10 p-8 rounded-[2rem] border border-teal-500/20 shadow-xl">
+                    <div class="flex items-center gap-4 mb-6">
+                        <div class="w-12 h-12 bg-teal-500/20 rounded-2xl flex items-center justify-center text-2xl">🔒
+                        </div>
+                        <h3 class="text-2xl font-black text-teal-600 dark:text-teal-400 uppercase tracking-tight">SOC
+                            2<br><span class="text-slate-400 text-xs tracking-widest font-bold">Security & Trust</span>
+                        </h3>
+                    </div>
+                    <ul class="space-y-4 text-slate-600 dark:text-slate-300">
+                        <li class="flex gap-3 text-sm leading-relaxed">
+                            <span class="text-teal-500 font-bold mt-1">✦</span>
+                            <span><strong>Focus:</strong> Trust Services Criteria (Security, Availability, Integrity,
+                                etc.).</span>
+                        </li>
+                        <li class="flex gap-3 text-sm leading-relaxed">
+                            <span class="text-teal-500 font-bold mt-1">✦</span>
+                            <span><strong>Audience:</strong> Management, regulators, and stakeholders.</span>
+                        </li>
+                        <li class="flex gap-3 text-sm leading-relaxed">
+                            <span class="text-teal-500 font-bold mt-1">✦</span>
+                            <span><strong>Purpose:</strong> Demonstrates a strong security and compliance
+                                posture.</span>
+                        </li>
+                        <li class="flex gap-3 text-sm leading-relaxed">
+                            <span class="text-teal-500 font-bold mt-1">✦</span>
+                            <span><strong>Standard:</strong> SSAE 18 (AT-C 105 and 205).</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div
+                    class="lg:col-span-2 bg-slate-100 dark:bg-slate-800/50 p-6 rounded-3xl border border-slate-200 dark:border-slate-700">
+                    <div class="flex gap-4 items-start">
+                        <span class="text-2xl">💡</span>
+                        <div>
+                            <h4 class="font-bold text-slate-800 dark:text-white mb-1">Key Difference</h4>
+                            <p class="text-sm text-slate-500 dark:text-slate-400">Use <strong>SOC 1</strong> if your
+                                service affects the customer's financial statements (e.g., payroll processing). Use
+                                <strong>SOC 2</strong> if your service handles sensitive data but doesn't impact
+                                financial reporting (e.g., a cloud storage provider).</p>
+                        </div>
                     </div>
                 </div>
             </div>
-            <div id="concepts-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+
+            <div id="framework-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
         </section>
 
         <section id="section-controls" class="content-section hidden fade-in">
@@ -417,28 +476,6 @@
                 <h2 class="text-4xl font-black mb-2 text-emerald-500">Internal Controls</h2>
                 <p class="text-slate-500 dark:text-slate-400 italic">The ITGC framework that protects financial
                     reporting data.</p>
-            </div>
-
-            <div
-                class="mb-10 bg-slate-100 dark:bg-slate-800/50 rounded-3xl p-8 border border-slate-200 dark:border-slate-700">
-                <h3 class="text-xl font-bold mb-6 text-emerald-500">The 3 Pillars of ITGCs</h3>
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                    <div class="p-6 bg-white dark:bg-slate-700 rounded-xl shadow-sm border-t-4 border-emerald-500">
-                        <div class="font-black text-slate-800 dark:text-white text-lg mb-2">1. Logical Access</div>
-                        <div class="text-sm text-slate-500">Ensuring only authorized individuals can access systems.
-                            Includes New Hires, Terminations, and Access Reviews.</div>
-                    </div>
-                    <div class="p-6 bg-white dark:bg-slate-700 rounded-xl shadow-sm border-t-4 border-emerald-500">
-                        <div class="font-black text-slate-800 dark:text-white text-lg mb-2">2. Change Management</div>
-                        <div class="text-sm text-slate-500">Ensuring code changes are tested, approved, and pushed to
-                            production by someone other than the developer (Segregation of Duties).</div>
-                    </div>
-                    <div class="p-6 bg-white dark:bg-slate-700 rounded-xl shadow-sm border-t-4 border-emerald-500">
-                        <div class="font-black text-slate-800 dark:text-white text-lg mb-2">3. IT Operations</div>
-                        <div class="text-sm text-slate-500">Ensuring data is not lost and systems stay online. Includes
-                            Backups, Batch processing, and Incident Management.</div>
-                    </div>
-                </div>
             </div>
             <div id="controls-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
         </section>
@@ -450,72 +487,140 @@
                 </p>
             </div>
 
-            <div
-                class="mb-10 bg-slate-100 dark:bg-slate-800/50 rounded-3xl p-8 border border-slate-200 dark:border-slate-700">
-                <h3 class="text-xl font-bold mb-6 text-cyan-500">The SOC 1 Audit Timeline</h3>
-                <div class="flex flex-col md:flex-row items-center justify-between gap-2">
-                    <div class="p-4 bg-white dark:bg-slate-700 rounded-xl shadow text-center w-full">
-                        <div class="font-bold text-cyan-600 dark:text-cyan-400">Readiness</div>
-                        <div class="text-xs text-slate-500">Gap Assessment</div>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-10">
+                <div
+                    class="bg-slate-500/5 dark:bg-slate-500/10 p-8 rounded-[2rem] border border-slate-500/20 shadow-xl">
+                    <div class="flex items-center gap-4 mb-6">
+                        <div class="w-12 h-12 bg-slate-500/20 rounded-2xl flex items-center justify-center text-2xl">✍️
+                        </div>
+                        <h3 class="text-2xl font-black text-slate-600 dark:text-slate-400 uppercase tracking-tight">
+                            Management<br><span
+                                class="text-slate-400 text-xs tracking-widest font-bold">Assertion</span></h3>
                     </div>
-                    <div class="text-slate-400 text-xl hidden md:block">➔</div>
-                    <div class="p-4 bg-white dark:bg-slate-700 rounded-xl shadow text-center w-full">
-                        <div class="font-bold text-cyan-600 dark:text-cyan-400">Type I</div>
-                        <div class="text-xs text-slate-500">Point-in-Time Design</div>
+                    <p class="text-sm text-slate-500 dark:text-slate-400 mb-6 font-medium italic">"We built the system,
+                        and we take responsibility for it."</p>
+                    <ul class="space-y-4 text-slate-600 dark:text-slate-300">
+                        <li class="flex gap-3 text-sm leading-relaxed">
+                            <span class="text-slate-500 font-bold mt-1">✦</span>
+                            <span>Management asserts the system description fairly presents the actual system.</span>
+                        </li>
+                        <li class="flex gap-3 text-sm leading-relaxed">
+                            <span class="text-slate-500 font-bold mt-1">✦</span>
+                            <span>Management asserts controls are suitably designed to achieve objectives.</span>
+                        </li>
+                        <li class="flex gap-3 text-sm leading-relaxed">
+                            <span class="text-slate-500 font-bold mt-1">✦</span>
+                            <span>In a Type 2, they assert controls operated effectively throughout the period.</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="bg-cyan-500/5 dark:bg-cyan-500/10 p-8 rounded-[2rem] border border-cyan-500/20 shadow-xl">
+                    <div class="flex items-center gap-4 mb-6">
+                        <div class="w-12 h-12 bg-cyan-500/20 rounded-2xl flex items-center justify-center text-2xl">🔍
+                        </div>
+                        <h3 class="text-2xl font-black text-cyan-600 dark:text-cyan-400 uppercase tracking-tight">
+                            Auditor<br><span class="text-slate-400 text-xs tracking-widest font-bold">Opinion</span>
+                        </h3>
                     </div>
-                    <div class="text-slate-400 text-xl hidden md:block">➔</div>
-                    <div class="p-4 bg-white dark:bg-slate-700 rounded-xl shadow text-center w-full">
-                        <div class="font-bold text-cyan-600 dark:text-cyan-400">Observation</div>
-                        <div class="text-xs text-slate-500">6-12 Month Period</div>
+                    <p class="text-sm text-cyan-600/70 dark:text-cyan-400/70 mb-6 font-medium italic">"We tested the
+                        system, and we agree (or disagree) with Management."</p>
+                    <ul class="space-y-4 text-slate-600 dark:text-slate-300">
+                        <li class="flex gap-3 text-sm leading-relaxed">
+                            <span class="text-cyan-500 font-bold mt-1">✦</span>
+                            <span>The auditor provides an <strong>independent</strong> opinion on management's
+                                assertion.</span>
+                        </li>
+                        <li class="flex gap-3 text-sm leading-relaxed">
+                            <span class="text-cyan-500 font-bold mt-1">✦</span>
+                            <span>They do not own the system; they provide assurance over it for third parties.</span>
+                        </li>
+                        <li class="flex gap-3 text-sm leading-relaxed">
+                            <span class="text-cyan-500 font-bold mt-1">✦</span>
+                            <span>Found in Section 1 of the report. This is what user auditors rely upon.</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-10">
+                <div
+                    class="bg-slate-500/5 dark:bg-slate-500/10 p-8 rounded-[2rem] border border-slate-500/20 shadow-xl">
+                    <div class="flex items-center gap-4 mb-6">
+                        <div class="w-12 h-12 bg-slate-500/20 rounded-2xl flex items-center justify-center text-2xl">📄
+                        </div>
+                        <h3 class="text-2xl font-black text-slate-600 dark:text-slate-400 uppercase tracking-tight">
+                            Test<br><span class="text-slate-400 text-xs tracking-widest font-bold">Exception</span></h3>
                     </div>
-                    <div class="text-slate-400 text-xl hidden md:block">➔</div>
-                    <div
-                        class="p-4 bg-cyan-50 dark:bg-cyan-900/30 border border-cyan-200 rounded-xl shadow text-center w-full">
-                        <div class="font-bold text-cyan-600 dark:text-cyan-400">Type II</div>
-                        <div class="text-xs text-slate-500">Operating Effectiveness</div>
+                    <ul class="space-y-4 text-slate-600 dark:text-slate-300">
+                        <li class="flex gap-3 text-sm leading-relaxed">
+                            <span class="text-slate-500 font-bold mt-1">✦</span>
+                            <span>A single sample item fails a test (e.g., 1 out of 25 terminated users was not
+                                removed).</span>
+                        </li>
+                        <li class="flex gap-3 text-sm leading-relaxed">
+                            <span class="text-slate-500 font-bold mt-1">✦</span>
+                            <span>Often referred to as a "Test Deviation."</span>
+                        </li>
+                        <li class="flex gap-3 text-sm leading-relaxed">
+                            <span class="text-slate-500 font-bold mt-1">✦</span>
+                            <span>Does not necessarily mean the whole control failed.</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="bg-red-500/5 dark:bg-red-500/10 p-8 rounded-[2rem] border border-red-500/20 shadow-xl">
+                    <div class="flex items-center gap-4 mb-6">
+                        <div class="w-12 h-12 bg-red-500/20 rounded-2xl flex items-center justify-center text-2xl">⚠️
+                        </div>
+                        <h3 class="text-2xl font-black text-red-600 dark:text-red-400 uppercase tracking-tight">
+                            Control<br><span class="text-slate-400 text-xs tracking-widest font-bold">Failure</span>
+                        </h3>
+                    </div>
+                    <ul class="space-y-4 text-slate-600 dark:text-slate-300">
+                        <li class="flex gap-3 text-sm leading-relaxed">
+                            <span class="text-red-500 font-bold mt-1">✦</span>
+                            <span>The number of exceptions is so high that the control cannot be relied upon.</span>
+                        </li>
+                        <li class="flex gap-3 text-sm leading-relaxed">
+                            <span class="text-red-500 font-bold mt-1">✦</span>
+                            <span>Requires the auditor to modify their opinion (Qualified or Adverse).</span>
+                        </li>
+                        <li class="flex gap-3 text-sm leading-relaxed">
+                            <span class="text-red-500 font-bold mt-1">✦</span>
+                            <span>Indicates a systemic breakdown in the control environment.</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div
+                    class="lg:col-span-2 bg-slate-100 dark:bg-slate-800/50 p-6 rounded-3xl border border-slate-200 dark:border-slate-700">
+                    <div class="flex gap-4 items-start">
+                        <span class="text-2xl">💡</span>
+                        <div>
+                            <h4 class="font-bold text-slate-800 dark:text-white mb-1">Mitigating Controls & Opinions
+                            </h4>
+                            <p class="text-sm text-slate-500 dark:text-slate-400">A report can have multiple exceptions
+                                in Section 4 but still receive an <strong>Unqualified (Clean)</strong> opinion in
+                                Section 1 if the exceptions are not material or are mitigated by other controls (like a
+                                secondary weekly review).</p>
+                        </div>
                     </div>
                 </div>
             </div>
 
-            <div class="mb-10 p-6 bg-cyan-500/10 border border-cyan-500/20 rounded-2xl">
-                <h4 class="font-bold text-cyan-600 dark:text-cyan-400 mb-2">The Sampling Golden Rule</h4>
-                <p class="text-sm text-slate-600 dark:text-slate-300">Auditors do not test every single event that
-                    occurred over the year. Instead, they request a complete <strong>Population</strong> (e.g., a list
-                    of all 1,000 code deployments), and randomly select a <strong>Sample</strong> (usually 25 to 40
-                    items) to test comprehensively via Inspection.</p>
-            </div>
-            <div
-                class="mb-10 bg-slate-100 dark:bg-slate-800/50 rounded-3xl p-8 border border-slate-200 dark:border-slate-700">
-                <h3 class="text-xl font-bold mb-6 text-cyan-500">Materiality Lens</h3>
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                    <div class="p-4 bg-white dark:bg-slate-700 rounded-xl shadow-sm border-t-4 border-cyan-500">
-                        <div class="font-bold text-slate-800 dark:text-white">Low Impact</div>
-                        <div class="text-xs text-slate-500 mt-1">Minor control deviation with limited user impact.</div>
-                    </div>
-                    <div class="p-4 bg-white dark:bg-slate-700 rounded-xl shadow-sm border-t-4 border-cyan-500">
-                        <div class="font-bold text-slate-800 dark:text-white">Material Exception</div>
-                        <div class="text-xs text-slate-500 mt-1">Could affect financial reporting or trust in the
-                            report.</div>
-                    </div>
-                    <div class="p-4 bg-white dark:bg-slate-700 rounded-xl shadow-sm border-t-4 border-cyan-500">
-                        <div class="font-bold text-slate-800 dark:text-white">Control Deficiency</div>
-                        <div class="text-xs text-slate-500 mt-1">Repeated failures can drive a qualified opinion.</div>
-                    </div>
-                </div>
-            </div>
             <div id="audit-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
         </section>
     </main>
-    <footer class="w-full max-w-7xl mx-auto px-4 pb-4 mt-12 text-center fade-in">
+    <footer class="w-full max-w-7xl mx-auto px-4 pb-12 mt-12 text-center fade-in">
         <p class="text-xs md:text-sm text-slate-600 dark:text-slate-400 font-semibold tracking-wide">
-            Version v0.7.98 •
+            Version <span class="app-version">v0.7.98</span> •
             <a href="https://github.com/Kaiwawa/masterthecloud" target="_blank" rel="noopener noreferrer"
                 class="text-brand-accent hover:underline">
                 Main GitHub Repository
             </a>
         </p>
     </footer>
-
 
     <div id="deep-dive-modal"
         class="fixed inset-0 z-[100] hidden items-center justify-center bg-slate-950/80 backdrop-blur-md p-4 opacity-0 transition-all duration-300"
@@ -596,47 +701,13 @@ When a critical fix is needed immediately, the standard process is bypassed. How
         const auditData = [
             { id: 'a1', icon: '🔍', title: 'Audit Testing Methods', desc: 'How auditors verify controls.', summary: '• Inquiry (Weakest)\n• Observation\n• Inspection\n• Reperformance (Strongest)', dive: `### Audit Testing Methods\n\n<div class="mermaid">\ngraph TD\n    A["Inquiry (Weakest)"] --> B["Observation"]\n    B --> C["Inspection"]\n    C --> D["Reperformance (Strongest)"]\n    style A fill:#ef4444,color:#fff\n    style B fill:#f97316,color:#fff\n    style C fill:#eab308,color:#000\n    style D fill:#22c55e,color:#fff\n</div>\n\nAuditors must independently pull samples and test them using a strict hierarchy of evidence.\n\n#### Evidence Strength\n| Method | Strength | Description |\n|--------|----------|------------|\n| **Inquiry** | Weakest | Asking questions. Must be corroborated. |\n| **Observation** | Moderate | Watching a process performed live. |\n| **Inspection** | Strong | Reviewing documents and system records. |\n| **Reperformance** | Strongest | Auditor executes the control themselves. |\n\n#### Examples\n- **Inquiry:** "How do you handle terminations?" (interview)\n- **Observation:** Watching an admin provision a new user via screen-share\n- **Inspection:** Reviewing Jira tickets, Git PRs, or HR termination emails\n- **Reperformance:** Attempting to log in with a terminated account to verify access is denied\n\n#### 💡 Key Insight\nInspection is the **primary method** for Type II audits. Inquiry alone is NEVER sufficient — it must always be corroborated with stronger evidence.` },
             { id: 'a2', icon: '⚠️', title: 'Sampling & Exceptions', desc: 'When controls fail testing.', summary: '• Population sampling\n• Deviations vs Exceptions\n• Management Responses', dive: `### Sampling and Exceptions\n\n#### Population Sampling\nAuditors don't test every event. They request a complete **Population** and select a random **Sample**.\n\n| Population Size | Typical Sample Size |\n|----------------|--------------------|\n| 1-5 items | All items |\n| 6-50 items | 5-10 items |\n| 51-250 items | 15-25 items |\n| 250+ items | 25-40 items |\n\n#### Exception Handling\n1. Auditor finds an item in the sample lacking required approval → **Exception noted**.\n2. Single exception → sample may be **expanded** (test 10+ more items).\n3. More exceptions found → control deemed **Ineffective**.\n4. All exceptions published in **Section 4** of the report.\n\n#### Management Response\nFor each exception, management writes a response explaining:\n- **Root cause** — why the failure occurred.\n- **Remediation** — what corrective steps were taken.\n- **Prevention** — how they will prevent recurrence.\n\n#### 💡 Key Insight\nA single exception does NOT automatically fail the audit. The auditor evaluates whether the exception is **isolated** or **systemic**. Multiple exceptions in the same control area = Qualified Opinion risk.` },
-            { id: 'a3', icon: '⚖️', title: 'The Auditor\'s Opinion', desc: 'The final result of the audit.', summary: '• Unqualified (Clean)\n• Qualified (Except for...)\n• Adverse / Disclaimer', dive: `### The Auditor's Opinion\n\nThe most critical component — found in Section 1. The CPA firm issues a formal, legally-binding opinion.\n\n#### Opinion Types\n| Opinion | Meaning | Impact |\n|---------|---------|--------|\n| **Unqualified** | Clean. Controls work as described. | Best outcome |\n| **Qualified** | "Except for..." specific controls. | Customers review closely |\n| **Adverse** | Fundamentally broken or misleading. | Reputation damage |\n| **Disclaimer** | Auditor couldn't form an opinion. | Management blocked access |\n\n#### What Triggers Each\n- **Unqualified:** No material issues. Minor exceptions acceptable if isolated.\n- **Qualified:** One or more material control failures, but the rest is solid.\n- **Adverse:** Widespread failures, management's description is misleading.\n- **Disclaimer:** Insufficient evidence provided, scope restrictions.\n\n#### 💡 Key Insight\nCustomers receiving a SOC 1 report should read the **opinion first**. A Qualified opinion means "mostly good but check the exceptions in Section 4." An Adverse opinion is a serious red flag.` },
-            { id: 'a4', icon: '📅', title: 'Type I vs Type II', desc: 'Point-in-time vs period of time.', summary: '• Type I: Design only\n• Type II: Operating effectiveness\n• Typical audit period', dive: `### Type I vs Type II Reports\n\n#### Type I — Point-in-Time\n- Tests whether controls are **designed properly** at a specific date.\n- No testing of operating effectiveness over time.\n- Often used as a first-year "stepping stone" before a Type II.\n- Does NOT include Section 4 (testing results).\n\n#### Type II — Period of Time\n- Tests whether controls **operated effectively** over a period (typically 6-12 months).\n- Includes Section 4 with detailed testing and results.\n- Required by most enterprise customers and financial auditors.\n- The "gold standard" for SOC reporting.\n\n#### Comparison\n| Feature | Type I | Type II |\n|---------|--------|--------|\n| Scope | Design at a point in time | Effectiveness over a period |\n| Period | Single date | 6-12 months |\n| Section 4 | No | Yes (testing matrix) |\n| Evidence level | Lower (design review) | Higher (sample testing) |\n| Customer preference | First-year only | Ongoing annual requirement |\n\n#### The Typical Journey\n1. **Year 1:** Readiness assessment → Type I report\n2. **Year 2+:** Type II report (annual renewal)\n\n#### 💡 Key Insight\nType II is almost always what customers and their auditors actually require. Type I is a stepping stone. If someone says "we have a SOC 1," always ask: "Type I or Type II?"` },
-            {
-                id: 'au5', icon: '📜', title: 'Audit Opinions', desc: 'The four types of auditor opinions.', summary: '• Unqualified (Clean)\n• Qualified (Except for)\n• Adverse & Disclaimer', dive: `### Audit Opinions
-At the end of a SOC 1 engagement, the auditor issues an opinion on the fairness of the presentation, suitability of design, and (in a Type 2) the operating effectiveness of controls.
-
-#### The Four Opinions
-1. **Unqualified Opinion (Clean):** The best outcome. The controls are presented fairly, designed suitably, and operating effectively.
-2. **Qualified Opinion:** A "clean" opinion *except for* a specific issue. Usually issued when a specific control objective fails, but the overall system is still reliable.
-3. **Adverse Opinion:** The worst outcome. The controls are pervasive failures, and the system cannot be relied upon.
-4. **Disclaimer of Opinion:** The auditor could not obtain sufficient evidence to form an opinion (e.g., management refused to provide requested documentation).` },
-            {
-                id: 'au6', icon: '🗣️', title: 'Management Assertion', desc: 'The organization takes responsibility.', summary: '• Written Assertion\n• System Description\n• Auditor Independence', dive: `### Management Assertion vs Auditor Opinion
-A SOC 1 report contains two distinct viewpoints: Management's and the Auditor's.
-
-#### Management's Assertion
-Management must provide a written assertion (usually Section 2 of the report) stating that:
-- The system description fairly presents the actual system.
-- The controls are suitably designed to achieve the control objectives.
-- (In a Type 2) The controls operated effectively throughout the specified period.
-*Management takes ultimate responsibility for the system.*
-
-#### The Auditor's Opinion
-The auditor (Section 1 of the report) provides an independent opinion on whether management's assertion is fairly stated in all material respects. The auditor does not own the system; they provide independent assurance over it.` },
-            {
-                id: 'au7', icon: '⚠️', title: 'Exceptions vs Deviations', desc: 'When controls fail during testing.', summary: '• Test Exceptions\n• Control Deviations\n• Mitigating Controls', dive: `### Exceptions vs Deviations
-Not all control failures lead to a qualified opinion. Auditors distinguish between individual test failures and overall control failures.
-
-#### Terminology
-- **Exception (or Test Deviation):** When a single sample item fails a test (e.g., one terminated user out of 25 was not removed within 24 hours).
-- **Control Failure (or Deficiency):** When the number of exceptions is so high that the control cannot be relied upon.
-- **Mitigating Controls:** Sometimes a primary control fails, but a secondary control (like a weekly access review) catches the error. The auditor may rely on the mitigating control to avoid modifying their overall opinion.
-
-#### Exam Tip
-A report can have multiple exceptions listed in Section 4, but still receive an **Unqualified (Clean)** opinion in Section 1 if the exceptions are not material or are mitigated by other controls.` }
+            { id: 'a3', icon: '⚖️', title: 'The Auditor\'s Opinion', desc: 'The final result of the audit.', summary: '• Unqualified (Clean)\n• Qualified (Except for...)\n• Adverse / Disclaimer', dive: `### The Auditor's Opinion\n\nThe most critical component — found in Section 1. The CPA firm issues a formal, legally-binding opinion.\n\n#### Opinion Types\n| Opinion | Meaning | Impact |\n|---------|---------|--------|\n| **Unqualified** | Clean. Controls work as described. | Best outcome |\n| **Qualified** | "Except for..." specific controls. | Customers review closely |\n| **Adverse** | Fundamentally broken or misleading. | Reputation damage |\n| **Disclaimer** | Auditor couldn't form an opinion. | Management blocked access |\n\n#### What Triggers Each\n- **Unqualified:** No material issues. Minor exceptions acceptable if isolated.\n- **Qualified:** One or more material control failures, but the rest is solid.\n- **Adverse:** Widespread failures, management's description is misleading.\n- **Disclaimer:** Insufficient evidence provided, scope restrictions.` },
+            { id: 'au5', icon: '📜', title: 'Audit Opinions', desc: 'The four types of auditor opinions.', summary: '• Unqualified (Clean)\n• Qualified (Except for)\n• Adverse & Disclaimer', dive: `### Audit Opinions\nAt the end of a SOC 1 engagement, the auditor issues an opinion on the fairness of the presentation, suitability of design, and (in a Type 2) the operating effectiveness of controls.\n\n#### The Four Opinions\n1. **Unqualified Opinion (Clean):** The best outcome. The controls are presented fairly, designed suitably, and operating effectively.\n2. **Qualified Opinion:** A "clean" opinion *except for* a specific issue. Usually issued when a specific control objective fails, but the overall system is still reliable.\n3. **Adverse Opinion:** The worst outcome. The controls are pervasive failures, and the system cannot be relied upon.\n4. **Disclaimer of Opinion:** The auditor could not obtain sufficient evidence to form an opinion (e.g., management refused to provide requested documentation).` }
         ];
 
         const app = new StudyGuideApp({
             grids: [
                 { id: 'framework-grid', data: frameworkData, border: 'border-teal-500', grad: 'from-teal-500/20', color: 'teal-500' },
-                { id: 'concepts-grid', data: frameworkData, border: 'border-blue-500', grad: 'from-blue-500/20', color: 'blue-500' },
                 { id: 'controls-grid', data: controlsData, border: 'border-emerald-500', grad: 'from-emerald-500/20', color: 'emerald-500' },
                 { id: 'audit-grid', data: auditData, border: 'border-cyan-500', grad: 'from-cyan-500/20', color: 'cyan-500' }
             ]

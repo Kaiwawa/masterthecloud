@@ -10,6 +10,7 @@
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
     <script src="assets/js/app.js"></script>
+    <script src="assets/js/version.js"></script>
     <link rel="stylesheet" href="assets/css/site.css">
     <script>
         tailwind.config = {
@@ -421,22 +422,52 @@
                 <h2 class="text-4xl font-black mb-2 text-orange-500">Compute Services</h2>
             </div>
 
-            <div
-                class="mb-10 bg-slate-100 dark:bg-slate-800/50 rounded-3xl p-8 border border-slate-200 dark:border-slate-700">
-                <h3 class="text-xl font-bold mb-6 text-orange-500">💻 Compute Decision Matrix</h3>
-                <ul
-                    class="list-disc list-inside text-slate-700 dark:text-slate-300 space-y-2 marker:text-orange-500 font-medium">
-                    <li><strong class="text-slate-900 dark:text-white">EC2:</strong> Need full control over the OS,
-                        custom software, or BYOL (Bring Your Own License).</li>
-                    <li><strong class="text-slate-900 dark:text-white">Lambda:</strong> Short-running (< 15 mins),
-                            event-driven code without managing servers. Pay per ms.</li>
-                    <li><strong class="text-slate-900 dark:text-white">ECS / EKS:</strong> Running Docker containers.
-                        Use EKS if you want open-source Kubernetes.</li>
-                    <li><strong class="text-slate-900 dark:text-white">Fargate:</strong> Running containers without
-                        managing the underlying EC2 servers (Serverless containers).</li>
-                    <li><strong class="text-slate-900 dark:text-white">Elastic Beanstalk:</strong> PaaS. Upload code and
-                        AWS handles deployment, scaling, and load balancing automatically.</li>
-                </ul>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-10">
+                <div
+                    class="bg-orange-500/5 dark:bg-orange-500/10 p-8 rounded-[2rem] border border-orange-500/20 shadow-xl">
+                    <div class="flex items-center gap-4 mb-6">
+                        <div class="w-12 h-12 bg-orange-500/20 rounded-2xl flex items-center justify-center text-2xl">💻
+                        </div>
+                        <h3 class="text-2xl font-black text-orange-600 dark:text-orange-400 uppercase tracking-tight">
+                            Virtual &<br>Serverless</h3>
+                    </div>
+                    <ul class="space-y-4 text-slate-600 dark:text-slate-300">
+                        <li class="flex gap-3 text-sm leading-relaxed">
+                            <span class="text-orange-500 font-bold mt-1">✦</span>
+                            <span><strong>EC2:</strong> Need full control over the OS, custom software, or BYOL.</span>
+                        </li>
+                        <li class="flex gap-3 text-sm leading-relaxed">
+                            <span class="text-orange-500 font-bold mt-1">✦</span>
+                            <span><strong>Lambda:</strong> Short-running (< 15 mins), event-driven code. Pay per
+                                    ms.</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div
+                    class="bg-orange-500/5 dark:bg-orange-500/10 p-8 rounded-[2rem] border border-orange-500/20 shadow-xl">
+                    <div class="flex items-center gap-4 mb-6">
+                        <div class="w-12 h-12 bg-orange-500/20 rounded-2xl flex items-center justify-center text-2xl">🐳
+                        </div>
+                        <h3 class="text-2xl font-black text-orange-600 dark:text-orange-400 uppercase tracking-tight">
+                            Containers &<br>Managed</h3>
+                    </div>
+                    <ul class="space-y-4 text-slate-600 dark:text-slate-300">
+                        <li class="flex gap-3 text-sm leading-relaxed">
+                            <span class="text-orange-500 font-bold mt-1">✦</span>
+                            <span><strong>ECS / EKS:</strong> Running Docker containers. Use EKS for Kubernetes.</span>
+                        </li>
+                        <li class="flex gap-3 text-sm leading-relaxed">
+                            <span class="text-orange-500 font-bold mt-1">✦</span>
+                            <span><strong>Fargate:</strong> Serverless containers. No EC2 management required.</span>
+                        </li>
+                        <li class="flex gap-3 text-sm leading-relaxed">
+                            <span class="text-orange-500 font-bold mt-1">✦</span>
+                            <span><strong>Elastic Beanstalk:</strong> PaaS. Upload code, AWS handles
+                                deployment/scaling.</span>
+                        </li>
+                    </ul>
+                </div>
             </div>
             <div id="compute-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
         </section>
@@ -655,9 +686,9 @@
         </section>
 
     </main>
-    <footer class="w-full max-w-7xl mx-auto px-4 pb-4 mt-12 text-center fade-in">
+    <footer class="w-full max-w-7xl mx-auto px-4 pb-12 mt-12 text-center fade-in">
         <p class="text-xs md:text-sm text-slate-600 dark:text-slate-400 font-semibold tracking-wide">
-            Version v0.7.98 •
+            Version <span class="app-version">v0.7.98</span> •
             <a href="https://github.com/Kaiwawa/masterthecloud" target="_blank" rel="noopener noreferrer"
                 class="text-brand-accent hover:underline">
                 Main GitHub Repository
@@ -1753,6 +1784,7 @@ Retaining means keeping workloads on-premises or in their current environment. E
             ]
         });
     </script>
+
 </body>
 
 </html>

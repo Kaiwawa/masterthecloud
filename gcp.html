@@ -9,6 +9,8 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+    <script src="assets/js/app.js"></script>
+    <script src="assets/js/version.js"></script>
     <link rel="stylesheet" href="assets/css/site.css">
     <script>
         tailwind.config = {
@@ -416,22 +418,49 @@
                 <p class="text-slate-500 dark:text-slate-400 italic">Virtual machines, serverless, and orchestration.
                 </p>
             </div>
-            <div
-                class="mb-10 bg-slate-100 dark:bg-slate-800/50 rounded-3xl p-8 border border-slate-200 dark:border-slate-700">
-                <h3 class="text-xl font-bold mb-6 text-orange-500">Compute Service Decision Tree</h3>
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                    <div class="p-4 bg-white dark:bg-slate-700 rounded-xl shadow-sm border-t-4 border-orange-500">
-                        <div class="font-bold text-slate-800 dark:text-white">Need full OS control?</div>
-                        <div class="text-xs text-slate-500 mt-1">Use Compute Engine.</div>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-10">
+                <div
+                    class="bg-orange-500/5 dark:bg-orange-500/10 p-8 rounded-[2rem] border border-orange-500/20 shadow-xl">
+                    <div class="flex items-center gap-4 mb-6">
+                        <div class="w-12 h-12 bg-orange-500/20 rounded-2xl flex items-center justify-center text-2xl">💻
+                        </div>
+                        <h3 class="text-2xl font-black text-orange-600 dark:text-orange-400 uppercase tracking-tight">
+                            VMs &<br>Servers</h3>
                     </div>
-                    <div class="p-4 bg-white dark:bg-slate-700 rounded-xl shadow-sm border-t-4 border-orange-500">
-                        <div class="font-bold text-slate-800 dark:text-white">Need raw code or containers?</div>
-                        <div class="text-xs text-slate-500 mt-1">Use App Engine or Cloud Run.</div>
+                    <ul class="space-y-4 text-slate-600 dark:text-slate-300">
+                        <li class="flex gap-3 text-sm leading-relaxed">
+                            <span class="text-orange-500 font-bold mt-1">✦</span>
+                            <span><strong>Need full OS control?</strong> Use Compute Engine (IaaS) for total
+                                flexibility.</span>
+                        </li>
+                        <li class="flex gap-3 text-sm leading-relaxed">
+                            <span class="text-orange-500 font-bold mt-1">✦</span>
+                            <span><strong>Need orchestration at scale?</strong> Use GKE or Autopilot for complex
+                                microservices.</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div
+                    class="bg-orange-500/5 dark:bg-orange-500/10 p-8 rounded-[2rem] border border-orange-500/20 shadow-xl">
+                    <div class="flex items-center gap-4 mb-6">
+                        <div class="w-12 h-12 bg-orange-500/20 rounded-2xl flex items-center justify-center text-2xl">⚡
+                        </div>
+                        <h3 class="text-2xl font-black text-orange-600 dark:text-orange-400 uppercase tracking-tight">
+                            Serverless &<br>Apps</h3>
                     </div>
-                    <div class="p-4 bg-white dark:bg-slate-700 rounded-xl shadow-sm border-t-4 border-orange-500">
-                        <div class="font-bold text-slate-800 dark:text-white">Need orchestration at scale?</div>
-                        <div class="text-xs text-slate-500 mt-1">Use GKE or Autopilot.</div>
-                    </div>
+                    <ul class="space-y-4 text-slate-600 dark:text-slate-300">
+                        <li class="flex gap-3 text-sm leading-relaxed">
+                            <span class="text-orange-500 font-bold mt-1">✦</span>
+                            <span><strong>Need raw code or containers?</strong> Use App Engine (PaaS) or Cloud Run
+                                (Serverless containers).</span>
+                        </li>
+                        <li class="flex gap-3 text-sm leading-relaxed">
+                            <span class="text-orange-500 font-bold mt-1">✦</span>
+                            <span><strong>Event-driven snippets?</strong> Use Cloud Functions for lightweight
+                                execution.</span>
+                        </li>
+                    </ul>
                 </div>
             </div>
 
@@ -550,9 +579,9 @@
             <div id="ops-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
         </section>
     </main>
-    <footer class="w-full max-w-7xl mx-auto px-4 pb-4 mt-12 text-center fade-in">
+    <footer class="w-full max-w-7xl mx-auto px-4 pb-12 mt-12 text-center fade-in">
         <p class="text-xs md:text-sm text-slate-600 dark:text-slate-400 font-semibold tracking-wide">
-            Version v0.7.98 •
+            Version <span class="app-version">v0.7.98</span> •
             <a href="https://github.com/Kaiwawa/masterthecloud" target="_blank" rel="noopener noreferrer"
                 class="text-brand-accent hover:underline">
                 Main GitHub Repository
@@ -634,6 +663,7 @@
         });
 
     </script>
+
 </body>
 
 </html>
