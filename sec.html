@@ -155,7 +155,7 @@
         <div class="max-w-7xl mx-auto px-4 h-20 grid grid-cols-3 items-center gap-4">
             <div class="flex items-center justify-start gap-4">
                 <button onclick="goHome()"
-                    class="hidden sm:flex p-2.5 bg-slate-100 dark:bg-slate-800 rounded-xl hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors shrink-0 text-slate-500 dark:text-slate-400 hover:text-brand-accent dark:hover:text-brand-accent items-center justify-center"
+                    class="hidden sm:flex p-2.5 bg-slate-100 dark:bg-slate-800 rounded-xl hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors shrink-0 text-slate-500 dark:text-slate-200 hover:text-brand-accent dark:hover:text-brand-accent items-center justify-center"
                     title="Home">
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5">
                         <path stroke-linecap="round" stroke-linejoin="round"
@@ -164,7 +164,7 @@
                     </svg>
                 </button>
                 <button onclick="openSidebar()"
-                    class="p-2.5 px-4 bg-slate-100 dark:bg-slate-800 rounded-xl hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors shrink-0 flex items-center gap-2 text-slate-700 dark:text-slate-300">
+                    class="p-2.5 px-4 bg-slate-100 dark:bg-slate-800 rounded-xl hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors shrink-0 flex items-center gap-2 text-slate-700 dark:text-slate-200">
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"></path>
                     </svg>
@@ -204,60 +204,67 @@
     <aside id="left-sidebar"
         class="fixed top-0 left-0 h-full w-72 bg-white dark:bg-[#0f172a] border-r border-slate-200 dark:border-slate-800 shadow-[0_0_50px_rgba(0,0,0,0.3)] z-[60] transform -translate-x-full transition-transform duration-300 flex flex-col">
         <div class="p-6 flex justify-between items-center border-b border-slate-200 dark:border-slate-800">
-            <span class="font-black text-sm text-slate-400 uppercase tracking-widest">Navigation</span>
+            <span class="font-black text-sm text-slate-200 uppercase tracking-widest">Navigation</span>
             <button onclick="closeSidebar()"
-                class="text-slate-400 hover:text-brand-accent transition-colors text-3xl">&times;</button>
-        </div>
-
-        <nav class="flex flex-col gap-1 p-4 overflow-y-auto custom-scrollbar flex-grow">
+                class="text-slate-200 hover:text-brand-accent transition-colors text-3xl">&times;</button>
+            </d <nav class="flex flex-col gap-1 p-4 overflow-y-auto custom-scrollbar flex-grow">
             <button data-target="section-home" onclick="navigateTo('section-home')"
                 class="nav-btn text-left px-4 py-2 rounded-xl text-base font-bold transition-all text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800">Dashboard</button>
 
-            <span class="px-4 text-base font-black text-slate-800 dark:text-slate-200 tracking-wide mt-4 mb-1">Exam
-                Domains</span>
+            <span
+                class="px-4 text-xs font-black text-slate-200 tracking-widest mt-6 mb-2 uppercase">Threats
+                & Governance</span>
             <button data-target="section-threats" onclick="navigateTo('section-threats')"
                 class="nav-btn text-left pl-8 pr-4 py-2 rounded-xl text-sm font-semibold transition-all text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800">Threats,
                 Attacks & Vulnerabilities</button>
+            <button data-target="section-governance" onclick="navigateTo('section-governance')"
+                class="nav-btn text-left pl-8 pr-4 py-2 rounded-xl text-sm font-semibold transition-all text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800">Governance,
+                Risk & Compliance</button>
+
+            <span
+                class="px-4 text-xs font-black text-slate-200 tracking-widest mt-6 mb-2 uppercase">Engineering
+                & Architecture</span>
             <button data-target="section-architecture" onclick="navigateTo('section-architecture')"
                 class="nav-btn text-left pl-8 pr-4 py-2 rounded-xl text-sm font-semibold transition-all text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800">Architecture
                 & Design</button>
+            <button data-target="section-cryptography" onclick="navigateTo('section-cryptography')"
+                class="nav-btn text-left pl-8 pr-4 py-2 rounded-xl text-sm font-semibold transition-all text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800">Cryptography
+                & PKI</button>
+
+            <span
+                class="px-4 text-xs font-black text-slate-200 tracking-widest mt-6 mb-2 uppercase">Operations
+                & Implementation</span>
             <button data-target="section-implementation" onclick="navigateTo('section-implementation')"
                 class="nav-btn text-left pl-8 pr-4 py-2 rounded-xl text-sm font-semibold transition-all text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800">Implementation</button>
             <button data-target="section-operations" onclick="navigateTo('section-operations')"
                 class="nav-btn text-left pl-8 pr-4 py-2 rounded-xl text-sm font-semibold transition-all text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800">Operations
                 & Incident Response</button>
-            <button data-target="section-governance" onclick="navigateTo('section-governance')"
-                class="nav-btn text-left pl-8 pr-4 py-2 rounded-xl text-sm font-semibold transition-all text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800">Governance,
-                Risk & Compliance</button>
-            <button data-target="section-cryptography" onclick="navigateTo('section-cryptography')"
-                class="nav-btn text-left pl-8 pr-4 py-2 rounded-xl text-sm font-semibold transition-all text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800">Cryptography
-                & PKI</button>
 
             <a href="index.html"
-                class="text-left px-4 py-2 rounded-xl text-sm font-bold transition-all text-brand-accent hover:bg-slate-100 dark:hover:bg-slate-800 mb-2">←
+                class="text-left px-4 py-2 rounded-xl text-sm font-bold transition-all text-brand-accent hover:bg-slate-100 dark:hover:bg-slate-800 mb-2 mt-4">←
                 Back to Main Menu</a>
-        </nav>
+            </nav>
     </aside>
 
     <main class="max-w-7xl mx-auto px-4 py-12">
 
-        <section id="section-home" class="content-section fade-in">
+        <section id="section-home" class="content-section fade-in pt-12">
             <div class="text-center mb-16 mt-8">
                 <div
                     class="inline-block px-4 py-1.5 rounded-full bg-brand-accent/10 border border-brand-accent/20 text-brand-accent font-bold text-xs tracking-widest uppercase mb-6">
                     CompTIA Security+ SY0-701</div>
                 <h2 class="text-5xl md:text-7xl font-black mb-6 tracking-tight text-slate-900 dark:text-white">Master
                     Security+.</h2>
-                <p class="text-slate-500 dark:text-slate-400 text-lg md:text-xl max-w-3xl mx-auto leading-relaxed">The
+                <p class="text-slate-500 dark:text-slate-200 text-lg md:text-xl max-w-3xl mx-auto leading-relaxed">The
                     definitive interactive guide for the SY0-701 exam. Select a domain below to explore core concepts
                     and security principles.</p>
             </div>
 
             <div class="mb-12">
                 <h3
-                    class="text-sm font-black text-slate-400 uppercase tracking-widest mb-6 pl-2 border-l-4 border-brand-accent">
-                    Exam Domains</h3>
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    class="text-sm font-black text-slate-200 uppercase tracking-widest mb-6 pl-2 border-l-4 border-brand-accent">
+                    Threats & Governance</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                     <div onclick="navigateTo('section-threats')"
                         class="bg-white dark:bg-slate-800/40 p-8 rounded-[2rem] border border-slate-200 dark:border-slate-700/50 shadow-xl cursor-pointer hover:-translate-y-2 hover:border-brand-accent/50 transition-all group">
                         <div
@@ -265,27 +272,62 @@
                             ⚠️</div>
                         <h3 class="text-xl font-black mb-2 text-slate-800 dark:text-white">Threats, Attacks &
                             Vulnerabilities</h3>
-                        <p class="text-slate-500 dark:text-slate-400 text-sm leading-relaxed">Social engineering,
+                        <p class="text-slate-500 dark:text-slate-200 text-sm leading-relaxed">Social engineering,
                             malware, vulnerability assessment, and threat modeling.</p>
                     </div>
 
+                    <div onclick="navigateTo('section-governance')"
+                        class="bg-white dark:bg-slate-800/40 p-8 rounded-[2rem] border border-slate-200 dark:border-slate-700/50 shadow-xl cursor-pointer hover:-translate-y-2 hover:border-red-500/50 transition-all group">
+                        <div
+                            class="w-14 h-14 mx-auto bg-red-500/10 rounded-2xl flex items-center justify-center text-3xl mb-6 group-hover:scale-110 transition-transform">
+                            📋</div>
+                        <h3 class="text-xl font-black mb-2 text-slate-800 dark:text-white">Governance, Risk & Compliance
+                        </h3>
+                        <p class="text-slate-500 dark:text-slate-200 text-sm leading-relaxed">Policies, regulations,
+                            risk management, and security governance.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mb-12">
+                <h3
+                    class="text-sm font-black text-slate-200 uppercase tracking-widest mb-6 pl-2 border-l-4 border-brand-accent">
+                    Engineering & Architecture</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                     <div onclick="navigateTo('section-architecture')"
                         class="bg-white dark:bg-slate-800/40 p-8 rounded-[2rem] border border-slate-200 dark:border-slate-700/50 shadow-xl cursor-pointer hover:-translate-y-2 hover:border-purple-500/50 transition-all group">
                         <div
                             class="w-14 h-14 mx-auto bg-purple-500/10 rounded-2xl flex items-center justify-center text-3xl mb-6 group-hover:scale-110 transition-transform">
                             🏗️</div>
                         <h3 class="text-xl font-black mb-2 text-slate-800 dark:text-white">Architecture & Design</h3>
-                        <p class="text-slate-500 dark:text-slate-400 text-sm leading-relaxed">Enterprise architecture,
+                        <p class="text-slate-500 dark:text-slate-200 text-sm leading-relaxed">Enterprise architecture,
                             cloud security, mobile security, and IoT.</p>
                     </div>
 
+                    <div onclick="navigateTo('section-cryptography')"
+                        class="bg-white dark:bg-slate-800/40 p-8 rounded-[2rem] border border-slate-200 dark:border-slate-700/50 shadow-xl cursor-pointer hover:-translate-y-2 hover:border-blue-500/50 transition-all group">
+                        <div
+                            class="w-14 h-14 mx-auto bg-blue-500/10 rounded-2xl flex items-center justify-center text-3xl mb-6 group-hover:scale-110 transition-transform">
+                            🔐</div>
+                        <h3 class="text-xl font-black mb-2 text-slate-800 dark:text-white">Cryptography & PKI</h3>
+                        <p class="text-slate-500 dark:text-slate-200 text-sm leading-relaxed">Encryption, certificates,
+                            digital signatures, and key management.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mb-12">
+                <h3
+                    class="text-sm font-black text-slate-200 uppercase tracking-widest mb-6 pl-2 border-l-4 border-brand-accent">
+                    Operations & Implementation</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                     <div onclick="navigateTo('section-implementation')"
                         class="bg-white dark:bg-slate-800/40 p-8 rounded-[2rem] border border-slate-200 dark:border-slate-700/50 shadow-xl cursor-pointer hover:-translate-y-2 hover:border-green-500/50 transition-all group">
                         <div
                             class="w-14 h-14 mx-auto bg-green-500/10 rounded-2xl flex items-center justify-center text-3xl mb-6 group-hover:scale-110 transition-transform">
                             ⚙️</div>
                         <h3 class="text-xl font-black mb-2 text-slate-800 dark:text-white">Implementation</h3>
-                        <p class="text-slate-500 dark:text-slate-400 text-sm leading-relaxed">Access control, identity
+                        <p class="text-slate-500 dark:text-slate-200 text-sm leading-relaxed">Access control, identity
                             management, network security controls.</p>
                     </div>
 
@@ -296,31 +338,12 @@
                             🚨</div>
                         <h3 class="text-xl font-black mb-2 text-slate-800 dark:text-white">Operations & Incident
                             Response</h3>
-                        <p class="text-slate-500 dark:text-slate-400 text-sm leading-relaxed">Security operations,
+                        <p class="text-slate-500 dark:text-slate-200 text-sm leading-relaxed">Security operations,
                             incident response, disaster recovery, and forensics.</p>
                     </div>
-
-                    <div onclick="navigateTo('section-governance')"
-                        class="bg-white dark:bg-slate-800/40 p-8 rounded-[2rem] border border-slate-200 dark:border-slate-700/50 shadow-xl cursor-pointer hover:-translate-y-2 hover:border-red-500/50 transition-all group">
-                        <div
-                            class="w-14 h-14 mx-auto bg-red-500/10 rounded-2xl flex items-center justify-center text-3xl mb-6 group-hover:scale-110 transition-transform">
-                            📋</div>
-                        <h3 class="text-xl font-black mb-2 text-slate-800 dark:text-white">Governance, Risk & Compliance
-                        </h3>
-                        <p class="text-slate-500 dark:text-slate-400 text-sm leading-relaxed">Policies, regulations,
-                            risk management, and security governance.</p>
-                    </div>
-
-                    <div onclick="navigateTo('section-cryptography')"
-                        class="bg-white dark:bg-slate-800/40 p-8 rounded-[2rem] border border-slate-200 dark:border-slate-700/50 shadow-xl cursor-pointer hover:-translate-y-2 hover:border-blue-500/50 transition-all group">
-                        <div
-                            class="w-14 h-14 mx-auto bg-blue-500/10 rounded-2xl flex items-center justify-center text-3xl mb-6 group-hover:scale-110 transition-transform">
-                            🔐</div>
-                        <h3 class="text-xl font-black mb-2 text-slate-800 dark:text-white">Cryptography & PKI</h3>
-                        <p class="text-slate-500 dark:text-slate-400 text-sm leading-relaxed">Encryption, certificates,
-                            digital signatures, and key management.</p>
-                    </div>
                 </div>
+            </div>
+            </div>
             </div>
         </section>
 
@@ -414,10 +437,10 @@
                         <div class="w-12 h-12 bg-orange-500/20 rounded-2xl flex items-center justify-center text-2xl">🚧
                         </div>
                         <h3 class="text-2xl font-black text-orange-600 dark:text-orange-400 uppercase tracking-tight">
-                            Phase 1 - 3<br><span class="text-slate-400 text-xs tracking-widest font-bold">Prep, Detect &
+                            Phase 1 - 3<br><span class="text-slate-200 text-xs tracking-widest font-bold">Prep, Detect &
                                 Contain</span></h3>
                     </div>
-                    <ul class="space-y-4 text-slate-600 dark:text-slate-300">
+                    <ul class="space-y-4 text-slate-600 dark:text-slate-200">
                         <li class="flex gap-3 text-sm leading-relaxed">
                             <span class="text-orange-500 font-bold mt-1">✦</span>
                             <span><strong>1. Preparation:</strong> Policies, training, and tools setup before an
@@ -442,10 +465,10 @@
                         <div class="w-12 h-12 bg-orange-500/20 rounded-2xl flex items-center justify-center text-2xl">🏁
                         </div>
                         <h3 class="text-2xl font-black text-orange-600 dark:text-orange-400 uppercase tracking-tight">
-                            Phase 4 - 6<br><span class="text-slate-400 text-xs tracking-widest font-bold">Eradicate,
+                            Phase 4 - 6<br><span class="text-slate-200 text-xs tracking-widest font-bold">Eradicate,
                                 Recover & Learn</span></h3>
                     </div>
-                    <ul class="space-y-4 text-slate-600 dark:text-slate-300">
+                    <ul class="space-y-4 text-slate-600 dark:text-slate-200">
                         <li class="flex gap-3 text-sm leading-relaxed">
                             <span class="text-orange-500 font-bold mt-1">✦</span>
                             <span><strong>4. Eradication:</strong> Removing the root cause and restoring clean
@@ -463,12 +486,18 @@
                         </li>
                     </ul>
                 </div>
-                <div class="lg:col-span-2 bg-slate-100 dark:bg-slate-800/50 p-6 rounded-3xl border border-slate-200 dark:border-slate-700">
+                <div
+                    class="lg:col-span-2 bg-slate-100 dark:bg-slate-800/50 p-6 rounded-3xl border border-slate-200 dark:border-slate-700">
                     <div class="flex gap-4 items-start">
                         <span class="text-2xl">🤖</span>
                         <div>
-                            <h4 class="font-bold text-slate-800 dark:text-white mb-1">Automation & Orchestration (SOAR)</h4>
-                            <p class="text-sm text-slate-500 dark:text-slate-400"><strong>SOAR (Security Orchestration, Automation, and Response)</strong> uses <strong>Playbooks</strong> (high-level strategy) and <strong>Runbooks</strong> (specific technical steps) to automate repetitive tasks like blocking an IP or isolating a host, reducing MTTR (Mean Time to Respond).</p>
+                            <h4 class="font-bold text-slate-800 dark:text-white mb-1">Automation & Orchestration (SOAR)
+                            </h4>
+                            <p class="text-sm text-slate-500 dark:text-slate-200"><strong>SOAR (Security Orchestration,
+                                    Automation, and Response)</strong> uses <strong>Playbooks</strong> (high-level
+                                strategy) and <strong>Runbooks</strong> (specific technical steps) to automate
+                                repetitive tasks like blocking an IP or isolating a host, reducing MTTR (Mean Time to
+                                Respond).</p>
                         </div>
                     </div>
                 </div>
@@ -492,7 +521,7 @@
 
     </main>
     <footer class="w-full max-w-7xl mx-auto px-4 pb-12 mt-12 text-center fade-in">
-        <p class="text-xs md:text-sm text-slate-600 dark:text-slate-400 font-semibold tracking-wide">
+        <p class="text-xs md:text-sm text-slate-600 dark:text-slate-200 font-semibold tracking-wide">
             Version <span class="app-version">v0.7.98</span> •
             <a href="https://github.com/Kaiwawa/masterthecloud" target="_blank" rel="noopener noreferrer"
                 class="text-brand-accent hover:underline">

@@ -155,7 +155,7 @@
         <div class="max-w-7xl mx-auto px-4 h-20 grid grid-cols-3 items-center gap-4">
             <div class="flex items-center justify-start gap-4">
                 <button onclick="goHome()"
-                    class="hidden sm:flex p-2.5 bg-slate-100 dark:bg-slate-800 rounded-xl hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors shrink-0 text-slate-500 dark:text-slate-400 hover:text-brand-accent dark:hover:text-brand-accent items-center justify-center"
+                    class="hidden sm:flex p-2.5 bg-slate-100 dark:bg-slate-800 rounded-xl hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors shrink-0 text-slate-500 dark:text-slate-200 hover:text-brand-accent dark:hover:text-brand-accent items-center justify-center"
                     title="Home">
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5">
                         <path stroke-linecap="round" stroke-linejoin="round"
@@ -164,7 +164,7 @@
                     </svg>
                 </button>
                 <button onclick="openSidebar()"
-                    class="p-2.5 px-4 bg-slate-100 dark:bg-slate-800 rounded-xl hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors shrink-0 flex items-center gap-2 text-slate-700 dark:text-slate-300">
+                    class="p-2.5 px-4 bg-slate-100 dark:bg-slate-800 rounded-xl hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors shrink-0 flex items-center gap-2 text-slate-700 dark:text-slate-200">
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"></path>
                     </svg>
@@ -204,17 +204,17 @@
     <aside id="left-sidebar"
         class="fixed top-0 left-0 h-full w-72 bg-white dark:bg-[#0f172a] border-r border-slate-200 dark:border-slate-800 shadow-[0_0_50px_rgba(0,0,0,0.3)] z-[60] transform -translate-x-full transition-transform duration-300 flex flex-col">
         <div class="p-6 flex justify-between items-center border-b border-slate-200 dark:border-slate-800">
-            <span class="font-black text-sm text-slate-400 uppercase tracking-widest">Navigation</span>
+            <span class="font-black text-sm text-slate-200 uppercase tracking-widest">Navigation</span>
             <button onclick="closeSidebar()"
-                class="text-slate-400 hover:text-brand-accent transition-colors text-3xl">&times;</button>
+                class="text-slate-200 hover:text-brand-accent transition-colors text-3xl">&times;</button>
         </div>
 
         <nav class="flex flex-col gap-1 p-4 overflow-y-auto custom-scrollbar flex-grow">
             <button data-target="section-home" onclick="navigateTo('section-home')"
                 class="nav-btn text-left px-4 py-2 rounded-xl text-base font-bold transition-all text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800">Dashboard</button>
 
-            <span class="px-4 text-base font-black text-slate-800 dark:text-slate-200 tracking-wide mt-4 mb-1">Reporting
-                Framework</span>
+            <span
+                class="px-4 text-xs font-black text-slate-200 tracking-widest mt-6 mb-2 uppercase">Reporting Framework</span>
             <button data-target="section-reports" onclick="navigateTo('section-reports')"
                 class="nav-btn text-left pl-8 pr-4 py-2 rounded-xl text-sm font-semibold transition-all text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800">Type
                 I vs Type II</button>
@@ -222,8 +222,8 @@
                 class="nav-btn text-left pl-8 pr-4 py-2 rounded-xl text-sm font-semibold transition-all text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800">Key
                 Concepts</button>
 
-            <span class="px-4 text-base font-black text-slate-800 dark:text-slate-200 tracking-wide mt-6 mb-1">Control &
-                Audit</span>
+            <span
+                class="px-4 text-xs font-black text-slate-200 tracking-widest mt-6 mb-2 uppercase">Control & Audit</span>
             <button data-target="section-controls" onclick="navigateTo('section-controls')"
                 class="nav-btn text-left pl-8 pr-4 py-2 rounded-xl text-sm font-semibold transition-all text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800">Control
                 Environment</button>
@@ -239,30 +239,30 @@
 
     <main class="max-w-7xl mx-auto px-4 py-12">
 
-        <section id="section-home" class="content-section fade-in">
+        <section id="section-home" class="content-section fade-in pt-12">
             <div class="text-center mb-16 mt-8">
                 <div
                     class="inline-block px-4 py-1.5 rounded-full bg-brand-accent/10 border border-brand-accent/20 text-brand-accent font-bold text-xs tracking-widest uppercase mb-6">
                     AICPA SOC 1 Compliance</div>
                 <h2 class="text-5xl md:text-7xl font-black mb-6 tracking-tight text-slate-900 dark:text-white">Master
                     SOC 1.</h2>
-                <p class="text-slate-500 dark:text-slate-400 text-lg md:text-xl max-w-3xl mx-auto leading-relaxed">The
+                <p class="text-slate-500 dark:text-slate-200 text-lg md:text-xl max-w-3xl mx-auto leading-relaxed">The
                     definitive guide for understanding Service Organization Controls reporting over financial
                     operations.</p>
             </div>
 
             <div class="mb-12">
                 <h3
-                    class="text-sm font-black text-slate-400 uppercase tracking-widest mb-6 pl-2 border-l-4 border-teal-500">
+                    class="text-sm font-black text-slate-200 uppercase tracking-widest mb-6 pl-2 border-l-4 border-teal-500">
                     Reporting Framework</h3>
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                     <div onclick="navigateTo('section-reports')"
                         class="bg-white dark:bg-slate-800/40 p-8 rounded-[2rem] border border-slate-200 dark:border-slate-700/50 shadow-xl cursor-pointer hover:-translate-y-2 hover:border-teal-500/50 transition-all group">
                         <div
                             class="w-14 h-14 mx-auto bg-teal-500/10 rounded-2xl flex items-center justify-center text-3xl mb-6 group-hover:scale-110 transition-transform">
                             📋</div>
                         <h3 class="text-xl font-black mb-2 text-slate-800 dark:text-white">Report Types</h3>
-                        <p class="text-slate-500 dark:text-slate-400 text-sm leading-relaxed">Type I vs Type II reports
+                        <p class="text-slate-500 dark:text-slate-200 text-sm leading-relaxed">Type I vs Type II reports
                             and their specific applications.</p>
                     </div>
 
@@ -272,7 +272,7 @@
                             class="w-14 h-14 mx-auto bg-blue-500/10 rounded-2xl flex items-center justify-center text-3xl mb-6 group-hover:scale-110 transition-transform">
                             🧠</div>
                         <h3 class="text-xl font-black mb-2 text-slate-800 dark:text-white">Key Concepts</h3>
-                        <p class="text-slate-500 dark:text-slate-400 text-sm leading-relaxed">SOC 1 vs SOC 2, SSAE 18,
+                        <p class="text-slate-500 dark:text-slate-200 text-sm leading-relaxed">SOC 1 vs SOC 2, SSAE 18,
                             and ICFR definitions.</p>
                     </div>
                 </div>
@@ -280,16 +280,16 @@
 
             <div class="mb-12">
                 <h3
-                    class="text-sm font-black text-slate-400 uppercase tracking-widest mb-6 pl-2 border-l-4 border-emerald-500">
+                    class="text-sm font-black text-slate-200 uppercase tracking-widest mb-6 pl-2 border-l-4 border-emerald-500">
                     Control & Audit</h3>
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                     <div onclick="navigateTo('section-controls')"
                         class="bg-white dark:bg-slate-800/40 p-8 rounded-[2rem] border border-slate-200 dark:border-slate-700/50 shadow-xl cursor-pointer hover:-translate-y-2 hover:border-emerald-500/50 transition-all group">
                         <div
                             class="w-14 h-14 mx-auto bg-emerald-500/10 rounded-2xl flex items-center justify-center text-3xl mb-6 group-hover:scale-110 transition-transform">
                             🛡️</div>
                         <h3 class="text-xl font-black mb-2 text-slate-800 dark:text-white">Internal Controls</h3>
-                        <p class="text-slate-500 dark:text-slate-400 text-sm leading-relaxed">Control Objectives, IT
+                        <p class="text-slate-500 dark:text-slate-200 text-sm leading-relaxed">Control Objectives, IT
                             General Controls (ITGCs), and CUECs.</p>
                     </div>
 
@@ -299,7 +299,7 @@
                             class="w-14 h-14 mx-auto bg-cyan-500/10 rounded-2xl flex items-center justify-center text-3xl mb-6 group-hover:scale-110 transition-transform">
                             🔍</div>
                         <h3 class="text-xl font-black mb-2 text-slate-800 dark:text-white">The Audit Process</h3>
-                        <p class="text-slate-500 dark:text-slate-400 text-sm leading-relaxed">Evidence collection,
+                        <p class="text-slate-500 dark:text-slate-200 text-sm leading-relaxed">Evidence collection,
                             testing, exceptions, and the auditor's opinion.</p>
                     </div>
                 </div>
@@ -309,7 +309,7 @@
         <section id="section-reports" class="content-section hidden fade-in">
             <div class="mb-12 text-center md:text-left">
                 <h2 class="text-4xl font-black mb-2 text-teal-500">Type I vs Type II Reports</h2>
-                <p class="text-slate-500 dark:text-slate-400 italic">Understanding the fundamental difference in audit
+                <p class="text-slate-500 dark:text-slate-200 italic">Understanding the fundamental difference in audit
                     report delivery.</p>
             </div>
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-10">
@@ -318,10 +318,10 @@
                         <div class="w-12 h-12 bg-teal-500/20 rounded-2xl flex items-center justify-center text-2xl">📋
                         </div>
                         <h3 class="text-2xl font-black text-teal-600 dark:text-teal-400 uppercase tracking-tight">Type
-                            I<br><span class="text-slate-400 text-xs tracking-widest font-bold">Point-in-Time</span>
+                            I<br><span class="text-slate-200 text-xs tracking-widest font-bold">Point-in-Time</span>
                         </h3>
                     </div>
-                    <ul class="space-y-4 text-slate-600 dark:text-slate-300">
+                    <ul class="space-y-4 text-slate-600 dark:text-slate-200">
                         <li class="flex gap-3 text-sm leading-relaxed">
                             <span class="text-teal-500 font-bold mt-1">✦</span>
                             <span>Attests to the <strong>design</strong> of controls at a specific date.</span>
@@ -347,10 +347,10 @@
                         <div class="w-12 h-12 bg-emerald-500/20 rounded-2xl flex items-center justify-center text-2xl">⚡
                         </div>
                         <h3 class="text-2xl font-black text-emerald-600 dark:text-emerald-400 uppercase tracking-tight">
-                            Type II<br><span class="text-slate-400 text-xs tracking-widest font-bold">Period of
+                            Type II<br><span class="text-slate-200 text-xs tracking-widest font-bold">Period of
                                 Time</span></h3>
                     </div>
-                    <ul class="space-y-4 text-slate-600 dark:text-slate-300">
+                    <ul class="space-y-4 text-slate-600 dark:text-slate-200">
                         <li class="flex gap-3 text-sm leading-relaxed">
                             <span class="text-emerald-500 font-bold mt-1">✦</span>
                             <span>Attests to both <strong>design AND operating effectiveness</strong> over 6-12
@@ -377,7 +377,7 @@
                         <span class="text-2xl">💡</span>
                         <div>
                             <h4 class="font-bold text-slate-800 dark:text-white mb-1">Key Insight</h4>
-                            <p class="text-sm text-slate-500 dark:text-slate-400">Type II is almost always what
+                            <p class="text-sm text-slate-500 dark:text-slate-200">Type II is almost always what
                                 customers and their auditors actually require. Type I is a stepping stone. If someone
                                 says "we have a SOC 1," always ask: "Type I or Type II?"</p>
                         </div>
@@ -399,10 +399,10 @@
                         <div class="w-12 h-12 bg-blue-500/20 rounded-2xl flex items-center justify-center text-2xl">💰
                         </div>
                         <h3 class="text-2xl font-black text-blue-600 dark:text-blue-400 uppercase tracking-tight">SOC
-                            1<br><span class="text-slate-400 text-xs tracking-widest font-bold">Financial
+                            1<br><span class="text-slate-200 text-xs tracking-widest font-bold">Financial
                                 Reporting</span></h3>
                     </div>
-                    <ul class="space-y-4 text-slate-600 dark:text-slate-300">
+                    <ul class="space-y-4 text-slate-600 dark:text-slate-200">
                         <li class="flex gap-3 text-sm leading-relaxed">
                             <span class="text-blue-500 font-bold mt-1">✦</span>
                             <span><strong>Focus:</strong> Internal Controls over Financial Reporting (ICFR).</span>
@@ -428,10 +428,10 @@
                         <div class="w-12 h-12 bg-teal-500/20 rounded-2xl flex items-center justify-center text-2xl">🔒
                         </div>
                         <h3 class="text-2xl font-black text-teal-600 dark:text-teal-400 uppercase tracking-tight">SOC
-                            2<br><span class="text-slate-400 text-xs tracking-widest font-bold">Security & Trust</span>
+                            2<br><span class="text-slate-200 text-xs tracking-widest font-bold">Security & Trust</span>
                         </h3>
                     </div>
-                    <ul class="space-y-4 text-slate-600 dark:text-slate-300">
+                    <ul class="space-y-4 text-slate-600 dark:text-slate-200">
                         <li class="flex gap-3 text-sm leading-relaxed">
                             <span class="text-teal-500 font-bold mt-1">✦</span>
                             <span><strong>Focus:</strong> Trust Services Criteria (Security, Availability, Integrity,
@@ -459,7 +459,7 @@
                         <span class="text-2xl">💡</span>
                         <div>
                             <h4 class="font-bold text-slate-800 dark:text-white mb-1">Key Difference</h4>
-                            <p class="text-sm text-slate-500 dark:text-slate-400">Use <strong>SOC 1</strong> if your
+                            <p class="text-sm text-slate-500 dark:text-slate-200">Use <strong>SOC 1</strong> if your
                                 service affects the customer's financial statements (e.g., payroll processing). Use
                                 <strong>SOC 2</strong> if your service handles sensitive data but doesn't impact
                                 financial reporting (e.g., a cloud storage provider).</p>
@@ -474,7 +474,7 @@
         <section id="section-controls" class="content-section hidden fade-in">
             <div class="mb-8 text-center md:text-left">
                 <h2 class="text-4xl font-black mb-2 text-emerald-500">Internal Controls</h2>
-                <p class="text-slate-500 dark:text-slate-400 italic">The ITGC framework that protects financial
+                <p class="text-slate-500 dark:text-slate-200 italic">The ITGC framework that protects financial
                     reporting data.</p>
             </div>
             <div id="controls-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
@@ -483,7 +483,7 @@
         <section id="section-audit" class="content-section hidden fade-in">
             <div class="mb-8 text-center md:text-left">
                 <h2 class="text-4xl font-black mb-2 text-cyan-500">The Audit Process</h2>
-                <p class="text-slate-500 dark:text-slate-400 italic">How CPA firms collect evidence and issue opinions.
+                <p class="text-slate-500 dark:text-slate-200 italic">How CPA firms collect evidence and issue opinions.
                 </p>
             </div>
 
@@ -493,13 +493,13 @@
                     <div class="flex items-center gap-4 mb-6">
                         <div class="w-12 h-12 bg-slate-500/20 rounded-2xl flex items-center justify-center text-2xl">✍️
                         </div>
-                        <h3 class="text-2xl font-black text-slate-600 dark:text-slate-400 uppercase tracking-tight">
+                        <h3 class="text-2xl font-black text-slate-600 dark:text-slate-200 uppercase tracking-tight">
                             Management<br><span
-                                class="text-slate-400 text-xs tracking-widest font-bold">Assertion</span></h3>
+                                class="text-slate-200 text-xs tracking-widest font-bold">Assertion</span></h3>
                     </div>
-                    <p class="text-sm text-slate-500 dark:text-slate-400 mb-6 font-medium italic">"We built the system,
+                    <p class="text-sm text-slate-500 dark:text-slate-200 mb-6 font-medium italic">"We built the system,
                         and we take responsibility for it."</p>
-                    <ul class="space-y-4 text-slate-600 dark:text-slate-300">
+                    <ul class="space-y-4 text-slate-600 dark:text-slate-200">
                         <li class="flex gap-3 text-sm leading-relaxed">
                             <span class="text-slate-500 font-bold mt-1">✦</span>
                             <span>Management asserts the system description fairly presents the actual system.</span>
@@ -520,12 +520,12 @@
                         <div class="w-12 h-12 bg-cyan-500/20 rounded-2xl flex items-center justify-center text-2xl">🔍
                         </div>
                         <h3 class="text-2xl font-black text-cyan-600 dark:text-cyan-400 uppercase tracking-tight">
-                            Auditor<br><span class="text-slate-400 text-xs tracking-widest font-bold">Opinion</span>
+                            Auditor<br><span class="text-slate-200 text-xs tracking-widest font-bold">Opinion</span>
                         </h3>
                     </div>
                     <p class="text-sm text-cyan-600/70 dark:text-cyan-400/70 mb-6 font-medium italic">"We tested the
                         system, and we agree (or disagree) with Management."</p>
-                    <ul class="space-y-4 text-slate-600 dark:text-slate-300">
+                    <ul class="space-y-4 text-slate-600 dark:text-slate-200">
                         <li class="flex gap-3 text-sm leading-relaxed">
                             <span class="text-cyan-500 font-bold mt-1">✦</span>
                             <span>The auditor provides an <strong>independent</strong> opinion on management's
@@ -549,10 +549,10 @@
                     <div class="flex items-center gap-4 mb-6">
                         <div class="w-12 h-12 bg-slate-500/20 rounded-2xl flex items-center justify-center text-2xl">📄
                         </div>
-                        <h3 class="text-2xl font-black text-slate-600 dark:text-slate-400 uppercase tracking-tight">
-                            Test<br><span class="text-slate-400 text-xs tracking-widest font-bold">Exception</span></h3>
+                        <h3 class="text-2xl font-black text-slate-600 dark:text-slate-200 uppercase tracking-tight">
+                            Test<br><span class="text-slate-200 text-xs tracking-widest font-bold">Exception</span></h3>
                     </div>
-                    <ul class="space-y-4 text-slate-600 dark:text-slate-300">
+                    <ul class="space-y-4 text-slate-600 dark:text-slate-200">
                         <li class="flex gap-3 text-sm leading-relaxed">
                             <span class="text-slate-500 font-bold mt-1">✦</span>
                             <span>A single sample item fails a test (e.g., 1 out of 25 terminated users was not
@@ -574,10 +574,10 @@
                         <div class="w-12 h-12 bg-red-500/20 rounded-2xl flex items-center justify-center text-2xl">⚠️
                         </div>
                         <h3 class="text-2xl font-black text-red-600 dark:text-red-400 uppercase tracking-tight">
-                            Control<br><span class="text-slate-400 text-xs tracking-widest font-bold">Failure</span>
+                            Control<br><span class="text-slate-200 text-xs tracking-widest font-bold">Failure</span>
                         </h3>
                     </div>
-                    <ul class="space-y-4 text-slate-600 dark:text-slate-300">
+                    <ul class="space-y-4 text-slate-600 dark:text-slate-200">
                         <li class="flex gap-3 text-sm leading-relaxed">
                             <span class="text-red-500 font-bold mt-1">✦</span>
                             <span>The number of exceptions is so high that the control cannot be relied upon.</span>
@@ -600,7 +600,7 @@
                         <div>
                             <h4 class="font-bold text-slate-800 dark:text-white mb-1">Mitigating Controls & Opinions
                             </h4>
-                            <p class="text-sm text-slate-500 dark:text-slate-400">A report can have multiple exceptions
+                            <p class="text-sm text-slate-500 dark:text-slate-200">A report can have multiple exceptions
                                 in Section 4 but still receive an <strong>Unqualified (Clean)</strong> opinion in
                                 Section 1 if the exceptions are not material or are mitigated by other controls (like a
                                 secondary weekly review).</p>
@@ -613,7 +613,7 @@
         </section>
     </main>
     <footer class="w-full max-w-7xl mx-auto px-4 pb-12 mt-12 text-center fade-in">
-        <p class="text-xs md:text-sm text-slate-600 dark:text-slate-400 font-semibold tracking-wide">
+        <p class="text-xs md:text-sm text-slate-600 dark:text-slate-200 font-semibold tracking-wide">
             Version <span class="app-version">v0.7.98</span> •
             <a href="https://github.com/Kaiwawa/masterthecloud" target="_blank" rel="noopener noreferrer"
                 class="text-brand-accent hover:underline">

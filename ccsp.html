@@ -28,6 +28,119 @@
             }
         }
     </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap');
+
+        body {
+            font-family: 'Inter', sans-serif;
+            transition: background-color 0.3s ease;
+        }
+
+        .perspective-1000 {
+            perspective: 1000px;
+        }
+
+        .transform-style-3d {
+            transform-style: preserve-3d;
+        }
+
+        .backface-hidden {
+            backface-visibility: hidden;
+            -webkit-backface-visibility: hidden;
+        }
+
+        .rotate-y-180 {
+            transform: rotateY(180deg);
+        }
+
+        .flip-card-inner {
+            transition: transform 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+            transform-style: preserve-3d;
+        }
+
+        .flip-card.flipped .flip-card-inner {
+            transform: rotateY(180deg);
+        }
+
+        .fade-in {
+            animation: fadeIn 0.4s ease-out forwards;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .md-content h3 {
+            font-weight: 800;
+            font-size: 1.5rem;
+            margin-top: 1rem;
+            margin-bottom: 1rem;
+            color: var(--brand-accent);
+            border-left: 5px solid var(--brand-accent);
+            padding-left: 1rem;
+        }
+
+        .md-content h4 {
+            font-weight: 700;
+            font-size: 1.1rem;
+            margin-top: 1.5rem;
+            color: #94a3b8;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .md-content p {
+            margin-bottom: 1rem;
+            line-height: 1.7;
+        }
+
+        .md-content ul,
+        .md-content ol {
+            margin-bottom: 1rem;
+            padding-left: 1.5rem;
+        }
+
+        .md-content li {
+            margin-bottom: 0.5rem;
+        }
+
+        .md-content table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+            font-size: 0.9rem;
+        }
+
+        .md-content th {
+            background: rgba(0, 0, 0, 0.05);
+            font-weight: 800;
+            text-align: left;
+            padding: 0.75rem;
+            border: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        .dark .md-content th {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: rgba(255, 255, 255, 0.1);
+        }
+
+        .md-content td {
+            padding: 0.75rem;
+            border: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        .dark .md-content td {
+            border-color: rgba(255, 255, 255, 0.1);
+        }
+    </style>
 </head>
 
 <body
@@ -39,7 +152,7 @@
         <div class="max-w-7xl mx-auto px-4 h-20 grid grid-cols-3 items-center gap-4">
             <div class="flex items-center justify-start gap-4">
                 <button onclick="goHome()"
-                    class="hidden sm:flex p-2.5 bg-slate-100 dark:bg-slate-800 rounded-xl hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors shrink-0 text-slate-500 dark:text-slate-400 hover:text-brand-accent dark:hover:text-brand-accent items-center justify-center"
+                    class="hidden sm:flex p-2.5 bg-slate-100 dark:bg-slate-800 rounded-xl hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors shrink-0 text-slate-500 dark:text-slate-200 hover:text-brand-accent dark:hover:text-brand-accent items-center justify-center"
                     title="Home">
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5">
                         <path stroke-linecap="round" stroke-linejoin="round"
@@ -48,7 +161,7 @@
                     </svg>
                 </button>
                 <button onclick="openSidebar()"
-                    class="p-2.5 px-4 bg-slate-100 dark:bg-slate-800 rounded-xl hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors shrink-0 flex items-center gap-2 text-slate-700 dark:text-slate-300">
+                    class="p-2.5 px-4 bg-slate-100 dark:bg-slate-800 rounded-xl hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors shrink-0 flex items-center gap-2 text-slate-700 dark:text-slate-200">
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"></path>
                     </svg>
@@ -88,38 +201,41 @@
     <aside id="left-sidebar"
         class="fixed top-0 left-0 h-full w-72 bg-white dark:bg-[#0f172a] border-r border-slate-200 dark:border-slate-800 shadow-[0_0_50px_rgba(0,0,0,0.3)] z-[60] transform -translate-x-full transition-transform duration-300 flex flex-col">
         <div class="p-6 flex justify-between items-center border-b border-slate-200 dark:border-slate-800">
-            <span class="font-black text-sm text-slate-400 uppercase tracking-widest">Navigation</span>
+            <span class="font-black text-sm text-slate-200 uppercase tracking-widest">Navigation</span>
             <button onclick="closeSidebar()"
-                class="text-slate-400 hover:text-brand-accent transition-colors text-3xl">&times;</button>
+                class="text-slate-200 hover:text-brand-accent transition-colors text-3xl">&times;</button>
         </div>
 
         <nav class="flex flex-col gap-1 p-4 overflow-y-auto custom-scrollbar flex-grow">
             <button data-target="section-home" onclick="navigateTo('section-home')"
                 class="nav-btn text-left px-4 py-2 rounded-xl text-base font-bold transition-all text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800">Dashboard</button>
+            
             <span
-                class="px-4 text-base font-black text-slate-800 dark:text-slate-200 tracking-wide mt-4 mb-1">Architecture</span>
+                class="px-4 text-xs font-black text-slate-200 tracking-widest mt-6 mb-2 uppercase">Architecture & Strategy</span>
             <button data-target="section-concepts" onclick="navigateTo('section-concepts')"
                 class="nav-btn text-left pl-8 pr-4 py-2 rounded-xl text-sm font-semibold transition-all text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800">Concepts
                 & Design</button>
-            <span
-                class="px-4 text-base font-black text-slate-800 dark:text-slate-200 tracking-wide mt-6 mb-1">Security</span>
             <button data-target="section-data" onclick="navigateTo('section-data')"
                 class="nav-btn text-left pl-8 pr-4 py-2 rounded-xl text-sm font-semibold transition-all text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800">Cloud
                 Data Security</button>
+            
+            <span
+                class="px-4 text-xs font-black text-slate-200 tracking-widest mt-6 mb-2 uppercase">Platform & Infrastructure</span>
             <button data-target="section-platform" onclick="navigateTo('section-platform')"
                 class="nav-btn text-left pl-8 pr-4 py-2 rounded-xl text-sm font-semibold transition-all text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800">Platform
                 Security</button>
             <button data-target="section-app" onclick="navigateTo('section-app')"
                 class="nav-btn text-left pl-8 pr-4 py-2 rounded-xl text-sm font-semibold transition-all text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800">App
                 Security</button>
+            
             <span
-                class="px-4 text-base font-black text-slate-800 dark:text-slate-200 tracking-wide mt-6 mb-1">Operations
-                & Legal</span>
+                class="px-4 text-xs font-black text-slate-200 tracking-widest mt-6 mb-2 uppercase">Operations & Compliance</span>
             <button data-target="section-ops" onclick="navigateTo('section-ops')"
                 class="nav-btn text-left pl-8 pr-4 py-2 rounded-xl text-sm font-semibold transition-all text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800">Operations</button>
             <button data-target="section-legal" onclick="navigateTo('section-legal')"
                 class="nav-btn text-left pl-8 pr-4 py-2 rounded-xl text-sm font-semibold transition-all text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800">Legal
                 & Risk</button>
+
             <a href="index.html"
                 class="text-left px-4 py-2 rounded-xl text-sm font-bold transition-all text-brand-accent hover:bg-slate-100 dark:hover:bg-slate-800 mb-2 mt-4">←
                 Back to Main Menu</a>
@@ -135,37 +251,78 @@
                     ISC² Professional</div>
                 <h2 class="text-5xl md:text-7xl font-black mb-6 tracking-tight text-slate-900 dark:text-white">Master
                     CCSP.</h2>
-                <p class="text-slate-500 dark:text-slate-400 text-lg max-w-2xl mx-auto leading-relaxed">Advanced cloud
+                <p class="text-slate-500 dark:text-slate-200 text-lg max-w-2xl mx-auto leading-relaxed">Advanced cloud
                     security concepts, architecture, and governance for security leaders.</p>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <div onclick="navigateTo('section-concepts')"
-                    class="bg-white dark:bg-slate-800/40 p-8 rounded-[2rem] border border-slate-200 dark:border-slate-700/50 shadow-xl cursor-pointer hover:-translate-y-2 hover:border-red-500/50 transition-all group">
-                    <div
-                        class="w-14 h-14 mx-auto bg-red-500/10 rounded-2xl flex items-center justify-center text-3xl mb-6 group-hover:scale-110 transition-transform">
-                        🏛️</div>
-                    <h3 class="text-xl font-black mb-2 text-slate-800 dark:text-white">Concepts & Design</h3>
-                    <p class="text-slate-500 dark:text-slate-400 text-sm leading-relaxed">Cloud architecture, shared
-                        responsibility, and design principles.</p>
+            <div class="mb-12">
+                <h3 class="text-sm font-black text-slate-200 uppercase tracking-widest mb-6 pl-2 border-l-4 border-red-500">
+                    Architecture & Strategy</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <div onclick="navigateTo('section-concepts')"
+                        class="bg-white dark:bg-slate-800/40 p-8 rounded-[2rem] border border-slate-200 dark:border-slate-700/50 shadow-xl cursor-pointer hover:-translate-y-2 hover:border-red-500/50 transition-all group">
+                        <div
+                            class="w-14 h-14 mx-auto bg-red-500/10 rounded-2xl flex items-center justify-center text-3xl mb-6 group-hover:scale-110 transition-transform">
+                            🏛️</div>
+                        <h3 class="text-xl font-black mb-2 text-slate-800 dark:text-white">Concepts & Design</h3>
+                        <p class="text-slate-500 dark:text-slate-200 text-sm leading-relaxed">Cloud architecture, shared
+                            responsibility, and design principles.</p>
+                    </div>
+                    <div onclick="navigateTo('section-data')"
+                        class="bg-white dark:bg-slate-800/40 p-8 rounded-[2rem] border border-slate-200 dark:border-slate-700/50 shadow-xl cursor-pointer hover:-translate-y-2 hover:border-red-500/50 transition-all group">
+                        <div
+                            class="w-14 h-14 mx-auto bg-red-500/10 rounded-2xl flex items-center justify-center text-3xl mb-6 group-hover:scale-110 transition-transform">
+                            💾</div>
+                        <h3 class="text-xl font-black mb-2 text-slate-800 dark:text-white">Cloud Data Security</h3>
+                        <p class="text-slate-500 dark:text-slate-200 text-sm leading-relaxed">Data lifecycle, encryption,
+                            discovery, and classification.</p>
+                    </div>
                 </div>
-                <div onclick="navigateTo('section-data')"
-                    class="bg-white dark:bg-slate-800/40 p-8 rounded-[2rem] border border-slate-200 dark:border-slate-700/50 shadow-xl cursor-pointer hover:-translate-y-2 hover:border-red-500/50 transition-all group">
-                    <div
-                        class="w-14 h-14 mx-auto bg-red-500/10 rounded-2xl flex items-center justify-center text-3xl mb-6 group-hover:scale-110 transition-transform">
-                        💾</div>
-                    <h3 class="text-xl font-black mb-2 text-slate-800 dark:text-white">Cloud Data Security</h3>
-                    <p class="text-slate-500 dark:text-slate-400 text-sm leading-relaxed">Data lifecycle, encryption,
-                        discovery, and classification.</p>
+            </div>
+
+            <div class="mb-12">
+                <h3 class="text-sm font-black text-slate-200 uppercase tracking-widest mb-6 pl-2 border-l-4 border-red-500">
+                    Platform & Infrastructure</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <div onclick="navigateTo('section-platform')"
+                        class="bg-white dark:bg-slate-800/40 p-8 rounded-[2rem] border border-slate-200 dark:border-slate-700/50 shadow-xl cursor-pointer hover:-translate-y-2 hover:border-red-500/50 transition-all group">
+                        <div
+                            class="w-14 h-14 mx-auto bg-red-500/10 rounded-2xl flex items-center justify-center text-3xl mb-6 group-hover:scale-110 transition-transform">
+                            🏗️</div>
+                        <h3 class="text-xl font-black mb-2 text-slate-800 dark:text-white">Platform Security</h3>
+                        <p class="text-slate-500 dark:text-slate-200 text-sm leading-relaxed">Network security, compute, storage, and physical controls.</p>
+                    </div>
+                    <div onclick="navigateTo('section-app')"
+                        class="bg-white dark:bg-slate-800/40 p-8 rounded-[2rem] border border-slate-200 dark:border-slate-700/50 shadow-xl cursor-pointer hover:-translate-y-2 hover:border-red-500/50 transition-all group">
+                        <div
+                            class="w-14 h-14 mx-auto bg-red-500/10 rounded-2xl flex items-center justify-center text-3xl mb-6 group-hover:scale-110 transition-transform">
+                            📱</div>
+                        <h3 class="text-xl font-black mb-2 text-slate-800 dark:text-white">Application Security</h3>
+                        <p class="text-slate-500 dark:text-slate-200 text-sm leading-relaxed">Secure development lifecycle, CI/CD, and identity management.</p>
+                    </div>
                 </div>
-                <div onclick="navigateTo('section-platform')"
-                    class="bg-white dark:bg-slate-800/40 p-8 rounded-[2rem] border border-slate-200 dark:border-slate-700/50 shadow-xl cursor-pointer hover:-translate-y-2 hover:border-red-500/50 transition-all group">
-                    <div
-                        class="w-14 h-14 mx-auto bg-red-500/10 rounded-2xl flex items-center justify-center text-3xl mb-6 group-hover:scale-110 transition-transform">
-                        ☁️</div>
-                    <h3 class="text-xl font-black mb-2 text-slate-800 dark:text-white">Platform Security</h3>
-                    <p class="text-slate-500 dark:text-slate-400 text-sm leading-relaxed">Infrastructure security,
-                        virtualization, and business continuity.</p>
+            </div>
+
+            <div class="mb-12">
+                <h3 class="text-sm font-black text-slate-200 uppercase tracking-widest mb-6 pl-2 border-l-4 border-red-500">
+                    Operations & Compliance</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <div onclick="navigateTo('section-ops')"
+                        class="bg-white dark:bg-slate-800/40 p-8 rounded-[2rem] border border-slate-200 dark:border-slate-700/50 shadow-xl cursor-pointer hover:-translate-y-2 hover:border-red-500/50 transition-all group">
+                        <div
+                            class="w-14 h-14 mx-auto bg-red-500/10 rounded-2xl flex items-center justify-center text-3xl mb-6 group-hover:scale-110 transition-transform">
+                            🛠️</div>
+                        <h3 class="text-xl font-black mb-2 text-slate-800 dark:text-white">Security Operations</h3>
+                        <p class="text-slate-500 dark:text-slate-200 text-sm leading-relaxed">Incident response, monitoring, and forensic analysis.</p>
+                    </div>
+                    <div onclick="navigateTo('section-legal')"
+                        class="bg-white dark:bg-slate-800/40 p-8 rounded-[2rem] border border-slate-200 dark:border-slate-700/50 shadow-xl cursor-pointer hover:-translate-y-2 hover:border-red-500/50 transition-all group">
+                        <div
+                            class="w-14 h-14 mx-auto bg-red-500/10 rounded-2xl flex items-center justify-center text-3xl mb-6 group-hover:scale-110 transition-transform">
+                            ⚖️</div>
+                        <h3 class="text-xl font-black mb-2 text-slate-800 dark:text-white">Legal & Risk</h3>
+                        <p class="text-slate-500 dark:text-slate-200 text-sm leading-relaxed">Compliance, legal frameworks, and risk management.</p>
+                    </div>
                 </div>
             </div>
         </section>
@@ -197,7 +354,7 @@
     </main>
 
     <footer class="w-full max-w-7xl mx-auto px-4 pb-12 mt-12 text-center fade-in">
-        <p class="text-xs md:text-sm text-slate-600 dark:text-slate-400 font-semibold tracking-wide">
+        <p class="text-xs md:text-sm text-slate-600 dark:text-slate-200 font-semibold tracking-wide">
             Version <span class="app-version">v0.8.5</span> •
             <a href="https://github.com/Kaiwawa/masterthecloud" target="_blank" rel="noopener noreferrer"
                 class="text-brand-accent hover:underline">Main GitHub Repository</a>
@@ -224,10 +381,10 @@
             <div id="m-content"
                 class="p-8 md:p-12 overflow-y-auto md-content custom-scrollbar bg-white dark:bg-slate-900 flex-grow">
             </div>
-           <script>
-        const conceptsData = [
-            {
-                id: 'c1', icon: '☁️', title: 'NIST Cloud Architecture', desc: 'The 5-3-4 Reference Model.', summary: '• 5 Essential Characteristics\n• 3 Service Models\n• 4 Deployment Models', dive: `### NIST SP 800-145 Fundamentals
+            <script>
+                const conceptsData = [
+                    {
+                        id: 'c1', icon: '☁️', title: 'NIST Cloud Architecture', desc: 'The 5-3-4 Reference Model.', summary: '• 5 Essential Characteristics\n• 3 Service Models\n• 4 Deployment Models', dive: `### NIST SP 800-145 Fundamentals
 
 The NIST definition is the bedrock of the CCSP exam. You must understand the "5-3-4" framework.
 
@@ -252,9 +409,9 @@ graph TD
 
 > [!TIP]
 > **Exam Tip:** If a feature doesn't have all 5 characteristics, it's not "True Cloud" according to NIST.`
-            },
-            {
-                id: 'c2', icon: '⚖️', title: 'Shared Responsibility', desc: 'The division of security duties.', summary: '• IaaS vs PaaS vs SaaS\n• Data Owner Responsibility\n• CSP vs Customer Roles', dive: `### The Shared Responsibility Model
+                    },
+                    {
+                        id: 'c2', icon: '⚖️', title: 'Shared Responsibility', desc: 'The division of security duties.', summary: '• IaaS vs PaaS vs SaaS\n• Data Owner Responsibility\n• CSP vs Customer Roles', dive: `### The Shared Responsibility Model
 
 Security "in" the cloud vs. Security "of" the cloud.
 
@@ -284,12 +441,12 @@ graph TD
 
 > [!IMPORTANT]
 > **Exam Tip:** The **Data Owner (Customer)** is ALWAYS responsible for Data Classification and Governance, regardless of the service model.`
-            }
-        ];
+                    }
+                ];
 
-        const dataData = [
-            {
-                id: 'd1', icon: '🔄', title: 'Cloud Data Lifecycle', desc: 'The 6 phases of data security.', summary: '• CSCUAD Lifecycle\n• Crypto-Shredding\n• Data Discovery', dive: `### Cloud Data Lifecycle (CSCUAD)
+                const dataData = [
+                    {
+                        id: 'd1', icon: '🔄', title: 'Cloud Data Lifecycle', desc: 'The 6 phases of data security.', summary: '• CSCUAD Lifecycle\n• Crypto-Shredding\n• Data Discovery', dive: `### Cloud Data Lifecycle (CSCUAD)
 
 Security controls must be applied at every phase.
 
@@ -317,12 +474,12 @@ graph LR
 
 > [!TIP]
 > **Exam Tip:** **Crypto-shredding** is the preferred method for destroying data in the cloud because you don't have physical access to the disks.`
-            }
-        ];
+                    }
+                ];
 
-        const platformData = [
-            {
-                id: 'p1', icon: '🖥️', title: 'Cloud Infrastructure', desc: 'Securing the foundation.', summary: '• Hypervisor Security\n• Software Defined (SDN)\n• Management Plane', dive: `### Securing the Cloud Platform
+                const platformData = [
+                    {
+                        id: 'p1', icon: '🖥️', title: 'Cloud Infrastructure', desc: 'Securing the foundation.', summary: '• Hypervisor Security\n• Software Defined (SDN)\n• Management Plane', dive: `### Securing the Cloud Platform
 
 #### Hypervisor Security
 - **VM Escape:** An attacker breaks out of a VM to access the underlying host. Prevention: Patching and isolation.
@@ -339,12 +496,12 @@ Decouples the control plane (decision making) from the data plane (packet forwar
 
 > [!IMPORTANT]
 > **Exam Tip:** The **Management Plane** is the "keys to the kingdom." Protect it with Zero Trust principles.`
-            }
-        ];
+                    }
+                ];
 
-        const appData = [
-            {
-                id: 'a1', icon: '🏗️', title: 'Cloud App Security', desc: 'SDLC and Supply Chain.', summary: '• Secure SDLC\n• Supply Chain Risks\n• API Security', dive: `### Cloud Application Security
+                const appData = [
+                    {
+                        id: 'a1', icon: '🏗️', title: 'Cloud App Security', desc: 'SDLC and Supply Chain.', summary: '• Secure SDLC\n• Supply Chain Risks\n• API Security', dive: `### Cloud Application Security
 
 #### Secure SDLC
 1. **Planning:** Training and risk assessment.
@@ -368,12 +525,12 @@ graph TD
 
 > [!TIP]
 > **Exam Tip:** **SAST** (Static) happens during coding; **DAST** (Dynamic) happens while the app is running.`
-            }
-        ];
+                    }
+                ];
 
-        const opsData = [
-            {
-                id: 'o1', icon: '⚙️', title: 'Operations & DC Security', desc: 'Managing the environment.', summary: '• Physical Security\n• Change Management\n• BCP/DRP', dive: `### Cloud Security Operations
+                const opsData = [
+                    {
+                        id: 'o1', icon: '⚙️', title: 'Operations & DC Security', desc: 'Managing the environment.', summary: '• Physical Security\n• Change Management\n• BCP/DRP', dive: `### Cloud Security Operations
 
 #### Physical Security (Layer 1)
 - **Bollards, Fences, Guards.**
@@ -390,12 +547,12 @@ graph TD
 
 > [!IMPORTANT]
 > **Exam Tip:** In a disaster, the **Safety of People** is always the #1 priority.`
-            }
-        ];
+                    }
+                ];
 
-        const legalData = [
-            {
-                id: 'l1', icon: '⚖️', title: 'Legal & Compliance', desc: 'Regulations and Jurisdictions.', summary: '• GDPR / CCPA\n• eDiscovery\n• Data Sovereignty', dive: `### Legal, Risk, and Compliance
+                const legalData = [
+                    {
+                        id: 'l1', icon: '⚖️', title: 'Legal & Compliance', desc: 'Regulations and Jurisdictions.', summary: '• GDPR / CCPA\n• eDiscovery\n• Data Sovereignty', dive: `### Legal, Risk, and Compliance
 
 #### Jurisdictional Issues
 Data is subject to the laws of the country where it is physically stored (**Data Sovereignty**).
@@ -411,22 +568,22 @@ The process of identifying and producing electronic evidence for a legal case.
 
 > [!TIP]
 > **Exam Tip:** **PPA (Privacy Level Agreement)** is a contract between the CSP and the customer regarding how privacy is handled.`
-            }
-        ];
+                    }
+                ];
 
-        document.addEventListener('DOMContentLoaded', () => {
-            new StudyGuideApp({
-                grids: [
-                    { id: 'concepts-grid', data: conceptsData, border: 'border-red-500', grad: 'from-red-500/20', color: 'red-500' },
-                    { id: 'data-grid', data: dataData, border: 'border-red-500', grad: 'from-red-500/20', color: 'red-500' },
-                    { id: 'platform-grid', data: platformData, border: 'border-red-500', grad: 'from-red-500/20', color: 'red-500' },
-                    { id: 'app-grid', data: appData, border: 'border-red-500', grad: 'from-red-500/20', color: 'red-500' },
-                    { id: 'ops-grid', data: opsData, border: 'border-red-500', grad: 'from-red-500/20', color: 'red-500' },
-                    { id: 'legal-grid', data: legalData, border: 'border-red-500', grad: 'from-red-500/20', color: 'red-500' }
-                ]
-            });
-        });
-    </script>
+                document.addEventListener('DOMContentLoaded', () => {
+                    new StudyGuideApp({
+                        grids: [
+                            { id: 'concepts-grid', data: conceptsData, border: 'border-red-500', grad: 'from-red-500/20', color: 'red-500' },
+                            { id: 'data-grid', data: dataData, border: 'border-red-500', grad: 'from-red-500/20', color: 'red-500' },
+                            { id: 'platform-grid', data: platformData, border: 'border-red-500', grad: 'from-red-500/20', color: 'red-500' },
+                            { id: 'app-grid', data: appData, border: 'border-red-500', grad: 'from-red-500/20', color: 'red-500' },
+                            { id: 'ops-grid', data: opsData, border: 'border-red-500', grad: 'from-red-500/20', color: 'red-500' },
+                            { id: 'legal-grid', data: legalData, border: 'border-red-500', grad: 'from-red-500/20', color: 'red-500' }
+                        ]
+                    });
+                });
+            </script>
 
 </body>
 

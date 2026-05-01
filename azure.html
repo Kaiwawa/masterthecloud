@@ -155,7 +155,7 @@
         <div class="max-w-7xl mx-auto px-4 h-20 grid grid-cols-3 items-center gap-4">
             <div class="flex items-center justify-start gap-4">
                 <button onclick="goHome()"
-                    class="hidden sm:flex p-2.5 bg-slate-100 dark:bg-slate-800 rounded-xl hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors shrink-0 text-slate-500 dark:text-slate-400 hover:text-brand-accent dark:hover:text-brand-accent items-center justify-center"
+                    class="hidden sm:flex p-2.5 bg-slate-100 dark:bg-slate-800 rounded-xl hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors shrink-0 text-slate-500 dark:text-slate-200 hover:text-brand-accent dark:hover:text-brand-accent items-center justify-center"
                     title="Home">
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5">
                         <path stroke-linecap="round" stroke-linejoin="round"
@@ -164,7 +164,7 @@
                     </svg>
                 </button>
                 <button onclick="openSidebar()"
-                    class="p-2.5 px-4 bg-slate-100 dark:bg-slate-800 rounded-xl hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors shrink-0 flex items-center gap-2 text-slate-700 dark:text-slate-300">
+                    class="p-2.5 px-4 bg-slate-100 dark:bg-slate-800 rounded-xl hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors shrink-0 flex items-center gap-2 text-slate-700 dark:text-slate-200">
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"></path>
                     </svg>
@@ -204,23 +204,23 @@
     <aside id="left-sidebar"
         class="fixed top-0 left-0 h-full w-72 bg-white dark:bg-[#0f172a] border-r border-slate-200 dark:border-slate-800 shadow-[0_0_50px_rgba(0,0,0,0.3)] z-[60] transform -translate-x-full transition-transform duration-300 flex flex-col">
         <div class="p-6 flex justify-between items-center border-b border-slate-200 dark:border-slate-800">
-            <span class="font-black text-sm text-slate-400 uppercase tracking-widest">Navigation</span>
+            <span class="font-black text-sm text-slate-200 uppercase tracking-widest">Navigation</span>
             <button onclick="closeSidebar()"
-                class="text-slate-400 hover:text-brand-accent transition-colors text-3xl">&times;</button>
+                class="text-slate-200 hover:text-brand-accent transition-colors text-3xl">&times;</button>
         </div>
-
         <nav class="flex flex-col gap-1 p-4 overflow-y-auto custom-scrollbar flex-grow">
             <button data-target="section-home" onclick="navigateTo('section-home')"
                 class="nav-btn text-left px-4 py-2 rounded-xl text-base font-bold transition-all text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800">Dashboard</button>
 
             <span
-                class="px-4 text-base font-black text-slate-800 dark:text-slate-200 tracking-wide mt-4 mb-1">Foundations</span>
+                class="px-4 text-xs font-black text-slate-200 tracking-widest mt-6 mb-2 uppercase">Cloud Foundations</span>
             <button data-target="section-concepts" onclick="navigateTo('section-concepts')"
                 class="nav-btn text-left pl-8 pr-4 py-2 rounded-xl text-sm font-semibold transition-all text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800">Cloud
                 Concepts</button>
+            <button data-target="section-shared" onclick="navigateTo('section-shared')"
+                class="nav-btn text-left pl-8 pr-4 py-2 rounded-xl text-sm font-semibold transition-all text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800">Shared Responsibility</button>
 
-            <span class="px-4 text-base font-black text-slate-800 dark:text-slate-200 tracking-wide mt-6 mb-1">Technical
-                Domains</span>
+            <span class="px-4 text-xs font-black text-slate-200 tracking-widest mt-6 mb-2 uppercase">Core Services</span>
             <button data-target="section-compute" onclick="navigateTo('section-compute')"
                 class="nav-btn text-left pl-8 pr-4 py-2 rounded-xl text-sm font-semibold transition-all text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800">Compute
                 & Containers</button>
@@ -234,156 +234,144 @@
                 class="nav-btn text-left pl-8 pr-4 py-2 rounded-xl text-sm font-semibold transition-all text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800">Networking</button>
 
             <span
-                class="px-4 text-base font-black text-slate-800 dark:text-slate-200 tracking-wide mt-6 mb-1">Management
-                & Security</span>
+                class="px-4 text-xs font-black text-slate-200 tracking-widest mt-6 mb-2 uppercase">Governance & Management</span>
             <button data-target="section-security" onclick="navigateTo('section-security')"
                 class="nav-btn text-left pl-8 pr-4 py-2 rounded-xl text-sm font-semibold transition-all text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800">Identity
                 & Security</button>
-            <button data-target="section-shared" onclick="navigateTo('section-shared')"
-                class="nav-btn text-left pl-8 pr-4 py-2 rounded-xl text-sm font-semibold transition-all text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800">Shared Responsibility</button>
             <button data-target="section-mgmt" onclick="navigateTo('section-mgmt')"
                 class="nav-btn text-left pl-8 pr-4 py-2 rounded-xl text-sm font-semibold transition-all text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800">Management
                 & Governance</button>
-
-            <span
-                class="px-4 text-base font-black text-slate-800 dark:text-slate-200 tracking-wide mt-6 mb-1">Business</span>
             <button data-target="section-pricing" onclick="navigateTo('section-pricing')"
                 class="nav-btn text-left pl-8 pr-4 py-2 rounded-xl text-sm font-semibold transition-all text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800">Pricing
-                & SLAs</button>
+                & Support</button>
 
             <a href="index.html"
-                class="text-left px-4 py-2 rounded-xl text-sm font-bold transition-all text-brand-accent hover:bg-slate-100 dark:hover:bg-slate-800 mb-2">←
+                class="text-left px-4 py-2 rounded-xl text-sm font-bold transition-all text-brand-accent hover:bg-slate-100 dark:hover:bg-slate-800 mb-2 mt-4">←
                 Back to Main Menu</a>
         </nav>
     </aside>
 
     <main class="max-w-7xl mx-auto px-4 py-12">
 
-        <section id="section-home" class="content-section fade-in">
+        <section id="section-home" class="content-section fade-in pt-12">
             <div class="text-center mb-16 mt-8">
                 <div
-                    class="inline-block px-4 py-1.5 rounded-full bg-brand-accent/10 border border-brand-accent/20 text-brand-accent font-bold text-xs tracking-widest uppercase mb-6">
+                    class="inline-block px-4 py-1.5 rounded-full bg-blue-500/10 border border-blue-500/20 font-bold text-xs text-blue-500 tracking-widest uppercase mb-6">
                     Microsoft Azure Fundamentals</div>
                 <h2 class="text-5xl md:text-7xl font-black mb-6 tracking-tight text-slate-900 dark:text-white">Master
                     Azure.</h2>
-                <p class="text-slate-500 dark:text-slate-400 text-lg md:text-xl max-w-3xl mx-auto leading-relaxed">The
-                    definitive interactive guide for the AZ-900 exam. Select a domain below to explore core services and
-                    architectural principles.</p>
+                <p class="text-slate-500 dark:text-slate-200 text-lg md:text-xl max-w-3xl mx-auto leading-relaxed">The
+                    definitive interactive guide for the AZ-900 exam. Explore core cloud concepts and Azure services.
+                </p>
             </div>
 
             <div class="mb-12">
                 <h3
-                    class="text-sm font-black text-slate-400 uppercase tracking-widest mb-6 pl-2 border-l-4 border-teal-500">
-                    Foundations</h3>
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    class="text-sm font-black text-slate-200 uppercase tracking-widest mb-6 pl-2 border-l-4 border-[#0078D4]">
+                    Cloud Foundations</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                     <div onclick="navigateTo('section-concepts')"
-                        class="bg-white dark:bg-slate-800/40 p-8 rounded-[2rem] border border-slate-200 dark:border-slate-700/50 shadow-xl cursor-pointer hover:-translate-y-2 hover:border-teal-500/50 transition-all group">
+                        class="bg-white dark:bg-slate-800/40 p-8 rounded-[2rem] border border-slate-200 dark:border-slate-700/50 shadow-xl cursor-pointer hover:-translate-y-2 hover:border-[#0078D4]/50 transition-all group">
                         <div
-                            class="w-14 h-14 mx-auto bg-teal-500/10 rounded-2xl flex items-center justify-center text-3xl mb-6 group-hover:scale-110 transition-transform">
-                            🧠</div>
+                            class="w-14 h-14 mx-auto bg-blue-500/10 rounded-2xl flex items-center justify-center text-3xl mb-6 group-hover:scale-110 transition-transform">
+                            ☁️</div>
                         <h3 class="text-xl font-black mb-2 text-slate-800 dark:text-white">Cloud Concepts</h3>
-                        <p class="text-slate-500 dark:text-slate-400 text-sm leading-relaxed">CapEx vs OpEx,
-                            IaaS/PaaS/SaaS, Public/Private/Hybrid Cloud.</p>
+                        <p class="text-slate-500 dark:text-slate-200 text-sm leading-relaxed">High availability,
+                            scalability, and disaster recovery.</p>
+                    </div>
+
+                    <div onclick="navigateTo('section-shared')"
+                        class="bg-white dark:bg-slate-800/40 p-8 rounded-[2rem] border border-slate-200 dark:border-slate-700/50 shadow-xl cursor-pointer hover:-translate-y-2 hover:border-[#0078D4]/50 transition-all group">
+                        <div
+                            class="w-14 h-14 mx-auto bg-blue-500/10 rounded-2xl flex items-center justify-center text-3xl mb-6 group-hover:scale-110 transition-transform">
+                            🤝</div>
+                        <h3 class="text-xl font-black mb-2 text-slate-800 dark:text-white">Shared Responsibility</h3>
+                        <p class="text-slate-500 dark:text-slate-200 text-sm leading-relaxed">Division of
+                            responsibilities between Microsoft and customers.</p>
                     </div>
                 </div>
             </div>
 
             <div class="mb-12">
                 <h3
-                    class="text-sm font-black text-slate-400 uppercase tracking-widest mb-6 pl-2 border-l-4 border-blue-500">
-                    Technical Domains</h3>
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    class="text-sm font-black text-slate-200 uppercase tracking-widest mb-6 pl-2 border-l-4 border-[#0078D4]">
+                    Core Services</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                     <div onclick="navigateTo('section-compute')"
-                        class="bg-white dark:bg-slate-800/40 p-8 rounded-[2rem] border border-slate-200 dark:border-slate-700/50 shadow-xl cursor-pointer hover:-translate-y-2 hover:border-blue-500/50 transition-all group">
+                        class="bg-white dark:bg-slate-800/40 p-8 rounded-[2rem] border border-slate-200 dark:border-slate-700/50 shadow-xl cursor-pointer hover:-translate-y-2 hover:border-[#0078D4]/50 transition-all group">
                         <div
                             class="w-14 h-14 mx-auto bg-blue-500/10 rounded-2xl flex items-center justify-center text-3xl mb-6 group-hover:scale-110 transition-transform">
                             💻</div>
                         <h3 class="text-xl font-black mb-2 text-slate-800 dark:text-white">Compute & Containers</h3>
-                        <p class="text-slate-500 dark:text-slate-400 text-sm leading-relaxed">VMs, App Services, ACI,
-                            AKS, and Azure Functions.</p>
+                        <p class="text-slate-500 dark:text-slate-200 text-sm leading-relaxed">Virtual Machines, App
+                            Services, and Azure Kubernetes Service.</p>
                     </div>
 
                     <div onclick="navigateTo('section-storage')"
-                        class="bg-white dark:bg-slate-800/40 p-8 rounded-[2rem] border border-slate-200 dark:border-slate-700/50 shadow-xl cursor-pointer hover:-translate-y-2 hover:border-green-500/50 transition-all group">
+                        class="bg-white dark:bg-slate-800/40 p-8 rounded-[2rem] border border-slate-200 dark:border-slate-700/50 shadow-xl cursor-pointer hover:-translate-y-2 hover:border-[#0078D4]/50 transition-all group">
                         <div
-                            class="w-14 h-14 mx-auto bg-green-500/10 rounded-2xl flex items-center justify-center text-3xl mb-6 group-hover:scale-110 transition-transform">
-                            🗄️</div>
+                            class="w-14 h-14 mx-auto bg-blue-500/10 rounded-2xl flex items-center justify-center text-3xl mb-6 group-hover:scale-110 transition-transform">
+                            📦</div>
                         <h3 class="text-xl font-black mb-2 text-slate-800 dark:text-white">Storage Services</h3>
-                        <p class="text-slate-500 dark:text-slate-400 text-sm leading-relaxed">Blob, Disk, File, Archive,
-                            and Data Box solutions.</p>
+                        <p class="text-slate-500 dark:text-slate-200 text-sm leading-relaxed">Blob storage, Disk
+                            storage, and Azure Files.</p>
                     </div>
 
                     <div onclick="navigateTo('section-database')"
-                        class="bg-white dark:bg-slate-800/40 p-8 rounded-[2rem] border border-slate-200 dark:border-slate-700/50 shadow-xl cursor-pointer hover:-translate-y-2 hover:border-cyan-500/50 transition-all group">
+                        class="bg-white dark:bg-slate-800/40 p-8 rounded-[2rem] border border-slate-200 dark:border-slate-700/50 shadow-xl cursor-pointer hover:-translate-y-2 hover:border-[#0078D4]/50 transition-all group">
                         <div
-                            class="w-14 h-14 mx-auto bg-cyan-500/10 rounded-2xl flex items-center justify-center text-3xl mb-6 group-hover:scale-110 transition-transform">
-                            🗃️</div>
-                        <h3 class="text-xl font-black mb-2 text-slate-800 dark:text-white">Databases</h3>
-                        <p class="text-slate-500 dark:text-slate-400 text-sm leading-relaxed">Cosmos DB, Azure SQL, and
-                            Open Source DBs.</p>
+                            class="w-14 h-14 mx-auto bg-blue-500/10 rounded-2xl flex items-center justify-center text-3xl mb-6 group-hover:scale-110 transition-transform">
+                            📊</div>
+                        <h3 class="text-xl font-black mb-2 text-slate-800 dark:text-white">Databases & Analytics</h3>
+                        <p class="text-slate-500 dark:text-slate-200 text-sm leading-relaxed">SQL Database, Cosmos DB,
+                            and Azure Synapse.</p>
                     </div>
 
                     <div onclick="navigateTo('section-network')"
-                        class="bg-white dark:bg-slate-800/40 p-8 rounded-[2rem] border border-slate-200 dark:border-slate-700/50 shadow-xl cursor-pointer hover:-translate-y-2 hover:border-purple-500/50 transition-all group">
+                        class="bg-white dark:bg-slate-800/40 p-8 rounded-[2rem] border border-slate-200 dark:border-slate-700/50 shadow-xl cursor-pointer hover:-translate-y-2 hover:border-[#0078D4]/50 transition-all group">
                         <div
-                            class="w-14 h-14 mx-auto bg-purple-500/10 rounded-2xl flex items-center justify-center text-3xl mb-6 group-hover:scale-110 transition-transform">
+                            class="w-14 h-14 mx-auto bg-blue-500/10 rounded-2xl flex items-center justify-center text-3xl mb-6 group-hover:scale-110 transition-transform">
                             🌐</div>
                         <h3 class="text-xl font-black mb-2 text-slate-800 dark:text-white">Networking</h3>
-                        <p class="text-slate-500 dark:text-slate-400 text-sm leading-relaxed">VNets, VPNs, ExpressRoute,
-                            and Load Balancing.</p>
+                        <p class="text-slate-500 dark:text-slate-200 text-sm leading-relaxed">Virtual Networks, Load
+                            Balancers, and VPN Gateway.</p>
                     </div>
                 </div>
             </div>
 
             <div class="mb-12">
                 <h3
-                    class="text-sm font-black text-slate-400 uppercase tracking-widest mb-6 pl-2 border-l-4 border-pink-500">
-                    Management & Security</h3>
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    class="text-sm font-black text-slate-200 uppercase tracking-widest mb-6 pl-2 border-l-4 border-[#0078D4]">
+                    Governance & Management</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                     <div onclick="navigateTo('section-security')"
-                        class="bg-white dark:bg-slate-800/40 p-8 rounded-[2rem] border border-slate-200 dark:border-slate-700/50 shadow-xl cursor-pointer hover:-translate-y-2 hover:border-red-500/50 transition-all group">
+                        class="bg-white dark:bg-slate-800/40 p-8 rounded-[2rem] border border-slate-200 dark:border-slate-700/50 shadow-xl cursor-pointer hover:-translate-y-2 hover:border-[#0078D4]/50 transition-all group">
                         <div
-                            class="w-14 h-14 mx-auto bg-red-500/10 rounded-2xl flex items-center justify-center text-3xl mb-6 group-hover:scale-110 transition-transform">
+                            class="w-14 h-14 mx-auto bg-blue-500/10 rounded-2xl flex items-center justify-center text-3xl mb-6 group-hover:scale-110 transition-transform">
                             🛡️</div>
                         <h3 class="text-xl font-black mb-2 text-slate-800 dark:text-white">Identity & Security</h3>
-                        <p class="text-slate-500 dark:text-slate-400 text-sm leading-relaxed">Entra ID, RBAC, Zero
-                            Trust, Defender for Cloud.</p>
+                        <p class="text-slate-500 dark:text-slate-200 text-sm leading-relaxed">Microsoft Entra ID, RBAC,
+                            and Zero Trust.</p>
                     </div>
 
                     <div onclick="navigateTo('section-mgmt')"
-                        class="bg-white dark:bg-slate-800/40 p-8 rounded-[2rem] border border-slate-200 dark:border-slate-700/50 shadow-xl cursor-pointer hover:-translate-y-2 hover:border-pink-500/50 transition-all group">
+                        class="bg-white dark:bg-slate-800/40 p-8 rounded-[2rem] border border-slate-200 dark:border-slate-700/50 shadow-xl cursor-pointer hover:-translate-y-2 hover:border-[#0078D4]/50 transition-all group">
                         <div
-                            class="w-14 h-14 mx-auto bg-pink-500/10 rounded-2xl flex items-center justify-center text-3xl mb-6 group-hover:scale-110 transition-transform">
+                            class="w-14 h-14 mx-auto bg-blue-500/10 rounded-2xl flex items-center justify-center text-3xl mb-6 group-hover:scale-110 transition-transform">
                             ⚙️</div>
-                        <h3 class="text-xl font-black mb-2 text-slate-800 dark:text-white">Management & Gov</h3>
-                        <p class="text-slate-500 dark:text-slate-400 text-sm leading-relaxed">Azure Monitor, Policy,
-                            Cost Management.</p>
+                        <h3 class="text-xl font-black mb-2 text-slate-800 dark:text-white">Management & Governance</h3>
+                        <p class="text-slate-500 dark:text-slate-200 text-sm leading-relaxed">Azure Policy, Blueprints,
+                            and Advisor.</p>
                     </div>
 
-                    <div onclick="navigateTo('section-shared')"
-                        class="bg-white dark:bg-slate-800/40 p-8 rounded-[2rem] border border-slate-200 dark:border-slate-700/50 shadow-xl cursor-pointer hover:-translate-y-2 hover:border-emerald-500/50 transition-all group">
-                        <div
-                            class="w-14 h-14 mx-auto bg-emerald-500/10 rounded-2xl flex items-center justify-center text-3xl mb-6 group-hover:scale-110 transition-transform">
-                            🤝</div>
-                        <h3 class="text-xl font-black mb-2 text-slate-800 dark:text-white">Shared Responsibility</h3>
-                        <p class="text-slate-500 dark:text-slate-400 text-sm leading-relaxed">Security of the Cloud vs. Security in the Cloud breakdown.</p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="mb-12">
-                <h3
-                    class="text-sm font-black text-slate-400 uppercase tracking-widest mb-6 pl-2 border-l-4 border-amber-500">
-                    Business</h3>
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                     <div onclick="navigateTo('section-pricing')"
-                        class="bg-white dark:bg-slate-800/40 p-8 rounded-[2rem] border border-slate-200 dark:border-slate-700/50 shadow-xl cursor-pointer hover:-translate-y-2 hover:border-amber-500/50 transition-all group">
+                        class="bg-white dark:bg-slate-800/40 p-8 rounded-[2rem] border border-slate-200 dark:border-slate-700/50 shadow-xl cursor-pointer hover:-translate-y-2 hover:border-[#0078D4]/50 transition-all group">
                         <div
-                            class="w-14 h-14 mx-auto bg-amber-500/10 rounded-2xl flex items-center justify-center text-3xl mb-6 group-hover:scale-110 transition-transform">
+                            class="w-14 h-14 mx-auto bg-blue-500/10 rounded-2xl flex items-center justify-center text-3xl mb-6 group-hover:scale-110 transition-transform">
                             💰</div>
-                        <h3 class="text-xl font-black mb-2 text-slate-800 dark:text-white">Pricing & SLAs</h3>
-                        <p class="text-slate-500 dark:text-slate-400 text-sm leading-relaxed">Azure pricing models,
-                            SLA guarantees, TCO Calculator, and cost optimization.</p>
+                        <h3 class="text-xl font-black mb-2 text-slate-800 dark:text-white">Pricing & Support</h3>
+                        <p class="text-slate-500 dark:text-slate-200 text-sm leading-relaxed">TCO Calculator, Cost
+                            Management, and Support Plans.</p>
                     </div>
                 </div>
             </div>
@@ -415,7 +403,7 @@
         <section id="section-compute" class="content-section hidden fade-in">
             <div class="mb-12 text-center md:text-left">
                 <h2 class="text-4xl font-black mb-2 text-blue-500">Compute Services</h2>
-                <p class="text-slate-500 dark:text-slate-400 italic">Virtual machines, serverless, and container
+                <p class="text-slate-500 dark:text-slate-200 italic">Virtual machines, serverless, and container
                     orchestration on Azure.</p>
             </div>
             <div
@@ -444,7 +432,7 @@
         <section id="section-storage" class="content-section hidden fade-in">
             <div class="mb-12 text-center md:text-left">
                 <h2 class="text-4xl font-black mb-2 text-green-500">Storage Services</h2>
-                <p class="text-slate-500 dark:text-slate-400 italic">Object, block, and file storage solutions on Azure.
+                <p class="text-slate-500 dark:text-slate-200 italic">Object, block, and file storage solutions on Azure.
                 </p>
             </div>
             <div
@@ -472,7 +460,7 @@
                     <div class="w-4 h-4 border-l-2 border-slate-300 ml-6"></div>
                     <div
                         class="p-3 bg-slate-200 dark:bg-slate-800 rounded-lg flex justify-between items-center border border-slate-300 text-slate-500">
-                        <span class="font-bold text-slate-600 dark:text-slate-400">Archive Tier</span> <span
+                        <span class="font-bold text-slate-600 dark:text-slate-200">Archive Tier</span> <span
                             class="text-xs">Long-term Retention (≥ 180 Days) / Lowest storage cost / Highest read
                             cost</span>
                     </div>
@@ -484,7 +472,7 @@
         <section id="section-database" class="content-section hidden fade-in">
             <div class="mb-12 text-center md:text-left">
                 <h2 class="text-4xl font-black mb-2 text-cyan-500">Database Services</h2>
-                <p class="text-slate-500 dark:text-slate-400 italic">Managed relational and NoSQL database solutions.
+                <p class="text-slate-500 dark:text-slate-200 italic">Managed relational and NoSQL database solutions.
                 </p>
             </div>
             <div
@@ -535,7 +523,7 @@
         <section id="section-network" class="content-section hidden fade-in">
             <div class="mb-12 text-center md:text-left">
                 <h2 class="text-4xl font-black mb-2 text-purple-500">Networking</h2>
-                <p class="text-slate-500 dark:text-slate-400 italic">Virtual networks, hybrid connectivity, and traffic
+                <p class="text-slate-500 dark:text-slate-200 italic">Virtual networks, hybrid connectivity, and traffic
                     management.</p>
             </div>
             <div
@@ -569,7 +557,7 @@
         <section id="section-security" class="content-section hidden fade-in">
             <div class="mb-12 text-center md:text-left">
                 <h2 class="text-4xl font-black mb-2 text-red-500">Identity & Security</h2>
-                <p class="text-slate-500 dark:text-slate-400 italic">Identity management, access control, and threat
+                <p class="text-slate-500 dark:text-slate-200 italic">Identity management, access control, and threat
                     protection in Azure.</p>
             </div>
             <div
@@ -605,7 +593,7 @@
         <section id="section-mgmt" class="content-section hidden fade-in">
             <div class="mb-12 text-center md:text-left">
                 <h2 class="text-4xl font-black mb-2 text-pink-500">Management & Governance</h2>
-                <p class="text-slate-500 dark:text-slate-400 italic">Monitoring, policy enforcement, cost control, and
+                <p class="text-slate-500 dark:text-slate-200 italic">Monitoring, policy enforcement, cost control, and
                     governance tools.</p>
             </div>
             <div
@@ -616,17 +604,17 @@
                         <div class="font-bold text-pink-600 dark:text-pink-400">Azure Policy</div>
                         <div class="text-xs text-slate-500">Define rules</div>
                     </div>
-                    <div class="text-slate-400 text-xl hidden md:block">➔</div>
+                    <div class="text-slate-200 text-xl hidden md:block">➔</div>
                     <div class="p-4 bg-white dark:bg-slate-700 rounded-xl shadow text-center w-full">
                         <div class="font-bold text-pink-600 dark:text-pink-400">Azure Blueprints</div>
                         <div class="text-xs text-slate-500">Package & deploy</div>
                     </div>
-                    <div class="text-slate-400 text-xl hidden md:block">➔</div>
+                    <div class="text-slate-200 text-xl hidden md:block">➔</div>
                     <div class="p-4 bg-white dark:bg-slate-700 rounded-xl shadow text-center w-full">
                         <div class="font-bold text-pink-600 dark:text-pink-400">Azure Monitor</div>
                         <div class="text-xs text-slate-500">Observe & alert</div>
                     </div>
-                    <div class="text-slate-400 text-xl hidden md:block">➔</div>
+                    <div class="text-slate-200 text-xl hidden md:block">➔</div>
                     <div
                         class="p-4 bg-pink-50 dark:bg-pink-900/30 border border-pink-200 rounded-xl shadow text-center w-full">
                         <div class="font-bold text-pink-600 dark:text-pink-400">Azure Advisor</div>
@@ -640,7 +628,7 @@
         <section id="section-shared" class="content-section hidden fade-in">
             <div class="mb-12 text-center md:text-left">
                 <h2 class="text-4xl font-black mb-2 text-emerald-500">Shared Responsibility Model</h2>
-                <p class="text-slate-500 dark:text-slate-400 italic">Security in the Cloud vs Security of the Cloud.</p>
+                <p class="text-slate-500 dark:text-slate-200 italic">Security in the Cloud vs Security of the Cloud.</p>
             </div>
 
             <div
@@ -651,19 +639,19 @@
                             class="w-16 h-16 bg-emerald-500/10 rounded-2xl flex items-center justify-center text-3xl shadow-inner">
                             👤</div>
                         <h3 class="text-2xl md:text-3xl font-black text-emerald-500 uppercase tracking-tight">
-                            Customer<br><span class="text-slate-400 text-sm tracking-widest">Responsibility IN the
+                            Customer<br><span class="text-slate-200 text-sm tracking-widest">Responsibility IN the
                                 Cloud</span></h3>
                     </div>
                     <div class="space-y-6">
                         <div
                             class="p-6 bg-slate-50/80 dark:bg-slate-800/30 rounded-2xl border-l-4 border-emerald-500 shadow-sm transition-transform hover:scale-[1.02]">
                             <h4 class="font-bold text-lg mb-2 text-slate-800 dark:text-white">Data & Access</h4>
-                            <p class="text-sm text-slate-500 dark:text-slate-400 leading-relaxed">The customer is ALWAYS responsible for data classification, encryption, and access management (Entra ID).</p>
+                            <p class="text-sm text-slate-500 dark:text-slate-200 leading-relaxed">The customer is ALWAYS responsible for data classification, encryption, and access management (Entra ID).</p>
                         </div>
                         <div
                             class="p-6 bg-slate-50/80 dark:bg-slate-800/30 rounded-2xl border-l-4 border-emerald-500 shadow-sm transition-transform hover:scale-[1.02]">
                             <h4 class="font-bold text-lg mb-2 text-slate-800 dark:text-white">Applications & OS</h4>
-                            <p class="text-sm text-slate-500 dark:text-slate-400 leading-relaxed">In IaaS, you manage the OS and apps. In PaaS, you manage the apps. In SaaS, you manage the configuration.</p>
+                            <p class="text-sm text-slate-500 dark:text-slate-200 leading-relaxed">In IaaS, you manage the OS and apps. In PaaS, you manage the apps. In SaaS, you manage the configuration.</p>
                         </div>
                     </div>
                 </div>
@@ -674,19 +662,19 @@
                             class="w-16 h-16 bg-blue-500/10 rounded-2xl flex items-center justify-center text-3xl shadow-inner">
                             ☁️</div>
                         <h3 class="text-2xl md:text-3xl font-black text-blue-500 uppercase tracking-tight">
-                            Microsoft<br><span class="text-slate-400 text-sm tracking-widest">Responsibility OF the
+                            Microsoft<br><span class="text-slate-200 text-sm tracking-widest">Responsibility OF the
                                 Cloud</span></h3>
                     </div>
                     <div class="space-y-6">
                         <div
                             class="p-6 bg-white/80 dark:bg-slate-800/40 rounded-2xl border-l-4 border-blue-500 shadow-sm transition-transform hover:scale-[1.02]">
                             <h4 class="font-bold text-lg mb-2 text-slate-800 dark:text-white">Physical Infrastructure</h4>
-                            <p class="text-sm text-slate-500 dark:text-slate-400 leading-relaxed">Microsoft handles the physical security of data centers, power, cooling, and global networking.</p>
+                            <p class="text-sm text-slate-500 dark:text-slate-200 leading-relaxed">Microsoft handles the physical security of data centers, power, cooling, and global networking.</p>
                         </div>
                         <div
                             class="p-6 bg-white/80 dark:bg-slate-800/40 rounded-2xl border-l-4 border-blue-500 shadow-sm transition-transform hover:scale-[1.02]">
                             <h4 class="font-bold text-lg mb-2 text-slate-800 dark:text-white">Managed Services</h4>
-                            <p class="text-sm text-slate-500 dark:text-slate-400 leading-relaxed">For PaaS and SaaS, Microsoft manages the underlying runtime, middleware, and operating systems.</p>
+                            <p class="text-sm text-slate-500 dark:text-slate-200 leading-relaxed">For PaaS and SaaS, Microsoft manages the underlying runtime, middleware, and operating systems.</p>
                         </div>
                     </div>
                 </div>
@@ -696,7 +684,7 @@
         <section id="section-pricing" class="content-section hidden fade-in">
             <div class="mb-12 text-center md:text-left">
                 <h2 class="text-4xl font-black mb-2 text-amber-500">Pricing & SLAs</h2>
-                <p class="text-slate-500 dark:text-slate-400 italic">Understand Azure pricing models, SLA guarantees,
+                <p class="text-slate-500 dark:text-slate-200 italic">Understand Azure pricing models, SLA guarantees,
                     and cost optimization strategies.</p>
             </div>
             <div
@@ -746,7 +734,7 @@
                         <h3 class="text-2xl font-black text-amber-600 dark:text-amber-400 uppercase tracking-tight">
                             Basic &<br>Developer</h3>
                     </div>
-                    <ul class="space-y-4 text-slate-600 dark:text-slate-300">
+                    <ul class="space-y-4 text-slate-600 dark:text-slate-200">
                         <li class="flex gap-3 text-sm leading-relaxed">
                             <span class="text-amber-500 font-bold mt-1">✦</span>
                             <span><strong>Basic:</strong> Free. Billing & subscription support only. No technical
@@ -768,7 +756,7 @@
                         <h3 class="text-2xl font-black text-amber-600 dark:text-amber-400 uppercase tracking-tight">
                             Standard &<br>Pro Direct</h3>
                     </div>
-                    <ul class="space-y-4 text-slate-600 dark:text-slate-300">
+                    <ul class="space-y-4 text-slate-600 dark:text-slate-200">
                         <li class="flex gap-3 text-sm leading-relaxed">
                             <span class="text-amber-500 font-bold mt-1">✦</span>
                             <span><strong>Standard:</strong> Production workloads. 24x7 support. 1-hour response for
@@ -787,7 +775,7 @@
 
     </main>
     <footer class="w-full max-w-7xl mx-auto px-4 pb-12 mt-12 text-center fade-in">
-        <p class="text-xs md:text-sm text-slate-600 dark:text-slate-400 font-semibold tracking-wide">
+        <p class="text-xs md:text-sm text-slate-600 dark:text-slate-200 font-semibold tracking-wide">
             Version <span class="app-version">v0.7.98</span> •
             <a href="https://github.com/Kaiwawa/masterthecloud" target="_blank" rel="noopener noreferrer"
                 class="text-brand-accent hover:underline">

@@ -67,7 +67,7 @@
         <div class="max-w-7xl mx-auto px-4 h-20 grid grid-cols-3 items-center gap-4">
             <div class="flex items-center justify-start gap-4">
                 <button onclick="goHome()"
-                    class="hidden sm:flex p-2.5 bg-slate-100 dark:bg-slate-800 rounded-xl hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors shrink-0 text-slate-500 dark:text-slate-400 hover:text-brand-accent dark:hover:text-brand-accent items-center justify-center"
+                    class="hidden sm:flex p-2.5 bg-slate-100 dark:bg-slate-800 rounded-xl hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors shrink-0 text-slate-500 dark:text-slate-200 hover:text-brand-accent dark:hover:text-brand-accent items-center justify-center"
                     title="Home">
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5">
                         <path stroke-linecap="round" stroke-linejoin="round"
@@ -76,7 +76,7 @@
                     </svg>
                 </button>
                 <button onclick="openSidebar()"
-                    class="p-2.5 px-4 bg-slate-100 dark:bg-slate-800 rounded-xl hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors shrink-0 flex items-center gap-2 text-slate-700 dark:text-slate-300">
+                    class="p-2.5 px-4 bg-slate-100 dark:bg-slate-800 rounded-xl hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors shrink-0 flex items-center gap-2 text-slate-700 dark:text-slate-200">
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"></path>
                     </svg>
@@ -113,20 +113,24 @@
 
     <aside id="left-sidebar" class="fixed top-0 left-0 h-full w-72 bg-white dark:bg-[#0f172a] border-r border-slate-200 dark:border-slate-800 shadow-[0_0_50px_rgba(0,0,0,0.3)] z-[60] transform -translate-x-full transition-transform duration-300 flex flex-col">
         <div class="p-6 flex justify-between items-center border-b border-slate-200 dark:border-slate-800">
-            <span class="font-black text-sm text-slate-400 uppercase tracking-widest">Navigation</span>
-            <button onclick="closeSidebar()" class="text-slate-400 hover:text-brand-accent transition-colors text-3xl">&times;</button>
+            <span class="font-black text-sm text-slate-200 uppercase tracking-widest">Navigation</span>
+            <button onclick="closeSidebar()" class="text-slate-200 hover:text-brand-accent transition-colors text-3xl">&times;</button>
         </div>
 
         <nav class="flex flex-col gap-1 p-4 overflow-y-auto custom-scrollbar flex-grow">
             <button data-target="section-home" onclick="navigateTo('section-home')" class="nav-btn text-left px-4 py-2 rounded-xl text-base font-bold transition-all text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800">Dashboard</button>
-            <span class="px-4 text-base font-black text-slate-800 dark:text-slate-200 tracking-wide mt-4 mb-1 uppercase">Planning</span>
+            
+            <span class="px-4 text-xs font-black text-slate-200 tracking-widest mt-6 mb-2 uppercase">AI Strategy & Governance</span>
             <button data-target="section-planning" onclick="navigateTo('section-planning')" class="nav-btn text-left pl-8 pr-4 py-2 rounded-xl text-sm font-semibold transition-all text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800">AI Solution Planning</button>
-            <span class="px-4 text-base font-black text-slate-800 dark:text-slate-200 tracking-wide mt-6 mb-1 uppercase">Cognitive Services</span>
+            
+            <span class="px-4 text-xs font-black text-slate-200 tracking-widest mt-6 mb-2 uppercase">Azure AI Services</span>
             <button data-target="section-vision" onclick="navigateTo('section-vision')" class="nav-btn text-left pl-8 pr-4 py-2 rounded-xl text-sm font-semibold transition-all text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800">Computer Vision</button>
             <button data-target="section-nlp" onclick="navigateTo('section-nlp')" class="nav-btn text-left pl-8 pr-4 py-2 rounded-xl text-sm font-semibold transition-all text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800">Natural Language</button>
-            <span class="px-4 text-base font-black text-slate-800 dark:text-slate-200 tracking-wide mt-6 mb-1 uppercase">Advanced AI</span>
-            <button data-target="section-mining" onclick="navigateTo('section-mining')" class="nav-btn text-left pl-8 pr-4 py-2 rounded-xl text-sm font-semibold transition-all text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800">Knowledge Mining</button>
             <button data-target="section-openai" onclick="navigateTo('section-openai')" class="nav-btn text-left pl-8 pr-4 py-2 rounded-xl text-sm font-semibold transition-all text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800">Azure OpenAI</button>
+            
+            <span class="px-4 text-xs font-black text-slate-200 tracking-widest mt-6 mb-2 uppercase">Knowledge Mining</span>
+            <button data-target="section-mining" onclick="navigateTo('section-mining')" class="nav-btn text-left pl-8 pr-4 py-2 rounded-xl text-sm font-semibold transition-all text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800">Knowledge Mining</button>
+            
             <a href="index.html" class="text-left px-4 py-2 rounded-xl text-sm font-bold transition-all text-brand-accent hover:bg-slate-100 dark:hover:bg-slate-800 mb-2 mt-4">← Back to Main Menu</a>
         </nav>
     </aside>
@@ -138,24 +142,52 @@
                 <div class="inline-block px-4 py-1.5 rounded-full bg-blue-500/10 border border-blue-500/20 font-bold text-xs text-blue-500 tracking-widest uppercase mb-6">Microsoft AI Associate</div>
                 <h2 class="text-5xl md:text-7xl font-black mb-6 tracking-tight text-slate-900 dark:text-white">Master
                     Azure AI Engineer.</h2>
-                <p class="text-slate-500 dark:text-slate-400 text-lg max-w-2xl mx-auto leading-relaxed">Implementing AI solutions using Azure Cognitive Services and Azure OpenAI.</p>
+                <p class="text-slate-500 dark:text-slate-200 text-lg max-w-2xl mx-auto leading-relaxed">Implementing AI solutions using Azure Cognitive Services and Azure OpenAI.</p>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <div onclick="navigateTo('section-planning')" class="bg-white dark:bg-slate-800/40 p-8 rounded-[2rem] border border-slate-200 dark:border-slate-700/50 shadow-xl cursor-pointer hover:-translate-y-2 hover:border-blue-500/50 transition-all group">
-                    <div class="w-14 h-14 mx-auto bg-blue-500/10 rounded-2xl flex items-center justify-center text-3xl mb-6 group-hover:scale-110 transition-transform">📋</div>
-                    <h3 class="text-xl font-black mb-2 text-slate-800 dark:text-white">AI Planning</h3>
-                    <p class="text-slate-500 dark:text-slate-400 text-sm leading-relaxed">Selecting services, managing costs, and security.</p>
+            <div class="mb-12">
+                <h3 class="text-sm font-black text-slate-200 uppercase tracking-widest mb-6 pl-2 border-l-4 border-[#0078D4]">
+                    AI Strategy & Governance</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <div onclick="navigateTo('section-planning')" class="bg-white dark:bg-slate-800/40 p-8 rounded-[2rem] border border-slate-200 dark:border-slate-700/50 shadow-xl cursor-pointer hover:-translate-y-2 hover:border-[#0078D4]/50 transition-all group">
+                        <div class="w-14 h-14 mx-auto bg-[#0078D4]/10 rounded-2xl flex items-center justify-center text-3xl mb-6 group-hover:scale-110 transition-transform">📋</div>
+                        <h3 class="text-xl font-black mb-2 text-slate-800 dark:text-white">AI Planning</h3>
+                        <p class="text-slate-500 dark:text-slate-200 text-sm leading-relaxed">Selecting services, managing costs, and security.</p>
+                    </div>
                 </div>
-                <div onclick="navigateTo('section-vision')" class="bg-white dark:bg-slate-800/40 p-8 rounded-[2rem] border border-slate-200 dark:border-slate-700/50 shadow-xl cursor-pointer hover:-translate-y-2 hover:border-blue-500/50 transition-all group">
-                    <div class="w-14 h-14 mx-auto bg-blue-500/10 rounded-2xl flex items-center justify-center text-3xl mb-6 group-hover:scale-110 transition-transform">👁️</div>
-                    <h3 class="text-xl font-black mb-2 text-slate-800 dark:text-white">Computer Vision</h3>
-                    <p class="text-slate-500 dark:text-slate-400 text-sm leading-relaxed">Image analysis, object detection, and OCR.</p>
+            </div>
+
+            <div class="mb-12">
+                <h3 class="text-sm font-black text-slate-200 uppercase tracking-widest mb-6 pl-2 border-l-4 border-[#0078D4]">
+                    Azure AI Services</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <div onclick="navigateTo('section-vision')" class="bg-white dark:bg-slate-800/40 p-8 rounded-[2rem] border border-slate-200 dark:border-slate-700/50 shadow-xl cursor-pointer hover:-translate-y-2 hover:border-[#0078D4]/50 transition-all group">
+                        <div class="w-14 h-14 mx-auto bg-[#0078D4]/10 rounded-2xl flex items-center justify-center text-3xl mb-6 group-hover:scale-110 transition-transform">👁️</div>
+                        <h3 class="text-xl font-black mb-2 text-slate-800 dark:text-white">Computer Vision</h3>
+                        <p class="text-slate-500 dark:text-slate-200 text-sm leading-relaxed">Image analysis, object detection, and OCR.</p>
+                    </div>
+                    <div onclick="navigateTo('section-nlp')" class="bg-white dark:bg-slate-800/40 p-8 rounded-[2rem] border border-slate-200 dark:border-slate-700/50 shadow-xl cursor-pointer hover:-translate-y-2 hover:border-[#0078D4]/50 transition-all group">
+                        <div class="w-14 h-14 mx-auto bg-[#0078D4]/10 rounded-2xl flex items-center justify-center text-3xl mb-6 group-hover:scale-110 transition-transform">💬</div>
+                        <h3 class="text-xl font-black mb-2 text-slate-800 dark:text-white">Natural Language</h3>
+                        <p class="text-slate-500 dark:text-slate-200 text-sm leading-relaxed">Sentiment analysis, translation, and bots.</p>
+                    </div>
+                    <div onclick="navigateTo('section-openai')" class="bg-white dark:bg-slate-800/40 p-8 rounded-[2rem] border border-slate-200 dark:border-slate-700/50 shadow-xl cursor-pointer hover:-translate-y-2 hover:border-[#0078D4]/50 transition-all group">
+                        <div class="w-14 h-14 mx-auto bg-[#0078D4]/10 rounded-2xl flex items-center justify-center text-3xl mb-6 group-hover:scale-110 transition-transform">🤖</div>
+                        <h3 class="text-xl font-black mb-2 text-slate-800 dark:text-white">Azure OpenAI</h3>
+                        <p class="text-slate-500 dark:text-slate-200 text-sm leading-relaxed">Enterprise LLMs, prompt engineering, and RAG.</p>
+                    </div>
                 </div>
-                <div onclick="navigateTo('section-nlp')" class="bg-white dark:bg-slate-800/40 p-8 rounded-[2rem] border border-slate-200 dark:border-slate-700/50 shadow-xl cursor-pointer hover:-translate-y-2 hover:border-blue-500/50 transition-all group">
-                    <div class="w-14 h-14 mx-auto bg-blue-500/10 rounded-2xl flex items-center justify-center text-3xl mb-6 group-hover:scale-110 transition-transform">💬</div>
-                    <h3 class="text-xl font-black mb-2 text-slate-800 dark:text-white">Natural Language</h3>
-                    <p class="text-slate-500 dark:text-slate-400 text-sm leading-relaxed">Sentiment analysis, translation, and bots.</p>
+            </div>
+
+            <div class="mb-12">
+                <h3 class="text-sm font-black text-slate-200 uppercase tracking-widest mb-6 pl-2 border-l-4 border-[#0078D4]">
+                    Knowledge Mining</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <div onclick="navigateTo('section-mining')" class="bg-white dark:bg-slate-800/40 p-8 rounded-[2rem] border border-slate-200 dark:border-slate-700/50 shadow-xl cursor-pointer hover:-translate-y-2 hover:border-[#0078D4]/50 transition-all group">
+                        <div class="w-14 h-14 mx-auto bg-[#0078D4]/10 rounded-2xl flex items-center justify-center text-3xl mb-6 group-hover:scale-110 transition-transform">🔍</div>
+                        <h3 class="text-xl font-black mb-2 text-slate-800 dark:text-white">AI Search</h3>
+                        <p class="text-slate-500 dark:text-slate-200 text-sm leading-relaxed">Knowledge mining, indexing, and semantic search.</p>
+                    </div>
                 </div>
             </div>
         </section>
@@ -183,7 +215,7 @@
     </main>
 
     <footer class="w-full max-w-7xl mx-auto px-4 pb-12 mt-12 text-center fade-in">
-        <p class="text-xs md:text-sm text-slate-600 dark:text-slate-400 font-semibold tracking-wide">
+        <p class="text-xs md:text-sm text-slate-600 dark:text-slate-200 font-semibold tracking-wide">
             Version <span class="app-version">v0.8.5</span> • 
             <a href="https://github.com/Kaiwawa/masterthecloud" target="_blank" rel="noopener noreferrer" class="text-brand-accent hover:underline">Main GitHub Repository</a>
         </p>
