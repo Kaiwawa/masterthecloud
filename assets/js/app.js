@@ -1,64 +1,113 @@
-class StudyGuideApp {
-    constructor(config) {
-        this.grids = config.grids;
-        this.allServices = config.grids.flatMap(g => g.data);
-        this.colorHexMap = {
-            'brand-accent': '#ef4444',
-            'red-500': '#ef4444',
-            'orange-500': '#f97316',
-            'amber-500': '#f59e0b',
-            'yellow-500': '#eab308',
-            'green-500': '#22c55e',
-            'emerald-500': '#10b981',
-            'teal-500': '#14b8a6',
-            'cyan-500': '#06b6d4',
-            'blue-500': '#3b82f6',
-            'indigo-500': '#6366f1',
-            'purple-500': '#8b5cf6',
-            'pink-500': '#ec4899'
-        };
-        this.bindEvents();
-        this.renderAll();
+class DataManager {
+    #grids;
+    #allServices;
+
+    constructor(grids) {
+        this.#grids = grids;
+        this.#allServices = grids.flatMap(g => g.data);
     }
 
-    hexToRgba(hex, alpha) {
-        const normalized = hex.replace('#', '');
-        const red = parseInt(normalized.slice(0, 2), 16);
-        const green = parseInt(normalized.slice(2, 4), 16);
-        const blue = parseInt(normalized.slice(4, 6), 16);
-        return `rgba(${red}, ${green}, ${blue}, ${alpha})`;
+    get grids() {
+        return this.#grids;
     }
 
-    resolveColorHex(colorToken) {
-        return this.colorHexMap[colorToken] || this.colorHexMap['brand-accent'];
+    get allServices() {
+        return this.#allServices;
     }
 
-    bindEvents() {
-        window.handleSearch = this.handleSearch.bind(this);
-        window.toggleTheme = this.toggleTheme.bind(this);
-        window.showDive = this.showDive.bind(this);
-        window.closeModal = this.closeModal.bind(this);
-        window.goHome = this.goHome.bind(this);
-        window.openSidebar = this.openSidebar.bind(this);
-        window.closeSidebar = this.closeSidebar.bind(this);
-        window.navigateTo = this.navigateTo.bind(this);
+    getServiceById(id) {
+        return this.#allServices.find(x => x.id === id);
+    }
 
-        document.addEventListener('click', (e) => {
-            if (!e.target.closest('#global-search')) {
-                const res = document.getElementById('search-results');
-                if (res) res.classList.add('hidden');
-            }
+    getGridForService(id) {
+        return this.#grids.find(grid => grid.data.some(item => item.id === id));
+    }
+
+    getDomainColorByServiceId(id) {
+        const grid = this.getGridForService(id);
+        return grid ? grid.color : 'brand-accent';
+    }
+
+    searchServices(query) {
+        if (!query.trim()) return [];
+        const lowerQuery = query.toLowerCase();
+        return this.#allServices.filter(s =>
+            s.title.toLowerCase().includes(lowerQuery) ||
+            s.desc.toLowerCase().includes(lowerQuery)
+        ).slice(0, 5);
+    }
+}
+
+class ThemeManager {
+    static toggleTheme() {
+        const html = document.documentElement;
+        const icon = document.getElementById('theme-icon');
+        if (html.classList.contains('dark')) {
+            html.classList.remove('dark');
+            if (icon) icon.innerText = '☀️';
+        } else {
+            html.classList.add('dark');
+            if (icon) icon.innerText = '🌙';
+        }
+    }
+}
+
+class NavigationManager {
+    static goHome(navigateToFn) {
+        const s = document.getElementById('section-home');
+        if (s && !s.classList.contains('hidden')) {
+            window.location.href = 'index.html';
+        } else {
+            navigateToFn('section-home');
+        }
+    }
+
+    static openSidebar() {
+        const overlay = document.getElementById('sidebar-overlay');
+        const sidebar = document.getElementById('left-sidebar');
+        if (!overlay || !sidebar) return;
+        overlay.classList.remove('hidden');
+        setTimeout(() => {
+            overlay.classList.remove('opacity-0');
+            sidebar.classList.remove('-translate-x-full');
+        }, 10);
+    }
+
+    static closeSidebar() {
+        const overlay = document.getElementById('sidebar-overlay');
+        const sidebar = document.getElementById('left-sidebar');
+        if (!overlay || !sidebar) return;
+        overlay.classList.add('opacity-0');
+        sidebar.classList.add('-translate-x-full');
+        setTimeout(() => overlay.classList.add('hidden'), 300);
+    }
+
+    static navigateTo(targetId) {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+        document.querySelectorAll('.content-section').forEach(s => s.classList.add('hidden'));
+        const targetSection = document.getElementById(targetId);
+        if (!targetSection) return;
+        targetSection.classList.remove('hidden');
+        document.querySelectorAll('.nav-btn').forEach(x => {
+            x.classList.remove('bg-brand-accent', 'text-white', 'text-slate-900');
+            x.classList.add('text-slate-500');
         });
+        const btn = document.querySelector(`.nav-btn[data-target="${targetId}"]`);
+        if (btn) {
+            btn.classList.add('bg-brand-accent', 'text-white');
+            btn.classList.remove('text-slate-500');
+        }
+        NavigationManager.closeSidebar();
     }
+}
 
-    handleSearch(query) {
+class SearchManager {
+    static handleSearch(query, dataManager) {
         const resultsBox = document.getElementById('search-results');
         if (!resultsBox) return;
-        if (!query.trim()) { resultsBox.classList.add('hidden'); return; }
-        const filtered = this.allServices.filter(s =>
-            s.title.toLowerCase().includes(query.toLowerCase()) ||
-            s.desc.toLowerCase().includes(query.toLowerCase())
-        ).slice(0, 5);
+
+        const filtered = dataManager.searchServices(query);
+
         if (filtered.length > 0) {
             resultsBox.innerHTML = filtered.map(s => `
                 <div onclick="showDive('${s.id}'); document.getElementById('global-search').value=''" class="p-4 hover:bg-slate-50 dark:hover:bg-slate-700 cursor-pointer border-b border-slate-100 dark:border-slate-700 last:border-0 flex items-center gap-3">
@@ -70,28 +119,81 @@ class StudyGuideApp {
                 </div>
             `).join('');
             resultsBox.classList.remove('hidden');
-        } else {
+        } else if (query.trim()) {
             resultsBox.innerHTML = `<div class="p-4 text-xs text-slate-400">No results found.</div>`;
             resultsBox.classList.remove('hidden');
-        }
-    }
-
-    toggleTheme() {
-        const html = document.documentElement;
-        const icon = document.getElementById('theme-icon');
-        if (html.classList.contains('dark')) {
-            html.classList.remove('dark');
-            if (icon) icon.innerText = '☀️';
         } else {
-            html.classList.add('dark');
-            if (icon) icon.innerText = '🌙';
+            resultsBox.classList.add('hidden');
         }
     }
 
-    createCard(c, grid) {
-        const accentHex = this.resolveColorHex(grid.color);
-        const accentSoft = this.hexToRgba(accentHex, 0.18);
-        const accentBorder = this.hexToRgba(accentHex, 0.45);
+    static bindDocumentClick() {
+        document.addEventListener('click', (e) => {
+            if (!e.target.closest('#global-search')) {
+                const res = document.getElementById('search-results');
+                if (res) res.classList.add('hidden');
+            }
+        });
+    }
+}
+
+class ModalManager {
+    static showDive(id, dataManager, colorResolver) {
+        const c = dataManager.getServiceById(id);
+        if (!c) return;
+
+        const domainColor = dataManager.getDomainColorByServiceId(id);
+        const accentHex = colorResolver.resolveColorHex(domainColor);
+        const accentSoft = colorResolver.hexToRgba(accentHex, 0.2);
+
+        document.getElementById('m-title').innerText = c.title;
+        document.getElementById('m-icon').innerText = c.icon;
+
+        const mIconBg = document.getElementById('m-icon-bg');
+        const mSubtitle = document.getElementById('m-subtitle');
+        const mContent = document.getElementById('m-content');
+
+        if (mIconBg) mIconBg.style.backgroundColor = accentSoft;
+        if (mSubtitle) mSubtitle.style.color = accentHex;
+
+        if (mContent) {
+            mContent.style.setProperty('--brand-accent', accentHex);
+            mContent.innerHTML = window.marked?.parse ? marked.parse(c.dive) : c.dive;
+            setTimeout(() => {
+                if (window.mermaid) {
+                    try { mermaid.init(undefined, mContent.querySelectorAll('.mermaid')); }
+                    catch (e) { console.error('Mermaid init error:', e); }
+                }
+            }, 50);
+        }
+
+        const m = document.getElementById('deep-dive-modal');
+        if (m) {
+            m.classList.add('active');
+            setTimeout(() => {
+                m.classList.add('opacity-100');
+                const shell = m.querySelector('div');
+                if (shell) shell.classList.add('scale-100');
+            }, 10);
+        }
+    }
+
+    static closeModal(e) {
+        if (e) e.stopPropagation();
+        const m = document.getElementById('deep-dive-modal');
+        if (!m) return;
+        m.classList.remove('opacity-100');
+        const shell = m.querySelector('div');
+        if (shell) shell.classList.remove('scale-100');
+        setTimeout(() => m.classList.remove('active'), 300);
+    }
+}
+
+class CardComponent {
+    static render(c, grid, colorResolver) {
+        const accentHex = colorResolver.resolveColorHex(grid.color);
+        const accentSoft = colorResolver.hexToRgba(accentHex, 0.18);
+        const accentBorder = colorResolver.hexToRgba(accentHex, 0.45);
         return `
         <div class="flip-card study-guide-card" style="--card-accent:${accentHex}; --card-accent-soft:${accentSoft}; --card-border:${accentBorder};" onclick="this.classList.toggle('flipped')">
             <div class="flip-card-inner">
@@ -111,40 +213,78 @@ class StudyGuideApp {
             </div>
         </div>`;
     }
+}
 
-    renderAll() { this.grids.forEach(g => { const el = document.getElementById(g.id); if (el) el.innerHTML = g.data.map(d => this.createCard(d, g)).join(''); }); }
+class GridRenderer {
+    static renderAll(dataManager, colorResolver) {
+        dataManager.grids.forEach(g => {
+            const el = document.getElementById(g.id);
+            if (el) {
+                el.innerHTML = g.data.map(d => CardComponent.render(d, g, colorResolver)).join('');
+            }
+        });
+    }
+}
 
-    showDive(id) {
-        const c = this.allServices.find(x => x.id === id);
-        if (!c) return;
-        let domainColor = 'brand-accent';
-        for (const grid of this.grids) { if (grid.data.some(item => item.id === id)) { domainColor = grid.color; break; } }
-        const accentHex = this.resolveColorHex(domainColor);
-        const accentSoft = this.hexToRgba(accentHex, 0.2);
-        document.getElementById('m-title').innerText = c.title;
-        document.getElementById('m-icon').innerText = c.icon;
-        const mIconBg = document.getElementById('m-icon-bg');
-        const mSubtitle = document.getElementById('m-subtitle');
-        const mContent = document.getElementById('m-content');
-        if (mIconBg) mIconBg.style.backgroundColor = accentSoft;
-        if (mSubtitle) mSubtitle.style.color = accentHex;
-        if (mContent) {
-            mContent.style.setProperty('--brand-accent', accentHex);
-            mContent.innerHTML = window.marked?.parse ? marked.parse(c.dive) : c.dive;
-            setTimeout(() => {
-                if (window.mermaid) {
-                    try { mermaid.init(undefined, mContent.querySelectorAll('.mermaid')); }
-                    catch (e) { console.error('Mermaid init error:', e); }
-                }
-            }, 50);
-        }
-        const m = document.getElementById('deep-dive-modal');
-        m.classList.add('active'); setTimeout(() => { m.classList.add('opacity-100'); m.querySelector('div').classList.add('scale-100'); }, 10);
+class ColorResolver {
+    constructor() {
+        this.colorHexMap = {
+            'brand-accent': '#ef4444',
+            'red-500': '#ef4444',
+            'orange-500': '#f97316',
+            'amber-500': '#f59e0b',
+            'yellow-500': '#eab308',
+            'green-500': '#22c55e',
+            'emerald-500': '#10b981',
+            'teal-500': '#14b8a6',
+            'cyan-500': '#06b6d4',
+            'blue-500': '#3b82f6',
+            'indigo-500': '#6366f1',
+            'purple-500': '#8b5cf6',
+            'pink-500': '#ec4899'
+        };
     }
 
-    closeModal(e) { if (e) e.stopPropagation(); const m = document.getElementById('deep-dive-modal'); if (!m) return; m.classList.remove('opacity-100'); const shell = m.querySelector('div'); if (shell) shell.classList.remove('scale-100'); setTimeout(() => m.classList.remove('active'), 300); }
-    goHome() { const s = document.getElementById('section-home'); if (s && !s.classList.contains('hidden')) window.location.href = 'index.html'; else this.navigateTo('section-home'); }
-    openSidebar() { const overlay = document.getElementById('sidebar-overlay'); const sidebar = document.getElementById('left-sidebar'); if (!overlay || !sidebar) return; overlay.classList.remove('hidden'); setTimeout(() => { overlay.classList.remove('opacity-0'); sidebar.classList.remove('-translate-x-full'); }, 10); }
-    closeSidebar() { const overlay = document.getElementById('sidebar-overlay'); const sidebar = document.getElementById('left-sidebar'); if (!overlay || !sidebar) return; overlay.classList.add('opacity-0'); sidebar.classList.add('-translate-x-full'); setTimeout(() => overlay.classList.add('hidden'), 300); }
-    navigateTo(targetId) { window.scrollTo({ top: 0, behavior: 'smooth' }); document.querySelectorAll('.content-section').forEach(s => s.classList.add('hidden')); const targetSection = document.getElementById(targetId); if (!targetSection) return; targetSection.classList.remove('hidden'); document.querySelectorAll('.nav-btn').forEach(x => { x.classList.remove('bg-brand-accent', 'text-white', 'text-slate-900'); x.classList.add('text-slate-500'); }); const btn = document.querySelector(`.nav-btn[data-target="${targetId}"]`); if (btn) { btn.classList.add('bg-brand-accent', 'text-white'); btn.classList.remove('text-slate-500'); } this.closeSidebar(); }
+    hexToRgba(hex, alpha) {
+        const normalized = hex.replace('#', '');
+        const red = parseInt(normalized.slice(0, 2), 16);
+        const green = parseInt(normalized.slice(2, 4), 16);
+        const blue = parseInt(normalized.slice(4, 6), 16);
+        return `rgba(${red}, ${green}, ${blue}, ${alpha})`;
+    }
+
+    resolveColorHex(colorToken) {
+        return this.colorHexMap[colorToken] || this.colorHexMap['brand-accent'];
+    }
+}
+
+class StudyGuideApp {
+    #dataManager;
+    #colorResolver;
+
+    constructor(config) {
+        this.#dataManager = new DataManager(config.grids);
+        this.#colorResolver = new ColorResolver();
+
+        this.#bindEvents();
+        this.#render();
+    }
+
+    #bindEvents() {
+        // Expose to window for inline onclick handlers in HTML
+        window.handleSearch = (query) => SearchManager.handleSearch(query, this.#dataManager);
+        window.toggleTheme = ThemeManager.toggleTheme;
+        window.showDive = (id) => ModalManager.showDive(id, this.#dataManager, this.#colorResolver);
+        window.closeModal = ModalManager.closeModal;
+        window.goHome = () => NavigationManager.goHome(NavigationManager.navigateTo);
+        window.openSidebar = NavigationManager.openSidebar;
+        window.closeSidebar = NavigationManager.closeSidebar;
+        window.navigateTo = NavigationManager.navigateTo;
+
+        SearchManager.bindDocumentClick();
+    }
+
+    #render() {
+        GridRenderer.renderAll(this.#dataManager, this.#colorResolver);
+    }
 }
