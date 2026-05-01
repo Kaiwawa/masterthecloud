@@ -1,3 +1,52 @@
+class DeploymentTracker {
+    #version;
+    #progressData;
+
+    constructor(version, progressData) {
+        this.#version = version;
+        this.#progressData = progressData;
+    }
+
+    init() {
+        this.#setVersion();
+        this.#updateProgressBars();
+    }
+
+    #setVersion() {
+        document.querySelectorAll('.app-version').forEach(el => {
+            el.innerText = this.#version;
+        });
+    }
+
+    #updateProgressBars() {
+        Object.entries(this.#progressData).forEach(([id, percentage]) => {
+            const card = document.querySelector(`[data-progress-id="${id}"]`);
+            if (!card) return;
+
+            const bar = card.querySelector('.progress-bar');
+            const text = card.querySelector('.progress-text');
+
+            if (bar && text) {
+                bar.style.width = `${percentage}%`;
+                text.innerText = `${percentage}%`;
+
+                // Clear any existing progress color classes
+                card.classList.remove('progress-red-500', 'progress-amber-500', 'progress-blue-500', 'progress-emerald-500');
+
+                // Add the appropriate progress color class based on threshold
+                card.classList.add(this.#getColorClass(percentage));
+            }
+        });
+    }
+
+    #getColorClass(percentage) {
+        if (percentage < 33) return 'progress-red-500';
+        if (percentage < 66) return 'progress-amber-500';
+        if (percentage < 95) return 'progress-blue-500';
+        return 'progress-emerald-500';
+    }
+}
+
 const APP_VERSION = 'v0.10.9';
 
 const deploymentProgress = {
@@ -19,37 +68,6 @@ const deploymentProgress = {
 };
 
 document.addEventListener('DOMContentLoaded', () => {
-    // Set version
-    document.querySelectorAll('.app-version').forEach(el => {
-        el.innerText = APP_VERSION;
-    });
-
-    // Update progress bars
-    Object.entries(deploymentProgress).forEach(([id, percentage]) => {
-        const card = document.querySelector(`[data-progress-id="${id}"]`);
-        if (!card) return;
-
-        const bar = card.querySelector('.h-full');
-        const text = card.querySelector('.progress-text');
-
-        if (bar && text) {
-            bar.style.width = percentage + '%';
-            text.innerText = percentage + '%';
-
-            // Change color at certain thresholds
-            if (percentage < 33) {
-                bar.style.backgroundColor = '#ef4444'; // Red-500
-                text.style.color = '#ef4444';
-            } else if (percentage < 66) {
-                bar.style.backgroundColor = '#f59e0b'; // Amber-500
-                text.style.color = '#f59e0b';
-            } else if (percentage < 95) {
-                bar.style.backgroundColor = '#fdf53dff'; // Blue-500
-                text.style.color = '#fdf53dff';
-            } else {
-                bar.style.backgroundColor = '#10b981'; // Emerald-500
-                text.style.color = '#10b981';
-            }
-        }
-    });
+    const tracker = new DeploymentTracker(APP_VERSION, deploymentProgress);
+    tracker.init();
 });
